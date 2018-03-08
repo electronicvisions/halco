@@ -372,7 +372,7 @@ struct GridCoordinate {
 		mY(static_cast<Derived const*>(this)->to_y(e))
 	{}
 
-	GridCoordinate(x_type const& x, y_type const& y) :
+	explicit GridCoordinate(x_type const& x, y_type const& y) :
 		mX(x), mY(y) { id(); /* throws for invalid x/y combination */ }
 
 	PYPP_CONSTEXPR GridCoordinate() :
@@ -500,12 +500,12 @@ size_t constexpr GridCoordinate<Derived, XT, YT, EnumSize>::size;
 
 
 #define GRID_COMMON_CONSTRUCTORS(cls)                                          \
-	PYPP_CONSTEXPR explicit cls(const enum_type e) : grid_type(e) {}           \
+	PYPP_CONSTEXPR explicit cls(const enum_type e) : grid_type(e) {}       \
                                                                                \
-	cls(x_type const& x, y_type const& y) : grid_type(x, y) {}                 \
-	cls(y_type const& y, x_type const& x) : grid_type(x, y) {}                 \
-	cls(common::X const& x, common::Y const& y) : grid_type(x_type(x), y_type(y)) {} \
-	cls(common::Y const& y, common::X const& x) : grid_type(x_type(x), y_type(y)) {} \
+	explicit cls(x_type const& x, y_type const& y) : grid_type(x, y) {}    \
+	explicit cls(y_type const& y, x_type const& x) : grid_type(x, y) {}    \
+	explicit cls(common::X const& x, common::Y const& y) : grid_type(x_type(x), y_type(y)) {} \
+	explicit cls(common::Y const& y, common::X const& x) : grid_type(x_type(x), y_type(y)) {} \
                                                                                \
 	PYPP_DEFAULT(PYPP_CONSTEXPR cls());
 

@@ -22,8 +22,8 @@
 		typedef HALCO_COORDINATE_MIXIN__ENUM_TYPE(cls, T) enum_type;           \
                                                                                \
 		mixin() {}                                                             \
-		mixin(T const t, cls const v) : T(t), mValue(v) {}                     \
-		mixin(enum_type const& e)                                              \
+		explicit mixin(T const t, cls const v) : T(t), mValue(v) {}            \
+		explicit mixin(enum_type const& e)                                     \
 			: T(::halco::common::Enum(e PYPP_EXCLUDE( % local_type::size)))    \
 			, mValue(::halco::common::Enum(e PYPP_EXCLUDE(/ local_type::size))) {} \
                                                                                \
