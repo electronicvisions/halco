@@ -140,6 +140,24 @@ public:
 	FPGAOnWafer toFPGAOnWafer() const { return This(); }
 };
 
+struct ANANASOnWafer : public common::detail::RantWrapper<ANANASOnWafer, size_t, 1, 0> {
+	PYPP_CONSTEXPR explicit ANANASOnWafer(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+struct ANANASGlobal : public WaferMixin<ANANASGlobal, ANANASOnWafer> {
+private:
+	typedef WaferMixin<ANANASGlobal, ANANASOnWafer> base;
+
+public:
+	using base::enum_type;
+
+	ANANASGlobal();
+	explicit ANANASGlobal(ANANASOnWafer const& h, Wafer const& w = Wafer());
+	explicit ANANASGlobal(enum_type const& e);
+
+	ANANASOnWafer toANANASOnWafer() const { return This(); }
+};
+
 struct AnalogOnHICANN : public common::detail::RantWrapper<AnalogOnHICANN, uint_fast16_t, 1, 0> {
 	PYPP_CONSTEXPR explicit AnalogOnHICANN(uintmax_t const val = 0) : rant_t(val) {}
 };
@@ -157,6 +175,8 @@ struct TriggerOnADC : public common::detail::RantWrapper<TriggerOnADC, uint_fast
 struct TriggerOnWafer : public common::detail::RantWrapper<TriggerOnWafer, uint_fast16_t, 12, 0>
 {
 	PYPP_CONSTEXPR explicit TriggerOnWafer(uintmax_t const val = 0) : rant_t(val) {}
+
+	ANANASOnWafer toANANASOnWafer() const;
 };
 
 struct TriggerGlobal : public WaferMixin<TriggerGlobal, TriggerOnWafer>
@@ -184,6 +204,7 @@ namespace std {
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::DNCOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::DNCOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::FPGAOnWafer)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::ANANASOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::TriggerOnADC)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::TriggerOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::AnalogOnHICANN)
@@ -192,12 +213,15 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::DNCGlobal)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::PowerCoordinate)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::FPGAGlobal)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::TriggerGlobal)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::ANANASGlobal)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::GbitLinkOnHICANN)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::WaferMixin<
     halco::hicann::v2::FPGAGlobal BOOST_PP_COMMA() halco::hicann::v2::FPGAOnWafer>)
 HALCO_GEOMETRY_HASH_CLASS(
     halco::hicann::v2::WaferMixin<halco::hicann::v2::TriggerGlobal BOOST_PP_COMMA()
     halco::hicann::v2::TriggerOnWafer>)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::WaferMixin<
+    halco::hicann::v2::ANANASGlobal BOOST_PP_COMMA() halco::hicann::v2::ANANASOnWafer>)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::WaferMixin<
     halco::hicann::v2::DNCGlobal BOOST_PP_COMMA() halco::hicann::v2::DNCOnWafer>)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::UDPPort)

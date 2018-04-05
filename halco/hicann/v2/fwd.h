@@ -15,6 +15,8 @@ struct FGCellOnFGBlock;
 struct FGRowOnFGBlock;
 struct FPGAGlobal;
 struct FPGAOnWafer;
+struct ANANASGlobal;
+struct ANANASOnWafer;
 struct GbitLinkOnHICANN;
 struct HICANNGlobal;
 struct HICANNOnDNC;

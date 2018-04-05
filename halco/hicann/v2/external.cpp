@@ -75,6 +75,11 @@ TriggerOnWafer FPGAOnWafer::toTriggerOnWafer() const
 	return gridLookupTriggerOnWafer(gridLookupDNCOnWafer(*this));
 }
 
+ANANASOnWafer TriggerOnWafer::toANANASOnWafer() const
+{
+	return gridLookupANANASOnWafer(*this);
+}
+
 FPGAGlobal::FPGAGlobal()
     : FPGAGlobal(FPGAOnWafer{}, Wafer{}) // delegate to common ctor for range checks
 {}
@@ -124,6 +129,16 @@ TriggerGlobal::TriggerGlobal(enum_type const& e)
 	: base(TriggerOnWafer(e % TriggerOnWafer::end), Wafer(e / TriggerOnWafer::end))
 {}
 
+ANANASGlobal::ANANASGlobal()
+    : ANANASGlobal(ANANASOnWafer{}, Wafer{}) // delegate to common ctor for range checks
+{}
+
+ANANASGlobal::ANANASGlobal(ANANASOnWafer const& h, Wafer const& w) : base(h, w) {
+}
+
+ANANASGlobal::ANANASGlobal(enum_type const& e) :
+	base(ANANASOnWafer(e % ANANASOnWafer::end), Wafer(e / ANANASOnWafer::end))
+{}
 
 const FPGAOnWafer FPGAOnWafer::Master = FPGAOnWafer(12);
 

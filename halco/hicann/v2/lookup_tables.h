@@ -54,6 +54,9 @@ DNCOnWafer gridLookupDNCOnWafer(FPGAOnWafer const f);
 // Return the Trigger position on a Wafer
 TriggerOnWafer gridLookupTriggerOnWafer(DNCOnWafer const dnc);
 
+// Return the ANANAS connected to a Trigger
+ANANASOnWafer gridLookupANANASOnWafer(TriggerOnWafer const trigger);
+
 } // v2
 } // hicann
 } // halco

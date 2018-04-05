@@ -186,6 +186,8 @@ std::array<size_t, 48> const reticle_adc_trigger_grid = {{
               0,  0,  0
 }};
 
+std::array<size_t, 12> const adc_trigger_ananas_grid = {{0,0,0,1,1,1,1,1,1,0,0,0}};
+
 // clang-format on
 
 static std::array<size_t, 48> const reverse_adc_trigger_grid =
@@ -233,6 +235,11 @@ DNCOnWafer gridLookupDNCOnWafer(FPGAOnWafer const f)
 TriggerOnWafer gridLookupTriggerOnWafer(DNCOnWafer const dnc)
 {
 	return TriggerOnWafer(reticle_adc_trigger_grid.at(dnc.toEnum()));
+}
+
+ANANASOnWafer gridLookupANANASOnWafer(TriggerOnWafer const trigger)
+{
+	return ANANASOnWafer(adc_trigger_ananas_grid.at(trigger.toEnum()));
 }
 
 } // v2

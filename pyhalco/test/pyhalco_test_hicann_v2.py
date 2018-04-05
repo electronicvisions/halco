@@ -21,6 +21,8 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
     FGRowOnFGBlock        => linear, iterable
     FPGAGlobal            =>
     FPGAOnWafer           => linear, iterable
+    ANANASGlobal          =>
+    ANANASOnWafer         => linear, iterable
     GbitLinkOnHICANN      => linear, iterable
     HICANNGlobal          =>
     HICANNOnWaferEnum     => ignore

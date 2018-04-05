@@ -35,6 +35,8 @@ typedef ::testing::Types<
 	FGRowOnFGBlock,
 	FPGAGlobal,
 	FPGAOnWafer,
+	ANANASGlobal,
+	ANANASOnWafer,
 	GbitLinkOnHICANN,
 	HICANNGlobal,
 	HICANNOnDNC,

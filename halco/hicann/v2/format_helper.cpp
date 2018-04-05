@@ -26,6 +26,12 @@ std::string short_format(const TriggerOnWafer& f)
 	return ss.str();
 }
 
+std::string short_format(const ANANASOnWafer& f) {
+	std::stringstream ss;
+	ss << "A" << std::setw(1) << std::setfill('0') << f.value();
+	return ss.str();
+}
+
 std::string short_format(const Wafer& w) {
 	std::stringstream ss;
 	ss << "W" << std::setw(3) << std::setfill('0') << w.value();
@@ -40,9 +46,12 @@ std::string short_format(const FPGAGlobal& fg) {
 	return short_format(fg.toWafer()) + short_format(fg.toFPGAOnWafer());
 }
 
-std::string short_format(const TriggerGlobal& fg)
-{
+std::string short_format(const TriggerGlobal& fg) {
 	return short_format(fg.toWafer()) + short_format(fg.toTriggerOnWafer());
+}
+
+std::string short_format(const ANANASGlobal& fg) {
+	return short_format(fg.toWafer()) + short_format(fg.toANANASOnWafer());
 }
 
 std::string short_format(const HRepeaterOnHICANN& hr) {
