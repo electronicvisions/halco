@@ -1,0 +1,144 @@
+#!/usr/bin/env python
+
+from waflib.extras import symwaf2ic
+from waflib.extras.gtest import summary
+
+def depends(ctx):
+    ctx('pyublas')
+    ctx('pywrap')
+    ctx('halco')
+
+def options(opt):
+    hopts = opt.add_option_group('pybind11')
+    hopts.add_withoption('pybind', default=None, help='Use pybind11-based bindings')
+
+    opt.load('compiler_cxx')
+    opt.load('gtest')
+    opt.load('python')
+    opt.load('pytest')
+
+def configure(cfg):
+    cfg.env.with_pybind = getattr(cfg.options, 'with_pybind', None)
+    if cfg.env.with_pybind not in [True, False]:
+        projects = set(str(p) for p in symwaf2ic.get_projects())
+        is_haldls = 'haldls' in projects
+        is_hicann = 'halbe' in projects
+        if is_haldls and is_hicann:
+            cfg.fatal(
+                'cannot build python bindings of both HICANN/DLS at the same time\n'
+                '(please specify --with-pybind / --without-pybind explicitly)'
+            )
+        cfg.env.with_pybind = is_haldls
+    cfg.msg(
+        'Using pybind11-based python bindings',
+        ['no', 'yes'][cfg.env.with_pybind])
+
+    cfg.load('compiler_cxx')
+    cfg.load('python')
+    cfg.check_python_version()
+    cfg.check_python_headers()
+    cfg.load('pytest')
+    cfg.load('genpybind')
+
+    if cfg.env.with_pybind:
+        cfg.check(
+            compiler='cxx',
+            features='cxx pyembed',
+            uselib_store='PYBIND11HALCO',
+            mandatory=True,
+            header_name='pybind11/pybind11.h',
+        )
+
+def build(bld):
+    if bld.env.with_pybind:
+        bld(
+            target='pyhalco_common',
+            source='../halco/common/common.h',
+            genpybind_tags='common',
+            features='genpybind cxx cxxshlib pyext post_task',
+            use=['halco_common', 'PYBIND11HALCO', 'pywrap_inc'],
+            install_path='${PREFIX}/lib',
+            linkflags='-Wl,-z,defs',
+            post_task='pyhalco_common_tests',
+        )
+
+        bld(
+            target='pyhalco_hicann_dls_v2',
+            source='../halco/hicann-dls/v2/coordinates.h',
+            genpybind_tags='hicann_dls_v2',
+            features='genpybind cxx cxxshlib pyext post_task',
+            use=['halco_common', 'halco_hicann_dls_v2', 'PYBIND11HALCO', 'pywrap_inc'],
+            install_path='${PREFIX}/lib',
+            linkflags='-Wl,-z,defs',
+            post_task=['pyhalco_hicann_dls_v2_tests', 'pyhalco_common'],
+        )
+
+        bld(
+            name='pyhalco_hicann_dls_v2_tests',
+            tests='test/pyhalco_test_hicann_dls_v2.py',
+            features='use pytest',
+            use='pyhalco_hicann_dls_v2',
+            install_path='${PREFIX}/bin',
+            linkflags='-Wl,-z,defs',
+            pythonpath=['test'],
+        )
+
+    else:
+        bld(
+                target         = 'pyhalco_common',
+                features       = 'cxx cxxshlib pypp pyembed pyext post_task',
+                script         = 'common/generate_common_coordinate.py',
+                gen_defines    = 'PYPLUSPLUS __STRICT_ANSI__',
+                defines        = 'PYBINDINGS',
+                headers        = '../halco/common/common.h',
+                use            = ['halco_common', 'pyublas', 'BOOST4HALCO', 'BOOST4PYHALCO', 'PYHALCO', 'pywrap', 'pywrapstdvector', 'pycellparameters' ],
+                post_task      = 'pyhalco_common_tests',
+                install_path   = '${PREFIX}/lib',
+                linkflags      = '-Wl,-z,defs',
+                includes       = '.',
+        )
+
+        bld(
+                target         = 'pyhalco_hicann_v2',
+                features       = 'cxx cxxshlib pypp pyembed pyext post_task',
+                script         = 'hicann/v2/generate_hicann_v2_coordinate.py',
+                gen_defines    = 'PYPLUSPLUS __STRICT_ANSI__ BOOST_PP_VARIADICS',
+                defines        = 'PYBINDINGS',
+                headers        = '../halco/hicann/v2/coordinates.h',
+                use            = ['pyhalco_common', 'halco_hicann_v2'],
+                post_task      = 'pyhalco_hicann_v2_tests',
+                install_path   = '${PREFIX}/lib',
+                linkflags      = '-Wl,-z,defs',
+                includes       = '.',
+        )
+
+        bld(
+                name            = "pyhalco_hicann_v2_tests",
+                tests           = 'test/pyhalco_test_hicann_v2.py',
+                features        = 'use pytest',
+                use             = 'pyhalco_hicann_v2',
+                install_path    = '${PREFIX}/bin',
+                linkflags      = '-Wl,-z,defs',
+                pythonpath      = ["test"],
+                test_environ    = { 'PYHALCO_API_CHECK' : '1' },
+        )
+
+    bld(
+        name='pyhalco_common_tests',
+        tests='test/pyhalco_test_common.py',
+        features='use pytest',
+        use='pyhalco_common',
+        install_path='${PREFIX}/bin',
+        linkflags='-Wl,-z,defs',
+        pythonpath=['test'],
+    )
+
+    bld.install_files(
+        '${PREFIX}/lib',
+        (bld.path.ant_glob('**/pyhalco_*.py') +
+         bld.path.ant_glob('common/pyhalco_*.py') +
+        ['test/pyhalco_test_utils.py']),
+        relative_trick=False,
+    )
+
+    bld.add_post_fun(summary)
