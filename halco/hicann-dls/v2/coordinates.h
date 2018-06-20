@@ -31,7 +31,7 @@ struct SynapseRowOnDLS;
 struct GENPYBIND(inline_base("*")) NeuronOnDLS
 	: public common::detail::RantWrapper<NeuronOnDLS, uint_fast16_t, 31, 0>
 {
-	constexpr explicit NeuronOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+	constexpr explicit NeuronOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) : rant_t(val) {}
 
 	CapMemColumnOnDLS toCapMemColumnOnDLS() const;
 	ColumnCorrelationSwitchOnDLS toColumnCorrelationSwitchOnDLS() const;
@@ -59,8 +59,8 @@ struct GENPYBIND(inline_base("*")) SynapseDriverOnDLS
 	: public common::detail::RantWrapper<SynapseDriverOnDLS, uint_fast16_t, 31, 0>
 	, public common::detail::YRangedTrait
 {
-	constexpr explicit SynapseDriverOnDLS(uintmax_t const val = 0) : rant_t(val) {}
-	constexpr explicit SynapseDriverOnDLS(common::Y const& y) : rant_t(y) {}
+	constexpr explicit SynapseDriverOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) : rant_t(val) {}
+	constexpr explicit SynapseDriverOnDLS(common::Y const& y) GENPYBIND(implicit_conversion) : rant_t(y) {}
 
 	SynapseRowOnDLS toSynapseRowOnDLS() const;
 };
@@ -73,8 +73,8 @@ struct GENPYBIND(inline_base("*")) ColumnBlockOnDLS
 	: public common::detail::RantWrapper<ColumnBlockOnDLS, uint_fast16_t, 7, 0>
 	, public common::detail::XRangedTrait
 {
-	constexpr explicit ColumnBlockOnDLS(uintmax_t const val = 0) : rant_t(val) {}
-	constexpr explicit ColumnBlockOnDLS(common::X const& x) : rant_t(x) {}
+	constexpr explicit ColumnBlockOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) : rant_t(val) {}
+	constexpr explicit ColumnBlockOnDLS(common::X const& x) GENPYBIND(implicit_conversion) : rant_t(x) {}
 };
 
 struct GENPYBIND(inline_base("*")) SynapseBlockOnDLS
@@ -91,16 +91,16 @@ struct GENPYBIND(inline_base("*")) SynapseOnSynapseBlock
 	: public common::detail::RantWrapper<SynapseOnSynapseBlock, uint_fast16_t, 3, 0>
 	, public common::detail::XRangedTrait
 {
-	constexpr explicit SynapseOnSynapseBlock(uintmax_t const val = 0) : rant_t(val) {}
-	constexpr explicit SynapseOnSynapseBlock(common::X const& x) : rant_t(x) {}
+	constexpr explicit SynapseOnSynapseBlock(uintmax_t const val = 0) GENPYBIND(implicit_conversion) : rant_t(val) {}
+	constexpr explicit SynapseOnSynapseBlock(common::X const& x) GENPYBIND(implicit_conversion) : rant_t(x) {}
 };
 
 struct GENPYBIND(inline_base("*")) SynapseColumnOnDLS
 	: public common::detail::RantWrapper<SynapseColumnOnDLS, uint_fast16_t, 31, 0>
 	, public common::detail::XRangedTrait
 {
-	constexpr explicit SynapseColumnOnDLS(uintmax_t const val = 0) : rant_t(val) {}
-	constexpr explicit SynapseColumnOnDLS(common::X const& x) : rant_t(x) {}
+	constexpr explicit SynapseColumnOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) : rant_t(val) {}
+	constexpr explicit SynapseColumnOnDLS(common::X const& x) GENPYBIND(implicit_conversion) : rant_t(x) {}
 
 	NeuronOnDLS toNeuronOnDLS() const { return NeuronOnDLS(value()); }
 };
@@ -109,8 +109,8 @@ struct GENPYBIND(inline_base("*")) SynapseRowOnDLS
 	: public common::detail::RantWrapper<SynapseRowOnDLS, uint_fast16_t, 31, 0>
 	, public common::detail::YRangedTrait
 {
-	constexpr explicit SynapseRowOnDLS(uintmax_t const val = 0) : rant_t(val) {}
-	constexpr explicit SynapseRowOnDLS(common::Y const& y) : rant_t(y) {}
+	constexpr explicit SynapseRowOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) : rant_t(val) {}
+	constexpr explicit SynapseRowOnDLS(common::Y const& y) GENPYBIND(implicit_conversion) : rant_t(y) {}
 
 	SynapseDriverOnDLS toSynapseDriverOnDLS() const { return SynapseDriverOnDLS(value()); }
 };
@@ -141,8 +141,8 @@ struct GENPYBIND(inline_base("*")) ColumnCorrelationSwitchOnColumnBlock
 		  SynapseOnSynapseBlock::max, SynapseOnSynapseBlock::min>
 	, public common::detail::XRangedTrait
 {
-	constexpr explicit ColumnCorrelationSwitchOnColumnBlock(uintmax_t const val = 0) : rant_t(val) {}
-	constexpr explicit ColumnCorrelationSwitchOnColumnBlock(common::X const& x) : rant_t(x) {}
+	constexpr explicit ColumnCorrelationSwitchOnColumnBlock(uintmax_t const val = 0) GENPYBIND(implicit_conversion) : rant_t(val) {}
+	constexpr explicit ColumnCorrelationSwitchOnColumnBlock(common::X const& x) GENPYBIND(implicit_conversion) : rant_t(x) {}
 
 	SynapseOnSynapseBlock toSynapseOnSynapseBlock() const { return SynapseOnSynapseBlock(value()); }
 };
@@ -152,8 +152,8 @@ struct GENPYBIND(inline_base("*")) ColumnCorrelationSwitchOnDLS
 		  ColumnCorrelationSwitchOnDLS, NeuronOnDLS::value_type, NeuronOnDLS::max, NeuronOnDLS::min>
 	, public common::detail::XRangedTrait
 {
-	constexpr explicit ColumnCorrelationSwitchOnDLS(uintmax_t const val = 0) : rant_t(val) {}
-	constexpr explicit ColumnCorrelationSwitchOnDLS(common::X const& x) : rant_t(x) {}
+	constexpr explicit ColumnCorrelationSwitchOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) : rant_t(val) {}
+	constexpr explicit ColumnCorrelationSwitchOnDLS(common::X const& x) GENPYBIND(implicit_conversion) : rant_t(x) {}
 
 	ColumnCorrelationSwitchOnColumnBlock toColumnCorrelationSwitchOnColumnBlock() const;
 	ColumnBlockOnDLS toColumnBlockOnDLS() const;
@@ -167,8 +167,8 @@ struct GENPYBIND(inline_base("*")) ColumnCurrentSwitchOnColumnBlock
 		  SynapseOnSynapseBlock::max, SynapseOnSynapseBlock::min>
 	, public common::detail::XRangedTrait
 {
-	constexpr explicit ColumnCurrentSwitchOnColumnBlock(uintmax_t const val = 0) : rant_t(val) {}
-	constexpr explicit ColumnCurrentSwitchOnColumnBlock(common::X const& x) : rant_t(x) {}
+	constexpr explicit ColumnCurrentSwitchOnColumnBlock(uintmax_t const val = 0) GENPYBIND(implicit_conversion) : rant_t(val) {}
+	constexpr explicit ColumnCurrentSwitchOnColumnBlock(common::X const& x) GENPYBIND(implicit_conversion) : rant_t(x) {}
 
 	SynapseOnSynapseBlock toSynapseOnSynapseBlock() const { return SynapseOnSynapseBlock(value()); }
 };
@@ -178,8 +178,8 @@ struct GENPYBIND(inline_base("*")) ColumnCurrentSwitchOnDLS
 		  ColumnCurrentSwitchOnDLS, NeuronOnDLS::value_type, NeuronOnDLS::max, NeuronOnDLS::min>
 	, public common::detail::XRangedTrait
 {
-	constexpr explicit ColumnCurrentSwitchOnDLS(uintmax_t const val = 0) : rant_t(val) {}
-	constexpr explicit ColumnCurrentSwitchOnDLS(common::X const& x) : rant_t(x) {}
+	constexpr explicit ColumnCurrentSwitchOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) : rant_t(val) {}
+	constexpr explicit ColumnCurrentSwitchOnDLS(common::X const& x) GENPYBIND(implicit_conversion) : rant_t(x) {}
 
 	ColumnCurrentSwitchOnColumnBlock toColumnCurrentSwitchOnColumnBlock() const;
 	ColumnBlockOnDLS toColumnBlockOnDLS() const;
@@ -203,8 +203,8 @@ struct GENPYBIND(inline_base("*")) CapMemColumnOnDLS
 		  CapMemColumnOnDLS, NeuronOnDLS::value_type, NeuronOnDLS::max + 1, NeuronOnDLS::min>
 	, public common::detail::XRangedTrait
 {
-	constexpr explicit CapMemColumnOnDLS(uintmax_t const val = 0) : rant_t(val) {}
-	constexpr explicit CapMemColumnOnDLS(common::X const& x) : rant_t(x) {}
+	constexpr explicit CapMemColumnOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) : rant_t(val) {}
+	constexpr explicit CapMemColumnOnDLS(common::X const& x) GENPYBIND(implicit_conversion) : rant_t(x) {}
 	static constexpr CapMemColumnOnDLS SharedCapMemColumnOnDLS() { return CapMemColumnOnDLS(max); }
 
 	bool isShared() const { return value() == max; }
@@ -214,8 +214,8 @@ struct GENPYBIND(inline_base("*")) CapMemRowOnDLS
 	: public common::detail::RantWrapper<CapMemRowOnDLS, uint_fast16_t, 23, 0>
 	, public common::detail::YRangedTrait
 {
-	constexpr explicit CapMemRowOnDLS(uintmax_t const val = 0) : rant_t(val) {}
-	constexpr explicit CapMemRowOnDLS(common::Y const& y) : rant_t(y) {}
+	constexpr explicit CapMemRowOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) : rant_t(val) {}
+	constexpr explicit CapMemRowOnDLS(common::Y const& y) GENPYBIND(implicit_conversion) : rant_t(y) {}
 };
 
 struct GENPYBIND(inline_base("*")) CapMemConfigOnDLS
@@ -283,14 +283,14 @@ struct GENPYBIND(inline_base("*")) CapMemCellOnDLS
 struct GENPYBIND(inline_base("*")) PPUMemoryWordOnDLS
 	: public common::detail::RantWrapper<PPUMemoryWordOnDLS, uint_fast16_t, 0x1000 - 1, 0>
 {
-	constexpr explicit PPUMemoryWordOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+	constexpr explicit PPUMemoryWordOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) : rant_t(val) {}
 };
 
 struct GENPYBIND(inline_base("*")) PPUMemoryBlockSize
     : public common::detail::
           RantWrapper<PPUMemoryBlockSize, uint_fast16_t, PPUMemoryWordOnDLS::size, 1>
 {
-	constexpr explicit PPUMemoryBlockSize(uintmax_t const val = 1) : rant_t(val) {}
+	constexpr explicit PPUMemoryBlockSize(uintmax_t const val = 1) GENPYBIND(implicit_conversion) : rant_t(val) {}
 };
 
 struct GENPYBIND(inline_base("*")) PPUMemoryBlockOnDLS
@@ -325,7 +325,7 @@ class GENPYBIND(inline_base("*")) DACOnBoard
 	: public common::detail::RantWrapper<DACOnBoard, uint_fast16_t, 1, 0>
 {
 public:
-	constexpr explicit DACOnBoard(uintmax_t const val = 0) : rant_t(val) {}
+	constexpr explicit DACOnBoard(uintmax_t const val = 0) GENPYBIND(implicit_conversion) : rant_t(val) {}
 
 	static DACOnBoard const DAC_25_DECIVOLT;
 	static DACOnBoard const DAC_12_DECIVOLT;

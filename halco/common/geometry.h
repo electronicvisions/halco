@@ -94,7 +94,7 @@ public:
 
 	static const bool is_interval = false;
 
-	PYPP_CONSTEXPR explicit BaseType(value_type const& val = 0) :
+	PYPP_CONSTEXPR explicit BaseType(value_type const& val = 0) GENPYBIND(implicit_conversion) :
 		mValue(val) {}
 
 	PYPP_DEFAULT(PYPP_CONSTEXPR BaseType(base_t const&));
@@ -167,17 +167,17 @@ const bool BaseType<Derived, T>::is_interval;
 
 struct GENPYBIND(inline_base("*BaseType*")) X : public detail::BaseType<X, size_t>
 {
-	PYPP_CONSTEXPR explicit X(size_t val = 0) : base_t(val) {}
+	PYPP_CONSTEXPR explicit X(size_t val = 0) GENPYBIND(implicit_conversion) : base_t(val) {}
 };
 
 struct GENPYBIND(inline_base("*BaseType*")) Y : public detail::BaseType<Y, size_t>
 {
-	PYPP_CONSTEXPR explicit Y(size_t val = 0) : base_t(val) {}
+	PYPP_CONSTEXPR explicit Y(size_t val = 0) GENPYBIND(implicit_conversion) : base_t(val) {}
 };
 
 struct GENPYBIND(inline_base("*BaseType*")) Enum : public detail::BaseType<Enum, size_t>
 {
-	PYPP_CONSTEXPR explicit Enum(size_t val = 0) : base_t(val) {}
+	PYPP_CONSTEXPR explicit Enum(size_t val = 0) GENPYBIND(implicit_conversion) : base_t(val) {}
 };
 
 template<typename Derived, typename T>
