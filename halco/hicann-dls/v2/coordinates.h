@@ -174,6 +174,12 @@ struct GENPYBIND(inline_base("*")) CapMemRowOnDLS
 	constexpr explicit CapMemRowOnDLS(common::Y const& y) : rant_t(y) {}
 };
 
+struct GENPYBIND(inline_base("*")) CapMemConfigOnDLS
+	: public common::detail::RantWrapper<CapMemConfigOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit CapMemConfigOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
 enum class GENPYBIND(visible) NeuronParameter
 {
 	v_leak = 0,
