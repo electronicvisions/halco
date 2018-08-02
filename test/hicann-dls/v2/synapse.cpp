@@ -11,6 +11,12 @@ TEST(SynapseDriverOnDLS, RespectsBounds)
 	EXPECT_NO_THROW(SynapseDriverOnDLS(31));
 }
 
+TEST(SynapseDriverBlockOnDLS, RespectsBounds)
+{
+	EXPECT_ANY_THROW(SynapseDriverBlockOnDLS(1));
+	EXPECT_NO_THROW(SynapseDriverBlockOnDLS(0));
+}
+
 TEST(SynapseBlockOnDLS, RespectsBounds)
 {
 	EXPECT_ANY_THROW(SynapseBlockOnDLS(X(2), Y(32)));
@@ -223,4 +229,10 @@ TEST(ColumnCurrentSwitchOnDLS, toNeuronOnDLS)
 {
 	EXPECT_EQ(NeuronOnDLS(31), ColumnCurrentSwitchOnDLS(31).toNeuronOnDLS());
 	EXPECT_NE(NeuronOnDLS(21), ColumnCurrentSwitchOnDLS(31).toNeuronOnDLS());
+}
+
+TEST(CorrelationConfigOnDLS, RespectsBounds)
+{
+	EXPECT_ANY_THROW(CorrelationConfigOnDLS(1));
+	EXPECT_NO_THROW(CorrelationConfigOnDLS(0));
 }

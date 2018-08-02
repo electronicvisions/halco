@@ -19,3 +19,23 @@ TEST(PPUMemoryWordOnDLS, RespectsBounds) {
 	EXPECT_ANY_THROW(PPUMemoryWordOnDLS(4096));
 	EXPECT_NO_THROW(PPUMemoryWordOnDLS(4095));
 }
+
+TEST(PPUMemoryOnDLS, RespectsBounds) {
+	EXPECT_ANY_THROW(PPUMemoryOnDLS(1));
+	EXPECT_NO_THROW(PPUMemoryOnDLS(0));
+}
+
+TEST(RateCounterOnDLS, RespectsBounds) {
+	EXPECT_ANY_THROW(RateCounterOnDLS(1));
+	EXPECT_NO_THROW(RateCounterOnDLS(0));
+}
+
+TEST(PPUControlRegisterOnDLS, RespectsBounds) {
+	EXPECT_ANY_THROW(PPUControlRegisterOnDLS(1));
+	EXPECT_NO_THROW(PPUControlRegisterOnDLS(0));
+}
+
+TEST(PPUStatusRegisterOnDLS, RespectsBounds) {
+	EXPECT_ANY_THROW(PPUStatusRegisterOnDLS(1));
+	EXPECT_NO_THROW(PPUStatusRegisterOnDLS(0));
+}

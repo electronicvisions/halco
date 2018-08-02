@@ -18,18 +18,27 @@ typedef ::testing::Types<
     CapMemCellOnDLS,
     CapMemColumnOnDLS,
     CapMemRowOnDLS,
+    CapMemConfigOnDLS,
+    CapMemOnDLS,
+    CommonNeuronConfigOnDLS,
     ColumnBlockOnDLS,
     ColumnCorrelationSwitchOnColumnBlock,
     ColumnCorrelationSwitchOnDLS,
     ColumnCurrentSwitchOnColumnBlock,
     ColumnCurrentSwitchOnDLS,
+    CorrelationConfigOnDLS,
     DACOnBoard,
     NeuronOnDLS,
     PPUMemoryWordOnDLS,
+    PPUMemoryOnDLS,
+    PPUControlRegisterOnDLS,
+    PPUStatusRegisterOnDLS,
     SynapseBlockOnDLS,
     SynapseDriverOnDLS,
+    SynapseDriverBlockOnDLS,
     SynapseOnDLS,
-    SynapseOnSynapseBlock
+    SynapseOnSynapseBlock,
+    RateCounterOnDLS
 > CoordinateTypes;
 TYPED_TEST_CASE(CommonCoordinateTest, CoordinateTypes);
 

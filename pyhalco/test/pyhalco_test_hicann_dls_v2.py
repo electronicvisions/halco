@@ -9,6 +9,9 @@ class Test_PyhalcoHICANNDLSv2(unittest.TestCase, PyhalcoTest):
     CapMemCellOnDLS                  => grid, iterable
     CapMemColumnOnDLS                => linear, iterable
     CapMemRowOnDLS                   => linear, iterable
+    CapMemOnDLS                      => linear, iterable
+    CapMemConfigOnDLS                => linear, iterable
+    CommonNeuronConfigOnDLS          => linear, iterable
     ColumnBlockOnDLS                 => linear, iterable
     ColumnCorrelationSwitchOnColumnBlock => linear, iterable
     ColumnCorrelationSwitchOnDLS     => linear, iterable
@@ -19,10 +22,16 @@ class Test_PyhalcoHICANNDLSv2(unittest.TestCase, PyhalcoTest):
     NeuronOnDLS                      => linear, iterable
     NeuronParameter                  => ignore
     PPUMemoryWordOnDLS               => linear, iterable
+    PPUMemoryOnDLS                   => linear, iterable
+    PPUStatusRegisterOnDLS           => linear, iterable
+    PPUControlRegisterOnDLS          => linear, iterable
     SynapseBlockOnDLS                => grid, iterable
     SynapseDriverOnDLS               => linear, iterable
     SynapseOnDLS                     => grid, iterable
     SynapseOnSynapseBlock            => linear, iterable
+    SynapseDriverBlockOnDLS          => linear, iterable
+    CorrelationConfigOnDLS           => linear, iterable
+    RateCounterOnDLS                 => linear, iterable
     """
 
     @staticmethod

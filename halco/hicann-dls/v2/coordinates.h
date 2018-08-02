@@ -37,9 +37,21 @@ struct GENPYBIND(inline_base("*")) NeuronOnDLS
 	ColumnCurrentSwitchOnDLS toColumnCurrentSwitchOnDLS() const;
 };
 
-/****************\
-   SynapseDriver
-\****************/
+struct GENPYBIND(inline_base("*")) CommonNeuronConfigOnDLS
+	: public common::detail::RantWrapper<CommonNeuronConfigOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit CommonNeuronConfigOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+/*********************\
+   SynapseDriverBlock
+\*********************/
+
+struct GENPYBIND(inline_base("*")) SynapseDriverBlockOnDLS
+	: public common::detail::RantWrapper<SynapseDriverBlockOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit SynapseDriverBlockOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
 
 struct GENPYBIND(inline_base("*")) SynapseDriverOnDLS
 	: public common::detail::RantWrapper<SynapseDriverOnDLS, uint_fast16_t, 31, 0>
@@ -149,6 +161,12 @@ struct GENPYBIND(inline_base("*")) ColumnCurrentSwitchOnDLS
 	NeuronOnDLS toNeuronOnDLS() const { return NeuronOnDLS(value()); }
 };
 
+struct GENPYBIND(inline_base("*")) CorrelationConfigOnDLS
+	: public common::detail::RantWrapper<CorrelationConfigOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit CorrelationConfigOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
 /**********\
    CapMem
 \**********/
@@ -172,6 +190,18 @@ struct GENPYBIND(inline_base("*")) CapMemRowOnDLS
 {
 	constexpr explicit CapMemRowOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 	constexpr explicit CapMemRowOnDLS(common::Y const& y) : rant_t(y) {}
+};
+
+struct GENPYBIND(inline_base("*")) CapMemConfigOnDLS
+	: public common::detail::RantWrapper<CapMemConfigOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit CapMemConfigOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+struct GENPYBIND(inline_base("*")) CapMemOnDLS
+	: public common::detail::RantWrapper<CapMemOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit CapMemOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
 
 enum class GENPYBIND(visible) NeuronParameter
@@ -230,6 +260,24 @@ struct GENPYBIND(inline_base("*")) PPUMemoryWordOnDLS
 	constexpr explicit PPUMemoryWordOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
 
+struct GENPYBIND(inline_base("*")) PPUMemoryOnDLS
+	: public common::detail::RantWrapper<PPUMemoryOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit PPUMemoryOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+struct GENPYBIND(inline_base("*")) PPUControlRegisterOnDLS
+	: public common::detail::RantWrapper<PPUControlRegisterOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit PPUControlRegisterOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+struct GENPYBIND(inline_base("*")) PPUStatusRegisterOnDLS
+	: public common::detail::RantWrapper<PPUStatusRegisterOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit PPUStatusRegisterOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
 class GENPYBIND(inline_base("*")) DACOnBoard
 	: public common::detail::RantWrapper<DACOnBoard, uint_fast16_t, 1, 0>
 {
@@ -239,6 +287,16 @@ public:
 	static DACOnBoard const DAC_25_DECIVOLT;
 	static DACOnBoard const DAC_12_DECIVOLT;
 }; // DACOnBoard
+
+/****************\
+   Rate Counters
+\****************/
+
+struct GENPYBIND(inline_base("*")) RateCounterOnDLS
+	: public common::detail::RantWrapper<RateCounterOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit RateCounterOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
 
 } // namespace v2
 } // namespace hicann_dls
@@ -250,17 +308,26 @@ namespace std {
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::CapMemCellOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::CapMemColumnOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::CapMemRowOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::CapMemConfigOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::CapMemOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::CommonNeuronConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::ColumnBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::ColumnCorrelationSwitchOnColumnBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::ColumnCorrelationSwitchOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::ColumnCurrentSwitchOnColumnBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::ColumnCurrentSwitchOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::CorrelationConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::NeuronOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::PPUMemoryWordOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::PPUMemoryOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::PPUControlRegisterOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::PPUStatusRegisterOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::SynapseBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::SynapseDriverOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::SynapseDriverBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::SynapseOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::SynapseOnSynapseBlock)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::RateCounterOnDLS)
 
 } // namespace std
 

@@ -5,6 +5,16 @@
 using namespace halco::common;
 using namespace halco::hicann_dls::v2;
 
+TEST(CapMemConfigOnDLS, RespectsBounds) {
+	EXPECT_ANY_THROW(CapMemConfigOnDLS(1));
+	EXPECT_NO_THROW(CapMemConfigOnDLS(0));
+}
+
+TEST(CapMemOnDLS, RespectsBounds) {
+	EXPECT_ANY_THROW(CapMemOnDLS(1));
+	EXPECT_NO_THROW(CapMemOnDLS(0));
+}
+
 TEST(CapMemColumnOnDLS, RespectsBounds) {
 	EXPECT_ANY_THROW(CapMemColumnOnDLS(33));
 	EXPECT_NO_THROW(CapMemColumnOnDLS(32));
