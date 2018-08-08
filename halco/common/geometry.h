@@ -340,7 +340,7 @@ struct GridCoordinate {
 #ifndef PYPLUSPLUS
 	static constexpr size_t size = EnumSize;
 #else
-	static const size_t size;
+	static const size_t size = EnumSize;
 #endif
 
 	typedef detail::EnumRanged<EnumSize> enum_type GENPYBIND(opaque(false));

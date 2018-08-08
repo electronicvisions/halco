@@ -3,12 +3,13 @@
 #include "halco/common/geometry.h"
 #include "halco/common/traits.h"
 
-#ifndef PYPLUSPLUS
+#ifdef PYPLUSPLUS
+#define HALCO_COORDINATE_MIXIN__ENUM_TYPE(...) \
+	typename ::halco::common::detail::pypp_maybe_ranged_enum<__VA_ARGS__>::type
+#else
 #define HALCO_COORDINATE_MIXIN__ENUM_TYPE(...) \
 	typename ::halco::common::detail::maybe_ranged_enum<__VA_ARGS__>::type
-#else
-#define HALCO_COORDINATE_MIXIN__ENUM_TYPE(...) ::halco::common::Enum
-#endif // !PYPLUSPLUS
+#endif
 
 #define HALCO_COORDINATE_MIXIN(mixin, cls, fct)                                \
 	template <typename Derived, typename T>                                    \
