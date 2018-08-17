@@ -2,6 +2,7 @@
 
 from waflib.extras import symwaf2ic
 from waflib.extras.gtest import summary
+import os.path
 
 def depends(ctx):
     ctx('pyublas')
@@ -20,7 +21,8 @@ def options(opt):
 def configure(cfg):
     cfg.env.with_pybind = getattr(cfg.options, 'with_pybind', None)
     if cfg.env.with_pybind not in [True, False]:
-        projects = set(str(p) for p in symwaf2ic.get_projects())
+        toplevel_path = symwaf2ic.get_toplevel_path()
+        projects = set(str(os.path.relpath(p, toplevel_path)) for p in symwaf2ic.get_required_paths())
         is_haldls = 'haldls' in projects
         is_hicann = 'halbe' in projects
         if is_haldls and is_hicann:
