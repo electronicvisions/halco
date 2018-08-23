@@ -11,6 +11,13 @@ TEST(SynapseDriverOnDLS, RespectsBounds)
 	EXPECT_NO_THROW(SynapseDriverOnDLS(31));
 }
 
+TEST(SynapseDriverOnDLS, toSynapseRowOnDLS)
+{
+	EXPECT_EQ(SynapseRowOnDLS(0), SynapseDriverOnDLS(0).toSynapseRowOnDLS());
+	EXPECT_EQ(SynapseRowOnDLS(31), SynapseDriverOnDLS(31).toSynapseRowOnDLS());
+	EXPECT_NE(SynapseRowOnDLS(5), SynapseDriverOnDLS(10).toSynapseRowOnDLS());
+}
+
 TEST(SynapseDriverBlockOnDLS, RespectsBounds)
 {
 	EXPECT_ANY_THROW(SynapseDriverBlockOnDLS(1));
@@ -45,19 +52,61 @@ TEST(SynapseOnSynapseBlock, RespectsBounds)
 	EXPECT_NO_THROW(SynapseOnSynapseBlock(3));
 }
 
+TEST(SynapseColumnOnDLS, RespectsBounds)
+{
+	EXPECT_ANY_THROW(SynapseColumnOnDLS(32));
+	EXPECT_NO_THROW(SynapseColumnOnDLS(31));
+	EXPECT_NO_THROW(SynapseColumnOnDLS(0));
+}
+
+TEST(SynapseColumnOnDLS, toNeuronOnDLS)
+{
+	for(size_t index = 0; index < NeuronOnDLS::size; index++) {
+		EXPECT_EQ(SynapseColumnOnDLS(index).toNeuronOnDLS(), NeuronOnDLS(index));
+	}
+}
+
+TEST(SynapseRowOnDLS, RespectsBounds)
+{
+	EXPECT_ANY_THROW(SynapseRowOnDLS(32));
+	EXPECT_NO_THROW(SynapseRowOnDLS(31));
+	EXPECT_NO_THROW(SynapseRowOnDLS(0));
+}
+
+TEST(SynapseRowOnDLS, toSynapseDriverOnDLS)
+{
+	for(size_t index = 0; index < SynapseDriverOnDLS::size; index++) {
+		EXPECT_EQ(SynapseRowOnDLS(index).toSynapseDriverOnDLS(), SynapseDriverOnDLS(index));
+	}
+}
+
 TEST(SynapseOnDLS, RespectsBounds)
 {
-	EXPECT_ANY_THROW(SynapseOnDLS(NeuronOnDLS(0), SynapseDriverOnDLS(32)));
-	EXPECT_NO_THROW(SynapseOnDLS(NeuronOnDLS(0), SynapseDriverOnDLS(31)));
-	EXPECT_ANY_THROW(SynapseOnDLS(NeuronOnDLS(32), SynapseDriverOnDLS(5)));
-	EXPECT_NO_THROW(SynapseOnDLS(NeuronOnDLS(31), SynapseDriverOnDLS(7)));
+	EXPECT_ANY_THROW(SynapseOnDLS(SynapseColumnOnDLS(0), SynapseRowOnDLS(32)));
+	EXPECT_NO_THROW(SynapseOnDLS(SynapseColumnOnDLS(0), SynapseRowOnDLS(31)));
+	EXPECT_ANY_THROW(SynapseOnDLS(SynapseColumnOnDLS(32), SynapseRowOnDLS(5)));
+	EXPECT_NO_THROW(SynapseOnDLS(SynapseColumnOnDLS(31), SynapseRowOnDLS(7)));
 }
 
 TEST(SynapseOnDLS, HasId)
 {
-	EXPECT_EQ(33, SynapseOnDLS(NeuronOnDLS(1), SynapseDriverOnDLS(1)).id());
-	EXPECT_EQ(127, SynapseOnDLS(NeuronOnDLS(31), SynapseDriverOnDLS(3)).id());
-	EXPECT_NE(0, SynapseOnDLS(NeuronOnDLS(1), SynapseDriverOnDLS(1)).id());
+	EXPECT_EQ(33, SynapseOnDLS(SynapseColumnOnDLS(1), SynapseRowOnDLS(1)).id());
+	EXPECT_EQ(127, SynapseOnDLS(SynapseColumnOnDLS(31), SynapseRowOnDLS(3)).id());
+	EXPECT_NE(0, SynapseOnDLS(SynapseColumnOnDLS(1), SynapseRowOnDLS(1)).id());
+}
+
+TEST(SynapseOnDLS, toSynapseRowOnDLS)
+{
+	EXPECT_EQ(SynapseRowOnDLS(0), SynapseOnDLS(Enum(5)).toSynapseRowOnDLS());
+	EXPECT_EQ(SynapseRowOnDLS(1), SynapseOnDLS(Enum(32)).toSynapseRowOnDLS());
+	EXPECT_NE(SynapseRowOnDLS(0), SynapseOnDLS(Enum(64)).toSynapseRowOnDLS());
+}
+
+TEST(SynapseOnDLS, toSynapseColumnOnDLS)
+{
+	EXPECT_EQ(SynapseColumnOnDLS(4), SynapseOnDLS(Enum(4)).toSynapseColumnOnDLS());
+	EXPECT_EQ(SynapseColumnOnDLS(0), SynapseOnDLS(Enum(32)).toSynapseColumnOnDLS());
+	EXPECT_NE(SynapseColumnOnDLS(1), SynapseOnDLS(Enum(2)).toSynapseColumnOnDLS());
 }
 
 TEST(SynapseOnDLS, toNeuronOnDLS)
@@ -78,13 +127,13 @@ TEST(SynapseOnDLS, toSynapseBlockOnDLS)
 {
 	EXPECT_EQ(
 		SynapseBlockOnDLS(X(2), Y(6)),
-		SynapseOnDLS(NeuronOnDLS(10), SynapseDriverOnDLS(6)).toSynapseBlockOnDLS());
+		SynapseOnDLS(SynapseColumnOnDLS(10), SynapseRowOnDLS(6)).toSynapseBlockOnDLS());
 	EXPECT_EQ(
 		SynapseBlockOnDLS(X(2), Y(7)),
-		SynapseOnDLS(NeuronOnDLS(11), SynapseDriverOnDLS(7)).toSynapseBlockOnDLS());
+		SynapseOnDLS(SynapseColumnOnDLS(11), SynapseRowOnDLS(7)).toSynapseBlockOnDLS());
 	EXPECT_NE(
 		SynapseBlockOnDLS(X(1), Y(10)),
-		SynapseOnDLS(NeuronOnDLS(10), SynapseDriverOnDLS(6)).toSynapseBlockOnDLS());
+		SynapseOnDLS(SynapseColumnOnDLS(10), SynapseRowOnDLS(6)).toSynapseBlockOnDLS());
 }
 
 TEST(SynapseOnDLS, toSynapseOnSynapseBlock)

@@ -20,6 +20,8 @@ namespace v2 GENPYBIND(tag(hicann_dls_v2)) {
 struct CapMemColumnOnDLS;
 struct ColumnCorrelationSwitchOnDLS;
 struct ColumnCurrentSwitchOnDLS;
+struct SynapseColumnOnDLS;
+struct SynapseRowOnDLS;
 
 /**********\
    NEURON
@@ -27,14 +29,13 @@ struct ColumnCurrentSwitchOnDLS;
 
 struct GENPYBIND(inline_base("*")) NeuronOnDLS
 	: public common::detail::RantWrapper<NeuronOnDLS, uint_fast16_t, 31, 0>
-	, public common::detail::XRangedTrait
 {
 	constexpr explicit NeuronOnDLS(uintmax_t const val = 0) : rant_t(val) {}
-	constexpr explicit NeuronOnDLS(common::X const& x) : rant_t(x) {}
 
 	CapMemColumnOnDLS toCapMemColumnOnDLS() const;
 	ColumnCorrelationSwitchOnDLS toColumnCorrelationSwitchOnDLS() const;
 	ColumnCurrentSwitchOnDLS toColumnCurrentSwitchOnDLS() const;
+	SynapseColumnOnDLS toSynapseColumnOnDLS() const;
 };
 
 struct GENPYBIND(inline_base("*")) CommonNeuronConfigOnDLS
@@ -59,6 +60,8 @@ struct GENPYBIND(inline_base("*")) SynapseDriverOnDLS
 {
 	constexpr explicit SynapseDriverOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 	constexpr explicit SynapseDriverOnDLS(common::Y const& y) : rant_t(y) {}
+
+	SynapseRowOnDLS toSynapseRowOnDLS() const;
 };
 
 /***********\
@@ -91,13 +94,35 @@ struct GENPYBIND(inline_base("*")) SynapseOnSynapseBlock
 	constexpr explicit SynapseOnSynapseBlock(common::X const& x) : rant_t(x) {}
 };
 
+struct GENPYBIND(inline_base("*")) SynapseColumnOnDLS
+	: public common::detail::RantWrapper<SynapseColumnOnDLS, uint_fast16_t, 31, 0>
+	, public common::detail::XRangedTrait
+{
+	constexpr explicit SynapseColumnOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+	constexpr explicit SynapseColumnOnDLS(common::X const& x) : rant_t(x) {}
+
+	NeuronOnDLS toNeuronOnDLS() const { return NeuronOnDLS(value()); }
+};
+
+struct GENPYBIND(inline_base("*")) SynapseRowOnDLS
+	: public common::detail::RantWrapper<SynapseRowOnDLS, uint_fast16_t, 31, 0>
+	, public common::detail::YRangedTrait
+{
+	constexpr explicit SynapseRowOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+	constexpr explicit SynapseRowOnDLS(common::Y const& y) : rant_t(y) {}
+
+	SynapseDriverOnDLS toSynapseDriverOnDLS() const { return SynapseDriverOnDLS(value()); }
+};
+
 struct GENPYBIND(inline_base("*")) SynapseOnDLS
-	: public common::detail::GridCoordinate<SynapseOnDLS, NeuronOnDLS, SynapseDriverOnDLS>
+	: public common::detail::GridCoordinate<SynapseOnDLS, SynapseColumnOnDLS, SynapseRowOnDLS>
 {
 	GRID_COMMON_CONSTRUCTORS(SynapseOnDLS)
 
-	NeuronOnDLS toNeuronOnDLS() const { return x(); }
-	SynapseDriverOnDLS toSynapseDriverOnDLS() const { return y(); }
+	SynapseColumnOnDLS toSynapseColumnOnDLS() const { return x(); }
+	SynapseRowOnDLS toSynapseRowOnDLS() const { return y(); }
+	NeuronOnDLS toNeuronOnDLS() const { return NeuronOnDLS(x()); }
+	SynapseDriverOnDLS toSynapseDriverOnDLS() const { return SynapseDriverOnDLS(y()); }
 	SynapseBlockOnDLS toSynapseBlockOnDLS() const;
 	SynapseOnSynapseBlock toSynapseOnSynapseBlock() const;
 	ColumnCorrelationSwitchOnDLS toColumnCorrelationSwitchOnDLS() const;

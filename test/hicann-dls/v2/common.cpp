@@ -36,6 +36,8 @@ typedef ::testing::Types<
     SynapseBlockOnDLS,
     SynapseDriverOnDLS,
     SynapseDriverBlockOnDLS,
+    SynapseColumnOnDLS,
+    SynapseRowOnDLS,
     SynapseOnDLS,
     SynapseOnSynapseBlock,
     RateCounterOnDLS

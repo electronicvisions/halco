@@ -16,6 +16,16 @@ ColumnCurrentSwitchOnDLS NeuronOnDLS::toColumnCurrentSwitchOnDLS() const
 	return ColumnCurrentSwitchOnDLS(value());
 }
 
+SynapseColumnOnDLS NeuronOnDLS::toSynapseColumnOnDLS() const
+{
+	return SynapseColumnOnDLS(value());
+}
+
+SynapseRowOnDLS SynapseDriverOnDLS::toSynapseRowOnDLS() const
+{
+	return SynapseRowOnDLS(value());
+}
+
 SynapseBlockOnDLS SynapseOnDLS::toSynapseBlockOnDLS() const
 {
 	return SynapseBlockOnDLS(

@@ -27,6 +27,8 @@ class Test_PyhalcoHICANNDLSv2(unittest.TestCase, PyhalcoTest):
     PPUControlRegisterOnDLS          => linear, iterable
     SynapseBlockOnDLS                => grid, iterable
     SynapseDriverOnDLS               => linear, iterable
+    SynapseColumnOnDLS               => linear, iterable
+    SynapseRowOnDLS                  => linear, iterable
     SynapseOnDLS                     => grid, iterable
     SynapseOnSynapseBlock            => linear, iterable
     SynapseDriverBlockOnDLS          => linear, iterable

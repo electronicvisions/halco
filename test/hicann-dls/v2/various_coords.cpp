@@ -15,6 +15,10 @@ TEST(NeuronOnDLS, toCapMemColumnOnDLS) {
 	EXPECT_EQ(CapMemColumnOnDLS(3), NeuronOnDLS(3).toCapMemColumnOnDLS());
 }
 
+TEST(NeuronOnDLS, toSynapseColumnOnDLS) {
+	EXPECT_EQ(SynapseColumnOnDLS(3), NeuronOnDLS(3).toSynapseColumnOnDLS());
+}
+
 TEST(PPUMemoryWordOnDLS, RespectsBounds) {
 	EXPECT_ANY_THROW(PPUMemoryWordOnDLS(4096));
 	EXPECT_NO_THROW(PPUMemoryWordOnDLS(4095));
