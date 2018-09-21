@@ -20,6 +20,10 @@
 
 #include "halco/common/genpybind.h"
 
+#ifndef PYPLUSPLUS
+#include "halco/common/cerealization.h"
+#endif
+
 namespace halco {
 namespace common GENPYBIND(tag(common)) {
 
@@ -140,6 +144,13 @@ private:
 	}
 
 #ifndef PYPLUSPLUS
+	friend class cereal::access;
+	template <class Archive>
+	void cerealize(Archive& ar)
+	{
+		ar(CEREAL_NVP_("value", mValue));
+	}
+
 	static_assert(boost::is_fundamental<T>::value || std::is_same<std::string, T>::value,
 				  "BaseType is intended to be used with numbers");
 #endif
@@ -234,13 +245,23 @@ public:
 
 private:
 	rant::integral_range<T, Max, Min> mValue;
-
+#ifndef PYPLUSPLUS
+	friend class cereal::access;
+#endif
 	friend class boost::serialization::access;
 	template<typename Archiver>
 	void serialize(Archiver& ar, unsigned int const x)
 	{
 		boost::serialization::serialize(ar, mValue, x);
 	}
+
+#ifndef PYPLUSPLUS
+	template<typename Archive>
+	void cerealize(Archive& ar)
+	{
+		ar(CEREAL_NVP_("value", mValue));
+	}
+#endif
 };
 
 template<typename Derived, typename T, T Max, T Min>
@@ -435,6 +456,9 @@ protected:
 	}
 
 private:
+#ifndef PYPLUSPLUS
+	friend class cereal::access;
+#endif
 	friend class boost::serialization::access;
 	template<typename Archiver>
 	void serialize(Archiver & ar, unsigned int const)
@@ -448,6 +472,20 @@ private:
 		enum_type e = id();
 		ar & make_nvp("e", e);
 	}
+
+#ifndef PYPLUSPLUS
+	template<typename Archive>
+	void cerealize(Archive& ar)
+	{
+		ar(CEREAL_NVP_("x", mX));
+		ar(CEREAL_NVP_("y", mY));
+
+		// despite not part of the class's layout the enum coordinate is
+		// serialized as well for Bjoern's visualization.
+		enum_type e = id();
+		ar(CEREAL_NVP_("e", e));
+	}
+#endif
 };
 
 #ifndef PYPLUSPLUS

@@ -25,6 +25,7 @@ def configure(conf):
             uselib_store='BOOST4HALCO')
 
     conf.check_cxx(lib='log4cxx', uselib_store='LOG4CXXHALCO', mandatory=1)
+    conf.check_cxx(mandatory=True, header_name='cereal/cereal.hpp')
 
     if conf.env.build_python_bindings:
         conf.recurse("pyhalco")

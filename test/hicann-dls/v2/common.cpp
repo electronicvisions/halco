@@ -7,6 +7,10 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/serialization.hpp>
 
+#ifndef PYPLUSPLUS
+#include "halco/common/cerealization.h"
+#endif
+
 #include "halco/hicann-dls/v2/coordinates.h"
 
 using namespace halco::hicann_dls::v2;
@@ -44,6 +48,8 @@ typedef ::testing::Types<
 > CoordinateTypes;
 TYPED_TEST_CASE(CommonCoordinateTest, CoordinateTypes);
 
+#define TEST_CEREAL
 #define COMMON_FIXTURE_NAME CommonCoordinateTest
 #include "test/HALCO_COMMON.cxx"
 #undef COMMON_FIXTURE_NAME
+#undef TEST_CEREAL

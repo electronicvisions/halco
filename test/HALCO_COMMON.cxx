@@ -55,5 +55,25 @@ TEST_THAT(HasSerialization) {
 	ASSERT_EQ(obj2, obj);
 }
 
+#ifdef TEST_CEREAL
+TEST_THAT(HasCerealization) {
+	TypeParam obj, obj2;
+
+	std::ostringstream ostream;
+	{
+		cereal::JSONOutputArchive oa(ostream);
+		oa(obj);
+	}
+
+	std::istringstream istream(ostream.str());
+	{
+		cereal::JSONInputArchive ia(istream);
+		ia(obj2);
+	}
+
+	ASSERT_EQ(obj2, obj);
+}
+#endif
+
 #undef TEST_THAT
 #undef TEST_THAT_EXPAND

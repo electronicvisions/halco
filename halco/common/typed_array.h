@@ -10,6 +10,10 @@
 
 #include "halco/common/traits.h"
 
+#ifndef PYPLUSPLUS
+#include "halco/common/cerealization.h"
+#endif
+
 #include <boost/serialization/array.hpp>
 
 namespace halco {
@@ -228,4 +232,23 @@ serialize(Archiver& ar, halco::common::typed_array<Value, Key, Limits>& x,
 
 } // namespace serialization
 } // namespace boost
+
+
+#ifndef PYPLUSPLUS
+namespace cereal {
+
+template <typename Archive, typename Value, typename Key, typename Limits> inline
+void
+CEREAL_SERIALIZE_FUNCTION_NAME(Archive& ar, halco::common::typed_array<Value, Key, Limits>& x) {
+	size_t count = 0;
+	for (auto& value: x) {
+		std::stringstream ss;
+		ss << "value" << count;
+		ar(CEREAL_NVP_(ss.str().c_str(), value));
+		count++;
+	}
+}
+
+} // namespace cereal
+#endif
 #endif // PYPLUSPLUS
