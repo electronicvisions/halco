@@ -52,7 +52,7 @@ struct DNCOnWafer
 };
 
 // DNC Coordinate relative to FPGA
-struct DNCOnFPGA : public common::detail::RantWrapper<DNCOnFPGA, size_t, 3, 0> {
+struct DNCOnFPGA : public common::detail::RantWrapper<DNCOnFPGA, size_t, 0, 0> {
 	PYPP_CONSTEXPR explicit DNCOnFPGA(uintmax_t val = 0) : rant_t(val) {}
 
 	// TODO: rename toDNCGlobal
