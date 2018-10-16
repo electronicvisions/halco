@@ -68,7 +68,7 @@ TYPED_TEST(IterableCoordinateTest, iter_all) {
 		++count;
 		static_cast<void>(c);
 	}
-	EXPECT_LT(1, count);
+	EXPECT_LE(1, count);
 }
 
 TEST(Merger3OnHICANN, iter_all) {
