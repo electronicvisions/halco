@@ -58,7 +58,7 @@ DNCMergerOnHICANN GbitLinkOnHICANN::toDNCMergerOnHICANN() const {
 }
 
 DNCOnFPGA DNCGlobal::toDNCOnFPGA() const {
-	return gridLookupDNCOnFPGA(*this);
+	return DNCOnFPGA(0);
 }
 
 FPGAOnWafer DNCGlobal::toFPGAOnWafer() const {

@@ -193,16 +193,6 @@ std::array<size_t, 12> const adc_trigger_ananas_grid = {{0,0,0,1,1,1,1,1,1,0,0,0
 static std::array<size_t, 48> const reverse_adc_trigger_grid =
 	reverseLookup(reticle_adc_trigger_grid);
 
-DNCOnFPGA gridLookupDNCOnFPGA(DNCGlobal const dnc) {
-	if (dnc.toWafer().isKintex()) {
-		// HBP/BSS-production-style wafer
-		return DNCOnFPGA(0);
-	} else {
-		// old lab wafers have multiple reticles per FPGA
-		return DNCOnFPGA(reticle_fpga_grid_wafer01.at(dnc.toDNCOnWafer().toEnum()).second);
-	}
-}
-
 FPGAOnWafer gridLookupFPGAOnWafer(DNCGlobal const dnc) {
 	auto const local_dnc_id = dnc.toDNCOnWafer().toEnum();
 	if (dnc.toWafer().isKintex()) {

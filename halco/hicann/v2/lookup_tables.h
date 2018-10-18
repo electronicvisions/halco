@@ -36,9 +36,6 @@ PYPP_CLASS_ENUM(SetupType) {
 	BSSWafer
 };
 
-// Return the DNC position on a FPGA, for BSS wafers this is always 0
-DNCOnFPGA gridLookupDNCOnFPGA(DNCGlobal const dnc);
-
 // Return the FPGA position on a Wafer
 FPGAOnWafer gridLookupFPGAOnWafer(DNCGlobal const dnc);
 
