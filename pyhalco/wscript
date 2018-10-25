@@ -56,7 +56,7 @@ def build(bld):
             source='../halco/common/common.h',
             genpybind_tags='common',
             features='genpybind cxx cxxshlib pyext post_task',
-            use=['halco_common', 'PYBIND11HALCO', 'pywrap_inc'],
+            use=['halco_common', 'PYBIND11HALCO', 'pywrap_inc', 'pyhalco_common_files'],
             install_path='${PREFIX}/lib',
             linkflags='-Wl,-z,defs',
             post_task='pyhalco_common_tests',
@@ -67,7 +67,7 @@ def build(bld):
             source='../halco/hicann-dls/v2/coordinates.h',
             genpybind_tags='hicann_dls_v2',
             features='genpybind cxx cxxshlib pyext post_task',
-            use=['halco_common', 'halco_hicann_dls_v2', 'PYBIND11HALCO', 'pywrap_inc'],
+            use=['halco_common', 'halco_hicann_dls_v2', 'PYBIND11HALCO', 'pywrap_inc', 'pyhalco_common'],
             install_path='${PREFIX}/lib',
             linkflags='-Wl,-z,defs',
             post_task=['pyhalco_hicann_dls_v2_tests', 'pyhalco_common'],
@@ -91,7 +91,7 @@ def build(bld):
                 gen_defines    = 'PYPLUSPLUS __STRICT_ANSI__',
                 defines        = 'PYBINDINGS',
                 headers        = '../halco/common/common.h',
-                use            = ['halco_common', 'pyublas', 'BOOST4HALCO', 'BOOST4PYHALCO', 'PYHALCO', 'pywrap', 'pywrapstdvector', 'pycellparameters' ],
+                use            = ['halco_common', 'pyublas', 'BOOST4HALCO', 'BOOST4PYHALCO', 'PYHALCO', 'pywrap', 'pywrapstdvector', 'pycellparameters', 'pyhalco_common_files'],
                 post_task      = 'pyhalco_common_tests',
                 install_path   = '${PREFIX}/lib',
                 linkflags      = '-Wl,-z,defs',
@@ -133,12 +133,13 @@ def build(bld):
         pythonpath=['test'],
     )
 
-    bld.install_files(
-        '${PREFIX}/lib',
-        (bld.path.ant_glob('**/pyhalco_*.py') +
-         bld.path.ant_glob('common/pyhalco_*.py') +
-        ['test/pyhalco_test_utils.py']),
-        relative_trick=False,
+    # flat installation of all sources (and generated py{c,d}) into lib/
+    bld(
+        features = 'py',
+        target   = 'pyhalco_common_files',
+        source   = bld.path.ant_glob('**/pyhalco_*.py'),
+        install_path = '${PREFIX}/lib',
+        relative_trick = False,
     )
 
     bld.add_post_fun(summary)
