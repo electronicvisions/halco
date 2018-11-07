@@ -28,6 +28,7 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
     HICANNOnWaferEnum     => ignore
     HICANNOnWaferGrid     => ignore
     HICANNOnDNC           => grid, iterable
+    HICANNOnHS            => iterable
     HICANNOnWafer         => grid, iterable
     HLineOnHICANN         => linear, iterable
     HRepeaterOnHICANN     => grid, iterable

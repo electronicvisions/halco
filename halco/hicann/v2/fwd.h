@@ -20,6 +20,7 @@ struct ANANASOnWafer;
 struct GbitLinkOnHICANN;
 struct HICANNGlobal;
 struct HICANNOnDNC;
+struct HICANNOnHS;
 struct HICANNOnWafer;
 struct HLineOnHICANN;
 struct HRepeaterOnHICANN;
