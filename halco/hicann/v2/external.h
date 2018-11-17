@@ -82,6 +82,7 @@ public:
 	DNCOnWafer toDNCOnWafer() const { return This(); }
 	DNCOnFPGA toDNCOnFPGA() const;
 	FPGAOnWafer toFPGAOnWafer() const;
+	FPGAGlobal toFPGAGlobal() const;
 };
 
 // IPv4 stack port number for UDP transport layer

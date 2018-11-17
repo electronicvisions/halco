@@ -65,6 +65,10 @@ FPGAOnWafer DNCGlobal::toFPGAOnWafer() const {
 	return gridLookupFPGAOnWafer(*this);
 }
 
+FPGAGlobal DNCGlobal::toFPGAGlobal() const {
+	return FPGAGlobal(gridLookupFPGAOnWafer(*this), toWafer());
+}
+
 DNCOnWafer FPGAOnWafer::toDNCOnWafer() const
 {
 	return gridLookupDNCOnWafer(*this);
