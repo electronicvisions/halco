@@ -19,6 +19,7 @@
 #include "pywrap/compat/hash.hpp"
 
 #include "halco/common/genpybind.h"
+#include "halco/common/iterator.h"
 
 #ifndef PYPLUSPLUS
 #include "halco/common/cerealization.h"
@@ -91,6 +92,8 @@ public:
 	typedef T value_type;
 	typedef BaseType<Derived, T> base_t;
 
+	static const bool is_interval = false;
+
 	PYPP_CONSTEXPR explicit BaseType(value_type const& val = 0) :
 		mValue(val) {}
 
@@ -156,6 +159,9 @@ private:
 #endif
 };
 
+template<typename Derived, typename T>
+const bool BaseType<Derived, T>::is_interval;
+
 } // namespace detail
 
 
@@ -193,6 +199,8 @@ public:
 	typedef Derived derived_type;
 	typedef RantWrapper<Derived, T, Max, Min> rant_t;
 	typedef RantWrapper<Derived, T, Max, Min> base_t;
+
+	static const bool is_interval = false;
 
 	PYPP_CONSTEXPR RantWrapper() : mValue(value_type(0)) {}
 
@@ -263,6 +271,9 @@ private:
 	}
 #endif
 };
+
+template<typename Derived, typename T, T Max, T Min>
+const bool RantWrapper<Derived, T, Max, Min>::is_interval;
 
 template<typename Derived, typename T, T Max, T Min>
 const T RantWrapper<Derived, T, Max, Min>::max;
@@ -350,6 +361,8 @@ template<typename Derived, typename XT, typename YT, size_t EnumSize = (XT::size
 struct GridCoordinate {
 	typedef XT x_type GENPYBIND(opaque(false));
 	typedef YT y_type GENPYBIND(opaque(false));
+
+	static const bool is_interval = false;
 
 #ifndef PYPLUSPLUS
 	static_assert(boost::is_base_of<detail::XRangedTrait, x_type>::value,
@@ -493,11 +506,201 @@ template<typename Derived, typename XT, typename YT, size_t EnumSize>
 size_t constexpr GridCoordinate<Derived, XT, YT, EnumSize>::size;
 #endif // !PYPLUSPLUS
 
+template<typename Derived, typename XT, typename YT, size_t EnumSize>
+const bool GridCoordinate<Derived, XT, YT, EnumSize>::is_interval;
+
+template<typename Derived, typename T, size_t EnumSize = T::size * T::size>
+struct IntervalCoordinate {
+	typedef T bound_type GENPYBIND(opaque(false));
+
+	static const bool is_interval = true;
+
+#ifndef PYPLUSPLUS
+	static constexpr size_t size = EnumSize;
+#else
+	static const size_t size = EnumSize;
+#endif
+
+	typedef detail::EnumRanged<EnumSize> enum_type GENPYBIND(opaque(false));
+	typedef IntervalCoordinate<Derived, bound_type, EnumSize> interval_type;
+
+	PYPP_CONSTEXPR explicit IntervalCoordinate(enum_type const& e) :
+	    mMin(static_cast<Derived const*>(this)->to_min(e)),
+	    mMax(static_cast<Derived const*>(this)->to_max(e))
+	{}
+
+	IntervalCoordinate(bound_type const& min, bound_type const& max) :
+	    mMin(min), mMax(max)
+	{
+		static_cast<Derived const*>(this)->check(mMin,mMax); /* throws for invalid min/max combination */
+	}
+
+	PYPP_CONSTEXPR IntervalCoordinate() :
+	    mMin(static_cast<Derived const*>(this)->to_min(enum_type(0))),
+	    mMax(static_cast<Derived const*>(this)->to_max(enum_type(0)))
+	{}
+
+	PYPP_DEFAULT(PYPP_CONSTEXPR IntervalCoordinate(IntervalCoordinate const&));
+	PYPP_DEFAULT(IntervalCoordinate& operator= (IntervalCoordinate const&));
+
+	enum_type id() const { return static_cast<Derived const*>(this)->to_enum(mMin, mMax); }
+	enum_type toEnum() const { return static_cast<Derived const*>(this)->to_enum(mMin, mMax); }
+	bound_type min()  const { return mMin; }
+	bound_type max()  const { return mMax; }
+	size_t length() const { return mMax - mMin + 1; }
+
+	GENPYBIND(expose_as(__getitem__))
+	bound_type get(size_t i) const;
+
+	bound_type const operator[](size_t i) const
+	{
+		if (!(i < length())) {
+			std::stringstream ss;
+			ss << "coordinate index ("
+			   << i << ") is out of interval range";
+			throw std::out_of_range(ss.str());
+		}
+		return bound_type(mMin.toEnum() + i);
+	}
+
+#ifndef PYPLUSPLUS
+	typename detail::CoordinateIterator<bound_type> begin()
+	{
+		return typename detail::CoordinateIterator<bound_type>(min().toEnum());
+	}
+
+	typename detail::CoordinateIterator<bound_type> end()
+	{
+		return typename detail::CoordinateIterator<bound_type>(max().toEnum() + 1);
+	}
+#endif
+
+	friend bool operator<(Derived const& a, Derived const&b)
+	{
+		return a.id() < b.id();
+	}
+
+	friend bool operator>(Derived const& a, Derived const&b)
+	{
+		return a.id() > b.id();
+	}
+
+	friend bool operator==(Derived const& a, Derived const&b)
+	{
+		return a.min() == b.min() && a.max() == b.max();
+	}
+
+	friend bool operator!=(Derived const& a, Derived const&b)
+	{
+		return !(a == b);
+	}
+
+	GENPYBIND(stringstream)
+	friend std::ostream& operator<<(std::ostream& os, const IntervalCoordinate& c)
+	{
+		static std::string const name =
+			ZTL::typestring<Derived>().substr(ZTL::typestring<Derived>().rfind(':') + 1);
+		os << name << "([" << c.min().toEnum().value()
+		   << "," << c.max().toEnum().value() << "])";
+		return os;
+	}
+
+	GENPYBIND(expose_as(__hash__))
+	size_t hash() const
+	{
+		// We include the type name in the hash to reduce the number of hash collisions in
+		// python code, where __hash__ is used in heterogeneous containers.
+		static const size_t seed = boost::hash_value(typeid(Derived).name());
+		size_t hash = seed;
+		boost::hash_combine(hash, mMin.value());
+		boost::hash_combine(hash, mMax.value());
+		return hash;
+	}
+
+	friend size_t hash_value(Derived const& t) {
+		return t.hash();
+	}
+
+protected:
+	bound_type mMin;
+	bound_type mMax;
+
+	static PYPP_CONSTEXPR bound_type to_min(enum_type const& e) GENPYBIND(hidden)
+	{
+		return bound_type(e / bound_type::size);
+	}
+
+	static PYPP_CONSTEXPR bound_type to_max(enum_type const& e) GENPYBIND(hidden)
+	{
+		return bound_type(e % bound_type::size + to_min(e));
+	}
+
+	static PYPP_CONSTEXPR void check(bound_type const& min, bound_type const& max) GENPYBIND(hidden)
+	{
+		if (min > max) {
+			throw std::runtime_error("Interval orientation wrong, min > max.");
+		}
+	}
+
+	static PYPP_CONSTEXPR enum_type to_enum(bound_type const& min, bound_type const& max) GENPYBIND(hidden)
+	{
+		if (min > max) {
+			throw std::runtime_error("Interval orientation wrong, min > max.");
+		}
+		return enum_type(bound_type::size * min + max);
+	}
+
+private:
+#ifndef PYPLUSPLUS
+	friend class cereal::access;
+#endif
+	friend class boost::serialization::access;
+	template<typename Archiver>
+	void serialize(Archiver & ar, unsigned int const)
+	{
+		using boost::serialization::make_nvp;
+		ar & make_nvp("min", mMin)
+		   & make_nvp("max", mMax);
+
+		// despite not part of the class's layout the enum coordinate is
+		// serialized as well for Bjoern's visualization.
+		enum_type e = id();
+		ar & make_nvp("e", e);
+	}
+
+#ifndef PYPLUSPLUS
+	template<typename Archive>
+	void cerealize(Archive& ar)
+	{
+		ar(CEREAL_NVP_("min", mMin));
+		ar(CEREAL_NVP_("max", mMax));
+
+		// despite not part of the class's layout the enum coordinate is
+		// serialized as well for Bjoern's visualization.
+		enum_type e = id();
+		ar(CEREAL_NVP_("e", e));
+	}
+#endif
+};
+
+#ifndef PYPLUSPLUS
+template<typename Derived, typename T, size_t EnumSize>
+size_t constexpr IntervalCoordinate<Derived, T, EnumSize>::size;
+#endif // !PYPLUSPLUS
+
+template<typename Derived, typename T, size_t EnumSize>
+const bool IntervalCoordinate<Derived, T, EnumSize>::is_interval;
+
 } // namespace detail
 
 } // namespace common
 } // namespace halco
 
+#define INTERVAL_COMMON_CONSTRUCTORS(cls)                                          \
+	PYPP_CONSTEXPR explicit cls(const enum_type e) : interval_type(e) {}           \
+                                                                               \
+	cls(bound_type const& min, bound_type const& max) : interval_type(min, max) {} \
+	PYPP_DEFAULT(PYPP_CONSTEXPR cls());
 
 #define GRID_COMMON_CONSTRUCTORS(cls)                                          \
 	PYPP_CONSTEXPR explicit cls(const enum_type e) : grid_type(e) {}       \
@@ -559,6 +762,13 @@ template<typename Derived, typename XT, typename YT, size_t EnumSize>
 struct hash<halco::common::detail::GridCoordinate<Derived, XT, YT, EnumSize> >
 {
 	typedef halco::common::detail::GridCoordinate<Derived, XT, YT, EnumSize> _type;
+	HALCO_GEOMETRY_HASH(_type)
+};
+
+template<typename Derived, typename T, size_t EnumSize>
+struct hash<halco::common::detail::IntervalCoordinate<Derived, T, EnumSize> >
+{
+	typedef halco::common::detail::IntervalCoordinate<Derived, T, EnumSize> _type;
 	HALCO_GEOMETRY_HASH(_type)
 };
 

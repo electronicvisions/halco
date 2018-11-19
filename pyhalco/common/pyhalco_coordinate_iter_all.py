@@ -12,13 +12,20 @@ def _iter_all(Type):
     except AttributeError:
         value_type = Type
         make = lambda ii: Type(ii)
-
-    for value in range(value_type.begin, value_type.end):
-        yield make(value)
+    if (Type.is_interval):
+        value = 0
+        while value < Type.size:
+            yield make(value)
+            value += 1
+            if (value % Type.bound_type.size == Type.bound_type.size - value / Type.bound_type.size):
+                value = Type.bound_type.size * (value / Type.bound_type.size + 1)
+    else:
+        for value in range(value_type.begin, value_type.end):
+            yield make(value)
 
 def iter_all(*Types):
     """
-    Iterates over all posible values of one or more coordinates, e.g.:
+    Iterates over all possible values of one or more coordinates, e.g.:
         - for neuron in iter_all(NeuronOnHICANN):
               print neuron
         - for hicann, neuron in iter_all(HICANNOnWafer, NeuronOnHICANN):

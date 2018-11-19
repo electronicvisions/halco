@@ -5,6 +5,7 @@ extern "C" {
 }
 
 #include "halco/common/common.h"
+#include "halco/common/geometry.th"
 #include "halco/common/genpybind.h"
 
 GENPYBIND(tag(hicann_dls_v2))

@@ -38,7 +38,7 @@ class PyhalcoTest(object):
         raise NotImplemented("failed to import module")
 
     COORDINATES = ""
-    CATEGORIES = ["all", "linear", "iterable", "ignore", "grid"]
+    CATEGORIES = ["all", "linear", "interval", "iterable", "ignore", "grid"]
 
     @staticmethod
     def _extract_categories(categories, text):
@@ -218,12 +218,23 @@ class PyhalcoTest(object):
         import pyhalco_common
         cls = self.get_coordinate_class(name)
 
-        coords = [c for c in pyhalco_common.iter_all(cls)]
-        for coord in coords:
-            self.assertIsInstance(coord, cls)
+        if cls.is_interval:
+            # only test cornercase of overstepped enum
+            # i.e. until 2*bound_type.size
+            coords = []
+            for c in pyhalco_common.iter_all(cls):
+                if c.toEnum().value() > cls.bound_type.size * 2:
+                    break
+                self.assertLessEqual(c.min(), c.max())
+                coords.append(c)
+            self.assertEqual(len(coords), cls.bound_type.size * 2 - 1)
+        else:
+            coords = [c for c in pyhalco_common.iter_all(cls)]
+            for coord in coords:
+                self.assertIsInstance(coord, cls)
 
-        set_coords = set(c for c in pyhalco_common.iter_all(cls))
-        self.assertEqual(len(set_coords), len(coords))
+            set_coords = set(c for c in pyhalco_common.iter_all(cls))
+            self.assertEqual(len(set_coords), len(coords))
 
     @for_coordinates_with_category('grid')
     def test_can_be_constructed_from_x_and_y(self, name):
@@ -257,3 +268,32 @@ class PyhalcoTest(object):
 
         self.assertEqual(c, cls(y, x))
         self.assertEqual(c, cls(Y(int(y)), X(int(x))))
+
+    @for_coordinates_with_category('interval')
+    def test_can_be_constructed_from_bounds(self, name):
+        from pyhalco_common import iter_all
+        cls = self.get_coordinate_class(name)
+
+        num_bound = cls.bound_type.size
+        num_enum = cls.enum_type.size
+
+        self.assertLess(0, num_bound)
+        self.assertLess(0, num_enum)
+        self.assertEqual(num_enum, num_bound * num_bound)
+
+        for min, max in itertools.product(
+                iter_all(cls.bound_type), iter_all(cls.bound_type)):
+            try:
+                c = cls(min, max)
+                break
+            except (RuntimeError, ValueError):
+                pass
+        else:
+            self.fail(
+                "Failed to construct from any min, max combination")
+
+        self.assertEqual(c, cls(min, max))
+        self.assertEqual(c, cls(cls.bound_type(int(min)), cls.bound_type(int(max))))
+
+        self.assertRaises(RuntimeError, c = cls(max, min))
+        self.assertRaises(RuntimeError, c = cls(cls.bound_type(int(max)), cls.bound_type(int(min))))
