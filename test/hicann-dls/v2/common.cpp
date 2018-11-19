@@ -34,6 +34,8 @@ typedef ::testing::Types<
     DACOnBoard,
     NeuronOnDLS,
     PPUMemoryWordOnDLS,
+    PPUMemoryBlockOnDLS,
+    PPUMemoryBlockSize,
     PPUMemoryOnDLS,
     PPUControlRegisterOnDLS,
     PPUStatusRegisterOnDLS,
@@ -45,8 +47,8 @@ typedef ::testing::Types<
     SynapseOnDLS,
     SynapseOnSynapseBlock,
     RateCounterOnDLS,
-    RateCounterConfigOnDLS
-> CoordinateTypes;
+    RateCounterConfigOnDLS>
+    CoordinateTypes;
 TYPED_TEST_CASE(CommonCoordinateTest, CoordinateTypes);
 
 #define TEST_CEREAL

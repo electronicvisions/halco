@@ -286,6 +286,23 @@ struct GENPYBIND(inline_base("*")) PPUMemoryWordOnDLS
 	constexpr explicit PPUMemoryWordOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
 
+struct GENPYBIND(inline_base("*")) PPUMemoryBlockSize
+    : public common::detail::
+          RantWrapper<PPUMemoryBlockSize, uint_fast16_t, PPUMemoryWordOnDLS::size, 1>
+{
+	constexpr explicit PPUMemoryBlockSize(uintmax_t const val = 1) : rant_t(val) {}
+};
+
+struct GENPYBIND(inline_base("*")) PPUMemoryBlockOnDLS
+    : public common::detail::IntervalCoordinate<PPUMemoryBlockOnDLS, PPUMemoryWordOnDLS>
+{
+	INTERVAL_COMMON_CONSTRUCTORS(PPUMemoryBlockOnDLS)
+
+	PPUMemoryBlockSize toPPUMemoryBlockSize() const { return PPUMemoryBlockSize(length()); }
+	PPUMemoryWordOnDLS toMin() const { return min(); }
+	PPUMemoryWordOnDLS toMax() const { return max(); }
+};
+
 struct GENPYBIND(inline_base("*")) PPUMemoryOnDLS
 	: public common::detail::RantWrapper<PPUMemoryOnDLS, uint_fast16_t, 0, 0>
 {
@@ -351,6 +368,8 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::ColumnCurrentSwitchOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::CorrelationConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::NeuronOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::PPUMemoryWordOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::PPUMemoryBlockSize)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::PPUMemoryBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::PPUMemoryOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::PPUControlRegisterOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::PPUStatusRegisterOnDLS)

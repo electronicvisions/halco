@@ -21,6 +21,8 @@ class Test_PyhalcoHICANNDLSv2(unittest.TestCase, PyhalcoTest):
     DACOnBoard                       => linear, iterable
     NeuronOnDLS                      => linear, iterable
     NeuronParameter                  => ignore
+    PPUMemoryBlockOnDLS              => interval, iterable
+    PPUMemoryBlockSize               => linear, iterable
     PPUMemoryWordOnDLS               => linear, iterable
     PPUMemoryOnDLS                   => linear, iterable
     PPUStatusRegisterOnDLS           => linear, iterable

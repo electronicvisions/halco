@@ -43,3 +43,27 @@ TEST(PPUStatusRegisterOnDLS, RespectsBounds) {
 	EXPECT_ANY_THROW(PPUStatusRegisterOnDLS(1));
 	EXPECT_NO_THROW(PPUStatusRegisterOnDLS(0));
 }
+
+TEST(PPUMemoryBlockOnDLS, IterateIntervalMin)
+{
+	PPUMemoryBlockOnDLS interval(
+	    PPUMemoryWordOnDLS(PPUMemoryWordOnDLS::min), PPUMemoryWordOnDLS(100));
+	size_t num = 0;
+
+	for (auto coord : interval) {
+		ASSERT_EQ(coord, PPUMemoryWordOnDLS(num));
+		num++;
+	}
+}
+
+TEST(PPUMemoryBlockOnDLS, IterateIntervalMax)
+{
+	PPUMemoryBlockOnDLS interval(
+	    PPUMemoryWordOnDLS(100), PPUMemoryWordOnDLS(PPUMemoryWordOnDLS::max));
+	size_t num = 100;
+
+	for (auto coord : interval) {
+		ASSERT_EQ(coord, PPUMemoryWordOnDLS(num));
+		num++;
+	}
+}
