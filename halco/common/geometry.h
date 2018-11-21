@@ -395,7 +395,7 @@ struct GridCoordinate {
 
 	friend bool operator>(Derived const& a, Derived const&b)
 	{
-		return !(a.id() < b.id());
+		return a.id() > b.id();
 	}
 
 	friend bool operator==(Derived const& a, Derived const&b)
