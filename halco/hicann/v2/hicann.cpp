@@ -41,6 +41,10 @@ DNCOnWafer HICANNOnWafer::toDNCOnWafer() const {
 	return DNCOnWafer(DNCOnWafer::x_type(x() / 4), DNCOnWafer::y_type(y() / 2));
 }
 
+FPGAOnWafer HICANNOnWafer::toFPGAOnWafer() const {
+	return toDNCOnWafer().toFPGAOnWafer();
+}
+
 HICANNOnDNC HICANNOnWafer::toHICANNOnDNC() const {
 	auto _x = HICANNOnDNC::x_type(x() % 4);
 	auto _y = HICANNOnDNC::y_type(y() % 2);

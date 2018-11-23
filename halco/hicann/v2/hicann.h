@@ -26,6 +26,7 @@ struct HICANNOnWafer
 	HICANNOnWafer move(common::Direction const& direction) const;
 
 	DNCOnWafer toDNCOnWafer() const;
+	FPGAOnWafer toFPGAOnWafer() const;
 	HICANNOnDNC toHICANNOnDNC() const;
 	HICANNOnHS toHICANNOnHS() const;
 
