@@ -75,6 +75,11 @@ HICANNOnWafer HICANNOnDNC::toHICANNOnWafer(const DNCOnWafer& dnc) const {
 	return HICANNOnWafer(_x, _y);
 }
 
+HICANNOnWafer HICANNOnDNC::toHICANNOnWafer(const FPGAOnWafer& fpga) const
+{
+	return toHICANNOnWafer(fpga.toDNCOnWafer());
+}
+
 HICANNGlobal HICANNGlobal::east() const {
 	return HICANNGlobal(HICANNOnWafer::east(), toWafer());
 }

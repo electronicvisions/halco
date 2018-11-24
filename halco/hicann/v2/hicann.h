@@ -44,6 +44,7 @@ struct HICANNOnDNC
 	GRID_COMMON_CONSTRUCTORS(HICANNOnDNC)
 
 	HICANNOnWafer toHICANNOnWafer(const DNCOnWafer& dnc) const;
+	HICANNOnWafer toHICANNOnWafer(const FPGAOnWafer& fpga) const;
 	HICANNOnHS toHICANNOnHS() const;
 };
 
