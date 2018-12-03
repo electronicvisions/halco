@@ -79,11 +79,11 @@ TriggerOnWafer FPGAOnWafer::toTriggerOnWafer() const
 	return gridLookupTriggerOnWafer(gridLookupDNCOnWafer(*this));
 }
 
-std::vector<HICANNOnWafer> FPGAOnWafer::toHICANNOnWafer() const
+std::array<HICANNOnWafer, HICANNOnDNC::size> FPGAOnWafer::toHICANNOnWafer() const
 {
-	std::vector<HICANNOnWafer> hicanns;
+	std::array<HICANNOnWafer, HICANNOnDNC::size> hicanns;
 	for (auto const hod : iter_all<HICANNOnDNC>()) {
-		hicanns.push_back(hod.toHICANNOnWafer(*this));
+		hicanns.at(hod.toEnum()) = hod.toHICANNOnWafer(*this);
 	}
 	return hicanns;
 }

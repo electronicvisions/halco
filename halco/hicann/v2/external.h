@@ -124,7 +124,7 @@ struct FPGAOnWafer : public common::detail::RantWrapper<FPGAOnWafer, size_t, 47,
 	DNCOnWafer toDNCOnWafer() const;
 	TriggerOnWafer toTriggerOnWafer() const;
 
-	std::vector<HICANNOnWafer> toHICANNOnWafer() const;
+	std::array<HICANNOnWafer, HICANNOnDNC::size> toHICANNOnWafer() const;
 };
 
 struct FPGAGlobal : public WaferMixin<FPGAGlobal, FPGAOnWafer> {
