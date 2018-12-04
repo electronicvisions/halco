@@ -29,6 +29,26 @@ TEST(HMFCoordinateConversion, DNCOnWafertoFPGAOnWafer)
 	}
 }
 
+TEST(HMFCoordinateConversion, FPGAOnWafertoHICANNOnWafer)
+{
+	for (auto fpga : iter_all<FPGAOnWafer>())
+	{
+		auto const dnc = fpga.toDNCOnWafer();
+		size_t const x_enum = dnc.x() * 4;
+		size_t const y_enum = dnc.y() * 2;
+		std::array<HICANNOnWafer, HICANNOnDNC::size> ref_array {
+			HICANNOnWafer(X(x_enum), Y(y_enum)),
+			HICANNOnWafer(X(x_enum + 1), Y(y_enum)),
+			HICANNOnWafer(X(x_enum + 2), Y(y_enum)),
+			HICANNOnWafer(X(x_enum + 3), Y(y_enum)),
+			HICANNOnWafer(X(x_enum), Y(y_enum + 1)),
+			HICANNOnWafer(X(x_enum + 1), Y(y_enum + 1)),
+			HICANNOnWafer(X(x_enum + 2), Y(y_enum + 1)),
+			HICANNOnWafer(X(x_enum + 3), Y(y_enum + 1))};
+		ASSERT_EQ(ref_array, fpga.toHICANNOnWafer());
+	}
+}
+
 TEST(HMFCoordinateConversion, HICANNOnDNCToHICANNOnHS)
 {
 	std::vector<HICANNOnHS> const expected_hicanns_on_hs = {
