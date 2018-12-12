@@ -317,6 +317,12 @@ public:
    Rate Counters
 \****************/
 
+struct GENPYBIND(inline_base("*")) RateCounterConfigOnDLS
+	: public common::detail::RantWrapper<RateCounterConfigOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit RateCounterConfigOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
 struct GENPYBIND(inline_base("*")) RateCounterOnDLS
 	: public common::detail::RantWrapper<RateCounterOnDLS, uint_fast16_t, 0, 0>
 {

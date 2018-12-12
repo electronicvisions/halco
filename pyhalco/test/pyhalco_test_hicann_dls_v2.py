@@ -34,6 +34,7 @@ class Test_PyhalcoHICANNDLSv2(unittest.TestCase, PyhalcoTest):
     SynapseDriverBlockOnDLS          => linear, iterable
     CorrelationConfigOnDLS           => linear, iterable
     RateCounterOnDLS                 => linear, iterable
+    RateCounterConfigOnDLS           => linear, iterable
     """
 
     @staticmethod
