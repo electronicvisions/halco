@@ -51,21 +51,21 @@ HICANNOnDNC HICANNOnWafer::toHICANNOnDNC() const {
 	return HICANNOnDNC(_x, _y);
 }
 
-HICANNOnHS HICANNOnWafer::toHICANNOnHS() const
+HighspeedLinkOnDNC HICANNOnWafer::toHighspeedLinkOnDNC() const
 {
-	return toHICANNOnDNC().toHICANNOnHS();
+	return toHICANNOnDNC().toHighspeedLinkOnDNC();
 }
 
-HICANNOnHS HICANNOnDNC::toHICANNOnHS() const
+HighspeedLinkOnDNC HICANNOnDNC::toHighspeedLinkOnDNC() const
 {
 	size_t const e = (y()) ? (x()) * 2 + 1 /*odd*/
 	                       : (x()) * 2 /*even*/;
-	return HICANNOnHS(e);
+	return HighspeedLinkOnDNC(e);
 }
 
-HICANNOnDNC HICANNOnHS::toHICANNOnDNC() const
+HICANNOnDNC HighspeedLinkOnDNC::toHICANNOnDNC() const
 {
-	static const typed_array<size_t, HICANNOnHS> lut{0, 4, 1, 5, 2, 6, 3, 7};
+	static const typed_array<size_t, HighspeedLinkOnDNC> lut{0, 4, 1, 5, 2, 6, 3, 7};
 	return HICANNOnDNC(Enum(lut[*this]));
 }
 

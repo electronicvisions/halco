@@ -28,7 +28,7 @@ struct HICANNOnWafer
 	DNCOnWafer toDNCOnWafer() const;
 	FPGAOnWafer toFPGAOnWafer() const;
 	HICANNOnDNC toHICANNOnDNC() const;
-	HICANNOnHS toHICANNOnHS() const;
+	HighspeedLinkOnDNC toHighspeedLinkOnDNC() const;
 
 
 /* implementation detail, not part of public API: */
@@ -45,15 +45,7 @@ struct HICANNOnDNC
 
 	HICANNOnWafer toHICANNOnWafer(const DNCOnWafer& dnc) const;
 	HICANNOnWafer toHICANNOnWafer(const FPGAOnWafer& fpga) const;
-	HICANNOnHS toHICANNOnHS() const;
-};
-
-// HICANN Coordinate relative to highspeed
-struct HICANNOnHS
-    : public common::detail::RantWrapper<HICANNOnHS, size_t, 7, 0> {
-	PYPP_CONSTEXPR explicit HICANNOnHS(uintmax_t const val = 0) : rant_t(val) {}
-
-	HICANNOnDNC toHICANNOnDNC() const;
+	HighspeedLinkOnDNC toHighspeedLinkOnDNC() const;
 };
 
 struct HICANNGlobal : public WaferMixin<HICANNGlobal, HICANNOnWafer> {
@@ -102,7 +94,6 @@ namespace std {
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::HICANNGlobal)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::HICANNOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::HICANNOnDNC)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::HICANNOnHS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::WaferMixin<
     halco::hicann::v2::HICANNGlobal BOOST_PP_COMMA() halco::hicann::v2::HICANNOnWafer>)
 

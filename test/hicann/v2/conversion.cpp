@@ -49,24 +49,24 @@ TEST(HMFCoordinateConversion, FPGAOnWafertoHICANNOnWafer)
 	}
 }
 
-TEST(HMFCoordinateConversion, HICANNOnDNCToHICANNOnHS)
+TEST(HMFCoordinateConversion, HICANNOnDNCToHighspeedLinkOnDNC)
 {
-	std::vector<HICANNOnHS> const expected_hicanns_on_hs = {
-	    HICANNOnHS(0), HICANNOnHS(2), HICANNOnHS(4), HICANNOnHS(6),
-	    HICANNOnHS(1), HICANNOnHS(3), HICANNOnHS(5), HICANNOnHS(7)};
+	std::vector<HighspeedLinkOnDNC> const expected_hicanns_on_hs = {
+	    HighspeedLinkOnDNC(0), HighspeedLinkOnDNC(2), HighspeedLinkOnDNC(4), HighspeedLinkOnDNC(6),
+	    HighspeedLinkOnDNC(1), HighspeedLinkOnDNC(3), HighspeedLinkOnDNC(5), HighspeedLinkOnDNC(7)};
 
-	std::vector<HICANNOnHS> hicanns_on_hs;
+	std::vector<HighspeedLinkOnDNC> hs_link;
 
 	for (auto hicann_on_dnc : iter_all<HICANNOnDNC>()) {
-		auto const hicann_on_hs = hicann_on_dnc.toHICANNOnHS();
-		hicanns_on_hs.push_back(hicann_on_hs);
+		auto const hicann_on_hs = hicann_on_dnc.toHighspeedLinkOnDNC();
+		hs_link.push_back(hicann_on_hs);
 	}
-	ASSERT_EQ(expected_hicanns_on_hs, hicanns_on_hs);
+	ASSERT_EQ(expected_hicanns_on_hs, hs_link);
 }
 
-TEST(HMFCoordinateConversion, HICANNOnHStoHICANNOnDNC)
+TEST(HMFCoordinateConversion, HighspeedLinkOnDNCtoHICANNOnDNC)
 {
 	for (auto hicann_on_dnc : iter_all<HICANNOnDNC>()) {
-		ASSERT_EQ(hicann_on_dnc, hicann_on_dnc.toHICANNOnHS().toHICANNOnDNC());
+		ASSERT_EQ(hicann_on_dnc, hicann_on_dnc.toHighspeedLinkOnDNC().toHICANNOnDNC());
 	}
 }

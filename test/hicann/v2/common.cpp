@@ -40,7 +40,7 @@ typedef ::testing::Types<
 	GbitLinkOnHICANN,
 	HICANNGlobal,
 	HICANNOnDNC,
-	HICANNOnHS,
+	HighspeedLinkOnDNC,
 	HICANNOnWafer,
 	HLineOnHICANN,
 	HRepeaterOnHICANN,

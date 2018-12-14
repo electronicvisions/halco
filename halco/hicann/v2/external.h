@@ -85,6 +85,14 @@ public:
 	FPGAGlobal toFPGAGlobal() const;
 };
 
+// HighspeedLink coordinate between HICANN and DNC(FPGA)
+struct HighspeedLinkOnDNC
+    : public common::detail::RantWrapper<HighspeedLinkOnDNC, size_t, 7, 0> {
+	PYPP_CONSTEXPR explicit HighspeedLinkOnDNC(uintmax_t const val = 0) : rant_t(val) {}
+
+	HICANNOnDNC toHICANNOnDNC() const;
+};
+
 // IPv4 stack port number for UDP transport layer
 struct UDPPort : public common::detail::BaseType<UDPPort, uint_fast16_t> {
 	PYPP_CONSTEXPR explicit UDPPort(value_type val) : base_t(val) {}
@@ -206,6 +214,7 @@ namespace std {
 
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::DNCOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::DNCOnFPGA)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::HighspeedLinkOnDNC)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::FPGAOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::ANANASOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::TriggerOnADC)

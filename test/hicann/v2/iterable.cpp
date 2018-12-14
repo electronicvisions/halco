@@ -25,7 +25,7 @@ typedef ::testing::Types<
 	FPGAOnWafer,
 	GbitLinkOnHICANN,
 	HICANNOnDNC,
-	HICANNOnHS,
+	HighspeedLinkOnDNC,
 	HICANNOnWafer,
 	HLineOnHICANN,
 	HRepeaterOnHICANN,
