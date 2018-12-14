@@ -59,6 +59,8 @@ struct DNCOnFPGA : public common::detail::RantWrapper<DNCOnFPGA, size_t, 0, 0> {
 	DNCGlobal toDNCOnWafer(FPGAGlobal const&) const;
 };
 
+HALCO_COORDINATE_MIXIN(DNCMixin, DNCOnWafer, dnc)
+
 struct PowerCoordinate : public common::detail::RantWrapper<PowerCoordinate, size_t, 48, 1> {
 	PYPP_CONSTEXPR explicit PowerCoordinate(uintmax_t val = 1) : rant_t(val) {}
 };
@@ -91,6 +93,26 @@ struct HighspeedLinkOnDNC
 	PYPP_CONSTEXPR explicit HighspeedLinkOnDNC(uintmax_t const val = 0) : rant_t(val) {}
 
 	HICANNOnDNC toHICANNOnDNC() const;
+};
+
+struct HighspeedLinkOnWafer : public DNCMixin<HighspeedLinkOnWafer, HighspeedLinkOnDNC>
+{
+private:
+	typedef DNCMixin<HighspeedLinkOnWafer, HighspeedLinkOnDNC> base;
+
+public:
+	using base::enum_type;
+
+	PYPP_DEFAULT(HighspeedLinkOnWafer());
+
+	explicit HighspeedLinkOnWafer(
+	    HighspeedLinkOnDNC const& hs_link, DNCOnWafer const& dnc = DNCOnWafer())
+	    : base(hs_link, dnc)
+	{}
+
+	explicit HighspeedLinkOnWafer(enum_type const& e) : base(e) {}
+
+	HighspeedLinkOnDNC toHighspeedLinkOnDNC() const { return This(); }
 };
 
 // IPv4 stack port number for UDP transport layer
@@ -215,6 +237,7 @@ namespace std {
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::DNCOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::DNCOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::HighspeedLinkOnDNC)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::HighspeedLinkOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::FPGAOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::ANANASOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::TriggerOnADC)
@@ -236,6 +259,8 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::WaferMixin<
     halco::hicann::v2::ANANASGlobal BOOST_PP_COMMA() halco::hicann::v2::ANANASOnWafer>)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::WaferMixin<
     halco::hicann::v2::DNCGlobal BOOST_PP_COMMA() halco::hicann::v2::DNCOnWafer>)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::DNCMixin<
+    halco::hicann::v2::HighspeedLinkOnWafer BOOST_PP_COMMA() halco::hicann::v2::HighspeedLinkOnDNC>)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::UDPPort)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::TCPPort)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::PMU)

@@ -21,6 +21,7 @@ struct GbitLinkOnHICANN;
 struct HICANNGlobal;
 struct HICANNOnDNC;
 struct HighspeedLinkOnDNC;
+struct HighspeedLinkOnWafer;
 struct HICANNOnWafer;
 struct HLineOnHICANN;
 struct HRepeaterOnHICANN;
