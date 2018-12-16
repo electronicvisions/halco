@@ -149,18 +149,6 @@ static std::map<size_t, size_t> const wafer_pmu_assignment_map = {{
 	{100, 100}
 }};
 
-// TODO: FPGAOnWafer-style coordinates!
-std::array< std::pair<int, int>, 48> const reticle_fpga_grid_wafer01 = {{
-                                  {  5, 0 }, {  5, 3 }, {  6, 0 },
-                       {  5, 1 }, {  2, 0 }, {  6, 1 }, {  6, 2 }, {  6, 3 },
-            {  4, 3 }, {  4, 2 }, {  5, 2 }, {  1, 3 }, {  1, 2 }, {  1, 1 }, {  7, 1 },
- {  4, 0 }, {  4, 1 }, {  2, 2 }, {  2, 3 }, {  2, 1 }, {  1, 0 }, {  7, 2 }, {  7, 3 }, {  7, 0 },
- { 11, 0 }, { 11, 3 }, { 11, 2 }, {  3, 3 }, {  3, 1 }, {  0, 3 }, {  0, 2 }, {  8, 1 }, {  8, 0 },
-            { 11, 1 }, {  3, 0 }, {  3, 2 }, {  0, 0 }, {  0, 1 }, {  8, 2 }, {  8, 3 },
-                       { 10, 3 }, { 10, 2 }, {  9, 2 }, {  9, 3 }, {  9, 1 },
-                                  { 10, 0 }, { 10, 1 }, {  9, 0 }
-}};
-
 std::array<size_t, 48> const reticle_fpga_grid_bss = {{
              12, 13, 11,
          16, 14, 15, 10,  9,
@@ -172,7 +160,6 @@ std::array<size_t, 48> const reticle_fpga_grid_bss = {{
              33, 34, 35
 }};
 
-static std::array<std::array<int, 4>, 12> const FindDNCGlobal = generateEnum<4, 12, 48>(reticle_fpga_grid_wafer01);
 static std::array<size_t, 48> const reverse_fpga_grid = reverseLookup(reticle_fpga_grid_bss);
 
 std::array<size_t, 48> const reticle_adc_trigger_grid = {{
@@ -195,21 +182,12 @@ static std::array<size_t, 48> const reverse_adc_trigger_grid =
 
 FPGAOnWafer gridLookupFPGAOnWafer(DNCGlobal const dnc) {
 	auto const local_dnc_id = dnc.toDNCOnWafer().toEnum();
-	if (dnc.toWafer().isKintex()) {
-		return FPGAOnWafer(reticle_fpga_grid_bss.at(local_dnc_id));
-	} else {
-		return FPGAOnWafer(reticle_fpga_grid_wafer01.at(local_dnc_id).first);
-	}
+	return FPGAOnWafer(reticle_fpga_grid_bss.at(local_dnc_id));
 }
 
-DNCGlobal gridLookupDNCGlobal(FPGAGlobal const f, DNCOnFPGA const dnc) {
-	if (f.toWafer().isKintex()) {
-		int id = reverse_fpga_grid.at(f.value());
-		return DNCGlobal(DNCOnWafer(Enum(id)), f.toWafer());
-	} else {
-		int id = FindDNCGlobal.at(f).at(dnc.value());
-		return DNCGlobal(DNCOnWafer(Enum(id)), f.toWafer());
-	}
+DNCGlobal gridLookupDNCGlobal(FPGAGlobal const f, DNCOnFPGA const /*dnc*/) {
+	int id = reverse_fpga_grid.at(f.value());
+	return DNCGlobal(DNCOnWafer(Enum(id)), f.toWafer());
 }
 
 FPGAOnWafer gridLookupFPGAOnWafer(DNCOnWafer const d)

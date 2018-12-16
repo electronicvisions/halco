@@ -18,8 +18,6 @@ namespace v2 {
 struct Wafer : public common::detail::BaseType<Wafer, size_t> {
 	PYPP_CONSTEXPR explicit Wafer(value_type val) : base_t(val) {}
 	PYPP_CONSTEXPR explicit Wafer() : base_t() {}
-
-	bool isKintex() const;
 };
 
 HALCO_COORDINATE_MIXIN(WaferMixin, Wafer, wafer)

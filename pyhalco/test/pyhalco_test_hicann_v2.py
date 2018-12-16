@@ -91,25 +91,6 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
         import pyhalco_hicann_v2
         return pyhalco_hicann_v2
 
-    def test_kintexVsVirtex(self):
-        """Tests ranges of FPGAGlobal coordinate
-
-        for Wafer 0..2 the maximum FPGA coordinate is 11, the FPGAGlobal will throw if an
-        FPGAOnWafer larger than 11 is combinend with Wafer 0..2
-        """
-
-        import pyhalco_hicann_v2
-        x = pyhalco_hicann_v2.FPGAOnWafer(12)
-        for w in [0, 1, 2]:
-            y = pyhalco_hicann_v2.Wafer(w)
-            self.assertRaises(RuntimeError, pyhalco_hicann_v2.FPGAGlobal, x, y)
-        for w in range(3, 10):
-            y = pyhalco_hicann_v2.Wafer(w)
-            try:
-                pyhalco_hicann_v2.FPGAGlobal(x, y)
-            except:
-                self.fail("FPGAGlobal(%s, %s) should not raise" % (x, y))
-
     def test_implicit_conversion(self):
         import pyhalco_hicann_v2 as C
         dnc = C.DNCMergerOnHICANN(5)

@@ -105,14 +105,6 @@ FPGAGlobal::FPGAGlobal()
 {}
 
 FPGAGlobal::FPGAGlobal(FPGAOnWafer const& h, Wafer const& w) : base(h, w) {
-	// Virtex5 vs. Kintex7 range check follows
-	size_t const minKintexId = 11;
-	if (!toWafer().isKintex() && (value() > minKintexId)) {
-		std::string s("range overflow for Virtex FPGAs: ");
-		s += std::to_string(value()) + " > min(";
-		s += std::to_string(minKintexId) + ")";
-		throw std::overflow_error(s);
-	}
 }
 
 FPGAGlobal::FPGAGlobal(enum_type const& e) :
@@ -128,10 +120,6 @@ std::vector<HICANNGlobal> FPGAGlobal::toHICANNGlobal() const {
 
 		for (auto const hod : iter_all<HICANNOnDNC>()) {
 			hgs.push_back(HICANNGlobal(hod.toHICANNOnWafer(dow), toWafer()));
-		}
-
-		if (toWafer().isKintex()) {
-			break; // there's no other "DNC" on Kintex-7
 		}
 	}
 
