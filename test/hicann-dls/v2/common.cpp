@@ -44,7 +44,8 @@ typedef ::testing::Types<
     SynapseRowOnDLS,
     SynapseOnDLS,
     SynapseOnSynapseBlock,
-    RateCounterOnDLS
+    RateCounterOnDLS,
+    RateCounterConfigOnDLS
 > CoordinateTypes;
 TYPED_TEST_CASE(CommonCoordinateTest, CoordinateTypes);
 

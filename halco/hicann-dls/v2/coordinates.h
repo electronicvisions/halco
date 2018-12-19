@@ -359,6 +359,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::SynapseDriverBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::SynapseOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::SynapseOnSynapseBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::RateCounterOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::RateCounterConfigOnDLS)
 
 } // namespace std
 
