@@ -1,6 +1,5 @@
 #include "halco/hicann/v2/coordinates.h"
 #include "halco/hicann/v2/lookup_tables.h"
-#include "halco/common/typed_array.h"
 
 using namespace halco::common;
 
@@ -61,12 +60,6 @@ HighspeedLinkOnDNC HICANNOnDNC::toHighspeedLinkOnDNC() const
 	size_t const e = (y()) ? (x()) * 2 + 1 /*odd*/
 	                       : (x()) * 2 /*even*/;
 	return HighspeedLinkOnDNC(e);
-}
-
-HICANNOnDNC HighspeedLinkOnDNC::toHICANNOnDNC() const
-{
-	static const typed_array<size_t, HighspeedLinkOnDNC> lut{0, 4, 1, 5, 2, 6, 3, 7};
-	return HICANNOnDNC(Enum(lut[*this]));
 }
 
 HICANNOnWafer HICANNOnDNC::toHICANNOnWafer(const DNCOnWafer& dnc) const {

@@ -1,3 +1,4 @@
+#include "halco/common/typed_array.h"
 #include "halco/hicann/v2/external.h"
 #include "halco/hicann/v2/lookup_tables.h"
 #include "halco/common/iter_all.h"
@@ -67,6 +68,12 @@ FPGAOnWafer DNCGlobal::toFPGAOnWafer() const {
 
 FPGAGlobal DNCGlobal::toFPGAGlobal() const {
 	return FPGAGlobal(gridLookupFPGAOnWafer(*this), toWafer());
+}
+
+HICANNOnDNC HighspeedLinkOnDNC::toHICANNOnDNC() const
+{
+	static const typed_array<size_t, HighspeedLinkOnDNC> lut{0, 4, 1, 5, 2, 6, 3, 7};
+	return HICANNOnDNC(Enum(lut[*this]));
 }
 
 DNCOnWafer FPGAOnWafer::toDNCOnWafer() const
