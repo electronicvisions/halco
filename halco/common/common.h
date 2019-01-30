@@ -7,7 +7,7 @@
  * This file provides coordinates common to all chips.
  */
 
-GENPYBIND(tag(common))
+GENPYBIND_TAG_HALCO_COMMON
 GENPYBIND_MANUAL({ parent.attr("__variant__") = "pybind11"; })
 
 #include "halco/common/relations.h"

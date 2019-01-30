@@ -8,7 +8,7 @@ extern "C" {
 #include "halco/common/geometry.th"
 #include "halco/common/genpybind.h"
 
-GENPYBIND(tag(hicann_dls_v2))
+GENPYBIND_TAG_HALCO_HICANN_DLS_V2
 GENPYBIND_MANUAL({
 	parent.attr("__variant__") = "pybind11";
 	parent->py::module::import("pyhalco_common");
@@ -16,7 +16,7 @@ GENPYBIND_MANUAL({
 
 namespace halco {
 namespace hicann_dls {
-namespace v2 GENPYBIND(tag(hicann_dls_v2)) {
+namespace v2 GENPYBIND_TAG_HALCO_HICANN_DLS_V2 {
 
 struct CapMemColumnOnDLS;
 struct ColumnCorrelationSwitchOnDLS;

@@ -11,7 +11,7 @@ extern "C" {
 #include "pywrap/compat/macros.hpp"
 
 namespace halco {
-namespace common GENPYBIND(tag(common)) {
+namespace common GENPYBIND_TAG_HALCO_COMMON {
 
 typedef detail::XRanged<1, 0> SideHorizontal GENPYBIND(opaque);
 extern SideHorizontal const left GENPYBIND(visible);

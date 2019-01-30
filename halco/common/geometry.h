@@ -26,7 +26,7 @@
 #endif
 
 namespace halco {
-namespace common GENPYBIND(tag(common)) {
+namespace common GENPYBIND_TAG_HALCO_COMMON {
 
 
 namespace detail {
