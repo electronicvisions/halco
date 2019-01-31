@@ -25,6 +25,21 @@ struct HICANNOnWafer
 	HICANNOnWafer south() const { return HICANNOnWafer(x(), y_type(y() + 1)); }
 	HICANNOnWafer move(common::Direction const& direction) const;
 
+
+	/**
+	 * @brief check if a hicann has a neighbouring hicanns in requested direction.
+	 *
+	 * The HICANNOnWaferEnum type is checked if the requested location evaluates
+	 * to a non invalid answer.
+	 *
+	 * @return true if there is a hicann to {east|west|north|south} false if not.
+	 */
+	bool has_east() const;
+	bool has_west() const;
+	bool has_north() const;
+	bool has_south() const;
+	bool can_move(common::Direction const& direction) const;
+
 	DNCOnWafer toDNCOnWafer() const;
 	FPGAOnWafer toFPGAOnWafer() const;
 	HICANNOnDNC toHICANNOnDNC() const;

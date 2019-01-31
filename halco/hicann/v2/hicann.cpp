@@ -36,6 +36,50 @@ HICANNOnWafer HICANNOnWafer::move(Direction const& direction) const {
 	return north();
 }
 
+bool HICANNOnWafer::has_east() const
+{
+	if (x() == x_type::max) {
+		return false;
+	}
+	return HICANNOnWaferEnum.at(x_type(x() + 1)).at(y()) != invalid;
+}
+
+bool HICANNOnWafer::has_west() const
+{
+	if (x() == x_type::min) {
+		return false;
+	}
+	return HICANNOnWaferEnum.at(x_type(x() - 1)).at(y()) != invalid;
+}
+bool HICANNOnWafer::has_north() const
+{
+	if (y() == y_type::min) {
+		return false;
+	}
+	return HICANNOnWaferEnum.at(x()).at(y_type(y() - 1)) != invalid;
+}
+bool HICANNOnWafer::has_south() const
+{
+	if (y() == y_type::max) {
+		return false;
+	}
+	return HICANNOnWaferEnum.at(x()).at(y_type(y() + 1)) != invalid;
+}
+
+bool HICANNOnWafer::can_move(Direction const& direction) const
+{
+	if (direction == halco::common::east) {
+		return has_east();
+	}
+	if (direction == halco::common::south) {
+		return has_south();
+	}
+	if (direction == halco::common::west) {
+		return has_west();
+	}
+	return has_north();
+}
+
 DNCOnWafer HICANNOnWafer::toDNCOnWafer() const {
 	return DNCOnWafer(DNCOnWafer::x_type(x() / 4), DNCOnWafer::y_type(y() / 2));
 }
