@@ -60,6 +60,56 @@ public:
 	PPUOnDLS toPPUOnDLS() const { return split().first; }
 };
 
+/***************\
+    ResetChip
+\***************/
+
+struct GENPYBIND(inline_base("*")) ResetChipOnDLS
+    : public common::detail::RantWrapper<ResetChipOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit ResetChipOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+/************\
+    Timer
+\************/
+
+struct GENPYBIND(inline_base("*")) TimerOnDLS
+    : public common::detail::RantWrapper<TimerOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit TimerOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+/***********\
+    Jtag
+\***********/
+
+struct GENPYBIND(inline_base("*")) JtagOnDLS
+    : public common::detail::RantWrapper<JtagOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit JtagOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+/**********\
+    Pll
+\**********/
+
+struct GENPYBIND(inline_base("*")) PllRegisterOnDLS
+    : public common::detail::RantWrapper<PllRegisterOnDLS, uint_fast16_t, 9, 0>
+{
+	constexpr explicit PllRegisterOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+/**************\
+    Omnibus
+\**************/
+
+struct GENPYBIND(inline_base("*")) OmnibusAddress
+    : public common::detail::BaseType<OmnibusAddress, uint32_t>
+{
+	constexpr explicit OmnibusAddress(uintmax_t const val = 0) : base_t(val) {}
+};
+
 } // namespace vx
 } // namespace hicann_dls
 } // namespace halco
@@ -70,6 +120,11 @@ namespace std {
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUMemoryWordOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUMemoryWordOnPPU)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ResetChipOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::JtagOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PllRegisterOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::TimerOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::OmnibusAddress)
 
 } // namespace std
 

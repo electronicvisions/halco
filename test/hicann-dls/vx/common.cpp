@@ -19,7 +19,17 @@ template <typename T>
 class CommonCoordinateTest : public ::testing::Test
 {};
 
-typedef ::testing::Types<PPUOnDLS, PPUMemoryWordOnPPU, PPUMemoryWordOnDLS> CoordinateTypes;
+typedef ::testing::Types<
+    ResetChipOnDLS,
+    JtagOnDLS,
+    PllRegisterOnDLS,
+    TimerOnDLS,
+    OmnibusAddress,
+    PPUOnDLS,
+    PPUMemoryWordOnPPU,
+    PPUMemoryWordOnDLS>
+    CoordinateTypes;
+
 TYPED_TEST_CASE(CommonCoordinateTest, CoordinateTypes);
 
 #define TEST_CEREAL

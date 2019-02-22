@@ -9,6 +9,11 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     PPUMemoryWordOnDLS               => linear, iterable
     PPUMemoryWordOnPPU               => linear, iterable
     PPUOnDLS                         => linear, iterable
+    ResetChipOnDLS                   => linear, iterable
+    JtagOnDLS                        => linear, iterable
+    PllRegisterOnDLS                 => linear, iterable
+    TimerOnDLS                       => linear, iterable
+    OmnibusAddress                   => linear
     """
 
     @staticmethod
