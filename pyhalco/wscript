@@ -23,14 +23,14 @@ def configure(cfg):
     if cfg.env.with_pybind not in [True, False]:
         toplevel_path = symwaf2ic.get_toplevel_path()
         projects = set(str(os.path.relpath(p, toplevel_path)) for p in symwaf2ic.get_required_paths())
-        is_haldls = 'haldls' in projects
+        is_hicann_dls = 'haldls' in projects
         is_hicann = 'halbe' in projects
-        if is_haldls and is_hicann:
+        if is_hicann_dls and is_hicann:
             cfg.fatal(
                 'cannot build python bindings of both HICANN/DLS at the same time\n'
                 '(please specify --with-pybind / --without-pybind explicitly)'
             )
-        cfg.env.with_pybind = is_haldls
+        cfg.env.with_pybind = is_hicann_dls
     cfg.msg(
         'Using pybind11-based python bindings',
         ['no', 'yes'][cfg.env.with_pybind])
@@ -80,6 +80,27 @@ def build(bld):
             tests='test/pyhalco_test_hicann_dls_v2.py',
             features='use pytest',
             use='pyhalco_hicann_dls_v2',
+            install_path='${PREFIX}/bin',
+            linkflags='-Wl,-z,defs',
+            pythonpath=['test'],
+        )
+
+        bld(
+            target='pyhalco_hicann_dls_vx',
+            source='../halco/hicann-dls/vx/coordinates.h',
+            genpybind_tags='hicann_dls_vx',
+            features='genpybind cxx cxxshlib pyext post_task',
+            use=['halco_common', 'halco_hicann_dls_vx', 'PYBIND11HALCO', 'pywrap_inc', 'pyhalco_common'],
+            install_path='${PREFIX}/lib',
+            linkflags='-Wl,-z,defs',
+            post_task=['pyhalco_hicann_dls_vx_tests', 'pyhalco_common'],
+        )
+
+        bld(
+            name='pyhalco_hicann_dls_vx_tests',
+            tests='test/pyhalco_test_hicann_dls_vx.py',
+            features='use pytest',
+            use='pyhalco_hicann_dls_vx',
             install_path='${PREFIX}/bin',
             linkflags='-Wl,-z,defs',
             pythonpath=['test'],
