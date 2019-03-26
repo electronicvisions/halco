@@ -23,7 +23,7 @@ def configure(cfg):
     if cfg.env.with_pybind not in [True, False]:
         toplevel_path = symwaf2ic.get_toplevel_path()
         projects = set(str(os.path.relpath(p, toplevel_path)) for p in symwaf2ic.get_required_paths())
-        is_hicann_dls = 'haldls' in projects
+        is_hicann_dls = any(project in projects for project in ['haldls', 'fisch'])
         is_hicann = 'halbe' in projects
         if is_hicann_dls and is_hicann:
             cfg.fatal(
