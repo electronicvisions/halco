@@ -34,7 +34,9 @@ struct GENPYBIND(inline_base("*")) PPUOnDLS
 struct GENPYBIND(inline_base("*")) PPUMemoryWordOnPPU
     : public common::detail::RantWrapper<PPUMemoryWordOnPPU, uint_fast16_t, 0x1000 - 1, 0>
 {
-	constexpr explicit PPUMemoryWordOnPPU(uintmax_t const val = 0) : rant_t(val) {}
+	constexpr explicit PPUMemoryWordOnPPU(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 };
 
 HALCO_COORDINATE_MIXIN(PPUMixin, PPUOnDLS, ppu)
@@ -97,7 +99,9 @@ struct GENPYBIND(inline_base("*")) JTAGOnDLS
 struct GENPYBIND(inline_base("*")) ADPLLOnDLS
     : public common::detail::RantWrapper<ADPLLOnDLS, uint_fast16_t, 1, 0>
 {
-	constexpr explicit ADPLLOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+	constexpr explicit ADPLLOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 };
 
 struct GENPYBIND(inline_base("*")) PLLClockOutputBlockOnDLS
@@ -109,13 +113,17 @@ struct GENPYBIND(inline_base("*")) PLLClockOutputBlockOnDLS
 struct GENPYBIND(inline_base("*")) PLLClockOutputOnDLS
     : public common::detail::RantWrapper<PLLClockOutputOnDLS, uint_fast16_t, 3, 0>
 {
-	constexpr explicit PLLClockOutputOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+	constexpr explicit PLLClockOutputOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 };
 
 struct GENPYBIND(inline_base("*")) PLLRegisterOnDLS
     : public common::detail::RantWrapper<PLLRegisterOnDLS, uint_fast16_t, 9, 0>
 {
-	constexpr explicit PLLRegisterOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+	constexpr explicit PLLRegisterOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 };
 
 /**************\
@@ -125,7 +133,9 @@ struct GENPYBIND(inline_base("*")) PLLRegisterOnDLS
 struct GENPYBIND(inline_base("*")) OmnibusAddress
     : public common::detail::BaseType<OmnibusAddress, uint32_t>
 {
-	constexpr explicit OmnibusAddress(uintmax_t const val = 0) : base_t(val) {}
+	constexpr explicit OmnibusAddress(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    base_t(val)
+	{}
 };
 
 } // namespace vx
