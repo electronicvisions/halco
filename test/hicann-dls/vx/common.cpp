@@ -25,7 +25,7 @@ typedef ::testing::Types<
     PLLRegisterOnDLS,
     ADPLLOnDLS,
     PLLClockOutputOnDLS,
-    PLLClockOutputBlockOnDLS,
+    PLLOnDLS,
     TimerOnDLS,
     OmnibusAddress,
     PPUOnDLS,

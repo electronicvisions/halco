@@ -96,18 +96,18 @@ struct GENPYBIND(inline_base("*")) JTAGOnDLS
     PLL
 \**********/
 
+struct GENPYBIND(inline_base("*")) PLLOnDLS
+    : public common::detail::RantWrapper<PLLOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit PLLOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
 struct GENPYBIND(inline_base("*")) ADPLLOnDLS
     : public common::detail::RantWrapper<ADPLLOnDLS, uint_fast16_t, 1, 0>
 {
 	constexpr explicit ADPLLOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
-};
-
-struct GENPYBIND(inline_base("*")) PLLClockOutputBlockOnDLS
-    : public common::detail::RantWrapper<PLLClockOutputBlockOnDLS, uint_fast16_t, 0, 0>
-{
-	constexpr explicit PLLClockOutputBlockOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
 
 struct GENPYBIND(inline_base("*")) PLLClockOutputOnDLS
@@ -149,8 +149,8 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUMemoryWordOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUMemoryWordOnPPU)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ADPLLOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLClockOutputBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLClockOutputOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ResetChipOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::JTAGOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLRegisterOnDLS)
