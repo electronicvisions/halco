@@ -138,6 +138,65 @@ struct GENPYBIND(inline_base("*")) OmnibusAddress
 	{}
 };
 
+/***********\
+    Board
+\***********/
+
+struct GENPYBIND(inline_base("*")) ShiftRegisterOnBoard
+    : public common::detail::RantWrapper<ShiftRegisterOnBoard, uint_fast16_t, 0, 0>
+{
+	constexpr explicit ShiftRegisterOnBoard(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+struct GENPYBIND(inline_base("*")) ADCSourceOnBoard
+    : public common::detail::RantWrapper<ADCSourceOnBoard, uint_fast16_t, 9, 0>
+{
+	constexpr explicit ADCSourceOnBoard(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+
+	static const ADCSourceOnBoard ReadoutChain0;
+	static const ADCSourceOnBoard ReadoutChain1;
+	static const ADCSourceOnBoard MuxRfu0;
+	static const ADCSourceOnBoard VReset;
+	static const ADCSourceOnBoard VDDResMeas;
+	static const ADCSourceOnBoard MuxDac25;
+	static const ADCSourceOnBoard IRef;
+	static const ADCSourceOnBoard MuxRfu1;
+	static const ADCSourceOnBoard MuxRfu2;
+	static const ADCSourceOnBoard None;
+};
+
+struct GENPYBIND(inline_base("*")) LEDOnBoard
+    : public common::detail::RantWrapper<LEDOnBoard, uint_fast16_t, 5, 0>
+{
+	constexpr explicit LEDOnBoard(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+
+	static const LEDOnBoard LED1;
+	static const LEDOnBoard LED2;
+	static const LEDOnBoard LED3;
+	static const LEDOnBoard LED4;
+	static const LEDOnBoard LED7;
+	static const LEDOnBoard LED8;
+};
+
+struct GENPYBIND(inline_base("*")) VDDOnBoard
+    : public common::detail::RantWrapper<VDDOnBoard, uint_fast16_t, 5, 0>
+{
+	constexpr explicit VDDOnBoard(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+
+	static const VDDOnBoard VDD25Digital;
+	static const VDDOnBoard VDD12Digital;
+	static const VDDOnBoard VDD25Analog;
+	static const VDDOnBoard VDD12Analog;
+	static const VDDOnBoard VDD12MADC;
+	static const VDDOnBoard VDD12Pll;
+};
+
 } // namespace vx
 } // namespace hicann_dls
 } // namespace halco
@@ -156,6 +215,10 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::JTAGOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLRegisterOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::TimerOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::OmnibusAddress)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ShiftRegisterOnBoard)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ADCSourceOnBoard)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::LEDOnBoard)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::VDDOnBoard)
 
 } // namespace std
 

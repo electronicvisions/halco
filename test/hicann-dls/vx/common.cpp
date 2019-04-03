@@ -28,6 +28,10 @@ typedef ::testing::Types<
     PLLOnDLS,
     TimerOnDLS,
     OmnibusAddress,
+    ShiftRegisterOnBoard,
+    ADCSourceOnBoard,
+    LEDOnBoard,
+    VDDOnBoard,
     PPUOnDLS,
     PPUMemoryWordOnPPU,
     PPUMemoryWordOnDLS>
