@@ -32,6 +32,9 @@ typedef ::testing::Types<
     ADCSourceOnBoard,
     LEDOnBoard,
     VDDOnBoard,
+    DACOnBoard,
+    DACChannelOnBoard,
+    DACChannelOnDAC,
     PPUOnDLS,
     PPUMemoryWordOnPPU,
     PPUMemoryWordOnDLS>

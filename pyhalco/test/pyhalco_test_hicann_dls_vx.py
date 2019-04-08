@@ -21,6 +21,9 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     ADCSourceOnBoard                 => linear, iterable
     LEDOnBoard                       => linear, iterable
     VDDOnBoard                       => linear, iterable
+    DACOnBoard                       => linear, iterable
+    DACChannelOnBoard                => linear, iterable
+    DACChannelOnDAC                  => linear, iterable
     """
 
     @staticmethod

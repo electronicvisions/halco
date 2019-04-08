@@ -30,3 +30,21 @@ TEST(PPUMemoryWordOnDLS, Conversion)
 	EXPECT_EQ(test_coord.toPPUMemoryWordOnPPU(), PPUMemoryWordOnPPU(1));
 	EXPECT_EQ(test_coord.toPPUOnDLS(), PPUOnDLS(1));
 }
+
+TEST(DACChannelOnBoard, toVDDOnBoard)
+{
+	DACChannelOnBoard channel = DACChannelOnBoard::VDD12MADC;
+	EXPECT_NO_THROW(channel.toVDDOnBoard());
+
+	DACChannelOnBoard channel2 = DACChannelOnBoard::VReset;
+	EXPECT_ANY_THROW(channel2.toVDDOnBoard());
+}
+
+TEST(VDDOnBoard, toDACChannelOnBoard)
+{
+	for (auto vdd : iter_all<VDDOnBoard>()) {
+		DACChannelOnBoard channel = vdd.toDACChannelOnBoard();
+		VDDOnBoard res = channel.toVDDOnBoard();
+		EXPECT_EQ(vdd, res);
+	}
+}

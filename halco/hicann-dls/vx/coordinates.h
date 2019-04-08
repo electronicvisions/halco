@@ -160,7 +160,7 @@ struct GENPYBIND(inline_base("*")) ADCSourceOnBoard
 	static const ADCSourceOnBoard MuxRfu0;
 	static const ADCSourceOnBoard VReset;
 	static const ADCSourceOnBoard VDDResMeas;
-	static const ADCSourceOnBoard MuxDac25;
+	static const ADCSourceOnBoard MuxDAC25;
 	static const ADCSourceOnBoard IRef;
 	static const ADCSourceOnBoard MuxRfu1;
 	static const ADCSourceOnBoard MuxRfu2;
@@ -182,6 +182,8 @@ struct GENPYBIND(inline_base("*")) LEDOnBoard
 	static const LEDOnBoard LED8;
 };
 
+struct DACChannelOnBoard;
+
 struct GENPYBIND(inline_base("*")) VDDOnBoard
     : public common::detail::RantWrapper<VDDOnBoard, uint_fast16_t, 5, 0>
 {
@@ -195,6 +197,66 @@ struct GENPYBIND(inline_base("*")) VDDOnBoard
 	static const VDDOnBoard VDD12Analog;
 	static const VDDOnBoard VDD12MADC;
 	static const VDDOnBoard VDD12Pll;
+
+	DACChannelOnBoard toDACChannelOnBoard() const;
+};
+
+struct GENPYBIND(inline_base("*")) DACOnBoard
+    : public common::detail::RantWrapper<DACOnBoard, uint_fast16_t, 1, 0>
+{
+	constexpr explicit DACOnBoard(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+struct GENPYBIND(inline_base("*")) DACChannelOnDAC
+    : public common::detail::RantWrapper<DACChannelOnDAC, uint_fast16_t, 7, 0>
+{
+	constexpr explicit DACChannelOnDAC(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+HALCO_COORDINATE_MIXIN(DACMixin, DACOnBoard, dac)
+
+struct GENPYBIND(inline_base("*DACMixin*")) DACChannelOnBoard
+    : public DACMixin<DACChannelOnBoard, DACChannelOnDAC>
+{
+private:
+	typedef DACMixin<DACChannelOnBoard, DACChannelOnDAC> base;
+
+public:
+	typedef base::enum_type enum_type GENPYBIND(opaque);
+
+	DACChannelOnBoard() = default;
+
+	explicit DACChannelOnBoard(
+	    DACChannelOnDAC const& channel, DACOnBoard const& dac = DACOnBoard()) :
+	    base(channel, dac)
+	{}
+
+	explicit DACChannelOnBoard(enum_type const& e) : base(e) {}
+
+	DACChannelOnDAC toDACChannelOnDAC() const { return This(); }
+	DACOnBoard toDACOnBoard() const { return split().first; }
+
+	static const DACChannelOnBoard VReset;
+	static const DACChannelOnBoard VResMeas;
+	static const DACChannelOnBoard MuxRfu0;
+	static const DACChannelOnBoard MuxRfu1;
+	static const DACChannelOnBoard IRefBoard;
+	static const DACChannelOnBoard AnaReadoutDebug0;
+	static const DACChannelOnBoard AnaReadoutDebug1;
+	static const DACChannelOnBoard MuxDAC25;
+
+	static const DACChannelOnBoard VDD25Digital;
+	static const DACChannelOnBoard VDD12Digital;
+	static const DACChannelOnBoard VDD25Analog;
+	static const DACChannelOnBoard VDD12Analog;
+	static const DACChannelOnBoard VDD12MADC;
+	static const DACChannelOnBoard VDD12Pll;
+	static const DACChannelOnBoard GeneralPurpose0;
+	static const DACChannelOnBoard GeneralPurpose1;
+
+	VDDOnBoard toVDDOnBoard() const;
 };
 
 } // namespace vx
@@ -219,6 +281,9 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ShiftRegisterOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ADCSourceOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::LEDOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::VDDOnBoard)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::DACOnBoard)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::DACChannelOnBoard)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::DACChannelOnDAC)
 
 } // namespace std
 
