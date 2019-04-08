@@ -186,11 +186,11 @@ swap(halco::common::typed_array<Value, Key, Limits> const& x,
 }
 
 template <typename Value, typename Key, typename Limits>
-class tuple_size<halco::common::typed_array<Value, Key, Limits> >
+struct tuple_size<halco::common::typed_array<Value, Key, Limits> >
   : public std::integral_constant<size_t, Limits::size> {};
 
 template <size_t Pos, typename Value, typename Key, typename Limits>
-class tuple_element<Pos, halco::common::typed_array<Value, Key, Limits> > {
+struct tuple_element<Pos, halco::common::typed_array<Value, Key, Limits> > {
 public:
 	typedef Value type;
 };
