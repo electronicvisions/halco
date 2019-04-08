@@ -259,6 +259,12 @@ public:
 	VDDOnBoard toVDDOnBoard() const;
 };
 
+struct GENPYBIND(inline_base("*")) ADCOnBoard
+    : public common::detail::RantWrapper<ADCOnBoard, uint_fast16_t, 0, 0>
+{
+	constexpr explicit ADCOnBoard(uintmax_t const val = 0) : rant_t(val) {}
+};
+
 } // namespace vx
 } // namespace hicann_dls
 } // namespace halco
@@ -284,6 +290,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::VDDOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::DACOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::DACChannelOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::DACChannelOnDAC)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ADCOnBoard)
 
 } // namespace std
 

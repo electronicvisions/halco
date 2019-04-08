@@ -35,6 +35,7 @@ typedef ::testing::Types<
     DACOnBoard,
     DACChannelOnBoard,
     DACChannelOnDAC,
+    ADCOnBoard,
     PPUOnDLS,
     PPUMemoryWordOnPPU,
     PPUMemoryWordOnDLS>
