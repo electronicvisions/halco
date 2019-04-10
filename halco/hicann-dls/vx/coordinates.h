@@ -119,7 +119,7 @@ struct GENPYBIND(inline_base("*")) PLLClockOutputOnDLS
 };
 
 struct GENPYBIND(inline_base("*")) PLLRegisterOnDLS
-    : public common::detail::RantWrapper<PLLRegisterOnDLS, uint_fast16_t, 9, 0>
+    : public common::detail::RantWrapper<PLLRegisterOnDLS, uint_fast16_t, 7, 0>
 {
 	constexpr explicit PLLRegisterOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
 	    rant_t(val)
