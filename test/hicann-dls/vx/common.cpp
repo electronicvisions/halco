@@ -21,11 +21,11 @@ class CommonCoordinateTest : public ::testing::Test
 
 typedef ::testing::Types<
     ResetChipOnDLS,
-    JtagOnDLS,
-    PllRegisterOnDLS,
-    AdPllOnDLS,
-    PllClockOutputOnDLS,
-    PllClockOutputBlockOnDLS,
+    JTAGOnDLS,
+    PLLRegisterOnDLS,
+    ADPLLOnDLS,
+    PLLClockOutputOnDLS,
+    PLLClockOutputBlockOnDLS,
     TimerOnDLS,
     OmnibusAddress,
     PPUOnDLS,

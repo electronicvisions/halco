@@ -81,41 +81,41 @@ struct GENPYBIND(inline_base("*")) TimerOnDLS
 };
 
 /***********\
-    Jtag
+    JTAG
 \***********/
 
-struct GENPYBIND(inline_base("*")) JtagOnDLS
-    : public common::detail::RantWrapper<JtagOnDLS, uint_fast16_t, 0, 0>
+struct GENPYBIND(inline_base("*")) JTAGOnDLS
+    : public common::detail::RantWrapper<JTAGOnDLS, uint_fast16_t, 0, 0>
 {
-	constexpr explicit JtagOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+	constexpr explicit JTAGOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
 
 /**********\
-    Pll
+    PLL
 \**********/
 
-struct GENPYBIND(inline_base("*")) AdPllOnDLS
-    : public common::detail::RantWrapper<AdPllOnDLS, uint_fast16_t, 1, 0>
+struct GENPYBIND(inline_base("*")) ADPLLOnDLS
+    : public common::detail::RantWrapper<ADPLLOnDLS, uint_fast16_t, 1, 0>
 {
-	constexpr explicit AdPllOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+	constexpr explicit ADPLLOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
 
-struct GENPYBIND(inline_base("*")) PllClockOutputBlockOnDLS
-    : public common::detail::RantWrapper<PllClockOutputBlockOnDLS, uint_fast16_t, 0, 0>
+struct GENPYBIND(inline_base("*")) PLLClockOutputBlockOnDLS
+    : public common::detail::RantWrapper<PLLClockOutputBlockOnDLS, uint_fast16_t, 0, 0>
 {
-	constexpr explicit PllClockOutputBlockOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+	constexpr explicit PLLClockOutputBlockOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
 
-struct GENPYBIND(inline_base("*")) PllClockOutputOnDLS
-    : public common::detail::RantWrapper<PllClockOutputOnDLS, uint_fast16_t, 3, 0>
+struct GENPYBIND(inline_base("*")) PLLClockOutputOnDLS
+    : public common::detail::RantWrapper<PLLClockOutputOnDLS, uint_fast16_t, 3, 0>
 {
-	constexpr explicit PllClockOutputOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+	constexpr explicit PLLClockOutputOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
 
-struct GENPYBIND(inline_base("*")) PllRegisterOnDLS
-    : public common::detail::RantWrapper<PllRegisterOnDLS, uint_fast16_t, 9, 0>
+struct GENPYBIND(inline_base("*")) PLLRegisterOnDLS
+    : public common::detail::RantWrapper<PLLRegisterOnDLS, uint_fast16_t, 9, 0>
 {
-	constexpr explicit PllRegisterOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+	constexpr explicit PLLRegisterOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
 
 /**************\
@@ -138,12 +138,12 @@ namespace std {
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUMemoryWordOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUMemoryWordOnPPU)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::AdPllOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PllClockOutputBlockOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PllClockOutputOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ADPLLOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLClockOutputBlockOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLClockOutputOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ResetChipOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::JtagOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PllRegisterOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::JTAGOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLRegisterOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::TimerOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::OmnibusAddress)
 
