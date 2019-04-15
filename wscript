@@ -43,7 +43,6 @@ def build(bld):
         source          = bld.path.ant_glob('halco/common/*.cpp'),
         install_path    = '${PREFIX}/lib',
         linkflags       = '-Wl,-z,defs',
-        cxxflags        = ['-Werror'],
         use             = ['halco_common_inc', 'LOG4CXX'],
     )
 
