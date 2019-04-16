@@ -6,6 +6,11 @@ namespace vx {
 
 using namespace halco::common;
 
+PLLClockOutputOnDLS const PLLClockOutputOnDLS::SerdesSerSendClk{0};
+PLLClockOutputOnDLS const PLLClockOutputOnDLS::PhyRefClk{1};
+PLLClockOutputOnDLS const PLLClockOutputOnDLS::PPUClk{2};
+PLLClockOutputOnDLS const PLLClockOutputOnDLS::MADCClk{3};
+
 LEDOnBoard const LEDOnBoard::LED1{0};
 LEDOnBoard const LEDOnBoard::LED2{1};
 LEDOnBoard const LEDOnBoard::LED3{2};

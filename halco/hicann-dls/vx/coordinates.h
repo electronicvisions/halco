@@ -116,6 +116,11 @@ struct GENPYBIND(inline_base("*")) PLLClockOutputOnDLS
 	constexpr explicit PLLClockOutputOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
+
+	static const PLLClockOutputOnDLS SerdesSerSendClk;
+	static const PLLClockOutputOnDLS PhyRefClk;
+	static const PLLClockOutputOnDLS PPUClk;
+	static const PLLClockOutputOnDLS MADCClk;
 };
 
 struct GENPYBIND(inline_base("*")) PLLRegisterOnDLS
