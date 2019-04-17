@@ -25,6 +25,7 @@ typedef ::testing::Types<
     CapMemConfigOnDLS,
     CapMemOnDLS,
     CommonNeuronConfigOnDLS,
+    CommonSynramConfigOnDLS,
     ColumnBlockOnDLS,
     ColumnCorrelationSwitchOnColumnBlock,
     ColumnCorrelationSwitchOnDLS,

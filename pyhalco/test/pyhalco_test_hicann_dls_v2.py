@@ -12,6 +12,7 @@ class Test_PyhalcoHICANNDLSv2(unittest.TestCase, PyhalcoTest):
     CapMemOnDLS                      => linear, iterable
     CapMemConfigOnDLS                => linear, iterable
     CommonNeuronConfigOnDLS          => linear, iterable
+    CommonSynramConfigOnDLS          => linear, iterable
     ColumnBlockOnDLS                 => linear, iterable
     ColumnCorrelationSwitchOnColumnBlock => linear, iterable
     ColumnCorrelationSwitchOnDLS     => linear, iterable

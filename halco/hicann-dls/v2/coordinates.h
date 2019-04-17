@@ -49,6 +49,12 @@ struct GENPYBIND(inline_base("*")) CommonNeuronConfigOnDLS
    SynapseDriverBlock
 \*********************/
 
+struct GENPYBIND(inline_base("*")) CommonSynramConfigOnDLS
+	: public common::detail::RantWrapper<CommonSynramConfigOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit CommonSynramConfigOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
 struct GENPYBIND(inline_base("*")) SynapseDriverBlockOnDLS
 	: public common::detail::RantWrapper<SynapseDriverBlockOnDLS, uint_fast16_t, 0, 0>
 {
@@ -360,6 +366,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::CapMemRowOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::CapMemConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::CapMemOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::CommonNeuronConfigOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::CommonSynramConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::ColumnBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::ColumnCorrelationSwitchOnColumnBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::ColumnCorrelationSwitchOnDLS)
