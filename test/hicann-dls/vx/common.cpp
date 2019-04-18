@@ -31,6 +31,7 @@ typedef ::testing::Types<
     TimerOnDLS,
     OmnibusAddress,
     ShiftRegisterOnBoard,
+    SPIShiftRegisterOnBoard,
     ADCSourceOnBoard,
     LEDOnBoard,
     VDDOnBoard,

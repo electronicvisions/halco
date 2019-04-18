@@ -164,6 +164,16 @@ struct GENPYBIND(inline_base("*")) OmnibusAddress
 };
 
 /***********\
+    SPI
+\***********/
+
+struct GENPYBIND(inline_base("*")) SPIShiftRegisterOnBoard
+    : public common::detail::RantWrapper<SPIShiftRegisterOnBoard, uint_fast16_t, 0, 0>
+{
+	constexpr explicit SPIShiftRegisterOnBoard(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+/***********\
     Board
 \***********/
 

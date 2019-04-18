@@ -20,6 +20,7 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     TimerOnDLS                       => linear, iterable
     OmnibusAddress                   => linear
     ShiftRegisterOnBoard             => linear, iterable
+    SPIShiftRegisterOnBoard          => linear, iterable
     ADCSourceOnBoard                 => linear, iterable
     LEDOnBoard                       => linear, iterable
     VDDOnBoard                       => linear, iterable
