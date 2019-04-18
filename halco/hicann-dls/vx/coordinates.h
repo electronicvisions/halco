@@ -173,6 +173,23 @@ struct GENPYBIND(inline_base("*")) SPIShiftRegisterOnBoard
 	constexpr explicit SPIShiftRegisterOnBoard(uintmax_t const val = 0) : rant_t(val) {}
 };
 
+struct GENPYBIND(inline_base("*")) SPIDACDataRegisterOnDAC
+    : public common::detail::RantWrapper<SPIDACDataRegisterOnDAC, uint_fast16_t, 7, 0>
+{
+	constexpr explicit SPIDACDataRegisterOnDAC(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+struct GENPYBIND(inline_base("*")) SPIDACControlRegisterOnDAC
+    : public common::detail::RantWrapper<SPIDACControlRegisterOnDAC, uint_fast16_t, 3, 0>
+{
+	constexpr explicit SPIDACControlRegisterOnDAC(uintmax_t const val = 0) : rant_t(val) {}
+
+	static const SPIDACControlRegisterOnDAC GainReference;
+	static const SPIDACControlRegisterOnDAC LDAC;
+	static const SPIDACControlRegisterOnDAC PowerDown;
+	static const SPIDACControlRegisterOnDAC Reset;
+};
+
 /***********\
     Board
 \***********/
@@ -259,7 +276,7 @@ private:
 	typedef DACMixin<DACChannelOnBoard, DACChannelOnDAC> base;
 
 public:
-	typedef base::enum_type enum_type GENPYBIND(opaque);
+	typedef base::enum_type enum_type GENPYBIND(opaque(false));
 
 	DACChannelOnBoard() = default;
 
@@ -294,6 +311,50 @@ public:
 	VDDOnBoard toVDDOnBoard() const;
 };
 
+struct GENPYBIND(inline_base("*DACMixin*")) SPIDACDataRegisterOnBoard
+    : public DACMixin<SPIDACDataRegisterOnBoard, SPIDACDataRegisterOnDAC>
+{
+private:
+	typedef DACMixin<SPIDACDataRegisterOnBoard, SPIDACDataRegisterOnDAC> base;
+
+public:
+	typedef base::enum_type enum_type GENPYBIND(opaque(false));
+
+	SPIDACDataRegisterOnBoard() = default;
+
+	explicit SPIDACDataRegisterOnBoard(
+	    SPIDACDataRegisterOnDAC const& channel, DACOnBoard const& dac = DACOnBoard()) :
+	    base(channel, dac)
+	{}
+
+	explicit SPIDACDataRegisterOnBoard(enum_type const& e) : base(e) {}
+
+	SPIDACDataRegisterOnDAC toSPIDACDataRegisterOnDAC() const { return This(); }
+	DACOnBoard toDACOnBoard() const { return split().first; }
+};
+
+struct GENPYBIND(inline_base("*DACMixin*")) SPIDACControlRegisterOnBoard
+    : public DACMixin<SPIDACControlRegisterOnBoard, SPIDACControlRegisterOnDAC>
+{
+private:
+	typedef DACMixin<SPIDACControlRegisterOnBoard, SPIDACControlRegisterOnDAC> base;
+
+public:
+	typedef base::enum_type enum_type GENPYBIND(opaque(false));
+
+	SPIDACControlRegisterOnBoard() = default;
+
+	explicit SPIDACControlRegisterOnBoard(
+	    SPIDACControlRegisterOnDAC const& channel, DACOnBoard const& dac = DACOnBoard()) :
+	    base(channel, dac)
+	{}
+
+	explicit SPIDACControlRegisterOnBoard(enum_type const& e) : base(e) {}
+
+	SPIDACControlRegisterOnDAC toSPIDACControlRegisterOnDAC() const { return This(); }
+	DACOnBoard toDACOnBoard() const { return split().first; }
+};
+
 struct GENPYBIND(inline_base("*")) ADCOnBoard
     : public common::detail::RantWrapper<ADCOnBoard, uint_fast16_t, 0, 0>
 {
@@ -321,6 +382,10 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLRegisterOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::TimerOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::OmnibusAddress)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ShiftRegisterOnBoard)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SPIDACDataRegisterOnDAC)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SPIDACControlRegisterOnDAC)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SPIDACDataRegisterOnBoard)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SPIDACControlRegisterOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ADCSourceOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::LEDOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::VDDOnBoard)

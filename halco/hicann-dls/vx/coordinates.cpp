@@ -11,6 +11,11 @@ PLLClockOutputOnDLS const PLLClockOutputOnDLS::PhyRefClk{1};
 PLLClockOutputOnDLS const PLLClockOutputOnDLS::PPUClk{2};
 PLLClockOutputOnDLS const PLLClockOutputOnDLS::MADCClk{3};
 
+SPIDACControlRegisterOnDAC const SPIDACControlRegisterOnDAC::GainReference{0};
+SPIDACControlRegisterOnDAC const SPIDACControlRegisterOnDAC::LDAC{1};
+SPIDACControlRegisterOnDAC const SPIDACControlRegisterOnDAC::PowerDown{2};
+SPIDACControlRegisterOnDAC const SPIDACControlRegisterOnDAC::Reset{3};
+
 LEDOnBoard const LEDOnBoard::LED1{0};
 LEDOnBoard const LEDOnBoard::LED2{1};
 LEDOnBoard const LEDOnBoard::LED3{2};
