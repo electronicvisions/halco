@@ -19,7 +19,9 @@ namespace hicann_dls {
 namespace v2 GENPYBIND_TAG_HALCO_HICANN_DLS_V2 {
 
 struct CapMemColumnOnDLS;
+struct ColumnCorrelationBlockOnDLS;
 struct ColumnCorrelationSwitchOnDLS;
+struct ColumnCurrentBlockOnDLS;
 struct ColumnCurrentSwitchOnDLS;
 struct SynapseColumnOnDLS;
 struct SynapseRowOnDLS;
@@ -75,21 +77,32 @@ struct GENPYBIND(inline_base("*")) SynapseDriverOnDLS
    Synapse
 \***********/
 
-struct GENPYBIND(inline_base("*")) ColumnBlockOnDLS
-	: public common::detail::RantWrapper<ColumnBlockOnDLS, uint_fast16_t, 7, 0>
-	, public common::detail::XRangedTrait
+struct GENPYBIND(inline_base("*")) SynapseBlockColumnOnDLS
+    : public common::detail::RantWrapper<SynapseBlockColumnOnDLS, uint_fast16_t, 7, 0>
+    , public common::detail::XRangedTrait
 {
-	constexpr explicit ColumnBlockOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) : rant_t(val) {}
-	constexpr explicit ColumnBlockOnDLS(common::X const& x) GENPYBIND(implicit_conversion) : rant_t(x) {}
+	constexpr explicit SynapseBlockColumnOnDLS(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+	constexpr explicit SynapseBlockColumnOnDLS(common::X const& x)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(x)
+	{}
+
+	ColumnCorrelationBlockOnDLS toColumnCorrelationBlockOnDLS() const;
+	ColumnCurrentBlockOnDLS toColumnCurrentBlockOnDLS() const;
 };
 
 struct GENPYBIND(inline_base("*")) SynapseBlockOnDLS
-	: public common::detail::GridCoordinate<
-		  SynapseBlockOnDLS, ColumnBlockOnDLS, SynapseDriverOnDLS>
+    : public common::detail::
+          GridCoordinate<SynapseBlockOnDLS, SynapseBlockColumnOnDLS, SynapseDriverOnDLS>
 {
 	GRID_COMMON_CONSTRUCTORS(SynapseBlockOnDLS)
 
-	ColumnBlockOnDLS toColumnBlockOnDLS() const { return x(); }
+	ColumnCorrelationBlockOnDLS toColumnCorrelationBlockOnDLS() const;
+	ColumnCurrentBlockOnDLS toColumnCurrentBlockOnDLS() const;
+	SynapseBlockColumnOnDLS toSynapseBlockColumnOnDLS() const { return x(); }
 	SynapseDriverOnDLS toSynapseDriverOnDLS() const { return y(); }
 };
 
@@ -145,8 +158,8 @@ struct GENPYBIND(inline_base("*")) ColumnCorrelationBlockOnDLS
     : public common::detail::RantWrapper<
           ColumnCorrelationBlockOnDLS,
           uint_fast16_t,
-          ColumnBlockOnDLS::max,
-          ColumnBlockOnDLS::min>
+          SynapseBlockColumnOnDLS::max,
+          SynapseBlockColumnOnDLS::min>
     , public common::detail::XRangedTrait
 {
 	constexpr explicit ColumnCorrelationBlockOnDLS(uintmax_t const val = 0)
@@ -198,8 +211,8 @@ struct GENPYBIND(inline_base("*")) ColumnCurrentBlockOnDLS
     : public common::detail::RantWrapper<
           ColumnCurrentBlockOnDLS,
           uint_fast16_t,
-          ColumnBlockOnDLS::max,
-          ColumnBlockOnDLS::min>
+          SynapseBlockColumnOnDLS::max,
+          SynapseBlockColumnOnDLS::min>
     , public common::detail::XRangedTrait
 {
 	constexpr explicit ColumnCurrentBlockOnDLS(uintmax_t const val = 0)
@@ -419,7 +432,6 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::CapMemConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::CapMemOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::CommonNeuronConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::CommonSynramConfigOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::ColumnBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::ColumnCorrelationBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::ColumnCorrelationSwitchOnColumnCorrelationBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::ColumnCorrelationSwitchOnDLS)
@@ -435,6 +447,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::PPUMemoryOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::PPUControlRegisterOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::PPUStatusRegisterOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::SynapseBlockOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::SynapseBlockColumnOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::SynapseDriverOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::SynapseDriverBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::SynapseOnDLS)

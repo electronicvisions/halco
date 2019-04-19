@@ -13,7 +13,6 @@ class Test_PyhalcoHICANNDLSv2(unittest.TestCase, PyhalcoTest):
     CapMemConfigOnDLS                => linear, iterable
     CommonNeuronConfigOnDLS          => linear, iterable
     CommonSynramConfigOnDLS          => linear, iterable
-    ColumnBlockOnDLS                 => linear, iterable
     ColumnCorrelationBlockOnDLS      => linear, iterable
     ColumnCorrelationSwitchOnColumnCorrelationBlock => linear, iterable
     ColumnCorrelationSwitchOnDLS     => linear, iterable
@@ -31,6 +30,7 @@ class Test_PyhalcoHICANNDLSv2(unittest.TestCase, PyhalcoTest):
     PPUStatusRegisterOnDLS           => linear, iterable
     PPUControlRegisterOnDLS          => linear, iterable
     SynapseBlockOnDLS                => grid, iterable
+    SynapseBlockColumnOnDLS          => linear, iterable
     SynapseDriverOnDLS               => linear, iterable
     SynapseColumnOnDLS               => linear, iterable
     SynapseRowOnDLS                  => linear, iterable

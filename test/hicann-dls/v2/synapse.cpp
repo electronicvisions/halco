@@ -46,6 +46,27 @@ TEST(SynapseBlockOnDLS, toSynapseDriverOnDLS)
 	EXPECT_NE(SynapseDriverOnDLS(3), SynapseBlockOnDLS(Enum(7)).toSynapseDriverOnDLS());
 }
 
+TEST(SynapseBlockOnDLS, toColumnCorrelationBlockOnDLS)
+{
+	EXPECT_EQ(
+	    ColumnCorrelationBlockOnDLS(3),
+	    ColumnCorrelationBlockOnDLS(SynapseBlockOnDLS(Enum(3)).toColumnCorrelationBlockOnDLS()));
+}
+
+TEST(SynapseBlockOnDLS, toColumnCurrentBlockOnDLS)
+{
+	EXPECT_EQ(
+	    ColumnCurrentBlockOnDLS(3),
+	    ColumnCurrentBlockOnDLS(SynapseBlockOnDLS(Enum(3)).toColumnCurrentBlockOnDLS()));
+}
+
+TEST(SynapseBlockOnDLS, toSynapseBlockColumnOnDLS)
+{
+	EXPECT_EQ(
+	    SynapseBlockColumnOnDLS(3),
+	    SynapseBlockColumnOnDLS(SynapseBlockOnDLS(Enum(3)).toSynapseBlockColumnOnDLS()));
+}
+
 TEST(SynapseOnSynapseBlock, RespectsBounds)
 {
 	EXPECT_ANY_THROW(SynapseOnSynapseBlock(4));
@@ -158,10 +179,24 @@ TEST(SynapseOnDLS, toColumnCurrentSwitchOnDLS)
 	EXPECT_NE(ColumnCurrentSwitchOnDLS(2), SynapseOnDLS(Enum(4)).toColumnCurrentSwitchOnDLS());
 }
 
-TEST(ColumnBlockOnDLS, RespectsBounds)
+TEST(SynapseBlockColumnOnDLS, RespectsBounds)
 {
-	EXPECT_ANY_THROW(ColumnBlockOnDLS(8));
-	EXPECT_NO_THROW(ColumnBlockOnDLS(7));
+	EXPECT_ANY_THROW(SynapseBlockColumnOnDLS(8));
+	EXPECT_NO_THROW(SynapseBlockColumnOnDLS(7));
+}
+
+TEST(SynapseBlockColumnOnDLS, toColumnCorrelationBlockOnDLS)
+{
+	EXPECT_EQ(
+	    ColumnCorrelationBlockOnDLS(3),
+	    ColumnCorrelationBlockOnDLS(SynapseBlockColumnOnDLS(Enum(3)).toColumnCorrelationBlockOnDLS()));
+}
+
+TEST(SynapseBlockColumnOnDLS, toColumnCurrentBlockOnDLS)
+{
+	EXPECT_EQ(
+	    ColumnCurrentBlockOnDLS(3),
+	    ColumnCurrentBlockOnDLS(SynapseBlockColumnOnDLS(Enum(3)).toColumnCurrentBlockOnDLS()));
 }
 
 TEST(ColumnCorrelationSwitchOnColumnCorrelationBlock, RespectsBounds)
@@ -170,7 +205,7 @@ TEST(ColumnCorrelationSwitchOnColumnCorrelationBlock, RespectsBounds)
 	EXPECT_NO_THROW(ColumnCorrelationSwitchOnColumnCorrelationBlock(3));
 }
 
-TEST(ColumnCorrelationSwitchOnColumnCorrelationBlock, toSynapseOnColumnBlock)
+TEST(ColumnCorrelationSwitchOnColumnCorrelationBlock, toSynapseOnSynapseBlock)
 {
 	EXPECT_EQ(
 	    SynapseOnSynapseBlock(3),

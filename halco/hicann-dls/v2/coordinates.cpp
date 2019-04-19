@@ -26,10 +26,30 @@ SynapseRowOnDLS SynapseDriverOnDLS::toSynapseRowOnDLS() const
 	return SynapseRowOnDLS(value());
 }
 
+ColumnCorrelationBlockOnDLS SynapseBlockColumnOnDLS::toColumnCorrelationBlockOnDLS() const
+{
+	return ColumnCorrelationBlockOnDLS(value());
+}
+
+ColumnCurrentBlockOnDLS SynapseBlockColumnOnDLS::toColumnCurrentBlockOnDLS() const
+{
+	return ColumnCurrentBlockOnDLS(value());
+}
+
+ColumnCorrelationBlockOnDLS SynapseBlockOnDLS::toColumnCorrelationBlockOnDLS() const
+{
+	return ColumnCorrelationBlockOnDLS(x());
+}
+
+ColumnCurrentBlockOnDLS SynapseBlockOnDLS::toColumnCurrentBlockOnDLS() const
+{
+	return ColumnCurrentBlockOnDLS(x());
+}
+
 SynapseBlockOnDLS SynapseOnDLS::toSynapseBlockOnDLS() const
 {
 	return SynapseBlockOnDLS(
-		ColumnBlockOnDLS(x() / SynapseOnSynapseBlock::size), SynapseDriverOnDLS(y()));
+	    SynapseBlockColumnOnDLS(x() / SynapseOnSynapseBlock::size), SynapseDriverOnDLS(y()));
 }
 
 SynapseOnSynapseBlock SynapseOnDLS::toSynapseOnSynapseBlock() const
