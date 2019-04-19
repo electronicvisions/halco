@@ -47,16 +47,17 @@ ColumnCurrentSwitchOnDLS SynapseOnDLS::toColumnCurrentSwitchOnDLS() const
 	return ColumnCurrentSwitchOnDLS(x());
 }
 
-ColumnCorrelationSwitchOnColumnBlock
-ColumnCorrelationSwitchOnDLS::toColumnCorrelationSwitchOnColumnBlock() const
+ColumnCorrelationSwitchOnColumnCorrelationBlock
+ColumnCorrelationSwitchOnDLS::toColumnCorrelationSwitchOnColumnCorrelationBlock() const
 {
-	return ColumnCorrelationSwitchOnColumnBlock(
-		value() % ColumnCorrelationSwitchOnColumnBlock::size);
+	return ColumnCorrelationSwitchOnColumnCorrelationBlock(
+	    value() % ColumnCorrelationSwitchOnColumnCorrelationBlock::size);
 }
 
-ColumnBlockOnDLS ColumnCorrelationSwitchOnDLS::toColumnBlockOnDLS() const
+ColumnCorrelationBlockOnDLS ColumnCorrelationSwitchOnDLS::toColumnCorrelationBlockOnDLS() const
 {
-	return ColumnBlockOnDLS(value() / ColumnCorrelationSwitchOnColumnBlock::size);
+	return ColumnCorrelationBlockOnDLS(
+	    value() / ColumnCorrelationSwitchOnColumnCorrelationBlock::size);
 }
 
 ColumnCurrentSwitchOnDLS ColumnCorrelationSwitchOnDLS::toColumnCurrentSwitchOnDLS() const

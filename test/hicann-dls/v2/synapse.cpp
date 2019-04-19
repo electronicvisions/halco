@@ -164,20 +164,20 @@ TEST(ColumnBlockOnDLS, RespectsBounds)
 	EXPECT_NO_THROW(ColumnBlockOnDLS(7));
 }
 
-TEST(ColumnCorrelationSwitchOnColumnBlock, RespectsBounds)
+TEST(ColumnCorrelationSwitchOnColumnCorrelationBlock, RespectsBounds)
 {
-	EXPECT_ANY_THROW(ColumnCorrelationSwitchOnColumnBlock(4));
-	EXPECT_NO_THROW(ColumnCorrelationSwitchOnColumnBlock(3));
+	EXPECT_ANY_THROW(ColumnCorrelationSwitchOnColumnCorrelationBlock(4));
+	EXPECT_NO_THROW(ColumnCorrelationSwitchOnColumnCorrelationBlock(3));
 }
 
-TEST(ColumnCorrelationSwitchOnColumnBlock, toSynapseOnColumnBlock)
+TEST(ColumnCorrelationSwitchOnColumnCorrelationBlock, toSynapseOnColumnBlock)
 {
 	EXPECT_EQ(
-		SynapseOnSynapseBlock(3),
-		ColumnCorrelationSwitchOnColumnBlock(Enum(3)).toSynapseOnSynapseBlock());
+	    SynapseOnSynapseBlock(3),
+	    ColumnCorrelationSwitchOnColumnCorrelationBlock(Enum(3)).toSynapseOnSynapseBlock());
 	EXPECT_NE(
-		SynapseOnSynapseBlock(2),
-		ColumnCorrelationSwitchOnColumnBlock(Enum(3)).toSynapseOnSynapseBlock());
+	    SynapseOnSynapseBlock(2),
+	    ColumnCorrelationSwitchOnColumnCorrelationBlock(Enum(3)).toSynapseOnSynapseBlock());
 }
 
 TEST(ColumnCorrelationSwitchOnDLS, RespectsBounds)
@@ -186,24 +186,30 @@ TEST(ColumnCorrelationSwitchOnDLS, RespectsBounds)
 	EXPECT_NO_THROW(ColumnCorrelationSwitchOnDLS(31));
 }
 
-TEST(ColumnCorrelationSwitchOnDLS, toColumnCorrelationSwitchOnColumnBlock)
+TEST(ColumnCorrelationSwitchOnDLS, toColumnCorrelationSwitchOnColumnCorrelationBlock)
 {
 	EXPECT_EQ(
-		ColumnCorrelationSwitchOnColumnBlock(3),
-		ColumnCorrelationSwitchOnDLS(Enum(3)).toColumnCorrelationSwitchOnColumnBlock());
+	    ColumnCorrelationSwitchOnColumnCorrelationBlock(3),
+	    ColumnCorrelationSwitchOnDLS(Enum(3)).toColumnCorrelationSwitchOnColumnCorrelationBlock());
 	EXPECT_EQ(
-		ColumnCorrelationSwitchOnColumnBlock(0),
-		ColumnCorrelationSwitchOnDLS(Enum(4)).toColumnCorrelationSwitchOnColumnBlock());
+	    ColumnCorrelationSwitchOnColumnCorrelationBlock(0),
+	    ColumnCorrelationSwitchOnDLS(Enum(4)).toColumnCorrelationSwitchOnColumnCorrelationBlock());
 	EXPECT_NE(
-		ColumnCorrelationSwitchOnColumnBlock(0),
-		ColumnCorrelationSwitchOnDLS(Enum(5)).toColumnCorrelationSwitchOnColumnBlock());
+	    ColumnCorrelationSwitchOnColumnCorrelationBlock(0),
+	    ColumnCorrelationSwitchOnDLS(Enum(5)).toColumnCorrelationSwitchOnColumnCorrelationBlock());
 }
 
-TEST(ColumnCorrelationSwitchOnDLS, toColumnBlockOnDLS)
+TEST(ColumnCorrelationSwitchOnDLS, toColumnCorrelationBlockOnDLS)
 {
-	EXPECT_EQ(ColumnBlockOnDLS(0), ColumnCorrelationSwitchOnDLS(Enum(3)).toColumnBlockOnDLS());
-	EXPECT_EQ(ColumnBlockOnDLS(1), ColumnCorrelationSwitchOnDLS(Enum(4)).toColumnBlockOnDLS());
-	EXPECT_NE(ColumnBlockOnDLS(1), ColumnCorrelationSwitchOnDLS(Enum(0)).toColumnBlockOnDLS());
+	EXPECT_EQ(
+	    ColumnCorrelationBlockOnDLS(0),
+	    ColumnCorrelationSwitchOnDLS(Enum(3)).toColumnCorrelationBlockOnDLS());
+	EXPECT_EQ(
+	    ColumnCorrelationBlockOnDLS(1),
+	    ColumnCorrelationSwitchOnDLS(Enum(4)).toColumnCorrelationBlockOnDLS());
+	EXPECT_NE(
+	    ColumnCorrelationBlockOnDLS(1),
+	    ColumnCorrelationSwitchOnDLS(Enum(0)).toColumnCorrelationBlockOnDLS());
 }
 
 TEST(ColumnCorrelationSwitchOnDLS, toColumnCurrentSwitchOnDLS)
