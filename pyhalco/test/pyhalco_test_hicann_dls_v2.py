@@ -17,7 +17,8 @@ class Test_PyhalcoHICANNDLSv2(unittest.TestCase, PyhalcoTest):
     ColumnCorrelationBlockOnDLS      => linear, iterable
     ColumnCorrelationSwitchOnColumnCorrelationBlock => linear, iterable
     ColumnCorrelationSwitchOnDLS     => linear, iterable
-    ColumnCurrentSwitchOnColumnBlock => linear, iterable
+    ColumnCurrentBlockOnDLS      => linear, iterable
+    ColumnCurrentSwitchOnColumnCurrentBlock => linear, iterable
     ColumnCurrentSwitchOnDLS         => linear, iterable
     CommonNeuronParameter            => ignore
     DACOnBoard                       => linear, iterable

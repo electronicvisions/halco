@@ -194,14 +194,39 @@ struct GENPYBIND(inline_base("*")) ColumnCorrelationSwitchOnDLS
 	NeuronOnDLS toNeuronOnDLS() const { return NeuronOnDLS(value()); }
 };
 
-struct GENPYBIND(inline_base("*")) ColumnCurrentSwitchOnColumnBlock
-	: public common::detail::RantWrapper<
-		  ColumnCurrentSwitchOnColumnBlock, SynapseOnSynapseBlock::value_type,
-		  SynapseOnSynapseBlock::max, SynapseOnSynapseBlock::min>
-	, public common::detail::XRangedTrait
+struct GENPYBIND(inline_base("*")) ColumnCurrentBlockOnDLS
+    : public common::detail::RantWrapper<
+          ColumnCurrentBlockOnDLS,
+          uint_fast16_t,
+          ColumnBlockOnDLS::max,
+          ColumnBlockOnDLS::min>
+    , public common::detail::XRangedTrait
 {
-	constexpr explicit ColumnCurrentSwitchOnColumnBlock(uintmax_t const val = 0) GENPYBIND(implicit_conversion) : rant_t(val) {}
-	constexpr explicit ColumnCurrentSwitchOnColumnBlock(common::X const& x) GENPYBIND(implicit_conversion) : rant_t(x) {}
+	constexpr explicit ColumnCurrentBlockOnDLS(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+	constexpr explicit ColumnCurrentBlockOnDLS(common::X const& x) GENPYBIND(implicit_conversion) :
+	    rant_t(x)
+	{}
+};
+
+struct GENPYBIND(inline_base("*")) ColumnCurrentSwitchOnColumnCurrentBlock
+    : public common::detail::RantWrapper<
+          ColumnCurrentSwitchOnColumnCurrentBlock,
+          SynapseOnSynapseBlock::value_type,
+          SynapseOnSynapseBlock::max,
+          SynapseOnSynapseBlock::min>
+    , public common::detail::XRangedTrait
+{
+	constexpr explicit ColumnCurrentSwitchOnColumnCurrentBlock(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+	constexpr explicit ColumnCurrentSwitchOnColumnCurrentBlock(common::X const& x)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(x)
+	{}
 
 	SynapseOnSynapseBlock toSynapseOnSynapseBlock() const { return SynapseOnSynapseBlock(value()); }
 };
@@ -214,8 +239,8 @@ struct GENPYBIND(inline_base("*")) ColumnCurrentSwitchOnDLS
 	constexpr explicit ColumnCurrentSwitchOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) : rant_t(val) {}
 	constexpr explicit ColumnCurrentSwitchOnDLS(common::X const& x) GENPYBIND(implicit_conversion) : rant_t(x) {}
 
-	ColumnCurrentSwitchOnColumnBlock toColumnCurrentSwitchOnColumnBlock() const;
-	ColumnBlockOnDLS toColumnBlockOnDLS() const;
+	ColumnCurrentSwitchOnColumnCurrentBlock toColumnCurrentSwitchOnColumnCurrentBlock() const;
+	ColumnCurrentBlockOnDLS toColumnCurrentBlockOnDLS() const;
 	ColumnCorrelationSwitchOnDLS toColumnCorrelationSwitchOnDLS() const;
 	NeuronOnDLS toNeuronOnDLS() const { return NeuronOnDLS(value()); }
 };
@@ -398,7 +423,8 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::ColumnBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::ColumnCorrelationBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::ColumnCorrelationSwitchOnColumnCorrelationBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::ColumnCorrelationSwitchOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::ColumnCurrentSwitchOnColumnBlock)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::ColumnCurrentBlockOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::ColumnCurrentSwitchOnColumnCurrentBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::ColumnCurrentSwitchOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::CorrelationConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::NeuronOnDLS)

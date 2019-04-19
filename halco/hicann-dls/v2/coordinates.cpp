@@ -65,15 +65,16 @@ ColumnCurrentSwitchOnDLS ColumnCorrelationSwitchOnDLS::toColumnCurrentSwitchOnDL
 	return ColumnCurrentSwitchOnDLS(value());
 }
 
-ColumnCurrentSwitchOnColumnBlock
-ColumnCurrentSwitchOnDLS::toColumnCurrentSwitchOnColumnBlock() const
+ColumnCurrentSwitchOnColumnCurrentBlock
+ColumnCurrentSwitchOnDLS::toColumnCurrentSwitchOnColumnCurrentBlock() const
 {
-	return ColumnCurrentSwitchOnColumnBlock(value() % ColumnCurrentSwitchOnColumnBlock::size);
+	return ColumnCurrentSwitchOnColumnCurrentBlock(
+	    value() % ColumnCurrentSwitchOnColumnCurrentBlock::size);
 }
 
-ColumnBlockOnDLS ColumnCurrentSwitchOnDLS::toColumnBlockOnDLS() const
+ColumnCurrentBlockOnDLS ColumnCurrentSwitchOnDLS::toColumnCurrentBlockOnDLS() const
 {
-	return ColumnBlockOnDLS(value() / ColumnCurrentSwitchOnColumnBlock::size);
+	return ColumnCurrentBlockOnDLS(value() / ColumnCurrentSwitchOnColumnCurrentBlock::size);
 }
 
 ColumnCorrelationSwitchOnDLS ColumnCurrentSwitchOnDLS::toColumnCorrelationSwitchOnDLS() const
