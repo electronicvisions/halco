@@ -37,6 +37,12 @@ class Test_PyhalcoHICANNDLSv2(unittest.TestCase, PyhalcoTest):
     SynapseOnDLS                     => grid, iterable
     SynapseOnSynapseBlock            => linear, iterable
     SynapseDriverBlockOnDLS          => linear, iterable
+    CausalCorrelationBlockOnDLS      => grid, iterable
+    CausalCorrelationOnDLS           => grid, iterable
+    CausalCorrelationOnCausalCorrelationBlock => linear, iterable
+    AcausalCorrelationBlockOnDLS     => grid, iterable
+    AcausalCorrelationOnDLS          => grid, iterable
+    AcausalCorrelationOnAcausalCorrelationBlock => linear, iterable
     CorrelationConfigOnDLS           => linear, iterable
     RateCounterOnDLS                 => linear, iterable
     RateCounterConfigOnDLS           => linear, iterable

@@ -67,6 +67,74 @@ ColumnCurrentSwitchOnDLS SynapseOnDLS::toColumnCurrentSwitchOnDLS() const
 	return ColumnCurrentSwitchOnDLS(x());
 }
 
+SynapseBlockColumnOnDLS CausalCorrelationBlockOnDLS::toSynapseBlockColumnOnDLS() const
+{
+	return SynapseBlockColumnOnDLS(x());
+}
+
+ColumnCurrentBlockOnDLS CausalCorrelationBlockOnDLS::toColumnCurrentBlockOnDLS() const
+{
+	return ColumnCurrentBlockOnDLS(x());
+}
+
+CausalCorrelationBlockOnDLS CausalCorrelationOnDLS::toCausalCorrelationBlockOnDLS() const
+{
+	return CausalCorrelationBlockOnDLS(
+	    ColumnCorrelationBlockOnDLS(x() / CausalCorrelationOnCausalCorrelationBlock::size),
+	    SynapseDriverOnDLS(y()));
+}
+
+CausalCorrelationOnCausalCorrelationBlock
+CausalCorrelationOnDLS::toCausalCorrelationOnCausalCorrelationBlock() const
+{
+	return CausalCorrelationOnCausalCorrelationBlock(
+	    x() % CausalCorrelationOnCausalCorrelationBlock::size);
+}
+
+ColumnCorrelationSwitchOnDLS CausalCorrelationOnDLS::toColumnCorrelationSwitchOnDLS() const
+{
+	return ColumnCorrelationSwitchOnDLS(x());
+}
+
+ColumnCurrentSwitchOnDLS CausalCorrelationOnDLS::toColumnCurrentSwitchOnDLS() const
+{
+	return ColumnCurrentSwitchOnDLS(x());
+}
+
+SynapseBlockColumnOnDLS AcausalCorrelationBlockOnDLS::toSynapseBlockColumnOnDLS() const
+{
+	return SynapseBlockColumnOnDLS(x());
+}
+
+ColumnCurrentBlockOnDLS AcausalCorrelationBlockOnDLS::toColumnCurrentBlockOnDLS() const
+{
+	return ColumnCurrentBlockOnDLS(x());
+}
+
+AcausalCorrelationBlockOnDLS AcausalCorrelationOnDLS::toAcausalCorrelationBlockOnDLS() const
+{
+	return AcausalCorrelationBlockOnDLS(
+	    ColumnCorrelationBlockOnDLS(x() / AcausalCorrelationOnAcausalCorrelationBlock::size),
+	    SynapseDriverOnDLS(y()));
+}
+
+AcausalCorrelationOnAcausalCorrelationBlock
+AcausalCorrelationOnDLS::toAcausalCorrelationOnAcausalCorrelationBlock() const
+{
+	return AcausalCorrelationOnAcausalCorrelationBlock(
+	    x() % AcausalCorrelationOnAcausalCorrelationBlock::size);
+}
+
+ColumnCorrelationSwitchOnDLS AcausalCorrelationOnDLS::toColumnCorrelationSwitchOnDLS() const
+{
+	return ColumnCorrelationSwitchOnDLS(x());
+}
+
+ColumnCurrentSwitchOnDLS AcausalCorrelationOnDLS::toColumnCurrentSwitchOnDLS() const
+{
+	return ColumnCurrentSwitchOnDLS(x());
+}
+
 ColumnCorrelationSwitchOnColumnCorrelationBlock
 ColumnCorrelationSwitchOnDLS::toColumnCorrelationSwitchOnColumnCorrelationBlock() const
 {

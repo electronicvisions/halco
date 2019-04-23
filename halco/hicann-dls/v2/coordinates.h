@@ -149,10 +149,9 @@ struct GENPYBIND(inline_base("*")) SynapseOnDLS
 	ColumnCurrentSwitchOnDLS toColumnCurrentSwitchOnDLS() const;
 };
 
-
-/*****************\
-  SynapseSwitches
-\*****************/
+/*************\
+  Correlation
+\*************/
 
 struct GENPYBIND(inline_base("*")) ColumnCorrelationBlockOnDLS
     : public common::detail::RantWrapper<
@@ -171,6 +170,107 @@ struct GENPYBIND(inline_base("*")) ColumnCorrelationBlockOnDLS
 	    rant_t(x)
 	{}
 };
+
+struct GENPYBIND(inline_base("*")) CausalCorrelationBlockOnDLS
+    : public common::detail::GridCoordinate<
+          CausalCorrelationBlockOnDLS,
+          ColumnCorrelationBlockOnDLS,
+          SynapseDriverOnDLS>
+{
+	GRID_COMMON_CONSTRUCTORS(CausalCorrelationBlockOnDLS)
+
+	ColumnCorrelationBlockOnDLS toColumnCorrelationBlockOnDLS() const { return x(); }
+	ColumnCurrentBlockOnDLS toColumnCurrentBlockOnDLS() const;
+	SynapseBlockColumnOnDLS toSynapseBlockColumnOnDLS() const;
+	SynapseDriverOnDLS toSynapseDriverOnDLS() const { return y(); }
+};
+
+struct GENPYBIND(inline_base("*")) CausalCorrelationOnCausalCorrelationBlock
+    : public common::detail::RantWrapper<
+          CausalCorrelationOnCausalCorrelationBlock,
+          uint_fast16_t,
+          SynapseOnSynapseBlock::max,
+          SynapseOnSynapseBlock::min>
+    , public common::detail::XRangedTrait
+{
+	constexpr explicit CausalCorrelationOnCausalCorrelationBlock(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+	constexpr explicit CausalCorrelationOnCausalCorrelationBlock(common::X const& x)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(x)
+	{}
+};
+
+struct GENPYBIND(inline_base("*")) CausalCorrelationOnDLS
+    : public common::detail::
+          GridCoordinate<CausalCorrelationOnDLS, SynapseColumnOnDLS, SynapseRowOnDLS>
+{
+	GRID_COMMON_CONSTRUCTORS(CausalCorrelationOnDLS)
+
+	SynapseColumnOnDLS toSynapseColumnOnDLS() const { return x(); }
+	SynapseRowOnDLS toSynapseRowOnDLS() const { return y(); }
+	NeuronOnDLS toNeuronOnDLS() const { return NeuronOnDLS(x()); }
+	SynapseDriverOnDLS toSynapseDriverOnDLS() const { return SynapseDriverOnDLS(y()); }
+	CausalCorrelationBlockOnDLS toCausalCorrelationBlockOnDLS() const;
+	CausalCorrelationOnCausalCorrelationBlock toCausalCorrelationOnCausalCorrelationBlock() const;
+	ColumnCorrelationSwitchOnDLS toColumnCorrelationSwitchOnDLS() const;
+	ColumnCurrentSwitchOnDLS toColumnCurrentSwitchOnDLS() const;
+};
+
+struct GENPYBIND(inline_base("*")) AcausalCorrelationBlockOnDLS
+    : public common::detail::GridCoordinate<
+          AcausalCorrelationBlockOnDLS,
+          ColumnCorrelationBlockOnDLS,
+          SynapseDriverOnDLS>
+{
+	GRID_COMMON_CONSTRUCTORS(AcausalCorrelationBlockOnDLS)
+
+	ColumnCorrelationBlockOnDLS toColumnCorrelationBlockOnDLS() const { return x(); }
+	ColumnCurrentBlockOnDLS toColumnCurrentBlockOnDLS() const;
+	SynapseBlockColumnOnDLS toSynapseBlockColumnOnDLS() const;
+	SynapseDriverOnDLS toSynapseDriverOnDLS() const { return y(); }
+};
+
+struct GENPYBIND(inline_base("*")) AcausalCorrelationOnAcausalCorrelationBlock
+    : public common::detail::RantWrapper<
+          AcausalCorrelationOnAcausalCorrelationBlock,
+          uint_fast16_t,
+          SynapseOnSynapseBlock::max,
+          SynapseOnSynapseBlock::min>
+    , public common::detail::XRangedTrait
+{
+	constexpr explicit AcausalCorrelationOnAcausalCorrelationBlock(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+	constexpr explicit AcausalCorrelationOnAcausalCorrelationBlock(common::X const& x)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(x)
+	{}
+};
+
+struct GENPYBIND(inline_base("*")) AcausalCorrelationOnDLS
+    : public common::detail::
+          GridCoordinate<AcausalCorrelationOnDLS, SynapseColumnOnDLS, SynapseRowOnDLS>
+{
+	GRID_COMMON_CONSTRUCTORS(AcausalCorrelationOnDLS)
+
+	SynapseColumnOnDLS toSynapseColumnOnDLS() const { return x(); }
+	SynapseRowOnDLS toSynapseRowOnDLS() const { return y(); }
+	NeuronOnDLS toNeuronOnDLS() const { return NeuronOnDLS(x()); }
+	SynapseDriverOnDLS toSynapseDriverOnDLS() const { return SynapseDriverOnDLS(y()); }
+	AcausalCorrelationBlockOnDLS toAcausalCorrelationBlockOnDLS() const;
+	AcausalCorrelationOnAcausalCorrelationBlock toAcausalCorrelationOnAcausalCorrelationBlock()
+	    const;
+	ColumnCorrelationSwitchOnDLS toColumnCorrelationSwitchOnDLS() const;
+	ColumnCurrentSwitchOnDLS toColumnCurrentSwitchOnDLS() const;
+};
+
+/*****************\
+  SynapseSwitches
+\*****************/
 
 struct GENPYBIND(inline_base("*")) ColumnCorrelationSwitchOnColumnCorrelationBlock
     : public common::detail::RantWrapper<

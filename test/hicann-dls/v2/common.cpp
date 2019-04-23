@@ -41,6 +41,8 @@ typedef ::testing::Types<
     PPUMemoryOnDLS,
     PPUControlRegisterOnDLS,
     PPUStatusRegisterOnDLS,
+    AcausalCorrelationBlockOnDLS,
+    CausalCorrelationBlockOnDLS,
     SynapseBlockOnDLS,
     SynapseBlockColumnOnDLS,
     SynapseDriverOnDLS,
@@ -49,6 +51,10 @@ typedef ::testing::Types<
     SynapseRowOnDLS,
     SynapseOnDLS,
     SynapseOnSynapseBlock,
+    AcausalCorrelationOnDLS,
+    AcausalCorrelationOnAcausalCorrelationBlock,
+    CausalCorrelationOnDLS,
+    CausalCorrelationOnCausalCorrelationBlock,
     RateCounterOnDLS,
     RateCounterConfigOnDLS>
     CoordinateTypes;
