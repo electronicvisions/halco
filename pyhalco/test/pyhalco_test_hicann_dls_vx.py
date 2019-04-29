@@ -26,7 +26,9 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     PLLClockOutputOnDLS              => linear, iterable
     PLLOnDLS                         => linear, iterable
     TimerOnDLS                       => linear, iterable
-    OmnibusAddress                   => linear
+    OmnibusChipOverJTAGAddress       => linear
+    OmnibusChipAddress               => linear
+    OmnibusFPGAAddress               => linear
     ShiftRegisterOnBoard             => linear, iterable
     SPIShiftRegisterOnBoard          => linear, iterable
     SPIDACDataRegisterOnBoard        => linear, iterable
