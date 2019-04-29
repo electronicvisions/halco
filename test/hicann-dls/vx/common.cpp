@@ -80,9 +80,10 @@ typedef ::testing::Types<
     PPUMemoryBlockOnDLS,
     PPUMemoryOnPPU,
     PPUMemoryOnDLS,
-    SystimeSyncBaseOnDLS>
+    SystimeSyncBaseOnDLS,
+    NeuronLabel,
+    SPL1Address>
     CoordinateTypes2;
-
 
 TYPED_TEST_CASE(CommonCoordinateTest1, CoordinateTypes1);
 TYPED_TEST_CASE(CommonCoordinateTest2, CoordinateTypes2);

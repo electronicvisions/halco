@@ -212,6 +212,26 @@ public:
 	PPUOnDLS toPPUOnDLS() const { return split().first; }
 };
 
+/************\
+    Neuron
+\************/
+
+struct GENPYBIND(inline_base("*")) NeuronLabel
+    : public halco::common::detail::RantWrapper<NeuronLabel, uint16_t, 0x3ff /* 14bit */, 0>
+{
+	NeuronLabel(uintmax_t value = 0) GENPYBIND(implicit_conversion) : rant_t(value) {}
+};
+
+/**********\
+    SPL1
+\**********/
+
+struct GENPYBIND(inline_base("*")) SPL1Address
+    : public halco::common::detail::RantWrapper<SPL1Address, uint16_t, 3 /* 2bit */, 0>
+{
+	SPL1Address(uintmax_t value = 0) GENPYBIND(implicit_conversion) : rant_t(value) {}
+};
+
 /***************\
     ResetChip
 \***************/
@@ -747,6 +767,8 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUStatusRegisterOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUControlRegisterOnPPU)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUControlRegisterOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronLabel)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SPL1Address)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ADPLLOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLClockOutputOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLOnDLS)
