@@ -75,7 +75,12 @@ typedef ::testing::Types<
     PerfTestStatusOnFPGA>
     CoordinateTypes1;
 
-typedef ::testing::Types<PPUMemoryBlockOnPPU, PPUMemoryBlockOnDLS, PPUMemoryOnPPU, PPUMemoryOnDLS>
+typedef ::testing::Types<
+    PPUMemoryBlockOnPPU,
+    PPUMemoryBlockOnDLS,
+    PPUMemoryOnPPU,
+    PPUMemoryOnDLS,
+    SystimeSyncBaseOnDLS>
     CoordinateTypes2;
 
 

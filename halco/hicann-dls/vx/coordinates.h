@@ -36,10 +36,19 @@ struct GENPYBIND(inline_base("*")) PerfTestStatusOnFPGA
 	constexpr explicit PerfTestStatusOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
 };
 
+/************\
+    Systime
+\************/
+
+struct GENPYBIND(inline_base("*")) SystimeSyncBaseOnDLS
+    : public common::detail::RantWrapper<SystimeSyncBaseOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit SystimeSyncBaseOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
 /**********\
     PPU
 \**********/
-
 
 struct GENPYBIND(inline_base("*")) PPUOnDLS
     : public common::detail::RantWrapper<PPUOnDLS, uint_fast16_t, 1, 0>
@@ -716,6 +725,7 @@ namespace std {
 
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PerfTestOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PerfTestStatusOnFPGA)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SystimeSyncBaseOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUMemoryWordOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUMemoryWordOnPPU)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUMemoryBlockOnPPU)
