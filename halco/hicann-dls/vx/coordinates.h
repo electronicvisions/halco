@@ -20,6 +20,22 @@ namespace halco {
 namespace hicann_dls {
 namespace vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
+/************\
+    PerfTest
+\************/
+
+struct GENPYBIND(inline_base("*")) PerfTestOnFPGA
+    : public common::detail::RantWrapper<PerfTestOnFPGA, uint_fast16_t, 0, 0>
+{
+	constexpr explicit PerfTestOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+struct GENPYBIND(inline_base("*")) PerfTestStatusOnFPGA
+    : public common::detail::RantWrapper<PerfTestStatusOnFPGA, uint_fast16_t, 0, 0>
+{
+	constexpr explicit PerfTestStatusOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
+};
+
 /**********\
     PPU
 \**********/
@@ -552,6 +568,8 @@ public:
 // std::hash specializations
 namespace std {
 
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PerfTestOnFPGA)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PerfTestStatusOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUMemoryWordOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUMemoryWordOnPPU)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUOnDLS)

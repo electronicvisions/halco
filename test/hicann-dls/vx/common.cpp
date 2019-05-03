@@ -60,7 +60,9 @@ typedef ::testing::Types<
     CapMemBlockConfigOnDLS,
     CapMemBlockOnDLS,
     CommonNeuronConfigOnDLS,
-    NeuronOnBlock>
+    NeuronOnBlock,
+    PerfTestOnFPGA,
+    PerfTestStatusOnFPGA>
     CoordinateTypes;
 
 TYPED_TEST_CASE(CommonCoordinateTest, CoordinateTypes);
