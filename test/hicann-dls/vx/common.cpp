@@ -21,7 +21,9 @@ class CommonCoordinateTest : public ::testing::Test
 
 typedef ::testing::Types<
     ResetChipOnDLS,
-    JTAGOnDLS,
+    ResetJTAGTapOnDLS,
+    JTAGClockScalerOnDLS,
+    JTAGIdCodeOnDLS,
     JTAGPLLRegisterOnDLS,
     JTAGPhyRegisterOnDLS,
     PhyConfigChipOnDLS,

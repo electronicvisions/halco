@@ -86,10 +86,22 @@ struct GENPYBIND(inline_base("*")) TimerOnDLS
     JTAG
 \***********/
 
-struct GENPYBIND(inline_base("*")) JTAGOnDLS
-    : public common::detail::RantWrapper<JTAGOnDLS, uint_fast16_t, 0, 0>
+struct GENPYBIND(inline_base("*")) ResetJTAGTapOnDLS
+    : public common::detail::RantWrapper<ResetJTAGTapOnDLS, uint_fast16_t, 0, 0>
 {
-	constexpr explicit JTAGOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+	constexpr explicit ResetJTAGTapOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+struct GENPYBIND(inline_base("*")) JTAGClockScalerOnDLS
+    : public common::detail::RantWrapper<JTAGClockScalerOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit JTAGClockScalerOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+struct GENPYBIND(inline_base("*")) JTAGIdCodeOnDLS
+    : public common::detail::RantWrapper<JTAGIdCodeOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit JTAGIdCodeOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
 
 struct GENPYBIND(inline_base("*")) JTAGPLLRegisterOnDLS
@@ -397,7 +409,9 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ADPLLOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLClockOutputOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ResetChipOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::JTAGOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ResetJTAGTapOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::JTAGClockScalerOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::JTAGIdCodeOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::JTAGPLLRegisterOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::JTAGPhyRegisterOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PhyConfigFPGAOnDLS)

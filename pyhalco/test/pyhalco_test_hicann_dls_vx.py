@@ -10,7 +10,9 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     PPUMemoryWordOnPPU               => linear, iterable
     PPUOnDLS                         => linear, iterable
     ResetChipOnDLS                   => linear, iterable
-    JTAGOnDLS                        => linear, iterable
+    ResetJTAGTapOnDLS                => linear, iterable
+    JTAGClockScalerOnDLS             => linear, iterable
+    JTAGIdCodeOnDLS                  => linear, iterable
     JTAGPLLRegisterOnDLS             => linear, iterable
     JTAGPhyRegisterOnDLS             => linear, iterable
     PhyConfigFPGAOnDLS               => linear, iterable
