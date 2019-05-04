@@ -11,9 +11,9 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     PPUOnDLS                         => linear, iterable
     ResetChipOnDLS                   => linear, iterable
     JTAGOnDLS                        => linear, iterable
+    JTAGPLLRegisterOnDLS             => linear, iterable
     PhyOnDLS                         => linear, iterable
     PhyBlockOnDLS                    => linear, iterable
-    PLLRegisterOnDLS                 => linear, iterable
     ADPLLOnDLS                       => linear, iterable
     PLLClockOutputOnDLS              => linear, iterable
     PLLOnDLS                         => linear, iterable

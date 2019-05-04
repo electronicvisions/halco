@@ -92,6 +92,14 @@ struct GENPYBIND(inline_base("*")) JTAGOnDLS
 	constexpr explicit JTAGOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
 
+struct GENPYBIND(inline_base("*")) JTAGPLLRegisterOnDLS
+    : public common::detail::RantWrapper<JTAGPLLRegisterOnDLS, uint_fast16_t, 7, 0>
+{
+	constexpr explicit JTAGPLLRegisterOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
 /**********\
     Phy
 \**********/
@@ -141,14 +149,6 @@ struct GENPYBIND(inline_base("*")) PLLClockOutputOnDLS
 	static const PLLClockOutputOnDLS PhyRefClk;
 	static const PLLClockOutputOnDLS PPUClk;
 	static const PLLClockOutputOnDLS MADCClk;
-};
-
-struct GENPYBIND(inline_base("*")) PLLRegisterOnDLS
-    : public common::detail::RantWrapper<PLLRegisterOnDLS, uint_fast16_t, 7, 0>
-{
-	constexpr explicit PLLRegisterOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
-	    rant_t(val)
-	{}
 };
 
 /**************\
@@ -376,9 +376,9 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLClockOutputOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ResetChipOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::JTAGOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::JTAGPLLRegisterOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PhyOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PhyBlockOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLRegisterOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::TimerOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::OmnibusAddress)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ShiftRegisterOnBoard)

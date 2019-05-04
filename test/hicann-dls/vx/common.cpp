@@ -22,9 +22,9 @@ class CommonCoordinateTest : public ::testing::Test
 typedef ::testing::Types<
     ResetChipOnDLS,
     JTAGOnDLS,
+    JTAGPLLRegisterOnDLS,
     PhyOnDLS,
     PhyBlockOnDLS,
-    PLLRegisterOnDLS,
     ADPLLOnDLS,
     PLLClockOutputOnDLS,
     PLLOnDLS,
