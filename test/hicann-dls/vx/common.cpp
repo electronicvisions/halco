@@ -23,7 +23,7 @@ typedef ::testing::Types<
     ResetChipOnDLS,
     JTAGOnDLS,
     JTAGPLLRegisterOnDLS,
-    PhyOnDLS,
+    JTAGPhyRegisterOnDLS,
     PhyBlockOnDLS,
     ADPLLOnDLS,
     PLLClockOutputOnDLS,
