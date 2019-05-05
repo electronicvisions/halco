@@ -48,3 +48,9 @@ TEST(VDDOnBoard, toDACChannelOnBoard)
 		EXPECT_EQ(vdd, res);
 	}
 }
+
+TEST(PhyConfigChipOnDLS, toJTAGPhyRegisterOnDLS)
+{
+	PhyConfigChipOnDLS phy_config(3);
+	EXPECT_EQ(phy_config.toJTAGPhyRegisterOnDLS(), JTAGPhyRegisterOnDLS(3));
+}
