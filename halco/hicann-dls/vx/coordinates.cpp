@@ -72,6 +72,14 @@ VDDOnBoard DACChannelOnBoard::toVDDOnBoard() const
 	throw std::logic_error("DAC channel not convertible to VDDOnBoard.");
 }
 
+CapMemColumnOnCapMemBlock const CapMemColumnOnCapMemBlock::SharedCapMemColumnOnCapMemBlock{
+    CapMemColumnOnCapMemBlock::max};
+
+bool CapMemCellOnCapMemBlock::isShared() const
+{
+	return x().isShared();
+}
+
 } // namespace vx
 } // namespace hicann_dls
 } // namespace halco

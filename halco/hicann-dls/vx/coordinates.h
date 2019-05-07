@@ -395,6 +395,156 @@ struct GENPYBIND(inline_base("*")) ADCOnBoard
 	constexpr explicit ADCOnBoard(uintmax_t const val = 0) : rant_t(val) {}
 };
 
+/**********\
+   Neuron
+\**********/
+
+struct GENPYBIND(inline_base("*")) NeuronOnBlock
+    : public common::detail::RantWrapper<NeuronOnBlock, uint_fast16_t, 127, 0>
+{
+	constexpr explicit NeuronOnBlock(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+struct GENPYBIND(inline_base("*")) CommonNeuronConfigOnDLS
+    : public common::detail::RantWrapper<CommonNeuronConfigOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit CommonNeuronConfigOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+/**********\
+   CapMem
+\**********/
+
+// Max value is 1 larger than neuron max due to global capmem column
+struct GENPYBIND(inline_base("*")) CapMemColumnOnCapMemBlock
+    : public common::detail::RantWrapper<
+          CapMemColumnOnCapMemBlock,
+          NeuronOnBlock::value_type,
+          NeuronOnBlock::end,
+          NeuronOnBlock::min>
+    , public common::detail::XRangedTrait
+{
+	constexpr explicit CapMemColumnOnCapMemBlock(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+	constexpr explicit CapMemColumnOnCapMemBlock(common::X const& x)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(x)
+	{}
+	static const CapMemColumnOnCapMemBlock SharedCapMemColumnOnCapMemBlock;
+
+	bool isShared() const { return value() == max; }
+};
+
+struct GENPYBIND(inline_base("*")) CapMemRowOnCapMemBlock
+    : public common::detail::RantWrapper<CapMemRowOnCapMemBlock, uint_fast16_t, 24, 0>
+    , public common::detail::YRangedTrait
+{
+	constexpr explicit CapMemRowOnCapMemBlock(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+	constexpr explicit CapMemRowOnCapMemBlock(common::Y const& y) GENPYBIND(implicit_conversion) :
+	    rant_t(y)
+	{}
+};
+
+struct GENPYBIND(inline_base("*")) CapMemBlockOnDLS
+    : public common::detail::RantWrapper<CapMemBlockOnDLS, uint_fast16_t, 3, 0>
+{
+	constexpr explicit CapMemBlockOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+struct GENPYBIND(inline_base("*")) CapMemBlockConfigOnDLS
+    : public common::detail::
+          RantWrapper<CapMemBlockConfigOnDLS, uint_fast16_t, CapMemBlockOnDLS::end, 0>
+{
+	constexpr explicit CapMemBlockConfigOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+struct GENPYBIND(inline_base("*")) CapMemCellOnCapMemBlock
+    : public common::detail::
+          GridCoordinate<CapMemCellOnCapMemBlock, CapMemColumnOnCapMemBlock, CapMemRowOnCapMemBlock>
+{
+	GRID_COMMON_CONSTRUCTORS(CapMemCellOnCapMemBlock)
+
+	CapMemColumnOnCapMemBlock toCapMemColumnOnCapMemBlock() const { return x(); }
+	CapMemRowOnCapMemBlock toCapMemRowOnCapMemBlock() const { return y(); }
+
+	bool isShared() const;
+};
+
+HALCO_COORDINATE_MIXIN(CapMemMixin, CapMemBlockOnDLS, capmem)
+
+struct GENPYBIND(inline_base("*CapMemMixin*")) CapMemCellOnDLS
+    : public CapMemMixin<CapMemCellOnDLS, CapMemCellOnCapMemBlock>
+{
+private:
+	typedef CapMemMixin<CapMemCellOnDLS, CapMemCellOnCapMemBlock> base;
+
+public:
+	typedef base::enum_type enum_type GENPYBIND(opaque);
+
+	CapMemCellOnDLS() = default;
+
+	explicit CapMemCellOnDLS(
+	    CapMemCellOnCapMemBlock const& cell, CapMemBlockOnDLS const& block = CapMemBlockOnDLS()) :
+	    base(cell, block)
+	{}
+
+	explicit CapMemCellOnDLS(enum_type const& e) : base(e) {}
+
+	CapMemCellOnCapMemBlock toCapMemCellOnCapMemBlock() const { return This(); }
+	CapMemBlockOnDLS toCapMemBlockOnDLS() const { return split().first; }
+};
+
+struct GENPYBIND(inline_base("*CapMemMixin*")) CapMemRowOnDLS
+    : public CapMemMixin<CapMemRowOnDLS, CapMemRowOnCapMemBlock>
+{
+private:
+	typedef CapMemMixin<CapMemRowOnDLS, CapMemRowOnCapMemBlock> base;
+
+public:
+	typedef base::enum_type enum_type GENPYBIND(opaque);
+
+	CapMemRowOnDLS() = default;
+
+	explicit CapMemRowOnDLS(
+	    CapMemRowOnCapMemBlock const& row, CapMemBlockOnDLS const& block = CapMemBlockOnDLS()) :
+	    base(row, block)
+	{}
+
+	explicit CapMemRowOnDLS(enum_type const& e) : base(e) {}
+
+	CapMemRowOnCapMemBlock toCapMemRowOnCapMemBlock() const { return This(); }
+	CapMemBlockOnDLS toCapMemBlockOnDLS() const { return split().first; }
+};
+
+struct GENPYBIND(inline_base("*CapMemMixin*")) CapMemColumnOnDLS
+    : public CapMemMixin<CapMemColumnOnDLS, CapMemColumnOnCapMemBlock>
+{
+private:
+	typedef CapMemMixin<CapMemColumnOnDLS, CapMemColumnOnCapMemBlock> base;
+
+public:
+	typedef base::enum_type enum_type GENPYBIND(opaque);
+
+	CapMemColumnOnDLS() = default;
+
+	explicit CapMemColumnOnDLS(
+	    CapMemColumnOnCapMemBlock const& col, CapMemBlockOnDLS const& block = CapMemBlockOnDLS()) :
+	    base(col, block)
+	{}
+
+	explicit CapMemColumnOnDLS(enum_type const& e) : base(e) {}
+
+	CapMemColumnOnCapMemBlock toCapMemColumnOnCapMemBlock() const { return This(); }
+	CapMemBlockOnDLS toCapMemBlockOnDLS() const { return split().first; }
+};
+
 } // namespace vx
 } // namespace hicann_dls
 } // namespace halco
@@ -432,6 +582,16 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::DACOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::DACChannelOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::DACChannelOnDAC)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ADCOnBoard)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronOnBlock)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CommonNeuronConfigOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemColumnOnCapMemBlock)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemRowOnCapMemBlock)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemBlockOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemBlockConfigOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemCellOnCapMemBlock)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemCellOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemRowOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemColumnOnDLS)
 
 } // namespace std
 

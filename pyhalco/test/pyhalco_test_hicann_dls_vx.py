@@ -5,6 +5,7 @@ from pyhalco_test_utils import parametrize, PyhalcoTest
 
 @parametrize
 class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
+    # clang-format off
     COORDINATES = """
     PPUMemoryWordOnDLS               => linear, iterable
     PPUMemoryWordOnPPU               => linear, iterable
@@ -37,8 +38,18 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     DACChannelOnBoard                => linear, iterable
     DACChannelOnDAC                  => linear, iterable
     ADCOnBoard                       => linear, iterable
+    CapMemCellOnDLS                  => iterable
+    CapMemCellOnCapMemBlock          => grid, iterable
+    CapMemColumnOnCapMemBlock        => linear, iterable
+    CapMemRowOnCapMemBlock           => linear, iterable
+    CapMemColumnOnDLS                => linear, iterable
+    CapMemRowOnDLS                   => linear, iterable
+    CapMemBlockConfigOnDLS           => linear, iterable
+    CapMemBlockOnDLS                 => linear, iterable
+    CommonNeuronConfigOnDLS          => linear, iterable
+    NeuronOnBlock                    => linear, iterable
     """
-
+    # clang-format on
     @staticmethod
     def get_module():
         import pyhalco_hicann_dls_vx
