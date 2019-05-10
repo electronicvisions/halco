@@ -50,7 +50,17 @@ typedef ::testing::Types<
     ADCOnBoard,
     PPUOnDLS,
     PPUMemoryWordOnPPU,
-    PPUMemoryWordOnDLS>
+    PPUMemoryWordOnDLS,
+    CapMemCellOnDLS,
+    CapMemCellOnCapMemBlock,
+    CapMemColumnOnCapMemBlock,
+    CapMemRowOnCapMemBlock,
+    CapMemColumnOnDLS,
+    CapMemRowOnDLS,
+    CapMemBlockConfigOnDLS,
+    CapMemBlockOnDLS,
+    CommonNeuronConfigOnDLS,
+    NeuronOnBlock>
     CoordinateTypes;
 
 TYPED_TEST_CASE(CommonCoordinateTest, CoordinateTypes);
