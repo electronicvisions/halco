@@ -80,6 +80,8 @@ typedef ::testing::Types<
     PPUMemoryBlockOnDLS,
     PPUMemoryOnPPU,
     PPUMemoryOnDLS,
+    PerfTestStatusOnFPGA,
+    SystimeSyncOnFPGA,
     SystimeSyncBaseOnDLS,
     NeuronLabel,
     SPL1Address>
