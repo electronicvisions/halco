@@ -21,7 +21,7 @@ namespace hicann_dls {
 namespace vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 /************\
-    PerfTest
+   PerfTest
 \************/
 
 struct GENPYBIND(inline_base("*")) PerfTestOnFPGA
@@ -55,7 +55,69 @@ struct GENPYBIND(inline_base("*")) PPUMemoryWordOnPPU
 	{}
 };
 
+struct GENPYBIND(inline_base("*")) PPUControlRegisterOnPPU
+    : public common::detail::RantWrapper<PPUControlRegisterOnPPU, uint_fast16_t, 0, 0>
+{
+	constexpr explicit PPUControlRegisterOnPPU(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+struct GENPYBIND(inline_base("*")) PPUStatusRegisterOnPPU
+    : public common::detail::RantWrapper<PPUStatusRegisterOnPPU, uint_fast16_t, 0, 0>
+{
+	constexpr explicit PPUStatusRegisterOnPPU(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
 HALCO_COORDINATE_MIXIN(PPUMixin, PPUOnDLS, ppu)
+
+struct GENPYBIND(inline_base("*PPUMixin*")) PPUControlRegisterOnDLS
+    : public PPUMixin<PPUControlRegisterOnDLS, PPUControlRegisterOnPPU>
+{
+private:
+	typedef PPUMixin<PPUControlRegisterOnDLS, PPUControlRegisterOnPPU> base;
+
+public:
+	typedef base::enum_type enum_type GENPYBIND(opaque(false));
+
+	PPUControlRegisterOnDLS() = default;
+
+	explicit PPUControlRegisterOnDLS(
+	    PPUControlRegisterOnPPU const& reg, PPUOnDLS const& ppu = PPUOnDLS()) :
+	    base(reg, ppu)
+	{}
+
+	explicit PPUControlRegisterOnDLS(enum_type const& e) : base(e) {}
+
+	PPUControlRegisterOnPPU toPPUControlRegisterOnPPU() const { return This(); }
+	PPUOnDLS toPPUOnDLS() const { return split().first; }
+};
+
+struct GENPYBIND(inline_base("*PPUMixin*")) PPUStatusRegisterOnDLS
+    : public PPUMixin<PPUStatusRegisterOnDLS, PPUStatusRegisterOnPPU>
+{
+private:
+	typedef PPUMixin<PPUStatusRegisterOnDLS, PPUStatusRegisterOnPPU> base;
+
+public:
+	typedef base::enum_type enum_type GENPYBIND(opaque(false));
+
+	PPUStatusRegisterOnDLS() = default;
+
+	explicit PPUStatusRegisterOnDLS(
+	    PPUStatusRegisterOnPPU const& reg, PPUOnDLS const& ppu = PPUOnDLS()) :
+	    base(reg, ppu)
+	{}
+
+	explicit PPUStatusRegisterOnDLS(enum_type const& e) : base(e) {}
+
+	PPUStatusRegisterOnPPU toPPUStatusRegisterOnPPU() const { return This(); }
+	PPUOnDLS toPPUOnDLS() const { return split().first; }
+};
 
 struct GENPYBIND(inline_base("*PPUMixin*")) PPUMemoryWordOnDLS
     : public PPUMixin<PPUMemoryWordOnDLS, PPUMemoryWordOnPPU>
@@ -589,6 +651,10 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PerfTestOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PerfTestStatusOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUMemoryWordOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUMemoryWordOnPPU)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUStatusRegisterOnPPU)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUStatusRegisterOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUControlRegisterOnPPU)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUControlRegisterOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ADPLLOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLClockOutputOnDLS)
