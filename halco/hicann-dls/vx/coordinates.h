@@ -36,6 +36,34 @@ struct GENPYBIND(inline_base("*")) PerfTestStatusOnFPGA
 	constexpr explicit PerfTestStatusOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
 };
 
+/***********\
+    Spike
+\***********/
+
+/**
+ * The chip supports packing from 1 to 3 spikes in one instruction to be processed in one clock
+ * cycle by the transport layer. In order to have unique container coordinates, these are layed out
+ * as separate coordinate types of length 1.
+ */
+
+struct GENPYBIND(inline_base("*")) SpikePack1ToChipOnDLS
+    : public common::detail::RantWrapper<SpikePack1ToChipOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit SpikePack1ToChipOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+struct GENPYBIND(inline_base("*")) SpikePack2ToChipOnDLS
+    : public common::detail::RantWrapper<SpikePack2ToChipOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit SpikePack2ToChipOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+struct GENPYBIND(inline_base("*")) SpikePack3ToChipOnDLS
+    : public common::detail::RantWrapper<SpikePack3ToChipOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit SpikePack3ToChipOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
 /************\
     Systime
 \************/
@@ -760,6 +788,9 @@ namespace std {
 
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PerfTestOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PerfTestStatusOnFPGA)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikePack1ToChipOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikePack2ToChipOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikePack3ToChipOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SystimeSyncOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SystimeSyncBaseOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUMemoryWordOnDLS)
