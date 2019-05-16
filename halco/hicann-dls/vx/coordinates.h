@@ -53,7 +53,9 @@ struct GENPYBIND(inline_base("*")) SystimeSyncBaseOnDLS
 struct GENPYBIND(inline_base("*")) PPUOnDLS
     : public common::detail::RantWrapper<PPUOnDLS, uint_fast16_t, 1, 0>
 {
-	constexpr explicit PPUOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+	constexpr explicit PPUOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 };
 
 struct GENPYBIND(inline_base("*")) PPUMemoryWordOnPPU
@@ -92,19 +94,13 @@ struct GENPYBIND(inline_base("*")) PPUMemoryOnPPU
 struct GENPYBIND(inline_base("*")) PPUControlRegisterOnPPU
     : public common::detail::RantWrapper<PPUControlRegisterOnPPU, uint_fast16_t, 0, 0>
 {
-	constexpr explicit PPUControlRegisterOnPPU(uintmax_t const val = 0)
-	    GENPYBIND(implicit_conversion) :
-	    rant_t(val)
-	{}
+	constexpr explicit PPUControlRegisterOnPPU(uintmax_t const val = 0) : rant_t(val) {}
 };
 
 struct GENPYBIND(inline_base("*")) PPUStatusRegisterOnPPU
     : public common::detail::RantWrapper<PPUStatusRegisterOnPPU, uint_fast16_t, 0, 0>
 {
-	constexpr explicit PPUStatusRegisterOnPPU(uintmax_t const val = 0)
-	    GENPYBIND(implicit_conversion) :
-	    rant_t(val)
-	{}
+	constexpr explicit PPUStatusRegisterOnPPU(uintmax_t const val = 0) : rant_t(val) {}
 };
 
 HALCO_COORDINATE_MIXIN(PPUMixin, PPUOnDLS, ppu)
@@ -381,13 +377,19 @@ struct GENPYBIND(inline_base("*")) SPIShiftRegisterOnBoard
 struct GENPYBIND(inline_base("*")) SPIDACDataRegisterOnDAC
     : public common::detail::RantWrapper<SPIDACDataRegisterOnDAC, uint_fast16_t, 7, 0>
 {
-	constexpr explicit SPIDACDataRegisterOnDAC(uintmax_t const val = 0) : rant_t(val) {}
+	constexpr explicit SPIDACDataRegisterOnDAC(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 };
 
 struct GENPYBIND(inline_base("*")) SPIDACControlRegisterOnDAC
     : public common::detail::RantWrapper<SPIDACControlRegisterOnDAC, uint_fast16_t, 3, 0>
 {
-	constexpr explicit SPIDACControlRegisterOnDAC(uintmax_t const val = 0) : rant_t(val) {}
+	constexpr explicit SPIDACControlRegisterOnDAC(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 
 	static const SPIDACControlRegisterOnDAC GainReference;
 	static const SPIDACControlRegisterOnDAC LDAC;
@@ -461,7 +463,9 @@ struct GENPYBIND(inline_base("*")) VDDOnBoard
 struct GENPYBIND(inline_base("*")) DACOnBoard
     : public common::detail::RantWrapper<DACOnBoard, uint_fast16_t, 1, 0>
 {
-	constexpr explicit DACOnBoard(uintmax_t const val = 0) : rant_t(val) {}
+	constexpr explicit DACOnBoard(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 };
 
 struct GENPYBIND(inline_base("*")) DACChannelOnDAC
@@ -626,14 +630,19 @@ struct GENPYBIND(inline_base("*")) CapMemRowOnCapMemBlock
 struct GENPYBIND(inline_base("*")) CapMemBlockOnDLS
     : public common::detail::RantWrapper<CapMemBlockOnDLS, uint_fast16_t, 3, 0>
 {
-	constexpr explicit CapMemBlockOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+	constexpr explicit CapMemBlockOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 };
 
 struct GENPYBIND(inline_base("*")) CapMemBlockConfigOnDLS
     : public common::detail::
           RantWrapper<CapMemBlockConfigOnDLS, uint_fast16_t, CapMemBlockOnDLS::end, 0>
 {
-	constexpr explicit CapMemBlockConfigOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+	constexpr explicit CapMemBlockConfigOnDLS(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 };
 
 struct GENPYBIND(inline_base("*")) CapMemCellOnCapMemBlock
