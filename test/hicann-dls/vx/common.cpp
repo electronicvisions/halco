@@ -75,7 +75,8 @@ typedef ::testing::Types<
     PerfTestStatusOnFPGA>
     CoordinateTypes1;
 
-typedef ::testing::Types<PPUMemoryBlockOnPPU, PPUMemoryBlockOnDLS> CoordinateTypes2;
+typedef ::testing::Types<PPUMemoryBlockOnPPU, PPUMemoryBlockOnDLS, PPUMemoryOnPPU, PPUMemoryOnDLS>
+    CoordinateTypes2;
 
 
 TYPED_TEST_CASE(CommonCoordinateTest1, CoordinateTypes1);
