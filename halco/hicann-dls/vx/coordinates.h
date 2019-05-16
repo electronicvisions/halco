@@ -55,6 +55,25 @@ struct GENPYBIND(inline_base("*")) PPUMemoryWordOnPPU
 	{}
 };
 
+struct GENPYBIND(inline_base("*")) PPUMemoryBlockSize
+    : public common::detail::
+          RantWrapper<PPUMemoryBlockSize, uint_fast16_t, PPUMemoryWordOnPPU::size, 1>
+{
+	constexpr explicit PPUMemoryBlockSize(uintmax_t const val = 1) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+struct GENPYBIND(inline_base("*")) PPUMemoryBlockOnPPU
+    : public common::detail::IntervalCoordinate<PPUMemoryBlockOnPPU, PPUMemoryWordOnPPU>
+{
+	INTERVAL_COMMON_CONSTRUCTORS(PPUMemoryBlockOnPPU)
+
+	PPUMemoryBlockSize toPPUMemoryBlockSize() const { return PPUMemoryBlockSize(length()); }
+	PPUMemoryWordOnPPU toMin() const { return min(); }
+	PPUMemoryWordOnPPU toMax() const { return max(); }
+};
+
 struct GENPYBIND(inline_base("*")) PPUControlRegisterOnPPU
     : public common::detail::RantWrapper<PPUControlRegisterOnPPU, uint_fast16_t, 0, 0>
 {
@@ -74,6 +93,28 @@ struct GENPYBIND(inline_base("*")) PPUStatusRegisterOnPPU
 };
 
 HALCO_COORDINATE_MIXIN(PPUMixin, PPUOnDLS, ppu)
+
+
+struct GENPYBIND(inline_base("*PPUMixin*")) PPUMemoryBlockOnDLS
+    : public PPUMixin<PPUMemoryBlockOnDLS, PPUMemoryBlockOnPPU>
+{
+private:
+	typedef PPUMixin<PPUMemoryBlockOnDLS, PPUMemoryBlockOnPPU> base;
+
+public:
+	typedef base::enum_type enum_type GENPYBIND(opaque(false));
+
+	PPUMemoryBlockOnDLS() = default;
+
+	explicit PPUMemoryBlockOnDLS(PPUMemoryBlockOnPPU const& reg, PPUOnDLS const& ppu = PPUOnDLS()) :
+	    base(reg, ppu)
+	{}
+
+	explicit PPUMemoryBlockOnDLS(enum_type const& e) : base(e) {}
+
+	PPUMemoryBlockOnPPU toPPUMemoryBlockOnPPU() const { return This(); }
+	PPUOnDLS toPPUOnDLS() const { return split().first; }
+};
 
 struct GENPYBIND(inline_base("*PPUMixin*")) PPUControlRegisterOnDLS
     : public PPUMixin<PPUControlRegisterOnDLS, PPUControlRegisterOnPPU>
@@ -651,6 +692,9 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PerfTestOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PerfTestStatusOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUMemoryWordOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUMemoryWordOnPPU)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUMemoryBlockOnPPU)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUMemoryBlockOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUMemoryBlockSize)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUStatusRegisterOnPPU)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUStatusRegisterOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUControlRegisterOnPPU)

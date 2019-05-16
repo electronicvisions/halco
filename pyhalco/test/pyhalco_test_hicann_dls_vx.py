@@ -11,6 +11,9 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     PerfTestStatusOnFPGA             => linear, iterable
     PPUMemoryWordOnDLS               => linear, iterable
     PPUMemoryWordOnPPU               => linear, iterable
+    PPUMemoryBlockOnDLS              => iterable
+    PPUMemoryBlockOnPPU              => interval, iterable
+    PPUMemoryBlockSize               => linear, iterable
     PPUControlRegisterOnPPU          => linear, iterable
     PPUControlRegisterOnDLS          => linear, iterable
     PPUStatusRegisterOnPPU           => linear, iterable
