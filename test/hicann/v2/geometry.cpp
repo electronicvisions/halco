@@ -1,9 +1,11 @@
 #include <gtest/gtest.h>
 
-#include <boost/preprocessor/stringize.hpp>
-#include <sstream>
+#include <algorithm>
 #include <iostream>
 #include <map>
+#include <random>
+#include <sstream>
+#include <boost/preprocessor/stringize.hpp>
 
 #include "halco/hicann/v2/coordinates.h"
 
@@ -28,6 +30,135 @@ TEST(HMFGeometryTest, HICANNOrdering)
 			|| (hicanns[ii].y()+1 == hicanns[ii+1].y()));
 	}
 }
+
+TEST(HMFGeometryTest, NeuronBlockOnWaferLessOrdering)
+{
+	std::vector<NeuronBlockOnWafer> nbs;
+	for (auto hicann : iter_all<HICANNOnWafer>()) {
+		for (auto nbonh : iter_all<NeuronBlockOnHICANN>()) {
+			NeuronBlockOnWafer nbonw = NeuronBlockOnWafer(nbonh, hicann);
+			ASSERT_FALSE(nbonw < nbonw);
+			nbs.push_back(NeuronBlockOnWafer(nbonh, hicann));
+		}
+	}
+
+	for (size_t i = 0; i < nbs.size() - 1; ++i) {
+		// test neighbours for greater ordering
+		ASSERT_TRUE(nbs[i] < nbs[i + 1]);
+		ASSERT_FALSE(nbs[i + 1] < nbs[i]);
+	}
+	std::mt19937 g(42);
+	std::shuffle(nbs.begin(), nbs.end(), g); // shuffle
+	std::sort(nbs.begin(), nbs.end());       // see if it can be sorted
+
+
+	for (size_t i = 0; i < nbs.size() - 1; ++i) {
+		// test if sorting is correct
+		ASSERT_TRUE(nbs[i] < nbs[i + 1]);
+		ASSERT_FALSE(nbs[i + 1] < nbs[i]);
+	}
+}
+
+TEST(HMFGeometryTest, NeuronBlockOnWaferGreaterOrdering)
+{
+	std::vector<NeuronBlockOnWafer> nbs;
+	for (auto hicann : iter_all<HICANNOnWafer>()) {
+		for (auto nbonh : iter_all<NeuronBlockOnHICANN>()) {
+			NeuronBlockOnWafer nbonw = NeuronBlockOnWafer(nbonh, hicann);
+			ASSERT_FALSE(nbonw > nbonw);
+			nbs.push_back(NeuronBlockOnWafer(nbonh, hicann));
+		}
+	}
+
+	for (size_t i = 0; i < nbs.size() - 1; ++i) {
+		// test neighbours for greater ordering
+		ASSERT_FALSE(nbs[i] > nbs[i + 1]);
+		ASSERT_TRUE(nbs[i + 1] > nbs[i]);
+		// test using normal less comparator
+		ASSERT_TRUE(nbs[i] < nbs[i + 1]);
+	}
+
+	std::mt19937 g(42);
+	std::shuffle(nbs.begin(), nbs.end(), g);
+	std::sort(nbs.begin(), nbs.end(), std::greater<>()); // sort by greater metric
+
+
+	for (size_t i = 0; i < nbs.size() - 1; ++i) {
+		// test using the greater comparator, to see if the greater metric could be applied
+		ASSERT_TRUE(nbs[i] > nbs[i + 1]);
+		ASSERT_FALSE(nbs[i + 1] > nbs[i]);
+		ASSERT_FALSE(nbs[i] < nbs[i + 1]);
+	}
+}
+
+
+TEST(HMFGeometryTest, NeuronBlockOnWaferOrders)
+{
+	HICANNOnWafer h0, h1;
+	h0 = HICANNOnWafer(Enum(0));
+	h1 = HICANNOnWafer(Enum(1));
+	NeuronBlockOnHICANN nb0, nb1;
+	nb0 = NeuronBlockOnHICANN(Enum(0));
+	nb1 = NeuronBlockOnHICANN(Enum(1));
+
+	NeuronBlockOnWafer nb0h0, nb0h1, nb1h0, nb1h1;
+	nb0h0 = NeuronBlockOnWafer(nb0, h0);
+	nb0h1 = NeuronBlockOnWafer(nb0, h1);
+	nb1h0 = NeuronBlockOnWafer(nb1, h0);
+	nb1h1 = NeuronBlockOnWafer(nb1, h1);
+
+	// clang-format off
+	ASSERT_TRUE (nb0h0 == nb0h0);
+	ASSERT_FALSE(nb0h0 != nb0h0);
+	ASSERT_FALSE(nb0h0 <  nb0h0);
+	ASSERT_TRUE (nb0h0 <= nb0h0);
+	ASSERT_FALSE(nb0h0 >  nb0h0);
+	ASSERT_TRUE (nb0h0 >= nb0h0);
+
+	ASSERT_FALSE(nb1h0 == nb0h0);
+	ASSERT_TRUE (nb1h0 != nb0h0);
+	ASSERT_FALSE(nb1h0 <  nb0h0);
+	ASSERT_FALSE(nb1h0 <= nb0h0);
+	ASSERT_TRUE (nb1h0 >  nb0h0);
+	ASSERT_TRUE (nb1h0 >= nb0h0);
+
+	ASSERT_FALSE(nb0h1 == nb0h0);
+	ASSERT_TRUE (nb0h1 != nb0h0);
+	ASSERT_FALSE(nb0h1 <  nb0h0);
+	ASSERT_FALSE(nb0h1 <= nb0h0);
+	ASSERT_TRUE (nb0h1 >  nb0h0);
+	ASSERT_TRUE (nb0h1 >= nb0h0);
+
+	ASSERT_FALSE(nb0h0 == nb1h0);
+	ASSERT_TRUE (nb0h0 != nb1h0);
+	ASSERT_TRUE (nb0h0 <  nb1h0);
+	ASSERT_TRUE (nb0h0 <= nb1h0);
+	ASSERT_FALSE(nb0h0 >  nb1h0);
+	ASSERT_FALSE(nb0h0 >= nb1h0);
+
+	ASSERT_FALSE(nb0h0 == nb0h1);
+	ASSERT_TRUE (nb0h0 != nb0h1);
+	ASSERT_TRUE (nb0h0 <  nb0h1);
+	ASSERT_TRUE (nb0h0 <= nb0h1);
+	ASSERT_FALSE(nb0h0 >  nb0h1);
+	ASSERT_FALSE(nb0h0 >= nb0h1);
+
+	ASSERT_FALSE(nb1h1 == nb0h0);
+	ASSERT_TRUE (nb1h1 != nb0h0);
+	ASSERT_FALSE(nb1h1 <  nb0h0);
+	ASSERT_FALSE(nb1h1 <= nb0h0);
+	ASSERT_TRUE (nb1h1 >  nb0h0);
+	ASSERT_TRUE (nb1h1 >= nb0h0);
+
+	ASSERT_FALSE(nb0h0 == nb1h1);
+	ASSERT_TRUE (nb0h0 != nb1h1);
+	ASSERT_TRUE (nb0h0 <  nb1h1);
+	ASSERT_TRUE (nb0h0 <= nb1h1);
+	ASSERT_FALSE(nb0h0 >  nb1h1);
+	ASSERT_FALSE(nb0h0 >= nb1h1);
+	// clang-format on
+}
+
 
 struct A
     : public detail::GridCoordinate<A, XRanged<10, 2>, YRanged<2, 0>> {};

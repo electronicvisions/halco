@@ -38,6 +38,18 @@
 			                            : a.mValue < b.mValue;                 \
 		}                                                                      \
                                                                                \
+		friend bool operator<=(Derived const& a, Derived const& b) {           \
+			return !(a > b);                                                   \
+		}                                                                      \
+                                                                               \
+		friend bool operator>(Derived const& a, Derived const& b) {            \
+			return !(a == b) && !(a < b);                                      \
+		}                                                                      \
+                                                                               \
+		friend bool operator>=(Derived const& a, Derived const& b) {           \
+			return !(a < b);                                                   \
+		}                                                                      \
+                                                                               \
 		friend bool operator==(Derived const& a, Derived const& b) {           \
 			return a.mValue == b.mValue && a.This() == b.This();               \
 		}                                                                      \
