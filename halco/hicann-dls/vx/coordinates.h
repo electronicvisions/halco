@@ -636,6 +636,38 @@ struct GENPYBIND(inline_base("*")) NeuronOnNeuronBlock
 	{}
 };
 
+struct GENPYBIND(inline_base("*")) NeuronBlockOnDLS
+    : public common::detail::RantWrapper<NeuronBlockOnDLS, uint_fast16_t, 3, 0>
+{
+	constexpr explicit NeuronBlockOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+HALCO_COORDINATE_MIXIN(NeuronMixin, NeuronBlockOnDLS, neuron)
+
+struct GENPYBIND(inline_base("*NeuronMixin*")) NeuronOnDLS
+    : public NeuronMixin<NeuronOnDLS, NeuronOnNeuronBlock>
+{
+private:
+	typedef NeuronMixin<NeuronOnDLS, NeuronOnNeuronBlock> base;
+
+public:
+	typedef base::enum_type enum_type GENPYBIND(opaque);
+
+	NeuronOnDLS() = default;
+
+	explicit NeuronOnDLS(
+	    NeuronOnNeuronBlock const& neuron, NeuronBlockOnDLS const& block = NeuronBlockOnDLS()) :
+	    base(neuron, block)
+	{}
+
+	explicit NeuronOnDLS(enum_type const& e) : base(e) {}
+
+	NeuronOnNeuronBlock toNeuronOnNeuronBlock() const { return This(); }
+	NeuronBlockOnDLS toNeuronBlockOnDLS() const { return split().first; }
+};
+
 struct GENPYBIND(inline_base("*")) CommonNeuronConfigOnDLS
     : public common::detail::RantWrapper<CommonNeuronConfigOnDLS, uint_fast16_t, 0, 0>
 {
@@ -837,6 +869,8 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::DACChannelOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::DACChannelOnDAC)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ADCOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronOnNeuronBlock)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronBlockOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CommonNeuronConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemColumnOnCapMemBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemRowOnCapMemBlock)

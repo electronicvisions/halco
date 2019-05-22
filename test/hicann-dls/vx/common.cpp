@@ -80,6 +80,8 @@ typedef ::testing::Types<
     PPUMemoryBlockOnDLS,
     PPUMemoryOnPPU,
     PPUMemoryOnDLS,
+    NeuronBlockOnDLS,
+    NeuronOnDLS,
     PerfTestStatusOnFPGA,
     SpikePack1ToChipOnDLS,
     SpikePack2ToChipOnDLS,
@@ -89,6 +91,7 @@ typedef ::testing::Types<
     NeuronLabel,
     SPL1Address>
     CoordinateTypes2;
+
 
 TYPED_TEST_CASE(CommonCoordinateTest1, CoordinateTypes1);
 TYPED_TEST_CASE(CommonCoordinateTest2, CoordinateTypes2);
