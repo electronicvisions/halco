@@ -628,10 +628,10 @@ struct GENPYBIND(inline_base("*")) ADCOnBoard
    Neuron
 \**********/
 
-struct GENPYBIND(inline_base("*")) NeuronOnBlock
-    : public common::detail::RantWrapper<NeuronOnBlock, uint_fast16_t, 127, 0>
+struct GENPYBIND(inline_base("*")) NeuronOnNeuronBlock
+    : public common::detail::RantWrapper<NeuronOnNeuronBlock, uint_fast16_t, 127, 0>
 {
-	constexpr explicit NeuronOnBlock(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	constexpr explicit NeuronOnNeuronBlock(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
 };
@@ -650,9 +650,9 @@ struct GENPYBIND(inline_base("*")) CommonNeuronConfigOnDLS
 struct GENPYBIND(inline_base("*")) CapMemColumnOnCapMemBlock
     : public common::detail::RantWrapper<
           CapMemColumnOnCapMemBlock,
-          NeuronOnBlock::value_type,
-          NeuronOnBlock::end,
-          NeuronOnBlock::min>
+          NeuronOnNeuronBlock::value_type,
+          NeuronOnNeuronBlock::end,
+          NeuronOnNeuronBlock::min>
     , public common::detail::XRangedTrait
 {
 	constexpr explicit CapMemColumnOnCapMemBlock(uintmax_t const val = 0)
@@ -836,7 +836,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::DACOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::DACChannelOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::DACChannelOnDAC)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ADCOnBoard)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronOnBlock)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronOnNeuronBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CommonNeuronConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemColumnOnCapMemBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemRowOnCapMemBlock)

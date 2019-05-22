@@ -65,7 +65,7 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     CapMemBlockConfigOnDLS           => linear, iterable
     CapMemBlockOnDLS                 => linear, iterable
     CommonNeuronConfigOnDLS          => linear, iterable
-    NeuronOnBlock                    => linear, iterable
+    NeuronOnNeuronBlock              => linear, iterable
     NeuronLabel                      => linear, iterable
     SPL1Address                      => linear, iterable
     """

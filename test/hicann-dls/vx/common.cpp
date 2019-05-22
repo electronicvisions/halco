@@ -70,7 +70,7 @@ typedef ::testing::Types<
     CapMemBlockConfigOnDLS,
     CapMemBlockOnDLS,
     CommonNeuronConfigOnDLS,
-    NeuronOnBlock,
+    NeuronOnNeuronBlock,
     PerfTestOnFPGA,
     PerfTestStatusOnFPGA>
     CoordinateTypes1;
