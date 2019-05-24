@@ -81,6 +81,16 @@ struct GENPYBIND(inline_base("*")) SystimeSyncBaseOnDLS
 };
 
 /**********\
+    CADC
+\**********/
+
+struct GENPYBIND(inline_base("*")) CADCConfigOnDLS
+    : public common::detail::RantWrapper<CADCConfigOnDLS, uint_fast16_t, 1, 0>
+{
+	constexpr explicit CADCConfigOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+/**********\
     PPU
 \**********/
 
@@ -825,6 +835,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikePack2ToChipOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikePack3ToChipOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SystimeSyncOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SystimeSyncBaseOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUMemoryWordOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUMemoryWordOnPPU)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUMemoryBlockOnPPU)

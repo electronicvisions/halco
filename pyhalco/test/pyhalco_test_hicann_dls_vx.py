@@ -14,6 +14,7 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     SpikePack3ToChipOnDLS            => linear, iterable
     SystimeSyncOnFPGA                => linear, iterable
     SystimeSyncBaseOnDLS             => linear, iterable
+    CADCConfigOnDLS                  => linear, iterable
     PPUMemoryWordOnDLS               => linear, iterable
     PPUMemoryWordOnPPU               => linear, iterable
     PPUMemoryBlockOnDLS              => iterable

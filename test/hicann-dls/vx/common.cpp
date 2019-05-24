@@ -88,6 +88,7 @@ typedef ::testing::Types<
     SpikePack3ToChipOnDLS,
     SystimeSyncOnFPGA,
     SystimeSyncBaseOnDLS,
+    CADCConfigOnDLS,
     NeuronLabel,
     SPL1Address>
     CoordinateTypes2;
