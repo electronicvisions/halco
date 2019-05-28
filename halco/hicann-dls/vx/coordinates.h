@@ -261,7 +261,7 @@ public:
 \************/
 
 struct GENPYBIND(inline_base("*")) NeuronLabel
-    : public halco::common::detail::RantWrapper<NeuronLabel, uint16_t, 0x3ff /* 14bit */, 0>
+    : public halco::common::detail::RantWrapper<NeuronLabel, uint16_t, 0x3fff /* 14bit */, 0>
 {
 	NeuronLabel(uintmax_t value = 0) GENPYBIND(implicit_conversion) : rant_t(value) {}
 };
