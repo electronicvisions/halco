@@ -688,12 +688,14 @@ struct GENPYBIND(inline_base("*")) CommonNeuronConfigOnDLS
    CapMem
 \**********/
 
-// Max value is 1 larger than neuron max due to global capmem column
+constexpr size_t num_block_global_capmem_column = 2;
+
+// Max value is num_block_global_capmem_column larger than neuron max due to global capmem columns
 struct GENPYBIND(inline_base("*")) CapMemColumnOnCapMemBlock
     : public common::detail::RantWrapper<
           CapMemColumnOnCapMemBlock,
           NeuronOnNeuronBlock::value_type,
-          NeuronOnNeuronBlock::end,
+          NeuronOnNeuronBlock::max + num_block_global_capmem_column,
           NeuronOnNeuronBlock::min>
     , public common::detail::XRangedTrait
 {
@@ -711,7 +713,7 @@ struct GENPYBIND(inline_base("*")) CapMemColumnOnCapMemBlock
 };
 
 struct GENPYBIND(inline_base("*")) CapMemRowOnCapMemBlock
-    : public common::detail::RantWrapper<CapMemRowOnCapMemBlock, uint_fast16_t, 24, 0>
+    : public common::detail::RantWrapper<CapMemRowOnCapMemBlock, uint_fast16_t, 23, 0>
     , public common::detail::YRangedTrait
 {
 	constexpr explicit CapMemRowOnCapMemBlock(uintmax_t const val = 0)
