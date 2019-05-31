@@ -11,11 +11,12 @@
 #include "halco/common/traits.h"
 
 #include "halco/common/cerealization.h"
+#include "halco/common/genpybind.h"
 
 #include <boost/serialization/array.hpp>
 
 namespace halco {
-namespace common {
+namespace common GENPYBIND_TAG_HALCO_COMMON {
 
 /**
  * @brief A fixed-size container that is indexed via (typed) coordinates.
@@ -40,46 +41,49 @@ struct typed_array {
 	typedef std::reverse_iterator<iterator> reverse_iterator;
 	typedef std::reverse_iterator<const_iterator> const_reverse_iterator;
 
-	value_type elems[Limits::size > 0 ? Limits::size : 1];
+	value_type elems[Limits::size > 0 ? Limits::size : 1] GENPYBIND(hidden);
 
 	// aggregate types may not have explicit constructor / destructor
 
 	void fill(value_type const& val) { std::fill_n(elems, Limits::size, val); }
 
-	void swap(typed_array& other)
+	void GENPYBIND(hidden) swap(typed_array& other)
 	  noexcept(noexcept(std::declval<std::array<Value, Limits::size> >().swap(
 	    std::declval<std::array<Value, Limits::size> >()))) {
 		std::swap_ranges(elems, elems + Limits::size, other.elems);
 	}
 
-	iterator begin() noexcept { return iterator(elems); }
-	const_iterator begin() const noexcept { return const_iterator(elems); }
-	iterator end() noexcept { return iterator(elems + Limits::size); }
-	const_iterator end() const noexcept { return const_iterator(elems + Limits::size); }
+	iterator GENPYBIND(hidden) begin() noexcept { return iterator(elems); }
+	const_iterator GENPYBIND(hidden) begin() const noexcept { return const_iterator(elems); }
+	iterator GENPYBIND(hidden) end() noexcept { return iterator(elems + Limits::size); }
+	const_iterator GENPYBIND(hidden) end() const noexcept { return const_iterator(elems + Limits::size); }
 
-	reverse_iterator rbegin() noexcept { return reverse_iterator(end()); }
-	const_reverse_iterator rbegin() const noexcept {
+	reverse_iterator GENPYBIND(hidden) rbegin() noexcept { return reverse_iterator(end()); }
+	const_reverse_iterator GENPYBIND(hidden) rbegin() const noexcept {
 		return const_reverse_iterator(end());
 	}
-	reverse_iterator rend() noexcept { return reverse_iterator(begin()); }
-	const_reverse_iterator rend() const noexcept {
+	reverse_iterator GENPYBIND(hidden) rend() noexcept { return reverse_iterator(begin()); }
+	const_reverse_iterator GENPYBIND(hidden) rend() const noexcept {
 		return const_reverse_iterator(begin());
 	}
 
-	const_iterator cbegin() const noexcept { return begin(); }
-	const_iterator cend() const noexcept { return end(); }
-	const_reverse_iterator crbegin() const noexcept { return rbegin(); }
-	const_reverse_iterator crend() const noexcept { return rend(); }
+	const_iterator GENPYBIND(hidden) cbegin() const noexcept { return begin(); }
+	const_iterator GENPYBIND(hidden) cend() const noexcept { return end(); }
+	const_reverse_iterator GENPYBIND(hidden) crbegin() const noexcept { return rbegin(); }
+	const_reverse_iterator GENPYBIND(hidden) crend() const noexcept { return rend(); }
 
+	GENPYBIND(getter_for(size))
 	constexpr size_type size() const noexcept { return Limits::size; }
+	GENPYBIND(getter_for(max_size))
 	constexpr size_type max_size() const noexcept { return Limits::size; }
+	GENPYBIND(getter_for(empty))
 	constexpr bool empty() const noexcept { return Limits::size == 0; }
 
-	reference operator[](key_type const& key) {
+	reference GENPYBIND(hidden) operator[](key_type const& key) {
 		using detail::to_number;
 		return elems[to_number(key) - Limits::min];
 	}
-	const_reference operator[](key_type const& key) const {
+	const_reference GENPYBIND(hidden) operator[](key_type const& key) const {
 		using detail::to_number;
 		return elems[to_number(key) - Limits::min];
 	}
@@ -93,8 +97,14 @@ struct typed_array {
 		return elems[Limits::size > 0 ? Limits::size - 1 : 0];
 	}
 
-	value_type* data() noexcept { return elems; }
-	value_type const* data() const noexcept { return elems; }
+	value_type* GENPYBIND(hidden) data() noexcept { return elems; }
+	value_type const* GENPYBIND(hidden) data() const noexcept { return elems; }
+
+	GENPYBIND(expose_as(__getitem__), return_value_policy(reference))
+	const_reference get(Key const& key) const { return at(key); }
+
+	GENPYBIND(expose_as(__setitem__))
+	void set(Key const& key, Value const& value) { at(key) = value; }
 };
 
 namespace typed_array_enum_support {
