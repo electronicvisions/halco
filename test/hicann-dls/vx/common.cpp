@@ -156,7 +156,8 @@ typedef ::testing::Types<
     CADCChannelConfigOnDLS,
     SynapseRowOnDLS,
     SynapseOnSynapseRow,
-    CADCSampleRowOnDLS>
+    CADCSampleRowOnDLS,
+    SynapticInputOnNeuron>
     CoordinateTypes3;
 
 

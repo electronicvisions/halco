@@ -115,6 +115,20 @@ struct GENPYBIND(inline_base("*SynapseQuadColumnMixin*")) SynapseOnSynapseRow
 	EntryOnQuad toEntryOnQuad() const { return This(); }
 };
 
+
+struct GENPYBIND(inline_base("*")) SynapticInputOnNeuron
+    : public common::detail::
+          RantWrapper<SynapticInputOnNeuron, uint_fast16_t, 1 /* exc. + inh. */, 0>
+{
+	constexpr explicit SynapticInputOnNeuron(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+
+	static const SynapticInputOnNeuron excitatory;
+	static const SynapticInputOnNeuron inhibitory;
+};
+
 } // namespace halco::hicann_dls::vx
 
 namespace std {
@@ -125,5 +139,6 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseRowOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseQuadOnSynram)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseQuadOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseOnSynapseRow)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapticInputOnNeuron)
 
 } // namespace std

@@ -8,4 +8,7 @@ NeuronConfigBlockOnDLS SynapseQuadOnDLS::toNeuronConfigBlockOnDLS() const
 	return NeuronConfigBlockOnDLS(toSynramOnDLS().toEnum() * 2 + east);
 }
 
+SynapticInputOnNeuron const SynapticInputOnNeuron::excitatory{0};
+SynapticInputOnNeuron const SynapticInputOnNeuron::inhibitory{1};
+
 } // namespace halco::hicann_dls::vx
