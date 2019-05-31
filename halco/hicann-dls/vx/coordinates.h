@@ -1163,6 +1163,84 @@ struct GENPYBIND(inline_base("*")) CapMemRowOnCapMemBlock
 	constexpr explicit CapMemRowOnCapMemBlock(common::Y const& y) GENPYBIND(implicit_conversion) :
 	    rant_t(y)
 	{}
+
+	/** Leak potential. */
+	static const CapMemRowOnCapMemBlock v_leak;
+
+	/** Synaptic excitatory current-driver reference potential. */
+	static const CapMemRowOnCapMemBlock v_syn_exc;
+
+	/** Synaptic inhibitory current-driver reference potential. */
+	static const CapMemRowOnCapMemBlock v_syn_inh;
+
+	/** Leak potential of adaptation term. */
+	static const CapMemRowOnCapMemBlock v_leak_adapt;
+
+	/** Threshold potential. */
+	static const CapMemRowOnCapMemBlock v_threshold;
+
+	/** Reset potential. */
+	static const CapMemRowOnCapMemBlock v_reset;
+
+	/** Bias current of OTA during leak. */
+	static const CapMemRowOnCapMemBlock i_bias_leak;
+
+	/** Bias current of OTA during reset. */
+	static const CapMemRowOnCapMemBlock i_bias_reset;
+
+	/**
+	 * Bias current of resistor leading to decay of the excitatory synaptic input to its resting
+	 * potential.
+	 */
+	static const CapMemRowOnCapMemBlock i_bias_syn_exc_res;
+
+	/**
+	 * Bias current of resistor leading to decay of the inhibitory synaptic input to its resting
+	 * potential.
+	 */
+	static const CapMemRowOnCapMemBlock i_bias_syn_inh_res;
+
+	/** Bias current of excitatory synaptic input OTA for current-based input. */
+	static const CapMemRowOnCapMemBlock i_bias_syn_exc_gm;
+
+	/** Bias current of inhibitory synaptic input OTA for current-based input. */
+	static const CapMemRowOnCapMemBlock i_bias_syn_inh_gm;
+
+	/** Bias current for source degeneration of the adaptation OTA. */
+	static const CapMemRowOnCapMemBlock i_bias_adapt_sd;
+
+	/**
+	 * Bias current for the resistor connecting adaptation v_w to the membrane (leading to decay of
+	 * the adaptation to zero).
+	 */
+	static const CapMemRowOnCapMemBlock i_bias_adapt_res;
+
+	/** Strength of the spike-triggered adaptation. */
+	static const CapMemRowOnCapMemBlock i_adapt_w;
+
+	/** Bias current of the source follower in the leak/reset circuit. */
+	static const CapMemRowOnCapMemBlock i_bias_source_follower;
+
+	/** Offset current sink from the membrane. */
+	static const CapMemRowOnCapMemBlock i_offset;
+
+	/**
+	 * Bias current for the final readout buffer at the Neuron.
+	 * This buffer is after the mux that selects readout from e.g. membrane or adaptation capacitor.
+	 * The bias current has to be set high when using this neuron's readout amplifier for any input,
+	 * including the connections to the CADC in the ColumnCurrentSwitches or the common neuron
+	 * readout line selected with enable_readout in the NeuronConfig.
+	 */
+	static const CapMemRowOnCapMemBlock i_bias_readout;
+
+	/** Bias current for the Adaptation OTA. */
+	static const CapMemRowOnCapMemBlock i_bias_adapt;
+
+	/** Bias current for the amplifier between membrane and the resistor to v_w. */
+	static const CapMemRowOnCapMemBlock i_bias_adapt_amp;
+
+	/** Bias current of inter-compartmental conductance. */
+	static const CapMemRowOnCapMemBlock i_bias_nmda;
 };
 
 struct GENPYBIND(inline_base("*")) CapMemBlockOnDLS

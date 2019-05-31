@@ -240,6 +240,28 @@ CADCChannelType const CADCChannelType::acausal{1};
 CADCReadoutType const CADCReadoutType::trigger_read{0};
 CADCReadoutType const CADCReadoutType::buffered{1};
 
+CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::v_leak{0};
+CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::v_syn_exc{1};
+CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::v_syn_inh{3};
+CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::v_leak_adapt{5};
+CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::v_threshold{6};
+CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::v_reset{7};
+CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_bias_leak{8};
+CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_bias_reset{9};
+CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_bias_syn_exc_res{10};
+CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_bias_syn_exc_gm{11};
+CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_bias_syn_inh_res{12};
+CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_bias_syn_inh_gm{13};
+CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_bias_adapt_sd{14};
+CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_bias_adapt_res{15};
+CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_adapt_w{16};
+CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_bias_source_follower{18};
+CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_offset{19};
+CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_bias_readout{20};
+CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_bias_adapt{21};
+CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_bias_adapt_amp{22};
+CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_bias_nmda{23};
+
 } // namespace vx
 } // namespace hicann_dls
 } // namespace halco
