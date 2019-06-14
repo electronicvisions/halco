@@ -110,7 +110,11 @@ typedef ::testing::Types<
     SynapseBlockOnSynram,
     SynramOnDLS,
     SynapseBlockOnDLS,
-    SynapseOnSynapseBlock>
+    SynapseOnSynapseBlock,
+    SynapseDriverOnSynapseDriverBlock,
+    SynapseDriverBlockOnDLS,
+    SynapseDriverOnDLS,
+    CommonSynapseDriverConfigOnDLS>
     CoordinateTypes2;
 
 

@@ -91,6 +91,10 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     SynapseBlockOnSynram             => grid, iterable
     SynapseBlockOnDLS                => iterable
     SynapseOnSynapseBlock            => linear, iterable
+    SynapseDriverOnSynapseDriverBlock => linear, iterable
+    SynapseDriverBlockOnDLS           => linear, iterable
+    SynapseDriverOnDLS                => linear, iterable
+    CommonSynapseDriverConfigOnDLS    => linear, iterable
     """
     # clang-format on
     @staticmethod

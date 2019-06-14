@@ -860,6 +860,65 @@ struct GENPYBIND(inline_base("*")) CommonNeuronConfigOnDLS
 	constexpr explicit CommonNeuronConfigOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
 
+/*****************\
+   SynapseDriver
+\*****************/
+
+class CommonSynapseDriverConfigOnDLS;
+
+struct GENPYBIND(inline_base("*")) SynapseDriverOnSynapseDriverBlock
+    : public common::detail::RantWrapper<SynapseDriverOnSynapseDriverBlock, uint_fast16_t, 127, 0>
+{
+	constexpr explicit SynapseDriverOnSynapseDriverBlock(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+struct GENPYBIND(inline_base("*")) SynapseDriverBlockOnDLS
+    : public common::detail::RantWrapper<SynapseDriverBlockOnDLS, uint_fast16_t, 1, 0>
+{
+	constexpr explicit SynapseDriverBlockOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+
+	CommonSynapseDriverConfigOnDLS toCommonSynapseDriverConfigOnDLS() const;
+};
+
+HALCO_COORDINATE_MIXIN(SynapseDriverMixin, SynapseDriverBlockOnDLS, synapse_driver)
+
+struct GENPYBIND(inline_base("*SynapseDriverMixin*")) SynapseDriverOnDLS
+    : public SynapseDriverMixin<SynapseDriverOnDLS, SynapseDriverOnSynapseDriverBlock>
+{
+private:
+	typedef SynapseDriverMixin<SynapseDriverOnDLS, SynapseDriverOnSynapseDriverBlock> base;
+
+public:
+	typedef base::enum_type enum_type GENPYBIND(opaque);
+
+	SynapseDriverOnDLS() = default;
+
+	explicit SynapseDriverOnDLS(
+	    SynapseDriverOnSynapseDriverBlock const& synapse_driver, SynapseDriverBlockOnDLS const& block = SynapseDriverBlockOnDLS()) :
+	    base(synapse_driver, block)
+	{}
+
+	explicit SynapseDriverOnDLS(enum_type const& e) : base(e) {}
+
+	SynapseDriverOnSynapseDriverBlock toSynapseDriverOnSynapseDriverBlock() const { return This(); }
+	SynapseDriverBlockOnDLS toSynapseDriverBlockOnDLS() const { return split().first; }
+};
+
+struct GENPYBIND(inline_base("*")) CommonSynapseDriverConfigOnDLS
+    : public common::detail::RantWrapper<CommonSynapseDriverConfigOnDLS, uint_fast16_t, 1, 0>
+{
+	constexpr explicit CommonSynapseDriverConfigOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+
+	SynapseDriverBlockOnDLS toSynapseDriverBlockOnDLS() const
+	{
+		return SynapseDriverBlockOnDLS(toEnum());
+	}
+};
+
 /**********\
    CapMem
 \**********/
@@ -1185,6 +1244,10 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronOnNeuronBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CommonNeuronConfigOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseDriverOnSynapseDriverBlock)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseDriverBlockOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseDriverOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CommonSynapseDriverConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemColumnOnCapMemBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemRowOnCapMemBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemBlockOnDLS)

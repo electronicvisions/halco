@@ -111,6 +111,11 @@ SynramOnDLS CommonSynramConfigOnDLS::toSynramOnDLS() const
 	return SynramOnDLS(toEnum());
 }
 
+CommonSynapseDriverConfigOnDLS SynapseDriverBlockOnDLS::toCommonSynapseDriverConfigOnDLS() const
+{
+	return CommonSynapseDriverConfigOnDLS(toEnum());
+}
+
 CommonSynramConfigOnDLS const CommonSynramConfigOnDLS::bottom{0};
 CommonSynramConfigOnDLS const CommonSynramConfigOnDLS::top{1};
 
