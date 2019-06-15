@@ -2,10 +2,10 @@
 
 namespace halco::hicann_dls::vx {
 
-NeuronBlockOnDLS SynapseQuadOnDLS::toNeuronBlockOnDLS() const
+NeuronConfigBlockOnDLS SynapseQuadOnDLS::toNeuronConfigBlockOnDLS() const
 {
 	bool east = toSynapseQuadColumnOnDLS() >= (SynapseQuadColumnOnDLS::size / 2);
-	return NeuronBlockOnDLS(toSynramOnDLS().toEnum() * 2 + east);
+	return NeuronConfigBlockOnDLS(toSynramOnDLS().toEnum() * 2 + east);
 }
 
 } // namespace halco::hicann_dls::vx

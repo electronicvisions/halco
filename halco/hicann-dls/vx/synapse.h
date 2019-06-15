@@ -19,7 +19,7 @@ struct GENPYBIND(inline_base("*")) SynapseQuadColumnOnDLS
     : public common::detail::RantWrapper<
           SynapseQuadColumnOnDLS,
           uint_fast16_t,
-          NeuronOnNeuronBlock::size * 2 / 4 - 1,
+          NeuronConfigOnNeuronConfigBlock::size * 2 / 4 - 1,
           0>
     , public common::detail::XRangedTrait
 {
@@ -73,7 +73,7 @@ struct GENPYBIND(inline_base("*SynramMixin*")) SynapseQuadOnDLS
 
 	SynapseQuadOnSynram toSynapseQuadOnSynram() const { return This(); }
 
-	NeuronBlockOnDLS toNeuronBlockOnDLS() const;
+	NeuronConfigBlockOnDLS toNeuronConfigBlockOnDLS() const;
 };
 
 

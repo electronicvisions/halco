@@ -72,7 +72,7 @@ typedef ::testing::Types<
     CapMemBlockConfigOnDLS,
     CapMemBlockOnDLS,
     CommonNeuronConfigOnDLS,
-    NeuronOnNeuronBlock,
+    NeuronConfigOnNeuronConfigBlock,
     PerfTestOnFPGA,
     PerfTestStatusOnFPGA>
     CoordinateTypes1;
@@ -82,8 +82,8 @@ typedef ::testing::Types<
     PPUMemoryBlockOnDLS,
     PPUMemoryOnPPU,
     PPUMemoryOnDLS,
-    NeuronBlockOnDLS,
-    NeuronOnDLS,
+    NeuronConfigBlockOnDLS,
+    NeuronConfigOnDLS,
     PerfTestStatusOnFPGA,
     SpikePack1ToChipOnDLS,
     SpikePack2ToChipOnDLS,
@@ -131,6 +131,9 @@ typedef ::testing::Types<
     CoordinateTypes2;
 
 typedef ::testing::Types<
+    NeuronBackendConfigBlockOnDLS,
+    NeuronBackendConfigOnNeuronBackendConfigBlock,
+    NeuronBackendConfigOnDLS,
     ColumnCorrelationQuadOnSynram,
     ColumnCurrentQuadOnSynram,
     ColumnCorrelationQuadOnDLS,

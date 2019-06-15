@@ -19,9 +19,9 @@ constexpr size_t num_block_global_capmem_column = 2;
 struct GENPYBIND(inline_base("*")) CapMemColumnOnCapMemBlock
     : public common::detail::RantWrapper<
           CapMemColumnOnCapMemBlock,
-          NeuronOnNeuronBlock::value_type,
-          NeuronOnNeuronBlock::max + num_block_global_capmem_column,
-          NeuronOnNeuronBlock::min>
+          NeuronConfigOnNeuronConfigBlock::value_type,
+          NeuronConfigOnNeuronConfigBlock::max + num_block_global_capmem_column,
+          NeuronConfigOnNeuronConfigBlock::min>
     , public common::detail::XRangedTrait
 {
 	constexpr explicit CapMemColumnOnCapMemBlock(uintmax_t const val = 0)

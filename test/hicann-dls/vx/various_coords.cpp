@@ -6,12 +6,12 @@
 using namespace halco::common;
 using namespace halco::hicann_dls::vx;
 
-TEST(SynapseQuadOnDLS, toNeuronBlockOnDLS)
+TEST(SynapseQuadOnDLS, toNeuronConfigBlockOnDLS)
 {
 	SynapseQuadOnDLS coord(
 	    SynapseQuadOnSynram(SynapseQuadColumnOnDLS(13), SynapseRowOnSynram(23)),
 	    SynramOnDLS::bottom);
-	EXPECT_EQ(coord.toNeuronBlockOnDLS(), NeuronBlockOnDLS(2));
+	EXPECT_EQ(coord.toNeuronConfigBlockOnDLS(), NeuronConfigBlockOnDLS(2));
 }
 
 TEST(CrossbarL2OutputOnDLS, toCrossbarOutputOnDLS)
