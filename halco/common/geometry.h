@@ -21,10 +21,6 @@
 #include "halco/common/genpybind.h"
 #include "halco/common/iterator.h"
 
-#ifndef PYPLUSPLUS
-#include "halco/common/cerealization.h"
-#endif
-
 namespace halco {
 namespace common GENPYBIND_TAG_HALCO_COMMON {
 
@@ -147,13 +143,6 @@ private:
 	}
 
 #ifndef PYPLUSPLUS
-	friend class cereal::access;
-	template <class Archive>
-	void cerealize(Archive& ar)
-	{
-		ar(CEREAL_NVP_("value", mValue));
-	}
-
 	static_assert(boost::is_fundamental<T>::value || std::is_same<std::string, T>::value,
 				  "BaseType is intended to be used with numbers");
 #endif
@@ -260,23 +249,13 @@ public:
 
 private:
 	rant::integral_range<T, Max, Min> mValue;
-#ifndef PYPLUSPLUS
-	friend class cereal::access;
-#endif
+
 	friend class boost::serialization::access;
 	template<typename Archiver>
 	void serialize(Archiver& ar, unsigned int const x)
 	{
 		boost::serialization::serialize(ar, mValue, x);
 	}
-
-#ifndef PYPLUSPLUS
-	template<typename Archive>
-	void cerealize(Archive& ar)
-	{
-		ar(CEREAL_NVP_("value", mValue));
-	}
-#endif
 };
 
 template<typename Derived, typename T, T Max, T Min>
@@ -428,6 +407,13 @@ struct GridCoordinate {
 		return !(a == b);
 	}
 
+	friend bool operator==(grid_type const& a, grid_type const& b)
+	{
+		return a.x() == b.x() && a.y() == b.y();
+	}
+
+	friend bool operator!=(grid_type const& a, grid_type const& b) { return !(a == b); }
+
 	GENPYBIND(stringstream)
 	friend std::ostream& operator<<(std::ostream& os, const GridCoordinate& c)
 	{
@@ -476,9 +462,6 @@ protected:
 	}
 
 private:
-#ifndef PYPLUSPLUS
-	friend class cereal::access;
-#endif
 	friend class boost::serialization::access;
 	template<typename Archiver>
 	void serialize(Archiver & ar, unsigned int const)
@@ -492,20 +475,6 @@ private:
 		enum_type e = id();
 		ar & make_nvp("e", e);
 	}
-
-#ifndef PYPLUSPLUS
-	template<typename Archive>
-	void cerealize(Archive& ar)
-	{
-		ar(CEREAL_NVP_("x", mX));
-		ar(CEREAL_NVP_("y", mY));
-
-		// despite not part of the class's layout the enum coordinate is
-		// serialized as well for Bjoern's visualization.
-		enum_type e = id();
-		ar(CEREAL_NVP_("e", e));
-	}
-#endif
 };
 
 #ifndef PYPLUSPLUS
@@ -602,6 +571,13 @@ struct IntervalCoordinate {
 		return !(a == b);
 	}
 
+	friend bool operator==(interval_type const& a, interval_type const& b)
+	{
+		return a.min() == b.min() && a.max() == b.max();
+	}
+
+	friend bool operator!=(interval_type const& a, interval_type const& b) { return !(a == b); }
+
 	GENPYBIND(stringstream)
 	friend std::ostream& operator<<(std::ostream& os, const IntervalCoordinate& c)
 	{
@@ -658,9 +634,6 @@ protected:
 	}
 
 private:
-#ifndef PYPLUSPLUS
-	friend class cereal::access;
-#endif
 	friend class boost::serialization::access;
 	template<typename Archiver>
 	void serialize(Archiver & ar, unsigned int const)
@@ -674,20 +647,6 @@ private:
 		enum_type e = id();
 		ar & make_nvp("e", e);
 	}
-
-#ifndef PYPLUSPLUS
-	template<typename Archive>
-	void cerealize(Archive& ar)
-	{
-		ar(CEREAL_NVP_("min", mMin));
-		ar(CEREAL_NVP_("max", mMax));
-
-		// despite not part of the class's layout the enum coordinate is
-		// serialized as well for Bjoern's visualization.
-		enum_type e = id();
-		ar(CEREAL_NVP_("e", e));
-	}
-#endif
 };
 
 #ifndef PYPLUSPLUS

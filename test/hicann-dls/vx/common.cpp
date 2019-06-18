@@ -7,9 +7,9 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/serialization.hpp>
 
-#ifndef PYPLUSPLUS
-#include "halco/common/cerealization.h"
-#endif
+#include <cereal/archives/json.hpp>
+
+#include "halco/common/cerealization_geometry.h"
 
 #include "halco/hicann-dls/vx/coordinates.h"
 
