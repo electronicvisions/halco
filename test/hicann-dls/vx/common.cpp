@@ -90,7 +90,8 @@ typedef ::testing::Types<
     SystimeSyncBaseOnDLS,
     CADCConfigOnDLS,
     NeuronLabel,
-    SPL1Address>
+    SPL1Address,
+    BackgroundSpikeSourceOnDLS>
     CoordinateTypes2;
 
 

@@ -20,6 +20,19 @@ namespace halco {
 namespace hicann_dls {
 namespace vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
+/*************************\
+   BackgroundSpikeSource
+\*************************/
+
+struct GENPYBIND(inline_base("*")) BackgroundSpikeSourceOnDLS
+    : public common::detail::RantWrapper<BackgroundSpikeSourceOnDLS, uint_fast16_t, 7, 0>
+{
+	constexpr explicit BackgroundSpikeSourceOnDLS(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
 /************\
    PerfTest
 \************/
@@ -830,6 +843,7 @@ public:
 // std::hash specializations
 namespace std {
 
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::BackgroundSpikeSourceOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PerfTestOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PerfTestStatusOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikePack1ToChipOnDLS)
