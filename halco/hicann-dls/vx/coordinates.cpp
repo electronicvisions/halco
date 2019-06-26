@@ -6,6 +6,12 @@ namespace vx {
 
 using namespace halco::common;
 
+CrossbarOutputOnDLS CrossbarL2OutputOnDLS::toCrossbarOutputOnDLS() const
+{
+	return CrossbarOutputOnDLS(
+	    toEnum() + (CrossbarOutputOnDLS::size - CrossbarL2OutputOnDLS::size));
+}
+
 PPUOnDLS const PPUOnDLS::top{0};
 PPUOnDLS const PPUOnDLS::bottom{1};
 

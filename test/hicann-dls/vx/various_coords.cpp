@@ -6,6 +6,12 @@
 using namespace halco::common;
 using namespace halco::hicann_dls::vx;
 
+TEST(CrossbarL2OutputOnDLS, toCrossbarOutputOnDLS)
+{
+	CrossbarL2OutputOnDLS coord(3);
+	EXPECT_EQ(coord.toCrossbarOutputOnDLS(), CrossbarOutputOnDLS(3 + 8));
+}
+
 TEST(PPUOnDLS, RespectsBounds)
 {
 	EXPECT_ANY_THROW(PPUOnDLS(2));

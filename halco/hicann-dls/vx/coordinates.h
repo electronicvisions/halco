@@ -74,6 +74,45 @@ struct GENPYBIND(inline_base("*")) BackgroundSpikeSourceOnDLS
 };
 
 /************\
+   Crossbar
+\************/
+
+/**
+ * Unique coordinate for crossbar output configuration.
+ */
+struct GENPYBIND(inline_base("*")) CrossbarOutputConfigOnDLS
+    : public common::detail::RantWrapper<CrossbarOutputConfigOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit CrossbarOutputConfigOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+/**
+ * Coordinate of a crossbar output channel.
+ */
+struct GENPYBIND(inline_base("*")) CrossbarOutputOnDLS
+    : public common::detail::RantWrapper<CrossbarOutputOnDLS, uint_fast16_t, 11, 0>
+{
+	constexpr explicit CrossbarOutputOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+/**
+ * Coordinate of a to-L2 crossbar output channel.
+ * Describes a continuous subset of the CrossbarOutputOnDLS range.
+ */
+struct GENPYBIND(inline_base("*")) CrossbarL2OutputOnDLS
+    : public common::detail::RantWrapper<CrossbarL2OutputOnDLS, uint_fast16_t, 3, 0>
+{
+	constexpr explicit CrossbarL2OutputOnDLS(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+
+	CrossbarOutputOnDLS toCrossbarOutputOnDLS() const;
+};
+
+/************\
    PerfTest
 \************/
 
@@ -1298,6 +1337,9 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::FPGADeviceDNAOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NullPayloadReadableOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::HicannARQStatusOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::BackgroundSpikeSourceOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CrossbarOutputConfigOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CrossbarOutputOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CrossbarL2OutputOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PerfTestOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PerfTestStatusOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikePack1ToChipOnDLS)

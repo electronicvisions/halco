@@ -121,7 +121,10 @@ typedef ::testing::Types<
     PADIBusOnPADIBusBlock,
     PADIEventOnDLS,
     CommonPADIBusConfigOnDLS,
-    CommonSTPConfigOnDLS>
+    CommonSTPConfigOnDLS,
+    CrossbarOutputConfigOnDLS,
+    CrossbarOutputOnDLS,
+    CrossbarL2OutputOnDLS>
     CoordinateTypes2;
 
 
