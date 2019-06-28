@@ -138,7 +138,8 @@ typedef ::testing::Types<
     ColumnCorrelationQuadOnDLS,
     ColumnCurrentQuadOnDLS,
     ColumnCorrelationSwitchOnColumnCorrelationQuad,
-    ColumnCurrentSwitchOnColumnCurrentQuad>
+    ColumnCurrentSwitchOnColumnCurrentQuad,
+    CrossbarNodeOnDLS>
     CoordinateTypes3;
 
 

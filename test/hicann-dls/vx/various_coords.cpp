@@ -75,6 +75,20 @@ TEST(CapMemColumnOnCapMemBlock, isShared)
 	}
 }
 
+TEST(CrossbarNodeOnDLS, Construction)
+{
+	// valid node
+	auto input = CrossbarInputOnDLS(3);
+	auto output = CrossbarOutputOnDLS(7);
+
+	auto node = CrossbarNodeOnDLS(output, input);
+	EXPECT_EQ(node.toEnum(), Enum(3 * 3 + 1));
+
+	// invalid combination of output and input
+	EXPECT_THROW(CrossbarNodeOnDLS(output, CrossbarInputOnDLS(2)), std::domain_error);
+}
+
+
 template <typename T>
 class CommonVerticalHalfCoordinateTest : public ::testing::Test
 {};

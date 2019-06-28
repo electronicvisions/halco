@@ -14,45 +14,6 @@ namespace halco {
 namespace hicann {
 namespace v2 {
 
-namespace {
-
-template<typename Data, size_t N>
-void set_invalid(std::array<Data, N>& ar)
-{
-	static_assert(N>0, "no zero-sized arrays");
-	typedef typename std::remove_const<decltype(invalid)>::type type;
-	type*       begin = reinterpret_cast<type*>(&ar[0]);
-	type const* end   = reinterpret_cast<type*>(&ar[N]);
-
-	while(end-begin)
-		*(begin++) = invalid;
-}
-
-template<size_t x_size, size_t y_size, size_t enum_size>
-array<array<int, x_size>, y_size> generateEnum(array<pair<int, int>, enum_size> const & grid)
-{
-	array<array<int, x_size>, y_size> result;
-	set_invalid(result);
-	for (size_t ii = 0; ii < grid.size(); ++ii) {
-		auto const& item = grid.at(ii);
-		size_t x = item.first;
-		size_t y = item.second;
-		result[x][y] = ii;
-	}
-	return result;
-}
-
-template<size_t size>
-std::array<size_t, size> reverseLookup(const std::array<size_t, size> & data)
-{
-	std::array<size_t, size> result;
-	for (size_t ii = 0; ii < size; ++ii)
-		result[data[ii]] = ii;
-	return result;
-}
-
-}
-
 // clang-format off
 
 // this is pretty ugly, but somehow I need to define the wafer grid ... ASCII art for the win
@@ -90,7 +51,7 @@ array< pair<int, int>, 384 >  const HICANNOnWaferGrid = {{
                                                                                                                                                             {{12},{15}}, {{13},{15}}, {{14},{15}}, {{15},{15}}, {{16},{15}}, {{17},{15}}, {{18},{15}}, {{19},{15}}, {{20},{15}}, {{21},{15}}, {{22},{15}}, {{23},{15}}
 }};
 
-array<array<int, 16>, 36> const HICANNOnWaferEnum = generateEnum<16, 36, 384>(HICANNOnWaferGrid);
+array<array<int, 16>, 36> const HICANNOnWaferEnum = detail::generateEnum<16, 36, 384>(HICANNOnWaferGrid);
 
 array< pair<int, int>, 48 > const DNCOnWaferGrid = {{
                                  {{3},{0}}, {{4},{0}}, {{5},{0}},
@@ -103,7 +64,7 @@ array< pair<int, int>, 48 > const DNCOnWaferGrid = {{
                                  {{3},{7}}, {{4},{7}}, {{5},{7}}
 }};
 
-array<array<int, 8>, 9> const DNCOnWaferEnum = generateEnum<8, 9, 48>(DNCOnWaferGrid);
+array<array<int, 8>, 9> const DNCOnWaferEnum = detail::generateEnum<8, 9, 48>(DNCOnWaferGrid);
 
 // power grid numbering starts at ONE!
 std::array<int, 48> const reticle_power_grid = {{
@@ -160,7 +121,7 @@ std::array<size_t, 48> const reticle_fpga_grid_bss = {{
              33, 34, 35
 }};
 
-static std::array<size_t, 48> const reverse_fpga_grid = reverseLookup(reticle_fpga_grid_bss);
+static std::array<size_t, 48> const reverse_fpga_grid = detail::reverseLookup(reticle_fpga_grid_bss);
 
 std::array<size_t, 48> const reticle_adc_trigger_grid = {{
               5,  5,  6,
@@ -178,7 +139,7 @@ std::array<size_t, 12> const adc_trigger_ananas_grid = {{0,0,0,1,1,1,1,1,1,0,0,0
 // clang-format on
 
 static std::array<size_t, 48> const reverse_adc_trigger_grid =
-	reverseLookup(reticle_adc_trigger_grid);
+    detail::reverseLookup(reticle_adc_trigger_grid);
 
 FPGAOnWafer gridLookupFPGAOnWafer(DNCGlobal const dnc) {
 	auto const local_dnc_id = dnc.toDNCOnWafer().toEnum();

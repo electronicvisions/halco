@@ -6,13 +6,14 @@
 #include "pywrap/compat/array.hpp"
 #include <boost/serialization/array.h>
 
+#include "halco/common/lookup_tables_helper.h"
 #include "halco/hicann/v2/external.h"
 
 namespace halco {
 namespace hicann {
 namespace v2 {
 
-static int const invalid = -1;
+static const int invalid = halco::common::detail::invalid;
 /// List of available HICANNOnWafer Coordinates
 extern std::array<std::pair<int, int>, 384> const HICANNOnWaferGrid;
 
