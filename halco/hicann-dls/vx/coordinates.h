@@ -112,6 +112,17 @@ struct GENPYBIND(inline_base("*")) CrossbarL2OutputOnDLS
 	CrossbarOutputOnDLS toCrossbarOutputOnDLS() const;
 };
 
+/**
+ * Coordinate of a crossbar input channel.
+ */
+struct GENPYBIND(inline_base("*")) CrossbarInputOnDLS
+    : public common::detail::RantWrapper<CrossbarInputOnDLS, uint_fast16_t, 19, 0>
+{
+	constexpr explicit CrossbarInputOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
 /************\
    PerfTest
 \************/
@@ -1340,6 +1351,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::BackgroundSpikeSourceOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CrossbarOutputConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CrossbarOutputOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CrossbarL2OutputOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CrossbarInputOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PerfTestOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PerfTestStatusOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikePack1ToChipOnDLS)

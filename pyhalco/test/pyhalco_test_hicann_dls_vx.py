@@ -21,6 +21,7 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     CrossbarOutputConfigOnDLS        => linear, iterable
     CrossbarOutputOnDLS              => linear, iterable
     CrossbarL2OutputOnDLS            => linear, iterable
+    CrossbarInputOnDLS               => linear, iterable
     PerfTestOnFPGA                   => linear, iterable
     PerfTestStatusOnFPGA             => linear, iterable
     SpikePack1ToChipOnDLS            => linear, iterable

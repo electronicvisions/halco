@@ -124,7 +124,8 @@ typedef ::testing::Types<
     CommonSTPConfigOnDLS,
     CrossbarOutputConfigOnDLS,
     CrossbarOutputOnDLS,
-    CrossbarL2OutputOnDLS>
+    CrossbarL2OutputOnDLS,
+    CrossbarInputOnDLS>
     CoordinateTypes2;
 
 
