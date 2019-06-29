@@ -848,6 +848,22 @@ public:
 	CapMemBlockOnDLS toCapMemBlockOnDLS() const { return split().first; }
 };
 
+/************\
+    Synram
+\************/
+
+struct GENPYBIND(inline_base("*")) CommonSynramConfigOnDLS
+    : public common::detail::RantWrapper<CommonSynramConfigOnDLS, uint_fast16_t, 1, 0>
+{
+	constexpr explicit CommonSynramConfigOnDLS(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+
+	static const CommonSynramConfigOnDLS bottom;
+	static const CommonSynramConfigOnDLS top;
+};
+
 } // namespace vx
 } // namespace hicann_dls
 } // namespace halco
@@ -919,6 +935,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemCellOnCapMemBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemCellOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemRowOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemColumnOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CommonSynramConfigOnDLS)
 
 } // namespace std
 

@@ -91,7 +91,8 @@ typedef ::testing::Types<
     CADCConfigOnDLS,
     NeuronLabel,
     SPL1Address,
-    BackgroundSpikeSourceOnDLS>
+    BackgroundSpikeSourceOnDLS,
+    CommonSynramConfigOnDLS>
     CoordinateTypes2;
 
 

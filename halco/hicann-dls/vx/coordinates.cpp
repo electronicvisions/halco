@@ -91,6 +91,9 @@ bool CapMemCellOnCapMemBlock::isShared() const
 	return x().isShared();
 }
 
+CommonSynramConfigOnDLS const CommonSynramConfigOnDLS::bottom{0};
+CommonSynramConfigOnDLS const CommonSynramConfigOnDLS::top{1};
+
 } // namespace vx
 } // namespace hicann_dls
 } // namespace halco
