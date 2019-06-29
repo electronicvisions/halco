@@ -104,7 +104,13 @@ typedef ::testing::Types<
     INA219OnBoard,
     I2CINA219RoRegisterOnBoard,
     I2CINA219RwRegisterOnBoard,
-    FPGADeviceDNAOnFPGA>
+    FPGADeviceDNAOnFPGA,
+    SynapseBlockColumnOnDLS,
+    SynapseRowOnSynram,
+    SynapseBlockOnSynram,
+    SynramOnDLS,
+    SynapseBlockOnDLS,
+    SynapseOnSynapseBlock>
     CoordinateTypes2;
 
 

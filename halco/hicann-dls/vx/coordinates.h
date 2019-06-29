@@ -1003,6 +1003,8 @@ public:
     Synram
 \************/
 
+class SynramOnDLS;
+
 struct GENPYBIND(inline_base("*")) CommonSynramConfigOnDLS
     : public common::detail::RantWrapper<CommonSynramConfigOnDLS, uint_fast16_t, 1, 0>
 {
@@ -1011,8 +1013,107 @@ struct GENPYBIND(inline_base("*")) CommonSynramConfigOnDLS
 	    rant_t(val)
 	{}
 
+	PPUOnDLS toPPUOnDLS() const { return PPUOnDLS(toEnum()); }
+	SynramOnDLS toSynramOnDLS() const;
+
 	static const CommonSynramConfigOnDLS bottom;
 	static const CommonSynramConfigOnDLS top;
+};
+
+/***********\
+   Synapse
+\***********/
+
+struct GENPYBIND(inline_base("*")) SynapseBlockColumnOnDLS
+    : public common::detail::RantWrapper<
+          SynapseBlockColumnOnDLS,
+          uint_fast16_t,
+          NeuronOnNeuronBlock::size * 2 / 4 - 1,
+          0>
+    , public common::detail::XRangedTrait
+{
+	constexpr explicit SynapseBlockColumnOnDLS(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+
+	constexpr explicit SynapseBlockColumnOnDLS(common::X const& x) GENPYBIND(implicit_conversion) :
+	    rant_t(x)
+	{}
+};
+
+struct GENPYBIND(inline_base("*")) SynapseRowOnSynram
+    : public common::detail::RantWrapper<SynapseRowOnSynram, uint_fast16_t, 255, 0>
+    , public common::detail::YRangedTrait
+{
+	constexpr explicit SynapseRowOnSynram(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+
+	constexpr explicit SynapseRowOnSynram(common::Y const& y) GENPYBIND(implicit_conversion) :
+	    rant_t(y)
+	{}
+};
+
+struct GENPYBIND(inline_base("*")) SynapseBlockOnSynram
+    : public common::detail::
+          GridCoordinate<SynapseBlockOnSynram, SynapseBlockColumnOnDLS, SynapseRowOnSynram>
+{
+	GRID_COMMON_CONSTRUCTORS(SynapseBlockOnSynram)
+
+	SynapseBlockColumnOnDLS toSynapseBlockColumnOnDLS() const { return x(); }
+	SynapseRowOnSynram toSynapseRowOnSynram() const { return y(); }
+};
+
+struct GENPYBIND(inline_base("*")) SynramOnDLS
+    : public common::detail::RantWrapper<SynramOnDLS, uint_fast16_t, PPUOnDLS::max, PPUOnDLS::min>
+{
+	constexpr explicit SynramOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+
+	CommonSynramConfigOnDLS toCommonSynramConfigOnDLS() const
+	{
+		return CommonSynramConfigOnDLS(toEnum());
+	}
+	PPUOnDLS toPPUOnDLS() const { return PPUOnDLS(toEnum()); }
+
+	static const SynramOnDLS bottom;
+	static const SynramOnDLS top;
+};
+
+HALCO_COORDINATE_MIXIN(SynramMixin, SynramOnDLS, synram)
+
+struct GENPYBIND(inline_base("*SynramMixin*")) SynapseBlockOnDLS
+    : public SynramMixin<SynapseBlockOnDLS, SynapseBlockOnSynram>
+{
+private:
+	typedef SynramMixin<SynapseBlockOnDLS, SynapseBlockOnSynram> base;
+
+public:
+	typedef base::enum_type enum_type GENPYBIND(opaque(false));
+
+	SynapseBlockOnDLS() = default;
+
+	explicit SynapseBlockOnDLS(
+	    SynapseBlockOnSynram const& block, SynramOnDLS const& synram = SynramOnDLS()) :
+	    base(block, synram)
+	{}
+
+	explicit SynapseBlockOnDLS(enum_type const& e) : base(e) {}
+
+	SynapseBlockOnSynram toSynapseBlockOnSynram() const { return This(); }
+	SynramOnDLS toSynramOnDLS() const { return split().first; }
+};
+
+struct GENPYBIND(inline_base("*")) SynapseOnSynapseBlock
+    : public common::detail::
+          RantWrapper<SynapseOnSynapseBlock, uint_fast16_t, 3, 0>
+{
+	constexpr explicit SynapseOnSynapseBlock(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 };
 
 } // namespace vx
@@ -1099,6 +1200,12 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::I2CINA219RwRegisterOnINA219)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::INA219OnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::I2CINA219RoRegisterOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::I2CINA219RwRegisterOnBoard)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseBlockColumnOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseRowOnSynram)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseBlockOnSynram)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynramOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseBlockOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseOnSynapseBlock)
 
 } // namespace std
 

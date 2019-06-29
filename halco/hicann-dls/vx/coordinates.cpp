@@ -106,8 +106,16 @@ bool CapMemCellOnCapMemBlock::isShared() const
 	return x().isShared();
 }
 
+SynramOnDLS CommonSynramConfigOnDLS::toSynramOnDLS() const
+{
+	return SynramOnDLS(toEnum());
+}
+
 CommonSynramConfigOnDLS const CommonSynramConfigOnDLS::bottom{0};
 CommonSynramConfigOnDLS const CommonSynramConfigOnDLS::top{1};
+
+SynramOnDLS const SynramOnDLS::bottom{CommonSynramConfigOnDLS::bottom.toEnum()};
+SynramOnDLS const SynramOnDLS::top{CommonSynramConfigOnDLS::top.toEnum()};
 
 } // namespace vx
 } // namespace hicann_dls
