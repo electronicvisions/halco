@@ -33,10 +33,10 @@ TEST(PPUMemoryWordOnDLS, Conversion)
 
 TEST(DACChannelOnBoard, toVDDOnBoard)
 {
-	DACChannelOnBoard channel = DACChannelOnBoard::VDD12MADC;
+	DACChannelOnBoard channel = DACChannelOnBoard::vdd12_madc;
 	EXPECT_NO_THROW(channel.toVDDOnBoard());
 
-	DACChannelOnBoard channel2 = DACChannelOnBoard::VReset;
+	DACChannelOnBoard channel2 = DACChannelOnBoard::v_reset;
 	EXPECT_ANY_THROW(channel2.toVDDOnBoard());
 }
 

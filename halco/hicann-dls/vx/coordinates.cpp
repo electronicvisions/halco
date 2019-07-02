@@ -17,58 +17,58 @@ PPUOnDLS CADCConfigOnDLS::toPPUOnDLS() const
 	return PPUOnDLS(toEnum());
 }
 
-PLLClockOutputOnDLS const PLLClockOutputOnDLS::SerdesSerSendClk{0};
-PLLClockOutputOnDLS const PLLClockOutputOnDLS::PhyRefClk{1};
-PLLClockOutputOnDLS const PLLClockOutputOnDLS::PPUClk{2};
-PLLClockOutputOnDLS const PLLClockOutputOnDLS::MADCClk{3};
+PLLClockOutputOnDLS const PLLClockOutputOnDLS::serdes_ser_send_clk{0};
+PLLClockOutputOnDLS const PLLClockOutputOnDLS::phy_ref_clk{1};
+PLLClockOutputOnDLS const PLLClockOutputOnDLS::ppu_clk{2};
+PLLClockOutputOnDLS const PLLClockOutputOnDLS::madc_clk{3};
 
-SPIDACControlRegisterOnDAC const SPIDACControlRegisterOnDAC::GainReference{0};
-SPIDACControlRegisterOnDAC const SPIDACControlRegisterOnDAC::LDAC{1};
-SPIDACControlRegisterOnDAC const SPIDACControlRegisterOnDAC::PowerDown{2};
-SPIDACControlRegisterOnDAC const SPIDACControlRegisterOnDAC::Reset{3};
+SPIDACControlRegisterOnDAC const SPIDACControlRegisterOnDAC::gain_reference{0};
+SPIDACControlRegisterOnDAC const SPIDACControlRegisterOnDAC::ldac{1};
+SPIDACControlRegisterOnDAC const SPIDACControlRegisterOnDAC::power_down{2};
+SPIDACControlRegisterOnDAC const SPIDACControlRegisterOnDAC::reset{3};
 
-LEDOnBoard const LEDOnBoard::LED1{0};
-LEDOnBoard const LEDOnBoard::LED2{1};
-LEDOnBoard const LEDOnBoard::LED3{2};
-LEDOnBoard const LEDOnBoard::LED4{3};
-LEDOnBoard const LEDOnBoard::LED7{4};
-LEDOnBoard const LEDOnBoard::LED8{5};
+LEDOnBoard const LEDOnBoard::led_1{0};
+LEDOnBoard const LEDOnBoard::led_2{1};
+LEDOnBoard const LEDOnBoard::led_3{2};
+LEDOnBoard const LEDOnBoard::led_4{3};
+LEDOnBoard const LEDOnBoard::led_7{4};
+LEDOnBoard const LEDOnBoard::led_8{5};
 
-VDDOnBoard const VDDOnBoard::VDD25Digital{0};
-VDDOnBoard const VDDOnBoard::VDD12Digital{1};
-VDDOnBoard const VDDOnBoard::VDD25Analog{2};
-VDDOnBoard const VDDOnBoard::VDD12Analog{3};
-VDDOnBoard const VDDOnBoard::VDD12MADC{4};
-VDDOnBoard const VDDOnBoard::VDD12Pll{5};
+VDDOnBoard const VDDOnBoard::vdd25_digital{0};
+VDDOnBoard const VDDOnBoard::vdd12_digital{1};
+VDDOnBoard const VDDOnBoard::vdd25_analog{2};
+VDDOnBoard const VDDOnBoard::vdd12_analog{3};
+VDDOnBoard const VDDOnBoard::vdd12_madc{4};
+VDDOnBoard const VDDOnBoard::vdd12_pll{5};
 
-ADCSourceOnBoard const ADCSourceOnBoard::ReadoutChain0{0};
-ADCSourceOnBoard const ADCSourceOnBoard::ReadoutChain1{1};
-ADCSourceOnBoard const ADCSourceOnBoard::MuxRfu0{2};
-ADCSourceOnBoard const ADCSourceOnBoard::VReset{3};
-ADCSourceOnBoard const ADCSourceOnBoard::VDDResMeas{4};
-ADCSourceOnBoard const ADCSourceOnBoard::MuxDAC25{5};
-ADCSourceOnBoard const ADCSourceOnBoard::IRef{6};
-ADCSourceOnBoard const ADCSourceOnBoard::MuxRfu1{7};
-ADCSourceOnBoard const ADCSourceOnBoard::MuxRfu2{8};
-ADCSourceOnBoard const ADCSourceOnBoard::None{9};
+ADCSourceOnBoard const ADCSourceOnBoard::readout_chain_0{0};
+ADCSourceOnBoard const ADCSourceOnBoard::readout_chain_1{1};
+ADCSourceOnBoard const ADCSourceOnBoard::mux_rfu_0{2};
+ADCSourceOnBoard const ADCSourceOnBoard::v_reset{3};
+ADCSourceOnBoard const ADCSourceOnBoard::vdd_res_meas{4};
+ADCSourceOnBoard const ADCSourceOnBoard::mux_dac_25{5};
+ADCSourceOnBoard const ADCSourceOnBoard::i_ref{6};
+ADCSourceOnBoard const ADCSourceOnBoard::mux_rfu_1{7};
+ADCSourceOnBoard const ADCSourceOnBoard::mux_rfu_2{8};
+ADCSourceOnBoard const ADCSourceOnBoard::none{9};
 
-DACChannelOnBoard const DACChannelOnBoard::VReset{DACChannelOnDAC(0), DACOnBoard(0)};
-DACChannelOnBoard const DACChannelOnBoard::VResMeas{DACChannelOnDAC(1), DACOnBoard(0)};
-DACChannelOnBoard const DACChannelOnBoard::MuxRfu0{DACChannelOnDAC(2), DACOnBoard(0)};
-DACChannelOnBoard const DACChannelOnBoard::MuxRfu1{DACChannelOnDAC(3), DACOnBoard(0)};
-DACChannelOnBoard const DACChannelOnBoard::IRefBoard{DACChannelOnDAC(4), DACOnBoard(0)};
-DACChannelOnBoard const DACChannelOnBoard::AnaReadoutDebug0{DACChannelOnDAC(5), DACOnBoard(0)};
-DACChannelOnBoard const DACChannelOnBoard::AnaReadoutDebug1{DACChannelOnDAC(6), DACOnBoard(0)};
-DACChannelOnBoard const DACChannelOnBoard::MuxDAC25{DACChannelOnDAC(7), DACOnBoard(0)};
+DACChannelOnBoard const DACChannelOnBoard::v_reset{DACChannelOnDAC(0), DACOnBoard(0)};
+DACChannelOnBoard const DACChannelOnBoard::v_res_meas{DACChannelOnDAC(1), DACOnBoard(0)};
+DACChannelOnBoard const DACChannelOnBoard::mux_rfu_0{DACChannelOnDAC(2), DACOnBoard(0)};
+DACChannelOnBoard const DACChannelOnBoard::mux_rfu_1{DACChannelOnDAC(3), DACOnBoard(0)};
+DACChannelOnBoard const DACChannelOnBoard::i_ref_board{DACChannelOnDAC(4), DACOnBoard(0)};
+DACChannelOnBoard const DACChannelOnBoard::ana_readout_debug_0{DACChannelOnDAC(5), DACOnBoard(0)};
+DACChannelOnBoard const DACChannelOnBoard::ana_readout_debug_1{DACChannelOnDAC(6), DACOnBoard(0)};
+DACChannelOnBoard const DACChannelOnBoard::mux_dac_25{DACChannelOnDAC(7), DACOnBoard(0)};
 
-DACChannelOnBoard const DACChannelOnBoard::VDD25Digital{DACChannelOnDAC(0), DACOnBoard(1)};
-DACChannelOnBoard const DACChannelOnBoard::VDD12Digital{DACChannelOnDAC(1), DACOnBoard(1)};
-DACChannelOnBoard const DACChannelOnBoard::VDD25Analog{DACChannelOnDAC(2), DACOnBoard(1)};
-DACChannelOnBoard const DACChannelOnBoard::VDD12Analog{DACChannelOnDAC(3), DACOnBoard(1)};
-DACChannelOnBoard const DACChannelOnBoard::VDD12MADC{DACChannelOnDAC(4), DACOnBoard(1)};
-DACChannelOnBoard const DACChannelOnBoard::VDD12Pll{DACChannelOnDAC(5), DACOnBoard(1)};
-DACChannelOnBoard const DACChannelOnBoard::GeneralPurpose0{DACChannelOnDAC(6), DACOnBoard(1)};
-DACChannelOnBoard const DACChannelOnBoard::GeneralPurpose1{DACChannelOnDAC(7), DACOnBoard(1)};
+DACChannelOnBoard const DACChannelOnBoard::vdd25_digital{DACChannelOnDAC(0), DACOnBoard(1)};
+DACChannelOnBoard const DACChannelOnBoard::vdd12_digital{DACChannelOnDAC(1), DACOnBoard(1)};
+DACChannelOnBoard const DACChannelOnBoard::vdd25_analog{DACChannelOnDAC(2), DACOnBoard(1)};
+DACChannelOnBoard const DACChannelOnBoard::vdd12_analog{DACChannelOnDAC(3), DACOnBoard(1)};
+DACChannelOnBoard const DACChannelOnBoard::vdd12_madc{DACChannelOnDAC(4), DACOnBoard(1)};
+DACChannelOnBoard const DACChannelOnBoard::vdd12_pll{DACChannelOnDAC(5), DACOnBoard(1)};
+DACChannelOnBoard const DACChannelOnBoard::general_purpose_0{DACChannelOnDAC(6), DACOnBoard(1)};
+DACChannelOnBoard const DACChannelOnBoard::general_purpose_1{DACChannelOnDAC(7), DACOnBoard(1)};
 
 DACChannelOnBoard VDDOnBoard::toDACChannelOnBoard() const
 {

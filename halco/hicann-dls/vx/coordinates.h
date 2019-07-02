@@ -418,10 +418,10 @@ struct GENPYBIND(inline_base("*")) PLLClockOutputOnDLS
 	    rant_t(val)
 	{}
 
-	static const PLLClockOutputOnDLS SerdesSerSendClk;
-	static const PLLClockOutputOnDLS PhyRefClk;
-	static const PLLClockOutputOnDLS PPUClk;
-	static const PLLClockOutputOnDLS MADCClk;
+	static const PLLClockOutputOnDLS serdes_ser_send_clk;
+	static const PLLClockOutputOnDLS phy_ref_clk;
+	static const PLLClockOutputOnDLS ppu_clk;
+	static const PLLClockOutputOnDLS madc_clk;
 };
 
 /**************\
@@ -480,10 +480,10 @@ struct GENPYBIND(inline_base("*")) SPIDACControlRegisterOnDAC
 	    rant_t(val)
 	{}
 
-	static const SPIDACControlRegisterOnDAC GainReference;
-	static const SPIDACControlRegisterOnDAC LDAC;
-	static const SPIDACControlRegisterOnDAC PowerDown;
-	static const SPIDACControlRegisterOnDAC Reset;
+	static const SPIDACControlRegisterOnDAC gain_reference;
+	static const SPIDACControlRegisterOnDAC ldac;
+	static const SPIDACControlRegisterOnDAC power_down;
+	static const SPIDACControlRegisterOnDAC reset;
 };
 
 /***********\
@@ -503,16 +503,16 @@ struct GENPYBIND(inline_base("*")) ADCSourceOnBoard
 	    rant_t(val)
 	{}
 
-	static const ADCSourceOnBoard ReadoutChain0;
-	static const ADCSourceOnBoard ReadoutChain1;
-	static const ADCSourceOnBoard MuxRfu0;
-	static const ADCSourceOnBoard VReset;
-	static const ADCSourceOnBoard VDDResMeas;
-	static const ADCSourceOnBoard MuxDAC25;
-	static const ADCSourceOnBoard IRef;
-	static const ADCSourceOnBoard MuxRfu1;
-	static const ADCSourceOnBoard MuxRfu2;
-	static const ADCSourceOnBoard None;
+	static const ADCSourceOnBoard readout_chain_0;
+	static const ADCSourceOnBoard readout_chain_1;
+	static const ADCSourceOnBoard mux_rfu_0;
+	static const ADCSourceOnBoard v_reset;
+	static const ADCSourceOnBoard vdd_res_meas;
+	static const ADCSourceOnBoard mux_dac_25;
+	static const ADCSourceOnBoard i_ref;
+	static const ADCSourceOnBoard mux_rfu_1;
+	static const ADCSourceOnBoard mux_rfu_2;
+	static const ADCSourceOnBoard none;
 };
 
 struct GENPYBIND(inline_base("*")) LEDOnBoard
@@ -522,12 +522,12 @@ struct GENPYBIND(inline_base("*")) LEDOnBoard
 	    rant_t(val)
 	{}
 
-	static const LEDOnBoard LED1;
-	static const LEDOnBoard LED2;
-	static const LEDOnBoard LED3;
-	static const LEDOnBoard LED4;
-	static const LEDOnBoard LED7;
-	static const LEDOnBoard LED8;
+	static const LEDOnBoard led_1;
+	static const LEDOnBoard led_2;
+	static const LEDOnBoard led_3;
+	static const LEDOnBoard led_4;
+	static const LEDOnBoard led_7;
+	static const LEDOnBoard led_8;
 };
 
 struct DACChannelOnBoard;
@@ -539,12 +539,12 @@ struct GENPYBIND(inline_base("*")) VDDOnBoard
 	    rant_t(val)
 	{}
 
-	static const VDDOnBoard VDD25Digital;
-	static const VDDOnBoard VDD12Digital;
-	static const VDDOnBoard VDD25Analog;
-	static const VDDOnBoard VDD12Analog;
-	static const VDDOnBoard VDD12MADC;
-	static const VDDOnBoard VDD12Pll;
+	static const VDDOnBoard vdd25_digital;
+	static const VDDOnBoard vdd12_digital;
+	static const VDDOnBoard vdd25_analog;
+	static const VDDOnBoard vdd12_analog;
+	static const VDDOnBoard vdd12_madc;
+	static const VDDOnBoard vdd12_pll;
 
 	DACChannelOnBoard toDACChannelOnBoard() const;
 };
@@ -588,23 +588,23 @@ public:
 	DACChannelOnDAC toDACChannelOnDAC() const { return This(); }
 	DACOnBoard toDACOnBoard() const { return split().first; }
 
-	static const DACChannelOnBoard VReset;
-	static const DACChannelOnBoard VResMeas;
-	static const DACChannelOnBoard MuxRfu0;
-	static const DACChannelOnBoard MuxRfu1;
-	static const DACChannelOnBoard IRefBoard;
-	static const DACChannelOnBoard AnaReadoutDebug0;
-	static const DACChannelOnBoard AnaReadoutDebug1;
-	static const DACChannelOnBoard MuxDAC25;
+	static const DACChannelOnBoard v_reset;
+	static const DACChannelOnBoard v_res_meas;
+	static const DACChannelOnBoard mux_rfu_0;
+	static const DACChannelOnBoard mux_rfu_1;
+	static const DACChannelOnBoard i_ref_board;
+	static const DACChannelOnBoard ana_readout_debug_0;
+	static const DACChannelOnBoard ana_readout_debug_1;
+	static const DACChannelOnBoard mux_dac_25;
 
-	static const DACChannelOnBoard VDD25Digital;
-	static const DACChannelOnBoard VDD12Digital;
-	static const DACChannelOnBoard VDD25Analog;
-	static const DACChannelOnBoard VDD12Analog;
-	static const DACChannelOnBoard VDD12MADC;
-	static const DACChannelOnBoard VDD12Pll;
-	static const DACChannelOnBoard GeneralPurpose0;
-	static const DACChannelOnBoard GeneralPurpose1;
+	static const DACChannelOnBoard vdd25_digital;
+	static const DACChannelOnBoard vdd12_digital;
+	static const DACChannelOnBoard vdd25_analog;
+	static const DACChannelOnBoard vdd12_analog;
+	static const DACChannelOnBoard vdd12_madc;
+	static const DACChannelOnBoard vdd12_pll;
+	static const DACChannelOnBoard general_purpose_0;
+	static const DACChannelOnBoard general_purpose_1;
 
 	VDDOnBoard toVDDOnBoard() const;
 };
