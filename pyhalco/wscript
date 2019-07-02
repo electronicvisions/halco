@@ -57,22 +57,20 @@ def build(bld):
             target='pyhalco_common',
             source='../halco/common/common.h',
             genpybind_tags='common',
-            features='genpybind cxx cxxshlib pyext post_task',
+            features='genpybind cxx cxxshlib pyext',
             use=['halco_common', 'PYBIND11HALCO', 'pywrap_inc', 'pyhalco_common_files'],
             install_path='${PREFIX}/lib',
-            linkflags='-Wl,-z,defs',
-            post_task='pyhalco_common_tests',
+            linkflags='-Wl,-z,defs'
         )
 
         bld(
             target='pyhalco_hicann_dls_v2',
             source='../halco/hicann-dls/v2/coordinates.h',
             genpybind_tags='hicann_dls_v2',
-            features='genpybind cxx cxxshlib pyext post_task',
+            features='genpybind cxx cxxshlib pyext',
             use=['halco_common', 'halco_hicann_dls_v2', 'PYBIND11HALCO', 'pywrap_inc', 'pyhalco_common'],
             install_path='${PREFIX}/lib',
-            linkflags='-Wl,-z,defs',
-            post_task=['pyhalco_hicann_dls_v2_tests', 'pyhalco_common'],
+            linkflags='-Wl,-z,defs'
         )
 
         bld(
@@ -89,11 +87,10 @@ def build(bld):
             target='pyhalco_hicann_dls_vx',
             source='../halco/hicann-dls/vx/coordinates.h',
             genpybind_tags='hicann_dls_vx',
-            features='genpybind cxx cxxshlib pyext post_task',
+            features='genpybind cxx cxxshlib pyext',
             use=['halco_common', 'halco_hicann_dls_vx', 'PYBIND11HALCO', 'pywrap_inc', 'pyhalco_common'],
             install_path='${PREFIX}/lib',
-            linkflags='-Wl,-z,defs',
-            post_task=['pyhalco_hicann_dls_vx_tests', 'pyhalco_common'],
+            linkflags='-Wl,-z,defs'
         )
 
         bld(
@@ -109,13 +106,12 @@ def build(bld):
     else:
         bld(
                 target         = 'pyhalco_common',
-                features       = 'cxx cxxshlib pypp pyembed pyext post_task',
+                features       = 'cxx cxxshlib pypp pyembed pyext',
                 script         = 'common/generate_common_coordinate.py',
                 gen_defines    = 'PYPLUSPLUS __STRICT_ANSI__',
                 defines        = 'PYBINDINGS',
                 headers        = '../halco/common/common.h',
                 use            = ['halco_common', 'pyublas', 'BOOST4HALCO', 'BOOST4PYHALCO', 'PYHALCO', 'pywrap', 'pywrapstdvector', 'pycellparameters', 'pyhalco_common_files'],
-                post_task      = 'pyhalco_common_tests',
                 install_path   = '${PREFIX}/lib',
                 linkflags      = '-Wl,-z,defs',
                 includes       = '.',
@@ -123,13 +119,12 @@ def build(bld):
 
         bld(
                 target         = 'pyhalco_hicann_v2',
-                features       = 'cxx cxxshlib pypp pyembed pyext post_task',
+                features       = 'cxx cxxshlib pypp pyembed pyext',
                 script         = 'hicann/v2/generate_hicann_v2_coordinate.py',
                 gen_defines    = 'PYPLUSPLUS __STRICT_ANSI__ BOOST_PP_VARIADICS',
                 defines        = 'PYBINDINGS',
                 headers        = '../halco/hicann/v2/coordinates.h',
                 use            = ['pyhalco_common', 'halco_hicann_v2'],
-                post_task      = 'pyhalco_hicann_v2_tests',
                 install_path   = '${PREFIX}/lib',
                 linkflags      = '-Wl,-z,defs',
                 includes       = '.',
