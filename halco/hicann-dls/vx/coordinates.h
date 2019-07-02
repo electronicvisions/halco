@@ -20,6 +20,8 @@ namespace halco {
 namespace hicann_dls {
 namespace vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
+class PPUOnDLS;
+
 /*************************\
    BackgroundSpikeSource
 \*************************/
@@ -101,6 +103,11 @@ struct GENPYBIND(inline_base("*")) CADCConfigOnDLS
     : public common::detail::RantWrapper<CADCConfigOnDLS, uint_fast16_t, 1, 0>
 {
 	constexpr explicit CADCConfigOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+
+	PPUOnDLS toPPUOnDLS() const;
+
+	static const CADCConfigOnDLS top;
+	static const CADCConfigOnDLS bottom;
 };
 
 /**********\
@@ -113,6 +120,11 @@ struct GENPYBIND(inline_base("*")) PPUOnDLS
 	constexpr explicit PPUOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
+
+	CADCConfigOnDLS toCADCConfigOnDLS() const { return CADCConfigOnDLS(toEnum()); }
+
+	static const PPUOnDLS top;
+	static const PPUOnDLS bottom;
 };
 
 struct GENPYBIND(inline_base("*")) PPUMemoryWordOnPPU

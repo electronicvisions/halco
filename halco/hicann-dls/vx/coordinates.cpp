@@ -6,6 +6,17 @@ namespace vx {
 
 using namespace halco::common;
 
+PPUOnDLS const PPUOnDLS::top{0};
+PPUOnDLS const PPUOnDLS::bottom{1};
+
+CADCConfigOnDLS const CADCConfigOnDLS::top{PPUOnDLS::top};
+CADCConfigOnDLS const CADCConfigOnDLS::bottom{PPUOnDLS::bottom};
+
+PPUOnDLS CADCConfigOnDLS::toPPUOnDLS() const
+{
+	return PPUOnDLS(toEnum());
+}
+
 PLLClockOutputOnDLS const PLLClockOutputOnDLS::SerdesSerSendClk{0};
 PLLClockOutputOnDLS const PLLClockOutputOnDLS::PhyRefClk{1};
 PLLClockOutputOnDLS const PLLClockOutputOnDLS::PPUClk{2};
