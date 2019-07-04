@@ -23,6 +23,7 @@ TEST(PPUMemoryWordOnDLS, RespectsBounds)
 	EXPECT_ANY_THROW(PPUMemoryWordOnDLS(Enum(8192)));
 	EXPECT_NO_THROW(PPUMemoryWordOnDLS(Enum(8191)));
 }
+
 TEST(PPUMemoryWordOnDLS, Conversion)
 {
 	PPUMemoryWordOnDLS test_coord(PPUMemoryWordOnPPU(1), PPUOnDLS(1));
@@ -53,4 +54,17 @@ TEST(PhyConfigChipOnDLS, toJTAGPhyRegisterOnDLS)
 {
 	PhyConfigChipOnDLS phy_config(3);
 	EXPECT_EQ(phy_config.toJTAGPhyRegisterOnDLS(), JTAGPhyRegisterOnDLS(3));
+}
+
+TEST(CapMemColumnOnCapMemBlock, isShared)
+{
+	CapMemColumnOnCapMemBlock shared_1(128);
+	CapMemColumnOnCapMemBlock shared_2(129);
+	EXPECT_TRUE(shared_1.isShared());
+	EXPECT_TRUE(shared_2.isShared());
+
+	for (size_t i = 0; i < 128; ++i) {
+		CapMemColumnOnCapMemBlock not_shared(i);
+		EXPECT_FALSE(not_shared.isShared());
+	}
 }

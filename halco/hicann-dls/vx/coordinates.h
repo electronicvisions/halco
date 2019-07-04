@@ -734,7 +734,7 @@ struct GENPYBIND(inline_base("*")) CapMemColumnOnCapMemBlock
 	{}
 	static const CapMemColumnOnCapMemBlock SharedCapMemColumnOnCapMemBlock;
 
-	bool isShared() const { return value() == max; }
+	bool isShared() const { return value() > (max - num_block_global_capmem_column); }
 };
 
 struct GENPYBIND(inline_base("*")) CapMemRowOnCapMemBlock
