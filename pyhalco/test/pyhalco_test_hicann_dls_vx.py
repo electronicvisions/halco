@@ -9,6 +9,7 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     COORDINATES = """
     SpikePackFromFPGAOnDLS           => linear, iterable
     MADCSamplePackFromFPGAOnDLS      => linear, iterable
+    NullPayloadReadableOnFPGA        => linear, iterable
     BackgroundSpikeSourceOnDLS       => linear, iterable
     PerfTestOnFPGA                   => linear, iterable
     PerfTestStatusOnFPGA             => linear, iterable

@@ -94,7 +94,8 @@ typedef ::testing::Types<
     BackgroundSpikeSourceOnDLS,
     CommonSynramConfigOnDLS,
     SpikePackFromFPGAOnDLS,
-    MADCSamplePackFromFPGAOnDLS>
+    MADCSamplePackFromFPGAOnDLS,
+    NullPayloadReadableOnFPGA>
     CoordinateTypes2;
 
 

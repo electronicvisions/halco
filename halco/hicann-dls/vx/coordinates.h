@@ -22,6 +22,21 @@ namespace vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 class PPUOnDLS;
 
+/************\
+   Loopback
+\************/
+
+/**
+ * Unique coordinate for a readable entity without payload.
+ * The read response is issued as fast as possible, which e.g. enables usage for synchronization of
+ * from-FPGA time annotation and to-FPGA Playback time annotation.
+ */
+struct GENPYBIND(inline_base("*")) NullPayloadReadableOnFPGA
+    : public common::detail::RantWrapper<NullPayloadReadableOnFPGA, uint_fast16_t, 0, 0>
+{
+	constexpr explicit NullPayloadReadableOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
+};
+
 /*************************\
    BackgroundSpikeSource
 \*************************/
@@ -887,6 +902,7 @@ struct GENPYBIND(inline_base("*")) CommonSynramConfigOnDLS
 // std::hash specializations
 namespace std {
 
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NullPayloadReadableOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::BackgroundSpikeSourceOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PerfTestOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PerfTestStatusOnFPGA)
