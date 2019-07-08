@@ -422,6 +422,14 @@ struct GENPYBIND(inline_base("*")) PhyConfigChipOnDLS
 	JTAGPhyRegisterOnDLS toJTAGPhyRegisterOnDLS() const { return JTAGPhyRegisterOnDLS(toEnum()); }
 };
 
+struct GENPYBIND(inline_base("*")) PhyStatusOnFPGA
+    : public common::detail::RantWrapper<PhyStatusOnFPGA, uint_fast16_t, 7, 0>
+{
+	constexpr explicit PhyStatusOnFPGA(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
 struct GENPYBIND(inline_base("*")) CommonPhyConfigFPGAOnDLS
     : public common::detail::RantWrapper<CommonPhyConfigFPGAOnDLS, uint_fast16_t, 0, 0>
 {
@@ -950,6 +958,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::JTAGPLLRegisterOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::JTAGPhyRegisterOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PhyConfigFPGAOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PhyConfigChipOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PhyStatusOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CommonPhyConfigFPGAOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CommonPhyConfigChipOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::TimerOnDLS)

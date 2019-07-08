@@ -40,6 +40,7 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     JTAGPhyRegisterOnDLS             => linear, iterable
     PhyConfigFPGAOnDLS               => linear, iterable
     PhyConfigChipOnDLS               => linear, iterable
+    PhyStatusOnFPGA                  => linear, iterable
     CommonPhyConfigFPGAOnDLS         => linear, iterable
     CommonPhyConfigChipOnDLS         => linear, iterable
     ADPLLOnDLS                       => linear, iterable

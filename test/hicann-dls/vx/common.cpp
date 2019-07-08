@@ -96,7 +96,8 @@ typedef ::testing::Types<
     SpikePackFromFPGAOnDLS,
     MADCSamplePackFromFPGAOnDLS,
     NullPayloadReadableOnFPGA,
-    HicannARQStatusOnFPGA>
+    HicannARQStatusOnFPGA,
+    PhyStatusOnFPGA>
     CoordinateTypes2;
 
 
