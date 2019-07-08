@@ -38,6 +38,16 @@ struct GENPYBIND(inline_base("*")) NullPayloadReadableOnFPGA
 };
 
 /*************************\
+   HicannARQStatus
+\*************************/
+
+struct GENPYBIND(inline_base("*")) HicannARQStatusOnFPGA
+    : public common::detail::RantWrapper<HicannARQStatusOnFPGA, uint_fast16_t, 0, 0>
+{
+	constexpr explicit HicannARQStatusOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+/*************************\
    BackgroundSpikeSource
 \*************************/
 
@@ -903,6 +913,7 @@ struct GENPYBIND(inline_base("*")) CommonSynramConfigOnDLS
 namespace std {
 
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NullPayloadReadableOnFPGA)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::HicannARQStatusOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::BackgroundSpikeSourceOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PerfTestOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PerfTestStatusOnFPGA)

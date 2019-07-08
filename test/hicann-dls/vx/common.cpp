@@ -95,7 +95,8 @@ typedef ::testing::Types<
     CommonSynramConfigOnDLS,
     SpikePackFromFPGAOnDLS,
     MADCSamplePackFromFPGAOnDLS,
-    NullPayloadReadableOnFPGA>
+    NullPayloadReadableOnFPGA,
+    HicannARQStatusOnFPGA>
     CoordinateTypes2;
 
 
