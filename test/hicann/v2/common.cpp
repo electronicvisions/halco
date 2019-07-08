@@ -47,6 +47,7 @@ typedef ::testing::Types<
 	HRepeaterOnHICANN,
 	HRepeaterOnWafer,
 	IPv4,
+	JTAGFrequency,
 	Merger0OnHICANN,
 	Merger1OnHICANN,
 	Merger2OnHICANN,

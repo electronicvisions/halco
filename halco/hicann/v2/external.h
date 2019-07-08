@@ -133,6 +133,10 @@ struct Host : public common::detail::BaseType<Host, size_t> {
 	PYPP_CONSTEXPR explicit Host() : base_t() {}
 };
 
+// JTAG TCK Frequency in Hz
+struct JTAGFrequency : public common::detail::RantWrapper<JTAGFrequency, size_t, 50000000, 10000> {
+	PYPP_CONSTEXPR explicit JTAGFrequency(size_t val = 10000000) : rant_t(val) {}
+};
 
 // Power Management Unit
 struct PMU : public common::detail::BaseType<PMU, size_t> {
@@ -265,6 +269,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::UDPPort)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::TCPPort)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::PMU)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::Host)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::JTAGFrequency)
 
 template <>
 struct hash<halco::hicann::v2::IPv4> {

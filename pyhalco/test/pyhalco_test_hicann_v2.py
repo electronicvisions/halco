@@ -36,6 +36,7 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
     HRepeaterOnWafer      =>
     Host                  =>
     IPv4                  =>
+    JTAGFrequency         =>
     Merger0OnHICANN       => linear, iterable
     Merger1OnHICANN       => linear, iterable
     Merger2OnHICANN       => linear, iterable
@@ -85,6 +86,9 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
     SetupType             => ignore
     VSetup                => ignore
     """
+
+    # remark: JTAGFrequency is iterable and linear but we skip tests as the range is large and
+    #         takes allot of time
 
     @staticmethod
     def get_module():
