@@ -503,6 +503,16 @@ struct GENPYBIND(inline_base("*")) OmnibusFPGAAddress
 };
 
 /***********\
+    I2C
+\***********/
+
+struct GENPYBIND(inline_base("*")) I2CIdRegisterOnBoard
+    : public common::detail::RantWrapper<I2CIdRegisterOnBoard, uint_fast16_t, 0, 0>
+{
+	constexpr explicit I2CIdRegisterOnBoard(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+/***********\
     SPI
 \***********/
 
@@ -990,6 +1000,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemCellOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemRowOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemColumnOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CommonSynramConfigOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::I2CIdRegisterOnBoard)
 
 } // namespace std
 

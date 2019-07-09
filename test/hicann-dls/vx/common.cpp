@@ -97,7 +97,8 @@ typedef ::testing::Types<
     MADCSamplePackFromFPGAOnDLS,
     NullPayloadReadableOnFPGA,
     HicannARQStatusOnFPGA,
-    PhyStatusOnFPGA>
+    PhyStatusOnFPGA,
+    I2CIdRegisterOnBoard>
     CoordinateTypes2;
 
 
