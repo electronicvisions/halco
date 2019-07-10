@@ -236,6 +236,13 @@ public:
 	DETAIL_OSTREAM(Derived)
 	DETAIL_ISTREAM(Derived)
 
+	template <size_t N>
+	std::bitset<N> to_bitset() const
+	{
+		typedef std::bitset<N> bit_type;
+		return bit_type(value());
+	}
+
 	GENPYBIND(expose_as(__hash__))
 	size_t hash() const
 	{
