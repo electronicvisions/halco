@@ -98,7 +98,12 @@ typedef ::testing::Types<
     NullPayloadReadableOnFPGA,
     HicannARQStatusOnFPGA,
     PhyStatusOnFPGA,
-    I2CIdRegisterOnBoard>
+    I2CIdRegisterOnBoard,
+    I2CINA219RoRegisterOnINA219,
+    I2CINA219RwRegisterOnINA219,
+    INA219OnBoard,
+    I2CINA219RoRegisterOnBoard,
+    I2CINA219RwRegisterOnBoard>
     CoordinateTypes2;
 
 

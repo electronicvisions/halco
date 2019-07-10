@@ -11,6 +11,11 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     MADCSamplePackFromFPGAOnDLS      => linear, iterable
     NullPayloadReadableOnFPGA        => linear, iterable
     I2CIdRegisterOnBoard             => linear, iterable
+    I2CINA219RoRegisterOnINA219      => linear, iterable
+    I2CINA219RwRegisterOnINA219      => linear, iterable
+    INA219OnBoard                    => linear, iterable
+    I2CINA219RoRegisterOnBoard       => linear, iterable
+    I2CINA219RwRegisterOnBoard       => linear, iterable
     HicannARQStatusOnFPGA            => linear, iterable
     BackgroundSpikeSourceOnDLS       => linear, iterable
     PerfTestOnFPGA                   => linear, iterable
