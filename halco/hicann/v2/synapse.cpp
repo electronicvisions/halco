@@ -91,6 +91,35 @@ SynapseArrayOnHICANN SynapseDriverOnHICANN::toSynapseArrayOnHICANN() const {
 	return SynapseArrayOnHICANN(toSideVertical());
 }
 
+SynapseRowOnArray SynapseRowOnHICANN::toSynapseRowOnArray() const
+{
+	if (toSynapseArrayOnHICANN().isTop()) {
+		return SynapseRowOnArray(value());
+	} else {
+		return SynapseRowOnArray(value() - SynapseRowOnArray::end);
+	}
+}
+
+SynapseRowOnHICANN::SynapseRowOnHICANN(SynapseRowOnArray const& row,
+                                       SynapseArrayOnHICANN const& synarray)
+{
+	if (synarray.isTop()) {
+		*this = SynapseRowOnHICANN(row.value());
+	} else {
+		*this = SynapseRowOnHICANN(SynapseRowOnArray::end + row.value());
+	}
+}
+
+SynapseRowOnArray::SynapseRowOnArray(SynapseDriverOnHICANN const& drv,
+                                     RowOnSynapseDriver const& row)
+{
+	if (drv.y() < (SynapseRowOnArray::end / 2)) {
+		*this = SynapseRowOnArray(drv.y() * 2 + row);
+	} else {
+		*this = SynapseRowOnArray(drv.y() * 2 + row - SynapseRowOnArray::end);
+	}
+}
+
 } // v2
 } // hicann
 } // halco

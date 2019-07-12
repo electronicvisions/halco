@@ -52,6 +52,7 @@ struct SynapseDriverOnQuadrant;
 struct SynapseOnHICANN;
 struct SynapseOnWafer;
 struct SynapseRowOnHICANN;
+struct SynapseRowOnArray;
 struct SynapseSwitchOnHICANN;
 struct SynapseSwitchRowOnHICANN;
 struct TCPPort;

@@ -169,6 +169,8 @@ struct SynapseRowOnHICANN
 	                            RowOnSynapseDriver const& row)
 	    : rant_t(drv.y() * 2 + row) {}
 
+	explicit SynapseRowOnHICANN(SynapseRowOnArray const& row, SynapseArrayOnHICANN const& synarray);
+
 	PYPP_CONSTEXPR explicit SynapseRowOnHICANN(common::Y const& y) : rant_t(y.value()) {}
 	PYPP_CONSTEXPR explicit SynapseRowOnHICANN(uintmax_t const val) : rant_t(val) {}
 
@@ -186,6 +188,21 @@ struct SynapseRowOnHICANN
 		return toSynapseDriverOnHICANN().toSynapseArrayOnHICANN();
 	}
 
+	SynapseRowOnArray toSynapseRowOnArray() const;
+};
+
+/** SynapseRow coordinate on (either top or botom) synapse array.
+ * Each synapse driver drives two synapse rows.
+ */
+struct SynapseRowOnArray
+    : public common::detail::RantWrapper<SynapseRowOnArray, uint_fast8_t, 224 - 1, 0>,
+	  public common::detail::YRangedTrait {
+	explicit SynapseRowOnArray(SynapseDriverOnHICANN const& drv, RowOnSynapseDriver const& row);
+
+	PYPP_CONSTEXPR explicit SynapseRowOnArray(common::Y const& y) : rant_t(y.value()) {}
+	PYPP_CONSTEXPR explicit SynapseRowOnArray(uintmax_t const val) : rant_t(val) {}
+
+	PYPP_DEFAULT(SynapseRowOnArray());
 };
 
 struct SynapseColumnOnHICANN
@@ -248,6 +265,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SynapseSwitchRowOnHICANN)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SynapseSwitchRowOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::RowOnSynapseDriver)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SynapseRowOnHICANN)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SynapseRowOnArray)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SynapseColumnOnHICANN)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SynapseOnHICANN)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SynapseOnWafer)

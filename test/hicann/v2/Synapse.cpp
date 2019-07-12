@@ -103,6 +103,25 @@ TEST(SynapseOnHICANN, SpotCheck) {
 	EXPECT_EQ(s.toNeuronOnHICANN(), NeuronOnHICANN(X(42), Y(1)));
 }
 
+TEST(SynapseRowOnHICANN, ConversionBetweenSynapseRowOnArray)
+{
+	for (auto srow : iter_all<SynapseRowOnHICANN>()) {
+		auto srow_back =
+		    SynapseRowOnHICANN(srow.toSynapseRowOnArray(), srow.toSynapseArrayOnHICANN());
+		EXPECT_EQ(srow, srow_back);
+	}
+}
+
+TEST(SynapseArrayOnHICANN, ConversionBetweenSynapseRowOnHICANN)
+{
+	for (auto srow : iter_all<SynapseRowOnArray>()) {
+		for (auto synarray : iter_all<SynapseArrayOnHICANN>()) {
+			auto srow_back = SynapseRowOnHICANN(srow, synarray).toSynapseRowOnArray();
+			EXPECT_EQ(srow, srow_back);
+		}
+	}
+}
+
 TEST(SynapseSwitchOnHICANN, Columns)
 {
 	for (auto x : iter_all<SynapseSwitchOnHICANN::x_type>()) {

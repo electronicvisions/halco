@@ -80,6 +80,7 @@ typedef ::testing::Types<
 	SynapseOnHICANN,
 	SynapseOnWafer,
 	SynapseRowOnHICANN,
+	SynapseRowOnArray,
 	SynapseSwitchOnHICANN,
 	SynapseSwitchRowOnHICANN,
 	SynapticInputOnNeuron,
