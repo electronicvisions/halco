@@ -23,6 +23,10 @@ template <typename T>
 class CommonCoordinateTest2 : public ::testing::Test
 {};
 
+template <typename T>
+class CommonCoordinateTest3 : public ::testing::Test
+{};
+
 typedef ::testing::Types<
     ResetChipOnDLS,
     ResetJTAGTapOnDLS,
@@ -128,15 +132,28 @@ typedef ::testing::Types<
     CrossbarInputOnDLS>
     CoordinateTypes2;
 
+typedef ::testing::Types<
+    ColumnCorrelationQuadOnSynram,
+    ColumnCurrentQuadOnSynram,
+    ColumnCorrelationQuadOnDLS,
+    ColumnCurrentQuadOnDLS,
+    ColumnCorrelationSwitchOnColumnCorrelationQuad,
+    ColumnCurrentSwitchOnColumnCurrentQuad>
+    CoordinateTypes3;
+
 
 TYPED_TEST_CASE(CommonCoordinateTest1, CoordinateTypes1);
 TYPED_TEST_CASE(CommonCoordinateTest2, CoordinateTypes2);
+TYPED_TEST_CASE(CommonCoordinateTest3, CoordinateTypes3);
 
 #define TEST_CEREAL
 #define COMMON_FIXTURE_NAME CommonCoordinateTest1
 #include "test/HALCO_COMMON.cxx"
 #undef COMMON_FIXTURE_NAME
 #define COMMON_FIXTURE_NAME CommonCoordinateTest2
+#include "test/HALCO_COMMON.cxx"
+#undef COMMON_FIXTURE_NAME
+#define COMMON_FIXTURE_NAME CommonCoordinateTest3
 #include "test/HALCO_COMMON.cxx"
 #undef COMMON_FIXTURE_NAME
 #undef TEST_CEREAL

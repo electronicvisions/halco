@@ -107,6 +107,12 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     PADIBusOnDLS                      => linear,iterable
     PADIBusOnPADIBusBlock             => linear,iterable
     PADIEventOnDLS                    => linear,iterable
+    ColumnCorrelationQuadOnSynram   => linear, iterable
+    ColumnCurrentQuadOnSynram       => linear, iterable
+    ColumnCorrelationQuadOnDLS      => linear, iterable
+    ColumnCurrentQuadOnDLS          => linear, iterable
+    ColumnCorrelationSwitchOnColumnCorrelationQuad => linear, iterable
+    ColumnCurrentSwitchOnColumnCurrentQuad         => linear, iterable
     """
     # clang-format on
     @staticmethod
