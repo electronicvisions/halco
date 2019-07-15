@@ -7,6 +7,8 @@ from pyhalco_test_utils import parametrize, PyhalcoTest
 class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     # clang-format off
     COORDINATES = """
+    SpikePackFromFPGAOnDLS           => linear, iterable
+    MADCSamplePackFromFPGAOnDLS      => linear, iterable
     BackgroundSpikeSourceOnDLS       => linear, iterable
     PerfTestOnFPGA                   => linear, iterable
     PerfTestStatusOnFPGA             => linear, iterable

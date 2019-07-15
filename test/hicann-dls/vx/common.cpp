@@ -92,7 +92,9 @@ typedef ::testing::Types<
     NeuronLabel,
     SPL1Address,
     BackgroundSpikeSourceOnDLS,
-    CommonSynramConfigOnDLS>
+    CommonSynramConfigOnDLS,
+    SpikePackFromFPGAOnDLS,
+    MADCSamplePackFromFPGAOnDLS>
     CoordinateTypes2;
 
 

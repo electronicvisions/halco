@@ -79,6 +79,22 @@ struct GENPYBIND(inline_base("*")) SpikePack3ToChipOnDLS
 	constexpr explicit SpikePack3ToChipOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
 
+struct GENPYBIND(inline_base("*")) SpikePackFromFPGAOnDLS
+    : public halco::common::detail::RantWrapper<SpikePackFromFPGAOnDLS, uint_fast16_t, 3, 1>
+{
+	explicit SpikePackFromFPGAOnDLS(uintmax_t const value = 1) GENPYBIND(implicit_conversion) :
+	    rant_t(value)
+	{}
+};
+
+struct GENPYBIND(inline_base("*")) MADCSamplePackFromFPGAOnDLS
+    : public halco::common::detail::RantWrapper<MADCSamplePackFromFPGAOnDLS, uint_fast16_t, 3, 1>
+{
+	explicit MADCSamplePackFromFPGAOnDLS(uintmax_t const value = 1) GENPYBIND(implicit_conversion) :
+	    rant_t(value)
+	{}
+};
+
 /************\
     Systime
 \************/
@@ -877,6 +893,8 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PerfTestStatusOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikePack1ToChipOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikePack2ToChipOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikePack3ToChipOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikePackFromFPGAOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::MADCSamplePackFromFPGAOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SystimeSyncOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SystimeSyncBaseOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCConfigOnDLS)
