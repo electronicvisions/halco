@@ -17,8 +17,8 @@ def _iter_all(Type):
         while value < Type.size:
             yield make(value)
             value += 1
-            if (value % Type.bound_type.size == Type.bound_type.size - value / Type.bound_type.size):
-                value = Type.bound_type.size * (value / Type.bound_type.size + 1)
+            if (value % Type.bound_type.size == Type.bound_type.size - value // Type.bound_type.size):
+                value = Type.bound_type.size * (value // Type.bound_type.size + 1)
     else:
         for value in range(value_type.begin, value_type.end):
             yield make(value)

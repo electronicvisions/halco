@@ -16,7 +16,7 @@ def for_coordinates_with_category(category):
 
 # TODO: Use meta-class instead of class decorator?
 def parametrize(cls):
-    for method_name, method in inspect.getmembers(cls, predicate=inspect.ismethod):
+    for method_name, method in inspect.getmembers(cls, predicate=lambda x: inspect.isfunction(x) or inspect.ismethod(x)):
         if hasattr(method, "category"):
             coordinates = cls.coordinates_with_category(method.category)
             for name_ in coordinates:
@@ -105,7 +105,7 @@ class PyhalcoTest(object):
 
         module = self.get_module()
         in_namespace = set(name for name in dir(module)
-                           if (name[0] in string.uppercase
+                           if (name[0] in string.ascii_uppercase
                                and '_' not in name))
         in_namespace.difference_update(self.coordinates_with_category('ignore'))
         in_namespace.difference_update(self.coordinates_with_category('all'))
