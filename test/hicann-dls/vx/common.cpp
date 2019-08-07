@@ -103,7 +103,8 @@ typedef ::testing::Types<
     I2CINA219RwRegisterOnINA219,
     INA219OnBoard,
     I2CINA219RoRegisterOnBoard,
-    I2CINA219RwRegisterOnBoard>
+    I2CINA219RwRegisterOnBoard,
+    FPGADeviceDNAOnFPGA>
     CoordinateTypes2;
 
 

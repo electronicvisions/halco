@@ -22,6 +22,19 @@ namespace vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 class PPUOnDLS;
 
+/******\
+  FPGA
+\******/
+
+/**
+ * Unique identifier on FPGA.
+ */
+struct GENPYBIND(inline_base("*")) FPGADeviceDNAOnFPGA
+    : public common::detail::RantWrapper<FPGADeviceDNAOnFPGA, uint_fast16_t, 0, 0>
+{
+	constexpr explicit FPGADeviceDNAOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
+};
+
 /************\
    Loopback
 \************/
@@ -1009,6 +1022,7 @@ struct GENPYBIND(inline_base("*")) CommonSynramConfigOnDLS
 // std::hash specializations
 namespace std {
 
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::FPGADeviceDNAOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NullPayloadReadableOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::HicannARQStatusOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::BackgroundSpikeSourceOnDLS)
