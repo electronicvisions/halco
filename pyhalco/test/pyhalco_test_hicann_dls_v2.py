@@ -6,6 +6,7 @@ from pyhalco_test_utils import parametrize, PyhalcoTest
 @parametrize
 class Test_PyhalcoHICANNDLSv2(unittest.TestCase, PyhalcoTest):
     COORDINATES = """
+    BoardOnFPGA                      => linear, iterable
     CapMemCellOnDLS                  => grid, iterable
     CapMemColumnOnDLS                => linear, iterable
     CapMemRowOnDLS                   => linear, iterable
@@ -21,6 +22,9 @@ class Test_PyhalcoHICANNDLSv2(unittest.TestCase, PyhalcoTest):
     ColumnCurrentSwitchOnDLS         => linear, iterable
     CommonNeuronParameter            => ignore
     DACOnBoard                       => linear, iterable
+    FlyspiConfigOnFPGA               => linear, iterable
+    FlyspiControlOnFPGA              => linear, iterable
+    FlyspiExceptionOnFPGA            => linear, iterable
     NeuronOnDLS                      => linear, iterable
     NeuronParameter                  => ignore
     PPUMemoryBlockOnDLS              => interval, iterable
@@ -29,6 +33,7 @@ class Test_PyhalcoHICANNDLSv2(unittest.TestCase, PyhalcoTest):
     PPUMemoryOnDLS                   => linear, iterable
     PPUStatusRegisterOnDLS           => linear, iterable
     PPUControlRegisterOnDLS          => linear, iterable
+    SpikeRouterOnFPGA                => linear, iterable
     SynapseBlockOnDLS                => grid, iterable
     SynapseBlockColumnOnDLS          => linear, iterable
     SynapseDriverOnDLS               => linear, iterable

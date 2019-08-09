@@ -67,3 +67,28 @@ TEST(PPUMemoryBlockOnDLS, IterateIntervalMax)
 		num++;
 	}
 }
+
+TEST(BoardOnFPGA, RespectsBounds) {
+	EXPECT_ANY_THROW(BoardOnFPGA(1));
+	EXPECT_NO_THROW(BoardOnFPGA(0));
+}
+
+TEST(FlyspiConfigOnFPGA, RespectsBounds) {
+	EXPECT_ANY_THROW(FlyspiConfigOnFPGA(1));
+	EXPECT_NO_THROW(FlyspiConfigOnFPGA(0));
+}
+
+TEST(FlyspiControlOnFPGA, RespectsBounds) {
+	EXPECT_ANY_THROW(FlyspiControlOnFPGA(1));
+	EXPECT_NO_THROW(FlyspiControlOnFPGA(0));
+}
+
+TEST(FlyspiExceptionOnFPGA, RespectsBounds) {
+	EXPECT_ANY_THROW(FlyspiExceptionOnFPGA(1));
+	EXPECT_NO_THROW(FlyspiExceptionOnFPGA(0));
+}
+
+TEST(SpikeRouterOnFPGA, RespectsBounds) {
+	EXPECT_ANY_THROW(SpikeRouterOnFPGA(1));
+	EXPECT_NO_THROW(SpikeRouterOnFPGA(0));
+}

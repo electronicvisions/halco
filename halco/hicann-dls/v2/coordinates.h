@@ -518,6 +518,41 @@ struct GENPYBIND(inline_base("*")) RateCounterOnDLS
 	constexpr explicit RateCounterOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
 
+/****************\
+   FPGA Config
+\****************/
+
+struct GENPYBIND(inline_base("*")) BoardOnFPGA
+	: public common::detail::RantWrapper<BoardOnFPGA, uint_fast16_t, 0, 0>
+{
+	constexpr explicit BoardOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+struct GENPYBIND(inline_base("*")) FlyspiConfigOnFPGA
+	: public common::detail::RantWrapper<FlyspiConfigOnFPGA, uint_fast16_t, 0, 0>
+{
+	constexpr explicit FlyspiConfigOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+struct GENPYBIND(inline_base("*")) FlyspiControlOnFPGA
+	: public common::detail::RantWrapper<FlyspiControlOnFPGA, uint_fast16_t, 0, 0>
+{
+	constexpr explicit FlyspiControlOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+struct GENPYBIND(inline_base("*")) FlyspiExceptionOnFPGA
+	: public common::detail::RantWrapper<FlyspiExceptionOnFPGA, uint_fast16_t, 0, 0>
+{
+	constexpr explicit FlyspiExceptionOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+struct GENPYBIND(inline_base("*")) SpikeRouterOnFPGA
+	: public common::detail::RantWrapper<SpikeRouterOnFPGA, uint_fast16_t, 0, 0>
+{
+	constexpr explicit SpikeRouterOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+
 } // namespace v2
 } // namespace hicann_dls
 } // namespace halco
@@ -525,6 +560,7 @@ struct GENPYBIND(inline_base("*")) RateCounterOnDLS
 // std::hash specializations
 namespace std {
 
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::BoardOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::CapMemCellOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::CapMemColumnOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::CapMemRowOnDLS)
@@ -539,6 +575,9 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::ColumnCurrentBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::ColumnCurrentSwitchOnColumnCurrentBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::ColumnCurrentSwitchOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::CorrelationConfigOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::FlyspiConfigOnFPGA)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::FlyspiControlOnFPGA)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::FlyspiExceptionOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::NeuronOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::PPUMemoryWordOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::PPUMemoryBlockSize)
@@ -552,6 +591,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::SynapseDriverOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::SynapseDriverBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::SynapseOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::SynapseOnSynapseBlock)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::SpikeRouterOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::RateCounterOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::v2::RateCounterConfigOnDLS)
 
