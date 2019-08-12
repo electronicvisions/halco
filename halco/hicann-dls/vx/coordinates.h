@@ -459,10 +459,22 @@ struct GENPYBIND(inline_base("*")) CommonPhyConfigChipOnDLS
     PLL
 \**********/
 
-struct GENPYBIND(inline_base("*")) PLLOnDLS
-    : public common::detail::RantWrapper<PLLOnDLS, uint_fast16_t, 0, 0>
+struct GENPYBIND(inline_base("*")) PLLSelfTestOnDLS
+    : public common::detail::RantWrapper<PLLSelfTestOnDLS, uint_fast16_t, 0, 0>
 {
-	constexpr explicit PLLOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+	constexpr explicit PLLSelfTestOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+struct GENPYBIND(inline_base("*")) PLLSelfTestStatusOnDLS
+    : public common::detail::RantWrapper<PLLSelfTestStatusOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit PLLSelfTestStatusOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+struct GENPYBIND(inline_base("*")) PLLClockOutputBlockOnDLS
+    : public common::detail::RantWrapper<PLLClockOutputBlockOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit PLLClockOutputBlockOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
 
 struct GENPYBIND(inline_base("*")) ADPLLOnDLS
@@ -1211,7 +1223,9 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronLabel)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SPL1Address)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ADPLLOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLClockOutputOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLSelfTestOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLSelfTestStatusOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLClockOutputBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ResetChipOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ResetJTAGTapOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::JTAGClockScalerOnDLS)

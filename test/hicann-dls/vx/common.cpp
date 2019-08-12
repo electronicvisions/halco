@@ -36,7 +36,7 @@ typedef ::testing::Types<
     CommonPhyConfigFPGAOnDLS,
     ADPLLOnDLS,
     PLLClockOutputOnDLS,
-    PLLOnDLS,
+    PLLClockOutputBlockOnDLS,
     TimerOnDLS,
     OmnibusChipOverJTAGAddress,
     OmnibusChipAddress,
@@ -114,7 +114,9 @@ typedef ::testing::Types<
     SynapseDriverOnSynapseDriverBlock,
     SynapseDriverBlockOnDLS,
     SynapseDriverOnDLS,
-    CommonSynapseDriverConfigOnDLS>
+    CommonSynapseDriverConfigOnDLS,
+    PLLSelfTestOnDLS,
+    PLLSelfTestStatusOnDLS>
     CoordinateTypes2;
 
 
