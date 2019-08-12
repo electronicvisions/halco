@@ -6,12 +6,13 @@
 #include "pywrap/compat/array.hpp"
 #include <boost/serialization/array.h>
 
+#include "halco/common/genpybind.h"
 #include "halco/common/lookup_tables_helper.h"
 #include "halco/hicann/v2/external.h"
 
 namespace halco {
 namespace hicann {
-namespace v2 {
+namespace v2 GENPYBIND_TAG_HALCO_HICANN_V2 {
 
 static const int invalid = halco::common::detail::invalid;
 /// List of available HICANNOnWafer Coordinates

@@ -1,7 +1,11 @@
 #!/usr/bin/env python
 
+import os
+import sys
 import unittest
 from pyhalco_test_utils import parametrize, PyhalcoTest
+
+GENPYBIND_POSTFIX = os.environ.get("GENPYBIND_POSTFIX", False)
 
 @parametrize
 class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
@@ -29,7 +33,7 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
     AnanasSliceGlobal     =>
     AnanasOnWafer         => linear, iterable
     AnanasSliceOnAnanas   => linear, iterable
-    AnanasSliceOnWafer    => linear, iterable
+    AnanasSliceOnWafer    => linear
     AuxPwrGlobal          =>
     AuxPwrOnWafer         => linear, iterable
     GbitLinkOnHICANN      => linear, iterable
@@ -46,7 +50,7 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
     HRepeaterOnHICANN     => grid, iterable
     HRepeaterOnWafer      => iterable
     Host                  =>
-    IPv4                  =>
+    IPv4                  => ignore
     JTAGFrequency         =>
     Merger0OnHICANN       => linear, iterable
     Merger1OnHICANN       => linear, iterable
@@ -108,23 +112,39 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
 
     # remark: JTAGFrequency is iterable and linear but we skip tests as the range is large and
     #         takes allot of time
+    # remark: IPv4 is not pickleable only in genpybind-based wrapping
+    # remark: AnanasSliceOnWafer is not iterable only for genpybind for python2 wrapping
 
     @staticmethod
     def get_module():
-        import pyhalco_hicann_v2
+        if GENPYBIND_POSTFIX:
+            import pyhalco_hicann_v2_genpybind as pyhalco_hicann_v2
+        else:
+            import pyhalco_hicann_v2
         return pyhalco_hicann_v2
 
     def test_implicit_conversion(self):
-        import pyhalco_hicann_v2 as C
+        if GENPYBIND_POSTFIX:
+            import pyhalco_hicann_v2_genpybind as C
+        else:
+            import pyhalco_hicann_v2 as C
         dnc = C.DNCMergerOnHICANN(5)
-        link = C.GbitLinkOnHICANN(dnc)
-        dnc_ = C.DNCMergerOnHICANN(link)
+        if GENPYBIND_POSTFIX and sys.version_info.major == 2:
+            link = C.GbitLinkOnHICANN(int(dnc))
+            dnc_ = C.DNCMergerOnHICANN(int(link))
+        else:
+            link = C.GbitLinkOnHICANN(dnc)
+            dnc_ = C.DNCMergerOnHICANN(link)
         self.assertEqual(5, link.value())
         self.assertEqual(5, dnc_.value())
 
     def test_format_helper(self):
-        import pyhalco_hicann_v2 as C
-        from pyhalco_common import Enum
+        if GENPYBIND_POSTFIX:
+            import pyhalco_hicann_v2_genpybind as C
+            from pyhalco_common_genpybind import Enum
+        else:
+            import pyhalco_hicann_v2 as C
+            from pyhalco_common import Enum
 
         w = C.Wafer(2)
         self.assertEqual(C.short_format(w),  "W002")
@@ -133,7 +153,10 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
         self.assertEqual(C.from_string("W02"), w)
         self.assertEqual(C.from_string("W2"), w)
 
-        a = C.AnanasOnWafer(Enum(1))
+        if GENPYBIND_POSTFIX and sys.version_info.major == 2:
+            a = C.AnanasOnWafer(int(Enum(1)))
+        else:
+            a = C.AnanasOnWafer(Enum(1))
         self.assertEqual(C.short_format(a), "A1")
         self.assertEqual(C.to_string(a), "A1")
         self.assertEqual(C.from_string("A1"), a)
@@ -145,7 +168,10 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
         self.assertEqual(C.from_string("W02A1"), ag)
         self.assertEqual(C.from_string("W2A1"), ag)
 
-        a = C.AuxPwrOnWafer(Enum(1))
+        if GENPYBIND_POSTFIX and sys.version_info.major == 2:
+            a = C.AuxPwrOnWafer(int(Enum(1)))
+        else:
+            a = C.AuxPwrOnWafer(Enum(1))
         self.assertEqual(C.short_format(a), "AP1")
         self.assertEqual(C.to_string(a), "AP1")
         self.assertEqual(C.from_string("AP1"), a)
@@ -171,7 +197,10 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
         self.assertEqual(C.from_string("W02H03"), hg)
         self.assertEqual(C.from_string("W2H3"), hg)
 
-        f = C.FPGAOnWafer(Enum(4))
+        if GENPYBIND_POSTFIX and sys.version_info.major == 2:
+            f = C.FPGAOnWafer(int(Enum(4)))
+        else:
+            f = C.FPGAOnWafer(Enum(4))
         self.assertEqual(C.short_format(f),  "F004")
         self.assertEqual(C.to_string(f),  "F004")
         self.assertEqual(C.from_string("F004"), f)
@@ -199,7 +228,10 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
         self.assertEqual(C.from_string("W02D04"), dg)
         self.assertEqual(C.from_string("W2D4"), dg)
 
-        t = C.TriggerOnWafer(Enum(1))
+        if GENPYBIND_POSTFIX and sys.version_info.major == 2:
+            t = C.TriggerOnWafer(int(Enum(1)))
+        else:
+            t = C.TriggerOnWafer(Enum(1))
         self.assertEqual(C.short_format(t), "T01")
         self.assertEqual(C.to_string(t), "T01")
         self.assertEqual(C.from_string("T01"), t)
@@ -257,7 +289,10 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
         self.assertEqual(C.from_string("H03VR6"), vr_on_wafer)
         self.assertEqual(C.from_string("H3VR6"), vr_on_wafer)
 
-        hl = C.HLineOnHICANN(Enum(5))
+        if GENPYBIND_POSTFIX and sys.version_info.major == 2:
+            hl = C.HLineOnHICANN(int(Enum(5)))
+        else:
+            hl = C.HLineOnHICANN(Enum(5))
         self.assertEqual(C.short_format(hl), "HL005")
         self.assertEqual(C.to_string(hl), "HL005")
         self.assertEqual(C.from_string("HL005"), hl)
@@ -277,7 +312,10 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
         self.assertEqual(C.from_string("H03HL5"), hl_on_wafer)
         self.assertEqual(C.from_string("H3HL5"), hl_on_wafer)
 
-        vl = C.VLineOnHICANN(Enum(6))
+        if GENPYBIND_POSTFIX and sys.version_info.major == 2:
+            vl = C.VLineOnHICANN(int(Enum(6)))
+        else:
+            vl = C.VLineOnHICANN(Enum(6))
         self.assertEqual(C.short_format(vl), "VL006")
         self.assertEqual(C.to_string(vl), "VL006")
         self.assertEqual(C.from_string("VL006"), vl)
@@ -327,8 +365,12 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
         self.assertEqual(C.from_string("N6"), nrn)
 
     def test_synapseswitchrow_driver(self):
-        import pyhalco_hicann_v2 as C
-        from pyhalco_common import Enum, left, Y
+        if GENPYBIND_POSTFIX:
+            import pyhalco_hicann_v2_genpybind as C
+            from pyhalco_common_genpybind import Enum, left, Y
+        else:
+            import pyhalco_hicann_v2 as C
+            from pyhalco_common import Enum, left, Y
 
         hicann = C.HICANNOnWafer(Enum(5))
         left_hicann = C.HICANNOnWafer(Enum(4))
@@ -341,28 +383,54 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
         """
         spot checks conversion to L1 lines on neighbor HICANN
         """
-        import pyhalco_hicann_v2 as C
-        from pyhalco_common import Enum
+        if GENPYBIND_POSTFIX:
+            import pyhalco_hicann_v2_genpybind as C
+            from pyhalco_common_genpybind import Enum
+        else:
+            import pyhalco_hicann_v2 as C
+            from pyhalco_common import Enum
 
-        # neighbour HICANN is connected right
-        hrepeater = C.HLineOnWafer(C.HLineOnHICANN(Enum(3)), C.HICANNOnWafer(Enum(13))).toHRepeaterOnWafer()[0]
-        self.assertEqual(hrepeater.toHLineOnWafer()[1],
-                         C.HLineOnWafer(C.HLineOnHICANN(Enum(5)), C.HICANNOnWafer(Enum(14))))
+        if GENPYBIND_POSTFIX and sys.version_info.major == 2:
+            # neighbour HICANN is connected right
+            hrepeater = C.HLineOnWafer(C.HLineOnHICANN(int(Enum(3))), C.HICANNOnWafer(Enum(13))).toHRepeaterOnWafer()[0]
+            self.assertEqual(hrepeater.toHLineOnWafer()[1],
+                             C.HLineOnWafer(C.HLineOnHICANN(int(Enum(5))), C.HICANNOnWafer(Enum(14))))
 
-        # neighbor HICANN is connected left
-        hrepeater = C.HLineOnWafer(C.HLineOnHICANN(Enum(2)), C.HICANNOnWafer(Enum(13))).toHRepeaterOnWafer()[0]
-        self.assertEqual(hrepeater.toHLineOnWafer()[1],
-                         C.HLineOnWafer(C.HLineOnHICANN(Enum(0)), C.HICANNOnWafer(Enum(12))))
+            # neighbor HICANN is connected left
+            hrepeater = C.HLineOnWafer(C.HLineOnHICANN(int(Enum(2))), C.HICANNOnWafer(Enum(13))).toHRepeaterOnWafer()[0]
+            self.assertEqual(hrepeater.toHLineOnWafer()[1],
+                             C.HLineOnWafer(C.HLineOnHICANN(int(Enum(0))), C.HICANNOnWafer(Enum(12))))
 
-        # neighbor HICANN is connected up
-        vrepeater = C.VLineOnWafer(C.VLineOnHICANN(Enum(1)), C.HICANNOnWafer(Enum(12))).toVRepeaterOnWafer()[0]
-        self.assertEqual(vrepeater.toVLineOnWafer()[1],
-                         C.VLineOnWafer(C.VLineOnHICANN(Enum(3)), C.HICANNOnWafer(Enum(0))))
+            # neighbor HICANN is connected up
+            vrepeater = C.VLineOnWafer(C.VLineOnHICANN(int(Enum(1))), C.HICANNOnWafer(Enum(12))).toVRepeaterOnWafer()[0]
+            self.assertEqual(vrepeater.toVLineOnWafer()[1],
+                             C.VLineOnWafer(C.VLineOnHICANN(int(Enum(3))), C.HICANNOnWafer(Enum(0))))
 
-        # neighbor HICANN is connected down
-        vrepeater = C.VLineOnWafer(C.VLineOnHICANN(Enum(2)), C.HICANNOnWafer(Enum(12))).toVRepeaterOnWafer()[0]
-        self.assertEqual(vrepeater.toVLineOnWafer()[1],
-                         C.VLineOnWafer(C.VLineOnHICANN(Enum(0)), C.HICANNOnWafer(Enum(28))))
+            # neighbor HICANN is connected down
+            vrepeater = C.VLineOnWafer(C.VLineOnHICANN(int(Enum(2))), C.HICANNOnWafer(Enum(12))).toVRepeaterOnWafer()[0]
+            self.assertEqual(vrepeater.toVLineOnWafer()[1],
+                             C.VLineOnWafer(C.VLineOnHICANN(int(Enum(0))), C.HICANNOnWafer(Enum(28))))
+
+        else:
+            # neighbour HICANN is connected right
+            hrepeater = C.HLineOnWafer(C.HLineOnHICANN(Enum(3)), C.HICANNOnWafer(Enum(13))).toHRepeaterOnWafer()[0]
+            self.assertEqual(hrepeater.toHLineOnWafer()[1],
+                             C.HLineOnWafer(C.HLineOnHICANN(Enum(5)), C.HICANNOnWafer(Enum(14))))
+
+            # neighbor HICANN is connected left
+            hrepeater = C.HLineOnWafer(C.HLineOnHICANN(int(Enum(2))), C.HICANNOnWafer(Enum(13))).toHRepeaterOnWafer()[0]
+            self.assertEqual(hrepeater.toHLineOnWafer()[1],
+                             C.HLineOnWafer(C.HLineOnHICANN(int(Enum(0))), C.HICANNOnWafer(Enum(12))))
+
+            # neighbor HICANN is connected up
+            vrepeater = C.VLineOnWafer(C.VLineOnHICANN(Enum(1)), C.HICANNOnWafer(Enum(12))).toVRepeaterOnWafer()[0]
+            self.assertEqual(vrepeater.toVLineOnWafer()[1],
+                             C.VLineOnWafer(C.VLineOnHICANN(Enum(3)), C.HICANNOnWafer(Enum(0))))
+
+            # neighbor HICANN is connected down
+            vrepeater = C.VLineOnWafer(C.VLineOnHICANN(Enum(2)), C.HICANNOnWafer(Enum(12))).toVRepeaterOnWafer()[0]
+            self.assertEqual(vrepeater.toVLineOnWafer()[1],
+                             C.VLineOnWafer(C.VLineOnHICANN(Enum(0)), C.HICANNOnWafer(Enum(28))))
 
         # HICANN 0 does not have a neighbor to the left
         self.assertEqual(None, C.HRepeaterOnWafer(C.HRepeaterOnHICANN(Enum(0)), C.HICANNOnWafer(Enum(0))).toHLineOnWafer()[1])
@@ -374,37 +442,67 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
         """
         spot checks conversion to L1 repeaters on neighbor HICANN
         """
-        import pyhalco_hicann_v2 as C
-        from pyhalco_common import Enum
+        if GENPYBIND_POSTFIX:
+            import pyhalco_hicann_v2_genpybind as C
+            from pyhalco_common_genpybind import Enum
+        else:
+            import pyhalco_hicann_v2 as C
+            from pyhalco_common import Enum
 
         # neighbour HICANN is connected right
-        hline = C.HLineOnWafer(C.HLineOnHICANN(Enum(4)), C.HICANNOnWafer(Enum(13)))
+        if GENPYBIND_POSTFIX and sys.version_info.major == 2:
+            hline = C.HLineOnWafer(C.HLineOnHICANN(int(Enum(4))), C.HICANNOnWafer(Enum(13)))
+        else:
+            hline = C.HLineOnWafer(C.HLineOnHICANN(Enum(4)), C.HICANNOnWafer(Enum(13)))
         self.assertEqual(hline.toHRepeaterOnWafer()[1],
                          C.HRepeaterOnWafer(C.HRepeaterOnHICANN(Enum(6)), C.HICANNOnWafer(Enum(14))))
 
         # neighbour HICANN is connected left
-        hline = C.HLineOnWafer(C.HLineOnHICANN(Enum(5)), C.HICANNOnWafer(Enum(13)))
+        if GENPYBIND_POSTFIX and sys.version_info.major == 2:
+            hline = C.HLineOnWafer(C.HLineOnHICANN(int(Enum(5))), C.HICANNOnWafer(Enum(13)))
+        else:
+            hline = C.HLineOnWafer(C.HLineOnHICANN(Enum(5)), C.HICANNOnWafer(Enum(13)))
         self.assertEqual(hline.toHRepeaterOnWafer()[1],
                          C.HRepeaterOnWafer(C.HRepeaterOnHICANN(Enum(3)), C.HICANNOnWafer(Enum(12))))
 
-        # neighbour HICANN is connected up
-        vline = C.VLineOnWafer(C.VLineOnHICANN(Enum(0)), C.HICANNOnWafer(Enum(12)))
-        self.assertEqual(vline.toVRepeaterOnWafer()[1],
-                         C.VRepeaterOnWafer(C.VLineOnHICANN(Enum(2)).toVRepeaterOnHICANN(), C.HICANNOnWafer(Enum(0))))
+        if GENPYBIND_POSTFIX and sys.version_info.major == 2:
+            # neighbour HICANN is connected up
+            vline = C.VLineOnWafer(C.VLineOnHICANN(int(Enum(0))), C.HICANNOnWafer(Enum(12)))
+            self.assertEqual(vline.toVRepeaterOnWafer()[1],
+                             C.VRepeaterOnWafer(C.VLineOnHICANN(int(Enum(2))).toVRepeaterOnHICANN(), C.HICANNOnWafer(Enum(0))))
 
-        # neighbour HICANN is connected down
-        vline = C.VLineOnWafer(C.VLineOnHICANN(Enum(3)), C.HICANNOnWafer(Enum(12)))
-        self.assertEqual(vline.toVRepeaterOnWafer()[1],
-                         C.VRepeaterOnWafer(C.VLineOnHICANN(Enum(1)).toVRepeaterOnHICANN(), C.HICANNOnWafer(Enum(28))))
+            # neighbour HICANN is connected down
+            vline = C.VLineOnWafer(C.VLineOnHICANN(int(Enum(3))), C.HICANNOnWafer(Enum(12)))
+            self.assertEqual(vline.toVRepeaterOnWafer()[1],
+                             C.VRepeaterOnWafer(C.VLineOnHICANN(int(Enum(1))).toVRepeaterOnHICANN(), C.HICANNOnWafer(Enum(28))))
 
-        # HICANN 0 does not have a neighbor to the left
-        self.assertEqual(None, C.HLineOnWafer(C.HLineOnHICANN(Enum(1)), C.HICANNOnWafer(Enum(0))).toHRepeaterOnWafer()[1])
+            # HICANN 0 does not have a neighbor to the left
+            self.assertEqual(None, C.HLineOnWafer(C.HLineOnHICANN(int(Enum(1))), C.HICANNOnWafer(Enum(0))).toHRepeaterOnWafer()[1])
 
-        # HICANN 0 does not have a neighbor up
-        self.assertEqual(None, C.VLineOnWafer(C.VLineOnHICANN(Enum(0)), C.HICANNOnWafer(Enum(0))).toVRepeaterOnWafer()[1])
+            # HICANN 0 does not have a neighbor up
+            self.assertEqual(None, C.VLineOnWafer(C.VLineOnHICANN(int(Enum(0))), C.HICANNOnWafer(Enum(0))).toVRepeaterOnWafer()[1])
+        else:
+            # neighbour HICANN is connected up
+            vline = C.VLineOnWafer(C.VLineOnHICANN(Enum(0)), C.HICANNOnWafer(Enum(12)))
+            self.assertEqual(vline.toVRepeaterOnWafer()[1],
+                             C.VRepeaterOnWafer(C.VLineOnHICANN(Enum(2)).toVRepeaterOnHICANN(), C.HICANNOnWafer(Enum(0))))
+
+            # neighbour HICANN is connected down
+            vline = C.VLineOnWafer(C.VLineOnHICANN(Enum(3)), C.HICANNOnWafer(Enum(12)))
+            self.assertEqual(vline.toVRepeaterOnWafer()[1],
+                             C.VRepeaterOnWafer(C.VLineOnHICANN(Enum(1)).toVRepeaterOnHICANN(), C.HICANNOnWafer(Enum(28))))
+
+            # HICANN 0 does not have a neighbor to the left
+            self.assertEqual(None, C.HLineOnWafer(C.HLineOnHICANN(Enum(1)), C.HICANNOnWafer(Enum(0))).toHRepeaterOnWafer()[1])
+
+            # HICANN 0 does not have a neighbor up
+            self.assertEqual(None, C.VLineOnWafer(C.VLineOnHICANN(Enum(0)), C.HICANNOnWafer(Enum(0))).toVRepeaterOnWafer()[1])
 
     def test_explicit_conversion(self):
-        import pyhalco_hicann_v2 as C
+        if GENPYBIND_POSTFIX:
+            import pyhalco_hicann_v2_genpybind as C
+        else:
+            import pyhalco_hicann_v2 as C
 
         # use some wafer != 0
         fg = C.FPGAGlobal(C.FPGAOnWafer(), C.Wafer(33))

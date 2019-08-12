@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 
+import os
 import unittest
 from pyhalco_test_utils import parametrize, PyhalcoTest
+
+GENPYBIND_POSTFIX = os.environ.get("GENPYBIND_POSTFIX", False)
 
 @parametrize
 class Test_PyhalcoCommon(unittest.TestCase, PyhalcoTest):
@@ -21,7 +24,10 @@ class Test_PyhalcoCommon(unittest.TestCase, PyhalcoTest):
 
     @staticmethod
     def get_module():
-        import pyhalco_common
+        if GENPYBIND_POSTFIX:
+            import pyhalco_common_genpybind as pyhalco_common
+        else:
+            import pyhalco_common
         return pyhalco_common
 
     def test_printable_SideHorizontal(self):
@@ -52,7 +58,10 @@ class Test_PyhalcoCommon(unittest.TestCase, PyhalcoTest):
 # There are other types in halco::common; manually tested below
 class Test_PyhalcoCommon_MiscTypes(unittest.TestCase):
     def test_ipv4(self):
-        from pyhalco_common import IPv4
+        if GENPYBIND_POSTFIX:
+            from pyhalco_common_genpybind import IPv4
+        else:
+            from pyhalco_common import IPv4
         self.assertTrue(IPv4([192,168,123,66]).to_string() == '192.168.123.66')
         self.assertTrue(list(IPv4([192,168,123,66]).to_bytes()) == [192,168,123,66])
         self.assertTrue(IPv4.any().to_string() == '0.0.0.0')

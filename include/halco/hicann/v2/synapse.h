@@ -6,27 +6,31 @@ extern "C" {
 
 #include "pywrap/compat/macros.hpp"
 
+#include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
-#include "halco/common/tblr.h"
 #include "halco/common/relations.h"
+#include "halco/common/tblr.h"
 #include "halco/hicann/v2/fwd.h"
 #include "halco/hicann/v2/hicann.h"
 #include "halco/hicann/v2/neuron.h"
 
 namespace halco {
 namespace hicann {
-namespace v2 {
+namespace v2 GENPYBIND_TAG_HALCO_HICANN_V2 {
 
-struct SynapseArrayOnHICANN
-    : public common::detail::RantWrapper<SynapseArrayOnHICANN, size_t, 1, 0>,
-      public common::detail::YRangedTrait,
-	  public common::detail::HasTopBottom<SynapseArrayOnHICANN> {
+struct GENPYBIND(inline_base("*")) SynapseArrayOnHICANN
+    : public common::detail::RantWrapper<SynapseArrayOnHICANN, size_t, 1, 0>
+    , public common::detail::YRangedTrait
+    , public common::detail::HasTopBottom<SynapseArrayOnHICANN>
+{
+	PYPP_CONSTEXPR explicit SynapseArrayOnHICANN(common::SideVertical const& v = common::top)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(v.value())
+	{}
 
-	PYPP_CONSTEXPR explicit SynapseArrayOnHICANN(
-	    common::SideVertical const& v = common::top)
-	    : rant_t(v.value()) {}
-
-	PYPP_CONSTEXPR explicit SynapseArrayOnHICANN(size_t const val) : rant_t(val) {}
+	PYPP_CONSTEXPR explicit SynapseArrayOnHICANN(size_t const val) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 };
 
 /** SynapseSwitchRowOnHICANN coordinate.
@@ -34,10 +38,12 @@ struct SynapseArrayOnHICANN
  * within the side.
  * The index is counted from top to bottom.
  */
-struct SynapseSwitchRowOnHICANN
-	: public common::detail::GridCoordinate<SynapseSwitchRowOnHICANN, common::Side, common::YRanged<223, 0> >,
-	  public common::detail::HasTopBottom<SynapseSwitchRowOnHICANN>,
-	  public common::detail::HasLeftRight<SynapseSwitchRowOnHICANN> {
+struct GENPYBIND(inline_base("*")) SynapseSwitchRowOnHICANN
+    : public common::detail::
+          GridCoordinate<SynapseSwitchRowOnHICANN, common::Side, common::YRanged<223, 0> >
+    , public common::detail::HasTopBottom<SynapseSwitchRowOnHICANN>
+    , public common::detail::HasLeftRight<SynapseSwitchRowOnHICANN>
+{
 	GRID_COMMON_CONSTRUCTORS(SynapseSwitchRowOnHICANN)
 
 	// TODO: Replace with conversion member function for consistency?
@@ -58,10 +64,12 @@ struct SynapseSwitchRowOnHICANN
  * which corresponds the row number of the adjacent synapse driver switch
  * matrix. The line number is counted from top to bottom.
  */
-struct SynapseDriverOnHICANN
-	: public common::detail::GridCoordinate<SynapseDriverOnHICANN, common::Side, common::YRanged<223, 0>, 112 * 2>,
-	  public common::detail::HasTopBottom<SynapseDriverOnHICANN>,
-	  public common::detail::HasLeftRight<SynapseDriverOnHICANN> {
+struct GENPYBIND(inline_base("*")) SynapseDriverOnHICANN
+    : public common::detail::
+          GridCoordinate<SynapseDriverOnHICANN, common::Side, common::YRanged<223, 0>, 112 * 2>
+    , public common::detail::HasTopBottom<SynapseDriverOnHICANN>
+    , public common::detail::HasLeftRight<SynapseDriverOnHICANN>
+{
 	GRID_COMMON_CONSTRUCTORS(SynapseDriverOnHICANN)
 
 	// TODO: Replace with conversion member function for consistency?
@@ -98,13 +106,14 @@ struct SynapseDriverOnHICANN
 	static enum_type to_enum(x_type const& x, y_type const& y);
 };
 
-struct SynapseDriverOnWafer
-    : public HICANNMixin<SynapseDriverOnWafer, SynapseDriverOnHICANN> {
+struct GENPYBIND(inline_base("*HICANNMixin*")) SynapseDriverOnWafer
+    : public HICANNMixin<SynapseDriverOnWafer, SynapseDriverOnHICANN>
+{
 private:
 	typedef HICANNMixin<SynapseDriverOnWafer, SynapseDriverOnHICANN> base;
 
 public:
-	using base::enum_type;
+	typedef base::enum_type enum_type GENPYBIND(opaque(false));
 
 	PYPP_DEFAULT(SynapseDriverOnWafer());
 
@@ -117,13 +126,14 @@ public:
 	SynapseDriverOnHICANN toSynapseDriverOnHICANN() const { return This(); }
 };
 
-struct SynapseSwitchRowOnWafer
-    : public HICANNMixin<SynapseSwitchRowOnWafer, SynapseSwitchRowOnHICANN> {
+struct GENPYBIND(inline_base("*HICANNMixin*")) SynapseSwitchRowOnWafer
+    : public HICANNMixin<SynapseSwitchRowOnWafer, SynapseSwitchRowOnHICANN>
+{
 private:
 	typedef HICANNMixin<SynapseSwitchRowOnWafer, SynapseSwitchRowOnHICANN> base;
 
 public:
-	using base::enum_type;
+	typedef base::enum_type enum_type GENPYBIND(opaque(false));
 
 	PYPP_DEFAULT(SynapseSwitchRowOnWafer());
 
@@ -140,21 +150,33 @@ public:
 	SynapseDriverOnWafer toSynapseDriverOnWafer() const;
 };
 
-struct SynapseDriverOnQuadrant
-    : public common::detail::RantWrapper<SynapseDriverOnQuadrant, uint_fast16_t,
-                                         SynapseDriverOnHICANN::y_type::end / 4 - 1, 0> {
-	PYPP_CONSTEXPR explicit SynapseDriverOnQuadrant(uintmax_t const val) : rant_t(val) {}
+struct GENPYBIND(inline_base("*")) SynapseDriverOnQuadrant
+    : public common::detail::RantWrapper<
+          SynapseDriverOnQuadrant,
+          uint_fast16_t,
+          SynapseDriverOnHICANN::y_type::end / 4 - 1,
+          0>
+{
+	PYPP_CONSTEXPR explicit SynapseDriverOnQuadrant(uintmax_t const val)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 
 	PYPP_DEFAULT(SynapseDriverOnQuadrant());
 
 	SynapseDriverOnHICANN toSynapseDriverOnHICANN(QuadrantOnHICANN const&) const;
 };
 
-struct RowOnSynapseDriver
-    : public common::detail::RantWrapper<RowOnSynapseDriver, uint_fast16_t, 1, 0> {
-	PYPP_CONSTEXPR explicit RowOnSynapseDriver(uintmax_t const val) : rant_t(val) {}
+struct GENPYBIND(inline_base("*")) RowOnSynapseDriver
+    : public common::detail::RantWrapper<RowOnSynapseDriver, uint_fast16_t, 1, 0>
+{
+	PYPP_CONSTEXPR explicit RowOnSynapseDriver(uintmax_t const val) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 
-	PYPP_CONSTEXPR RowOnSynapseDriver(common::SideVertical s) : rant_t(s) {}
+	PYPP_CONSTEXPR RowOnSynapseDriver(common::SideVertical s) GENPYBIND(implicit_conversion) :
+	    rant_t(s)
+	{}
 
 	PYPP_DEFAULT(RowOnSynapseDriver());
 };
@@ -162,17 +184,23 @@ struct RowOnSynapseDriver
 /** SynapseRow coordinate.
  * Each synapse driver drives two synapse rows.
  */
-struct SynapseRowOnHICANN
-    : public common::detail::RantWrapper<SynapseRowOnHICANN, uint_fast16_t, 2 * 224 - 1, 0>,
-      public common::detail::YRangedTrait {
-	explicit SynapseRowOnHICANN(SynapseDriverOnHICANN const& drv,
-	                            RowOnSynapseDriver const& row)
-	    : rant_t(drv.y() * 2 + row) {}
+struct GENPYBIND(inline_base("*")) SynapseRowOnHICANN
+    : public common::detail::RantWrapper<SynapseRowOnHICANN, uint_fast16_t, 2 * 224 - 1, 0>
+    , public common::detail::YRangedTrait
+{
+	explicit SynapseRowOnHICANN(SynapseDriverOnHICANN const& drv, RowOnSynapseDriver const& row)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(drv.y() * 2 + row)
+	{}
 
 	explicit SynapseRowOnHICANN(SynapseRowOnArray const& row, SynapseArrayOnHICANN const& synarray);
 
-	PYPP_CONSTEXPR explicit SynapseRowOnHICANN(common::Y const& y) : rant_t(y.value()) {}
-	PYPP_CONSTEXPR explicit SynapseRowOnHICANN(uintmax_t const val) : rant_t(val) {}
+	PYPP_CONSTEXPR explicit SynapseRowOnHICANN(common::Y const& y) GENPYBIND(implicit_conversion) :
+	    rant_t(y.value())
+	{}
+	PYPP_CONSTEXPR explicit SynapseRowOnHICANN(uintmax_t const val) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 
 	PYPP_DEFAULT(SynapseRowOnHICANN());
 
@@ -191,7 +219,8 @@ struct SynapseRowOnHICANN
 	SynapseRowOnArray toSynapseRowOnArray() const;
 };
 
-struct SynapseRowOnWafer : public HICANNMixin<SynapseRowOnWafer, SynapseRowOnHICANN>
+struct GENPYBIND(inline_base("*HICANNMixin*")) SynapseRowOnWafer
+    : public HICANNMixin<SynapseRowOnWafer, SynapseRowOnHICANN>
 {
 private:
 	typedef HICANNMixin<SynapseRowOnWafer, SynapseRowOnHICANN> base;
@@ -221,28 +250,44 @@ public:
 /** SynapseRow coordinate on (either top or botom) synapse array.
  * Each synapse driver drives two synapse rows.
  */
-struct SynapseRowOnArray
-    : public common::detail::RantWrapper<SynapseRowOnArray, uint_fast8_t, 224 - 1, 0>,
-	  public common::detail::YRangedTrait {
+struct GENPYBIND(inline_base("*")) SynapseRowOnArray
+    : public common::detail::RantWrapper<SynapseRowOnArray, uint_fast16_t, 224 - 1, 0>
+    , public common::detail::YRangedTrait
+{
 	explicit SynapseRowOnArray(SynapseDriverOnHICANN const& drv, RowOnSynapseDriver const& row);
 
-	PYPP_CONSTEXPR explicit SynapseRowOnArray(common::Y const& y) : rant_t(y.value()) {}
-	PYPP_CONSTEXPR explicit SynapseRowOnArray(uintmax_t const val) : rant_t(val) {}
+	PYPP_CONSTEXPR explicit SynapseRowOnArray(common::Y const& y) GENPYBIND(implicit_conversion) :
+	    rant_t(y.value())
+	{}
+	PYPP_CONSTEXPR explicit SynapseRowOnArray(uintmax_t const val) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 
 	PYPP_DEFAULT(SynapseRowOnArray());
 };
 
-struct SynapseColumnOnHICANN
-    : public common::detail::RantWrapper<SynapseColumnOnHICANN, NeuronOnHICANN::x_type::value_type,
-                                         NeuronOnHICANN::x_type::max, 0>,
-      public common::detail::XRangedTrait {
-	PYPP_CONSTEXPR explicit SynapseColumnOnHICANN(common::X const& x) : rant_t(x.value()) {}
-	PYPP_CONSTEXPR explicit SynapseColumnOnHICANN(uintmax_t const val = 0) : rant_t(val) {}
+struct GENPYBIND(inline_base("*")) SynapseColumnOnHICANN
+    : public common::detail::RantWrapper<
+          SynapseColumnOnHICANN,
+          NeuronOnHICANN::x_type::value_type,
+          NeuronOnHICANN::x_type::max,
+          0>
+    , public common::detail::XRangedTrait
+{
+	PYPP_CONSTEXPR explicit SynapseColumnOnHICANN(common::X const& x)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(x.value())
+	{}
+	PYPP_CONSTEXPR explicit SynapseColumnOnHICANN(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 };
 
-struct SynapseOnHICANN
-    : public common::detail::GridCoordinate<SynapseOnHICANN, SynapseColumnOnHICANN,
-                                            SynapseRowOnHICANN> {
+struct GENPYBIND(inline_base("*")) SynapseOnHICANN
+    : public common::detail::
+          GridCoordinate<SynapseOnHICANN, SynapseColumnOnHICANN, SynapseRowOnHICANN>
+{
 	GRID_COMMON_CONSTRUCTORS(SynapseOnHICANN)
 
 	SynapseRowOnHICANN toSynapseRowOnHICANN() const { return y(); }
@@ -258,12 +303,14 @@ struct SynapseOnHICANN
 	}
 };
 
-struct SynapseOnWafer : public HICANNMixin<SynapseOnWafer, SynapseOnHICANN> {
+struct GENPYBIND(inline_base("*HICANNMixin*")) SynapseOnWafer
+    : public HICANNMixin<SynapseOnWafer, SynapseOnHICANN>
+{
 private:
 	typedef HICANNMixin<SynapseOnWafer, SynapseOnHICANN> base;
 
 public:
-	using base::enum_type;
+	typedef base::enum_type enum_type GENPYBIND(opaque(false));
 
 	PYPP_DEFAULT(SynapseOnWafer());
 

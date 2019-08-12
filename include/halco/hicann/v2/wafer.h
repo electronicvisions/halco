@@ -2,6 +2,7 @@
 
 #include "pywrap/compat/macros.hpp"
 
+#include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
 #include "halco/common/relations.h"
@@ -10,12 +11,13 @@
 
 namespace halco {
 namespace hicann {
-namespace v2 {
+namespace v2 GENPYBIND_TAG_HALCO_HICANN_V2 {
 
 /// Wafer coordinate
-struct Wafer : public common::detail::BaseType<Wafer, size_t> {
-	PYPP_CONSTEXPR explicit Wafer(value_type val) : base_t(val) {}
-	PYPP_CONSTEXPR explicit Wafer() : base_t() {}
+struct GENPYBIND(inline_base("*")) Wafer : public common::detail::BaseType<Wafer, size_t>
+{
+	PYPP_CONSTEXPR explicit Wafer(value_type val) GENPYBIND(implicit_conversion) : base_t(val) {}
+	PYPP_CONSTEXPR explicit Wafer() GENPYBIND(implicit_conversion) : base_t() {}
 };
 
 HALCO_COORDINATE_MIXIN(WaferMixin, Wafer, wafer)

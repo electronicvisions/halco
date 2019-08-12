@@ -368,7 +368,7 @@ TEST(HRepeaterOnWafer, toHLineOnWaferLocalFirst) {
 		auto const hlines =
 		    HRepeaterOnWafer(hrepeater, hline_on_wafer.toHICANNOnWafer()).toHLineOnWafer();
 
-		EXPECT_EQ(hline_on_wafer, hlines.get<0>());
+		EXPECT_EQ(hline_on_wafer, boost::tuples::get<0>(hlines));
 	}
 }
 
@@ -380,9 +380,9 @@ TEST(HRepeaterOnWafer, toHLineOnWaferHasNeighbor) {
 		    HRepeaterOnWafer(hrepeater, hline_on_wafer.toHICANNOnWafer()).toHLineOnWafer();
 
 		if (hrepeater.isLeft()) {
-			EXPECT_EQ(hicann.has_west(), hlines.get<1>().has_value());
+			EXPECT_EQ(hicann.has_west(), boost::tuples::get<1>(hlines).has_value());
 		} else {
-			EXPECT_EQ(hicann.has_east(), hlines.get<1>().has_value());
+			EXPECT_EQ(hicann.has_east(), boost::tuples::get<1>(hlines).has_value());
 		}
 	}
 }
@@ -396,17 +396,17 @@ TEST(HRepeaterOnWafer, toHLineOnWaferMoves) {
 
 		if (hrepeater.isLeft()) {
 			if (hicann.has_west()) {
-				EXPECT_EQ(hicann.west(), hlines.get<1>()->toHICANNOnWafer());
+				EXPECT_EQ(hicann.west(), boost::tuples::get<1>(hlines)->toHICANNOnWafer());
 				EXPECT_EQ(
 				    hline_on_wafer.toHLineOnHICANN().west(),
-				    hlines.get<1>()->toHLineOnHICANN());
+				    boost::tuples::get<1>(hlines)->toHLineOnHICANN());
 			}
 		} else {
 			if (hicann.has_east()) {
-				EXPECT_EQ(hicann.east(), hlines.get<1>()->toHICANNOnWafer());
+				EXPECT_EQ(hicann.east(), boost::tuples::get<1>(hlines)->toHICANNOnWafer());
 				EXPECT_EQ(
 				    hline_on_wafer.toHLineOnHICANN().east(),
-				    hlines.get<1>()->toHLineOnHICANN());
+				    boost::tuples::get<1>(hlines)->toHLineOnHICANN());
 			}
 		}
 	}
@@ -418,7 +418,7 @@ TEST(VRepeaterOnWafer, toVLineOnWaferLocalFirst) {
 		auto const vlines =
 		    VRepeaterOnWafer(vrepeater, vline_on_wafer.toHICANNOnWafer()).toVLineOnWafer();
 
-		EXPECT_EQ(vline_on_wafer, vlines.get<0>());
+		EXPECT_EQ(vline_on_wafer, boost::tuples::get<0>(vlines));
 	}
 }
 
@@ -430,9 +430,9 @@ TEST(VRepeaterOnWafer, toVLineOnWaferHasNeighbor) {
 		    VRepeaterOnWafer(vrepeater, vline_on_wafer.toHICANNOnWafer()).toVLineOnWafer();
 
 		if (vrepeater.isTop()) {
-			EXPECT_EQ(hicann.has_north(), vlines.get<1>().has_value());
+			EXPECT_EQ(hicann.has_north(), boost::tuples::get<1>(vlines).has_value());
 		} else {
-			EXPECT_EQ(hicann.has_south(), vlines.get<1>().has_value());
+			EXPECT_EQ(hicann.has_south(), boost::tuples::get<1>(vlines).has_value());
 		}
 	}
 }
@@ -446,17 +446,17 @@ TEST(VRepeaterOnWafer, toVLineOnWaferMoves) {
 
 		if (vrepeater.isBottom()) {
 			if (hicann.has_south()) {
-				EXPECT_EQ(hicann.south(), vlines.get<1>()->toHICANNOnWafer());
+				EXPECT_EQ(hicann.south(), boost::tuples::get<1>(vlines)->toHICANNOnWafer());
 				EXPECT_EQ(
 				    vline_on_wafer.toVLineOnHICANN().south(),
-				    vlines.get<1>()->toVLineOnHICANN());
+				    boost::tuples::get<1>(vlines)->toVLineOnHICANN());
 			}
 		} else {
 			if (hicann.has_north()) {
-				EXPECT_EQ(hicann.north(), vlines.get<1>()->toHICANNOnWafer());
+				EXPECT_EQ(hicann.north(), boost::tuples::get<1>(vlines)->toHICANNOnWafer());
 				EXPECT_EQ(
 				    vline_on_wafer.toVLineOnHICANN().north(),
-				    vlines.get<1>()->toVLineOnHICANN());
+				    boost::tuples::get<1>(vlines)->toVLineOnHICANN());
 			}
 		}
 	}
@@ -468,7 +468,7 @@ TEST(HLineOnWafer, toHRepeaterOnWaferLocalFirst) {
 		auto const hlines =
 		    HLineOnWafer(hrepeater, hline_on_wafer.toHICANNOnWafer()).toHRepeaterOnWafer();
 
-		EXPECT_EQ(hline_on_wafer, hlines.get<0>());
+		EXPECT_EQ(hline_on_wafer, boost::tuples::get<0>(hlines));
 	}
 }
 
@@ -480,9 +480,9 @@ TEST(HLineOnWafer, toHRepeaterOnWaferHasNeighbor) {
 		    HLineOnWafer(hline, hrepeater_on_wafer.toHICANNOnWafer()).toHRepeaterOnWafer();
 
 		if (hline.toHRepeaterOnHICANN().isLeft()) {
-			EXPECT_EQ(hicann.has_east(), hrepeaters.get<1>().has_value());
+			EXPECT_EQ(hicann.has_east(), boost::tuples::get<1>(hrepeaters).has_value());
 		} else {
-			EXPECT_EQ(hicann.has_west(), hrepeaters.get<1>().has_value());
+			EXPECT_EQ(hicann.has_west(), boost::tuples::get<1>(hrepeaters).has_value());
 		}
 	}
 }
@@ -496,23 +496,23 @@ TEST(HLineOnWafer, toHRepeaterOnWaferMoves) {
 
 		if (hline.toHRepeaterOnHICANN().isLeft()) {
 			if (hicann.has_east()) {
-				EXPECT_EQ(hicann.east(), hrepeaters.get<1>()->toHICANNOnWafer());
+				EXPECT_EQ(hicann.east(), boost::tuples::get<1>(hrepeaters)->toHICANNOnWafer());
 				EXPECT_EQ(
 				    hrepeater_on_wafer.toHRepeaterOnHICANN()
 				        .toHLineOnHICANN()
 				        .east()
 				        .toHRepeaterOnHICANN(),
-				    hrepeaters.get<1>()->toHRepeaterOnHICANN());
+				    boost::tuples::get<1>(hrepeaters)->toHRepeaterOnHICANN());
 			}
 		} else {
 			if (hicann.has_west()) {
-				EXPECT_EQ(hicann.west(), hrepeaters.get<1>()->toHICANNOnWafer());
+				EXPECT_EQ(hicann.west(), boost::tuples::get<1>(hrepeaters)->toHICANNOnWafer());
 				EXPECT_EQ(
 				    hrepeater_on_wafer.toHRepeaterOnHICANN()
 				        .toHLineOnHICANN()
 				        .west()
 				        .toHRepeaterOnHICANN(),
-				    hrepeaters.get<1>()->toHRepeaterOnHICANN());
+				    boost::tuples::get<1>(hrepeaters)->toHRepeaterOnHICANN());
 			}
 		}
 	}
@@ -524,7 +524,7 @@ TEST(VLineOnWafer, toVRepeaterOnWaferLocalFirst) {
 		auto const vlines =
 		    VLineOnWafer(vrepeater, vline_on_wafer.toHICANNOnWafer()).toVRepeaterOnWafer();
 
-		EXPECT_EQ(vline_on_wafer, vlines.get<0>());
+		EXPECT_EQ(vline_on_wafer, boost::tuples::get<0>(vlines));
 	}
 }
 
@@ -536,9 +536,9 @@ TEST(VLineOnWafer, toVRepeaterOnWaferHasNeighbor) {
 		    VLineOnWafer(vline, vrepeater_on_wafer.toHICANNOnWafer()).toVRepeaterOnWafer();
 
 		if (vline.toVRepeaterOnHICANN().isTop()) {
-			EXPECT_EQ(hicann.has_south(), vrepeaters.get<1>().has_value());
+			EXPECT_EQ(hicann.has_south(), boost::tuples::get<1>(vrepeaters).has_value());
 		} else {
-			EXPECT_EQ(hicann.has_north(), vrepeaters.get<1>().has_value());
+			EXPECT_EQ(hicann.has_north(), boost::tuples::get<1>(vrepeaters).has_value());
 		}
 	}
 }
@@ -552,23 +552,23 @@ TEST(VLineOnWafer, toVRepeaterOnWaferMoves) {
 
 		if (vline.toVRepeaterOnHICANN().isTop()) {
 			if (hicann.has_south()) {
-				EXPECT_EQ(hicann.south(), vrepeaters.get<1>()->toHICANNOnWafer());
+				EXPECT_EQ(hicann.south(), boost::tuples::get<1>(vrepeaters)->toHICANNOnWafer());
 				EXPECT_EQ(
 				    vrepeater_on_wafer.toVRepeaterOnHICANN()
 				        .toVLineOnHICANN()
-				        .south ()
+				        .south()
 				        .toVRepeaterOnHICANN(),
-				    vrepeaters.get<1>()->toVRepeaterOnHICANN());
+				    boost::tuples::get<1>(vrepeaters)->toVRepeaterOnHICANN());
 			}
 		} else {
 			if (hicann.has_north()) {
-				EXPECT_EQ(hicann.north(), vrepeaters.get<1>()->toHICANNOnWafer());
+				EXPECT_EQ(hicann.north(), boost::tuples::get<1>(vrepeaters)->toHICANNOnWafer());
 				EXPECT_EQ(
 				    vrepeater_on_wafer.toVRepeaterOnHICANN()
 				        .toVLineOnHICANN()
 				        .north()
 				        .toVRepeaterOnHICANN(),
-				    vrepeaters.get<1>()->toVRepeaterOnHICANN());
+				    boost::tuples::get<1>(vrepeaters)->toVRepeaterOnHICANN());
 			}
 		}
 	}

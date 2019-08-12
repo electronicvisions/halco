@@ -9,9 +9,10 @@ extern "C" {
 
 #include "pywrap/compat/macros.hpp"
 
+#include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
-#include "halco/common/tblr.h"
 #include "halco/common/relations.h"
+#include "halco/common/tblr.h"
 
 #include "halco/hicann/v2/fwd.h"
 #include "halco/hicann/v2/hicann.h"
@@ -20,12 +21,22 @@ extern "C" {
 #include "boost/optional.hpp"
 #include "boost/tuple/tuple.hpp"
 
+#if defined(__GENPYBIND__) || defined(__GENPYBIND_GENERATED__)
+#include <pybind11/stl.h>
+namespace pybind11 {
+namespace detail {
+template <typename T>
+struct type_caster<boost::optional<T>> : optional_caster<boost::optional<T>>
+{};
+}
+}
+#endif
+
 namespace halco {
 namespace hicann {
-namespace v2 {
+namespace v2 GENPYBIND_TAG_HALCO_HICANN_V2 {
 
-
-struct CrossbarSwitchOnCrossbarSwitchRow
+struct GENPYBIND(inline_base("*")) CrossbarSwitchOnCrossbarSwitchRow
     : public common::detail::GridCoordinate<
           CrossbarSwitchOnCrossbarSwitchRow,
           common::XRanged<4, 0>,
@@ -35,7 +46,7 @@ struct CrossbarSwitchOnCrossbarSwitchRow
 	GRID_COMMON_CONSTRUCTORS(CrossbarSwitchOnCrossbarSwitchRow)
 };
 
-struct SynapseSwitchOnSynapseSwitchRow
+struct GENPYBIND(inline_base("*")) SynapseSwitchOnSynapseSwitchRow
     : public common::detail::GridCoordinate<
           SynapseSwitchOnSynapseSwitchRow,
           common::XRanged<16, 0>,
@@ -45,7 +56,7 @@ struct SynapseSwitchOnSynapseSwitchRow
 	GRID_COMMON_CONSTRUCTORS(SynapseSwitchOnSynapseSwitchRow)
 };
 
-struct CrossbarSwitchOnHICANN
+struct GENPYBIND(inline_base("*")) CrossbarSwitchOnHICANN
     : public common::detail::GridCoordinate<
           CrossbarSwitchOnHICANN,
           common::XRanged<255, 0>,
@@ -67,16 +78,21 @@ struct CrossbarSwitchOnHICANN
 	static const enum_type::value_type per_side = per_row / 2;
 	static const enum_type::value_type per_half = enum_type::size / 2;
 
-	static std::array<y_type, per_column> column(x_type x);
+	static std::array<y_type, halco::hicann::v2::CrossbarSwitchOnHICANN::per_column> column(
+	    x_type x);
 	static bool exists(x_type x, y_type y);
 	static x_type to_x(enum_type const& e);
 	static y_type to_y(enum_type const& e);
 	static enum_type to_enum(x_type const& x, y_type const& y);
 };
 
-struct SynapseSwitchOnHICANN
-	: public common::detail::GridCoordinate<SynapseSwitchOnHICANN, common::XRanged<255, 0>,
-	                                        common::YRanged<223, 0>, 32 * 224> {
+struct GENPYBIND(inline_base("*")) SynapseSwitchOnHICANN
+    : public common::detail::GridCoordinate<
+          SynapseSwitchOnHICANN,
+          common::XRanged<255, 0>,
+          common::YRanged<223, 0>,
+          32 * 224>
+{
 	GRID_COMMON_CONSTRUCTORS(SynapseSwitchOnHICANN)
 
 	// get SynapseSwitch from SynapseSwitchRow and number of switch in SynapseSwitchRow
@@ -92,7 +108,8 @@ struct SynapseSwitchOnHICANN
 	static const enum_type::value_type per_side = per_row/2;
 	static const enum_type::value_type per_half = enum_type::size/2;
 
-	static std::array<y_type, per_column> column(x_type x);
+	static std::array<y_type, halco::hicann::v2::SynapseSwitchOnHICANN::per_column> column(
+	    x_type y);
 	static bool exists(x_type x, y_type y);
 	static x_type to_x(enum_type const& e);
 	static y_type to_y(enum_type const& e);
@@ -100,10 +117,16 @@ struct SynapseSwitchOnHICANN
 };
 
 
-struct HLineOnHICANN : public common::detail::RantWrapper<HLineOnHICANN, size_t, 63, 0>,
-                       public common::detail::YRangedTrait {
-	PYPP_CONSTEXPR explicit HLineOnHICANN(common::Y const& y) : rant_t(y.value()) {}
-	PYPP_CONSTEXPR explicit HLineOnHICANN(uintmax_t const val = 0) : rant_t(val) {}
+struct GENPYBIND(inline_base("*")) HLineOnHICANN
+    : public common::detail::RantWrapper<HLineOnHICANN, size_t, 63, 0>
+    , public common::detail::YRangedTrait
+{
+	PYPP_CONSTEXPR explicit HLineOnHICANN(common::Y const& y) GENPYBIND(implicit_conversion) :
+	    rant_t(y.value())
+	{}
+	PYPP_CONSTEXPR explicit HLineOnHICANN(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 
 	HLineOnHICANN east() const { return HLineOnHICANN((value() + 2) % end); }
 	HLineOnHICANN west() const { return HLineOnHICANN((value() + end - 2) % end); }
@@ -124,11 +147,17 @@ struct HLineOnHICANN : public common::detail::RantWrapper<HLineOnHICANN, size_t,
 	VLineOnHICANN toVLineOnHICANN(common::SideHorizontal side, size_t num) const;
 };
 
-struct VLineOnHICANN : public common::detail::RantWrapper<VLineOnHICANN, size_t, 255, 0>,
-                       public common::detail::XRangedTrait,
-                       public common::detail::HasLeftRight<VLineOnHICANN> {
-	PYPP_CONSTEXPR explicit VLineOnHICANN(common::X const& x) : rant_t(x.value()) {}
-	PYPP_CONSTEXPR explicit VLineOnHICANN(uintmax_t const val = 0) : rant_t(val) {}
+struct GENPYBIND(inline_base("*")) VLineOnHICANN
+    : public common::detail::RantWrapper<VLineOnHICANN, size_t, 255, 0>
+    , public common::detail::XRangedTrait
+    , public common::detail::HasLeftRight<VLineOnHICANN>
+{
+	PYPP_CONSTEXPR explicit VLineOnHICANN(common::X const& x) GENPYBIND(implicit_conversion) :
+	    rant_t(x.value())
+	{}
+	PYPP_CONSTEXPR explicit VLineOnHICANN(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 
 	static size_t const switches_per_side = 14;
 
@@ -160,23 +189,24 @@ struct VLineOnHICANN : public common::detail::RantWrapper<VLineOnHICANN, size_t,
 	SynapseSwitchRowOnHICANN toSynapseSwitchRowOnHICANN(
 		common::SideVertical side_vert, size_t num) const;
 
-	std::array<SynapseSwitchRowOnHICANN, switches_per_side> toSynapseSwitchRowOnHICANN(
-	    common::SideVertical side_vert) const;
+	std::array<SynapseSwitchRowOnHICANN, halco::hicann::v2::VLineOnHICANN::switches_per_side>
+	toSynapseSwitchRowOnHICANN(common::SideVertical side_vert) const;
 
-	std::array<SynapseSwitchRowOnHICANN, 2 * switches_per_side>
+	std::array<SynapseSwitchRowOnHICANN, 2 * halco::hicann::v2::VLineOnHICANN::switches_per_side>
 	toSynapseSwitchRowOnHICANN() const;
 
 	/// Return synapse drivers reachable from this vline that are on the
 	/// specified side of this or the adjacent hicann.
-	std::array<SynapseDriverOnHICANN, switches_per_side> toSynapseDriverOnHICANN(
-		common::SideHorizontal const& side) const;
+	std::array<SynapseDriverOnHICANN, halco::hicann::v2::VLineOnHICANN::switches_per_side>
+	toSynapseDriverOnHICANN(common::SideHorizontal const& side) const;
 
 	std::array<HLineOnHICANN, 2> toHLineOnHICANN() const;
 };
 
 class HRepeaterOnWafer;
 
-struct HLineOnWafer : public HICANNMixin<HLineOnWafer, HLineOnHICANN>
+struct GENPYBIND(inline_base("*HICANNMixin*")) HLineOnWafer
+    : public HICANNMixin<HLineOnWafer, HLineOnHICANN>
 {
 private:
 	typedef HICANNMixin<HLineOnWafer, HLineOnHICANN> base;
@@ -200,12 +230,22 @@ public:
 
 	   The HRepeater on the local HICANN is guaranteed to be in the first element of the tuple.
 	 */
-	boost::tuple<HRepeaterOnWafer, boost::optional<HRepeaterOnWafer> > toHRepeaterOnWafer() const;
+	// clang-format off
+	boost::tuple<HRepeaterOnWafer, boost::optional<HRepeaterOnWafer> > GENPYBIND(hidden)
+	    toHRepeaterOnWafer() const;
+	// clang-format on
+	GENPYBIND_MANUAL({
+		parent.def("toHRepeaterOnWafer", [](GENPYBIND_PARENT_TYPE const& self) {
+			auto const t = self.toHRepeaterOnWafer();
+			return std::tuple{t.template get<0>(), t.template get<1>()};
+		});
+	})
 };
 
 class VRepeaterOnWafer;
 
-struct VLineOnWafer : public HICANNMixin<VLineOnWafer, VLineOnHICANN>
+struct GENPYBIND(inline_base("*HICANNMixin*")) VLineOnWafer
+    : public HICANNMixin<VLineOnWafer, VLineOnHICANN>
 {
 private:
 	typedef HICANNMixin<VLineOnWafer, VLineOnHICANN> base;
@@ -229,30 +269,48 @@ public:
 
 	   The VRepeater on the local HICANN is guaranteed to be in the first element of the tuple.
 	 */
-	boost::tuple<VRepeaterOnWafer, boost::optional<VRepeaterOnWafer> > toVRepeaterOnWafer() const;
+	// clang-format off
+	boost::tuple<VRepeaterOnWafer, boost::optional<VRepeaterOnWafer> > GENPYBIND(hidden)
+	    toVRepeaterOnWafer() const;
+	// clang-format on
+	GENPYBIND_MANUAL({
+		parent.def("toVRepeaterOnWafer", [](GENPYBIND_PARENT_TYPE const& self) {
+			auto const t = self.toVRepeaterOnWafer();
+			return std::tuple{t.template get<0>(), t.template get<1>()};
+		});
+	})
 };
 
-
-struct BackgroundGeneratorOnHICANN
-    : public common::detail::RantWrapper<BackgroundGeneratorOnHICANN, uint_fast16_t, 7, 0> {
+struct GENPYBIND(inline_base("*")) BackgroundGeneratorOnHICANN
+    : public common::detail::RantWrapper<BackgroundGeneratorOnHICANN, uint_fast16_t, 7, 0>
+{
 	PYPP_CONSTEXPR explicit BackgroundGeneratorOnHICANN(uintmax_t const val = 0)
-	    : rant_t(val) {}
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 
 	NeuronBlockOnHICANN toNeuronBlockOnHICANN() const;
 };
 
-struct DNCMergerOnHICANN : public common::detail::RantWrapper<DNCMergerOnHICANN, uint_fast16_t, 7, 0> {
-	PYPP_CONSTEXPR explicit DNCMergerOnHICANN(uintmax_t const val = 0) : rant_t(val) {}
+struct GENPYBIND(inline_base("*")) DNCMergerOnHICANN
+    : public common::detail::RantWrapper<DNCMergerOnHICANN, uint_fast16_t, 7, 0>
+{
+	PYPP_CONSTEXPR explicit DNCMergerOnHICANN(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 
 	SendingRepeaterOnHICANN toSendingRepeaterOnHICANN() const;
 };
 
-struct DNCMergerOnWafer : public HICANNMixin<DNCMergerOnWafer, DNCMergerOnHICANN> {
+struct GENPYBIND(inline_base("*HICANNMixin*")) DNCMergerOnWafer
+    : public HICANNMixin<DNCMergerOnWafer, DNCMergerOnHICANN>
+{
 private:
 	typedef HICANNMixin<DNCMergerOnWafer, DNCMergerOnHICANN> base;
 
 public:
-	using base::enum_type;
+	typedef base::enum_type enum_type GENPYBIND(opaque(false));
 
 	PYPP_DEFAULT(DNCMergerOnWafer());
 
@@ -265,17 +323,26 @@ public:
 	DNCMergerOnHICANN toDNCMergerOnHICANN() const { return This(); }
 };
 
-struct TestPortOnRepeaterBlock : public common::detail::RantWrapper<TestPortOnRepeaterBlock, size_t, 1, 0> {
-	PYPP_CONSTEXPR explicit TestPortOnRepeaterBlock(uintmax_t const val = 0) : rant_t(val) {}
+struct GENPYBIND(inline_base("*")) TestPortOnRepeaterBlock
+    : public common::detail::RantWrapper<TestPortOnRepeaterBlock, size_t, 1, 0>
+{
+	PYPP_CONSTEXPR explicit TestPortOnRepeaterBlock(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 };
 
-struct RepeaterBlockOnHICANN
-    : public common::detail::GridCoordinate<RepeaterBlockOnHICANN, common::XRanged<1, 0>,
-                                            common::YRanged<2, 0> > {
+// clang-format off
+struct GENPYBIND(inline_base("*")) RepeaterBlockOnHICANN
+    : public common::detail::
+          GridCoordinate<RepeaterBlockOnHICANN, common::XRanged<1, 0>, common::YRanged<2, 0> >
+// clang-format on
+{
 	GRID_COMMON_CONSTRUCTORS(RepeaterBlockOnHICANN)
 };
 
-struct RepeaterBlockOnWafer : public HICANNMixin<RepeaterBlockOnWafer, RepeaterBlockOnHICANN>
+struct GENPYBIND(inline_base("*HICANNMixin*")) RepeaterBlockOnWafer
+    : public HICANNMixin<RepeaterBlockOnWafer, RepeaterBlockOnHICANN>
 {
 private:
 	typedef HICANNMixin<RepeaterBlockOnWafer, RepeaterBlockOnHICANN> base;
@@ -296,9 +363,13 @@ public:
 
 };
 
-struct SendingRepeaterOnHICANN
-    : public common::detail::RantWrapper<SendingRepeaterOnHICANN, size_t, 7, 0> {
-	PYPP_CONSTEXPR explicit SendingRepeaterOnHICANN(uintmax_t const val = 0) : rant_t(val) {}
+struct GENPYBIND(inline_base("*")) SendingRepeaterOnHICANN
+    : public common::detail::RantWrapper<SendingRepeaterOnHICANN, size_t, 7, 0>
+{
+	PYPP_CONSTEXPR explicit SendingRepeaterOnHICANN(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 
 	GbitLinkOnHICANN toGbitLinkOnHICANN() const;
 	HLineOnHICANN toHLineOnHICANN() const;
@@ -307,10 +378,14 @@ struct SendingRepeaterOnHICANN
 	DNCMergerOnHICANN toDNCMergerOnHICANN() const;
 };
 
-struct HRepeaterOnHICANN
-	: public common::detail::GridCoordinate<HRepeaterOnHICANN, common::SideHorizontal,
-	                                        HLineOnHICANN, HLineOnHICANN::size>,
-	  public common::detail::HasLeftRight<HRepeaterOnHICANN> {
+struct GENPYBIND(inline_base("*")) HRepeaterOnHICANN
+    : public common::detail::GridCoordinate<
+          HRepeaterOnHICANN,
+          common::SideHorizontal,
+          HLineOnHICANN,
+          HLineOnHICANN::size>
+    , public common::detail::HasLeftRight<HRepeaterOnHICANN>
+{
 	GRID_COMMON_CONSTRUCTORS(HRepeaterOnHICANN)
 
 	// TODO: Replace with conversion member function for consistency
@@ -349,13 +424,14 @@ private:
 };
 
 
-struct HRepeaterOnWafer : public HICANNMixin<HRepeaterOnWafer, HRepeaterOnHICANN>
+struct GENPYBIND(inline_base("*HICANNMixin*")) HRepeaterOnWafer
+    : public HICANNMixin<HRepeaterOnWafer, HRepeaterOnHICANN>
 {
 private:
 	typedef HICANNMixin<HRepeaterOnWafer, HRepeaterOnHICANN> base;
 
 public:
-	using base::enum_type;
+	typedef base::enum_type enum_type GENPYBIND(opaque(false));
 
 	PYPP_DEFAULT(HRepeaterOnWafer());
 
@@ -372,19 +448,33 @@ public:
 		                            toHICANNOnWafer());
 	}
 
+
 	/* L1 repeaters are connected to two L1 lines. One on the local
 	   HICANN, the other on a neighboring HICANN.
 
 	   The HLine on the local HICANN is guaranteed to be in the first element of the tuple.
 	 */
-	boost::tuple<HLineOnWafer, boost::optional<HLineOnWafer> > toHLineOnWafer() const;
+	// clang-format off
+	boost::tuple<HLineOnWafer, boost::optional<HLineOnWafer> > GENPYBIND(hidden)
+	    toHLineOnWafer() const;
+	// clang-format on
+	GENPYBIND_MANUAL({
+		parent.def("toHLineOnWafer", [](GENPYBIND_PARENT_TYPE const& self) {
+			auto const t = self.toHLineOnWafer();
+			return std::tuple{t.template get<0>(), t.template get<1>()};
+		});
+	})
 };
 
 
-struct VRepeaterOnHICANN
-	: public common::detail::GridCoordinate<VRepeaterOnHICANN, VLineOnHICANN, common::SideVertical,
-	                                        VLineOnHICANN::size>,
-	  public common::detail::HasTopBottom<VRepeaterOnHICANN> {
+struct GENPYBIND(inline_base("*")) VRepeaterOnHICANN
+    : public common::detail::GridCoordinate<
+          VRepeaterOnHICANN,
+          VLineOnHICANN,
+          common::SideVertical,
+          VLineOnHICANN::size>
+    , public common::detail::HasTopBottom<VRepeaterOnHICANN>
+{
 	GRID_COMMON_CONSTRUCTORS(VRepeaterOnHICANN)
 
 	VLineOnHICANN toVLineOnHICANN() const { return mX; }
@@ -441,13 +531,14 @@ struct VRepeaterOnHICANN
 	}
 };
 
-struct VRepeaterOnWafer : public HICANNMixin<VRepeaterOnWafer, VRepeaterOnHICANN>
+struct GENPYBIND(inline_base("*HICANNMixin*")) VRepeaterOnWafer
+    : public HICANNMixin<VRepeaterOnWafer, VRepeaterOnHICANN>
 {
 private:
 	typedef HICANNMixin<VRepeaterOnWafer, VRepeaterOnHICANN> base;
 
 public:
-	using base::enum_type;
+	typedef base::enum_type enum_type GENPYBIND(opaque(false));
 
 	PYPP_DEFAULT(VRepeaterOnWafer());
 
@@ -469,7 +560,16 @@ public:
 
 	   The VLine on the local HICANN is guaranteed to be in the first element of the tuple.
 	 */
-	boost::tuple<VLineOnWafer, boost::optional<VLineOnWafer> > toVLineOnWafer() const;
+	// clang-format off
+	boost::tuple<VLineOnWafer, boost::optional<VLineOnWafer> > GENPYBIND(hidden)
+	    toVLineOnWafer() const;
+	// clang-format on
+	GENPYBIND_MANUAL({
+		parent.def("toVLineOnWafer", [](GENPYBIND_PARENT_TYPE const& self) {
+			auto const t = self.toVLineOnWafer();
+			return std::tuple{t.template get<0>(), t.template get<1>()};
+		});
+	})
 };
 
 } // v2

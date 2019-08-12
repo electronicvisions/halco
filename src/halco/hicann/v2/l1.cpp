@@ -395,90 +395,94 @@ SendingRepeaterOnHICANN DNCMergerOnHICANN::toSendingRepeaterOnHICANN() const {
 	return SendingRepeaterOnHICANN(max - value());
 }
 
-boost::tuple<HRepeaterOnWafer, boost::optional<HRepeaterOnWafer> >  HLineOnWafer::toHRepeaterOnWafer() const
+boost::tuple<HRepeaterOnWafer, boost::optional<HRepeaterOnWafer>> HLineOnWafer::toHRepeaterOnWafer()
+    const
 {
-	boost::tuple<HRepeaterOnWafer, boost::optional<HRepeaterOnWafer> > ret;
+	boost::tuple<HRepeaterOnWafer, boost::optional<HRepeaterOnWafer>> ret;
 
 	HRepeaterOnHICANN const hrepeater_on_this = toHRepeaterOnHICANN();
 
-	ret.get<0>() = HRepeaterOnWafer(hrepeater_on_this, toHICANNOnWafer());
+	boost::tuples::get<0>(ret) = HRepeaterOnWafer(hrepeater_on_this, toHICANNOnWafer());
 
 	if (hrepeater_on_this.isLeft()) {
 		if (toHICANNOnWafer().has_east()) {
-			ret.get<1>() = HRepeaterOnWafer(
-			    this->east().toHRepeaterOnHICANN(), toHICANNOnWafer().east());
+			boost::tuples::get<1>(ret) =
+			    HRepeaterOnWafer(this->east().toHRepeaterOnHICANN(), toHICANNOnWafer().east());
 		}
 	} else {
 		if (toHICANNOnWafer().has_west()) {
-			ret.get<1>() = HRepeaterOnWafer(
-			    this->west().toHRepeaterOnHICANN(), toHICANNOnWafer().west());
+			boost::tuples::get<1>(ret) =
+			    HRepeaterOnWafer(this->west().toHRepeaterOnHICANN(), toHICANNOnWafer().west());
 		}
 	}
 
 	return ret;
 }
 
-boost::tuple<VRepeaterOnWafer, boost::optional<VRepeaterOnWafer> > VLineOnWafer::toVRepeaterOnWafer() const
+boost::tuple<VRepeaterOnWafer, boost::optional<VRepeaterOnWafer>> VLineOnWafer::toVRepeaterOnWafer()
+    const
 {
-	boost::tuple<VRepeaterOnWafer, boost::optional<VRepeaterOnWafer> > ret;
+	boost::tuple<VRepeaterOnWafer, boost::optional<VRepeaterOnWafer>> ret;
 
 	VRepeaterOnHICANN const vrepeater_on_this = toVRepeaterOnHICANN();
 
-	ret.get<0>() = VRepeaterOnWafer(vrepeater_on_this, toHICANNOnWafer());
+	boost::tuples::get<0>(ret) = VRepeaterOnWafer(vrepeater_on_this, toHICANNOnWafer());
 
 	if (vrepeater_on_this.isTop()) {
 		if (toHICANNOnWafer().has_south()) {
-			ret.get<1>() = VRepeaterOnWafer(
-			    this->south().toVRepeaterOnHICANN(), toHICANNOnWafer().south());
+			boost::tuples::get<1>(ret) =
+			    VRepeaterOnWafer(this->south().toVRepeaterOnHICANN(), toHICANNOnWafer().south());
 		}
 	} else {
 		if (toHICANNOnWafer().has_north()) {
-			ret.get<1>() = VRepeaterOnWafer(
-			    this->north().toVRepeaterOnHICANN(), toHICANNOnWafer().north());
+			boost::tuples::get<1>(ret) =
+			    VRepeaterOnWafer(this->north().toVRepeaterOnHICANN(), toHICANNOnWafer().north());
 		}
 	}
 
 	return ret;
 }
 
-boost::tuple<HLineOnWafer, boost::optional<HLineOnWafer>>
-HRepeaterOnWafer::toHLineOnWafer() const
+boost::tuple<HLineOnWafer, boost::optional<HLineOnWafer>> HRepeaterOnWafer::toHLineOnWafer() const
 {
-	boost::tuple<HLineOnWafer, boost::optional<HLineOnWafer> > ret;
+	boost::tuple<HLineOnWafer, boost::optional<HLineOnWafer>> ret;
 
 	HLineOnHICANN const hline_on_this = toHRepeaterOnHICANN().toHLineOnHICANN();
 
-	ret.get<0>() = HLineOnWafer(hline_on_this, toHICANNOnWafer());
+	boost::tuples::get<0>(ret) = HLineOnWafer(hline_on_this, toHICANNOnWafer());
 
 	if (isLeft()) {
 		if (toHICANNOnWafer().has_west()) {
-			ret.get<1>() = HLineOnWafer(hline_on_this.west(), toHICANNOnWafer().west());
+			boost::tuples::get<1>(ret) =
+			    HLineOnWafer(hline_on_this.west(), toHICANNOnWafer().west());
 		}
 	} else {
 		if (toHICANNOnWafer().has_east()) {
-			ret.get<1>() = HLineOnWafer(hline_on_this.east(), toHICANNOnWafer().east());
+			boost::tuples::get<1>(ret) =
+			    HLineOnWafer(hline_on_this.east(), toHICANNOnWafer().east());
 		}
 	}
 
 	return ret;
 }
 
-boost::tuple<VLineOnWafer, boost::optional<VLineOnWafer> >
-VRepeaterOnWafer::toVLineOnWafer() const
+boost::tuple<VLineOnWafer, boost::optional<VLineOnWafer>> VRepeaterOnWafer::toVLineOnWafer() const
 {
 	VLineOnHICANN const vline_on_this = toVRepeaterOnHICANN().toVLineOnHICANN();
 
-	boost::tuple<VLineOnWafer, boost::optional<VLineOnWafer> > ret;
+	boost::tuple<VLineOnWafer, boost::optional<VLineOnWafer>> ret;
 
-	ret.get<0>() = VLineOnWafer(vline_on_this, toHICANNOnWafer());
+	boost::tuples::get<0>(ret) = VLineOnWafer(vline_on_this, toHICANNOnWafer());
 
 	if (isBottom()) {
 		if (toHICANNOnWafer().has_south()) {
-			ret.get<1>() = VLineOnWafer(vline_on_this.south(), toHICANNOnWafer().south());
+			boost::tuples::get<1>(ret) =
+			    VLineOnWafer(vline_on_this.south(), toHICANNOnWafer().south());
 		}
 	} else {
 		if (toHICANNOnWafer().has_north()) {
-			ret.get<1>() = VLineOnWafer(vline_on_this.north(), toHICANNOnWafer().north());
+			boost::tuples::get<1>(ret) =
+			    VLineOnWafer(vline_on_this.north(), toHICANNOnWafer().north());
 		}
 	}
 

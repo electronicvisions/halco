@@ -3,10 +3,12 @@
 import functools
 import inspect
 import itertools
+import os
 import sys
 import string
 import unittest
 
+GENPYBIND_POSTFIX = os.environ.get("GENPYBIND_POSTFIX", False)
 
 def for_coordinates_with_category(category):
     def decorator(method):
@@ -202,6 +204,8 @@ class PyhalcoTest(object):
 
     @for_coordinates_with_category('all')
     def test_pickling(self, name):
+        if GENPYBIND_POSTFIX and sys.version_info.major == 2:
+            self.skipTest("pickling not supported for pybind11 in python2")
         module = self.get_module()
         import pickle
         cls = self.get_coordinate_class(name)
@@ -211,6 +215,8 @@ class PyhalcoTest(object):
 
     @for_coordinates_with_category('all')
     def test_pickling_keeps_value(self, name):
+        if GENPYBIND_POSTFIX and sys.version_info.major == 2:
+            self.skipTest("pickling not supported for pybind11 in python2")
         module = self.get_module()
         import pickle
         cls, a, b = self.get_coordinate_instances(name)
@@ -225,7 +231,10 @@ class PyhalcoTest(object):
 
     @for_coordinates_with_category('iterable')
     def test_iter_all(self, name):
-        import pyhalco_common
+        if GENPYBIND_POSTFIX:
+            import pyhalco_common_genpybind as pyhalco_common
+        else:
+            import pyhalco_common
         cls = self.get_coordinate_class(name)
 
         if cls.is_interval:
@@ -248,7 +257,10 @@ class PyhalcoTest(object):
 
     @for_coordinates_with_category('grid')
     def test_can_be_constructed_from_x_and_y(self, name):
-        from pyhalco_common import X, Y, iter_all
+        if GENPYBIND_POSTFIX:
+            from pyhalco_common_genpybind import X, Y, iter_all
+        else:
+            from pyhalco_common import X, Y, iter_all
         cls = self.get_coordinate_class(name)
 
         num_x = len(list(iter_all(cls.x_type)))
@@ -281,7 +293,10 @@ class PyhalcoTest(object):
 
     @for_coordinates_with_category('interval')
     def test_can_be_constructed_from_bounds(self, name):
-        from pyhalco_common import iter_all
+        if GENPYBIND_POSTFIX:
+            from pyhalco_common_genpybind import iter_all
+        else:
+            from pyhalco_common import iter_all
         cls = self.get_coordinate_class(name)
 
         num_bound = cls.bound_type.size

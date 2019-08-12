@@ -1,24 +1,40 @@
 #pragma once
 
+#include <boost/core/enable_if.hpp>
 #include "halco/common/geometry.h"
 #include "halco/common/traits.h"
 
-#ifdef PYPLUSPLUS
+#if defined(PYPLUSPLUS)
 #define HALCO_COORDINATE_MIXIN__ENUM_TYPE(...) \
 	typename ::halco::common::detail::pypp_maybe_ranged_enum<__VA_ARGS__>::type
-#define HALCO_COORDINATE_MIXIN__SIZE_MEMBERS
 #else
 #define HALCO_COORDINATE_MIXIN__ENUM_TYPE(...) \
 	typename ::halco::common::detail::maybe_ranged_enum<__VA_ARGS__>::type
-#define HALCO_COORDINATE_MIXIN__SIZE_MEMBERS \
-	inline static const size_t size = enum_type::size;\
-	inline static const size_t min = enum_type::min;\
-	inline static const size_t max = enum_type::max;
+#endif
+
+template <typename T, typename Enum, typename = void>
+struct EnumMixin : public T
+{
+	EnumMixin() : T() {}
+	EnumMixin(T const& t) : T(t) {}
+};
+
+#ifndef PYPLUSPLUS
+template <typename T, typename Enum>
+struct EnumMixin<T, Enum, typename boost::enable_if_has_type<decltype(Enum::size)>::type> : public T
+{
+	EnumMixin() : T() {}
+	EnumMixin(T const& t) : T(t) {}
+	inline static const size_t size = Enum::size;
+	inline static const size_t min = Enum::min;
+	inline static const size_t max = Enum::max;
+};
 #endif
 
 #define HALCO_COORDINATE_MIXIN(mixin, cls, fct)                                                    \
 	template <typename Derived, typename T>                                                        \
-	class mixin : public T                                                                         \
+	class GENPYBIND(inline_base("*EnumMixin*")) mixin                                              \
+	    : public EnumMixin<T, HALCO_COORDINATE_MIXIN__ENUM_TYPE(cls, T)>                           \
 	{                                                                                              \
 		typedef void value_type;                                                                   \
                                                                                                    \
@@ -27,12 +43,12 @@
 		typedef T local_type;                                                                      \
 		typedef mixin mixin_t;                                                                     \
 		typedef HALCO_COORDINATE_MIXIN__ENUM_TYPE(cls, T) enum_type GENPYBIND(opaque(false));      \
-		HALCO_COORDINATE_MIXIN__SIZE_MEMBERS                                                       \
+		typedef EnumMixin<T, HALCO_COORDINATE_MIXIN__ENUM_TYPE(cls, T)> enum_mixin;                \
                                                                                                    \
-		mixin() : T(), mValue() {}                                                                 \
-		explicit mixin(T const t, cls const v) : T(t), mValue(v) {}                                \
+		mixin() : enum_mixin(), mValue() {}                                                        \
+		explicit mixin(T const t, cls const v) : enum_mixin(t), mValue(v) {}                       \
 		explicit mixin(enum_type const& e) :                                                       \
-		    T(::halco::common::Enum(e PYPP_EXCLUDE(% local_type::size))),                          \
+		    enum_mixin(T(::halco::common::Enum(e PYPP_EXCLUDE(% local_type::size)))),              \
 		    mValue(::halco::common::Enum(e PYPP_EXCLUDE(/ local_type::size)))                      \
 		{}                                                                                         \
                                                                                                    \

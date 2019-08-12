@@ -2,6 +2,7 @@
 
 #include "pywrap/compat/macros.hpp"
 
+#include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
 #include "halco/common/relations.h"
@@ -11,12 +12,13 @@
 
 namespace halco {
 namespace hicann {
-namespace v2 {
+namespace v2 GENPYBIND_TAG_HALCO_HICANN_V2 {
 
 // HICANN coordinate
-struct HICANNOnWafer
-	: public common::detail::
-		  GridCoordinate<HICANNOnWafer, common::XRanged<35, 0>, common::YRanged<15, 0>, 384> {
+struct GENPYBIND(inline_base("*")) HICANNOnWafer
+    : public common::detail::
+          GridCoordinate<HICANNOnWafer, common::XRanged<35, 0>, common::YRanged<15, 0>, 384>
+{
 	GRID_COMMON_CONSTRUCTORS(HICANNOnWafer)
 
 	HICANNOnWafer east() const { return HICANNOnWafer(x_type(x() + 1), y()); }
@@ -54,8 +56,10 @@ struct HICANNOnWafer
 };
 
 // HICANN Coordinate relative to DNC
-struct HICANNOnDNC
-    : public common::detail::GridCoordinate<HICANNOnDNC, common::XRanged<3, 0>, common::YRanged<1, 0> > {
+struct GENPYBIND(inline_base("*")) HICANNOnDNC
+    : public common::detail::
+          GridCoordinate<HICANNOnDNC, common::XRanged<3, 0>, common::YRanged<1, 0> >
+{
 	GRID_COMMON_CONSTRUCTORS(HICANNOnDNC)
 
 	HICANNOnWafer toHICANNOnWafer(const DNCOnWafer& dnc) const;
@@ -63,12 +67,14 @@ struct HICANNOnDNC
 	HighspeedLinkOnDNC toHighspeedLinkOnDNC() const;
 };
 
-struct HICANNGlobal : public WaferMixin<HICANNGlobal, HICANNOnWafer> {
+struct GENPYBIND(inline_base("*WaferMixin*")) HICANNGlobal
+    : public WaferMixin<HICANNGlobal, HICANNOnWafer>
+{
 private:
 	typedef WaferMixin<HICANNGlobal, HICANNOnWafer> base;
 
 public:
-	using base::enum_type;
+	typedef base::enum_type enum_type GENPYBIND(opaque(false));
 	typedef HICANNOnWafer::x_type x_type;
 	typedef HICANNOnWafer::y_type y_type;
 

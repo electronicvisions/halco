@@ -27,45 +27,60 @@ extern "C" {
 
 namespace halco {
 namespace hicann {
-namespace v2 {
+namespace v2 GENPYBIND_TAG_HALCO_HICANN_V2 {
 
 // IP address
-typedef boost::asio::ip::address_v4 IPv4;
+typedef boost::asio::ip::address_v4 IPv4 GENPYBIND(visible);
 typedef boost::asio::ip::address_v4::bytes_type IPv4_array_t;
 
-struct AnalogOnHICANN : public common::detail::RantWrapper<AnalogOnHICANN, uint_fast16_t, 1, 0>
+struct GENPYBIND(inline_base("*")) AnalogOnHICANN
+    : public common::detail::RantWrapper<AnalogOnHICANN, uint_fast16_t, 1, 0>
 {
-	PYPP_CONSTEXPR explicit AnalogOnHICANN(uintmax_t const val = 0) : rant_t(val) {}
+	PYPP_CONSTEXPR explicit AnalogOnHICANN(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 
 	AnalogOnDNC toAnalogOnDNC() const;
 };
 
 /// corresponds to the analog outputs of each reticle, same as AnalogOnHICANN (but multiple HICANNs
 /// share this)
-struct AnalogOnDNC : public common::detail::RantWrapper<AnalogOnDNC, uint_fast16_t, 1, 0>
+struct GENPYBIND(inline_base("*")) AnalogOnDNC
+    : public common::detail::RantWrapper<AnalogOnDNC, uint_fast16_t, 1, 0>
 {
-	explicit AnalogOnDNC(uintmax_t const val = 0) : rant_t(val) {}
+	explicit AnalogOnDNC(uintmax_t const val = 0) GENPYBIND(implicit_conversion) : rant_t(val) {}
 };
 
 
-struct WIOOnWafer : public common::detail::RantWrapper<WIOOnWafer, uint_fast16_t, 3, 0>
+struct GENPYBIND(inline_base("*")) WIOOnWafer
+    : public common::detail::RantWrapper<WIOOnWafer, uint_fast16_t, 3, 0>
 {
-	PYPP_CONSTEXPR explicit WIOOnWafer(uintmax_t const val = 0) : rant_t(val) {}
+	PYPP_CONSTEXPR explicit WIOOnWafer(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 };
 
-struct SocketOnWIO : public common::detail::RantWrapper<SocketOnWIO, uint_fast16_t, 11, 0>
+struct GENPYBIND(inline_base("*")) SocketOnWIO
+    : public common::detail::RantWrapper<SocketOnWIO, uint_fast16_t, 11, 0>
 {
-	PYPP_CONSTEXPR explicit SocketOnWIO(uintmax_t const val = 0) : rant_t(val) {}
+	PYPP_CONSTEXPR explicit SocketOnWIO(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 };
 
-struct GbitLinkOnHICANN
-	: public common::detail::RantWrapper<GbitLinkOnHICANN, uint_fast16_t, 7, 0> {
-	PYPP_CONSTEXPR explicit GbitLinkOnHICANN(uintmax_t const val = 0) : rant_t(val) {}
+struct GENPYBIND(inline_base("*")) GbitLinkOnHICANN
+    : public common::detail::RantWrapper<GbitLinkOnHICANN, uint_fast16_t, 7, 0>
+{
+	PYPP_CONSTEXPR explicit GbitLinkOnHICANN(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 
 	DNCMergerOnHICANN toDNCMergerOnHICANN() const;
 };
 
-struct GbitLinkOnWafer : public HICANNMixin<GbitLinkOnWafer, GbitLinkOnHICANN>
+struct GENPYBIND(inline_base("*HICANNMixin*")) GbitLinkOnWafer
+    : public HICANNMixin<GbitLinkOnWafer, GbitLinkOnHICANN>
 {
 private:
 	typedef HICANNMixin<GbitLinkOnWafer, GbitLinkOnHICANN> base;
@@ -89,15 +104,17 @@ public:
 };
 
 
-struct DNCOnWafer
-	: public common::detail::
-		  GridCoordinate<DNCOnWafer, common::XRanged<8, 0>, common::YRanged<7, 0>, 48> {
+struct GENPYBIND(inline_base("*")) DNCOnWafer
+    : public common::detail::
+          GridCoordinate<DNCOnWafer, common::XRanged<8, 0>, common::YRanged<7, 0>, 48>
+{
 	GRID_COMMON_CONSTRUCTORS(DNCOnWafer)
 
 	FPGAOnWafer toFPGAOnWafer() const;
 	PowerCoordinate toPowerCoordinate() const;
 	TriggerOnWafer toTriggerOnWafer() const;
-	std::array<AnanasChannelOnAnanasSlice, AnalogOnDNC::size> toAnanasChannelOnAnanasSlice() const;
+	std::array<AnanasChannelOnAnanasSlice, ::halco::hicann::v2::AnalogOnDNC::size>
+	toAnanasChannelOnAnanasSlice() const;
 	AuxPwrOnWafer toAuxPwrOnWafer() const;
 
 	/* implementation detail, not part of public API: */
@@ -107,8 +124,12 @@ struct DNCOnWafer
 };
 
 // DNC Coordinate relative to FPGA
-struct DNCOnFPGA : public common::detail::RantWrapper<DNCOnFPGA, size_t, 0, 0> {
-	PYPP_CONSTEXPR explicit DNCOnFPGA(uintmax_t val = 0) : rant_t(val) {}
+struct GENPYBIND(inline_base("*")) DNCOnFPGA
+    : public common::detail::RantWrapper<DNCOnFPGA, size_t, 0, 0>
+{
+	PYPP_CONSTEXPR explicit DNCOnFPGA(uintmax_t val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 
 	// TODO: rename toDNCGlobal
 	DNCGlobal toDNCOnWafer(FPGAGlobal const&) const;
@@ -116,16 +137,21 @@ struct DNCOnFPGA : public common::detail::RantWrapper<DNCOnFPGA, size_t, 0, 0> {
 
 HALCO_COORDINATE_MIXIN(DNCMixin, DNCOnWafer, dnc)
 
-struct PowerCoordinate : public common::detail::RantWrapper<PowerCoordinate, size_t, 48, 1> {
-	PYPP_CONSTEXPR explicit PowerCoordinate(uintmax_t val = 1) : rant_t(val) {}
+struct GENPYBIND(inline_base("*")) PowerCoordinate
+    : public common::detail::RantWrapper<PowerCoordinate, size_t, 48, 1>
+{
+	PYPP_CONSTEXPR explicit PowerCoordinate(uintmax_t val = 1) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 };
 
-struct DNCGlobal : public WaferMixin<DNCGlobal, DNCOnWafer> {
+struct GENPYBIND(inline_base("*WaferMixin*")) DNCGlobal : public WaferMixin<DNCGlobal, DNCOnWafer>
+{
 private:
 	typedef WaferMixin<DNCGlobal, DNCOnWafer> base;
 
 public:
-	using base::enum_type;
+	typedef base::enum_type enum_type GENPYBIND(opaque(false));
 	typedef DNCOnWafer::x_type x_type;
 	typedef DNCOnWafer::y_type y_type;
 
@@ -143,20 +169,25 @@ public:
 };
 
 // HighspeedLink coordinate between HICANN and DNC(FPGA)
-struct HighspeedLinkOnDNC
-    : public common::detail::RantWrapper<HighspeedLinkOnDNC, size_t, 7, 0> {
-	PYPP_CONSTEXPR explicit HighspeedLinkOnDNC(uintmax_t const val = 0) : rant_t(val) {}
+struct GENPYBIND(inline_base("*")) HighspeedLinkOnDNC
+    : public common::detail::RantWrapper<HighspeedLinkOnDNC, size_t, 7, 0>
+{
+	PYPP_CONSTEXPR explicit HighspeedLinkOnDNC(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 
 	HICANNOnDNC toHICANNOnDNC() const;
 };
 
-struct HighspeedLinkOnWafer : public DNCMixin<HighspeedLinkOnWafer, HighspeedLinkOnDNC>
+struct GENPYBIND(inline_base("*DNCMixin*")) HighspeedLinkOnWafer
+    : public DNCMixin<HighspeedLinkOnWafer, HighspeedLinkOnDNC>
 {
 private:
 	typedef DNCMixin<HighspeedLinkOnWafer, HighspeedLinkOnDNC> base;
 
 public:
-	using base::enum_type;
+	typedef base::enum_type enum_type GENPYBIND(opaque(false));
 
 	PYPP_DEFAULT(HighspeedLinkOnWafer());
 
@@ -171,41 +202,53 @@ public:
 };
 
 // IPv4 stack port number for UDP transport layer
-struct UDPPort : public common::detail::BaseType<UDPPort, uint_fast16_t> {
-	PYPP_CONSTEXPR explicit UDPPort(value_type val) : base_t(val) {}
-	PYPP_CONSTEXPR explicit UDPPort() : base_t() {}
+struct GENPYBIND(inline_base("*")) UDPPort : public common::detail::BaseType<UDPPort, uint_fast16_t>
+{
+	PYPP_CONSTEXPR explicit UDPPort(value_type val) GENPYBIND(implicit_conversion) : base_t(val) {}
+	PYPP_CONSTEXPR explicit UDPPort() GENPYBIND(implicit_conversion) : base_t() {}
 };
 
 // IPv4 stack port number for TCP transport layer
-struct TCPPort : public common::detail::BaseType<TCPPort, uint_fast16_t> {
-	PYPP_CONSTEXPR explicit TCPPort(value_type val) : base_t(val) {}
-	PYPP_CONSTEXPR explicit TCPPort() : base_t() {}
+struct GENPYBIND(inline_base("*")) TCPPort : public common::detail::BaseType<TCPPort, uint_fast16_t>
+{
+	PYPP_CONSTEXPR explicit TCPPort(value_type val) GENPYBIND(implicit_conversion) : base_t(val) {}
+	PYPP_CONSTEXPR explicit TCPPort() GENPYBIND(implicit_conversion) : base_t() {}
 };
 
 // Host Computer
-struct Host : public common::detail::BaseType<Host, size_t> {
-	PYPP_CONSTEXPR explicit Host(value_type val) : base_t(val) {}
-	PYPP_CONSTEXPR explicit Host() : base_t() {}
+struct GENPYBIND(inline_base("*")) Host : public common::detail::BaseType<Host, size_t>
+{
+	PYPP_CONSTEXPR explicit Host(value_type val) GENPYBIND(implicit_conversion) : base_t(val) {}
+	PYPP_CONSTEXPR explicit Host() GENPYBIND(implicit_conversion) : base_t() {}
 };
 
 // JTAG TCK Frequency in Hz
-struct JTAGFrequency : public common::detail::RantWrapper<JTAGFrequency, size_t, 50000000, 10000> {
-	PYPP_CONSTEXPR explicit JTAGFrequency(size_t val = 10000000) : rant_t(val) {}
+struct GENPYBIND(inline_base("*")) JTAGFrequency
+    : public common::detail::RantWrapper<JTAGFrequency, size_t, 50000000, 10000>
+{
+	PYPP_CONSTEXPR explicit JTAGFrequency(size_t val = 10000000) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 };
 
 // Power Management Unit
-struct PMU : public common::detail::BaseType<PMU, size_t> {
-	PYPP_CONSTEXPR explicit PMU(value_type val) : base_t(val) {}
-	PYPP_CONSTEXPR explicit PMU() : base_t() {}
+struct GENPYBIND(inline_base("*")) PMU : public common::detail::BaseType<PMU, size_t>
+{
+	PYPP_CONSTEXPR explicit PMU(value_type val) GENPYBIND(implicit_conversion) : base_t(val) {}
+	PYPP_CONSTEXPR explicit PMU() GENPYBIND(implicit_conversion) : base_t() {}
 };
 
 /// FPGA (FCP module) connected to a wafer module
 ///
 /// \note: For (old) Virtex-5-based wafer modules the valid values are only in the range of
 ///        0..11; to avoid introducing a new type for the Kintex-7-based wafer modules we
-///        check this constraint only in FPGAGlobal's constructor.
-struct FPGAOnWafer : public common::detail::RantWrapper<FPGAOnWafer, size_t, 47, 0> {
-	PYPP_CONSTEXPR explicit FPGAOnWafer(uintmax_t const val = 0) : rant_t(val) {}
+///        check this constraint only in FPGAGlobal's construct GENPYBIND(inline_base("*"))or.
+struct GENPYBIND(inline_base("*")) FPGAOnWafer
+    : public common::detail::RantWrapper<FPGAOnWafer, size_t, 47, 0>
+{
+	PYPP_CONSTEXPR explicit FPGAOnWafer(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 
 	explicit FPGAOnWafer(WIOOnWafer const& wio, SocketOnWIO const& s);
 
@@ -217,15 +260,17 @@ struct FPGAOnWafer : public common::detail::RantWrapper<FPGAOnWafer, size_t, 47,
 	WIOOnWafer toWIOOnWafer() const;
 	SocketOnWIO toSocketOnWIO() const;
 
-	std::array<HICANNOnWafer, HICANNOnDNC::size> toHICANNOnWafer() const;
+	std::array<HICANNOnWafer, halco::hicann::v2::HICANNOnDNC::size> toHICANNOnWafer() const;
 };
 
-struct FPGAGlobal : public WaferMixin<FPGAGlobal, FPGAOnWafer> {
+struct GENPYBIND(inline_base("*WaferMixin*")) FPGAGlobal
+    : public WaferMixin<FPGAGlobal, FPGAOnWafer>
+{
 private:
 	typedef WaferMixin<FPGAGlobal, FPGAOnWafer> base;
 
 public:
-	using base::enum_type;
+	typedef base::enum_type enum_type GENPYBIND(opaque(false));
 
 	FPGAGlobal();
 	explicit FPGAGlobal(FPGAOnWafer const& h, Wafer const& w = Wafer());
@@ -238,21 +283,29 @@ public:
 
 /// ANAlog Network-Attached Sampling unit (analog membrane recording and readout based on FlySpi
 /// FPGA board)
-struct AnanasOnWafer : public common::detail::RantWrapper<AnanasOnWafer, size_t, 1, 0>
+struct GENPYBIND(inline_base("*")) AnanasOnWafer
+    : public common::detail::RantWrapper<AnanasOnWafer, size_t, 1, 0>
 {
-	PYPP_CONSTEXPR explicit AnanasOnWafer(uintmax_t const val = 0) : rant_t(val) {}
+	PYPP_CONSTEXPR explicit AnanasOnWafer(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 };
 
 /// AnanasSlice corresponds to a HostARQ instance inside the FPGA (independently accessible by
 /// multiple hosts)
-struct AnanasSliceOnAnanas : public common::detail::RantWrapper<AnanasSliceOnAnanas, size_t, 5, 0>
+struct GENPYBIND(inline_base("*")) AnanasSliceOnAnanas
+    : public common::detail::RantWrapper<AnanasSliceOnAnanas, size_t, 5, 0>
 {
-	PYPP_CONSTEXPR explicit AnanasSliceOnAnanas(uintmax_t const val = 0) : rant_t(val) {}
+	PYPP_CONSTEXPR explicit AnanasSliceOnAnanas(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 };
 
 HALCO_COORDINATE_MIXIN(AnanasMixin, AnanasOnWafer, ananas)
 
-struct AnanasSliceOnWafer : public AnanasMixin<AnanasSliceOnWafer, AnanasSliceOnAnanas>
+struct GENPYBIND(inline_base("*AnanasMixin*")) AnanasSliceOnWafer
+    : public AnanasMixin<AnanasSliceOnWafer, AnanasSliceOnAnanas>
 {
 private:
 	typedef AnanasMixin<AnanasSliceOnWafer, AnanasSliceOnAnanas> base;
@@ -272,19 +325,23 @@ public:
 };
 
 /// AnanasChannel corresponds to an analog input to the board (physical copper trace)
-struct AnanasChannelOnAnanasSlice
+struct GENPYBIND(inline_base("*")) AnanasChannelOnAnanasSlice
     : public common::detail::RantWrapper<AnanasChannelOnAnanasSlice, size_t, 7, 0>
 {
-	PYPP_CONSTEXPR explicit AnanasChannelOnAnanasSlice(uintmax_t const val = 0) : rant_t(val) {}
+	PYPP_CONSTEXPR explicit AnanasChannelOnAnanasSlice(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 };
 
-struct AnanasGlobal : public WaferMixin<AnanasGlobal, AnanasOnWafer>
+struct GENPYBIND(inline_base("*WaferMixin*")) AnanasGlobal
+    : public WaferMixin<AnanasGlobal, AnanasOnWafer>
 {
 private:
 	typedef WaferMixin<AnanasGlobal, AnanasOnWafer> base;
 
 public:
-	using base::enum_type;
+	typedef base::enum_type enum_type GENPYBIND(opaque(false));
 
 	AnanasGlobal();
 	explicit AnanasGlobal(AnanasOnWafer const& h, Wafer const& w = Wafer());
@@ -293,7 +350,8 @@ public:
 	AnanasOnWafer toAnanasOnWafer() const;
 };
 
-struct AnanasSliceGlobal : public WaferMixin<AnanasSliceGlobal, AnanasSliceOnWafer>
+struct GENPYBIND(inline_base("*WaferMixin*")) AnanasSliceGlobal
+    : public WaferMixin<AnanasSliceGlobal, AnanasSliceOnWafer>
 {
 private:
 	typedef WaferMixin<AnanasSliceGlobal, AnanasSliceOnWafer> base;
@@ -312,19 +370,24 @@ public:
 	// TODO FIXME AnanasGlobal toAnanasGlobal() const { return }
 };
 
-struct AuxPwrOnWafer
-    : public common::detail::RantWrapper<AuxPwrOnWafer, size_t, 1, 0>,
-      public common::detail::YRangedTrait,
-      public common::detail::HasTopBottom<AuxPwrOnWafer> {
+struct GENPYBIND(inline_base("*")) AuxPwrOnWafer
+    : public common::detail::RantWrapper<AuxPwrOnWafer, size_t, 1, 0>
+    , public common::detail::YRangedTrait
+    , public common::detail::HasTopBottom<AuxPwrOnWafer>
+{
+	PYPP_CONSTEXPR explicit AuxPwrOnWafer(common::SideVertical const& v = common::top)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(v.value())
+	{}
 
-	PYPP_CONSTEXPR explicit AuxPwrOnWafer(
-	    common::SideVertical const& v = common::top)
-	    : rant_t(v.value()) {}
-
-	PYPP_CONSTEXPR explicit AuxPwrOnWafer(size_t const val) : rant_t(val) {}
+	PYPP_CONSTEXPR explicit AuxPwrOnWafer(size_t const val) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 };
 
-struct AuxPwrGlobal : public WaferMixin<AuxPwrGlobal, AuxPwrOnWafer> {
+struct GENPYBIND(inline_base("*WaferMixin*")) AuxPwrGlobal
+    : public WaferMixin<AuxPwrGlobal, AuxPwrOnWafer>
+{
 private:
 	typedef WaferMixin<AuxPwrGlobal, AuxPwrOnWafer> base;
 
@@ -338,32 +401,44 @@ public:
 	AuxPwrOnWafer toAuxPwrOnWafer() const { return This(); }
 };
 
-struct ChannelOnADC : public common::detail::RantWrapper<ChannelOnADC, int_fast16_t, 7, -1> {
-	PYPP_CONSTEXPR explicit ChannelOnADC(intmax_t const val = 0) : rant_t(val) {}
+struct GENPYBIND(inline_base("*")) ChannelOnADC
+    : public common::detail::RantWrapper<ChannelOnADC, int_fast16_t, 7, -1>
+{
+	PYPP_CONSTEXPR explicit ChannelOnADC(intmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 
 	static const ChannelOnADC GND;
 };
 
-struct TriggerOnADC : public common::detail::RantWrapper<TriggerOnADC, uint_fast16_t, 1, 0> {
-	PYPP_CONSTEXPR explicit TriggerOnADC(uintmax_t const val = 0) : rant_t(val) {}
+struct GENPYBIND(inline_base("*")) TriggerOnADC
+    : public common::detail::RantWrapper<TriggerOnADC, uint_fast16_t, 1, 0>
+{
+	PYPP_CONSTEXPR explicit TriggerOnADC(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 };
 
-struct TriggerOnWafer : public common::detail::RantWrapper<TriggerOnWafer, uint_fast16_t, 11, 0>
+struct GENPYBIND(inline_base("*")) TriggerOnWafer
+    : public common::detail::RantWrapper<TriggerOnWafer, uint_fast16_t, 11, 0>
 {
-	PYPP_CONSTEXPR explicit TriggerOnWafer(uintmax_t const val = 0) : rant_t(val) {}
+	PYPP_CONSTEXPR explicit TriggerOnWafer(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
 
 	AnanasOnWafer toAnanasOnWafer() const;
 	AnanasSliceOnAnanas toAnanasSliceOnAnanas() const;
 	AnanasSliceOnWafer toAnanasSliceOnWafer() const;
 };
 
-struct TriggerGlobal : public WaferMixin<TriggerGlobal, TriggerOnWafer>
+struct GENPYBIND(inline_base("*WaferMixin*")) TriggerGlobal
+    : public WaferMixin<TriggerGlobal, TriggerOnWafer>
 {
 private:
 	typedef WaferMixin<TriggerGlobal, TriggerOnWafer> base;
 
 public:
-	using base::enum_type;
+	typedef base::enum_type enum_type GENPYBIND(opaque(false));
 
 	TriggerGlobal();
 	explicit TriggerGlobal(TriggerOnWafer const& h, Wafer const& w = Wafer());

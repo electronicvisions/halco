@@ -9,47 +9,99 @@
 
 #include "halco/hicann/v2/coordinates.h"
 
+#if defined(__GENPYBIND__) || defined(__GENPYBIND_GENERATED__)
+// TODO: Issue #3375 move to genpybind as is general
+#include <pybind11/stl.h>
+namespace pybind11::detail {
+
+template <typename... Ts>
+struct type_caster<boost::variant<Ts...>> : variant_caster<boost::variant<Ts...>>
+{};
+
+template <>
+struct visit_helper<boost::variant>
+{
+	template <typename... Args>
+	static auto call(Args&&... args) -> decltype(boost::apply_visitor(args...))
+	{
+		return boost::apply_visitor(args...);
+	}
+};
+
+} // namespace pybind11::detail
+#endif
+
 namespace halco {
 namespace hicann {
-namespace v2 {
+namespace v2 GENPYBIND_TAG_HALCO_HICANN_V2 {
 
 // Order of declaration matters for python bindings:
 // Keep globals first!
+GENPYBIND(visible)
 std::string short_format(const AnanasGlobal& a);
+GENPYBIND(visible)
 std::string short_format(const AuxPwrGlobal& apg);
+GENPYBIND(visible)
 std::string short_format(const HICANNGlobal& hg);
+GENPYBIND(visible)
 std::string short_format(const FPGAGlobal& fg);
+GENPYBIND(visible)
 std::string short_format(const DNCGlobal& fg);
+GENPYBIND(visible)
 std::string short_format(const TriggerGlobal& t);
+GENPYBIND(visible)
 std::string short_format(const AnanasOnWafer& a);
+GENPYBIND(visible)
 std::string short_format(const AuxPwrOnWafer& a);
+GENPYBIND(visible)
 std::string short_format(const HICANNOnWafer& h);
+GENPYBIND(visible)
 std::string short_format(const FPGAOnWafer& f);
+GENPYBIND(visible)
 std::string short_format(const DNCOnWafer& f);
+GENPYBIND(visible)
 std::string short_format(const TriggerOnWafer& t);
+GENPYBIND(visible)
 std::string short_format(const RepeaterBlockOnWafer& rb);
+GENPYBIND(visible)
 std::string short_format(const HRepeaterOnWafer& hr);
+GENPYBIND(visible)
 std::string short_format(const VRepeaterOnWafer& vr);
+GENPYBIND(visible)
 std::string short_format(const HLineOnWafer& hl);
+GENPYBIND(visible)
 std::string short_format(const VLineOnWafer& vl);
+GENPYBIND(visible)
+std::string short_format(const Wafer& w);
+GENPYBIND(visible)
+std::string short_format(const RepeaterBlockOnHICANN& rb);
+GENPYBIND(visible)
+std::string short_format(const TriggerOnWafer& t);
+GENPYBIND(visible)
 std::string short_format(const Wafer& w);
 
-std::string short_format(const RepeaterBlockOnHICANN& rb);
+GENPYBIND(visible)
 std::string short_format(const HRepeaterOnHICANN& hr);
+GENPYBIND(visible)
 std::string short_format(const VRepeaterOnHICANN& vr);
-
+GENPYBIND(visible)
 std::string short_format(const HLineOnHICANN& hl);
+GENPYBIND(visible)
 std::string short_format(const VLineOnHICANN& vl);
-
+GENPYBIND(visible)
 std::string short_format(const NeuronOnHICANN& vl);
 
+GENPYBIND(visible)
 std::string slurm_license(AnanasGlobal const& ag);
+GENPYBIND(visible)
 std::string slurm_license(FPGAGlobal const& fg);
+GENPYBIND(visible)
 std::string slurm_license(HICANNGlobal const& hg);
+GENPYBIND(visible)
 std::string slurm_license(TriggerGlobal const& tg);
 
 template <typename T>
-std::string to_string(T const& t)
+std::string to_string(T const& t) GENPYBIND(visible)
 {
 	return short_format(t);
 }
@@ -110,6 +162,7 @@ typedef boost::variant<
     format_type;
 
 // converts from short format to type
+GENPYBIND(visible)
 format_type from_string(std::string const& s);
 
 #ifndef PYPLUSPLUS

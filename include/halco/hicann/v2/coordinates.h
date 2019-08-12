@@ -1,11 +1,18 @@
 #pragma once
 
+#include "halco/common/genpybind.h"
+
+GENPYBIND_TAG_HALCO_HICANN_V2
+GENPYBIND_MANUAL({
+	parent.attr("__variant__") = "pybind11";
+	parent->py::module::import("pyhalco_common_genpybind");
+})
+
 /**
  * @file
  * This file provides the HMF-specific Coordinates.
  */
 
-#include "halco/common/common.h"
 #include "halco/hicann/v2/external.h"
 #include "halco/hicann/v2/fg.h"
 #include "halco/hicann/v2/hicann.h"
@@ -21,3 +28,8 @@
 #include "halco/hicann/v2/lookup_tables.h"
 
 #include "halco/hicann/v2/format_helper.h"
+
+GENPYBIND(postamble, tag(hicann_v2))
+GENPYBIND_MANUAL({
+	parent->py::module::import("pyhalco_hicann_v2_patch_genpybind").attr("patch")(parent);
+})

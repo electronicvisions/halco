@@ -7,6 +7,7 @@
 #include <sstream>
 #include <boost/preprocessor/stringize.hpp>
 
+#include "halco/common/iter_all.h"
 #include "halco/hicann/v2/coordinates.h"
 
 using namespace halco::common;

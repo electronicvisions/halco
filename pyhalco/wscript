@@ -90,6 +90,49 @@ def build(bld):
         )
 
     else:
+        # in the transition time we also build genpybind targets and
+        # use with_pybind == False as selector of the wafer stack
+        bld(
+            target='pyhalco_common_genpybind',
+            source='../include/halco/common/common.h',
+            genpybind_tags='common',
+            features='genpybind cxx cxxshlib pyext pyembed',
+            use=['halco_common', 'PYBIND11HALCO', 'pyhalco_common_files'],
+            install_path='${PREFIX}/lib',
+            linkflags='-Wl,-z,defs'
+        )
+
+        bld(
+            name='pyhalco_common_tests_genpybind',
+            tests='test/pyhalco_test_common.py',
+            features='use pytest',
+            use='pyhalco_common_genpybind',
+            install_path='${PREFIX}/bin',
+            pythonpath=['test'],
+            test_environ={'GENPYBIND_POSTFIX': '1'},
+        )
+
+        bld(
+            target         = 'pyhalco_hicann_v2_genpybind',
+            features       = 'genpybind cxx cxxshlib pyext pyembed',
+            source         = '../include/halco/hicann/v2/coordinates.h',
+            genpybind_tags = 'hicann_v2',
+            use            = ['pyhalco_common_genpybind', 'halco_hicann_v2'],
+            install_path   = '${PREFIX}/lib',
+            linkflags      = '-Wl,-z,defs',
+        )
+
+        bld(
+            name            = "pyhalco_hicann_v2_tests_genpybind",
+            tests           = 'test/pyhalco_test_hicann_v2.py',
+            features        = 'use pytest',
+            use             = 'pyhalco_hicann_v2_genpybind',
+            install_path    = '${PREFIX}/bin',
+            linkflags      = '-Wl,-z,defs',
+            pythonpath      = ["test"],
+            test_environ    = {'PYHALCO_API_CHECK': '1', 'GENPYBIND_POSTFIX': '1'},
+        )
+
         bld(
             target='pyhalco_common',
             features='cxx cxxshlib pypp pyembed pyext',
