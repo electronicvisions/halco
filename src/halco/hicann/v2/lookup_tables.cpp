@@ -136,6 +136,17 @@ std::array<size_t, 48> const reticle_adc_trigger_grid = {{
 
 std::array<size_t, 12> const adc_trigger_ananas_grid = {{0,0,0,1,1,1,1,1,1,0,0,0}};
 
+std::array<size_t, 12> const adc_trigger_ananasslice_grid = {{0,1,2,3,4,5,0,1,2,3,4,5}};
+
+std::array<std::array<size_t, 2>, 48> const dnc_analog_ananaschannel_grid = {{
+	{6,7}, {4,5}, {0,1}, {6,7}, {2,3}, {0,1}, {2,3}, {4,5},
+	{6,7}, {4,5}, {0,1}, {0,1}, {2,3}, {6,7}, {0,1}, {2,3},
+	{4,5}, {0,1}, {2,3}, {4,5}, {6,7}, {6,7}, {2,3}, {4,5},
+	{4,5}, {2,3}, {6,7}, {6,7}, {0,1}, {2,3}, {0,1}, {4,5},
+	{2,3}, {0,1}, {4,5}, {2,3}, {4,5}, {6,7}, {2,3}, {6,7},
+	{0,1}, {6,7}, {0,1}, {4,5}, {6,7}, {4,5}, {2,3}, {0,1}
+}};
+
 std::array<size_t, 48> const reticle_auxpwr_grid = {{
               1,  1,  0,
           1,  1,  1,  0,  0,
@@ -177,9 +188,20 @@ TriggerOnWafer gridLookupTriggerOnWafer(DNCOnWafer const dnc)
 	return TriggerOnWafer(reticle_adc_trigger_grid.at(dnc.toEnum()));
 }
 
-ANANASOnWafer gridLookupANANASOnWafer(TriggerOnWafer const trigger)
+AnanasOnWafer gridLookupAnanasOnWafer(TriggerOnWafer const trigger)
 {
-	return ANANASOnWafer(adc_trigger_ananas_grid.at(trigger.toEnum()));
+	return AnanasOnWafer(adc_trigger_ananas_grid.at(trigger.toEnum()));
+}
+
+AnanasSliceOnAnanas gridLookupAnanasSliceOnAnanas(TriggerOnWafer const trigger)
+{
+	return AnanasSliceOnAnanas(adc_trigger_ananasslice_grid.at(trigger.toEnum()));
+}
+
+AnanasChannelOnAnanasSlice gridLookupAnanasChannelOnAnanasSlice(
+    AnalogOnDNC const a, DNCOnWafer const d)
+{
+	return AnanasChannelOnAnanasSlice(dnc_analog_ananaschannel_grid.at(d.toEnum()).at(a.toEnum()));
 }
 
 AuxPwrOnWafer gridLookupAuxPwrOnWafer(DNCOnWafer const dnc)

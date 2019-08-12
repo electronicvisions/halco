@@ -2,6 +2,7 @@ namespace halco {
 namespace hicann {
 namespace v2 {
 
+struct AnalogOnDNC;
 struct AnalogOnHICANN;
 struct BackgroundGeneratorOnHICANN;
 struct ChannelOnADC;
@@ -15,9 +16,13 @@ struct FGCellOnFGBlock;
 struct FGRowOnFGBlock;
 struct FPGAGlobal;
 struct FPGAOnWafer;
-struct ANANASGlobal;
+struct AnanasGlobal;
+struct AnanasSliceGlobal;
+struct AnanasOnWafer;
+struct AnanasChannelOnAnanasSlice;
+struct AnanasSliceOnAnanas;
+struct AnanasSliceOnWafer;
 struct AuxPwrGlobal;
-struct ANANASOnWafer;
 struct AuxPwrOnWafer;
 struct GbitLinkOnHICANN;
 struct HICANNGlobal;

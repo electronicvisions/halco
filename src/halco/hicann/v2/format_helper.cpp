@@ -34,7 +34,8 @@ std::string short_format(const TriggerOnWafer& f)
 	return ss.str();
 }
 
-std::string short_format(const ANANASOnWafer& f) {
+std::string short_format(const AnanasOnWafer& f)
+{
 	std::stringstream ss;
 	ss << "A" << std::setw(1) << std::setfill('0') << f.value();
 	return ss.str();
@@ -68,8 +69,9 @@ std::string short_format(const TriggerGlobal& fg) {
 	return short_format(fg.toWafer()) + short_format(fg.toTriggerOnWafer());
 }
 
-std::string short_format(const ANANASGlobal& fg) {
-	return short_format(fg.toWafer()) + short_format(fg.toANANASOnWafer());
+std::string short_format(const AnanasGlobal& fg)
+{
+	return short_format(fg.toWafer()) + short_format(fg.toAnanasOnWafer());
 }
 
 std::string short_format(const AuxPwrGlobal& apg) {
@@ -139,10 +141,10 @@ std::string short_format(const VLineOnWafer& vl) {
 	return short_format(vl.toHICANNOnWafer()) + short_format(vl.toVLineOnHICANN());
 }
 
-std::string slurm_license(ANANASGlobal const& ag)
+std::string slurm_license(AnanasGlobal const& ag)
 {
 	return "W" + std::to_string(ag.toWafer().toEnum()) + "A" +
-	       std::to_string(ag.toANANASOnWafer().toEnum());
+	       std::to_string(ag.toAnanasOnWafer().toEnum());
 }
 
 std::string slurm_license(FPGAGlobal const& fg)
@@ -171,7 +173,7 @@ typedef boost::variant<
     FPGAOnWafer,
     DNCOnWafer,
     TriggerOnWafer,
-    ANANASOnWafer,
+    AnanasOnWafer,
     AuxPwrOnWafer,
     Wafer,
     RepeaterBlockOnHICANN,
@@ -184,7 +186,7 @@ typedef boost::variant<
 
 // all compound types
 typedef boost::variant<
-    ANANASGlobal,
+    AnanasGlobal,
     AuxPwrGlobal,
     HICANNGlobal,
     FPGAGlobal,
@@ -226,7 +228,7 @@ local_type to_local(std::string const& type, std::string const& value)
 	} else if (type == "N") {
 		return NeuronOnHICANN(e);
 	} else if (type == "A") {
-		return ANANASOnWafer(e);
+		return AnanasOnWafer(e);
 	} else if (type == "AP") {
 		return AuxPwrOnWafer(e);
 	} else {
@@ -244,9 +246,9 @@ struct to_compound : public boost::static_visitor<compound_type>
 	}
 	FPGAGlobal operator()(Wafer const& w, FPGAOnWafer const& f) const { return FPGAGlobal(f, w); }
 	DNCGlobal operator()(Wafer const& w, DNCOnWafer const& f) const { return DNCGlobal(f, w); }
-	ANANASGlobal operator()(Wafer const& w, ANANASOnWafer const& a) const
+	AnanasGlobal operator()(Wafer const& w, AnanasOnWafer const& a) const
 	{
-		return ANANASGlobal(a, w);
+		return AnanasGlobal(a, w);
 	}
 	AuxPwrGlobal operator()(Wafer const& w, AuxPwrOnWafer const& a) const
 	{

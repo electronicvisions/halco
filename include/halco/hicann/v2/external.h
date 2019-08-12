@@ -30,6 +30,21 @@ namespace v2 {
 typedef boost::asio::ip::address_v4 IPv4;
 typedef boost::asio::ip::address_v4::bytes_type IPv4_array_t;
 
+struct AnalogOnHICANN : public common::detail::RantWrapper<AnalogOnHICANN, uint_fast16_t, 1, 0>
+{
+	PYPP_CONSTEXPR explicit AnalogOnHICANN(uintmax_t const val = 0) : rant_t(val) {}
+
+	AnalogOnDNC toAnalogOnDNC() const;
+};
+
+/// corresponds to the analog outputs of each reticle, same as AnalogOnHICANN (but multiple HICANNs
+/// share this)
+struct AnalogOnDNC : public common::detail::RantWrapper<AnalogOnDNC, uint_fast16_t, 1, 0>
+{
+	explicit AnalogOnDNC(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+
 struct WIOOnWafer : public common::detail::RantWrapper<WIOOnWafer, uint_fast16_t, 3, 0>
 {
 	PYPP_CONSTEXPR explicit WIOOnWafer(uintmax_t const val = 0) : rant_t(val) {}
@@ -79,6 +94,7 @@ struct DNCOnWafer
 	FPGAOnWafer toFPGAOnWafer() const;
 	PowerCoordinate toPowerCoordinate() const;
 	TriggerOnWafer toTriggerOnWafer() const;
+	std::array<AnanasChannelOnAnanasSlice, AnalogOnDNC::size> toAnanasChannelOnAnanasSlice() const;
 	AuxPwrOnWafer toAuxPwrOnWafer() const;
 
 	/* implementation detail, not part of public API: */
@@ -217,22 +233,80 @@ public:
 	FPGAOnWafer toFPGAOnWafer() const { return This(); }
 };
 
-struct ANANASOnWafer : public common::detail::RantWrapper<ANANASOnWafer, size_t, 1, 0> {
-	PYPP_CONSTEXPR explicit ANANASOnWafer(uintmax_t const val = 0) : rant_t(val) {}
+/// ANAlog Network-Attached Sampling unit (analog membrane recording and readout based on FlySpi
+/// FPGA board)
+struct AnanasOnWafer : public common::detail::RantWrapper<AnanasOnWafer, size_t, 1, 0>
+{
+	PYPP_CONSTEXPR explicit AnanasOnWafer(uintmax_t const val = 0) : rant_t(val) {}
 };
 
-struct ANANASGlobal : public WaferMixin<ANANASGlobal, ANANASOnWafer> {
+/// AnanasSlice corresponds to a HostARQ instance inside the FPGA (independently accessible by
+/// multiple hosts)
+struct AnanasSliceOnAnanas : public common::detail::RantWrapper<AnanasSliceOnAnanas, size_t, 5, 0>
+{
+	PYPP_CONSTEXPR explicit AnanasSliceOnAnanas(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+HALCO_COORDINATE_MIXIN(AnanasMixin, AnanasOnWafer, ananas)
+
+struct AnanasSliceOnWafer : public AnanasMixin<AnanasSliceOnWafer, AnanasSliceOnAnanas>
+{
 private:
-	typedef WaferMixin<ANANASGlobal, ANANASOnWafer> base;
+	typedef AnanasMixin<AnanasSliceOnWafer, AnanasSliceOnAnanas> base;
+
+public:
+	typedef base::enum_type enum_type;
+
+	AnanasSliceOnWafer();
+
+	explicit AnanasSliceOnWafer(
+	    AnanasSliceOnAnanas const& slice, AnanasOnWafer const& ananas = AnanasOnWafer());
+
+	explicit AnanasSliceOnWafer(
+	    uintmax_t const& e); // TODO FIXME uint because of AnanasChannelGlobal
+
+	AnanasSliceOnAnanas toAnanasSliceOnAnanas() const;
+};
+
+/// AnanasChannel corresponds to an analog input to the board (physical copper trace)
+struct AnanasChannelOnAnanasSlice
+    : public common::detail::RantWrapper<AnanasChannelOnAnanasSlice, size_t, 7, 0>
+{
+	PYPP_CONSTEXPR explicit AnanasChannelOnAnanasSlice(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+struct AnanasGlobal : public WaferMixin<AnanasGlobal, AnanasOnWafer>
+{
+private:
+	typedef WaferMixin<AnanasGlobal, AnanasOnWafer> base;
 
 public:
 	using base::enum_type;
 
-	ANANASGlobal();
-	explicit ANANASGlobal(ANANASOnWafer const& h, Wafer const& w = Wafer());
-	explicit ANANASGlobal(enum_type const& e);
+	AnanasGlobal();
+	explicit AnanasGlobal(AnanasOnWafer const& h, Wafer const& w = Wafer());
+	explicit AnanasGlobal(enum_type const& e);
 
-	ANANASOnWafer toANANASOnWafer() const { return This(); }
+	AnanasOnWafer toAnanasOnWafer() const;
+};
+
+struct AnanasSliceGlobal : public WaferMixin<AnanasSliceGlobal, AnanasSliceOnWafer>
+{
+private:
+	typedef WaferMixin<AnanasSliceGlobal, AnanasSliceOnWafer> base;
+
+public:
+	using base::enum_type;
+
+	AnanasSliceGlobal();
+	explicit AnanasSliceGlobal(AnanasSliceOnWafer const& h, Wafer const& w = Wafer());
+	explicit AnanasSliceGlobal(enum_type const& e);
+
+	AnanasSliceOnWafer toAnanasSliceOnWafer() const
+	{
+		return This();
+	}
+	// TODO FIXME AnanasGlobal toAnanasGlobal() const { return }
 };
 
 struct AuxPwrOnWafer
@@ -261,10 +335,6 @@ public:
 	AuxPwrOnWafer toAuxPwrOnWafer() const { return This(); }
 };
 
-struct AnalogOnHICANN : public common::detail::RantWrapper<AnalogOnHICANN, uint_fast16_t, 1, 0> {
-	PYPP_CONSTEXPR explicit AnalogOnHICANN(uintmax_t const val = 0) : rant_t(val) {}
-};
-
 struct ChannelOnADC : public common::detail::RantWrapper<ChannelOnADC, int_fast16_t, 7, -1> {
 	PYPP_CONSTEXPR explicit ChannelOnADC(intmax_t const val = 0) : rant_t(val) {}
 
@@ -279,7 +349,9 @@ struct TriggerOnWafer : public common::detail::RantWrapper<TriggerOnWafer, uint_
 {
 	PYPP_CONSTEXPR explicit TriggerOnWafer(uintmax_t const val = 0) : rant_t(val) {}
 
-	ANANASOnWafer toANANASOnWafer() const;
+	AnanasOnWafer toAnanasOnWafer() const;
+	AnanasSliceOnAnanas toAnanasSliceOnAnanas() const;
+	AnanasSliceOnWafer toAnanasSliceOnWafer() const;
 };
 
 struct TriggerGlobal : public WaferMixin<TriggerGlobal, TriggerOnWafer>
@@ -311,17 +383,25 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::DNCOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::HighspeedLinkOnDNC)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::HighspeedLinkOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::FPGAOnWafer)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::ANANASOnWafer)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::AnanasChannelOnAnanasSlice)
+HALCO_GEOMETRY_HASH_CLASS(
+    halco::hicann::v2::AnanasMixin<halco::hicann::v2::AnanasSliceOnWafer BOOST_PP_COMMA()
+                                       halco::hicann::v2::AnanasSliceOnAnanas>)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::AnanasOnWafer)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::AnanasSliceGlobal)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::AnanasSliceOnAnanas)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::AnanasSliceOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::AuxPwrOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::TriggerOnADC)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::TriggerOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::AnalogOnHICANN)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::AnalogOnDNC)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::ChannelOnADC)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::DNCGlobal)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::PowerCoordinate)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::FPGAGlobal)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::TriggerGlobal)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::ANANASGlobal)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::AnanasGlobal)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::AuxPwrGlobal)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::GbitLinkOnHICANN)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::GbitLinkOnWafer)
@@ -330,8 +410,12 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::WaferMixin<
 HALCO_GEOMETRY_HASH_CLASS(
     halco::hicann::v2::WaferMixin<halco::hicann::v2::TriggerGlobal BOOST_PP_COMMA()
     halco::hicann::v2::TriggerOnWafer>)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::WaferMixin<
-    halco::hicann::v2::ANANASGlobal BOOST_PP_COMMA() halco::hicann::v2::ANANASOnWafer>)
+HALCO_GEOMETRY_HASH_CLASS(
+    halco::hicann::v2::WaferMixin<halco::hicann::v2::AnanasGlobal BOOST_PP_COMMA()
+                                      halco::hicann::v2::AnanasOnWafer>)
+HALCO_GEOMETRY_HASH_CLASS(
+    halco::hicann::v2::WaferMixin<halco::hicann::v2::AnanasSliceGlobal BOOST_PP_COMMA()
+                                      halco::hicann::v2::AnanasSliceOnWafer>)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::WaferMixin<
     halco::hicann::v2::AuxPwrGlobal BOOST_PP_COMMA() halco::hicann::v2::AuxPwrOnWafer>)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::WaferMixin<

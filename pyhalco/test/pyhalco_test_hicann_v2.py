@@ -6,6 +6,7 @@ from pyhalco_test_utils import parametrize, PyhalcoTest
 @parametrize
 class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
     COORDINATES = """
+    AnalogOnDNC           => linear, iterable
     AnalogOnHICANN        => linear, iterable
     BackgroundGeneratorOnHICANN  =>  linear, iterable
     ChannelOnADC          => linear, iterable
@@ -23,8 +24,12 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
     FGRowOnFGBlock        => linear, iterable
     FPGAGlobal            =>
     FPGAOnWafer           => linear, iterable
-    ANANASGlobal          =>
-    ANANASOnWafer         => linear, iterable
+    AnanasChannelOnAnanasSlice => linear, iterable
+    AnanasGlobal          =>
+    AnanasSliceGlobal     =>
+    AnanasOnWafer         => linear, iterable
+    AnanasSliceOnAnanas   => linear, iterable
+    AnanasSliceOnWafer    => linear, iterable
     AuxPwrGlobal          =>
     AuxPwrOnWafer         => linear, iterable
     GbitLinkOnHICANN      => linear, iterable
@@ -128,12 +133,12 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
         self.assertEqual(C.from_string("W02"), w)
         self.assertEqual(C.from_string("W2"), w)
 
-        a = C.ANANASOnWafer(Enum(1))
+        a = C.AnanasOnWafer(Enum(1))
         self.assertEqual(C.short_format(a), "A1")
         self.assertEqual(C.to_string(a), "A1")
         self.assertEqual(C.from_string("A1"), a)
 
-        ag = C.ANANASGlobal(a, w)
+        ag = C.AnanasGlobal(a, w)
         self.assertEqual(C.short_format(ag), "W002A1")
         self.assertEqual(C.to_string(ag), "W002A1")
         self.assertEqual(C.from_string("W002A1"), ag)

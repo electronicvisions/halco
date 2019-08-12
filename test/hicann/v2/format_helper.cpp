@@ -17,15 +17,15 @@ TEST(FormatHelper, ShortFormat) {
 	EXPECT_EQ(to_string(w),  "W002");
 	EXPECT_EQ(boost::get<Wafer>(from_string("W002")), w);
 
-	ANANASOnWafer a(Enum(1));
+	AnanasOnWafer a(Enum(1));
 	EXPECT_EQ(short_format(a),  "A1");
 	EXPECT_EQ(to_string(a),  "A1");
-	EXPECT_EQ(boost::get<ANANASOnWafer>(from_string("A1")), a);
+	EXPECT_EQ(boost::get<AnanasOnWafer>(from_string("A1")), a);
 
-	ANANASGlobal ag(a,w);
+	AnanasGlobal ag(a, w);
 	EXPECT_EQ(short_format(ag), "W002A1");
 	EXPECT_EQ(to_string(ag), "W002A1");
-	EXPECT_EQ(boost::get<ANANASGlobal>(from_string("W002A1")), ag);
+	EXPECT_EQ(boost::get<AnanasGlobal>(from_string("W002A1")), ag);
 
 	AuxPwrOnWafer ap(Enum(1));
 	EXPECT_EQ(short_format(ap),  "AP1");
@@ -149,7 +149,7 @@ TEST(FormatHelper, ShortFormat) {
 TEST(FormatHelper, SlurmLicense)
 {
 	// explicitly test first "overflow" of OnWafer coordinates
-	EXPECT_EQ(slurm_license(ANANASGlobal(Enum(2))), "W1A0");
+	EXPECT_EQ(slurm_license(AnanasGlobal(Enum(2))), "W1A0");
 	EXPECT_EQ(slurm_license(FPGAGlobal(Enum(48))), "W1F0");
 	EXPECT_EQ(slurm_license(HICANNGlobal(Enum(384))), "W1H0");
 	EXPECT_EQ(slurm_license(TriggerGlobal(Enum(12))), "W1T0");
@@ -158,17 +158,17 @@ TEST(FormatHelper, SlurmLicense)
 	Wafer const wafer2 = Wafer(30);
 	Wafer const wafer3 = Wafer(123);
 
-	for (auto ananas : iter_all<ANANASOnWafer>()) {
+	for (auto ananas : iter_all<AnanasOnWafer>()) {
 		std::string const teststring1 =
 		    "W" + std::to_string(wafer1.toEnum()) + "A" + std::to_string(ananas.toEnum());
 		std::string const teststring2 =
 		    "W" + std::to_string(wafer2.toEnum()) + "A" + std::to_string(ananas.toEnum());
 		std::string const teststring3 =
 		    "W" + std::to_string(wafer3.toEnum()) + "A" + std::to_string(ananas.toEnum());
-		ASSERT_EQ(teststring1, slurm_license(ANANASGlobal(ananas, wafer1)));
-		ASSERT_EQ(teststring2, slurm_license(ANANASGlobal(ananas, wafer2)));
-		ASSERT_EQ(teststring3, slurm_license(ANANASGlobal(ananas, wafer3)));
-		ASSERT_NE(teststring1, slurm_license(ANANASGlobal(ananas, wafer2)));
+		ASSERT_EQ(teststring1, slurm_license(AnanasGlobal(ananas, wafer1)));
+		ASSERT_EQ(teststring2, slurm_license(AnanasGlobal(ananas, wafer2)));
+		ASSERT_EQ(teststring3, slurm_license(AnanasGlobal(ananas, wafer3)));
+		ASSERT_NE(teststring1, slurm_license(AnanasGlobal(ananas, wafer2)));
 	}
 
 	for (auto fpga : iter_all<FPGAOnWafer>()) {

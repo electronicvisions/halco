@@ -20,6 +20,7 @@ template<typename T>
 class CommonCoordinateTestNtoZ : public ::testing::Test {};
 
 typedef ::testing::Types<
+	AnalogOnDNC,
 	AnalogOnHICANN,
 	BackgroundGeneratorOnHICANN,
 	ChannelOnADC,
@@ -37,8 +38,12 @@ typedef ::testing::Types<
 	FGRowOnFGBlock,
 	FPGAGlobal,
 	FPGAOnWafer,
-	ANANASGlobal,
-	ANANASOnWafer,
+	AnanasChannelOnAnanasSlice,
+	AnanasGlobal,
+	AnanasOnWafer,
+	AnanasSliceGlobal,
+	AnanasSliceOnAnanas,
+	AnanasSliceOnWafer,
 	AuxPwrGlobal,
 	AuxPwrOnWafer,
 	GbitLinkOnHICANN,

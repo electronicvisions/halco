@@ -52,8 +52,15 @@ DNCOnWafer gridLookupDNCOnWafer(FPGAOnWafer const f);
 // Return the Trigger position on a Wafer
 TriggerOnWafer gridLookupTriggerOnWafer(DNCOnWafer const dnc);
 
-// Return the ANANAS connected to a Trigger
-ANANASOnWafer gridLookupANANASOnWafer(TriggerOnWafer const trigger);
+// Return the Ananas connected to a Trigger
+AnanasOnWafer gridLookupAnanasOnWafer(TriggerOnWafer const trigger);
+
+// Return the AnanasSlice connected to a Trigger
+AnanasSliceOnAnanas gridLookupAnanasSliceOnAnanas(TriggerOnWafer const trigger);
+
+// Return the AnanasChannel connected to the analog output of a DNC
+AnanasChannelOnAnanasSlice gridLookupAnanasChannelOnAnanasSlice(
+    AnalogOnDNC const a, DNCOnWafer const d);
 
 // Return the associated AuxPwr on a Wafer
 AuxPwrOnWafer gridLookupAuxPwrOnWafer(DNCOnWafer const dnc);

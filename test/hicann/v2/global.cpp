@@ -14,7 +14,7 @@ class GlobalCoordinateTest : public ::testing::Test
 typedef ::testing::Types<
 	DNCGlobal,
 	FPGAGlobal,
-	ANANASGlobal,
+	AnanasGlobal,
 	AuxPwrGlobal,
 	HICANNGlobal,
 	NeuronBlockGlobal,

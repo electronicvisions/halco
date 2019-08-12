@@ -50,6 +50,16 @@ TriggerOnWafer DNCOnWafer::toTriggerOnWafer() const
 	return gridLookupTriggerOnWafer(*this);
 }
 
+std::array<AnanasChannelOnAnanasSlice, AnalogOnDNC::size> DNCOnWafer::toAnanasChannelOnAnanasSlice()
+    const
+{
+	std::array<AnanasChannelOnAnanasSlice, AnalogOnDNC::size> ret;
+	for (size_t i = 0; i < AnalogOnDNC::size; i++) {
+		ret.at(i) = gridLookupAnanasChannelOnAnanasSlice(AnalogOnDNC(i), *this);
+	}
+	return ret;
+}
+
 DNCGlobal DNCOnFPGA::toDNCOnWafer(FPGAGlobal const& f) const {
 	return gridLookupDNCGlobal(f, *this);
 }
@@ -105,9 +115,24 @@ std::array<HICANNOnWafer, HICANNOnDNC::size> FPGAOnWafer::toHICANNOnWafer() cons
 	return hicanns;
 }
 
-ANANASOnWafer TriggerOnWafer::toANANASOnWafer() const
+AnalogOnDNC AnalogOnHICANN::toAnalogOnDNC() const
 {
-	return gridLookupANANASOnWafer(*this);
+	return AnalogOnDNC(*this);
+}
+
+AnanasOnWafer TriggerOnWafer::toAnanasOnWafer() const
+{
+	return gridLookupAnanasOnWafer(*this);
+}
+
+AnanasSliceOnAnanas TriggerOnWafer::toAnanasSliceOnAnanas() const
+{
+	return gridLookupAnanasSliceOnAnanas(*this);
+}
+
+AnanasSliceOnWafer TriggerOnWafer::toAnanasSliceOnWafer() const
+{
+	return AnanasSliceOnWafer(toAnanasSliceOnAnanas(), toAnanasOnWafer());
 }
 
 AuxPwrOnWafer DNCOnWafer::toAuxPwrOnWafer() const
@@ -152,16 +177,51 @@ TriggerGlobal::TriggerGlobal(enum_type const& e)
 	: base(TriggerOnWafer(e % TriggerOnWafer::end), Wafer(e / TriggerOnWafer::end))
 {}
 
-ANANASGlobal::ANANASGlobal()
-    : ANANASGlobal(ANANASOnWafer{}, Wafer{}) // delegate to common ctor for range checks
+AnanasGlobal::AnanasGlobal() :
+    AnanasGlobal(AnanasOnWafer{}, Wafer{}) // delegate to common ctor for range checks
 {}
 
-ANANASGlobal::ANANASGlobal(ANANASOnWafer const& h, Wafer const& w) : base(h, w) {
+AnanasGlobal::AnanasGlobal(AnanasOnWafer const& h, Wafer const& w) : base(h, w) {}
+
+AnanasGlobal::AnanasGlobal(enum_type const& e) :
+    base(AnanasOnWafer(e % AnanasOnWafer::end), Wafer(e / AnanasOnWafer::end))
+{}
+
+AnanasSliceOnWafer::AnanasSliceOnWafer() :
+    AnanasSliceOnWafer(
+        AnanasSliceOnAnanas{}, AnanasOnWafer{}) // delegate to common ctor for range checks
+{}
+
+AnanasSliceOnWafer::AnanasSliceOnWafer(
+    AnanasSliceOnAnanas const& slice, AnanasOnWafer const& ananas) :
+    base(slice, ananas)
+{}
+
+AnanasSliceOnWafer::AnanasSliceOnWafer(uintmax_t const& e) :
+    base(
+        AnanasSliceOnAnanas(e % AnanasSliceOnAnanas::end),
+        AnanasOnWafer(e / AnanasSliceOnAnanas::end))
+{}
+
+AnanasSliceOnAnanas AnanasSliceOnWafer::toAnanasSliceOnAnanas() const
+{
+	return This();
 }
 
-ANANASGlobal::ANANASGlobal(enum_type const& e) :
-	base(ANANASOnWafer(e % ANANASOnWafer::end), Wafer(e / ANANASOnWafer::end))
+AnanasSliceGlobal::AnanasSliceGlobal() :
+    AnanasSliceGlobal(AnanasSliceOnWafer{}, Wafer{}) // delegate to common ctor for range checks
 {}
+
+AnanasSliceGlobal::AnanasSliceGlobal(AnanasSliceOnWafer const& h, Wafer const& w) : base(h, w) {}
+
+AnanasSliceGlobal::AnanasSliceGlobal(enum_type const& e) :
+    base(AnanasSliceOnWafer(e % AnanasSliceOnWafer::end), Wafer(e / AnanasSliceOnWafer::end))
+{}
+
+AnanasOnWafer AnanasGlobal::toAnanasOnWafer() const
+{
+	return This();
+}
 
 AuxPwrGlobal::AuxPwrGlobal()
     : AuxPwrGlobal(AuxPwrOnWafer{}, Wafer{}) // delegate to common ctor for range checks
