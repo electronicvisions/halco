@@ -90,6 +90,30 @@ std::string short_format(const VLineOnHICANN& vl) {
 	return ss.str();
 }
 
+std::string slurm_license(ANANASGlobal const& ag)
+{
+	return "W" + std::to_string(ag.toWafer().toEnum()) + "A" +
+	       std::to_string(ag.toANANASOnWafer().toEnum());
+}
+
+std::string slurm_license(FPGAGlobal const& fg)
+{
+	return "W" + std::to_string(fg.toWafer().toEnum()) + "F" +
+	       std::to_string(fg.toFPGAOnWafer().toEnum());
+}
+
+std::string slurm_license(HICANNGlobal const& hg)
+{
+	return "W" + std::to_string(hg.toWafer().toEnum()) + "H" +
+	       std::to_string(hg.toHICANNOnWafer().toEnum());
+}
+
+std::string slurm_license(TriggerGlobal const& tg)
+{
+	return "W" + std::to_string(tg.toWafer().toEnum()) + "T" +
+	       std::to_string(tg.toTriggerOnWafer().toEnum());
+}
+
 } // v2
 } // hicann
 } // halco
