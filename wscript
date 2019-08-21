@@ -25,8 +25,7 @@ def configure(conf):
 
     conf.check_cxx(mandatory=True, header_name='cereal/cereal.hpp')
 
-    if conf.env.build_python_bindings:
-        conf.recurse("pyhalco")
+    conf.recurse("pyhalco")
 
 
 def build(bld):
@@ -108,5 +107,4 @@ def build(bld):
         install_path="${PREFIX}/bin"
     )
 
-    if bld.env.build_python_bindings:
-            bld.recurse("pyhalco")
+    bld.recurse("pyhalco")
