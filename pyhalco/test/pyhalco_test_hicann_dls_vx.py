@@ -85,12 +85,12 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     SPL1Address                      => linear, iterable
     CommonSynramConfigOnDLS          => linear, iterable
     FPGADeviceDNAOnFPGA              => linear, iterable
-    SynapseBlockColumnOnDLS          => linear, iterable
+    SynapseQuadColumnOnDLS          => linear, iterable
     SynapseRowOnSynram               => linear, iterable
     SynramOnDLS                      => linear, iterable
-    SynapseBlockOnSynram             => grid, iterable
-    SynapseBlockOnDLS                => iterable
-    SynapseOnSynapseBlock            => linear, iterable
+    SynapseQuadOnSynram             => grid, iterable
+    SynapseQuadOnDLS                => iterable
+    SynapseOnSynapseQuad            => linear, iterable
     SynapseDriverOnSynapseDriverBlock => linear, iterable
     SynapseDriverBlockOnDLS           => linear, iterable
     SynapseDriverOnDLS                => linear, iterable

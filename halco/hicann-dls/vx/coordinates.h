@@ -1083,20 +1083,20 @@ struct GENPYBIND(inline_base("*")) CommonSynramConfigOnDLS
    Synapse
 \***********/
 
-struct GENPYBIND(inline_base("*")) SynapseBlockColumnOnDLS
+struct GENPYBIND(inline_base("*")) SynapseQuadColumnOnDLS
     : public common::detail::RantWrapper<
-          SynapseBlockColumnOnDLS,
+          SynapseQuadColumnOnDLS,
           uint_fast16_t,
           NeuronOnNeuronBlock::size * 2 / 4 - 1,
           0>
     , public common::detail::XRangedTrait
 {
-	constexpr explicit SynapseBlockColumnOnDLS(uintmax_t const val = 0)
+	constexpr explicit SynapseQuadColumnOnDLS(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
 
-	constexpr explicit SynapseBlockColumnOnDLS(common::X const& x) GENPYBIND(implicit_conversion) :
+	constexpr explicit SynapseQuadColumnOnDLS(common::X const& x) GENPYBIND(implicit_conversion) :
 	    rant_t(x)
 	{}
 };
@@ -1114,13 +1114,13 @@ struct GENPYBIND(inline_base("*")) SynapseRowOnSynram
 	{}
 };
 
-struct GENPYBIND(inline_base("*")) SynapseBlockOnSynram
+struct GENPYBIND(inline_base("*")) SynapseQuadOnSynram
     : public common::detail::
-          GridCoordinate<SynapseBlockOnSynram, SynapseBlockColumnOnDLS, SynapseRowOnSynram>
+          GridCoordinate<SynapseQuadOnSynram, SynapseQuadColumnOnDLS, SynapseRowOnSynram>
 {
-	GRID_COMMON_CONSTRUCTORS(SynapseBlockOnSynram)
+	GRID_COMMON_CONSTRUCTORS(SynapseQuadOnSynram)
 
-	SynapseBlockColumnOnDLS toSynapseBlockColumnOnDLS() const { return x(); }
+	SynapseQuadColumnOnDLS toSynapseQuadColumnOnDLS() const { return x(); }
 	SynapseRowOnSynram toSynapseRowOnSynram() const { return y(); }
 };
 
@@ -1143,33 +1143,32 @@ struct GENPYBIND(inline_base("*")) SynramOnDLS
 
 HALCO_COORDINATE_MIXIN(SynramMixin, SynramOnDLS, synram)
 
-struct GENPYBIND(inline_base("*SynramMixin*")) SynapseBlockOnDLS
-    : public SynramMixin<SynapseBlockOnDLS, SynapseBlockOnSynram>
+struct GENPYBIND(inline_base("*SynramMixin*")) SynapseQuadOnDLS
+    : public SynramMixin<SynapseQuadOnDLS, SynapseQuadOnSynram>
 {
 private:
-	typedef SynramMixin<SynapseBlockOnDLS, SynapseBlockOnSynram> base;
+	typedef SynramMixin<SynapseQuadOnDLS, SynapseQuadOnSynram> base;
 
 public:
 	typedef base::enum_type enum_type GENPYBIND(opaque(false));
 
-	SynapseBlockOnDLS() = default;
+	SynapseQuadOnDLS() = default;
 
-	explicit SynapseBlockOnDLS(
-	    SynapseBlockOnSynram const& block, SynramOnDLS const& synram = SynramOnDLS()) :
+	explicit SynapseQuadOnDLS(
+	    SynapseQuadOnSynram const& block, SynramOnDLS const& synram = SynramOnDLS()) :
 	    base(block, synram)
 	{}
 
-	explicit SynapseBlockOnDLS(enum_type const& e) : base(e) {}
+	explicit SynapseQuadOnDLS(enum_type const& e) : base(e) {}
 
-	SynapseBlockOnSynram toSynapseBlockOnSynram() const { return This(); }
+	SynapseQuadOnSynram toSynapseQuadOnSynram() const { return This(); }
 	SynramOnDLS toSynramOnDLS() const { return split().first; }
 };
 
-struct GENPYBIND(inline_base("*")) SynapseOnSynapseBlock
-    : public common::detail::
-          RantWrapper<SynapseOnSynapseBlock, uint_fast16_t, 3, 0>
+struct GENPYBIND(inline_base("*")) SynapseOnSynapseQuad
+    : public common::detail::RantWrapper<SynapseOnSynapseQuad, uint_fast16_t, 3, 0>
 {
-	constexpr explicit SynapseOnSynapseBlock(uintmax_t const val = 0)
+	constexpr explicit SynapseOnSynapseQuad(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
@@ -1263,12 +1262,12 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::I2CINA219RwRegisterOnINA219)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::INA219OnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::I2CINA219RoRegisterOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::I2CINA219RwRegisterOnBoard)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseBlockColumnOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseQuadColumnOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseRowOnSynram)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseBlockOnSynram)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseQuadOnSynram)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynramOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseBlockOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseOnSynapseBlock)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseQuadOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseOnSynapseQuad)
 
 } // namespace std
 
