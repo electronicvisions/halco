@@ -1077,7 +1077,7 @@ struct GENPYBIND(inline_base("*")) CapMemBlockOnDLS
 
 struct GENPYBIND(inline_base("*")) CapMemBlockConfigOnDLS
     : public common::detail::
-          RantWrapper<CapMemBlockConfigOnDLS, uint_fast16_t, CapMemBlockOnDLS::end, 0>
+          RantWrapper<CapMemBlockConfigOnDLS, uint_fast16_t, CapMemBlockOnDLS::max, 0>
 {
 	constexpr explicit CapMemBlockConfigOnDLS(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
