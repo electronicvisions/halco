@@ -9,8 +9,8 @@ using namespace halco::common;
 PPUOnDLS const PPUOnDLS::top{0};
 PPUOnDLS const PPUOnDLS::bottom{1};
 
-CADCConfigOnDLS const CADCConfigOnDLS::top{PPUOnDLS::top};
-CADCConfigOnDLS const CADCConfigOnDLS::bottom{PPUOnDLS::bottom};
+CADCConfigOnDLS const CADCConfigOnDLS::top{PPUOnDLS::top.toEnum()};
+CADCConfigOnDLS const CADCConfigOnDLS::bottom{PPUOnDLS::bottom.toEnum()};
 
 PPUOnDLS CADCConfigOnDLS::toPPUOnDLS() const
 {
@@ -116,8 +116,8 @@ CommonSynapseDriverConfigOnDLS SynapseDriverBlockOnDLS::toCommonSynapseDriverCon
 	return CommonSynapseDriverConfigOnDLS(toEnum());
 }
 
-CommonSynramConfigOnDLS const CommonSynramConfigOnDLS::bottom{0};
-CommonSynramConfigOnDLS const CommonSynramConfigOnDLS::top{1};
+CommonSynramConfigOnDLS const CommonSynramConfigOnDLS::bottom{PPUOnDLS::bottom.toEnum()};
+CommonSynramConfigOnDLS const CommonSynramConfigOnDLS::top{PPUOnDLS::top.toEnum()};
 
 SynramOnDLS const SynramOnDLS::bottom{CommonSynramConfigOnDLS::bottom.toEnum()};
 SynramOnDLS const SynramOnDLS::top{CommonSynramConfigOnDLS::top.toEnum()};
