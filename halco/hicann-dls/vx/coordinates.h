@@ -1271,6 +1271,66 @@ struct GENPYBIND(inline_base("*")) CapMemCellOnCapMemBlock
 	CapMemRowOnCapMemBlock toCapMemRowOnCapMemBlock() const { return y(); }
 
 	bool isShared() const;
+
+	/** STP vcharge target voltage for selection 0. */
+	static const CapMemCellOnCapMemBlock stp_v_charge_0;
+
+	/** STP vcharge target voltage for selection 1. */
+	static const CapMemCellOnCapMemBlock stp_v_charge_1;
+
+	/** STP vrecover target voltage for selection 0. */
+	static const CapMemCellOnCapMemBlock stp_v_recover_0;
+
+	/** STP vrecover target voltage for selection 1. */
+	static const CapMemCellOnCapMemBlock stp_v_recover_1;
+
+	/** CADC ramp offset potential. */
+	static const CapMemCellOnCapMemBlock cadc_v_ramp_offset;
+
+	/** CADC ramp buffer bias potential. */
+	static const CapMemCellOnCapMemBlock cadc_v_bias_ramp_buf;
+
+	/** Synapse DAC bias that scales the weight of the synapses on the neuron's input globally. */
+	static const CapMemCellOnCapMemBlock syn_i_bias_dac;
+
+	/** Current determining the time constant of the correlation measurement. */
+	static const CapMemCellOnCapMemBlock syn_i_bias_ramp;
+
+	/** Current acting as a multiplicative factor while accumulating correlation measurements. */
+	static const CapMemCellOnCapMemBlock syn_i_bias_store;
+
+	/**
+	 * Bias current for the output buffer of the synapses' correlation voltage, which accumulates
+	 * and stores the individual measurements.
+	 */
+	static const CapMemCellOnCapMemBlock syn_i_bias_corout;
+
+	/** Bias current for the comparator used for weight modulation in STP circuit. */
+	static const CapMemCellOnCapMemBlock stp_i_bias_comparator;
+
+	/** Ramp generating current used for weight modulation in STP circuit. */
+	static const CapMemCellOnCapMemBlock stp_i_ramp;
+
+	/** Calibration current for the ramp in the STP circuit. */
+	static const CapMemCellOnCapMemBlock stp_i_calib;
+
+	/** Ramp generating current for the CADC circuit. */
+	static const CapMemCellOnCapMemBlock cadc_i_ramp_slope;
+
+	/** Comparator bias current in the CADC circuit. */
+	static const CapMemCellOnCapMemBlock cadc_i_bias_comp;
+
+	/** Bias current for the reset buffer of the CADC circuit. */
+	static const CapMemCellOnCapMemBlock cadc_i_bias_vreset_buf;
+
+	/** Source degeneration bias for the excitatory synaptic input OTA. */
+	static const CapMemCellOnCapMemBlock neuron_i_bias_synin_sd_exc;
+
+	/** Source degeneration bias for the inhibitory synaptic input OTA. */
+	static const CapMemCellOnCapMemBlock neuron_i_bias_synin_sd_inh;
+
+	/** Bias current for the threshold comparator. */
+	static const CapMemCellOnCapMemBlock neuron_i_bias_threshold_comparator;
 };
 
 HALCO_COORDINATE_MIXIN(CapMemMixin, CapMemBlockOnDLS, capmem)
@@ -1293,6 +1353,45 @@ public:
 
 	CapMemCellOnCapMemBlock toCapMemCellOnCapMemBlock() const { return This(); }
 	CapMemBlockOnDLS toCapMemBlockOnDLS() const { return split().first; }
+
+	static const CapMemCellOnDLS readout_sc_amp_v_ref;
+	static const CapMemCellOnDLS readout_pseudo_diff_v_ref;
+	static const CapMemCellOnDLS readout_iconv_test_voltage;
+	static const CapMemCellOnDLS readout_iconv_sc_amp_v_ref;
+	static const CapMemCellOnDLS readout_iconv_sc_amp_i_bias;
+	static const CapMemCellOnDLS readout_pseudo_diff_buffer_bias;
+	static const CapMemCellOnDLS readout_out_amp_i_bias_0;
+	static const CapMemCellOnDLS readout_out_amp_i_bias_1;
+	static const CapMemCellOnDLS readout_idac_i_bias;
+	static const CapMemCellOnDLS readout_idac_i_bias_casc;
+	static const CapMemCellOnDLS readout_iconv_i_bias_buffer;
+	static const CapMemCellOnDLS readout_ac_mux_i_bias;
+	static const CapMemCellOnDLS readout_madc_in_500na;
+	static const CapMemCellOnDLS readout_sc_amp_i_bias;
+
+	/**
+	 * Bias current for the buffer in the top synapse drivers which allows readout of the STP
+	 * voltage.
+	 */
+	static const CapMemCellOnDLS stp_ibias_readout_top;
+
+	/**
+	 * Bias current for the buffer in the bottom synapse drivers which allows readout of the STP
+	 * voltage.
+	 */
+	static const CapMemCellOnDLS stp_ibias_readout_bottom;
+
+	/**
+	 * Bias current for the Hagen mode input DAC used for weight modulation of the top
+	 * synapse drivers.
+	 */
+	static const CapMemCellOnDLS hagen_ibias_dac_top;
+
+	/**
+	 * Bias current for the Hagen mode input DAC used for weight modulation of the bottom
+	 * synapse drivers.
+	 */
+	static const CapMemCellOnDLS hagen_ibias_dac_bottom;
 };
 
 struct GENPYBIND(inline_base("*CapMemMixin*")) CapMemRowOnDLS
