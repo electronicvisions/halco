@@ -69,6 +69,16 @@ for ns in [ns_coordinate]:
         classes.expose_std_hash(c)
 ns_std.exclude()
 
+c = mb.class_('::boost::asio::ip::address_v4')
+c.alias = "IPv4"
+c.include()
+classes.add_comparison_operators(c)
+classes.expose_std_hash(c)
+c.add_registration_code('def(bp::self == bp::self)')
+c.include_files.append('pywrap/print_helper.hpp')
+c.add_registration_code('def(pywrap::PrintNice())')
+classes.add_pickle_suite(c)
+
 for cls in ns_detail.classes():
     cls.alias = '_' + cls.alias
 

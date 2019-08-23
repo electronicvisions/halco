@@ -10,6 +10,7 @@ extern "C" {
 #include <boost/serialization/version.hpp>
 
 #include "halco/common/geometry.h"
+#include "halco/common/misc_types.h"
 #include "halco/common/relations.h"
 #include "halco/hicann/v2/fwd.h"
 #include "halco/hicann/v2/hicann.h"
@@ -19,7 +20,9 @@ extern "C" {
 #include "pywrap/compat/macros.hpp"
 
 // Ensure that "pywrap/compat/array.hpp" is included before this and hope...
+#ifndef BOOST_ASIO_HAS_STD_ARRAY
 #define BOOST_ASIO_HAS_STD_ARRAY
+#endif
 #include <boost/asio/ip/address.hpp>
 
 namespace halco {
@@ -431,29 +434,4 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::PMU)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::Host)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::JTAGFrequency)
 
-template <>
-struct hash<halco::hicann::v2::IPv4> {
-	size_t operator()(halco::hicann::v2::IPv4 const& t) const {
-		static std::string const name = typeid(t).name();
-		size_t hash = boost::hash_value(t.to_string());
-		boost::hash_combine(hash, name);
-		return hash;
-	}
-};
-
 } // std
-
-namespace boost {
-namespace serialization {
-
-template <typename Archiver>
-void serialize(Archiver& ar, halco::hicann::v2::IPv4& ipv4, unsigned int const) {
-	// non-intrusive version where there is no access to private member.
-	// Following http://stackoverflow.com/questions/9454307/boost-serialization-of-classes-with-private-data
-	unsigned long ip_as_ulong = ipv4.to_ulong();
-	ar & make_nvp("ip_as_ulong", ip_as_ulong);
-	ipv4 = halco::hicann::v2::IPv4(ip_as_ulong);
-}
-
-} // namespace serialization
-} // namespace boost
