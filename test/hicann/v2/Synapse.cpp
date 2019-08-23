@@ -133,6 +133,43 @@ TEST(SynapseSwitchOnHICANN, Columns)
 	}
 }
 
+TEST(SynapseSwitchOnHICANN, Constructor)
+{
+	int em = 0;
+	for (auto r : iter_all<SynapseSwitchRowOnHICANN>()) {
+		for (auto sw : iter_all<SynapseSwitchOnSynapseSwitchRow>()) {
+			EXPECT_EQ(SynapseSwitchOnHICANN(r, sw).toEnum().value(), em)
+			    << " for " << r << ", " << sw;
+			em++;
+		}
+	}
+}
+
+TEST(CrossbarSwitchOnHICANN, Columns)
+{
+	for (auto x : iter_all<CrossbarSwitchOnHICANN::x_type>()) {
+		for (auto y : CrossbarSwitchOnHICANN::column(x)) {
+			EXPECT_NO_THROW(CrossbarSwitchOnHICANN(x, y)) << " for " << x << ", " << y;
+		}
+	}
+}
+
+
+TEST(CrossbarSwitchOnHICANN, Constructor)
+{
+	int em = 0;
+	for (auto l : iter_all<HLineOnHICANN>()) {
+		for (auto s : iter_all<SideHorizontal>()) {
+			for (auto sw : iter_all<CrossbarSwitchOnCrossbarSwitchRow>()) {
+				EXPECT_EQ(CrossbarSwitchOnHICANN(l, s, sw).toEnum().value(), em)
+				    << " for " << l << ", " << s << ", " << sw;
+				em++;
+			}
+		}
+	}
+}
+
+
 TEST(VLineOnHICANN, toSynapseDriverOnHICANN)
 {
 	for (auto line : iter_all<VLineOnHICANN>()) {

@@ -21,10 +21,63 @@ namespace halco {
 namespace hicann {
 namespace v2 {
 
+
+struct CrossbarSwitchOnCrossbarSwitchRow
+    : public common::detail::GridCoordinate<
+          CrossbarSwitchOnCrossbarSwitchRow,
+          common::XRanged<4, 0>,
+          common::YRanged<1, 0>,
+          4>
+{
+	GRID_COMMON_CONSTRUCTORS(CrossbarSwitchOnCrossbarSwitchRow)
+};
+
+struct SynapseSwitchOnSynapseSwitchRow
+    : public common::detail::GridCoordinate<
+          SynapseSwitchOnSynapseSwitchRow,
+          common::XRanged<16, 0>,
+          common::YRanged<1, 0>,
+          16>
+{
+	GRID_COMMON_CONSTRUCTORS(SynapseSwitchOnSynapseSwitchRow)
+};
+
+struct CrossbarSwitchOnHICANN
+    : public common::detail::GridCoordinate<
+          CrossbarSwitchOnHICANN,
+          common::XRanged<255, 0>,
+          common::YRanged<63, 0>,
+          8 * 64>
+{
+	GRID_COMMON_CONSTRUCTORS(CrossbarSwitchOnHICANN)
+
+	// get CrossbarSwitch from Hline, Side and number of switch in row on side
+	CrossbarSwitchOnHICANN(
+	    HLineOnHICANN const& l, common::SideHorizontal const& s, CrossbarSwitchOnCrossbarSwitchRow const& switch_num);
+
+	static const enum_type::value_type periods = 8;
+	static const enum_type::value_type period = x_type::size / periods;
+	static const enum_type::value_type period_length = 1;
+	static const enum_type::value_type v_period_length = 2;
+	static const enum_type::value_type per_row = 8;
+	static const enum_type::value_type per_column = 2;
+	static const enum_type::value_type per_side = per_row / 2;
+	static const enum_type::value_type per_half = enum_type::size / 2;
+
+	static std::array<y_type, per_column> column(x_type x);
+	static bool exists(x_type x, y_type y);
+	static x_type to_x(enum_type const& e);
+	static y_type to_y(enum_type const& e);
+	static enum_type to_enum(x_type const& x, y_type const& y);
+};
+
 struct SynapseSwitchOnHICANN
 	: public common::detail::GridCoordinate<SynapseSwitchOnHICANN, common::XRanged<255, 0>,
 	                                        common::YRanged<223, 0>, 32 * 224> {
 	GRID_COMMON_CONSTRUCTORS(SynapseSwitchOnHICANN)
+
+	// get SynapseSwitch from SynapseSwitchRow and number of switch in SynapseSwitchRow
+	SynapseSwitchOnHICANN(SynapseSwitchRowOnHICANN const& r, SynapseSwitchOnSynapseSwitchRow const& switch_in_row);
 
 	static const enum_type::value_type periods = 8;
 	static const enum_type::value_type period  = x_type::size / periods;
@@ -36,7 +89,7 @@ struct SynapseSwitchOnHICANN
 	static const enum_type::value_type per_side = per_row/2;
 	static const enum_type::value_type per_half = enum_type::size/2;
 
-	static std::array<y_type, per_column> column(x_type y);
+	static std::array<y_type, per_column> column(x_type x);
 	static bool exists(x_type x, y_type y);
 	static x_type to_x(enum_type const& e);
 	static y_type to_y(enum_type const& e);
@@ -321,6 +374,9 @@ namespace std {
 
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::HLineOnHICANN)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::VLineOnHICANN)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::CrossbarSwitchOnCrossbarSwitchRow)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SynapseSwitchOnSynapseSwitchRow)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::CrossbarSwitchOnHICANN)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SynapseSwitchOnHICANN)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::HRepeaterOnHICANN)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::HRepeaterOnWafer)

@@ -9,6 +9,8 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
     AnalogOnHICANN        => linear, iterable
     BackgroundGeneratorOnHICANN  =>  linear, iterable
     ChannelOnADC          => linear, iterable
+    CrossbarSwitchOnHICANN => grid, iterable
+    CrossbarSwitchOnCrossbarSwitchRow => grid, iterable
     DNCGlobal             =>
     DNCMergerOnHICANN     => linear, iterable
     DNCMergerOnWafer      =>
@@ -69,6 +71,7 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
     SynapseRowOnHICANN    => linear, iterable
     SynapseRowOnArray     => linear, iterable
     SynapseSwitchOnHICANN => grid, iterable
+    SynapseSwitchOnSynapseSwitchRow => grid, iterable
     SynapseSwitchRowOnHICANN => grid, iterable
     SynapseSwitchRowOnWafer =>
     SynapticInputOnNeuron => linear, iterable

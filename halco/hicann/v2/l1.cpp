@@ -11,6 +11,72 @@ namespace halco {
 namespace hicann {
 namespace v2 {
 
+const CrossbarSwitchOnHICANN::enum_type::value_type CrossbarSwitchOnHICANN::periods;
+const CrossbarSwitchOnHICANN::enum_type::value_type CrossbarSwitchOnHICANN::period;
+const CrossbarSwitchOnHICANN::enum_type::value_type CrossbarSwitchOnHICANN::period_length;
+const CrossbarSwitchOnHICANN::enum_type::value_type CrossbarSwitchOnHICANN::v_period_length;
+const CrossbarSwitchOnHICANN::enum_type::value_type CrossbarSwitchOnHICANN::per_column;
+const CrossbarSwitchOnHICANN::enum_type::value_type CrossbarSwitchOnHICANN::per_row;
+const CrossbarSwitchOnHICANN::enum_type::value_type CrossbarSwitchOnHICANN::per_side;
+const CrossbarSwitchOnHICANN::enum_type::value_type CrossbarSwitchOnHICANN::per_half;
+
+CrossbarSwitchOnHICANN::CrossbarSwitchOnHICANN(
+    HLineOnHICANN const& l, common::SideHorizontal const& s, CrossbarSwitchOnCrossbarSwitchRow const& switch_num)
+{
+	mX = to_x(enum_type(l.value() * per_row + s.value() * per_side + switch_num.x().value()));
+	mY = y_type(l.value());
+}
+
+std::array<CrossbarSwitchOnHICANN::y_type, CrossbarSwitchOnHICANN::per_column>
+CrossbarSwitchOnHICANN::column(x_type x)
+{
+	auto offset = x.value() % period * v_period_length;
+	if (x < x_type::size / 2) {
+		offset = y_type::size - v_period_length - offset;
+	}
+	// clang-format off
+	return std::array<y_type, per_column>{{
+		y_type(offset),
+		y_type(offset + 1)
+	}};
+	// clang-format on
+}
+
+bool CrossbarSwitchOnHICANN::exists(x_type x, y_type y)
+{
+	auto possible_y_value = x.value() % period * v_period_length;
+	if (x < x_type::size / 2) {
+		possible_y_value = y_type::size - v_period_length - possible_y_value;
+	}
+	return y.value() == possible_y_value || y.value() == possible_y_value + 1;
+}
+
+
+CrossbarSwitchOnHICANN::x_type CrossbarSwitchOnHICANN::to_x(enum_type const& e)
+{
+	const auto row = e.value() / per_row;
+	const auto h_position = e.value() % per_row;
+	if (h_position < per_side) {
+		// left side
+		return x_type(h_position * period + period - 1 - row / v_period_length);
+	} else {
+		// right side
+		return x_type(h_position * period + row / v_period_length);
+	}
+}
+
+CrossbarSwitchOnHICANN::y_type CrossbarSwitchOnHICANN::to_y(enum_type const& e)
+{
+	return y_type(e.value() / per_row);
+}
+
+CrossbarSwitchOnHICANN::enum_type CrossbarSwitchOnHICANN::to_enum(x_type const& x, y_type const& y)
+{
+	if (!exists(x, y))
+		throw std::domain_error("Invalid combination of X and Y for a CrossbarSwitch");
+	return enum_type(y.value() * per_row + x.value() / period);
+}
+
 const SynapseSwitchOnHICANN::enum_type::value_type SynapseSwitchOnHICANN::periods;
 const SynapseSwitchOnHICANN::enum_type::value_type SynapseSwitchOnHICANN::period;
 const SynapseSwitchOnHICANN::enum_type::value_type SynapseSwitchOnHICANN::period_length;
@@ -20,6 +86,13 @@ const SynapseSwitchOnHICANN::enum_type::value_type SynapseSwitchOnHICANN::per_si
 const SynapseSwitchOnHICANN::enum_type::value_type SynapseSwitchOnHICANN::per_half;
 const SynapseSwitchOnHICANN::enum_type::value_type SynapseSwitchOnHICANN::v_period;
 const SynapseSwitchOnHICANN::enum_type::value_type SynapseSwitchOnHICANN::v_period_length;
+
+SynapseSwitchOnHICANN::SynapseSwitchOnHICANN(
+    SynapseSwitchRowOnHICANN const& r, SynapseSwitchOnSynapseSwitchRow const& switch_in_row)
+{
+	mX = to_x(enum_type(r.y().value() * per_row + r.x().value() * per_side + switch_in_row.x().value()));
+	mY = y_type(r.y());
+}
 
 std::array<SynapseSwitchOnHICANN::y_type, SynapseSwitchOnHICANN::per_column>
 SynapseSwitchOnHICANN::column(x_type x)
