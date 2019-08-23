@@ -185,6 +185,24 @@ public:
 	static SynapticInputOnNeuron const default_exc;
 }; // SynapticInputOnNeuron
 
+HALCO_COORDINATE_MIXIN(NeuronMixin, NeuronOnHICANN, neuron)
+
+class SynapticInputOnHICANN : public NeuronMixin<SynapticInputOnHICANN, SynapticInputOnNeuron> {
+private:
+	typedef NeuronMixin<SynapticInputOnHICANN, SynapticInputOnNeuron> base;
+
+public:
+	using base::enum_type;
+
+	PYPP_DEFAULT(SynapticInputOnHICANN());
+
+	explicit SynapticInputOnHICANN(SynapticInputOnNeuron const& input,
+	                            NeuronOnHICANN const& neuron = NeuronOnHICANN())
+	    : base(input, neuron) {}
+
+	explicit SynapticInputOnHICANN(enum_type const& e) : base(e) {}
+}; // SynapticInputOnHICANN
+
 } // v2
 } // hicann
 } // halco
@@ -203,6 +221,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::NeuronOnQuad)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::NeuronOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::QuadOnHICANN)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SynapticInputOnNeuron)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SynapticInputOnHICANN)
 HALCO_GEOMETRY_HASH_CLASS(
     halco::hicann::v2::HICANNMixin<halco::hicann::v2::NeuronBlockOnWafer BOOST_PP_COMMA()
     halco::hicann::v2::NeuronBlockOnHICANN>)
@@ -215,5 +234,8 @@ HALCO_GEOMETRY_HASH_CLASS(
 HALCO_GEOMETRY_HASH_CLASS(
     halco::hicann::v2::WaferMixin<halco::hicann::v2::NeuronGlobal BOOST_PP_COMMA()
     halco::hicann::v2::NeuronOnWafer>)
+HALCO_GEOMETRY_HASH_CLASS(
+    halco::hicann::v2::NeuronMixin<halco::hicann::v2::SynapticInputOnHICANN BOOST_PP_COMMA()
+    halco::hicann::v2::SynapticInputOnNeuron>)
 
 } // std

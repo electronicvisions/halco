@@ -32,6 +32,16 @@ typedef ::testing::Types<
 
 TYPED_TEST_CASE(MixedOnWaferCoordinateTest, CoordinateOnWaferTypes);
 
+template<typename T>
+class MixedOnHICANNCoordinateTest : public ::testing::Test
+{};
+
+typedef ::testing::Types<
+	SynapticInputOnHICANN
+> CoordinateOnHICANNTypes;
+
+TYPED_TEST_CASE(MixedOnHICANNCoordinateTest, CoordinateOnHICANNTypes);
+
 TEST(MixedCoordinateTest, HICANNGlobalCanBeSplitted) {
 	HICANNGlobal mixed;
 
@@ -57,11 +67,22 @@ TYPED_TEST(MixedOnWaferCoordinateTest, CanBeSplitted) {
 	ASSERT_EQ(mixed, reconstructed);
 }
 
+TYPED_TEST(MixedOnHICANNCoordinateTest, CanBeSplitted) {
+	TypeParam mixed;
+	auto pair = mixed.split();
+	TypeParam reconstructed{pair.second, pair.first};
+	ASSERT_EQ(mixed, reconstructed);
+}
+
 TYPED_TEST(MixedGlobalCoordinateTest, ProvidesTypedefs) {
 	TypeParam mixed(typename TypeParam::local_type(), typename TypeParam::mixed_in_type());
 }
 
 TYPED_TEST(MixedOnWaferCoordinateTest, ProvidesTypedefs) {
+	TypeParam mixed(typename TypeParam::local_type(), typename TypeParam::mixed_in_type());
+}
+
+TYPED_TEST(MixedOnHICANNCoordinateTest, ProvidesTypedefs) {
 	TypeParam mixed(typename TypeParam::local_type(), typename TypeParam::mixed_in_type());
 }
 

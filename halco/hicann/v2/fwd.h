@@ -55,6 +55,8 @@ struct SynapseRowOnHICANN;
 struct SynapseRowOnArray;
 struct SynapseSwitchOnHICANN;
 struct SynapseSwitchRowOnHICANN;
+struct SynapticInputOnNeuron;
+struct SynapticInputOnHICANN;
 struct TCPPort;
 struct TestPortOnRepeaterBlock;
 struct TriggerOnADC;

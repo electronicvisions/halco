@@ -84,6 +84,7 @@ typedef ::testing::Types<
 	SynapseSwitchOnHICANN,
 	SynapseSwitchRowOnHICANN,
 	SynapticInputOnNeuron,
+	SynapticInputOnHICANN,
 	TriggerOnADC,
 	TriggerOnWafer,
 	TriggerGlobal,
