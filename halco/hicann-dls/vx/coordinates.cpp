@@ -122,6 +122,38 @@ CommonSynramConfigOnDLS const CommonSynramConfigOnDLS::top{1};
 SynramOnDLS const SynramOnDLS::bottom{CommonSynramConfigOnDLS::bottom.toEnum()};
 SynramOnDLS const SynramOnDLS::top{CommonSynramConfigOnDLS::top.toEnum()};
 
+PADIBusBlockOnDLS const PADIBusBlockOnDLS::bottom{PPUOnDLS::bottom.toEnum()};
+PADIBusBlockOnDLS const PADIBusBlockOnDLS::top{PPUOnDLS::top.toEnum()};
+
+PADIEventOnDLS const PADIEventOnDLS::bottom{PPUOnDLS::bottom.toEnum()};
+PADIEventOnDLS const PADIEventOnDLS::top{PPUOnDLS::top.toEnum()};
+
+CommonPADIBusConfigOnDLS const CommonPADIBusConfigOnDLS::bottom{PPUOnDLS::bottom.toEnum()};
+CommonPADIBusConfigOnDLS const CommonPADIBusConfigOnDLS::top{PPUOnDLS::top.toEnum()};
+
+CommonSTPConfigOnDLS const CommonSTPConfigOnDLS::bottom{PPUOnDLS::bottom.toEnum()};
+CommonSTPConfigOnDLS const CommonSTPConfigOnDLS::top{PPUOnDLS::top.toEnum()};
+
+SynramOnDLS PADIBusBlockOnDLS::toSynramOnDLS() const
+{
+	return SynramOnDLS(toEnum());
+}
+
+PADIEventOnDLS PADIBusBlockOnDLS::toPADIEventOnDLS() const
+{
+	return PADIEventOnDLS(toEnum());
+}
+
+CommonPADIBusConfigOnDLS PADIBusBlockOnDLS::toCommonPADIBusConfigOnDLS() const
+{
+	return CommonPADIBusConfigOnDLS(toEnum());
+}
+
+CommonSTPConfigOnDLS PADIBusBlockOnDLS::toCommonSTPConfigOnDLS() const
+{
+	return CommonSTPConfigOnDLS(toEnum());
+}
+
 } // namespace vx
 } // namespace hicann_dls
 } // namespace halco

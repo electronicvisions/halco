@@ -931,6 +931,101 @@ struct GENPYBIND(inline_base("*")) CommonSynapseDriverConfigOnDLS
 	}
 };
 
+
+/*****************\
+   PADIBus
+\*****************/
+
+class SynramOnDLS;
+class PADIEventOnDLS;
+class CommonPADIBusConfigOnDLS;
+class CommonSTPConfigOnDLS;
+
+struct GENPYBIND(inline_base("*")) PADIBusBlockOnDLS
+    : public common::detail::RantWrapper<PADIBusBlockOnDLS, uint_fast16_t, 1, 0>
+{
+	constexpr explicit PADIBusBlockOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+
+	SynramOnDLS toSynramOnDLS() const;
+	PADIEventOnDLS toPADIEventOnDLS() const;
+	CommonPADIBusConfigOnDLS toCommonPADIBusConfigOnDLS() const;
+	CommonSTPConfigOnDLS toCommonSTPConfigOnDLS() const;
+
+	static const PADIBusBlockOnDLS bottom;
+	static const PADIBusBlockOnDLS top;
+};
+
+struct GENPYBIND(inline_base("*")) PADIBusOnPADIBusBlock
+    : public common::detail::RantWrapper<PADIBusOnPADIBusBlock, uint_fast16_t, 3, 0>
+{
+	constexpr explicit PADIBusOnPADIBusBlock(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+
+HALCO_COORDINATE_MIXIN(PADIBusMixin, PADIBusBlockOnDLS, padi_bus)
+
+struct GENPYBIND(inline_base("*PADIBusMixin*")) PADIBusOnDLS
+    : public PADIBusMixin<PADIBusOnDLS, PADIBusOnPADIBusBlock>
+{
+private:
+	typedef PADIBusMixin<PADIBusOnDLS, PADIBusOnPADIBusBlock> base;
+
+public:
+	typedef base::enum_type enum_type GENPYBIND(opaque);
+
+	PADIBusOnDLS() = default;
+
+	explicit PADIBusOnDLS(
+	    PADIBusOnPADIBusBlock const& synapse_driver, PADIBusBlockOnDLS const& block = PADIBusBlockOnDLS()) :
+	    base(synapse_driver, block)
+	{}
+
+	explicit PADIBusOnDLS(enum_type const& e) : base(e) {}
+
+	PADIBusOnPADIBusBlock toPADIBusOnPADIBusBlock() const { return This(); }
+	PADIBusBlockOnDLS toPADIBusBlockOnDLS() const { return split().first; }
+};
+
+struct GENPYBIND(inline_base("*")) CommonPADIBusConfigOnDLS
+    : public common::detail::RantWrapper<CommonPADIBusConfigOnDLS, uint_fast16_t, 1, 0>
+{
+	constexpr explicit CommonPADIBusConfigOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+
+	PADIBusBlockOnDLS toPADIBusBlockOnDLS() const { return PADIBusBlockOnDLS(toEnum()); }
+
+	static const CommonPADIBusConfigOnDLS bottom;
+	static const CommonPADIBusConfigOnDLS top;
+};
+
+struct GENPYBIND(inline_base("*")) CommonSTPConfigOnDLS
+    : public common::detail::RantWrapper<CommonSTPConfigOnDLS, uint_fast16_t, 1, 0>
+{
+	constexpr explicit CommonSTPConfigOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+
+	PADIBusBlockOnDLS toPADIBusBlockOnDLS() const { return PADIBusBlockOnDLS(toEnum()); }
+
+	static const CommonSTPConfigOnDLS bottom;
+	static const CommonSTPConfigOnDLS top;
+};
+
+struct GENPYBIND(inline_base("*")) PADIEventOnDLS
+    : public common::detail::RantWrapper<PADIEventOnDLS, uint_fast16_t, 1, 0>
+{
+	constexpr explicit PADIEventOnDLS(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+
+	PADIBusBlockOnDLS toPADIBusBlockOnDLS() const { return PADIBusBlockOnDLS(toEnum()); }
+
+	static const PADIEventOnDLS bottom;
+	static const PADIEventOnDLS top;
+};
+
 /**********\
    CapMem
 \**********/
@@ -1282,6 +1377,12 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseQuadOnSynram)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynramOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseQuadOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseOnSynapseQuad)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PADIBusOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PADIBusBlockOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PADIBusOnPADIBusBlock)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PADIEventOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CommonPADIBusConfigOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CommonSTPConfigOnDLS)
 
 } // namespace std
 

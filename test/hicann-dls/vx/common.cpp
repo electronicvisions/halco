@@ -116,7 +116,12 @@ typedef ::testing::Types<
     SynapseDriverOnDLS,
     CommonSynapseDriverConfigOnDLS,
     PLLSelfTestOnDLS,
-    PLLSelfTestStatusOnDLS>
+    PLLSelfTestStatusOnDLS,
+    PADIBusBlockOnDLS,
+    PADIBusOnPADIBusBlock,
+    PADIEventOnDLS,
+    CommonPADIBusConfigOnDLS,
+    CommonSTPConfigOnDLS>
     CoordinateTypes2;
 
 
