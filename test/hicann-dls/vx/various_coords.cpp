@@ -68,3 +68,28 @@ TEST(CapMemColumnOnCapMemBlock, isShared)
 		EXPECT_FALSE(not_shared.isShared());
 	}
 }
+
+template <typename T>
+class CommonVerticalHalfCoordinateTest : public ::testing::Test
+{};
+
+typedef ::testing::Types<
+    PPUOnDLS,
+    CommonSynramConfigOnDLS,
+    SynramOnDLS,
+    CADCConfigOnDLS,
+    CommonSTPConfigOnDLS,
+    CommonPADIBusConfigOnDLS,
+    PADIEventOnDLS>
+    CommonVerticalHalfCoordinateTypes;
+
+TYPED_TEST_CASE(CommonVerticalHalfCoordinateTest, CommonVerticalHalfCoordinateTypes);
+
+TYPED_TEST(CommonVerticalHalfCoordinateTest, TopBottom)
+{
+	TypeParam const top = TypeParam::top;
+	TypeParam const bottom = TypeParam::bottom;
+
+	EXPECT_EQ(top.toEnum(), 0);
+	EXPECT_EQ(bottom.toEnum(), 1);
+}

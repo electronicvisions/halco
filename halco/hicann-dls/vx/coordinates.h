@@ -894,6 +894,9 @@ struct GENPYBIND(inline_base("*")) SynapseDriverBlockOnDLS
 	{}
 
 	CommonSynapseDriverConfigOnDLS toCommonSynapseDriverConfigOnDLS() const;
+
+	static const SynapseDriverBlockOnDLS top;
+	static const SynapseDriverBlockOnDLS bottom;
 };
 
 HALCO_COORDINATE_MIXIN(SynapseDriverMixin, SynapseDriverBlockOnDLS, synapse_driver)
@@ -929,6 +932,9 @@ struct GENPYBIND(inline_base("*")) CommonSynapseDriverConfigOnDLS
 	{
 		return SynapseDriverBlockOnDLS(toEnum());
 	}
+
+	static const CommonSynapseDriverConfigOnDLS top;
+	static const CommonSynapseDriverConfigOnDLS bottom;
 };
 
 
@@ -953,8 +959,8 @@ struct GENPYBIND(inline_base("*")) PADIBusBlockOnDLS
 	CommonPADIBusConfigOnDLS toCommonPADIBusConfigOnDLS() const;
 	CommonSTPConfigOnDLS toCommonSTPConfigOnDLS() const;
 
-	static const PADIBusBlockOnDLS bottom;
 	static const PADIBusBlockOnDLS top;
+	static const PADIBusBlockOnDLS bottom;
 };
 
 struct GENPYBIND(inline_base("*")) PADIBusOnPADIBusBlock
@@ -997,8 +1003,8 @@ struct GENPYBIND(inline_base("*")) CommonPADIBusConfigOnDLS
 
 	PADIBusBlockOnDLS toPADIBusBlockOnDLS() const { return PADIBusBlockOnDLS(toEnum()); }
 
-	static const CommonPADIBusConfigOnDLS bottom;
 	static const CommonPADIBusConfigOnDLS top;
+	static const CommonPADIBusConfigOnDLS bottom;
 };
 
 struct GENPYBIND(inline_base("*")) CommonSTPConfigOnDLS
@@ -1008,8 +1014,8 @@ struct GENPYBIND(inline_base("*")) CommonSTPConfigOnDLS
 
 	PADIBusBlockOnDLS toPADIBusBlockOnDLS() const { return PADIBusBlockOnDLS(toEnum()); }
 
-	static const CommonSTPConfigOnDLS bottom;
 	static const CommonSTPConfigOnDLS top;
+	static const CommonSTPConfigOnDLS bottom;
 };
 
 struct GENPYBIND(inline_base("*")) PADIEventOnDLS
@@ -1022,8 +1028,8 @@ struct GENPYBIND(inline_base("*")) PADIEventOnDLS
 
 	PADIBusBlockOnDLS toPADIBusBlockOnDLS() const { return PADIBusBlockOnDLS(toEnum()); }
 
-	static const PADIEventOnDLS bottom;
 	static const PADIEventOnDLS top;
+	static const PADIEventOnDLS bottom;
 };
 
 /**********\
@@ -1182,8 +1188,8 @@ struct GENPYBIND(inline_base("*")) CommonSynramConfigOnDLS
 	PPUOnDLS toPPUOnDLS() const { return PPUOnDLS(toEnum()); }
 	SynramOnDLS toSynramOnDLS() const;
 
-	static const CommonSynramConfigOnDLS bottom;
 	static const CommonSynramConfigOnDLS top;
+	static const CommonSynramConfigOnDLS bottom;
 };
 
 /***********\
@@ -1244,8 +1250,8 @@ struct GENPYBIND(inline_base("*")) SynramOnDLS
 	}
 	PPUOnDLS toPPUOnDLS() const { return PPUOnDLS(toEnum()); }
 
-	static const SynramOnDLS bottom;
 	static const SynramOnDLS top;
+	static const SynramOnDLS bottom;
 };
 
 HALCO_COORDINATE_MIXIN(SynramMixin, SynramOnDLS, synram)

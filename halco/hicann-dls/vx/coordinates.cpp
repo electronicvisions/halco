@@ -116,11 +116,18 @@ CommonSynapseDriverConfigOnDLS SynapseDriverBlockOnDLS::toCommonSynapseDriverCon
 	return CommonSynapseDriverConfigOnDLS(toEnum());
 }
 
-CommonSynramConfigOnDLS const CommonSynramConfigOnDLS::bottom{PPUOnDLS::bottom.toEnum()};
 CommonSynramConfigOnDLS const CommonSynramConfigOnDLS::top{PPUOnDLS::top.toEnum()};
+CommonSynramConfigOnDLS const CommonSynramConfigOnDLS::bottom{PPUOnDLS::bottom.toEnum()};
 
-SynramOnDLS const SynramOnDLS::bottom{CommonSynramConfigOnDLS::bottom.toEnum()};
-SynramOnDLS const SynramOnDLS::top{CommonSynramConfigOnDLS::top.toEnum()};
+SynramOnDLS const SynramOnDLS::top{PPUOnDLS::top.toEnum()};
+SynramOnDLS const SynramOnDLS::bottom{PPUOnDLS::bottom.toEnum()};
+
+SynapseDriverBlockOnDLS const SynapseDriverBlockOnDLS::top{PPUOnDLS::top.toEnum()};
+SynapseDriverBlockOnDLS const SynapseDriverBlockOnDLS::bottom{PPUOnDLS::bottom.toEnum()};
+
+CommonSynapseDriverConfigOnDLS const CommonSynapseDriverConfigOnDLS::top{PPUOnDLS::top.toEnum()};
+CommonSynapseDriverConfigOnDLS const CommonSynapseDriverConfigOnDLS::bottom{
+    PPUOnDLS::bottom.toEnum()};
 
 PADIBusBlockOnDLS const PADIBusBlockOnDLS::bottom{PPUOnDLS::bottom.toEnum()};
 PADIBusBlockOnDLS const PADIBusBlockOnDLS::top{PPUOnDLS::top.toEnum()};
