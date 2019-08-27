@@ -97,6 +97,12 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     SynapseDriverBlockOnDLS           => linear, iterable
     SynapseDriverOnDLS                => linear, iterable
     CommonSynapseDriverConfigOnDLS    => linear, iterable
+    CommonPADIBusConfigOnDLS          => linear,iterable
+    CommonSTPConfigOnDLS              => linear,iterable
+    PADIBusBlockOnDLS                 => linear,iterable
+    PADIBusOnDLS                      => linear,iterable
+    PADIBusOnPADIBusBlock             => linear,iterable
+    PADIEventOnDLS                    => linear,iterable
     """
     # clang-format on
     @staticmethod
