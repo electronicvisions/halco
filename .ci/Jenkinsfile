@@ -1,0 +1,12 @@
+@Library("jenlib") _
+
+wafDefaultPipeline(projects: ["halco"],
+                   container: [app: "visionary-dls"],
+                   testSlurmResource: [partition: "jenkins"],
+                   configureInstallOptions: "--with-pybind",
+                   notificationChannel: "#dls-software")
+
+wafDefaultPipeline(projects: ["halco"],
+                   container: [app: "visionary-wafer"],
+                   testSlurmResource: [partition: "jenkins"],
+                   notificationChannel: "#softies")
