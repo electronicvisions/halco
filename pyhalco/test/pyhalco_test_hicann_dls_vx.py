@@ -104,6 +104,8 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     SynramOnDLS                      => linear, iterable
     SynapseQuadOnSynram             => grid, iterable
     SynapseQuadOnDLS                => iterable
+    SynapseOnSynapseRow             => linear, iterable
+    SynapseRowOnDLS                 => linear, iterable
     SynapseDriverOnSynapseDriverBlock => linear, iterable
     SynapseDriverBlockOnDLS           => linear, iterable
     SynapseDriverOnDLS                => linear, iterable

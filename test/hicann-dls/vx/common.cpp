@@ -153,7 +153,9 @@ typedef ::testing::Types<
     NeuronResetOnNeuronResetBlock,
     NeuronResetBlockOnDLS,
     NeuronResetOnDLS,
-    CADCChannelConfigOnDLS>
+    CADCChannelConfigOnDLS,
+    SynapseRowOnDLS,
+    SynapseOnSynapseRow>
     CoordinateTypes3;
 
 

@@ -7,6 +7,7 @@
 #include "halco/common/mixin.h"
 
 #include "halco/hicann-dls/vx/neuron.h"
+#include "halco/hicann-dls/vx/quad.h"
 #include "halco/hicann-dls/vx/synram.h"
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
@@ -33,6 +34,8 @@ struct GENPYBIND(inline_base("*")) SynapseQuadColumnOnDLS
 	{}
 };
 
+HALCO_COORDINATE_MIXIN(SynapseQuadColumnMixin, SynapseQuadColumnOnDLS, synapse_quad_column)
+
 
 struct GENPYBIND(inline_base("*")) SynapseRowOnSynram
     : public common::detail::RantWrapper<SynapseRowOnSynram, uint_fast16_t, 255, 0>
@@ -45,6 +48,22 @@ struct GENPYBIND(inline_base("*")) SynapseRowOnSynram
 	constexpr explicit SynapseRowOnSynram(common::Y const& y) GENPYBIND(implicit_conversion) :
 	    rant_t(y)
 	{}
+};
+
+
+struct GENPYBIND(inline_base("*SynramMixin*")) SynapseRowOnDLS
+    : public SynramMixin<SynapseRowOnDLS, SynapseRowOnSynram>
+{
+	SynapseRowOnDLS() = default;
+
+	explicit SynapseRowOnDLS(
+	    SynapseRowOnSynram const& block, SynramOnDLS const& synram = SynramOnDLS()) :
+	    mixin_t(block, synram)
+	{}
+
+	explicit SynapseRowOnDLS(enum_type const& e) : mixin_t(e) {}
+
+	SynapseRowOnSynram toSynapseRowOnSynram() const { return This(); }
 };
 
 
@@ -76,13 +95,35 @@ struct GENPYBIND(inline_base("*SynramMixin*")) SynapseQuadOnDLS
 	NeuronConfigBlockOnDLS toNeuronConfigBlockOnDLS() const;
 };
 
+
+struct GENPYBIND(inline_base("*SynapseQuadColumnMixin*")) SynapseOnSynapseRow
+    : public SynapseQuadColumnMixin<SynapseOnSynapseRow, EntryOnQuad>
+{
+	SynapseOnSynapseRow() = default;
+
+	explicit SynapseOnSynapseRow(
+	    EntryOnQuad const& syn_on_quad, SynapseQuadColumnOnDLS const& quad) :
+	    mixin_t(syn_on_quad, quad)
+	{}
+
+	explicit SynapseOnSynapseRow(enum_type const& e) : mixin_t(e) {}
+
+	explicit SynapseOnSynapseRow(uintmax_t const value) GENPYBIND(implicit_conversion) :
+	    mixin_t(enum_type(value))
+	{}
+
+	EntryOnQuad toEntryOnQuad() const { return This(); }
+};
+
 } // namespace halco::hicann_dls::vx
 
 namespace std {
 
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseQuadColumnOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseRowOnSynram)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseRowOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseQuadOnSynram)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseQuadOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseOnSynapseRow)
 
 } // namespace std
