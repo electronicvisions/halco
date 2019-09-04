@@ -19,7 +19,8 @@
 	public:                                                                    \
 		typedef cls mixed_in_type;                                             \
 		typedef T local_type;                                                  \
-		typedef HALCO_COORDINATE_MIXIN__ENUM_TYPE(cls, T) enum_type;           \
+		typedef HALCO_COORDINATE_MIXIN__ENUM_TYPE(cls, T) enum_type            \
+		     GENPYBIND(opaque(false));                                         \
                                                                                \
 		mixin() {}                                                             \
 		explicit mixin(T const t, cls const v) : T(t), mValue(v) {}            \

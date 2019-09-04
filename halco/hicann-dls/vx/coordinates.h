@@ -346,8 +346,6 @@ private:
 	typedef PPUMixin<PPUMemoryBlockOnDLS, PPUMemoryBlockOnPPU> base;
 
 public:
-	typedef base::enum_type enum_type GENPYBIND(opaque(false));
-
 	PPUMemoryBlockOnDLS() = default;
 
 	explicit PPUMemoryBlockOnDLS(PPUMemoryBlockOnPPU const& reg, PPUOnDLS const& ppu = PPUOnDLS()) :
@@ -367,8 +365,6 @@ private:
 	typedef PPUMixin<PPUMemoryOnDLS, PPUMemoryOnPPU> base;
 
 public:
-	typedef base::enum_type enum_type GENPYBIND(opaque(false));
-
 	PPUMemoryOnDLS() = default;
 
 	explicit PPUMemoryOnDLS(PPUMemoryOnPPU const& reg, PPUOnDLS const& ppu = PPUOnDLS()) :
@@ -388,8 +384,6 @@ private:
 	typedef PPUMixin<PPUControlRegisterOnDLS, PPUControlRegisterOnPPU> base;
 
 public:
-	typedef base::enum_type enum_type GENPYBIND(opaque(false));
-
 	PPUControlRegisterOnDLS() = default;
 
 	explicit PPUControlRegisterOnDLS(
@@ -410,8 +404,6 @@ private:
 	typedef PPUMixin<PPUStatusRegisterOnDLS, PPUStatusRegisterOnPPU> base;
 
 public:
-	typedef base::enum_type enum_type GENPYBIND(opaque(false));
-
 	PPUStatusRegisterOnDLS() = default;
 
 	explicit PPUStatusRegisterOnDLS(
@@ -432,8 +424,6 @@ private:
 	typedef PPUMixin<PPUMemoryWordOnDLS, PPUMemoryWordOnPPU> base;
 
 public:
-	typedef base::enum_type enum_type GENPYBIND(opaque);
-
 	PPUMemoryWordOnDLS() = default;
 
 	explicit PPUMemoryWordOnDLS(PPUMemoryWordOnPPU const& word, PPUOnDLS const& ppu = PPUOnDLS()) :
@@ -690,8 +680,6 @@ private:
 	typedef INA219Mixin<I2CINA219RoRegisterOnBoard, I2CINA219RoRegisterOnINA219> base;
 
 public:
-	typedef base::enum_type enum_type GENPYBIND(opaque(false));
-
 	I2CINA219RoRegisterOnBoard() = default;
 
 	explicit I2CINA219RoRegisterOnBoard(
@@ -712,8 +700,6 @@ private:
 	typedef INA219Mixin<I2CINA219RwRegisterOnBoard, I2CINA219RwRegisterOnINA219> base;
 
 public:
-	typedef base::enum_type enum_type GENPYBIND(opaque(false));
-
 	I2CINA219RwRegisterOnBoard() = default;
 
 	explicit I2CINA219RwRegisterOnBoard(
@@ -848,8 +834,6 @@ private:
 	typedef DACMixin<DACChannelOnBoard, DACChannelOnDAC> base;
 
 public:
-	typedef base::enum_type enum_type GENPYBIND(opaque(false));
-
 	DACChannelOnBoard() = default;
 
 	explicit DACChannelOnBoard(
@@ -890,8 +874,6 @@ private:
 	typedef DACMixin<SPIDACDataRegisterOnBoard, SPIDACDataRegisterOnDAC> base;
 
 public:
-	typedef base::enum_type enum_type GENPYBIND(opaque(false));
-
 	SPIDACDataRegisterOnBoard() = default;
 
 	explicit SPIDACDataRegisterOnBoard(
@@ -912,8 +894,6 @@ private:
 	typedef DACMixin<SPIDACControlRegisterOnBoard, SPIDACControlRegisterOnDAC> base;
 
 public:
-	typedef base::enum_type enum_type GENPYBIND(opaque(false));
-
 	SPIDACControlRegisterOnBoard() = default;
 
 	explicit SPIDACControlRegisterOnBoard(
@@ -962,8 +942,6 @@ private:
 	typedef NeuronMixin<NeuronOnDLS, NeuronOnNeuronBlock> base;
 
 public:
-	typedef base::enum_type enum_type GENPYBIND(opaque);
-
 	NeuronOnDLS() = default;
 
 	explicit NeuronOnDLS(
@@ -1019,8 +997,6 @@ private:
 	typedef SynapseDriverMixin<SynapseDriverOnDLS, SynapseDriverOnSynapseDriverBlock> base;
 
 public:
-	typedef base::enum_type enum_type GENPYBIND(opaque);
-
 	SynapseDriverOnDLS() = default;
 
 	explicit SynapseDriverOnDLS(
@@ -1092,8 +1068,6 @@ private:
 	typedef PADIBusMixin<PADIBusOnDLS, PADIBusOnPADIBusBlock> base;
 
 public:
-	typedef base::enum_type enum_type GENPYBIND(opaque);
-
 	PADIBusOnDLS() = default;
 
 	explicit PADIBusOnDLS(
@@ -1224,8 +1198,6 @@ private:
 	typedef CapMemMixin<CapMemCellOnDLS, CapMemCellOnCapMemBlock> base;
 
 public:
-	typedef base::enum_type enum_type GENPYBIND(opaque);
-
 	CapMemCellOnDLS() = default;
 
 	explicit CapMemCellOnDLS(
@@ -1246,8 +1218,6 @@ private:
 	typedef CapMemMixin<CapMemRowOnDLS, CapMemRowOnCapMemBlock> base;
 
 public:
-	typedef base::enum_type enum_type GENPYBIND(opaque);
-
 	CapMemRowOnDLS() = default;
 
 	explicit CapMemRowOnDLS(
@@ -1268,8 +1238,6 @@ private:
 	typedef CapMemMixin<CapMemColumnOnDLS, CapMemColumnOnCapMemBlock> base;
 
 public:
-	typedef base::enum_type enum_type GENPYBIND(opaque);
-
 	CapMemColumnOnDLS() = default;
 
 	explicit CapMemColumnOnDLS(
@@ -1375,8 +1343,6 @@ private:
 	typedef SynramMixin<SynapseQuadOnDLS, SynapseQuadOnSynram> base;
 
 public:
-	typedef base::enum_type enum_type GENPYBIND(opaque(false));
-
 	SynapseQuadOnDLS() = default;
 
 	explicit SynapseQuadOnDLS(
@@ -1429,8 +1395,6 @@ private:
 	typedef SynramMixin<ColumnCorrelationQuadOnDLS, ColumnCorrelationQuadOnSynram> base;
 
 public:
-	typedef base::enum_type enum_type GENPYBIND(opaque(false));
-
 	ColumnCorrelationQuadOnDLS() = default;
 
 	explicit ColumnCorrelationQuadOnDLS(
@@ -1484,8 +1448,6 @@ private:
 	typedef SynramMixin<ColumnCurrentQuadOnDLS, ColumnCurrentQuadOnSynram> base;
 
 public:
-	typedef base::enum_type enum_type GENPYBIND(opaque(false));
-
 	ColumnCurrentQuadOnDLS() = default;
 
 	explicit ColumnCurrentQuadOnDLS(
