@@ -119,6 +119,10 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     CADCSampleQuadUnspecifiedReadoutOnSynram => iterable
     CADCSampleQuadOnSynram            => iterable
     CADCSampleQuadOnDLS               => iterable
+    CADCChannelColumnOnSynram         => linear,iterable
+    CADCChannelConfigOnSynram         => iterable
+    CADCChannelConfigOnDLS            => iterable
+    CADCSampleOnCADCSampleQuad        => linear,iterable
     """
     # clang-format on
     @staticmethod

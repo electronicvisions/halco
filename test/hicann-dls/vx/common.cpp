@@ -144,7 +144,11 @@ typedef ::testing::Types<
     CADCReadoutType,
     CADCSampleQuadUnspecifiedReadoutOnSynram,
     CADCSampleQuadOnSynram,
-    CADCSampleQuadOnDLS>
+    CADCSampleQuadOnDLS,
+    CADCChannelColumnOnSynram,
+    CADCChannelConfigOnSynram,
+    CADCChannelConfigOnDLS,
+    CADCSampleOnCADCSampleQuad>
     CoordinateTypes3;
 
 
