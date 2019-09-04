@@ -209,7 +209,7 @@ struct TriggerOnADC : public common::detail::RantWrapper<TriggerOnADC, uint_fast
 	PYPP_CONSTEXPR explicit TriggerOnADC(uintmax_t const val = 0) : rant_t(val) {}
 };
 
-struct TriggerOnWafer : public common::detail::RantWrapper<TriggerOnWafer, uint_fast16_t, 12, 0>
+struct TriggerOnWafer : public common::detail::RantWrapper<TriggerOnWafer, uint_fast16_t, 11, 0>
 {
 	PYPP_CONSTEXPR explicit TriggerOnWafer(uintmax_t const val = 0) : rant_t(val) {}
 
