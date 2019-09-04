@@ -1477,6 +1477,99 @@ struct GENPYBIND(inline_base("*")) ColumnCurrentSwitchOnColumnCurrentQuad
 	{}
 };
 
+/******\
+  CADC
+\******/
+
+struct GENPYBIND(inline_base("*")) CADCChannelType
+    : public common::detail::RantWrapper<CADCChannelType, uint_fast16_t, 1, 0>
+{
+	constexpr explicit CADCChannelType(uintmax_t const val = 0) : rant_t(val) {}
+
+	static const CADCChannelType causal;
+	static const CADCChannelType acausal;
+};
+
+struct GENPYBIND(inline_base("*")) CADCReadoutType
+    : public common::detail::RantWrapper<CADCReadoutType, uint_fast16_t, 1, 0>
+{
+	constexpr explicit CADCReadoutType(uintmax_t const val = 0) : rant_t(val) {}
+
+	static const CADCReadoutType trigger_read;
+	static const CADCReadoutType buffered;
+};
+
+HALCO_COORDINATE_MIXIN(CADCChannelTypeMixin, CADCChannelType, cadc_channel_type)
+HALCO_COORDINATE_MIXIN(CADCReadoutTypeMixin, CADCReadoutType, cadc_readout_type)
+
+struct GENPYBIND(inline_base("*CADCChannelTypeMixin*")) CADCSampleQuadUnspecifiedReadoutOnSynram
+    : public CADCChannelTypeMixin<CADCSampleQuadUnspecifiedReadoutOnSynram, SynapseQuadOnSynram>
+{
+private:
+	typedef CADCChannelTypeMixin<CADCSampleQuadUnspecifiedReadoutOnSynram, SynapseQuadOnSynram>
+	    base;
+
+public:
+	CADCSampleQuadUnspecifiedReadoutOnSynram() = default;
+
+	explicit CADCSampleQuadUnspecifiedReadoutOnSynram(
+	    SynapseQuadOnSynram const& quad, CADCChannelType const& cadc_channel_type) :
+	    base(quad, cadc_channel_type)
+	{}
+
+	explicit CADCSampleQuadUnspecifiedReadoutOnSynram(enum_type const& e) : base(e) {}
+
+	SynapseQuadOnSynram toSynapseQuadOnSynram() const { return This(); }
+	CADCChannelType toCADCChannelType() const { return split().first; }
+};
+
+struct GENPYBIND(inline_base("*CADCReadoutTypeMixin*")) CADCSampleQuadOnSynram
+    : public CADCReadoutTypeMixin<CADCSampleQuadOnSynram, CADCSampleQuadUnspecifiedReadoutOnSynram>
+{
+private:
+	typedef CADCReadoutTypeMixin<CADCSampleQuadOnSynram, CADCSampleQuadUnspecifiedReadoutOnSynram>
+	    base;
+
+public:
+	CADCSampleQuadOnSynram() = default;
+
+	explicit CADCSampleQuadOnSynram(
+	    SynapseQuadOnSynram const& quad,
+	    CADCChannelType const& cadc_channel_type,
+	    CADCReadoutType const& cadc_readout_type = CADCReadoutType()) :
+	    base(CADCSampleQuadUnspecifiedReadoutOnSynram(quad, cadc_channel_type), cadc_readout_type)
+	{}
+
+	explicit CADCSampleQuadOnSynram(enum_type const& e) : base(e) {}
+
+	CADCSampleQuadUnspecifiedReadoutOnSynram toCADCSampleQuadUnspecifiedReadoutOnSynram() const
+	{
+		return This();
+	}
+	SynapseQuadOnSynram toSynapseQuadOnSynram() const { return This().toSynapseQuadOnSynram(); }
+	CADCReadoutType toCADCReadoutType() const { return split().first; }
+	CADCChannelType toCADCChannelType() const { return This().toCADCChannelType(); }
+};
+
+struct GENPYBIND(inline_base("*SynramMixin*")) CADCSampleQuadOnDLS
+    : public SynramMixin<CADCSampleQuadOnDLS, CADCSampleQuadOnSynram>
+{
+private:
+	typedef SynramMixin<CADCSampleQuadOnDLS, CADCSampleQuadOnSynram> base;
+
+public:
+	CADCSampleQuadOnDLS() = default;
+
+	explicit CADCSampleQuadOnDLS(CADCSampleQuadOnSynram const& block, SynramOnDLS const& synram) :
+	    base(block, synram)
+	{}
+
+	explicit CADCSampleQuadOnDLS(enum_type const& e) : base(e) {}
+
+	CADCSampleQuadOnSynram toCADCSampleQuadOnSynram() const { return This(); }
+	SynramOnDLS toSynramOnDLS() const { return split().first; }
+};
+
 } // namespace vx
 } // namespace hicann_dls
 } // namespace halco
@@ -1590,6 +1683,11 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ColumnCorrelationQuadOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ColumnCurrentQuadOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ColumnCorrelationSwitchOnColumnCorrelationQuad)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ColumnCurrentSwitchOnColumnCurrentQuad)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCChannelType)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCReadoutType)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCSampleQuadOnSynram)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCSampleQuadUnspecifiedReadoutOnSynram)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCSampleQuadOnDLS)
 
 } // namespace std
 

@@ -139,7 +139,12 @@ typedef ::testing::Types<
     ColumnCurrentQuadOnDLS,
     ColumnCorrelationSwitchOnColumnCorrelationQuad,
     ColumnCurrentSwitchOnColumnCurrentQuad,
-    CrossbarNodeOnDLS>
+    CrossbarNodeOnDLS,
+    CADCChannelType,
+    CADCReadoutType,
+    CADCSampleQuadUnspecifiedReadoutOnSynram,
+    CADCSampleQuadOnSynram,
+    CADCSampleQuadOnDLS>
     CoordinateTypes3;
 
 

@@ -114,6 +114,11 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     ColumnCurrentQuadOnDLS          => linear, iterable
     ColumnCorrelationSwitchOnColumnCorrelationQuad => linear, iterable
     ColumnCurrentSwitchOnColumnCurrentQuad         => linear, iterable
+    CADCChannelType                   => linear,iterable
+    CADCReadoutType                   => linear,iterable
+    CADCSampleQuadUnspecifiedReadoutOnSynram => iterable
+    CADCSampleQuadOnSynram            => iterable
+    CADCSampleQuadOnDLS               => iterable
     """
     # clang-format on
     @staticmethod
