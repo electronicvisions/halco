@@ -14,6 +14,8 @@
 
 #include <boost/serialization/array.hpp>
 
+#endif
+
 namespace halco {
 namespace common GENPYBIND_TAG_HALCO_COMMON {
 
@@ -40,12 +42,15 @@ struct typed_array {
 	typedef std::reverse_iterator<iterator> reverse_iterator;
 	typedef std::reverse_iterator<const_iterator> const_reverse_iterator;
 
+#ifndef PYPLUSPLUS
 	value_type elems[Limits::size > 0 ? Limits::size : 1] GENPYBIND(hidden);
+#endif
 
 	// aggregate types may not have explicit constructor / destructor
 
-	void fill(value_type const& val) { std::fill_n(elems, Limits::size, val); }
+	void fill(value_type const& val) PYPP_HIDE_BODY({ std::fill_n(elems, Limits::size, val); })
 
+#ifndef PYPLUSPLUS
 	void GENPYBIND(hidden) swap(typed_array& other)
 	  noexcept(noexcept(std::declval<std::array<Value, Limits::size> >().swap(
 	    std::declval<std::array<Value, Limits::size> >()))) {
@@ -70,14 +75,19 @@ struct typed_array {
 	const_iterator GENPYBIND(hidden) cend() const noexcept { return end(); }
 	const_reverse_iterator GENPYBIND(hidden) crbegin() const noexcept { return rbegin(); }
 	const_reverse_iterator GENPYBIND(hidden) crend() const noexcept { return rend(); }
+#endif
 
 	GENPYBIND(getter_for(size))
-	constexpr size_type size() const noexcept { return Limits::size; }
+	PYPP_CONSTEXPR size_type size() const PYPP_NOEXCEPT(true)
+		PYPP_HIDE_BODY({ return Limits::size; })
 	GENPYBIND(getter_for(max_size))
-	constexpr size_type max_size() const noexcept { return Limits::size; }
+	PYPP_CONSTEXPR size_type max_size() const PYPP_NOEXCEPT(true)
+		PYPP_HIDE_BODY({ return Limits::size; })
 	GENPYBIND(getter_for(empty))
-	constexpr bool empty() const noexcept { return Limits::size == 0; }
+	PYPP_CONSTEXPR bool empty() const PYPP_NOEXCEPT(true)
+		PYPP_HIDE_BODY({ return Limits::size == 0; })
 
+#ifndef PYPLUSPLUS
 	reference GENPYBIND(hidden) operator[](key_type const& key) {
 		using detail::to_number;
 		return elems[to_number(key) - Limits::min];
@@ -98,12 +108,13 @@ struct typed_array {
 
 	value_type* GENPYBIND(hidden) data() noexcept { return elems; }
 	value_type const* GENPYBIND(hidden) data() const noexcept { return elems; }
+#endif
 
 	GENPYBIND(expose_as(__getitem__), return_value_policy(reference))
-	const_reference get(Key const& key) const { return at(key); }
+	const_reference get(Key const& key) const PYPP_HIDE_BODY({ return at(key); })
 
 	GENPYBIND(expose_as(__setitem__))
-	void set(Key const& key, Value const& value) { at(key) = value; }
+	void set(Key const& key, Value const& value) PYPP_HIDE_BODY({ at(key) = value; })
 
 	GENPYBIND_MANUAL({
 		parent.def(
@@ -113,6 +124,7 @@ struct typed_array {
 	})
 };
 
+#ifndef PYPLUSPLUS
 namespace typed_array_enum_support {
 
 template <typename T, T End, T Begin = static_cast<T>(0)>
@@ -149,11 +161,12 @@ auto typed_array<Value, Key, Limits>::at(key_type const& key) const -> const_ref
 	return elems[idx];
 }
 
+#endif
+
 template <typename Value, typename Key, typename Limits>
 inline bool operator==(typed_array<Value, Key, Limits> const& x,
-                       typed_array<Value, Key, Limits> const& y) {
-	return std::equal(x.elems, x.elems + Limits::size, y.elems);
-}
+                       typed_array<Value, Key, Limits> const& y)
+	PYPP_HIDE_BODY({return std::equal(x.elems, x.elems + Limits::size, y.elems); })
 
 template <typename Value, typename Key, typename Limits>
 inline bool operator!=(typed_array<Value, Key, Limits> const& x,
@@ -163,10 +176,9 @@ inline bool operator!=(typed_array<Value, Key, Limits> const& x,
 
 template <typename Value, typename Key, typename Limits>
 inline bool operator<(typed_array<Value, Key, Limits> const& x,
-                      typed_array<Value, Key, Limits> const& y) {
-	return std::lexicographical_compare(x.elems, x.elems + Limits::size, y.elems,
-	                                    y.elems + Limits::size);
-}
+                      typed_array<Value, Key, Limits> const& y)
+	PYPP_HIDE_BODY({return std::lexicographical_compare(
+				x.elems, x.elems + Limits::size, y.elems, y.elems + Limits::size); })
 
 template <typename Value, typename Key, typename Limits>
 inline bool operator>(typed_array<Value, Key, Limits> const& x,
@@ -189,6 +201,7 @@ inline bool operator>=(typed_array<Value, Key, Limits> const& x,
 } // namespace common
 } // namespace halco
 
+#ifndef PYPLUSPLUS
 namespace std {
 
 // FIXME: unlike libstdc++, libcxx has enable_if here:
@@ -233,6 +246,8 @@ get(halco::common::typed_array<Value, Key, Limits>&& a) noexcept {
 }
 
 } // namespace std
+#endif // PYPLUSPLUS
+
 
 namespace boost {
 namespace serialization {
@@ -240,10 +255,8 @@ namespace serialization {
 template <typename Archiver, typename Value, typename Key, typename Limits>
 void
 serialize(Archiver& ar, halco::common::typed_array<Value, Key, Limits>& x,
-          unsigned int const /*version*/) {
-	ar & boost::serialization::make_array(x.data(), x.size());
-}
+          unsigned int const /*version*/)
+	PYPP_HIDE_BODY({ar & boost::serialization::make_array(x.data(), x.size()); })
 
 } // namespace serialization
 } // namespace boost
-#endif // PYPLUSPLUS
