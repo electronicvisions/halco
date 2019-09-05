@@ -20,7 +20,7 @@ namespace halco {
 namespace hicann_dls {
 namespace vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
-class PPUOnDLS;
+struct PPUOnDLS;
 
 /******\
   FPGA
@@ -981,7 +981,7 @@ struct GENPYBIND(inline_base("*")) CommonNeuronConfigOnDLS
    SynapseDriver
 \*****************/
 
-class CommonSynapseDriverConfigOnDLS;
+struct CommonSynapseDriverConfigOnDLS;
 
 struct GENPYBIND(inline_base("*")) SynapseDriverOnSynapseDriverBlock
     : public common::detail::RantWrapper<SynapseDriverOnSynapseDriverBlock, uint_fast16_t, 127, 0>
@@ -1047,10 +1047,10 @@ struct GENPYBIND(inline_base("*")) CommonSynapseDriverConfigOnDLS
    PADIBus
 \*****************/
 
-class SynramOnDLS;
-class PADIEventOnDLS;
-class CommonPADIBusConfigOnDLS;
-class CommonSTPConfigOnDLS;
+struct SynramOnDLS;
+struct PADIEventOnDLS;
+struct CommonPADIBusConfigOnDLS;
+struct CommonSTPConfigOnDLS;
 
 struct GENPYBIND(inline_base("*")) PADIBusBlockOnDLS
     : public common::detail::RantWrapper<PADIBusBlockOnDLS, uint_fast16_t, 1, 0>
@@ -1280,7 +1280,7 @@ public:
     Synram
 \************/
 
-class SynramOnDLS;
+struct SynramOnDLS;
 
 struct GENPYBIND(inline_base("*")) CommonSynramConfigOnDLS
     : public common::detail::RantWrapper<CommonSynramConfigOnDLS, uint_fast16_t, 1, 0>
