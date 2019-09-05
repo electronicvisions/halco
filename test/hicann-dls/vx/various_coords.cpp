@@ -88,6 +88,23 @@ TEST(CrossbarNodeOnDLS, Construction)
 	EXPECT_THROW(CrossbarNodeOnDLS(output, CrossbarInputOnDLS(2)), std::domain_error);
 }
 
+TEST(PADIBusOnDLS, toCrossbarOutputOnDLS)
+{
+	auto bus = PADIBusOnDLS(PADIBusOnPADIBusBlock(2), PADIBusBlockOnDLS::bottom);
+	EXPECT_EQ(bus.toCrossbarOutputOnDLS(), CrossbarOutputOnDLS(6));
+}
+
+TEST(BackgroundSpikeSourceOnDLS, toCrossbarInputOnDLS)
+{
+	auto source = BackgroundSpikeSourceOnDLS(5);
+	EXPECT_EQ(source.toCrossbarInputOnDLS(), CrossbarInputOnDLS(17));
+}
+
+TEST(BackgroundSpikeSourceOnDLS, toCrossbarL2OutputOnDLS)
+{
+	auto source = BackgroundSpikeSourceOnDLS(5);
+	EXPECT_EQ(source.toCrossbarL2OutputOnDLS(), CrossbarL2OutputOnDLS(1));
+}
 
 template <typename T>
 class CommonVerticalHalfCoordinateTest : public ::testing::Test

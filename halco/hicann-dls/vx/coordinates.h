@@ -64,6 +64,9 @@ struct GENPYBIND(inline_base("*")) HicannARQStatusOnFPGA
    BackgroundSpikeSource
 \*************************/
 
+struct CrossbarInputOnDLS;
+struct CrossbarL2OutputOnDLS;
+
 struct GENPYBIND(inline_base("*")) BackgroundSpikeSourceOnDLS
     : public common::detail::RantWrapper<BackgroundSpikeSourceOnDLS, uint_fast16_t, 7, 0>
 {
@@ -71,6 +74,9 @@ struct GENPYBIND(inline_base("*")) BackgroundSpikeSourceOnDLS
 	    GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
+
+	CrossbarInputOnDLS toCrossbarInputOnDLS() const;
+	CrossbarL2OutputOnDLS toCrossbarL2OutputOnDLS() const;
 };
 
 /************\
@@ -1099,6 +1105,7 @@ public:
 
 	PADIBusOnPADIBusBlock toPADIBusOnPADIBusBlock() const { return This(); }
 	PADIBusBlockOnDLS toPADIBusBlockOnDLS() const { return split().first; }
+	CrossbarOutputOnDLS toCrossbarOutputOnDLS() const { return CrossbarOutputOnDLS(toEnum()); }
 };
 
 struct GENPYBIND(inline_base("*")) CommonPADIBusConfigOnDLS
