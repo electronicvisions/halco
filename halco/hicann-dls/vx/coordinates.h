@@ -1567,6 +1567,11 @@ struct GENPYBIND(inline_base("*")) ColumnCorrelationQuadOnSynram
 	    GENPYBIND(implicit_conversion) :
 	    rant_t(x)
 	{}
+
+	SynapseQuadColumnOnDLS toSynapseQuadColumnOnDLS() const
+	{
+		return SynapseQuadColumnOnDLS(toEnum());
+	}
 };
 
 struct GENPYBIND(inline_base("*SynramMixin*")) ColumnCorrelationQuadOnDLS
@@ -1620,6 +1625,11 @@ struct GENPYBIND(inline_base("*")) ColumnCurrentQuadOnSynram
 	    GENPYBIND(implicit_conversion) :
 	    rant_t(x)
 	{}
+
+	SynapseQuadColumnOnDLS toSynapseQuadColumnOnDLS() const
+	{
+		return SynapseQuadColumnOnDLS(toEnum());
+	}
 };
 
 struct GENPYBIND(inline_base("*SynramMixin*")) ColumnCurrentQuadOnDLS
