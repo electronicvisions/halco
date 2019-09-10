@@ -6,6 +6,11 @@ namespace v2 {
 
 using namespace halco::common;
 
+PPUMemoryWordOnDLS const PPUMemoryWordOnDLS::return_code(3071);
+
+PPUMemoryBlockOnDLS const PPUMemoryBlockOnDLS::mailbox(
+    PPUMemoryWordOnDLS(3072), PPUMemoryWordOnDLS(4095));
+
 ColumnCorrelationSwitchOnDLS NeuronOnDLS::toColumnCorrelationSwitchOnDLS() const
 {
 	return ColumnCorrelationSwitchOnDLS(value());

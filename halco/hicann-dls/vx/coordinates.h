@@ -298,6 +298,9 @@ struct GENPYBIND(inline_base("*")) PPUMemoryWordOnPPU
 	constexpr explicit PPUMemoryWordOnPPU(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
+
+	/** Return code word location (atop first stack frame). */
+	static const PPUMemoryWordOnPPU return_code;
 };
 
 struct GENPYBIND(inline_base("*")) PPUMemoryBlockSize
@@ -317,6 +320,9 @@ struct GENPYBIND(inline_base("*")) PPUMemoryBlockOnPPU
 	PPUMemoryBlockSize toPPUMemoryBlockSize() const { return PPUMemoryBlockSize(length()); }
 	PPUMemoryWordOnPPU toMin() const { return min(); }
 	PPUMemoryWordOnPPU toMax() const { return max(); }
+
+	/** Location of mailbox memory area (deprecated). */
+	static const PPUMemoryBlockOnPPU mailbox;
 };
 
 struct GENPYBIND(inline_base("*")) PPUMemoryOnPPU

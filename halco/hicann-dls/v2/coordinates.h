@@ -455,6 +455,9 @@ struct GENPYBIND(inline_base("*")) PPUMemoryWordOnDLS
 	: public common::detail::RantWrapper<PPUMemoryWordOnDLS, uint_fast16_t, 0x1000 - 1, 0>
 {
 	constexpr explicit PPUMemoryWordOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) : rant_t(val) {}
+
+	/** Return code word location (atop first stack frame). */
+	static const PPUMemoryWordOnDLS return_code;
 };
 
 struct GENPYBIND(inline_base("*")) PPUMemoryBlockSize
@@ -472,6 +475,9 @@ struct GENPYBIND(inline_base("*")) PPUMemoryBlockOnDLS
 	PPUMemoryBlockSize toPPUMemoryBlockSize() const { return PPUMemoryBlockSize(length()); }
 	PPUMemoryWordOnDLS toMin() const { return min(); }
 	PPUMemoryWordOnDLS toMax() const { return max(); }
+
+	/** Location of mailbox memory area. */
+	static const PPUMemoryBlockOnDLS mailbox;
 };
 
 struct GENPYBIND(inline_base("*")) PPUMemoryOnDLS

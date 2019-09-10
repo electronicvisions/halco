@@ -77,6 +77,11 @@ CrossbarNodeOnDLS::enum_type CrossbarNodeOnDLS::to_enum(x_type const& x, y_type 
 PPUOnDLS const PPUOnDLS::top{0};
 PPUOnDLS const PPUOnDLS::bottom{1};
 
+PPUMemoryBlockOnPPU const PPUMemoryBlockOnPPU::mailbox(
+    PPUMemoryWordOnPPU(3072), PPUMemoryWordOnPPU(4095));
+
+PPUMemoryWordOnPPU const PPUMemoryWordOnPPU::return_code(3071);
+
 CADCConfigOnDLS const CADCConfigOnDLS::top{PPUOnDLS::top.toEnum()};
 CADCConfigOnDLS const CADCConfigOnDLS::bottom{PPUOnDLS::bottom.toEnum()};
 
