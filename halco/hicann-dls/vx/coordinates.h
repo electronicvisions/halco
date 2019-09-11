@@ -318,8 +318,6 @@ struct GENPYBIND(inline_base("*")) PPUMemoryBlockOnPPU
 	INTERVAL_COMMON_CONSTRUCTORS(PPUMemoryBlockOnPPU)
 
 	PPUMemoryBlockSize toPPUMemoryBlockSize() const { return PPUMemoryBlockSize(length()); }
-	PPUMemoryWordOnPPU toMin() const { return min(); }
-	PPUMemoryWordOnPPU toMax() const { return max(); }
 
 	/** Location of mailbox memory area (deprecated). */
 	static const PPUMemoryBlockOnPPU mailbox;

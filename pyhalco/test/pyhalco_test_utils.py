@@ -225,7 +225,7 @@ class PyhalcoTest(object):
             for c in pyhalco_common.iter_all(cls):
                 if c.toEnum().value() > cls.bound_type.size * 2:
                     break
-                self.assertLessEqual(c.min(), c.max())
+                self.assertLessEqual(c.toMin(), c.toMax())
                 coords.append(c)
             self.assertEqual(len(coords), cls.bound_type.size * 2 - 1)
         else:

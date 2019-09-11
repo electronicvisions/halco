@@ -473,8 +473,6 @@ struct GENPYBIND(inline_base("*")) PPUMemoryBlockOnDLS
 	INTERVAL_COMMON_CONSTRUCTORS(PPUMemoryBlockOnDLS)
 
 	PPUMemoryBlockSize toPPUMemoryBlockSize() const { return PPUMemoryBlockSize(length()); }
-	PPUMemoryWordOnDLS toMin() const { return min(); }
-	PPUMemoryWordOnDLS toMax() const { return max(); }
 
 	/** Location of mailbox memory area. */
 	static const PPUMemoryBlockOnDLS mailbox;

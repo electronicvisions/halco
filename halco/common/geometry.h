@@ -521,8 +521,8 @@ struct IntervalCoordinate {
 
 	enum_type id() const { return static_cast<Derived const*>(this)->to_enum(mMin, mMax); }
 	enum_type toEnum() const { return static_cast<Derived const*>(this)->to_enum(mMin, mMax); }
-	bound_type min()  const { return mMin; }
-	bound_type max()  const { return mMax; }
+	bound_type toMin() const { return mMin; }
+	bound_type toMax() const { return mMax; }
 	size_t length() const { return mMax - mMin + 1; }
 
 	GENPYBIND(expose_as(__getitem__))
@@ -542,12 +542,12 @@ struct IntervalCoordinate {
 #ifndef PYPLUSPLUS
 	typename detail::CoordinateIterator<bound_type> begin()
 	{
-		return typename detail::CoordinateIterator<bound_type>(min().toEnum());
+		return typename detail::CoordinateIterator<bound_type>(toMin().toEnum());
 	}
 
 	typename detail::CoordinateIterator<bound_type> end()
 	{
-		return typename detail::CoordinateIterator<bound_type>(max().toEnum() + 1);
+		return typename detail::CoordinateIterator<bound_type>(toMax().toEnum() + 1);
 	}
 #endif
 
@@ -563,7 +563,7 @@ struct IntervalCoordinate {
 
 	friend bool operator==(Derived const& a, Derived const&b)
 	{
-		return a.min() == b.min() && a.max() == b.max();
+		return a.toMin() == b.toMin() && a.toMax() == b.toMax();
 	}
 
 	friend bool operator!=(Derived const& a, Derived const&b)
@@ -573,7 +573,7 @@ struct IntervalCoordinate {
 
 	friend bool operator==(interval_type const& a, interval_type const& b)
 	{
-		return a.min() == b.min() && a.max() == b.max();
+		return a.toMin() == b.toMin() && a.toMax() == b.toMax();
 	}
 
 	friend bool operator!=(interval_type const& a, interval_type const& b) { return !(a == b); }
@@ -583,8 +583,8 @@ struct IntervalCoordinate {
 	{
 		static std::string const name =
 			ZTL::typestring<Derived>().substr(ZTL::typestring<Derived>().rfind(':') + 1);
-		os << name << "([" << c.min().toEnum().value()
-		   << "," << c.max().toEnum().value() << "])";
+		os << name << "([" << c.toMin().toEnum().value() << "," << c.toMax().toEnum().value()
+		   << "])";
 		return os;
 	}
 

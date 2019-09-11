@@ -44,8 +44,8 @@ template <typename Archive, typename Derived, typename T, size_t EnumSize>
 void CEREAL_SERIALIZE_FUNCTION_NAME(
     Archive& ar, halco::common::detail::IntervalCoordinate<Derived, T, EnumSize>& interval)
 {
-	auto min = interval.min();
-	auto max = interval.max();
+	auto min = interval.toMin();
+	auto max = interval.toMax();
 	ar(CEREAL_NVP(min));
 	ar(CEREAL_NVP(max));
 	interval = halco::common::detail::IntervalCoordinate<Derived, T, EnumSize>(min, max);
