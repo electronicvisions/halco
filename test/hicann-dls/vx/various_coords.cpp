@@ -28,6 +28,9 @@ TEST(PPUMemoryWordOnDLS, RespectsBounds)
 {
 	EXPECT_ANY_THROW(PPUMemoryWordOnDLS(Enum(8192)));
 	EXPECT_NO_THROW(PPUMemoryWordOnDLS(Enum(8191)));
+	EXPECT_EQ(PPUMemoryWordOnDLS::size, PPUMemoryWordOnPPU::size * PPUOnDLS::size);
+	EXPECT_EQ(PPUMemoryWordOnDLS::min, 0);
+	EXPECT_EQ(PPUMemoryWordOnDLS::max, PPUMemoryWordOnPPU::size * PPUOnDLS::size - 1);
 }
 
 TEST(PPUMemoryWordOnDLS, Conversion)
@@ -104,6 +107,47 @@ TEST(BackgroundSpikeSourceOnDLS, toCrossbarL2OutputOnDLS)
 {
 	auto source = BackgroundSpikeSourceOnDLS(5);
 	EXPECT_EQ(source.toCrossbarL2OutputOnDLS(), CrossbarL2OutputOnDLS(1));
+}
+
+TEST(CADCSampleQuadOnSynram, Size)
+{
+	EXPECT_EQ(
+	    CADCSampleQuadOnSynram::size,
+	    CADCChannelType::size * CADCReadoutType::size * SynapseQuadOnSynram::size);
+
+	EXPECT_EQ(CADCSampleQuadOnSynram::min, 0);
+
+	EXPECT_EQ(
+	    CADCSampleQuadOnSynram::max,
+	    CADCChannelType::size * CADCReadoutType::size * SynapseQuadOnSynram::size - 1);
+
+	size_t count = 0;
+	for (auto coord : iter_all<CADCSampleQuadOnSynram>()) {
+		static_cast<void>(coord);
+		count++;
+	}
+	EXPECT_EQ(count++, CADCSampleQuadOnSynram::size);
+}
+
+TEST(CADCSampleQuadOnDLS, Size)
+{
+	EXPECT_EQ(
+	    CADCSampleQuadOnDLS::size, CADCChannelType::size * CADCReadoutType::size *
+	                                   SynapseQuadOnSynram::size * SynramOnDLS::size);
+
+	EXPECT_EQ(CADCSampleQuadOnDLS::min, 0);
+
+	EXPECT_EQ(
+	    CADCSampleQuadOnDLS::max, CADCChannelType::size * CADCReadoutType::size *
+	                                      SynapseQuadOnSynram::size * SynramOnDLS::size -
+	                                  1);
+
+	size_t count = 0;
+	for (auto coord : iter_all<CADCSampleQuadOnDLS>()) {
+		static_cast<void>(coord);
+		count++;
+	}
+	EXPECT_EQ(count++, CADCSampleQuadOnDLS::size);
 }
 
 template <typename T>

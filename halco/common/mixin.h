@@ -6,9 +6,14 @@
 #ifdef PYPLUSPLUS
 #define HALCO_COORDINATE_MIXIN__ENUM_TYPE(...) \
 	typename ::halco::common::detail::pypp_maybe_ranged_enum<__VA_ARGS__>::type
+#define HALCO_COORDINATE_MIXIN__SIZE_MEMBERS
 #else
 #define HALCO_COORDINATE_MIXIN__ENUM_TYPE(...) \
 	typename ::halco::common::detail::maybe_ranged_enum<__VA_ARGS__>::type
+#define HALCO_COORDINATE_MIXIN__SIZE_MEMBERS \
+	inline static const size_t size = enum_type::size;\
+	inline static const size_t min = enum_type::min;\
+	inline static const size_t max = enum_type::max;
 #endif
 
 #define HALCO_COORDINATE_MIXIN(mixin, cls, fct)                                \
@@ -21,6 +26,7 @@
 		typedef T local_type;                                                  \
 		typedef HALCO_COORDINATE_MIXIN__ENUM_TYPE(cls, T) enum_type            \
 		     GENPYBIND(opaque(false));                                         \
+		HALCO_COORDINATE_MIXIN__SIZE_MEMBERS                                   \
                                                                                \
 		mixin() {}                                                             \
 		explicit mixin(T const t, cls const v) : T(t), mValue(v) {}            \
