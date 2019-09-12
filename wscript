@@ -30,64 +30,51 @@ def configure(conf):
 
 def build(bld):
     bld(
-        target          = 'halco_common_inc',
+        target          = 'halco_inc',
         use             = ['ZTL', 'rant', 'pywrap_inc',  'boost_serialization'],
-        export_includes = ['.'],
+        export_includes = ['include'],
     )
 
     bld.shlib(
         target          = 'halco_common',
-        source          = bld.path.ant_glob('halco/common/*.cpp'),
+        source          = bld.path.ant_glob('src/halco/common/*.cpp'),
         install_path    = '${PREFIX}/lib',
         linkflags       = '-Wl,-z,defs',
-        use             = ['halco_common_inc', 'LOG4CXX'],
-    )
-
-    bld(
-        target          = 'halco_hicann_v2_inc',
-        use             = ['halco_common_inc', 'boost_serialization'],
-        export_includes = ['.'],
+        use             = ['halco_inc', 'LOG4CXX'],
     )
 
     bld.shlib(
         target          = 'halco_hicann_v2',
-        source          = bld.path.ant_glob('halco/hicann/v2/*.cpp'),
+        source          = bld.path.ant_glob('src/halco/hicann/v2/*.cpp'),
         install_path    = '${PREFIX}/lib',
-        linkflags      = '-Wl,-z,defs',
-        use             = ['halco_hicann_v2_inc', 'halco_common', 'BOOST4HALCO'],
-    )
-
-    bld(
-        target="halco_hicann_dls_v2_inc",
-        use=["halco_common_inc"],
-        export_includes=["."],
+        linkflags       = '-Wl,-z,defs',
+        use             = ['halco_common', 'BOOST4HALCO'],
     )
 
     bld.shlib(
         target="halco_hicann_dls_v2",
-        source=bld.path.ant_glob("halco/hicann-dls/v2/*.cpp"),
+        source=bld.path.ant_glob("src/halco/hicann-dls/v2/*.cpp"),
         install_path="${PREFIX}/lib",
-        use=["halco_hicann_dls_v2_inc", "halco_common", "BOOST4HALCO"],
-    )
-
-    bld(
-        target="halco_hicann_dls_vx_inc",
-        use=["halco_common_inc"],
-        export_includes=["."],
+        use=["halco_common", "BOOST4HALCO"],
     )
 
     bld.shlib(
         target="halco_hicann_dls_vx",
-        source=bld.path.ant_glob("halco/hicann-dls/vx/*.cpp"),
+        source=bld.path.ant_glob("src/halco/hicann-dls/vx/*.cpp"),
         install_path="${PREFIX}/lib",
-        use=["halco_hicann_dls_vx_inc", "halco_common", "BOOST4HALCO"],
+        use=["halco_common", "BOOST4HALCO"],
+    )
+
+    bld(
+        target='halco_test_inc',
+        export_includes=['test'],
     )
 
     bld(
         target       = 'halco_hicann_v2_tests',
         features     = 'gtest cxx cxxprogram',
         source       = bld.path.ant_glob('test/hicann/v2/*.cpp'),
-        use          = ['halco_hicann_v2', 'GTEST', 'BOOST4TOOLS', 'pythonic'],
+        use          = ['halco_hicann_v2', 'GTEST', 'BOOST4TOOLS', 'pythonic', 'halco_test_inc'],
         install_path = '${PREFIX}/bin'
     )
 
@@ -95,7 +82,7 @@ def build(bld):
         target="halco_hicann_dls_v2_tests",
         features="gtest cxx cxxprogram",
         source=bld.path.ant_glob("test/hicann-dls/v2/*.cpp"),
-        use=["halco_hicann_dls_v2", "GTEST", "BOOST4TOOLS"],
+        use=["halco_hicann_dls_v2", "GTEST", "BOOST4TOOLS", 'halco_test_inc'],
         install_path="${PREFIX}/bin"
     )
 
@@ -103,7 +90,7 @@ def build(bld):
         target="halco_hicann_dls_vx_tests",
         features="gtest cxx cxxprogram",
         source=bld.path.ant_glob("test/hicann-dls/vx/*.cpp"),
-        use=["halco_hicann_dls_vx", "GTEST", "BOOST4TOOLS"],
+        use=["halco_hicann_dls_vx", "GTEST", "BOOST4TOOLS", 'halco_test_inc'],
         install_path="${PREFIX}/bin"
     )
 

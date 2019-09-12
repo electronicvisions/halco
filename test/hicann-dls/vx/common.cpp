@@ -163,12 +163,12 @@ TYPED_TEST_CASE(CommonCoordinateTest3, CoordinateTypes3);
 
 #define TEST_CEREAL
 #define COMMON_FIXTURE_NAME CommonCoordinateTest1
-#include "test/HALCO_COMMON.cxx"
+#include "HALCO_COMMON.cxx"
 #undef COMMON_FIXTURE_NAME
 #define COMMON_FIXTURE_NAME CommonCoordinateTest2
-#include "test/HALCO_COMMON.cxx"
+#include "HALCO_COMMON.cxx"
 #undef COMMON_FIXTURE_NAME
 #define COMMON_FIXTURE_NAME CommonCoordinateTest3
-#include "test/HALCO_COMMON.cxx"
+#include "HALCO_COMMON.cxx"
 #undef COMMON_FIXTURE_NAME
 #undef TEST_CEREAL

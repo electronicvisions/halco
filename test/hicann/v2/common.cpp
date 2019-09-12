@@ -103,10 +103,10 @@ typedef ::testing::Types<
 > CoordinateTypesNtoZ;
 TYPED_TEST_CASE(CommonCoordinateTestNtoZ, CoordinateTypesNtoZ);
 #define COMMON_FIXTURE_NAME CommonCoordinateTestAtoM
-#include "test/HALCO_COMMON.cxx"
+#include "HALCO_COMMON.cxx"
 #undef COMMON_FIXTURE_NAME
 #define COMMON_FIXTURE_NAME CommonCoordinateTestNtoZ
-#include "test/HALCO_COMMON.cxx"
+#include "HALCO_COMMON.cxx"
 #undef COMMON_FIXTURE_NAME
 
 // clang-format on

@@ -55,7 +55,7 @@ def build(bld):
     if bld.env.with_pybind:
         bld(
             target='pyhalco_common',
-            source='../halco/common/common.h',
+            source='../include/halco/common/common.h',
             genpybind_tags='common',
             features='genpybind cxx cxxshlib pyext',
             use=['halco_common', 'PYBIND11HALCO', 'pywrap_inc', 'pyhalco_common_files'],
@@ -65,7 +65,7 @@ def build(bld):
 
         bld(
             target='pyhalco_hicann_dls_v2',
-            source='../halco/hicann-dls/v2/coordinates.h',
+            source='../include/halco/hicann-dls/v2/coordinates.h',
             genpybind_tags='hicann_dls_v2',
             features='genpybind cxx cxxshlib pyext',
             use=['halco_common', 'halco_hicann_dls_v2', 'PYBIND11HALCO', 'pywrap_inc', 'pyhalco_common'],
@@ -85,7 +85,7 @@ def build(bld):
 
         bld(
             target='pyhalco_hicann_dls_vx',
-            source='../halco/hicann-dls/vx/coordinates.h',
+            source='../include/halco/hicann-dls/vx/coordinates.h',
             genpybind_tags='hicann_dls_vx',
             features='genpybind cxx cxxshlib pyext',
             use=['halco_common', 'halco_hicann_dls_vx', 'PYBIND11HALCO', 'pywrap_inc', 'pyhalco_common'],
@@ -110,7 +110,7 @@ def build(bld):
                 script         = 'common/generate_common_coordinate.py',
                 gen_defines    = 'PYPLUSPLUS __STRICT_ANSI__',
                 defines        = 'PYBINDINGS',
-                headers        = '../halco/common/common.h',
+                headers        = '../include/halco/common/common.h',
                 use            = ['halco_common', 'pyublas', 'BOOST4HALCO', 'BOOST4PYHALCO', 'PYHALCO', 'pywrap', 'pywrapstdvector', 'pycellparameters', 'pyhalco_common_files'],
                 install_path   = '${PREFIX}/lib',
                 linkflags      = '-Wl,-z,defs',
@@ -125,7 +125,7 @@ def build(bld):
                 # gccxml requires non-variadic implementation of boost::variant for python wrappers
                 defines        = ['PYBINDINGS', 'BOOST_VARIANT_DO_NOT_USE_VARIADIC_TEMPLATES'],
                 export_defines = 'BOOST_VARIANT_DO_NOT_USE_VARIADIC_TEMPLATES',
-                headers        = '../halco/hicann/v2/coordinates.h',
+                headers        = '../include/halco/hicann/v2/coordinates.h',
                 use            = ['pyhalco_common', 'halco_hicann_v2'],
                 install_path   = '${PREFIX}/lib',
                 linkflags      = '-Wl,-z,defs',

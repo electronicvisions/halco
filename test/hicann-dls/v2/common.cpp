@@ -62,6 +62,6 @@ TYPED_TEST_CASE(CommonCoordinateTest, CoordinateTypes);
 
 #define TEST_CEREAL
 #define COMMON_FIXTURE_NAME CommonCoordinateTest
-#include "test/HALCO_COMMON.cxx"
+#include "HALCO_COMMON.cxx"
 #undef COMMON_FIXTURE_NAME
 #undef TEST_CEREAL
