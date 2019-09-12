@@ -1145,7 +1145,6 @@ struct GENPYBIND(inline_base("*")) CapMemColumnOnCapMemBlock
 	    GENPYBIND(implicit_conversion) :
 	    rant_t(x)
 	{}
-	static const CapMemColumnOnCapMemBlock SharedCapMemColumnOnCapMemBlock;
 
 	bool isShared() const { return value() > (max - num_block_global_capmem_column); }
 };
