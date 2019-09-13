@@ -1,6 +1,6 @@
 #include "halco/hicann-dls/vx/dac.h"
 
-#include "halco/hicann-dls/vx/coordinates.h"
+#include "halco/hicann-dls/vx/xboard.h"
 
 namespace halco::hicann_dls::vx {
 
