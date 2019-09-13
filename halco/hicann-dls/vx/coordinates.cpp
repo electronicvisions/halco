@@ -82,11 +82,6 @@ PPUOnDLS CADCConfigOnDLS::toPPUOnDLS() const
 	return PPUOnDLS(toEnum());
 }
 
-PLLClockOutputOnDLS const PLLClockOutputOnDLS::serdes_ser_send_clk{0};
-PLLClockOutputOnDLS const PLLClockOutputOnDLS::phy_ref_clk{1};
-PLLClockOutputOnDLS const PLLClockOutputOnDLS::ppu_clk{2};
-PLLClockOutputOnDLS const PLLClockOutputOnDLS::madc_clk{3};
-
 SPIDACControlRegisterOnDAC const SPIDACControlRegisterOnDAC::gain_reference{0};
 SPIDACControlRegisterOnDAC const SPIDACControlRegisterOnDAC::ldac{1};
 SPIDACControlRegisterOnDAC const SPIDACControlRegisterOnDAC::power_down{2};

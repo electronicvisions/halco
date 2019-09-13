@@ -16,6 +16,7 @@ extern "C"
 #include "halco/hicann-dls/vx/omnibus.h"
 #include "halco/hicann-dls/vx/ppu.h"
 #include "halco/hicann-dls/vx/timing.h"
+#include "halco/hicann-dls/vx/pll.h"
 
 GENPYBIND_TAG_HALCO_HICANN_DLS_VX
 GENPYBIND_MANUAL({
@@ -202,49 +203,6 @@ struct GENPYBIND(inline_base("*")) ResetChipOnDLS
     : public common::detail::RantWrapper<ResetChipOnDLS, uint_fast16_t, 0, 0>
 {
 	constexpr explicit ResetChipOnDLS(uintmax_t const val = 0) : rant_t(val) {}
-};
-
-/**********\
-    PLL
-\**********/
-
-struct GENPYBIND(inline_base("*")) PLLSelfTestOnDLS
-    : public common::detail::RantWrapper<PLLSelfTestOnDLS, uint_fast16_t, 0, 0>
-{
-	constexpr explicit PLLSelfTestOnDLS(uintmax_t const val = 0) : rant_t(val) {}
-};
-
-struct GENPYBIND(inline_base("*")) PLLSelfTestStatusOnDLS
-    : public common::detail::RantWrapper<PLLSelfTestStatusOnDLS, uint_fast16_t, 0, 0>
-{
-	constexpr explicit PLLSelfTestStatusOnDLS(uintmax_t const val = 0) : rant_t(val) {}
-};
-
-struct GENPYBIND(inline_base("*")) PLLClockOutputBlockOnDLS
-    : public common::detail::RantWrapper<PLLClockOutputBlockOnDLS, uint_fast16_t, 0, 0>
-{
-	constexpr explicit PLLClockOutputBlockOnDLS(uintmax_t const val = 0) : rant_t(val) {}
-};
-
-struct GENPYBIND(inline_base("*")) ADPLLOnDLS
-    : public common::detail::RantWrapper<ADPLLOnDLS, uint_fast16_t, 1, 0>
-{
-	constexpr explicit ADPLLOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
-	    rant_t(val)
-	{}
-};
-
-struct GENPYBIND(inline_base("*")) PLLClockOutputOnDLS
-    : public common::detail::RantWrapper<PLLClockOutputOnDLS, uint_fast16_t, 3, 0>
-{
-	constexpr explicit PLLClockOutputOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
-	    rant_t(val)
-	{}
-
-	static const PLLClockOutputOnDLS serdes_ser_send_clk;
-	static const PLLClockOutputOnDLS phy_ref_clk;
-	static const PLLClockOutputOnDLS ppu_clk;
-	static const PLLClockOutputOnDLS madc_clk;
 };
 
 /***********\
@@ -1311,11 +1269,6 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CrossbarL2OutputOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CrossbarInputOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CrossbarNodeOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCConfigOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ADPLLOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLClockOutputOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLSelfTestOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLSelfTestStatusOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLClockOutputBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ResetChipOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ShiftRegisterOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SPIDACDataRegisterOnDAC)
