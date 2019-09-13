@@ -13,6 +13,7 @@ extern "C"
 #include "halco/hicann-dls/vx/background.h"
 #include "halco/hicann-dls/vx/dac.h"
 #include "halco/hicann-dls/vx/event.h"
+#include "halco/hicann-dls/vx/fpga.h"
 #include "halco/hicann-dls/vx/highspeed_link.h"
 #include "halco/hicann-dls/vx/i2c.h"
 #include "halco/hicann-dls/vx/jtag.h"
@@ -34,34 +35,6 @@ GENPYBIND_MANUAL({
 namespace halco {
 namespace hicann_dls {
 namespace vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
-
-/******\
-  FPGA
-\******/
-
-/**
- * Unique identifier on FPGA.
- */
-struct GENPYBIND(inline_base("*")) FPGADeviceDNAOnFPGA
-    : public common::detail::RantWrapper<FPGADeviceDNAOnFPGA, uint_fast16_t, 0, 0>
-{
-	constexpr explicit FPGADeviceDNAOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
-};
-
-/************\
-   Loopback
-\************/
-
-/**
- * Unique coordinate for a readable entity without payload.
- * The read response is issued as fast as possible, which e.g. enables usage for synchronization of
- * from-FPGA time annotation and to-FPGA Playback time annotation.
- */
-struct GENPYBIND(inline_base("*")) NullPayloadReadableOnFPGA
-    : public common::detail::RantWrapper<NullPayloadReadableOnFPGA, uint_fast16_t, 0, 0>
-{
-	constexpr explicit NullPayloadReadableOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
-};
 
 struct CrossbarInputOnDLS;
 struct CrossbarL2OutputOnDLS;
@@ -876,8 +849,6 @@ struct GENPYBIND(inline_base("*")) CADCSampleOnCADCSampleQuad
 // std::hash specializations
 namespace std {
 
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::FPGADeviceDNAOnFPGA)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NullPayloadReadableOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronOnNeuronBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronBlockOnDLS)
