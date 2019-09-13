@@ -11,6 +11,7 @@ extern "C"
 #include "halco/common/mixin.h"
 
 #include "halco/hicann-dls/vx/background.h"
+#include "halco/hicann-dls/vx/dac.h"
 #include "halco/hicann-dls/vx/event.h"
 #include "halco/hicann-dls/vx/highspeed_link.h"
 #include "halco/hicann-dls/vx/jtag.h"
@@ -18,6 +19,7 @@ extern "C"
 #include "halco/hicann-dls/vx/pll.h"
 #include "halco/hicann-dls/vx/ppu.h"
 #include "halco/hicann-dls/vx/routing_crossbar.h"
+#include "halco/hicann-dls/vx/spi.h"
 #include "halco/hicann-dls/vx/timing.h"
 
 GENPYBIND_TAG_HALCO_HICANN_DLS_VX
@@ -162,39 +164,6 @@ struct GENPYBIND(inline_base("*INA219Mixin*")) I2CINA219RwRegisterOnBoard
 };
 
 /***********\
-    SPI
-\***********/
-
-struct GENPYBIND(inline_base("*")) SPIShiftRegisterOnBoard
-    : public common::detail::RantWrapper<SPIShiftRegisterOnBoard, uint_fast16_t, 0, 0>
-{
-	constexpr explicit SPIShiftRegisterOnBoard(uintmax_t const val = 0) : rant_t(val) {}
-};
-
-struct GENPYBIND(inline_base("*")) SPIDACDataRegisterOnDAC
-    : public common::detail::RantWrapper<SPIDACDataRegisterOnDAC, uint_fast16_t, 7, 0>
-{
-	constexpr explicit SPIDACDataRegisterOnDAC(uintmax_t const val = 0)
-	    GENPYBIND(implicit_conversion) :
-	    rant_t(val)
-	{}
-};
-
-struct GENPYBIND(inline_base("*")) SPIDACControlRegisterOnDAC
-    : public common::detail::RantWrapper<SPIDACControlRegisterOnDAC, uint_fast16_t, 3, 0>
-{
-	constexpr explicit SPIDACControlRegisterOnDAC(uintmax_t const val = 0)
-	    GENPYBIND(implicit_conversion) :
-	    rant_t(val)
-	{}
-
-	static const SPIDACControlRegisterOnDAC gain_reference;
-	static const SPIDACControlRegisterOnDAC ldac;
-	static const SPIDACControlRegisterOnDAC power_down;
-	static const SPIDACControlRegisterOnDAC reset;
-};
-
-/***********\
     Board
 \***********/
 
@@ -238,8 +207,6 @@ struct GENPYBIND(inline_base("*")) LEDOnBoard
 	static const LEDOnBoard led_8;
 };
 
-struct DACChannelOnBoard;
-
 struct GENPYBIND(inline_base("*")) VDDOnBoard
     : public common::detail::RantWrapper<VDDOnBoard, uint_fast16_t, 5, 0>
 {
@@ -255,89 +222,6 @@ struct GENPYBIND(inline_base("*")) VDDOnBoard
 	static const VDDOnBoard vdd12_pll;
 
 	DACChannelOnBoard toDACChannelOnBoard() const;
-};
-
-struct GENPYBIND(inline_base("*")) DACOnBoard
-    : public common::detail::RantWrapper<DACOnBoard, uint_fast16_t, 1, 0>
-{
-	constexpr explicit DACOnBoard(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
-	    rant_t(val)
-	{}
-};
-
-struct GENPYBIND(inline_base("*")) DACChannelOnDAC
-    : public common::detail::RantWrapper<DACChannelOnDAC, uint_fast16_t, 7, 0>
-{
-	constexpr explicit DACChannelOnDAC(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
-	    rant_t(val)
-	{}
-};
-
-HALCO_COORDINATE_MIXIN(DACMixin, DACOnBoard, dac)
-
-struct GENPYBIND(inline_base("*DACMixin*")) DACChannelOnBoard
-    : public DACMixin<DACChannelOnBoard, DACChannelOnDAC>
-{
-	DACChannelOnBoard() = default;
-
-	explicit DACChannelOnBoard(
-	    DACChannelOnDAC const& channel, DACOnBoard const& dac = DACOnBoard()) :
-	    mixin_t(channel, dac)
-	{}
-
-	explicit DACChannelOnBoard(enum_type const& e) : mixin_t(e) {}
-
-	DACChannelOnDAC toDACChannelOnDAC() const { return This(); }
-
-	static const DACChannelOnBoard v_reset;
-	static const DACChannelOnBoard v_res_meas;
-	static const DACChannelOnBoard mux_rfu_0;
-	static const DACChannelOnBoard mux_rfu_1;
-	static const DACChannelOnBoard i_ref_board;
-	static const DACChannelOnBoard ana_readout_debug_0;
-	static const DACChannelOnBoard ana_readout_debug_1;
-	static const DACChannelOnBoard mux_dac_25;
-
-	static const DACChannelOnBoard vdd25_digital;
-	static const DACChannelOnBoard vdd12_digital;
-	static const DACChannelOnBoard vdd25_analog;
-	static const DACChannelOnBoard vdd12_analog;
-	static const DACChannelOnBoard vdd12_madc;
-	static const DACChannelOnBoard vdd12_pll;
-	static const DACChannelOnBoard general_purpose_0;
-	static const DACChannelOnBoard general_purpose_1;
-
-	VDDOnBoard toVDDOnBoard() const;
-};
-
-struct GENPYBIND(inline_base("*DACMixin*")) SPIDACDataRegisterOnBoard
-    : public DACMixin<SPIDACDataRegisterOnBoard, SPIDACDataRegisterOnDAC>
-{
-	SPIDACDataRegisterOnBoard() = default;
-
-	explicit SPIDACDataRegisterOnBoard(
-	    SPIDACDataRegisterOnDAC const& channel, DACOnBoard const& dac = DACOnBoard()) :
-	    mixin_t(channel, dac)
-	{}
-
-	explicit SPIDACDataRegisterOnBoard(enum_type const& e) : mixin_t(e) {}
-
-	SPIDACDataRegisterOnDAC toSPIDACDataRegisterOnDAC() const { return This(); }
-};
-
-struct GENPYBIND(inline_base("*DACMixin*")) SPIDACControlRegisterOnBoard
-    : public DACMixin<SPIDACControlRegisterOnBoard, SPIDACControlRegisterOnDAC>
-{
-	SPIDACControlRegisterOnBoard() = default;
-
-	explicit SPIDACControlRegisterOnBoard(
-	    SPIDACControlRegisterOnDAC const& channel, DACOnBoard const& dac = DACOnBoard()) :
-	    mixin_t(channel, dac)
-	{}
-
-	explicit SPIDACControlRegisterOnBoard(enum_type const& e) : mixin_t(e) {}
-
-	SPIDACControlRegisterOnDAC toSPIDACControlRegisterOnDAC() const { return This(); }
 };
 
 struct GENPYBIND(inline_base("*")) ADCOnBoard
@@ -1146,16 +1030,9 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NullPayloadReadableOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ResetChipOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ShiftRegisterOnBoard)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SPIDACDataRegisterOnDAC)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SPIDACControlRegisterOnDAC)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SPIDACDataRegisterOnBoard)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SPIDACControlRegisterOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ADCSourceOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::LEDOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::VDDOnBoard)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::DACOnBoard)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::DACChannelOnBoard)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::DACChannelOnDAC)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ADCOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronOnNeuronBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronBlockOnDLS)
