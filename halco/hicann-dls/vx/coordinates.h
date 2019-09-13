@@ -1392,46 +1392,6 @@ public:
 	static const CapMemCellOnDLS hagen_ibias_dac_bottom;
 };
 
-struct GENPYBIND(inline_base("*CapMemMixin*")) CapMemRowOnDLS
-    : public CapMemMixin<CapMemRowOnDLS, CapMemRowOnCapMemBlock>
-{
-private:
-	typedef CapMemMixin<CapMemRowOnDLS, CapMemRowOnCapMemBlock> base;
-
-public:
-	CapMemRowOnDLS() = default;
-
-	explicit CapMemRowOnDLS(
-	    CapMemRowOnCapMemBlock const& row, CapMemBlockOnDLS const& block = CapMemBlockOnDLS()) :
-	    base(row, block)
-	{}
-
-	explicit CapMemRowOnDLS(enum_type const& e) : base(e) {}
-
-	CapMemRowOnCapMemBlock toCapMemRowOnCapMemBlock() const { return This(); }
-	CapMemBlockOnDLS toCapMemBlockOnDLS() const { return split().first; }
-};
-
-struct GENPYBIND(inline_base("*CapMemMixin*")) CapMemColumnOnDLS
-    : public CapMemMixin<CapMemColumnOnDLS, CapMemColumnOnCapMemBlock>
-{
-private:
-	typedef CapMemMixin<CapMemColumnOnDLS, CapMemColumnOnCapMemBlock> base;
-
-public:
-	CapMemColumnOnDLS() = default;
-
-	explicit CapMemColumnOnDLS(
-	    CapMemColumnOnCapMemBlock const& col, CapMemBlockOnDLS const& block = CapMemBlockOnDLS()) :
-	    base(col, block)
-	{}
-
-	explicit CapMemColumnOnDLS(enum_type const& e) : base(e) {}
-
-	CapMemColumnOnCapMemBlock toCapMemColumnOnCapMemBlock() const { return This(); }
-	CapMemBlockOnDLS toCapMemBlockOnDLS() const { return split().first; }
-};
-
 /************\
     Synram
 \************/
@@ -1893,8 +1853,6 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemBlockConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemCellOnCapMemBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemCellOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemRowOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemColumnOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CommonSynramConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::I2CIdRegisterOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::I2CINA219RoRegisterOnINA219)

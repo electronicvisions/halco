@@ -69,8 +69,6 @@ typedef ::testing::Types<
     CapMemCellOnCapMemBlock,
     CapMemColumnOnCapMemBlock,
     CapMemRowOnCapMemBlock,
-    CapMemColumnOnDLS,
-    CapMemRowOnDLS,
     CapMemBlockConfigOnDLS,
     CapMemBlockOnDLS,
     CommonNeuronConfigOnDLS,
