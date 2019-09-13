@@ -10,6 +10,8 @@ extern "C"
 #include "halco/common/geometry.th"
 #include "halco/common/mixin.h"
 
+#include "halco/hicann-dls/vx/event.h"
+
 GENPYBIND_TAG_HALCO_HICANN_DLS_VX
 GENPYBIND_MANUAL({
 	parent.attr("__variant__") = "pybind11";
@@ -200,50 +202,6 @@ struct GENPYBIND(inline_base("*")) PerfTestStatusOnFPGA
 	constexpr explicit PerfTestStatusOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
 };
 
-/***********\
-    Spike
-\***********/
-
-/**
- * The chip supports packing from 1 to 3 spikes in one instruction to be processed in one clock
- * cycle by the transport layer. In order to have unique container coordinates, these are layed out
- * as separate coordinate types of length 1.
- */
-
-struct GENPYBIND(inline_base("*")) SpikePack1ToChipOnDLS
-    : public common::detail::RantWrapper<SpikePack1ToChipOnDLS, uint_fast16_t, 0, 0>
-{
-	constexpr explicit SpikePack1ToChipOnDLS(uintmax_t const val = 0) : rant_t(val) {}
-};
-
-struct GENPYBIND(inline_base("*")) SpikePack2ToChipOnDLS
-    : public common::detail::RantWrapper<SpikePack2ToChipOnDLS, uint_fast16_t, 0, 0>
-{
-	constexpr explicit SpikePack2ToChipOnDLS(uintmax_t const val = 0) : rant_t(val) {}
-};
-
-struct GENPYBIND(inline_base("*")) SpikePack3ToChipOnDLS
-    : public common::detail::RantWrapper<SpikePack3ToChipOnDLS, uint_fast16_t, 0, 0>
-{
-	constexpr explicit SpikePack3ToChipOnDLS(uintmax_t const val = 0) : rant_t(val) {}
-};
-
-struct GENPYBIND(inline_base("*")) SpikePackFromFPGAOnDLS
-    : public halco::common::detail::RantWrapper<SpikePackFromFPGAOnDLS, uint_fast16_t, 3, 1>
-{
-	explicit SpikePackFromFPGAOnDLS(uintmax_t const value = 1) GENPYBIND(implicit_conversion) :
-	    rant_t(value)
-	{}
-};
-
-struct GENPYBIND(inline_base("*")) MADCSamplePackFromFPGAOnDLS
-    : public halco::common::detail::RantWrapper<MADCSamplePackFromFPGAOnDLS, uint_fast16_t, 3, 1>
-{
-	explicit MADCSamplePackFromFPGAOnDLS(uintmax_t const value = 1) GENPYBIND(implicit_conversion) :
-	    rant_t(value)
-	{}
-};
-
 /************\
     Systime
 \************/
@@ -413,26 +371,6 @@ struct GENPYBIND(inline_base("*PPUMixin*")) PPUMemoryWordOnDLS
 	explicit PPUMemoryWordOnDLS(enum_type const& e) : mixin_t(e) {}
 
 	PPUMemoryWordOnPPU toPPUMemoryWordOnPPU() const { return This(); }
-};
-
-/************\
-    Neuron
-\************/
-
-struct GENPYBIND(inline_base("*")) NeuronLabel
-    : public halco::common::detail::RantWrapper<NeuronLabel, uint16_t, 0x3fff /* 14bit */, 0>
-{
-	NeuronLabel(uintmax_t value = 0) GENPYBIND(implicit_conversion) : rant_t(value) {}
-};
-
-/**********\
-    SPL1
-\**********/
-
-struct GENPYBIND(inline_base("*")) SPL1Address
-    : public halco::common::detail::RantWrapper<SPL1Address, uint16_t, 3 /* 2bit */, 0>
-{
-	SPL1Address(uintmax_t value = 0) GENPYBIND(implicit_conversion) : rant_t(value) {}
 };
 
 /***************\
@@ -1673,11 +1611,6 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CrossbarInputOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CrossbarNodeOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PerfTestOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PerfTestStatusOnFPGA)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikePack1ToChipOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikePack2ToChipOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikePack3ToChipOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikePackFromFPGAOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::MADCSamplePackFromFPGAOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SystimeSyncOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SystimeSyncBaseOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCConfigOnDLS)
@@ -1693,8 +1626,6 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUStatusRegisterOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUControlRegisterOnPPU)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUControlRegisterOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronLabel)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SPL1Address)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ADPLLOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLClockOutputOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLSelfTestOnDLS)
