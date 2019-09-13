@@ -346,98 +346,73 @@ HALCO_COORDINATE_MIXIN(PPUMixin, PPUOnDLS, ppu)
 struct GENPYBIND(inline_base("*PPUMixin*")) PPUMemoryBlockOnDLS
     : public PPUMixin<PPUMemoryBlockOnDLS, PPUMemoryBlockOnPPU>
 {
-private:
-	typedef PPUMixin<PPUMemoryBlockOnDLS, PPUMemoryBlockOnPPU> base;
-
-public:
 	PPUMemoryBlockOnDLS() = default;
 
 	explicit PPUMemoryBlockOnDLS(PPUMemoryBlockOnPPU const& reg, PPUOnDLS const& ppu = PPUOnDLS()) :
-	    base(reg, ppu)
+	    mixin_t(reg, ppu)
 	{}
 
-	explicit PPUMemoryBlockOnDLS(enum_type const& e) : base(e) {}
+	explicit PPUMemoryBlockOnDLS(enum_type const& e) : mixin_t(e) {}
 
 	PPUMemoryBlockOnPPU toPPUMemoryBlockOnPPU() const { return This(); }
-	PPUOnDLS toPPUOnDLS() const { return split().first; }
 };
 
 struct GENPYBIND(inline_base("*PPUMixin*")) PPUMemoryOnDLS
     : public PPUMixin<PPUMemoryOnDLS, PPUMemoryOnPPU>
 {
-private:
-	typedef PPUMixin<PPUMemoryOnDLS, PPUMemoryOnPPU> base;
-
-public:
 	PPUMemoryOnDLS() = default;
 
 	explicit PPUMemoryOnDLS(PPUMemoryOnPPU const& reg, PPUOnDLS const& ppu = PPUOnDLS()) :
-	    base(reg, ppu)
+	    mixin_t(reg, ppu)
 	{}
 
-	explicit PPUMemoryOnDLS(enum_type const& e) : base(e) {}
+	explicit PPUMemoryOnDLS(enum_type const& e) : mixin_t(e) {}
 
 	PPUMemoryOnPPU toPPUMemoryOnPPU() const { return This(); }
-	PPUOnDLS toPPUOnDLS() const { return split().first; }
 };
 
 struct GENPYBIND(inline_base("*PPUMixin*")) PPUControlRegisterOnDLS
     : public PPUMixin<PPUControlRegisterOnDLS, PPUControlRegisterOnPPU>
 {
-private:
-	typedef PPUMixin<PPUControlRegisterOnDLS, PPUControlRegisterOnPPU> base;
-
-public:
 	PPUControlRegisterOnDLS() = default;
 
 	explicit PPUControlRegisterOnDLS(
 	    PPUControlRegisterOnPPU const& reg, PPUOnDLS const& ppu = PPUOnDLS()) :
-	    base(reg, ppu)
+	    mixin_t(reg, ppu)
 	{}
 
-	explicit PPUControlRegisterOnDLS(enum_type const& e) : base(e) {}
+	explicit PPUControlRegisterOnDLS(enum_type const& e) : mixin_t(e) {}
 
 	PPUControlRegisterOnPPU toPPUControlRegisterOnPPU() const { return This(); }
-	PPUOnDLS toPPUOnDLS() const { return split().first; }
 };
 
 struct GENPYBIND(inline_base("*PPUMixin*")) PPUStatusRegisterOnDLS
     : public PPUMixin<PPUStatusRegisterOnDLS, PPUStatusRegisterOnPPU>
 {
-private:
-	typedef PPUMixin<PPUStatusRegisterOnDLS, PPUStatusRegisterOnPPU> base;
-
-public:
 	PPUStatusRegisterOnDLS() = default;
 
 	explicit PPUStatusRegisterOnDLS(
 	    PPUStatusRegisterOnPPU const& reg, PPUOnDLS const& ppu = PPUOnDLS()) :
-	    base(reg, ppu)
+	    mixin_t(reg, ppu)
 	{}
 
-	explicit PPUStatusRegisterOnDLS(enum_type const& e) : base(e) {}
+	explicit PPUStatusRegisterOnDLS(enum_type const& e) : mixin_t(e) {}
 
 	PPUStatusRegisterOnPPU toPPUStatusRegisterOnPPU() const { return This(); }
-	PPUOnDLS toPPUOnDLS() const { return split().first; }
 };
 
 struct GENPYBIND(inline_base("*PPUMixin*")) PPUMemoryWordOnDLS
     : public PPUMixin<PPUMemoryWordOnDLS, PPUMemoryWordOnPPU>
 {
-private:
-	typedef PPUMixin<PPUMemoryWordOnDLS, PPUMemoryWordOnPPU> base;
-
-public:
 	PPUMemoryWordOnDLS() = default;
 
 	explicit PPUMemoryWordOnDLS(PPUMemoryWordOnPPU const& word, PPUOnDLS const& ppu = PPUOnDLS()) :
-	    base(word, ppu)
+	    mixin_t(word, ppu)
 	{}
 
-	explicit PPUMemoryWordOnDLS(enum_type const& e) : base(e) {}
+	explicit PPUMemoryWordOnDLS(enum_type const& e) : mixin_t(e) {}
 
 	PPUMemoryWordOnPPU toPPUMemoryWordOnPPU() const { return This(); }
-	PPUOnDLS toPPUOnDLS() const { return split().first; }
 };
 
 /************\
@@ -680,41 +655,31 @@ HALCO_COORDINATE_MIXIN(INA219Mixin, INA219OnBoard, ina219)
 struct GENPYBIND(inline_base("*INA219Mixin*")) I2CINA219RoRegisterOnBoard
     : public INA219Mixin<I2CINA219RoRegisterOnBoard, I2CINA219RoRegisterOnINA219>
 {
-private:
-	typedef INA219Mixin<I2CINA219RoRegisterOnBoard, I2CINA219RoRegisterOnINA219> base;
-
-public:
 	I2CINA219RoRegisterOnBoard() = default;
 
 	explicit I2CINA219RoRegisterOnBoard(
 	    I2CINA219RoRegisterOnINA219 const& reg, INA219OnBoard const& ina = INA219OnBoard()) :
-	    base(reg, ina)
+	    mixin_t(reg, ina)
 	{}
 
-	explicit I2CINA219RoRegisterOnBoard(enum_type const& e) : base(e) {}
+	explicit I2CINA219RoRegisterOnBoard(enum_type const& e) : mixin_t(e) {}
 
 	I2CINA219RoRegisterOnINA219 toI2CINA219RoRegisterOnINA219() const { return This(); }
-	INA219OnBoard toINA219OnBoard() const { return split().first; }
 };
 
 struct GENPYBIND(inline_base("*INA219Mixin*")) I2CINA219RwRegisterOnBoard
     : public INA219Mixin<I2CINA219RwRegisterOnBoard, I2CINA219RwRegisterOnINA219>
 {
-private:
-	typedef INA219Mixin<I2CINA219RwRegisterOnBoard, I2CINA219RwRegisterOnINA219> base;
-
-public:
 	I2CINA219RwRegisterOnBoard() = default;
 
 	explicit I2CINA219RwRegisterOnBoard(
 	    I2CINA219RwRegisterOnINA219 const& reg, INA219OnBoard const& ina = INA219OnBoard()) :
-	    base(reg, ina)
+	    mixin_t(reg, ina)
 	{}
 
-	explicit I2CINA219RwRegisterOnBoard(enum_type const& e) : base(e) {}
+	explicit I2CINA219RwRegisterOnBoard(enum_type const& e) : mixin_t(e) {}
 
 	I2CINA219RwRegisterOnINA219 toI2CINA219RwRegisterOnINA219() const { return This(); }
-	INA219OnBoard toINA219OnBoard() const { return split().first; }
 };
 
 /***********\
@@ -834,21 +799,16 @@ HALCO_COORDINATE_MIXIN(DACMixin, DACOnBoard, dac)
 struct GENPYBIND(inline_base("*DACMixin*")) DACChannelOnBoard
     : public DACMixin<DACChannelOnBoard, DACChannelOnDAC>
 {
-private:
-	typedef DACMixin<DACChannelOnBoard, DACChannelOnDAC> base;
-
-public:
 	DACChannelOnBoard() = default;
 
 	explicit DACChannelOnBoard(
 	    DACChannelOnDAC const& channel, DACOnBoard const& dac = DACOnBoard()) :
-	    base(channel, dac)
+	    mixin_t(channel, dac)
 	{}
 
-	explicit DACChannelOnBoard(enum_type const& e) : base(e) {}
+	explicit DACChannelOnBoard(enum_type const& e) : mixin_t(e) {}
 
 	DACChannelOnDAC toDACChannelOnDAC() const { return This(); }
-	DACOnBoard toDACOnBoard() const { return split().first; }
 
 	static const DACChannelOnBoard v_reset;
 	static const DACChannelOnBoard v_res_meas;
@@ -874,41 +834,31 @@ public:
 struct GENPYBIND(inline_base("*DACMixin*")) SPIDACDataRegisterOnBoard
     : public DACMixin<SPIDACDataRegisterOnBoard, SPIDACDataRegisterOnDAC>
 {
-private:
-	typedef DACMixin<SPIDACDataRegisterOnBoard, SPIDACDataRegisterOnDAC> base;
-
-public:
 	SPIDACDataRegisterOnBoard() = default;
 
 	explicit SPIDACDataRegisterOnBoard(
 	    SPIDACDataRegisterOnDAC const& channel, DACOnBoard const& dac = DACOnBoard()) :
-	    base(channel, dac)
+	    mixin_t(channel, dac)
 	{}
 
-	explicit SPIDACDataRegisterOnBoard(enum_type const& e) : base(e) {}
+	explicit SPIDACDataRegisterOnBoard(enum_type const& e) : mixin_t(e) {}
 
 	SPIDACDataRegisterOnDAC toSPIDACDataRegisterOnDAC() const { return This(); }
-	DACOnBoard toDACOnBoard() const { return split().first; }
 };
 
 struct GENPYBIND(inline_base("*DACMixin*")) SPIDACControlRegisterOnBoard
     : public DACMixin<SPIDACControlRegisterOnBoard, SPIDACControlRegisterOnDAC>
 {
-private:
-	typedef DACMixin<SPIDACControlRegisterOnBoard, SPIDACControlRegisterOnDAC> base;
-
-public:
 	SPIDACControlRegisterOnBoard() = default;
 
 	explicit SPIDACControlRegisterOnBoard(
 	    SPIDACControlRegisterOnDAC const& channel, DACOnBoard const& dac = DACOnBoard()) :
-	    base(channel, dac)
+	    mixin_t(channel, dac)
 	{}
 
-	explicit SPIDACControlRegisterOnBoard(enum_type const& e) : base(e) {}
+	explicit SPIDACControlRegisterOnBoard(enum_type const& e) : mixin_t(e) {}
 
 	SPIDACControlRegisterOnDAC toSPIDACControlRegisterOnDAC() const { return This(); }
-	DACOnBoard toDACOnBoard() const { return split().first; }
 };
 
 struct GENPYBIND(inline_base("*")) ADCOnBoard
@@ -942,21 +892,16 @@ HALCO_COORDINATE_MIXIN(NeuronMixin, NeuronBlockOnDLS, neuron)
 struct GENPYBIND(inline_base("*NeuronMixin*")) NeuronOnDLS
     : public NeuronMixin<NeuronOnDLS, NeuronOnNeuronBlock>
 {
-private:
-	typedef NeuronMixin<NeuronOnDLS, NeuronOnNeuronBlock> base;
-
-public:
 	NeuronOnDLS() = default;
 
 	explicit NeuronOnDLS(
 	    NeuronOnNeuronBlock const& neuron, NeuronBlockOnDLS const& block = NeuronBlockOnDLS()) :
-	    base(neuron, block)
+	    mixin_t(neuron, block)
 	{}
 
-	explicit NeuronOnDLS(enum_type const& e) : base(e) {}
+	explicit NeuronOnDLS(enum_type const& e) : mixin_t(e) {}
 
 	NeuronOnNeuronBlock toNeuronOnNeuronBlock() const { return This(); }
-	NeuronBlockOnDLS toNeuronBlockOnDLS() const { return split().first; }
 };
 
 struct GENPYBIND(inline_base("*")) CommonNeuronConfigOnDLS
@@ -997,21 +942,17 @@ HALCO_COORDINATE_MIXIN(SynapseDriverMixin, SynapseDriverBlockOnDLS, synapse_driv
 struct GENPYBIND(inline_base("*SynapseDriverMixin*")) SynapseDriverOnDLS
     : public SynapseDriverMixin<SynapseDriverOnDLS, SynapseDriverOnSynapseDriverBlock>
 {
-private:
-	typedef SynapseDriverMixin<SynapseDriverOnDLS, SynapseDriverOnSynapseDriverBlock> base;
-
-public:
 	SynapseDriverOnDLS() = default;
 
 	explicit SynapseDriverOnDLS(
-	    SynapseDriverOnSynapseDriverBlock const& synapse_driver, SynapseDriverBlockOnDLS const& block = SynapseDriverBlockOnDLS()) :
-	    base(synapse_driver, block)
+	    SynapseDriverOnSynapseDriverBlock const& synapse_driver,
+	    SynapseDriverBlockOnDLS const& block = SynapseDriverBlockOnDLS()) :
+	    mixin_t(synapse_driver, block)
 	{}
 
-	explicit SynapseDriverOnDLS(enum_type const& e) : base(e) {}
+	explicit SynapseDriverOnDLS(enum_type const& e) : mixin_t(e) {}
 
 	SynapseDriverOnSynapseDriverBlock toSynapseDriverOnSynapseDriverBlock() const { return This(); }
-	SynapseDriverBlockOnDLS toSynapseDriverBlockOnDLS() const { return split().first; }
 };
 
 struct GENPYBIND(inline_base("*")) CommonSynapseDriverConfigOnDLS
@@ -1068,21 +1009,17 @@ HALCO_COORDINATE_MIXIN(PADIBusMixin, PADIBusBlockOnDLS, padi_bus)
 struct GENPYBIND(inline_base("*PADIBusMixin*")) PADIBusOnDLS
     : public PADIBusMixin<PADIBusOnDLS, PADIBusOnPADIBusBlock>
 {
-private:
-	typedef PADIBusMixin<PADIBusOnDLS, PADIBusOnPADIBusBlock> base;
-
-public:
 	PADIBusOnDLS() = default;
 
 	explicit PADIBusOnDLS(
-	    PADIBusOnPADIBusBlock const& synapse_driver, PADIBusBlockOnDLS const& block = PADIBusBlockOnDLS()) :
-	    base(synapse_driver, block)
+	    PADIBusOnPADIBusBlock const& synapse_driver,
+	    PADIBusBlockOnDLS const& block = PADIBusBlockOnDLS()) :
+	    mixin_t(synapse_driver, block)
 	{}
 
-	explicit PADIBusOnDLS(enum_type const& e) : base(e) {}
+	explicit PADIBusOnDLS(enum_type const& e) : mixin_t(e) {}
 
 	PADIBusOnPADIBusBlock toPADIBusOnPADIBusBlock() const { return This(); }
-	PADIBusBlockOnDLS toPADIBusBlockOnDLS() const { return split().first; }
 	CrossbarOutputOnDLS toCrossbarOutputOnDLS() const { return CrossbarOutputOnDLS(toEnum()); }
 };
 
@@ -1335,21 +1272,16 @@ HALCO_COORDINATE_MIXIN(CapMemMixin, CapMemBlockOnDLS, capmem)
 struct GENPYBIND(inline_base("*CapMemMixin*")) CapMemCellOnDLS
     : public CapMemMixin<CapMemCellOnDLS, CapMemCellOnCapMemBlock>
 {
-private:
-	typedef CapMemMixin<CapMemCellOnDLS, CapMemCellOnCapMemBlock> base;
-
-public:
 	CapMemCellOnDLS() = default;
 
 	explicit CapMemCellOnDLS(
 	    CapMemCellOnCapMemBlock const& cell, CapMemBlockOnDLS const& block = CapMemBlockOnDLS()) :
-	    base(cell, block)
+	    mixin_t(cell, block)
 	{}
 
-	explicit CapMemCellOnDLS(enum_type const& e) : base(e) {}
+	explicit CapMemCellOnDLS(enum_type const& e) : mixin_t(e) {}
 
 	CapMemCellOnCapMemBlock toCapMemCellOnCapMemBlock() const { return This(); }
-	CapMemBlockOnDLS toCapMemBlockOnDLS() const { return split().first; }
 
 	static const CapMemCellOnDLS readout_sc_amp_v_ref;
 	static const CapMemCellOnDLS readout_pseudo_diff_v_ref;
@@ -1479,21 +1411,16 @@ HALCO_COORDINATE_MIXIN(SynramMixin, SynramOnDLS, synram)
 struct GENPYBIND(inline_base("*SynramMixin*")) SynapseQuadOnDLS
     : public SynramMixin<SynapseQuadOnDLS, SynapseQuadOnSynram>
 {
-private:
-	typedef SynramMixin<SynapseQuadOnDLS, SynapseQuadOnSynram> base;
-
-public:
 	SynapseQuadOnDLS() = default;
 
 	explicit SynapseQuadOnDLS(
 	    SynapseQuadOnSynram const& block, SynramOnDLS const& synram = SynramOnDLS()) :
-	    base(block, synram)
+	    mixin_t(block, synram)
 	{}
 
-	explicit SynapseQuadOnDLS(enum_type const& e) : base(e) {}
+	explicit SynapseQuadOnDLS(enum_type const& e) : mixin_t(e) {}
 
 	SynapseQuadOnSynram toSynapseQuadOnSynram() const { return This(); }
-	SynramOnDLS toSynramOnDLS() const { return split().first; }
 };
 
 struct GENPYBIND(inline_base("*")) SynapseOnSynapseQuad
@@ -1536,21 +1463,16 @@ struct GENPYBIND(inline_base("*")) ColumnCorrelationQuadOnSynram
 struct GENPYBIND(inline_base("*SynramMixin*")) ColumnCorrelationQuadOnDLS
     : public SynramMixin<ColumnCorrelationQuadOnDLS, ColumnCorrelationQuadOnSynram>
 {
-private:
-	typedef SynramMixin<ColumnCorrelationQuadOnDLS, ColumnCorrelationQuadOnSynram> base;
-
-public:
 	ColumnCorrelationQuadOnDLS() = default;
 
 	explicit ColumnCorrelationQuadOnDLS(
 	    ColumnCorrelationQuadOnSynram const& block, SynramOnDLS const& synram = SynramOnDLS()) :
-	    base(block, synram)
+	    mixin_t(block, synram)
 	{}
 
-	explicit ColumnCorrelationQuadOnDLS(enum_type const& e) : base(e) {}
+	explicit ColumnCorrelationQuadOnDLS(enum_type const& e) : mixin_t(e) {}
 
 	ColumnCorrelationQuadOnSynram toColumnCorrelationQuadOnSynram() const { return This(); }
-	SynramOnDLS toSynramOnDLS() const { return split().first; }
 };
 
 struct GENPYBIND(inline_base("*")) ColumnCorrelationSwitchOnColumnCorrelationQuad
@@ -1594,21 +1516,16 @@ struct GENPYBIND(inline_base("*")) ColumnCurrentQuadOnSynram
 struct GENPYBIND(inline_base("*SynramMixin*")) ColumnCurrentQuadOnDLS
     : public SynramMixin<ColumnCurrentQuadOnDLS, ColumnCurrentQuadOnSynram>
 {
-private:
-	typedef SynramMixin<ColumnCurrentQuadOnDLS, ColumnCurrentQuadOnSynram> base;
-
-public:
 	ColumnCurrentQuadOnDLS() = default;
 
 	explicit ColumnCurrentQuadOnDLS(
 	    ColumnCurrentQuadOnSynram const& block, SynramOnDLS const& synram = SynramOnDLS()) :
-	    base(block, synram)
+	    mixin_t(block, synram)
 	{}
 
-	explicit ColumnCurrentQuadOnDLS(enum_type const& e) : base(e) {}
+	explicit ColumnCurrentQuadOnDLS(enum_type const& e) : mixin_t(e) {}
 
 	ColumnCurrentQuadOnSynram toColumnCurrentQuadOnSynram() const { return This(); }
-	SynramOnDLS toSynramOnDLS() const { return split().first; }
 };
 
 struct GENPYBIND(inline_base("*")) ColumnCurrentSwitchOnColumnCurrentQuad
@@ -1649,69 +1566,51 @@ HALCO_COORDINATE_MIXIN(CADCReadoutTypeMixin, CADCReadoutType, cadc_readout_type)
 struct GENPYBIND(inline_base("*CADCChannelTypeMixin*")) CADCSampleQuadUnspecifiedReadoutOnSynram
     : public CADCChannelTypeMixin<CADCSampleQuadUnspecifiedReadoutOnSynram, SynapseQuadOnSynram>
 {
-private:
-	typedef CADCChannelTypeMixin<CADCSampleQuadUnspecifiedReadoutOnSynram, SynapseQuadOnSynram>
-	    base;
-
-public:
 	CADCSampleQuadUnspecifiedReadoutOnSynram() = default;
 
 	explicit CADCSampleQuadUnspecifiedReadoutOnSynram(
 	    SynapseQuadOnSynram const& quad, CADCChannelType const& cadc_channel_type) :
-	    base(quad, cadc_channel_type)
+	    mixin_t(quad, cadc_channel_type)
 	{}
 
-	explicit CADCSampleQuadUnspecifiedReadoutOnSynram(enum_type const& e) : base(e) {}
+	explicit CADCSampleQuadUnspecifiedReadoutOnSynram(enum_type const& e) : mixin_t(e) {}
 
 	SynapseQuadOnSynram toSynapseQuadOnSynram() const { return This(); }
-	CADCChannelType toCADCChannelType() const { return split().first; }
 };
 
 struct GENPYBIND(inline_base("*CADCReadoutTypeMixin*")) CADCSampleQuadOnSynram
     : public CADCReadoutTypeMixin<CADCSampleQuadOnSynram, CADCSampleQuadUnspecifiedReadoutOnSynram>
 {
-private:
-	typedef CADCReadoutTypeMixin<CADCSampleQuadOnSynram, CADCSampleQuadUnspecifiedReadoutOnSynram>
-	    base;
-
-public:
 	CADCSampleQuadOnSynram() = default;
 
 	explicit CADCSampleQuadOnSynram(
 	    SynapseQuadOnSynram const& quad,
 	    CADCChannelType const& cadc_channel_type,
 	    CADCReadoutType const& cadc_readout_type = CADCReadoutType()) :
-	    base(CADCSampleQuadUnspecifiedReadoutOnSynram(quad, cadc_channel_type), cadc_readout_type)
+	    mixin_t(
+	        CADCSampleQuadUnspecifiedReadoutOnSynram(quad, cadc_channel_type), cadc_readout_type)
 	{}
 
-	explicit CADCSampleQuadOnSynram(enum_type const& e) : base(e) {}
+	explicit CADCSampleQuadOnSynram(enum_type const& e) : mixin_t(e) {}
 
 	CADCSampleQuadUnspecifiedReadoutOnSynram toCADCSampleQuadUnspecifiedReadoutOnSynram() const
 	{
 		return This();
 	}
-	SynapseQuadOnSynram toSynapseQuadOnSynram() const { return This().toSynapseQuadOnSynram(); }
-	CADCReadoutType toCADCReadoutType() const { return split().first; }
-	CADCChannelType toCADCChannelType() const { return This().toCADCChannelType(); }
 };
 
 struct GENPYBIND(inline_base("*SynramMixin*")) CADCSampleQuadOnDLS
     : public SynramMixin<CADCSampleQuadOnDLS, CADCSampleQuadOnSynram>
 {
-private:
-	typedef SynramMixin<CADCSampleQuadOnDLS, CADCSampleQuadOnSynram> base;
-
-public:
 	CADCSampleQuadOnDLS() = default;
 
 	explicit CADCSampleQuadOnDLS(CADCSampleQuadOnSynram const& block, SynramOnDLS const& synram) :
-	    base(block, synram)
+	    mixin_t(block, synram)
 	{}
 
-	explicit CADCSampleQuadOnDLS(enum_type const& e) : base(e) {}
+	explicit CADCSampleQuadOnDLS(enum_type const& e) : mixin_t(e) {}
 
 	CADCSampleQuadOnSynram toCADCSampleQuadOnSynram() const { return This(); }
-	SynramOnDLS toSynramOnDLS() const { return split().first; }
 };
 
 struct GENPYBIND(inline_base("*")) CADCChannelColumnOnSynram
@@ -1723,41 +1622,31 @@ struct GENPYBIND(inline_base("*")) CADCChannelColumnOnSynram
 struct GENPYBIND(inline_base("*CADCChannelTypeMixin*")) CADCChannelConfigOnSynram
     : public CADCChannelTypeMixin<CADCChannelConfigOnSynram, CADCChannelColumnOnSynram>
 {
-private:
-	typedef CADCChannelTypeMixin<CADCChannelConfigOnSynram, CADCChannelColumnOnSynram> base;
-
-public:
 	CADCChannelConfigOnSynram() = default;
 
 	explicit CADCChannelConfigOnSynram(
 	    CADCChannelColumnOnSynram const& quad, CADCChannelType const& cadc_channel_type) :
-	    base(quad, cadc_channel_type)
+	    mixin_t(quad, cadc_channel_type)
 	{}
 
-	explicit CADCChannelConfigOnSynram(enum_type const& e) : base(e) {}
+	explicit CADCChannelConfigOnSynram(enum_type const& e) : mixin_t(e) {}
 
 	CADCChannelColumnOnSynram toCADCChannelColumnOnSynram() const { return This(); }
-	CADCChannelType toCADCChannelType() const { return split().first; }
 };
 
 struct GENPYBIND(inline_base("*SynramMixin*")) CADCChannelConfigOnDLS
     : public SynramMixin<CADCChannelConfigOnDLS, CADCChannelConfigOnSynram>
 {
-private:
-	typedef SynramMixin<CADCChannelConfigOnDLS, CADCChannelConfigOnSynram> base;
-
-public:
 	CADCChannelConfigOnDLS() = default;
 
 	explicit CADCChannelConfigOnDLS(
 	    CADCChannelConfigOnSynram const& block, SynramOnDLS const& synram = SynramOnDLS()) :
-	    base(block, synram)
+	    mixin_t(block, synram)
 	{}
 
-	explicit CADCChannelConfigOnDLS(enum_type const& e) : base(e) {}
+	explicit CADCChannelConfigOnDLS(enum_type const& e) : mixin_t(e) {}
 
 	CADCChannelConfigOnSynram toCADCChannelConfigOnSynram() const { return This(); }
-	SynramOnDLS toSynramOnDLS() const { return split().first; }
 };
 
 struct GENPYBIND(inline_base("*")) CADCSampleOnCADCSampleQuad

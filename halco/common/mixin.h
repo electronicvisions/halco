@@ -24,6 +24,7 @@
 	public:                                                                    \
 		typedef cls mixed_in_type;                                             \
 		typedef T local_type;                                                  \
+		typedef mixin mixin_t;                                                 \
 		typedef HALCO_COORDINATE_MIXIN__ENUM_TYPE(cls, T) enum_type            \
 		     GENPYBIND(opaque(false));                                         \
 		HALCO_COORDINATE_MIXIN__SIZE_MEMBERS                                   \
