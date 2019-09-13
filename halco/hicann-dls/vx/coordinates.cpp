@@ -74,16 +74,8 @@ CrossbarNodeOnDLS::enum_type CrossbarNodeOnDLS::to_enum(x_type const& x, y_type 
 	return enum_type(en);
 }
 
-PPUOnDLS const PPUOnDLS::top{0};
-PPUOnDLS const PPUOnDLS::bottom{1};
-
-PPUMemoryBlockOnPPU const PPUMemoryBlockOnPPU::mailbox(
-    PPUMemoryWordOnPPU(3072), PPUMemoryWordOnPPU(4095));
-
-PPUMemoryWordOnPPU const PPUMemoryWordOnPPU::return_code(3071);
-
-CADCConfigOnDLS const CADCConfigOnDLS::top{PPUOnDLS::top.toEnum()};
-CADCConfigOnDLS const CADCConfigOnDLS::bottom{PPUOnDLS::bottom.toEnum()};
+CADCConfigOnDLS const CADCConfigOnDLS::top{enum_vertical_top};
+CADCConfigOnDLS const CADCConfigOnDLS::bottom{enum_vertical_bottom};
 
 PPUOnDLS CADCConfigOnDLS::toPPUOnDLS() const
 {
@@ -280,30 +272,30 @@ CommonSynapseDriverConfigOnDLS SynapseDriverBlockOnDLS::toCommonSynapseDriverCon
 	return CommonSynapseDriverConfigOnDLS(toEnum());
 }
 
-CommonSynramConfigOnDLS const CommonSynramConfigOnDLS::top{PPUOnDLS::top.toEnum()};
-CommonSynramConfigOnDLS const CommonSynramConfigOnDLS::bottom{PPUOnDLS::bottom.toEnum()};
+CommonSynramConfigOnDLS const CommonSynramConfigOnDLS::top{enum_vertical_top};
+CommonSynramConfigOnDLS const CommonSynramConfigOnDLS::bottom{enum_vertical_bottom};
 
-SynramOnDLS const SynramOnDLS::top{PPUOnDLS::top.toEnum()};
-SynramOnDLS const SynramOnDLS::bottom{PPUOnDLS::bottom.toEnum()};
+SynramOnDLS const SynramOnDLS::top{enum_vertical_top};
+SynramOnDLS const SynramOnDLS::bottom{enum_vertical_bottom};
 
-SynapseDriverBlockOnDLS const SynapseDriverBlockOnDLS::top{PPUOnDLS::top.toEnum()};
-SynapseDriverBlockOnDLS const SynapseDriverBlockOnDLS::bottom{PPUOnDLS::bottom.toEnum()};
+SynapseDriverBlockOnDLS const SynapseDriverBlockOnDLS::top{enum_vertical_top};
+SynapseDriverBlockOnDLS const SynapseDriverBlockOnDLS::bottom{enum_vertical_bottom};
 
-CommonSynapseDriverConfigOnDLS const CommonSynapseDriverConfigOnDLS::top{PPUOnDLS::top.toEnum()};
+CommonSynapseDriverConfigOnDLS const CommonSynapseDriverConfigOnDLS::top{enum_vertical_top};
 CommonSynapseDriverConfigOnDLS const CommonSynapseDriverConfigOnDLS::bottom{
-    PPUOnDLS::bottom.toEnum()};
+    enum_vertical_bottom};
 
-PADIBusBlockOnDLS const PADIBusBlockOnDLS::bottom{PPUOnDLS::bottom.toEnum()};
-PADIBusBlockOnDLS const PADIBusBlockOnDLS::top{PPUOnDLS::top.toEnum()};
+PADIBusBlockOnDLS const PADIBusBlockOnDLS::bottom{enum_vertical_bottom};
+PADIBusBlockOnDLS const PADIBusBlockOnDLS::top{enum_vertical_top};
 
-PADIEventOnDLS const PADIEventOnDLS::bottom{PPUOnDLS::bottom.toEnum()};
-PADIEventOnDLS const PADIEventOnDLS::top{PPUOnDLS::top.toEnum()};
+PADIEventOnDLS const PADIEventOnDLS::bottom{enum_vertical_bottom};
+PADIEventOnDLS const PADIEventOnDLS::top{enum_vertical_top};
 
-CommonPADIBusConfigOnDLS const CommonPADIBusConfigOnDLS::bottom{PPUOnDLS::bottom.toEnum()};
-CommonPADIBusConfigOnDLS const CommonPADIBusConfigOnDLS::top{PPUOnDLS::top.toEnum()};
+CommonPADIBusConfigOnDLS const CommonPADIBusConfigOnDLS::bottom{enum_vertical_bottom};
+CommonPADIBusConfigOnDLS const CommonPADIBusConfigOnDLS::top{enum_vertical_top};
 
-CommonSTPConfigOnDLS const CommonSTPConfigOnDLS::bottom{PPUOnDLS::bottom.toEnum()};
-CommonSTPConfigOnDLS const CommonSTPConfigOnDLS::top{PPUOnDLS::top.toEnum()};
+CommonSTPConfigOnDLS const CommonSTPConfigOnDLS::bottom{enum_vertical_bottom};
+CommonSTPConfigOnDLS const CommonSTPConfigOnDLS::top{enum_vertical_top};
 
 SynramOnDLS PADIBusBlockOnDLS::toSynramOnDLS() const
 {
