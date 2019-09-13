@@ -11,6 +11,7 @@ extern "C"
 #include "halco/common/mixin.h"
 
 #include "halco/hicann-dls/vx/event.h"
+#include "halco/hicann-dls/vx/jtag.h"
 
 GENPYBIND_TAG_HALCO_HICANN_DLS_VX
 GENPYBIND_MANUAL({
@@ -391,44 +392,6 @@ struct GENPYBIND(inline_base("*")) TimerOnDLS
     : public common::detail::RantWrapper<TimerOnDLS, uint_fast16_t, 0, 0>
 {
 	constexpr explicit TimerOnDLS(uintmax_t const val = 0) : rant_t(val) {}
-};
-
-/***********\
-    JTAG
-\***********/
-
-struct GENPYBIND(inline_base("*")) ResetJTAGTapOnDLS
-    : public common::detail::RantWrapper<ResetJTAGTapOnDLS, uint_fast16_t, 0, 0>
-{
-	constexpr explicit ResetJTAGTapOnDLS(uintmax_t const val = 0) : rant_t(val) {}
-};
-
-struct GENPYBIND(inline_base("*")) JTAGClockScalerOnDLS
-    : public common::detail::RantWrapper<JTAGClockScalerOnDLS, uint_fast16_t, 0, 0>
-{
-	constexpr explicit JTAGClockScalerOnDLS(uintmax_t const val = 0) : rant_t(val) {}
-};
-
-struct GENPYBIND(inline_base("*")) JTAGIdCodeOnDLS
-    : public common::detail::RantWrapper<JTAGIdCodeOnDLS, uint_fast16_t, 0, 0>
-{
-	constexpr explicit JTAGIdCodeOnDLS(uintmax_t const val = 0) : rant_t(val) {}
-};
-
-struct GENPYBIND(inline_base("*")) JTAGPLLRegisterOnDLS
-    : public common::detail::RantWrapper<JTAGPLLRegisterOnDLS, uint_fast16_t, 7, 0>
-{
-	constexpr explicit JTAGPLLRegisterOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
-	    rant_t(val)
-	{}
-};
-
-struct GENPYBIND(inline_base("*")) JTAGPhyRegisterOnDLS
-    : public common::detail::RantWrapper<JTAGPhyRegisterOnDLS, uint_fast16_t, 7, 0>
-{
-	constexpr explicit JTAGPhyRegisterOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
-	    rant_t(val)
-	{}
 };
 
 /**********\
@@ -1632,11 +1595,6 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLSelfTestOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLSelfTestStatusOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLClockOutputBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ResetChipOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ResetJTAGTapOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::JTAGClockScalerOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::JTAGIdCodeOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::JTAGPLLRegisterOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::JTAGPhyRegisterOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PhyConfigFPGAOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PhyConfigChipOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PhyStatusOnFPGA)
