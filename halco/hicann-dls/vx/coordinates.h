@@ -26,6 +26,7 @@ extern "C"
 #include "halco/hicann-dls/vx/routing_crossbar.h"
 #include "halco/hicann-dls/vx/spi.h"
 #include "halco/hicann-dls/vx/synapse_driver.h"
+#include "halco/hicann-dls/vx/synram.h"
 #include "halco/hicann-dls/vx/timing.h"
 #include "halco/hicann-dls/vx/xboard.h"
 
@@ -61,7 +62,6 @@ struct GENPYBIND(inline_base("*")) CADCConfigOnDLS
    PADIBus
 \*****************/
 
-struct SynramOnDLS;
 struct PADIEventOnDLS;
 struct CommonPADIBusConfigOnDLS;
 struct CommonSTPConfigOnDLS;
@@ -146,27 +146,6 @@ struct GENPYBIND(inline_base("*")) PADIEventOnDLS
 	static const PADIEventOnDLS bottom;
 };
 
-/************\
-    Synram
-\************/
-
-struct SynramOnDLS;
-
-struct GENPYBIND(inline_base("*")) CommonSynramConfigOnDLS
-    : public common::detail::RantWrapper<CommonSynramConfigOnDLS, uint_fast16_t, 1, 0>
-{
-	constexpr explicit CommonSynramConfigOnDLS(uintmax_t const val = 0)
-	    GENPYBIND(implicit_conversion) :
-	    rant_t(val)
-	{}
-
-	PPUOnDLS toPPUOnDLS() const { return PPUOnDLS(toEnum()); }
-	SynramOnDLS toSynramOnDLS() const;
-
-	static const CommonSynramConfigOnDLS top;
-	static const CommonSynramConfigOnDLS bottom;
-};
-
 /***********\
    Synapse
 \***********/
@@ -211,25 +190,6 @@ struct GENPYBIND(inline_base("*")) SynapseQuadOnSynram
 	SynapseQuadColumnOnDLS toSynapseQuadColumnOnDLS() const { return x(); }
 	SynapseRowOnSynram toSynapseRowOnSynram() const { return y(); }
 };
-
-struct GENPYBIND(inline_base("*")) SynramOnDLS
-    : public common::detail::RantWrapper<SynramOnDLS, uint_fast16_t, PPUOnDLS::max, PPUOnDLS::min>
-{
-	constexpr explicit SynramOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
-	    rant_t(val)
-	{}
-
-	CommonSynramConfigOnDLS toCommonSynramConfigOnDLS() const
-	{
-		return CommonSynramConfigOnDLS(toEnum());
-	}
-	PPUOnDLS toPPUOnDLS() const { return PPUOnDLS(toEnum()); }
-
-	static const SynramOnDLS top;
-	static const SynramOnDLS bottom;
-};
-
-HALCO_COORDINATE_MIXIN(SynramMixin, SynramOnDLS, synram)
 
 struct GENPYBIND(inline_base("*SynramMixin*")) SynapseQuadOnDLS
     : public SynramMixin<SynapseQuadOnDLS, SynapseQuadOnSynram>
@@ -486,11 +446,9 @@ struct GENPYBIND(inline_base("*")) CADCSampleOnCADCSampleQuad
 namespace std {
 
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCConfigOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CommonSynramConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseQuadColumnOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseRowOnSynram)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseQuadOnSynram)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynramOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseQuadOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseOnSynapseQuad)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PADIBusOnDLS)

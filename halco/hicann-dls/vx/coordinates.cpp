@@ -14,21 +14,10 @@ PPUOnDLS CADCConfigOnDLS::toPPUOnDLS() const
 	return PPUOnDLS(toEnum());
 }
 
-SynramOnDLS CommonSynramConfigOnDLS::toSynramOnDLS() const
-{
-	return SynramOnDLS(toEnum());
-}
-
 CommonSynapseDriverConfigOnDLS SynapseDriverBlockOnDLS::toCommonSynapseDriverConfigOnDLS() const
 {
 	return CommonSynapseDriverConfigOnDLS(toEnum());
 }
-
-CommonSynramConfigOnDLS const CommonSynramConfigOnDLS::top{enum_vertical_top};
-CommonSynramConfigOnDLS const CommonSynramConfigOnDLS::bottom{enum_vertical_bottom};
-
-SynramOnDLS const SynramOnDLS::top{enum_vertical_top};
-SynramOnDLS const SynramOnDLS::bottom{enum_vertical_bottom};
 
 SynapseDriverBlockOnDLS const SynapseDriverBlockOnDLS::top{enum_vertical_top};
 SynapseDriverBlockOnDLS const SynapseDriverBlockOnDLS::bottom{enum_vertical_bottom};
