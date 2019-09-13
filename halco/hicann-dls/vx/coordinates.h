@@ -12,6 +12,7 @@ extern "C"
 
 #include "halco/hicann-dls/vx/event.h"
 #include "halco/hicann-dls/vx/jtag.h"
+#include "halco/hicann-dls/vx/highspeed_link.h"
 
 GENPYBIND_TAG_HALCO_HICANN_DLS_VX
 GENPYBIND_MANUAL({
@@ -51,16 +52,6 @@ struct GENPYBIND(inline_base("*")) NullPayloadReadableOnFPGA
     : public common::detail::RantWrapper<NullPayloadReadableOnFPGA, uint_fast16_t, 0, 0>
 {
 	constexpr explicit NullPayloadReadableOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
-};
-
-/*************************\
-   HicannARQStatus
-\*************************/
-
-struct GENPYBIND(inline_base("*")) HicannARQStatusOnFPGA
-    : public common::detail::RantWrapper<HicannARQStatusOnFPGA, uint_fast16_t, 0, 0>
-{
-	constexpr explicit HicannARQStatusOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
 };
 
 /*************************\
@@ -185,22 +176,6 @@ struct GENPYBIND(inline_base("*")) CrossbarNodeOnDLS
 	static x_type to_x(enum_type const& e);
 	static y_type to_y(enum_type const& e);
 	static enum_type to_enum(x_type const& x, y_type const& y);
-};
-
-/************\
-   PerfTest
-\************/
-
-struct GENPYBIND(inline_base("*")) PerfTestOnFPGA
-    : public common::detail::RantWrapper<PerfTestOnFPGA, uint_fast16_t, 0, 0>
-{
-	constexpr explicit PerfTestOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
-};
-
-struct GENPYBIND(inline_base("*")) PerfTestStatusOnFPGA
-    : public common::detail::RantWrapper<PerfTestStatusOnFPGA, uint_fast16_t, 0, 0>
-{
-	constexpr explicit PerfTestStatusOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
 };
 
 /************\
@@ -392,48 +367,6 @@ struct GENPYBIND(inline_base("*")) TimerOnDLS
     : public common::detail::RantWrapper<TimerOnDLS, uint_fast16_t, 0, 0>
 {
 	constexpr explicit TimerOnDLS(uintmax_t const val = 0) : rant_t(val) {}
-};
-
-/**********\
-    Phy
-\**********/
-
-struct GENPYBIND(inline_base("*")) PhyConfigFPGAOnDLS
-    : public common::detail::RantWrapper<PhyConfigFPGAOnDLS, uint_fast16_t, 7, 0>
-{
-	constexpr explicit PhyConfigFPGAOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
-	    rant_t(val)
-	{}
-};
-
-struct GENPYBIND(inline_base("*")) PhyConfigChipOnDLS
-    : public common::detail::RantWrapper<PhyConfigChipOnDLS, uint_fast16_t, 7, 0>
-{
-	constexpr explicit PhyConfigChipOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
-	    rant_t(val)
-	{}
-
-	JTAGPhyRegisterOnDLS toJTAGPhyRegisterOnDLS() const { return JTAGPhyRegisterOnDLS(toEnum()); }
-};
-
-struct GENPYBIND(inline_base("*")) PhyStatusOnFPGA
-    : public common::detail::RantWrapper<PhyStatusOnFPGA, uint_fast16_t, 7, 0>
-{
-	constexpr explicit PhyStatusOnFPGA(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
-	    rant_t(val)
-	{}
-};
-
-struct GENPYBIND(inline_base("*")) CommonPhyConfigFPGAOnDLS
-    : public common::detail::RantWrapper<CommonPhyConfigFPGAOnDLS, uint_fast16_t, 0, 0>
-{
-	constexpr explicit CommonPhyConfigFPGAOnDLS(uintmax_t const val = 0) : rant_t(val) {}
-};
-
-struct GENPYBIND(inline_base("*")) CommonPhyConfigChipOnDLS
-    : public common::detail::RantWrapper<CommonPhyConfigChipOnDLS, uint_fast16_t, 0, 0>
-{
-	constexpr explicit CommonPhyConfigChipOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
 
 /**********\
@@ -1565,15 +1498,12 @@ namespace std {
 
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::FPGADeviceDNAOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NullPayloadReadableOnFPGA)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::HicannARQStatusOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::BackgroundSpikeSourceOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CrossbarOutputConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CrossbarOutputOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CrossbarL2OutputOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CrossbarInputOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CrossbarNodeOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PerfTestOnFPGA)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PerfTestStatusOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SystimeSyncOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SystimeSyncBaseOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCConfigOnDLS)
@@ -1595,11 +1525,6 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLSelfTestOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLSelfTestStatusOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLClockOutputBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ResetChipOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PhyConfigFPGAOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PhyConfigChipOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PhyStatusOnFPGA)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CommonPhyConfigFPGAOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CommonPhyConfigChipOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::TimerOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::OmnibusChipOverJTAGAddress)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::OmnibusChipAddress)
