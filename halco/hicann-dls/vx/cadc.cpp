@@ -1,10 +1,8 @@
-#include "halco/hicann-dls/vx/coordinates.h"
+#include "halco/hicann-dls/vx/cadc.h"
 
-namespace halco {
-namespace hicann_dls {
-namespace vx {
+#include "halco/hicann-dls/vx/ppu.h"
 
-using namespace halco::common;
+namespace halco::hicann_dls::vx {
 
 CADCConfigOnDLS const CADCConfigOnDLS::top{enum_vertical_top};
 CADCConfigOnDLS const CADCConfigOnDLS::bottom{enum_vertical_bottom};
@@ -20,6 +18,4 @@ CADCChannelType const CADCChannelType::acausal{1};
 CADCReadoutType const CADCReadoutType::trigger_read{0};
 CADCReadoutType const CADCReadoutType::buffered{1};
 
-} // namespace vx
-} // namespace hicann_dls
-} // namespace halco
+} // namespace halco::hicann_dls::vx
