@@ -19,6 +19,7 @@ extern "C"
 #include "halco/hicann-dls/vx/omnibus.h"
 #include "halco/hicann-dls/vx/pll.h"
 #include "halco/hicann-dls/vx/ppu.h"
+#include "halco/hicann-dls/vx/reset.h"
 #include "halco/hicann-dls/vx/routing_crossbar.h"
 #include "halco/hicann-dls/vx/spi.h"
 #include "halco/hicann-dls/vx/timing.h"
@@ -78,16 +79,6 @@ struct GENPYBIND(inline_base("*")) CADCConfigOnDLS
 
 	static const CADCConfigOnDLS top;
 	static const CADCConfigOnDLS bottom;
-};
-
-/***************\
-    ResetChip
-\***************/
-
-struct GENPYBIND(inline_base("*")) ResetChipOnDLS
-    : public common::detail::RantWrapper<ResetChipOnDLS, uint_fast16_t, 0, 0>
-{
-	constexpr explicit ResetChipOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
 
 /**********\
@@ -888,7 +879,6 @@ namespace std {
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::FPGADeviceDNAOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NullPayloadReadableOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCConfigOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ResetChipOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronOnNeuronBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronOnDLS)
