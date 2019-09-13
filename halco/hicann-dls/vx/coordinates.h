@@ -10,6 +10,7 @@ extern "C"
 #include "halco/common/geometry.th"
 #include "halco/common/mixin.h"
 
+#include "halco/hicann-dls/vx/background.h"
 #include "halco/hicann-dls/vx/event.h"
 #include "halco/hicann-dls/vx/highspeed_link.h"
 #include "halco/hicann-dls/vx/jtag.h"
@@ -57,24 +58,8 @@ struct GENPYBIND(inline_base("*")) NullPayloadReadableOnFPGA
 	constexpr explicit NullPayloadReadableOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
 };
 
-/*************************\
-   BackgroundSpikeSource
-\*************************/
-
 struct CrossbarInputOnDLS;
 struct CrossbarL2OutputOnDLS;
-
-struct GENPYBIND(inline_base("*")) BackgroundSpikeSourceOnDLS
-    : public common::detail::RantWrapper<BackgroundSpikeSourceOnDLS, uint_fast16_t, 7, 0>
-{
-	constexpr explicit BackgroundSpikeSourceOnDLS(uintmax_t const val = 0)
-	    GENPYBIND(implicit_conversion) :
-	    rant_t(val)
-	{}
-
-	CrossbarInputOnDLS toCrossbarInputOnDLS() const;
-	CrossbarL2OutputOnDLS toCrossbarL2OutputOnDLS() const;
-};
 
 /**********\
     CADC
@@ -1158,7 +1143,6 @@ namespace std {
 
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::FPGADeviceDNAOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NullPayloadReadableOnFPGA)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::BackgroundSpikeSourceOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ResetChipOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ShiftRegisterOnBoard)

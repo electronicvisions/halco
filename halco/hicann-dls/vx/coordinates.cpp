@@ -6,17 +6,6 @@ namespace vx {
 
 using namespace halco::common;
 
-CrossbarInputOnDLS BackgroundSpikeSourceOnDLS::toCrossbarInputOnDLS() const
-{
-	// FIXME: Get constant from l2 and neuron input sizes once they exist
-	return CrossbarInputOnDLS(toEnum() + 12);
-}
-
-CrossbarL2OutputOnDLS BackgroundSpikeSourceOnDLS::toCrossbarL2OutputOnDLS() const
-{
-	return CrossbarL2OutputOnDLS(toEnum() % CrossbarL2OutputOnDLS::size);
-}
-
 CADCConfigOnDLS const CADCConfigOnDLS::top{enum_vertical_top};
 CADCConfigOnDLS const CADCConfigOnDLS::bottom{enum_vertical_bottom};
 
