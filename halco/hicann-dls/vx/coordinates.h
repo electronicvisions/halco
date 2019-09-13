@@ -13,6 +13,7 @@ extern "C"
 #include "halco/hicann-dls/vx/event.h"
 #include "halco/hicann-dls/vx/jtag.h"
 #include "halco/hicann-dls/vx/highspeed_link.h"
+#include "halco/hicann-dls/vx/omnibus.h"
 
 GENPYBIND_TAG_HALCO_HICANN_DLS_VX
 GENPYBIND_MANUAL({
@@ -410,35 +411,6 @@ struct GENPYBIND(inline_base("*")) PLLClockOutputOnDLS
 	static const PLLClockOutputOnDLS phy_ref_clk;
 	static const PLLClockOutputOnDLS ppu_clk;
 	static const PLLClockOutputOnDLS madc_clk;
-};
-
-/**************\
-    Omnibus
-\**************/
-
-struct GENPYBIND(inline_base("*")) OmnibusChipOverJTAGAddress
-    : public common::detail::BaseType<OmnibusChipOverJTAGAddress, uint32_t>
-{
-	constexpr explicit OmnibusChipOverJTAGAddress(uintmax_t const val = 0)
-	    GENPYBIND(implicit_conversion) :
-	    base_t(val)
-	{}
-};
-
-struct GENPYBIND(inline_base("*")) OmnibusChipAddress
-    : public common::detail::BaseType<OmnibusChipAddress, uint32_t>
-{
-	constexpr explicit OmnibusChipAddress(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
-	    base_t(val)
-	{}
-};
-
-struct GENPYBIND(inline_base("*")) OmnibusFPGAAddress
-    : public common::detail::BaseType<OmnibusFPGAAddress, uint32_t>
-{
-	constexpr explicit OmnibusFPGAAddress(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
-	    base_t(val)
-	{}
 };
 
 /***********\
@@ -1526,9 +1498,6 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLSelfTestStatusOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PLLClockOutputBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ResetChipOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::TimerOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::OmnibusChipOverJTAGAddress)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::OmnibusChipAddress)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::OmnibusFPGAAddress)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ShiftRegisterOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SPIDACDataRegisterOnDAC)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SPIDACControlRegisterOnDAC)
