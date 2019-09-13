@@ -94,8 +94,6 @@ struct GENPYBIND(inline_base("*")) INA219OnBoard
 	static const INA219OnBoard vdd12_pll;
 };
 
-HALCO_COORDINATE_MIXIN(INA219Mixin, INA219OnBoard, ina219)
-
 } // namespace halco::hicann_dls::vx
 
 namespace std {

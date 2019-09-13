@@ -14,14 +14,6 @@ PPUOnDLS CADCConfigOnDLS::toPPUOnDLS() const
 	return PPUOnDLS(toEnum());
 }
 
-I2CINA219RoRegisterOnINA219 const I2CINA219RoRegisterOnINA219::shunt{0};
-I2CINA219RoRegisterOnINA219 const I2CINA219RoRegisterOnINA219::bus{1};
-I2CINA219RoRegisterOnINA219 const I2CINA219RoRegisterOnINA219::power{2};
-I2CINA219RoRegisterOnINA219 const I2CINA219RoRegisterOnINA219::current{3};
-
-I2CINA219RwRegisterOnINA219 const I2CINA219RwRegisterOnINA219::config{0};
-I2CINA219RwRegisterOnINA219 const I2CINA219RwRegisterOnINA219::calibration{1};
-
 bool CapMemCellOnCapMemBlock::isShared() const
 {
 	return x().isShared();
