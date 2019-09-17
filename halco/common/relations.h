@@ -31,7 +31,7 @@ extern SideVertical const bottom GENPYBIND(visible);
 class GENPYBIND(inline_base("*")) Unique : public detail::RantWrapper<Unique, uint_fast16_t, 0, 0>
 {
 public:
-	PYPP_CONSTEXPR explicit Unique() : rant_t(0) {}
+	PYPP_CONSTEXPR explicit Unique(uintmax_t const value = 0) : rant_t(value) {}
 }; // Unique
 
 class GENPYBIND(inline_base("*")) Orientation
@@ -45,15 +45,14 @@ class GENPYBIND(inline_base("*")) Direction
 	: public detail::RantWrapper<Direction, uint_fast16_t, 3, 0>
 {
 public:
-	PYPP_CONSTEXPR Direction() : rant_t(0u) {}
 	static Direction north() GENPYBIND(hidden);
 	static Direction east() GENPYBIND(hidden);
 	static Direction south() GENPYBIND(hidden);
 	static Direction west() GENPYBIND(hidden);
 
 	Orientation toOrientation() const;
-private:
-	PYPP_CONSTEXPR explicit Direction(uintmax_t val) : rant_t(val) {}
+
+	PYPP_CONSTEXPR explicit Direction(uintmax_t const val = 0) : rant_t(val) {}
 }; // Direction
 
 class GENPYBIND(inline_base("*")) Parity : public detail::RantWrapper<Parity, uint_fast16_t, 1, 0>
@@ -76,8 +75,6 @@ extern Unique const unique GENPYBIND(visible);
 
 namespace detail {
 
-// Overload for `from_number` trait, because `Direction` ctor is private.
-void from_number(Direction& direction, Direction::value_type const& value);
 std::ostream& _write(std::ostream& os, const XRanged<1, 0>& v);
 std::ostream& _write(std::ostream& os, const YRanged<1, 0>& v);
 std::ostream& _write(std::ostream& os, Direction const& direction);

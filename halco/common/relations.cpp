@@ -51,10 +51,6 @@ Parity Parity::from_number(uintmax_t val) {
 
 namespace detail {
 
-void from_number(Direction& direction, Direction::value_type const& value) {
-	direction = (value == 3) ? west : (value == 2) ? south : (value == 1) ? east : north;
-}
-
 std::ostream& _write(std::ostream& os, const XRanged<1, 0>& v) {
 	return os << (v.value() ? "right" : "left");
 }

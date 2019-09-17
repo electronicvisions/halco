@@ -33,6 +33,25 @@ namespace detail {
 		return lhs.value() OP rhs.value(); \
 	}
 
+#define DETAIL_BINOP(NAME, OP)\
+	friend NAME operator OP (NAME const& lhs, NAME const& rhs) \
+	{ \
+		return NAME(lhs.mValue OP rhs.mValue); \
+	}
+
+#define DETAIL_ASSIGNOP(NAME, OP)\
+	friend NAME& operator OP (NAME& lhs, NAME const& rhs) \
+	{ \
+		lhs.mValue OP rhs.mValue; \
+		return lhs;\
+	}
+
+#define DETAIL_UNOP(NAME, OP)\
+	friend NAME operator OP (NAME const& lhs) \
+	{ \
+		return NAME(OP lhs.mValue); \
+	}
+
 #define DETAIL_OSTREAM(DERIVED_NAME)                                                               \
 	friend std::ostream& operator<<(std::ostream& os, const base_t& d) GENPYBIND(hidden)           \
 	{                                                                                              \
@@ -115,6 +134,17 @@ public:
 	DETAIL_COMPARE(Derived, >=)
 	DETAIL_OSTREAM(Derived)
 	DETAIL_ISTREAM(Derived)
+	DETAIL_BINOP(Derived, +)
+	DETAIL_BINOP(Derived, -)
+	DETAIL_BINOP(Derived, *)
+	DETAIL_BINOP(Derived, /)
+	DETAIL_BINOP(Derived, %)
+	DETAIL_ASSIGNOP(Derived, +=)
+	DETAIL_ASSIGNOP(Derived, -=)
+	DETAIL_ASSIGNOP(Derived, *=)
+	DETAIL_ASSIGNOP(Derived, /=)
+	DETAIL_UNOP(Derived, +)
+	DETAIL_UNOP(Derived, -)
 
 	GENPYBIND(expose_as(__hash__))
 	size_t hash() const
@@ -224,6 +254,17 @@ public:
 	DETAIL_COMPARE(Derived, >=)
 	DETAIL_OSTREAM(Derived)
 	DETAIL_ISTREAM(Derived)
+	DETAIL_BINOP(Derived, +)
+	DETAIL_BINOP(Derived, -)
+	DETAIL_BINOP(Derived, *)
+	DETAIL_BINOP(Derived, /)
+	DETAIL_BINOP(Derived, %)
+	DETAIL_ASSIGNOP(Derived, +=)
+	DETAIL_ASSIGNOP(Derived, -=)
+	DETAIL_ASSIGNOP(Derived, *=)
+	DETAIL_ASSIGNOP(Derived, /=)
+	DETAIL_UNOP(Derived, +)
+	DETAIL_UNOP(Derived, -)
 
 	template <size_t N>
 	std::bitset<N> to_bitset() const
@@ -279,6 +320,9 @@ const T RantWrapper<Derived, T, Max, Min>::min;
 #undef DETAIL_COMPARE
 #undef DETAIL_OSTREAM
 #undef DETAIL_ISTREAM
+#undef DETAIL_BINOP
+#undef DETAIL_ASSIGNOP
+#undef DETAIL_UNOP
 
 struct XRangedTrait {};
 struct YRangedTrait {};
