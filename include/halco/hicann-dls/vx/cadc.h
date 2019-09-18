@@ -141,6 +141,27 @@ struct GENPYBIND(inline_base("*SynramMixin*")) CADCChannelConfigOnDLS
 	CADCChannelConfigOnSynram toCADCChannelConfigOnSynram() const { return This(); }
 };
 
+
+struct GENPYBIND(inline_base("*SynramMixin*")) CADCSampleRowOnDLS
+    : public SynramMixin<CADCSampleRowOnDLS, SynapseRowOnSynram>
+{
+private:
+	typedef SynramMixin<CADCSampleRowOnDLS, SynapseRowOnSynram> base;
+
+public:
+	CADCSampleRowOnDLS() = default;
+
+	explicit CADCSampleRowOnDLS(
+	    SynapseRowOnSynram const& block, SynramOnDLS const& synram = SynramOnDLS()) :
+	    base(block, synram)
+	{}
+
+	explicit CADCSampleRowOnDLS(enum_type const& e) : base(e) {}
+
+	SynapseRowOnSynram toSynapseRowOnSynram() const { return This(); }
+	SynramOnDLS toSynramOnDLS() const { return split().first; }
+};
+
 } // namespace halco::hicann_dls::vx
 
 namespace std {
@@ -154,5 +175,6 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCSampleQuadOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCChannelColumnOnSynram)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCChannelConfigOnSynram)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCChannelConfigOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCSampleRowOnDLS)
 
 } // namespace std

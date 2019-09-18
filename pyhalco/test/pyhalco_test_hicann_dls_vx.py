@@ -10,6 +10,7 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     EventOutputOnNeuronBackendBlock  => linear, iterable
     DACControlBlockOnBoard           => linear, iterable
     DACChannelBlockOnBoard           => linear, iterable
+    CADCSampleRowOnDLS               => iterable
     SpikePackFromFPGAOnDLS           => linear, iterable
     MADCSamplePackFromFPGAOnDLS      => linear, iterable
     NullPayloadReadableOnFPGA        => linear, iterable
