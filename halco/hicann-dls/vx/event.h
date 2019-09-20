@@ -40,7 +40,8 @@ struct GENPYBIND(inline_base("*")) SpikePack3ToChipOnDLS
 struct GENPYBIND(inline_base("*")) SpikePackFromFPGAOnDLS
     : public halco::common::detail::RantWrapper<SpikePackFromFPGAOnDLS, uint_fast16_t, 3, 1>
 {
-	explicit SpikePackFromFPGAOnDLS(uintmax_t const value = 1) GENPYBIND(implicit_conversion) :
+	constexpr explicit SpikePackFromFPGAOnDLS(uintmax_t const value = 1)
+	    GENPYBIND(implicit_conversion) :
 	    rant_t(value)
 	{}
 };
@@ -49,7 +50,8 @@ struct GENPYBIND(inline_base("*")) SpikePackFromFPGAOnDLS
 struct GENPYBIND(inline_base("*")) MADCSamplePackFromFPGAOnDLS
     : public halco::common::detail::RantWrapper<MADCSamplePackFromFPGAOnDLS, uint_fast16_t, 3, 1>
 {
-	explicit MADCSamplePackFromFPGAOnDLS(uintmax_t const value = 1) GENPYBIND(implicit_conversion) :
+	constexpr explicit MADCSamplePackFromFPGAOnDLS(uintmax_t const value = 1)
+	    GENPYBIND(implicit_conversion) :
 	    rant_t(value)
 	{}
 };
@@ -62,7 +64,9 @@ struct GENPYBIND(inline_base("*")) MADCSamplePackFromFPGAOnDLS
 struct GENPYBIND(inline_base("*")) NeuronLabel
     : public halco::common::detail::RantWrapper<NeuronLabel, uint16_t, 0x3fff /* 14bit */, 0>
 {
-	NeuronLabel(uintmax_t value = 0) GENPYBIND(implicit_conversion) : rant_t(value) {}
+	constexpr explicit NeuronLabel(uintmax_t value = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(value)
+	{}
 };
 
 
@@ -73,7 +77,9 @@ struct GENPYBIND(inline_base("*")) NeuronLabel
 struct GENPYBIND(inline_base("*")) SPL1Address
     : public halco::common::detail::RantWrapper<SPL1Address, uint16_t, 3 /* 2bit */, 0>
 {
-	SPL1Address(uintmax_t value = 0) GENPYBIND(implicit_conversion) : rant_t(value) {}
+	constexpr explicit SPL1Address(uintmax_t value = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(value)
+	{}
 };
 
 } // namespace halco::hicann_dls::vx
