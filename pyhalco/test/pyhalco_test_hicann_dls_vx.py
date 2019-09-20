@@ -104,7 +104,6 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     SynramOnDLS                      => linear, iterable
     SynapseQuadOnSynram             => grid, iterable
     SynapseQuadOnDLS                => iterable
-    SynapseOnSynapseQuad            => linear, iterable
     SynapseDriverOnSynapseDriverBlock => linear, iterable
     SynapseDriverBlockOnDLS           => linear, iterable
     SynapseDriverOnDLS                => linear, iterable
@@ -119,8 +118,6 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     ColumnCurrentQuadOnSynram       => linear, iterable
     ColumnCorrelationQuadOnDLS      => linear, iterable
     ColumnCurrentQuadOnDLS          => linear, iterable
-    ColumnCorrelationSwitchOnColumnCorrelationQuad => linear, iterable
-    ColumnCurrentSwitchOnColumnCurrentQuad         => linear, iterable
     CADCChannelType                   => linear,iterable
     CADCReadoutType                   => linear,iterable
     CADCSampleQuadUnspecifiedReadoutOnSynram => iterable
@@ -129,7 +126,7 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     CADCChannelColumnOnSynram         => linear,iterable
     CADCChannelConfigOnSynram         => iterable
     CADCChannelConfigOnDLS            => iterable
-    CADCSampleOnCADCSampleQuad        => linear,iterable
+    EntryOnQuad                       => linear, iterable
     """
     # clang-format on
     @staticmethod

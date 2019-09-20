@@ -112,7 +112,6 @@ typedef ::testing::Types<
     SynapseQuadOnSynram,
     SynramOnDLS,
     SynapseQuadOnDLS,
-    SynapseOnSynapseQuad,
     SynapseDriverOnSynapseDriverBlock,
     SynapseDriverBlockOnDLS,
     SynapseDriverOnDLS,
@@ -136,12 +135,11 @@ typedef ::testing::Types<
     NeuronBackendConfigOnDLS,
     DACControlBlockOnBoard,
     DACChannelBlockOnBoard,
+    EntryOnQuad,
     ColumnCorrelationQuadOnSynram,
     ColumnCurrentQuadOnSynram,
     ColumnCorrelationQuadOnDLS,
     ColumnCurrentQuadOnDLS,
-    ColumnCorrelationSwitchOnColumnCorrelationQuad,
-    ColumnCurrentSwitchOnColumnCurrentQuad,
     CrossbarNodeOnDLS,
     CADCChannelType,
     CADCReadoutType,
@@ -151,11 +149,11 @@ typedef ::testing::Types<
     CADCChannelColumnOnSynram,
     CADCChannelConfigOnSynram,
     CADCChannelConfigOnDLS,
-    CADCSampleOnCADCSampleQuad,
     EventOutputOnNeuronBackendBlock,
     NeuronResetOnNeuronResetBlock,
     NeuronResetBlockOnDLS,
-    NeuronResetOnDLS>
+    NeuronResetOnDLS,
+    CADCChannelConfigOnDLS>
     CoordinateTypes3;
 
 

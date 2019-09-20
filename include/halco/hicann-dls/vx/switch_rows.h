@@ -54,17 +54,6 @@ struct GENPYBIND(inline_base("*SynramMixin*")) ColumnCorrelationQuadOnDLS
 };
 
 
-struct GENPYBIND(inline_base("*")) ColumnCorrelationSwitchOnColumnCorrelationQuad
-    : public common::detail::
-          RantWrapper<ColumnCorrelationSwitchOnColumnCorrelationQuad, uint_fast16_t, 3, 0>
-{
-	constexpr explicit ColumnCorrelationSwitchOnColumnCorrelationQuad(uintmax_t const val = 0)
-	    GENPYBIND(implicit_conversion) :
-	    rant_t(val)
-	{}
-};
-
-
 /********************\
   ColumnCurrentQuad
 \********************/
@@ -109,17 +98,6 @@ struct GENPYBIND(inline_base("*SynramMixin*")) ColumnCurrentQuadOnDLS
 	ColumnCurrentQuadOnSynram toColumnCurrentQuadOnSynram() const { return This(); }
 };
 
-
-struct GENPYBIND(inline_base("*")) ColumnCurrentSwitchOnColumnCurrentQuad
-    : public common::detail::
-          RantWrapper<ColumnCurrentSwitchOnColumnCurrentQuad, uint_fast16_t, 3, 0>
-{
-	constexpr explicit ColumnCurrentSwitchOnColumnCurrentQuad(uintmax_t const val = 0)
-	    GENPYBIND(implicit_conversion) :
-	    rant_t(val)
-	{}
-};
-
 } // namespace halco::hicann_dls::vx
 
 namespace std {
@@ -128,7 +106,5 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ColumnCorrelationQuadOnSynram)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ColumnCurrentQuadOnSynram)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ColumnCorrelationQuadOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ColumnCurrentQuadOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ColumnCorrelationSwitchOnColumnCorrelationQuad)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ColumnCurrentSwitchOnColumnCurrentQuad)
 
 } // namespace std

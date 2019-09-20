@@ -76,16 +76,6 @@ struct GENPYBIND(inline_base("*SynramMixin*")) SynapseQuadOnDLS
 	NeuronConfigBlockOnDLS toNeuronConfigBlockOnDLS() const;
 };
 
-
-struct GENPYBIND(inline_base("*")) SynapseOnSynapseQuad
-    : public common::detail::RantWrapper<SynapseOnSynapseQuad, uint_fast16_t, 3, 0>
-{
-	constexpr explicit SynapseOnSynapseQuad(uintmax_t const val = 0)
-	    GENPYBIND(implicit_conversion) :
-	    rant_t(val)
-	{}
-};
-
 } // namespace halco::hicann_dls::vx
 
 namespace std {
@@ -94,6 +84,5 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseQuadColumnOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseRowOnSynram)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseQuadOnSynram)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseQuadOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseOnSynapseQuad)
 
 } // namespace std

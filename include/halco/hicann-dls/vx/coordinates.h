@@ -17,6 +17,7 @@
 #include "halco/hicann-dls/vx/padi.h"
 #include "halco/hicann-dls/vx/pll.h"
 #include "halco/hicann-dls/vx/ppu.h"
+#include "halco/hicann-dls/vx/quad.h"
 #include "halco/hicann-dls/vx/reset.h"
 #include "halco/hicann-dls/vx/routing_crossbar.h"
 #include "halco/hicann-dls/vx/spi.h"

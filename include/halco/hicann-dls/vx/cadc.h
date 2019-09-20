@@ -141,13 +141,6 @@ struct GENPYBIND(inline_base("*SynramMixin*")) CADCChannelConfigOnDLS
 	CADCChannelConfigOnSynram toCADCChannelConfigOnSynram() const { return This(); }
 };
 
-
-struct GENPYBIND(inline_base("*")) CADCSampleOnCADCSampleQuad
-    : public common::detail::RantWrapper<CADCSampleOnCADCSampleQuad, uint_fast16_t, 3, 0>
-{
-	constexpr explicit CADCSampleOnCADCSampleQuad(uintmax_t const val = 0) : rant_t(val) {}
-};
-
 } // namespace halco::hicann_dls::vx
 
 namespace std {
@@ -161,6 +154,5 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCSampleQuadOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCChannelColumnOnSynram)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCChannelConfigOnSynram)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCChannelConfigOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCSampleOnCADCSampleQuad)
 
 } // namespace std
