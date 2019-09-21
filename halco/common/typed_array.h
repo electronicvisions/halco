@@ -104,6 +104,13 @@ struct typed_array {
 
 	GENPYBIND(expose_as(__setitem__))
 	void set(Key const& key, Value const& value) { at(key) = value; }
+
+	GENPYBIND_MANUAL({
+		parent.def(
+		    "__iter__",
+		    [parent](GENPYBIND_PARENT_TYPE& self) { return parent->py::make_iterator(self); },
+		    parent->py::template keep_alive<0, 1>());
+	})
 };
 
 namespace typed_array_enum_support {
