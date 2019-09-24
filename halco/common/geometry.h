@@ -240,11 +240,11 @@ public:
 	PYPP_CONSTEXPR value_type value() const { return mValue; }
 	PYPP_CONSTEXPR Enum toEnum() const { return Enum(mValue); }
 
-	static const T max    = Max;
-	static const T end    = Max + 1;
-	static const T size   = Max - Min + 1;
-	static const T min    = Min;
-	static const T begin  = Min;
+	PYPP_CONSTEXPR_STATIC T max = Max;
+	PYPP_CONSTEXPR_STATIC T end = Max + 1;
+	PYPP_CONSTEXPR_STATIC T size = Max - Min + 1;
+	PYPP_CONSTEXPR_STATIC T min = Min;
+	PYPP_CONSTEXPR_STATIC T begin = Min;
 
 	DETAIL_COMPARE(Derived, ==)
 	DETAIL_COMPARE(Derived, !=)
@@ -301,21 +301,6 @@ private:
 
 template<typename Derived, typename T, T Max, T Min>
 const bool RantWrapper<Derived, T, Max, Min>::is_interval;
-
-template<typename Derived, typename T, T Max, T Min>
-const T RantWrapper<Derived, T, Max, Min>::max;
-
-template<typename Derived, typename T, T Max, T Min>
-const T RantWrapper<Derived, T, Max, Min>::end;
-
-template<typename Derived, typename T, T Max, T Min>
-const T RantWrapper<Derived, T, Max, Min>::size;
-
-template<typename Derived, typename T, T Max, T Min>
-const T RantWrapper<Derived, T, Max, Min>::begin;
-
-template<typename Derived, typename T, T Max, T Min>
-const T RantWrapper<Derived, T, Max, Min>::min;
 
 #undef DETAIL_COMPARE
 #undef DETAIL_OSTREAM
@@ -401,11 +386,7 @@ struct GridCoordinate {
 		"Only YRanged is allowed as y type of GridCoordinate");
 #endif
 
-#ifndef PYPLUSPLUS
-	static constexpr size_t size = EnumSize;
-#else
-	static const size_t size = EnumSize;
-#endif
+	PYPP_CONSTEXPR_STATIC size_t size = EnumSize;
 
 	typedef detail::EnumRanged<EnumSize> enum_type GENPYBIND(opaque(false));
 	typedef GridCoordinate<Derived, x_type, y_type, EnumSize> grid_type;
@@ -521,11 +502,6 @@ private:
 	}
 };
 
-#ifndef PYPLUSPLUS
-template<typename Derived, typename XT, typename YT, size_t EnumSize>
-size_t constexpr GridCoordinate<Derived, XT, YT, EnumSize>::size;
-#endif // !PYPLUSPLUS
-
 template<typename Derived, typename XT, typename YT, size_t EnumSize>
 const bool GridCoordinate<Derived, XT, YT, EnumSize>::is_interval;
 
@@ -535,11 +511,7 @@ struct IntervalCoordinate {
 
 	static const bool is_interval = true;
 
-#ifndef PYPLUSPLUS
-	static constexpr size_t size = EnumSize;
-#else
-	static const size_t size = EnumSize;
-#endif
+	PYPP_CONSTEXPR_STATIC size_t size = EnumSize;
 
 	typedef detail::EnumRanged<EnumSize> enum_type GENPYBIND(opaque(false));
 	typedef IntervalCoordinate<Derived, bound_type, EnumSize> interval_type;
@@ -692,11 +664,6 @@ private:
 		ar & make_nvp("e", e);
 	}
 };
-
-#ifndef PYPLUSPLUS
-template<typename Derived, typename T, size_t EnumSize>
-size_t constexpr IntervalCoordinate<Derived, T, EnumSize>::size;
-#endif // !PYPLUSPLUS
 
 template<typename Derived, typename T, size_t EnumSize>
 const bool IntervalCoordinate<Derived, T, EnumSize>::is_interval;
