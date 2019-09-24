@@ -159,7 +159,11 @@ auto typed_array<Value, Key, Limits>::at(key_type const& key) -> reference {
 	using detail::to_number;
 	size_t idx = to_number(key) - Limits::min;
 	if (idx >= Limits::size) {
+#ifndef __ppu__
 		throw std::out_of_range("typed_array::at");
+#else
+		exit(1);
+#endif
 	}
 	return elems[idx];
 }
@@ -169,7 +173,11 @@ auto typed_array<Value, Key, Limits>::at(key_type const& key) const -> const_ref
 	using detail::to_number;
 	size_t idx = to_number(key) - Limits::min;
 	if (idx >= Limits::size) {
+#ifndef __ppu__
 		throw std::out_of_range("typed_array::at");
+#else
+		exit(1);
+#endif
 	}
 	return elems[idx];
 }

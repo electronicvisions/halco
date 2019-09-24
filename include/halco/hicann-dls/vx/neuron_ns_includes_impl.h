@@ -233,8 +233,12 @@ AtomicNeuronOnLogicalNeuron AtomicNeuronOnLogicalNeuron::get_neighbor(
 			return neighbor;
 		}
 		default: {
+#ifndef __ppu__
 			throw std::logic_error(
 			    "Unsupported direction for neighbor for AtomicNeuronOnLogicalNeuron was chosen.");
+#else
+			exit(1);
+#endif
 		}
 	}
 }
@@ -248,7 +252,11 @@ LogicalNeuronCompartments::LogicalNeuronCompartments(Compartments const& compart
 		n += compartment.size();
 	}
 	if (unique.size() != n) {
+#ifndef __ppu__
 		throw std::runtime_error("Multiple compartments contain the same neuron(s).");
+#else
+		exit(1);
+#endif
 	}
 	m_compartments = compartments;
 }
@@ -386,6 +394,7 @@ bool LogicalNeuronCompartments::operator>=(LogicalNeuronCompartments const& othe
 	return m_compartments >= other.m_compartments;
 }
 
+#ifndef __ppu__
 std::ostream& operator<<(std::ostream& os, LogicalNeuronCompartments const& config)
 {
 	os << "LogicalNeuronCompartments(\n";
@@ -404,6 +413,7 @@ void LogicalNeuronCompartments::serialize(Archive& ar, uint32_t const)
 {
 	ar(m_compartments);
 }
+#endif
 
 LogicalNeuronOnDLS::LogicalNeuronOnDLS(
     LogicalNeuronCompartments const& compartments, AtomicNeuronOnDLS const& anchor)
@@ -416,15 +426,23 @@ LogicalNeuronOnDLS::LogicalNeuronOnDLS(
 	auto const width = rmost.value() - lmost.value();
 
 	if ((anchor.toNeuronRowOnDLS().value() + height) > NeuronRowOnDLS::max) {
+#ifndef __ppu__
 		throw std::runtime_error(
 		    "LogicalNeuron anchor results in placement of compartments outside of neuron grid.");
+#else
+		exit(1);
+#endif
 	}
 	if ((((anchor.toNeuronColumnOnDLS().value()) < NeuronColumnOnLogicalNeuron::max) &&
 	     ((anchor.toNeuronColumnOnDLS().value() + width) > NeuronColumnOnLogicalNeuron::max)) ||
 	    (((anchor.toNeuronColumnOnDLS().value()) > NeuronColumnOnLogicalNeuron::max) &&
 	     ((anchor.toNeuronColumnOnDLS().value() + width) > NeuronColumnOnDLS::max))) {
+#ifndef __ppu__
 		throw std::runtime_error(
 		    "LogicalNeuron anchor results in placement of compartments outside of neuron grid.");
+#else
+		exit(1);
+#endif
 	}
 	for (auto const& [index, compartment] : compartments.get_compartments()) {
 		auto& placed_compartment = m_compartments[index];
@@ -475,6 +493,7 @@ bool LogicalNeuronOnDLS::operator>=(LogicalNeuronOnDLS const& other) const
 	return m_compartments >= other.m_compartments;
 }
 
+#ifndef __ppu__
 std::ostream& operator<<(std::ostream& os, LogicalNeuronOnDLS const& config)
 {
 	os << "LogicalNeuronOnDLS(\n";
@@ -493,3 +512,4 @@ void LogicalNeuronOnDLS::serialize(Archive& ar, uint32_t const)
 {
 	ar(m_compartments);
 }
+#endif

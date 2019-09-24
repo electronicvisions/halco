@@ -178,7 +178,11 @@ auto typed_heap_array<Value, Key, Limits>::at(key_type const& key) -> reference
 	using detail::to_number;
 	size_t idx = to_number(key) - Limits::min;
 	if (idx >= Limits::size) {
+#ifndef __ppu__
 		throw std::out_of_range("typed_heap_array::at");
+#else
+		exit(1);
+#endif
 	}
 	return elems[idx];
 }
@@ -189,7 +193,11 @@ auto typed_heap_array<Value, Key, Limits>::at(key_type const& key) const -> cons
 	using detail::to_number;
 	size_t idx = to_number(key) - Limits::min;
 	if (idx >= Limits::size) {
+#ifndef __ppu__
 		throw std::out_of_range("typed_heap_array::at");
+#else
+		exit(1);
+#endif
 	}
 	return elems[idx];
 }

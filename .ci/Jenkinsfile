@@ -8,7 +8,6 @@ wafDefaultPipeline(projects: ["halco"],
                    notificationChannel: "#dls-software")
 
 wafDefaultPipeline(projects: ["halco"],
-                   moduleOptions: [modules: ["ppu-toolchain"]],
                    container: [app: "wafer"],
                    testSlurmResource: [partition: "jenkins"],
                    notificationChannel: "#softies",

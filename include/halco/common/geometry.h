@@ -13,7 +13,9 @@
 #include <boost/preprocessor/cat.hpp>
 #include <boost/preprocessor/punctuation/comma.hpp>
 
+#ifndef __ppu__
 #include "pywrap/compat/debug.hpp"
+#endif
 #include "pywrap/compat/rant.hpp"
 #include "pywrap/compat/macros.hpp"
 #include "pywrap/compat/hash.hpp"
@@ -100,14 +102,23 @@ inline int _print(unsigned char c)
 template<typename T>
 std::ostream & _write(std::ostream& os, T const & t)
 {
+#ifndef __ppu__
 	static std::string const name = ZTL::typestring<T>().substr(
 		ZTL::typestring<T>().rfind(':')+1);
+#endif
 	// clang-format off
 	if PYPP_CONSTEXPR (boost::is_same<T, char>::value || boost::is_same<T, unsigned char>::value) {
-		return os << name << "(" << _print(static_cast<int>(t.value())) << ")";
+#ifndef __ppu__
+		return os << _print(static_cast<int>(t.value()));
+#else
+#endif
 	}
 	// clang-format on
+#ifndef __ppu__
 	return os << name << "(" << _print(t.value()) << ")";
+#else
+	return os << _print(t.value());
+#endif
 }
 
 } // namespace detail
@@ -186,10 +197,14 @@ public:
 	GENPYBIND(expose_as(__hash__))
 	size_t hash() const
 	{
+#ifndef __ppu__
 		// We include the type name in the hash to reduce the number of hash collisions in
 		// python code, where __hash__ is used in heterogeneous containers.
 		static const size_t seed = boost::hash_value(typeid(base_t).name());
 		size_t hash = seed;
+#else
+		size_t hash = 0;
+#endif
 		boost::hash_combine(hash, value());
 		return hash;
 	}
@@ -342,10 +357,14 @@ public:
 	GENPYBIND(expose_as(__hash__))
 	size_t hash() const
 	{
+#ifndef __ppu__
 		// We include the type name in the hash to reduce the number of hash collisions in
 		// python code, where __hash__ is used in heterogeneous containers.
 		static const size_t seed = boost::hash_value(typeid(rant_t).name());
 		size_t hash = seed;
+#else
+		size_t hash = 0;
+#endif
 		boost::hash_combine(hash, value());
 		return hash;
 	}
@@ -418,7 +437,7 @@ RangedIMPL(EnumRanged, /*_*/, EnumRanged<Size>, Enum, /*Max=*/Size - 1, 0);
 
 #undef RangedIMPL
 
-
+#ifndef __ppu__
 template<X::value_type Max, X::value_type Min>
 inline std::ostream & _write(std::ostream& os, const XRanged<Max, Min> & v)
 {
@@ -436,6 +455,7 @@ inline std::ostream & _write(std::ostream& os, const EnumRanged<Size> & v)
 {
 	return os << "Enum(" << v.value() << ")";
 }
+#endif
 
 } // namespace detail
 
@@ -514,19 +534,27 @@ struct GridCoordinate {
 	GENPYBIND(stringstream)
 	friend std::ostream& operator<<(std::ostream& os, const GridCoordinate& c)
 	{
+#ifndef __ppu__
 		static std::string const name =
 			ZTL::typestring<Derived>().substr(ZTL::typestring<Derived>().rfind(':') + 1);
 		os << name << "(" << c.x() << ", " << c.y() << "; " << c.toEnum() << ")";
+#else
+		os << c.x() << ", " << c.y() << "; " << c.toEnum();
+#endif
 		return os;
 	}
 
 	GENPYBIND(expose_as(__hash__))
 	size_t hash() const
 	{
+#ifndef __ppu__
 		// We include the type name in the hash to reduce the number of hash collisions in
 		// python code, where __hash__ is used in heterogeneous containers.
 		static const size_t seed = boost::hash_value(typeid(Derived).name());
 		size_t hash = seed;
+#else
+		size_t hash = 0;
+#endif
 		boost::hash_combine(hash, mX.value());
 		boost::hash_combine(hash, mY.value());
 		return hash;
@@ -686,20 +714,28 @@ struct IntervalCoordinate {
 	GENPYBIND(stringstream)
 	friend std::ostream& operator<<(std::ostream& os, const IntervalCoordinate& c)
 	{
+#ifndef __ppu__
 		static std::string const name =
 			ZTL::typestring<Derived>().substr(ZTL::typestring<Derived>().rfind(':') + 1);
 		os << name << "([" << c.toMin().toEnum().value() << "," << c.toMax().toEnum().value()
 		   << "])";
+#else
+		os << "[" << c.toMin().toEnum().value() << "," << c.toMax().toEnum().value() << "]";
+#endif
 		return os;
 	}
 
 	GENPYBIND(expose_as(__hash__))
 	size_t hash() const
 	{
+#ifndef __ppu__
 		// We include the type name in the hash to reduce the number of hash collisions in
 		// python code, where __hash__ is used in heterogeneous containers.
 		static const size_t seed = boost::hash_value(typeid(Derived).name());
 		size_t hash = seed;
+#else
+		size_t hash = 0;
+#endif
 		boost::hash_combine(hash, mMin.value());
 		boost::hash_combine(hash, mMax.value());
 		return hash;
@@ -735,7 +771,11 @@ protected:
 	static PYPP_CONSTEXPR void check(bound_type const& min, bound_type const& max) GENPYBIND(hidden)
 	{
 		if (min > max) {
+#ifndef __ppu__
 			throw std::runtime_error("Interval orientation wrong, min > max.");
+#else
+			exit(1);
+#endif
 		}
 	}
 

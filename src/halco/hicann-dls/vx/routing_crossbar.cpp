@@ -5,6 +5,10 @@
 #include "halco/hicann-dls/vx/neuron.h"
 #include "halco/hicann-dls/vx/padi.h"
 
+#ifdef __ppu__
+extern void exit(int32_t);
+#endif
+
 namespace halco::hicann_dls::vx {
 
 std::optional<PADIBusOnDLS> CrossbarOutputOnDLS::toPADIBusOnDLS() const
@@ -91,7 +95,11 @@ CrossbarNodeOnDLS::enum_type CrossbarNodeOnDLS::to_enum(x_type const& x, y_type 
 	// throws out_of_range if x or y is not available on wafer.
 	int const en = CrossbarNodeOnDLSEnum.at(y).at(x);
 	if (en == halco::common::detail::invalid)
+#ifndef __ppu__
 		throw std::domain_error("Invalid combination of X and Y for a CrossbarNode");
+#else
+		exit(1);
+#endif
 	return enum_type(en);
 }
 

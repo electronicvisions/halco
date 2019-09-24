@@ -2,6 +2,10 @@
 
 #include "halco/hicann-dls/vx/xboard.h"
 
+#ifdef __ppu__
+extern void exit(int32_t);
+#endif
+
 namespace halco::hicann_dls::vx {
 
 DACChannelOnBoard const DACChannelOnBoard::v_reset{DACChannelOnDAC(0), DACOnBoard(0)};
@@ -27,7 +31,11 @@ VDDOnBoard DACChannelOnBoard::toVDDOnBoard() const
 	if ((toDACOnBoard() == DACOnBoard(1)) && (toDACChannelOnDAC() <= DACChannelOnDAC(5))) {
 		return VDDOnBoard(toDACChannelOnDAC().toEnum());
 	}
+#ifndef __ppu__
 	throw std::logic_error("DAC channel not convertible to VDDOnBoard.");
+#else
+	exit(1);
+#endif
 }
 
 } // namespace halco::hicann_dls::vx

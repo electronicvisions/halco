@@ -53,6 +53,7 @@ Parity Parity::from_number(uintmax_t val) {
 
 namespace detail {
 
+#ifndef __ppu__
 std::ostream& _write(std::ostream& os, const XRanged<1, 0>& v) {
 	return os << (v.value() ? "right" : "left");
 }
@@ -80,6 +81,7 @@ std::ostream& _write(std::ostream& os, Parity const& parity) {
 std::ostream& _write(std::ostream& os, Unique const&) {
 	return os << "unique";
 }
+#endif
 
 } // namespace detail
 } // namespace common

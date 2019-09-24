@@ -6,6 +6,7 @@ def depends(ctx):
     ctx('ztl')
     ctx('pywrap') # also needed in non-python mode! (compatibility headers!)
     ctx('lib-boost-patches')
+    ctx('libnux')
 
 
 def options(opt):
@@ -55,6 +56,16 @@ def build(bld):
                         'BOOST_MPL_LIMIT_LIST_SIZE=30'],
     )
 
+    if bld.env.have_ppu_toolchain:
+        bld.stlib(
+            target='halco_common_ppu_vx',
+            source=bld.path.ant_glob('src/halco/common/*.cpp'),
+            install_path='${PREFIX}/lib/ppu',
+            use=['halco_inc', 'ZTL', 'rant', 'pywrap_inc'],
+            env=bld.all_envs['nux_vx'],
+            linkflags='-Wl,-z,defs',
+        )
+
     bld.shlib(
         target='halco_hicann_dls_vx',
         source=bld.path.ant_glob('src/halco/hicann-dls/vx/*.cpp'),
@@ -72,6 +83,27 @@ def build(bld):
             linkflags='-Wl,-z,defs',
             use=['halco_common', 'halco_hicann_dls_vx'],
         )
+
+    if bld.env.have_ppu_toolchain:
+        bld.stlib(
+            target='halco_hicann_dls_ppu_vx',
+            source=bld.path.ant_glob('src/halco/hicann-dls/vx/*.cpp'),
+            install_path='${PREFIX}/lib/ppu',
+            linkflags='-Wl,-z,defs',
+            use=['halco_common_ppu_vx'],
+            env = bld.all_envs['nux_vx'],
+        )
+
+        for hx_version in [1, 2, 3]:
+            bld.stlib(
+                target='halco_hicann_dls_ppu_vx_v%s' % hx_version,
+                source=bld.path.ant_glob('src/halco/hicann-dls/vx/v%s/*.cpp' % hx_version,
+                                         excl=['**/py*.cpp']),
+                install_path='${PREFIX}/lib/ppu',
+                linkflags='-Wl,-z,defs',
+                use=['halco_common_ppu_vx', 'halco_hicann_dls_ppu_vx'],
+                env = bld.all_envs['nux_vx_v%s' % hx_version],
+            )
 
     bld(
         target='halco_test_inc',

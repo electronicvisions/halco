@@ -31,6 +31,38 @@ struct EnumMixin<T, Enum, typename boost::enable_if_has_type<decltype(Enum::size
 };
 #endif
 
+#ifndef __ppu__
+#define MIXIN_OSTREAM                                                                              \
+	GENPYBIND(stringstream)                                                                        \
+	friend std::ostream& operator<<(std::ostream& os, const Derived& h)                            \
+	{                                                                                              \
+		static std::string const _s =                                                              \
+		    ZTL::typestring<Derived>().substr(ZTL::typestring<Derived>().rfind(':') + 1);          \
+		return os << _s << "(" << h.This() << ", " << h.mValue << ")";                             \
+	}
+#define MIXIN_HASH                                                                                 \
+	GENPYBIND(expose_as(__hash__))                                                                 \
+	size_t hash() const                                                                            \
+	{                                                                                              \
+		static const size_t seed = boost::hash_value(typeid(Derived).name());                      \
+		size_t hash = seed;                                                                        \
+		boost::hash_combine(hash, std::hash<T>()(This()));                                         \
+		boost::hash_combine(hash, mValue);                                                         \
+		return hash;                                                                               \
+	}
+#else
+#define MIXIN_OSTREAM
+#define MIXIN_HASH                                                                                 \
+	GENPYBIND(expose_as(__hash__))                                                                 \
+	size_t hash() const                                                                            \
+	{                                                                                              \
+		size_t hash = 0;                                                                           \
+		boost::hash_combine(hash, std::hash<T>()(This()));                                         \
+		boost::hash_combine(hash, mValue);                                                         \
+		return hash;                                                                               \
+	}
+#endif
+
 #define HALCO_COORDINATE_MIXIN(mixin, cls, fct)                                                    \
 	template <typename Derived, typename T>                                                        \
 	class GENPYBIND(inline_base("*EnumMixin*")) mixin                                              \
@@ -92,25 +124,11 @@ struct EnumMixin<T, Enum, typename boost::enable_if_has_type<decltype(Enum::size
 			return !(a == b);                                                                      \
 		}                                                                                          \
                                                                                                    \
-		GENPYBIND(stringstream)                                                                    \
-		friend std::ostream& operator<<(std::ostream& os, const Derived& h)                        \
-		{                                                                                          \
-			static std::string const _s =                                                          \
-			    ZTL::typestring<Derived>().substr(ZTL::typestring<Derived>().rfind(':') + 1);      \
-			return os << _s << "(" << h.This() << ", " << h.mValue << ")";                         \
-		}                                                                                          \
+		MIXIN_OSTREAM                                                                              \
                                                                                                    \
 		PYPP_DEFAULT(mixin& operator=(mixin const&));                                              \
                                                                                                    \
-		GENPYBIND(expose_as(__hash__))                                                             \
-		size_t hash() const                                                                        \
-		{                                                                                          \
-			static const size_t seed = boost::hash_value(typeid(Derived).name());                  \
-			size_t hash = seed;                                                                    \
-			boost::hash_combine(hash, std::hash<T>()(This()));                                     \
-			boost::hash_combine(hash, mValue);                                                     \
-			return hash;                                                                           \
-		}                                                                                          \
+		MIXIN_HASH                                                                                 \
                                                                                                    \
 		friend size_t hash_value(Derived const& t)                                                 \
 		{                                                                                          \

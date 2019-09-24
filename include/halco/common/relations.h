@@ -75,12 +75,14 @@ extern Unique const unique GENPYBIND(visible);
 
 namespace detail {
 
+#ifndef __ppu__
 std::ostream& _write(std::ostream& os, const XRanged<1, 0>& v);
 std::ostream& _write(std::ostream& os, const YRanged<1, 0>& v);
 std::ostream& _write(std::ostream& os, Direction const& direction);
 std::ostream& _write(std::ostream& os, Orientation const& orientation);
 std::ostream& _write(std::ostream& os, Parity const& parity);
 std::ostream& _write(std::ostream& os, Unique const&);
+#endif
 
 } // namespace detail
 } // common
