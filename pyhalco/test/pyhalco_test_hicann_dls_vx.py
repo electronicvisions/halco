@@ -90,6 +90,9 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     NeuronConfigOnDLS                => iterable
     NeuronBackendConfigOnNeuronBackendConfigBlock => linear, iterable
     NeuronBackendConfigOnDLS         => iterable
+    NeuronResetOnNeuronResetBlock    => linear, iterable
+    NeuronResetBlockOnDLS            => linear, iterable
+    NeuronResetOnDLS                 => iterable
     NeuronLabel                      => linear, iterable
     SPL1Address                      => linear, iterable
     CommonSynramConfigOnDLS          => linear, iterable

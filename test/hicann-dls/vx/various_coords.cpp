@@ -14,6 +14,20 @@ TEST(SynapseQuadOnDLS, toNeuronConfigBlockOnDLS)
 	EXPECT_EQ(coord.toNeuronConfigBlockOnDLS(), NeuronConfigBlockOnDLS(2));
 }
 
+TEST(NeuronConfigOnDLS, toNeuronResetOnDLS)
+{
+	NeuronConfigOnDLS coord(NeuronConfigOnNeuronConfigBlock(23), NeuronConfigBlockOnDLS(1));
+	EXPECT_EQ(
+	    coord.toNeuronResetOnDLS(),
+	    NeuronResetOnDLS(NeuronResetOnNeuronResetBlock(23), NeuronResetBlockOnDLS(1)));
+}
+
+TEST(NeuronConfigBlockOnDLS, toNeuronResetBlockOnDLS)
+{
+	NeuronConfigBlockOnDLS coord(1);
+	EXPECT_EQ(coord.toNeuronResetBlockOnDLS(), NeuronResetBlockOnDLS(1));
+}
+
 TEST(CrossbarL2OutputOnDLS, toCrossbarOutputOnDLS)
 {
 	CrossbarL2OutputOnDLS coord(3);

@@ -14,4 +14,21 @@ CapMemBlockOnDLS NeuronConfigBlockOnDLS::toCapMemBlockOnDLS() const
 	return CapMemBlockOnDLS(toEnum());
 }
 
+NeuronResetBlockOnDLS NeuronConfigBlockOnDLS::toNeuronResetBlockOnDLS() const
+{
+	return NeuronResetBlockOnDLS(toEnum() % NeuronResetBlockOnDLS::size);
+}
+
+NeuronResetOnDLS NeuronConfigOnDLS::toNeuronResetOnDLS() const
+{
+	auto block = toNeuronConfigBlockOnDLS().toNeuronResetBlockOnDLS();
+	return NeuronResetOnDLS(
+	    NeuronResetOnNeuronResetBlock(
+	        toNeuronConfigOnNeuronConfigBlock() +
+	        ((toNeuronConfigBlockOnDLS() / NeuronResetBlockOnDLS::size)
+	             ? NeuronConfigOnNeuronConfigBlock::size
+	             : 0)),
+	    block);
+}
+
 } // namespace halco::hicann_dls::vx

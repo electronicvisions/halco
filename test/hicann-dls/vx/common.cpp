@@ -150,7 +150,10 @@ typedef ::testing::Types<
     CADCChannelConfigOnSynram,
     CADCChannelConfigOnDLS,
     CADCSampleOnCADCSampleQuad,
-    EventOutputOnNeuronBackendBlock>
+    EventOutputOnNeuronBackendBlock,
+    NeuronResetOnNeuronResetBlock,
+    NeuronResetBlockOnDLS,
+    NeuronResetOnDLS>
     CoordinateTypes3;
 
 

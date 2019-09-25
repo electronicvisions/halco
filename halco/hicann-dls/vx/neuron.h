@@ -9,6 +9,8 @@ namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 struct CapMemColumnOnCapMemBlock;
 struct CapMemBlockOnDLS;
+struct NeuronResetBlockOnDLS;
+struct NeuronResetOnDLS;
 
 /**********\
    Neuron
@@ -35,6 +37,7 @@ struct GENPYBIND(inline_base("*")) NeuronConfigBlockOnDLS
 	{}
 
 	CapMemBlockOnDLS toCapMemBlockOnDLS() const;
+	NeuronResetBlockOnDLS toNeuronResetBlockOnDLS() const;
 };
 
 
@@ -54,6 +57,7 @@ struct GENPYBIND(inline_base("*NeuronConfigMixin*")) NeuronConfigOnDLS
 	explicit NeuronConfigOnDLS(enum_type const& e) : mixin_t(e) {}
 
 	NeuronConfigOnNeuronConfigBlock toNeuronConfigOnNeuronConfigBlock() const { return This(); }
+	NeuronResetOnDLS toNeuronResetOnDLS() const;
 };
 
 
@@ -63,6 +67,16 @@ struct GENPYBIND(inline_base("*")) CommonNeuronConfigOnDLS
 	constexpr explicit CommonNeuronConfigOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
 
+
+struct GENPYBIND(inline_base("*")) NeuronBackendConfigOnNeuronBackendConfigBlock
+    : public common::detail::
+          RantWrapper<NeuronBackendConfigOnNeuronBackendConfigBlock, uint_fast16_t, 255, 0>
+{
+	constexpr explicit NeuronBackendConfigOnNeuronBackendConfigBlock(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
 
 struct GENPYBIND(inline_base("*")) NeuronBackendConfigBlockOnDLS
     : public common::detail::RantWrapper<NeuronBackendConfigBlockOnDLS, uint_fast8_t, 1, 0>
@@ -74,11 +88,19 @@ struct GENPYBIND(inline_base("*")) NeuronBackendConfigBlockOnDLS
 };
 
 
-struct GENPYBIND(inline_base("*")) NeuronBackendConfigOnNeuronBackendConfigBlock
-    : public common::detail::
-          RantWrapper<NeuronBackendConfigOnNeuronBackendConfigBlock, uint_fast16_t, 255, 0>
+struct GENPYBIND(inline_base("*")) NeuronResetOnNeuronResetBlock
+    : public common::detail::RantWrapper<NeuronResetOnNeuronResetBlock, uint_fast16_t, 255, 0>
 {
-	constexpr explicit NeuronBackendConfigOnNeuronBackendConfigBlock(uintmax_t const val = 0)
+	constexpr explicit NeuronResetOnNeuronResetBlock(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+struct GENPYBIND(inline_base("*")) NeuronResetBlockOnDLS
+    : public common::detail::RantWrapper<NeuronResetBlockOnDLS, uint_fast16_t, 1, 0>
+{
+	constexpr explicit NeuronResetBlockOnDLS(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
@@ -120,6 +142,24 @@ struct GENPYBIND(inline_base("*")) EventOutputOnNeuronBackendBlock
 };
 
 
+HALCO_COORDINATE_MIXIN(NeuronResetMixin, NeuronResetBlockOnDLS, neuron)
+
+struct GENPYBIND(inline_base("*NeuronResetMixin*")) NeuronResetOnDLS
+    : public NeuronResetMixin<NeuronResetOnDLS, NeuronResetOnNeuronResetBlock>
+{
+	NeuronResetOnDLS() = default;
+
+	explicit NeuronResetOnDLS(
+	    NeuronResetOnNeuronResetBlock const& neuron,
+	    NeuronResetBlockOnDLS const& block = NeuronResetBlockOnDLS()) :
+	    mixin_t(neuron, block)
+	{}
+
+	explicit NeuronResetOnDLS(enum_type const& e) : mixin_t(e) {}
+
+	NeuronResetOnNeuronResetBlock toNeuronResetOnNeuronResetBlock() const { return This(); }
+};
+
 } // namespace halco::hicann_dls::vx
 
 namespace std {
@@ -132,5 +172,8 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronBackendConfigOnNeuronBack
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronBackendConfigBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronBackendConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::EventOutputOnNeuronBackendBlock)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronResetOnNeuronResetBlock)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronResetBlockOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronResetOnDLS)
 
 } // namespace std
