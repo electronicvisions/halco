@@ -3,6 +3,8 @@
 #include <iomanip>
 #include "halco/hicann/v2/format_helper.h"
 
+#include <regex>
+
 namespace halco {
 namespace hicann {
 namespace v2 {
@@ -112,6 +114,127 @@ std::string slurm_license(TriggerGlobal const& tg)
 {
 	return "W" + std::to_string(tg.toWafer().toEnum()) + "T" +
 	       std::to_string(tg.toTriggerOnWafer().toEnum());
+}
+
+namespace {
+
+// all local types
+typedef boost::variant<
+    HICANNOnWafer,
+    FPGAOnWafer,
+    TriggerOnWafer,
+    ANANASOnWafer,
+    Wafer,
+    HRepeaterOnHICANN,
+    VRepeaterOnHICANN,
+    HLineOnHICANN,
+    VLineOnHICANN>
+    local_type;
+
+// all compound types
+typedef boost::variant<
+    ANANASGlobal,
+    HICANNGlobal,
+    FPGAGlobal,
+    TriggerGlobal,
+    HRepeaterOnWafer,
+    VRepeaterOnWafer>
+    compound_type;
+
+// converts type and value to a local type
+local_type to_local(std::string const& type, std::string const& value)
+{
+	size_t const num(std::stoul(value));
+	halco::common::Enum const e(num);
+
+	if (type == "H") {
+		return HICANNOnWafer(e);
+	} else if (type == "F") {
+		return FPGAOnWafer(e);
+	} else if (type == "W") {
+		return Wafer(num);
+	} else if (type == "T") {
+		return TriggerOnWafer(e);
+	} else if (type == "HR") {
+		return HRepeaterOnHICANN(e);
+	} else if (type == "VR") {
+		return VRepeaterOnHICANN(e);
+	} else if (type == "HL") {
+		return HLineOnHICANN(e);
+	} else if (type == "VL") {
+		return VLineOnHICANN(e);
+	} else if (type == "A") {
+		return ANANASOnWafer(e);
+	} else {
+		throw std::runtime_error(
+		    "halco::hicann::v2::to_local: unknown local type \"" + type + "\"");
+	}
+}
+
+// converts to a compound type
+struct to_compound : public boost::static_visitor<compound_type>
+{
+	HICANNGlobal operator()(Wafer const& w, HICANNOnWafer const& h) const
+	{
+		return HICANNGlobal(h, w);
+	}
+	FPGAGlobal operator()(Wafer const& w, FPGAOnWafer const& f) const { return FPGAGlobal(f, w); }
+	ANANASGlobal operator()(Wafer const& w, ANANASOnWafer const& a) const
+	{
+		return ANANASGlobal(a, w);
+	}
+	TriggerGlobal operator()(Wafer const& w, TriggerOnWafer const& t) const
+	{
+		return TriggerGlobal(t, w);
+	}
+	HRepeaterOnWafer operator()(HICANNOnWafer const& h, HRepeaterOnHICANN const& hr) const
+	{
+		return HRepeaterOnWafer(hr, h);
+	}
+	VRepeaterOnWafer operator()(HICANNOnWafer const& h, VRepeaterOnHICANN const& hr) const
+	{
+		return VRepeaterOnWafer(hr, h);
+	}
+
+	template <typename T, typename V>
+	compound_type operator()(T const& t, V const& v) const
+	{
+		throw std::runtime_error(
+		    "halco::hicann::v2::to_compound: cannot convert " + short_format(t) + " and " +
+		    short_format(v) + " to a compound type");
+	}
+};
+}
+
+format_type from_string(std::string const& s)
+{
+	std::string message = s;
+	std::smatch result;
+
+	std::vector<local_type> local_types;
+	std::regex const local_pattern("^([A-Z]{1,2})([0-9]+)");
+
+	while (std::regex_search(message, result, local_pattern)) {
+		std::string const type(result[1].first, result[1].second);
+		std::string const value(result[2].first, result[2].second);
+		local_types.push_back(to_local(type, value));
+		message = result.suffix();
+	}
+
+	if (!message.empty()) {
+		throw std::runtime_error(
+		    "halco::hicann::v2::from_string: cannot parse \"" + message + "\"");
+	}
+
+	if (local_types.size() == 1) {
+		return local_types.front();
+	} else if (local_types.size() == 2) {
+		return boost::apply_visitor(to_compound(), local_types.front(), local_types.back());
+	} else {
+		throw std::runtime_error(
+		    "halco::hicann::v2::from_string: cannot construct local or compound type from \"" +
+		    message + "\"");
+	}
 }
 
 } // v2

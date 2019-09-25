@@ -3,6 +3,8 @@
 #include <string>
 #include <stdio.h>
 
+#include <boost/variant.hpp>
+
 #include "halco/hicann/v2/coordinates.h"
 
 namespace halco {
@@ -34,6 +36,27 @@ std::string slurm_license(ANANASGlobal const& ag);
 std::string slurm_license(FPGAGlobal const& fg);
 std::string slurm_license(HICANNGlobal const& hg);
 std::string slurm_license(TriggerGlobal const& tg);
+
+typedef boost::variant<
+    ANANASGlobal,
+    HICANNGlobal,
+    FPGAGlobal,
+    TriggerGlobal,
+    HICANNOnWafer,
+    FPGAOnWafer,
+    TriggerOnWafer,
+    ANANASOnWafer,
+    Wafer,
+    HRepeaterOnHICANN,
+    VRepeaterOnHICANN,
+    HRepeaterOnWafer,
+    VRepeaterOnWafer,
+    HLineOnHICANN,
+    VLineOnHICANN>
+    format_type;
+
+// converts from short format to type
+format_type from_string(std::string const& s);
 
 } // v2
 } // hicann

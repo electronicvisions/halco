@@ -122,7 +122,9 @@ def build(bld):
                 features       = 'cxx cxxshlib pypp pyembed pyext',
                 script         = 'hicann/v2/generate_hicann_v2_coordinate.py',
                 gen_defines    = 'PYPLUSPLUS __STRICT_ANSI__ BOOST_PP_VARIADICS',
-                defines        = 'PYBINDINGS',
+                # gccxml requires non-variadic implementation of boost::variant for python wrappers
+                defines        = ['PYBINDINGS', 'BOOST_VARIANT_DO_NOT_USE_VARIADIC_TEMPLATES'],
+                export_defines = 'BOOST_VARIANT_DO_NOT_USE_VARIADIC_TEMPLATES',
                 headers        = '../halco/hicann/v2/coordinates.h',
                 use            = ['pyhalco_common', 'halco_hicann_v2'],
                 install_path   = '${PREFIX}/lib',

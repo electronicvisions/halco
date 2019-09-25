@@ -111,6 +111,11 @@ namespaces.exclude_by_regex(mb, ['calldefs', 'classes', 'variables'], r'(^_[^_])
 mb.add_registration_code(
     'bp::import("pyhalco_hicann_v2_patch").attr("patch")(bp::scope());')
 
+c = mb.typedef('::halco::hicann::v2::format_type').type.declaration
+c.include()
+
+classes.add_variant_converters_for(mb, mb.typedef('::halco::hicann::v2::format_type').target_decl)
+
 wrap.set_number_of_files(5)
 
 wrap.finish()
