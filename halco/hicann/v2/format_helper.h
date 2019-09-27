@@ -37,6 +37,31 @@ std::string slurm_license(FPGAGlobal const& fg);
 std::string slurm_license(HICANNGlobal const& hg);
 std::string slurm_license(TriggerGlobal const& tg);
 
+template <typename T>
+std::string to_string(T const& t)
+{
+	return short_format(t);
+}
+
+template std::string to_string(ANANASGlobal const&);
+template std::string to_string(HICANNGlobal const&);
+template std::string to_string(FPGAGlobal const&);
+template std::string to_string(TriggerGlobal const&);
+template std::string to_string(ANANASOnWafer const&);
+template std::string to_string(HICANNOnWafer const&);
+template std::string to_string(FPGAOnWafer const&);
+template std::string to_string(TriggerOnWafer const&);
+template std::string to_string(Wafer const&);
+
+template std::string to_string(HRepeaterOnHICANN const&);
+template std::string to_string(VRepeaterOnHICANN const&);
+
+template std::string to_string(HRepeaterOnWafer const&);
+template std::string to_string(VRepeaterOnWafer const&);
+
+template std::string to_string(HLineOnHICANN const&);
+template std::string to_string(VLineOnHICANN const&);
+
 typedef boost::variant<
     ANANASGlobal,
     HICANNGlobal,
