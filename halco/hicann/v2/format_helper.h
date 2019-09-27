@@ -11,9 +11,11 @@ namespace v2 {
 
 // Order of declaration matters for python bindings:
 // Keep globals first!
+std::string short_format(const ANANASGlobal& a);
 std::string short_format(const HICANNGlobal& hg);
 std::string short_format(const FPGAGlobal& fg);
 std::string short_format(const TriggerGlobal& t);
+std::string short_format(const ANANASOnWafer& a);
 std::string short_format(const HICANNOnWafer& h);
 std::string short_format(const FPGAOnWafer& f);
 std::string short_format(const TriggerOnWafer& t);

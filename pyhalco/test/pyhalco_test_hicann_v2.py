@@ -115,6 +115,12 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
         w = C.Wafer(2)
         self.assertEqual(C.short_format(w),  "W002")
 
+        a = C.ANANASOnWafer(Enum(1))
+        self.assertEqual(C.short_format(a), "A1")
+
+        ag = C.ANANASGlobal(a, w)
+        self.assertEqual(C.short_format(ag), "W002A1")
+
         h = C.HICANNOnWafer(Enum(3))
         self.assertEqual(C.short_format(h),  "H003")
 
@@ -126,6 +132,12 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
 
         fg = C.FPGAGlobal(f,w)
         self.assertEqual(C.short_format(fg), "W002F004")
+
+        t = C.TriggerOnWafer(Enum(1))
+        self.assertEqual(C.short_format(t), "T01")
+
+        tg = C.TriggerGlobal(t,w)
+        self.assertEqual(C.short_format(tg), "W002T01")
 
         hr = C.HRepeaterOnHICANN(Enum(5))
         self.assertEqual(C.short_format(hr), "HR005")

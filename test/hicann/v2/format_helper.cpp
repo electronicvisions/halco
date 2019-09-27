@@ -15,6 +15,12 @@ TEST(FormatHelper, ShortFormat) {
 	Wafer w(2);
 	EXPECT_EQ(short_format(w),  "W002");
 
+	ANANASOnWafer a(Enum(1));
+	EXPECT_EQ(short_format(a),  "A1");
+
+	ANANASGlobal ag(a,w);
+	EXPECT_EQ(short_format(ag), "W002A1");
+
 	HICANNOnWafer h(Enum(3));
 	EXPECT_EQ(short_format(h),  "H003");
 
@@ -26,6 +32,12 @@ TEST(FormatHelper, ShortFormat) {
 
 	FPGAGlobal fg(f,w);
 	EXPECT_EQ(short_format(fg), "W002F004");
+
+	TriggerOnWafer t(Enum(3));
+	EXPECT_EQ(short_format(t),  "T03");
+
+	TriggerGlobal tg(t,w);
+	EXPECT_EQ(short_format(tg), "W002T03");
 
 	HRepeaterOnHICANN hr(Enum(5));
 	EXPECT_EQ(short_format(hr), "HR005");
