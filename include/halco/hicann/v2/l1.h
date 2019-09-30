@@ -17,6 +17,9 @@ extern "C" {
 #include "halco/hicann/v2/hicann.h"
 #include "halco/hicann/v2/synapse.h"
 
+#include "boost/optional.hpp"
+#include "boost/tuple/tuple.hpp"
+
 namespace halco {
 namespace hicann {
 namespace v2 {
@@ -329,6 +332,13 @@ public:
 	explicit HRepeaterOnWafer(enum_type const& e) : base(e) {}
 
 	HRepeaterOnHICANN toHRepeaterOnHICANN() const { return This(); }
+
+	/* L1 repeaters are connected to two L1 lines. One on the local
+	   HICANN, the other on a neighboring HICANN.
+
+	   The HLine on the local HICANN is guaranteed to be in the first element of the tuple.
+	 */
+	boost::tuple<HLineOnWafer, boost::optional<HLineOnWafer> > toHLineOnWafer() const;
 };
 
 
@@ -410,6 +420,13 @@ public:
 	explicit VRepeaterOnWafer(enum_type const& e) : base(e) {}
 
 	VRepeaterOnHICANN toVRepeaterOnHICANN() const { return This(); }
+
+	/* L1 repeaters are connected to two L1 lines. One on the local
+	   HICANN, the other on a neighboring HICANN.
+
+	   The VLine on the local HICANN is guaranteed to be in the first element of the tuple.
+	 */
+	boost::tuple<VLineOnWafer, boost::optional<VLineOnWafer> > toVLineOnWafer() const;
 };
 
 } // v2

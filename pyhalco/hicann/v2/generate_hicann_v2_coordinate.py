@@ -3,7 +3,7 @@ import sys,os, re, logging, argparse
 
 from pyplusplus.module_builder import call_policies
 from pywrap.wrapper import Wrapper
-from pywrap import containers, namespaces, matchers, classes
+from pywrap import containers, namespaces, matchers, classes, functions
 from pywrap.namespace_util import NamespaceUtil
 from pygccxml.declarations import templates
 from pyplusplus import decl_wrappers, messages
@@ -115,6 +115,10 @@ c = mb.typedef('::halco::hicann::v2::format_type').type.declaration
 c.include()
 
 classes.add_variant_converters_for(mb, mb.typedef('::halco::hicann::v2::format_type').target_decl)
+
+for cl in ns_coordinate.classes(allow_empty=True):
+    for fun in cl.mem_funs(allow_empty=True):
+        functions.return_optional_by_value(fun)
 
 wrap.set_number_of_files(5)
 

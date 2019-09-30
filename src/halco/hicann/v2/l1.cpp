@@ -397,6 +397,50 @@ VRepeaterOnWafer VLineOnWafer::toVRepeaterOnWafer() const
 	return VRepeaterOnWafer(toVLineOnHICANN().toVRepeaterOnHICANN(), toHICANNOnWafer());
 }
 
+boost::tuple<HLineOnWafer, boost::optional<HLineOnWafer>>
+HRepeaterOnWafer::toHLineOnWafer() const
+{
+	boost::tuple<HLineOnWafer, boost::optional<HLineOnWafer> > ret;
+
+	HLineOnHICANN const hline_on_this = toHRepeaterOnHICANN().toHLineOnHICANN();
+
+	ret.get<0>() = HLineOnWafer(hline_on_this, toHICANNOnWafer());
+
+	if (isLeft()) {
+		if (toHICANNOnWafer().has_west()) {
+			ret.get<1>() = HLineOnWafer(hline_on_this.west(), toHICANNOnWafer().west());
+		}
+	} else {
+		if (toHICANNOnWafer().has_east()) {
+			ret.get<1>() = HLineOnWafer(hline_on_this.east(), toHICANNOnWafer().east());
+		}
+	}
+
+	return ret;
+}
+
+boost::tuple<VLineOnWafer, boost::optional<VLineOnWafer> >
+VRepeaterOnWafer::toVLineOnWafer() const
+{
+	VLineOnHICANN const vline_on_this = toVRepeaterOnHICANN().toVLineOnHICANN();
+
+	boost::tuple<VLineOnWafer, boost::optional<VLineOnWafer> > ret;
+
+	ret.get<0>() = VLineOnWafer(vline_on_this, toHICANNOnWafer());
+
+	if (isBottom()) {
+		if (toHICANNOnWafer().has_south()) {
+			ret.get<1>() = VLineOnWafer(vline_on_this.south(), toHICANNOnWafer().south());
+		}
+	} else {
+		if (toHICANNOnWafer().has_north()) {
+			ret.get<1>() = VLineOnWafer(vline_on_this.north(), toHICANNOnWafer().north());
+		}
+	}
+
+	return ret;
+}
+
 } // v2
 } // hicann
 } // halco
