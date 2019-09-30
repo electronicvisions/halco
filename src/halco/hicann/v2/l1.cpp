@@ -387,6 +387,16 @@ SendingRepeaterOnHICANN DNCMergerOnHICANN::toSendingRepeaterOnHICANN() const {
 	return SendingRepeaterOnHICANN(max - value());
 }
 
+HRepeaterOnWafer HLineOnWafer::toHRepeaterOnWafer() const
+{
+	return HRepeaterOnWafer(toHLineOnHICANN().toHRepeaterOnHICANN(), toHICANNOnWafer());
+}
+
+VRepeaterOnWafer VLineOnWafer::toVRepeaterOnWafer() const
+{
+	return VRepeaterOnWafer(toVLineOnHICANN().toVRepeaterOnHICANN(), toHICANNOnWafer());
+}
+
 } // v2
 } // hicann
 } // halco

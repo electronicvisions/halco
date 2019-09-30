@@ -34,6 +34,7 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
     HighspeedLinkOnWafer  => iterable
     HICANNOnWafer         => grid, iterable
     HLineOnHICANN         => linear, iterable
+    HLineOnWafer          => iterable
     HRepeaterOnHICANN     => grid, iterable
     HRepeaterOnWafer      =>
     Host                  =>
@@ -82,6 +83,7 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
     UDPPort               => linear
     TCPPort               => linear
     VLineOnHICANN         => linear, iterable
+    VLineOnWafer          => iterable
     VRepeaterOnHICANN     => grid, iterable
     VRepeaterOnWafer      =>
     Wafer                 => linear

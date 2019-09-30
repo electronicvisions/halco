@@ -169,6 +169,53 @@ struct VLineOnHICANN : public common::detail::RantWrapper<VLineOnHICANN, size_t,
 		common::SideHorizontal const& side) const;
 };
 
+class HRepeaterOnWafer;
+
+struct HLineOnWafer : public HICANNMixin<HLineOnWafer, HLineOnHICANN>
+{
+private:
+	typedef HICANNMixin<HLineOnWafer, HLineOnHICANN> base;
+
+public:
+	using base::enum_type;
+
+	PYPP_DEFAULT(HLineOnWafer());
+
+	explicit HLineOnWafer(
+	    HLineOnHICANN const& hline, HICANNOnWafer const& h = HICANNOnWafer())
+	    : base(hline, h)
+	{}
+
+	explicit HLineOnWafer(enum_type const& e) : base(e) {}
+
+	HLineOnHICANN toHLineOnHICANN() const { return This(); }
+	HRepeaterOnWafer toHRepeaterOnWafer() const;
+};
+
+class VRepeaterOnWafer;
+
+struct VLineOnWafer : public HICANNMixin<VLineOnWafer, VLineOnHICANN>
+{
+private:
+	typedef HICANNMixin<VLineOnWafer, VLineOnHICANN> base;
+
+public:
+	using base::enum_type;
+
+	PYPP_DEFAULT(VLineOnWafer());
+
+	explicit VLineOnWafer(
+	    VLineOnHICANN const& hline, HICANNOnWafer const& h = HICANNOnWafer())
+	    : base(hline, h)
+	{}
+
+	explicit VLineOnWafer(enum_type const& e) : base(e) {}
+
+	VLineOnHICANN toVLineOnHICANN() const { return This(); }
+	VRepeaterOnWafer toVRepeaterOnWafer() const;
+};
+
+
 struct BackgroundGeneratorOnHICANN
     : public common::detail::RantWrapper<BackgroundGeneratorOnHICANN, uint_fast16_t, 7, 0> {
 	PYPP_CONSTEXPR explicit BackgroundGeneratorOnHICANN(uintmax_t const val = 0)
@@ -374,6 +421,8 @@ namespace std {
 
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::HLineOnHICANN)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::VLineOnHICANN)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::HLineOnWafer)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::VLineOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::CrossbarSwitchOnCrossbarSwitchRow)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SynapseSwitchOnSynapseSwitchRow)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::CrossbarSwitchOnHICANN)
@@ -397,5 +446,11 @@ HALCO_GEOMETRY_HASH_CLASS(
 HALCO_GEOMETRY_HASH_CLASS(
     halco::hicann::v2::HICANNMixin<halco::hicann::v2::HRepeaterOnWafer BOOST_PP_COMMA()
     halco::hicann::v2::HRepeaterOnHICANN>)
+HALCO_GEOMETRY_HASH_CLASS(
+    halco::hicann::v2::HICANNMixin<halco::hicann::v2::HLineOnWafer BOOST_PP_COMMA()
+    halco::hicann::v2::HLineOnHICANN>)
+HALCO_GEOMETRY_HASH_CLASS(
+    halco::hicann::v2::HICANNMixin<halco::hicann::v2::VLineOnWafer BOOST_PP_COMMA()
+    halco::hicann::v2::VLineOnHICANN>)
 
 } // std
