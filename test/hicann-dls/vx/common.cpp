@@ -149,7 +149,8 @@ typedef ::testing::Types<
     CADCChannelColumnOnSynram,
     CADCChannelConfigOnSynram,
     CADCChannelConfigOnDLS,
-    CADCSampleOnCADCSampleQuad>
+    CADCSampleOnCADCSampleQuad,
+    EventOutputOnNeuronBackendBlock>
     CoordinateTypes3;
 
 

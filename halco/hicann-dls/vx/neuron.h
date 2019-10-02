@@ -109,6 +109,17 @@ struct GENPYBIND(inline_base("*NeuronBackendConfigMixin*")) NeuronBackendConfigO
 	}
 };
 
+
+struct GENPYBIND(inline_base("*")) EventOutputOnNeuronBackendBlock
+    : public common::detail::RantWrapper<EventOutputOnNeuronBackendBlock, uint_fast16_t, 3, 0>
+{
+	constexpr explicit EventOutputOnNeuronBackendBlock(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+
 } // namespace halco::hicann_dls::vx
 
 namespace std {
@@ -120,5 +131,6 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CommonNeuronConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronBackendConfigOnNeuronBackendConfigBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronBackendConfigBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronBackendConfigOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::EventOutputOnNeuronBackendBlock)
 
 } // namespace std

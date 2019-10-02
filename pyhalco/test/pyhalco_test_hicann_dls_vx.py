@@ -7,6 +7,7 @@ from pyhalco_test_utils import parametrize, PyhalcoTest
 class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     # clang-format off
     COORDINATES = """
+    EventOutputOnNeuronBackendBlock  => linear, iterable
     SpikePackFromFPGAOnDLS           => linear, iterable
     MADCSamplePackFromFPGAOnDLS      => linear, iterable
     NullPayloadReadableOnFPGA        => linear, iterable
