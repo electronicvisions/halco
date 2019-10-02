@@ -134,6 +134,8 @@ typedef ::testing::Types<
     NeuronBackendConfigBlockOnDLS,
     NeuronBackendConfigOnNeuronBackendConfigBlock,
     NeuronBackendConfigOnDLS,
+    DACControlBlockOnBoard,
+    DACChannelBlockOnBoard,
     ColumnCorrelationQuadOnSynram,
     ColumnCurrentQuadOnSynram,
     ColumnCorrelationQuadOnDLS,

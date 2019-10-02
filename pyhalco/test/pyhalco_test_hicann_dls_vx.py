@@ -8,6 +8,8 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     # clang-format off
     COORDINATES = """
     EventOutputOnNeuronBackendBlock  => linear, iterable
+    DACControlBlockOnBoard           => linear, iterable
+    DACChannelBlockOnBoard           => linear, iterable
     SpikePackFromFPGAOnDLS           => linear, iterable
     MADCSamplePackFromFPGAOnDLS      => linear, iterable
     NullPayloadReadableOnFPGA        => linear, iterable
