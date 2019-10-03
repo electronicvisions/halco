@@ -134,6 +134,7 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     CADCChannelConfigOnDLS            => iterable
     EntryOnQuad                       => linear, iterable
     SynapticInputOnNeuron            => linear, iterable
+    MADCControlOnDLS                 => linear, iterable
     """
     # clang-format on
     @staticmethod

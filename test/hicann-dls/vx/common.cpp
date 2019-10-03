@@ -160,7 +160,8 @@ typedef ::testing::Types<
     NeuronOnDLS,
     DLSGlobal,
     HemisphereOnDLS,
-    HemisphereGlobal>
+    HemisphereGlobal,
+    MADCControlOnDLS>
     CoordinateTypes3;
 
 

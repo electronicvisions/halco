@@ -33,6 +33,7 @@ GENPYBIND_MANUAL({
 #include "halco/hicann-dls/vx/synapse_driver.h"
 #include "halco/hicann-dls/vx/synram.h"
 #include "halco/hicann-dls/vx/timing.h"
+#include "halco/hicann-dls/vx/madc.h"
 #include "halco/hicann-dls/vx/xboard.h"
 
 GENPYBIND(postamble, tag(hicann_dls_vx))
