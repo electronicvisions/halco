@@ -72,6 +72,8 @@ struct GENPYBIND(inline_base("*SynramMixin*")) SynapseQuadOnDLS
 	explicit SynapseQuadOnDLS(enum_type const& e) : mixin_t(e) {}
 
 	SynapseQuadOnSynram toSynapseQuadOnSynram() const { return This(); }
+
+	NeuronBlockOnDLS toNeuronBlockOnDLS() const;
 };
 
 
