@@ -7,6 +7,9 @@
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
+struct CapMemColumnOnCapMemBlock;
+struct CapMemBlockOnDLS;
+
 /**********\
    Neuron
 \**********/
@@ -18,6 +21,8 @@ struct GENPYBIND(inline_base("*")) NeuronConfigOnNeuronConfigBlock
 	    GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
+
+	CapMemColumnOnCapMemBlock toCapMemColumnOnCapMemBlock() const;
 };
 
 
@@ -28,6 +33,8 @@ struct GENPYBIND(inline_base("*")) NeuronConfigBlockOnDLS
 	    GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
+
+	CapMemBlockOnDLS toCapMemBlockOnDLS() const;
 };
 
 
