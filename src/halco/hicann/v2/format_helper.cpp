@@ -34,6 +34,12 @@ std::string short_format(const ANANASOnWafer& f) {
 	return ss.str();
 }
 
+std::string short_format(const AuxPwrOnWafer& ap) {
+	std::stringstream ss;
+	ss << "AP" << std::setw(1) << std::setfill('0') << ap.value();
+	return ss.str();
+}
+
 std::string short_format(const Wafer& w) {
 	std::stringstream ss;
 	ss << "W" << std::setw(3) << std::setfill('0') << w.value();
@@ -54,6 +60,10 @@ std::string short_format(const TriggerGlobal& fg) {
 
 std::string short_format(const ANANASGlobal& fg) {
 	return short_format(fg.toWafer()) + short_format(fg.toANANASOnWafer());
+}
+
+std::string short_format(const AuxPwrGlobal& apg) {
+	return short_format(apg.toWafer()) + short_format(apg.toAuxPwrOnWafer());
 }
 
 std::string short_format(const HRepeaterOnHICANN& hr) {
@@ -124,6 +134,7 @@ typedef boost::variant<
     FPGAOnWafer,
     TriggerOnWafer,
     ANANASOnWafer,
+    AuxPwrOnWafer,
     Wafer,
     HRepeaterOnHICANN,
     VRepeaterOnHICANN,
@@ -134,6 +145,7 @@ typedef boost::variant<
 // all compound types
 typedef boost::variant<
     ANANASGlobal,
+    AuxPwrGlobal,
     HICANNGlobal,
     FPGAGlobal,
     TriggerGlobal,
@@ -165,6 +177,8 @@ local_type to_local(std::string const& type, std::string const& value)
 		return VLineOnHICANN(e);
 	} else if (type == "A") {
 		return ANANASOnWafer(e);
+	} else if (type == "AP") {
+		return AuxPwrOnWafer(e);
 	} else {
 		throw std::runtime_error(
 		    "halco::hicann::v2::to_local: unknown local type \"" + type + "\"");
@@ -182,6 +196,10 @@ struct to_compound : public boost::static_visitor<compound_type>
 	ANANASGlobal operator()(Wafer const& w, ANANASOnWafer const& a) const
 	{
 		return ANANASGlobal(a, w);
+	}
+	AuxPwrGlobal operator()(Wafer const& w, AuxPwrOnWafer const& a) const
+	{
+		return AuxPwrGlobal(a, w);
 	}
 	TriggerGlobal operator()(Wafer const& w, TriggerOnWafer const& t) const
 	{

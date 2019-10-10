@@ -55,6 +55,9 @@ TriggerOnWafer gridLookupTriggerOnWafer(DNCOnWafer const dnc);
 // Return the ANANAS connected to a Trigger
 ANANASOnWafer gridLookupANANASOnWafer(TriggerOnWafer const trigger);
 
+// Return the associated AuxPwr on a Wafer
+AuxPwrOnWafer gridLookupAuxPwrOnWafer(DNCOnWafer const dnc);
+
 } // v2
 } // hicann
 } // halco

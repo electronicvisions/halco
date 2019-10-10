@@ -39,6 +39,8 @@ typedef ::testing::Types<
 	FPGAOnWafer,
 	ANANASGlobal,
 	ANANASOnWafer,
+	AuxPwrGlobal,
+	AuxPwrOnWafer,
 	GbitLinkOnHICANN,
 	HICANNGlobal,
 	HICANNOnDNC,

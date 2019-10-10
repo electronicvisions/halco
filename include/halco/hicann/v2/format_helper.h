@@ -14,10 +14,12 @@ namespace v2 {
 // Order of declaration matters for python bindings:
 // Keep globals first!
 std::string short_format(const ANANASGlobal& a);
+std::string short_format(const AuxPwrGlobal& apg);
 std::string short_format(const HICANNGlobal& hg);
 std::string short_format(const FPGAGlobal& fg);
 std::string short_format(const TriggerGlobal& t);
 std::string short_format(const ANANASOnWafer& a);
+std::string short_format(const AuxPwrOnWafer& a);
 std::string short_format(const HICANNOnWafer& h);
 std::string short_format(const FPGAOnWafer& f);
 std::string short_format(const TriggerOnWafer& t);
@@ -44,10 +46,12 @@ std::string to_string(T const& t)
 }
 
 template std::string to_string(ANANASGlobal const&);
+template std::string to_string(AuxPwrGlobal const&);
 template std::string to_string(HICANNGlobal const&);
 template std::string to_string(FPGAGlobal const&);
 template std::string to_string(TriggerGlobal const&);
 template std::string to_string(ANANASOnWafer const&);
+template std::string to_string(AuxPwrOnWafer const&);
 template std::string to_string(HICANNOnWafer const&);
 template std::string to_string(FPGAOnWafer const&);
 template std::string to_string(TriggerOnWafer const&);
@@ -64,6 +68,7 @@ template std::string to_string(VLineOnHICANN const&);
 
 typedef boost::variant<
     ANANASGlobal,
+    AuxPwrGlobal,
     HICANNGlobal,
     FPGAGlobal,
     TriggerGlobal,
@@ -71,6 +76,7 @@ typedef boost::variant<
     FPGAOnWafer,
     TriggerOnWafer,
     ANANASOnWafer,
+    AuxPwrOnWafer,
     Wafer,
     HRepeaterOnHICANN,
     VRepeaterOnHICANN,

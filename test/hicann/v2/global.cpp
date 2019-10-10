@@ -15,6 +15,7 @@ typedef ::testing::Types<
 	DNCGlobal,
 	FPGAGlobal,
 	ANANASGlobal,
+	AuxPwrGlobal,
 	HICANNGlobal,
 	NeuronBlockGlobal,
 	NeuronGlobal,

@@ -25,6 +25,8 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
     FPGAOnWafer           => linear, iterable
     ANANASGlobal          =>
     ANANASOnWafer         => linear, iterable
+    AuxPwrGlobal          =>
+    AuxPwrOnWafer         => linear, iterable
     GbitLinkOnHICANN      => linear, iterable
     HICANNGlobal          =>
     HICANNOnWaferEnum     => ignore
@@ -132,6 +134,18 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
         self.assertEqual(C.from_string("W002A1"), ag)
         self.assertEqual(C.from_string("W02A1"), ag)
         self.assertEqual(C.from_string("W2A1"), ag)
+
+        a = C.AuxPwrOnWafer(Enum(1))
+        self.assertEqual(C.short_format(a), "AP1")
+        self.assertEqual(C.to_string(a), "AP1")
+        self.assertEqual(C.from_string("AP1"), a)
+
+        apg = C.AuxPwrGlobal(a, w)
+        self.assertEqual(C.short_format(apg), "W002AP1")
+        self.assertEqual(C.to_string(apg), "W002AP1")
+        self.assertEqual(C.from_string("W002AP1"), apg)
+        self.assertEqual(C.from_string("W02AP1"), apg)
+        self.assertEqual(C.from_string("W2AP1"), apg)
 
         h = C.HICANNOnWafer(Enum(3))
         self.assertEqual(C.short_format(h),  "H003")

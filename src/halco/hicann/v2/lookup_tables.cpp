@@ -136,6 +136,17 @@ std::array<size_t, 48> const reticle_adc_trigger_grid = {{
 
 std::array<size_t, 12> const adc_trigger_ananas_grid = {{0,0,0,1,1,1,1,1,1,0,0,0}};
 
+std::array<size_t, 48> const reticle_auxpwr_grid = {{
+              1,  1,  0,
+          1,  1,  1,  0,  0,
+      1,  1,  1,  1,  0,  0,  0,
+  1,  1,  1,  1,  1,  0,  0,  0,  0,
+  1,  1,  1,  1,  0,  0,  0,  0,  0,
+      1,  1,  1,  0,  0,  0,  0,
+          1,  1,  0,  0, 0,
+              1,  0,  0
+}};
+
 // clang-format on
 
 static std::array<size_t, 48> const reverse_adc_trigger_grid =
@@ -169,6 +180,11 @@ TriggerOnWafer gridLookupTriggerOnWafer(DNCOnWafer const dnc)
 ANANASOnWafer gridLookupANANASOnWafer(TriggerOnWafer const trigger)
 {
 	return ANANASOnWafer(adc_trigger_ananas_grid.at(trigger.toEnum()));
+}
+
+AuxPwrOnWafer gridLookupAuxPwrOnWafer(DNCOnWafer const dnc)
+{
+	return AuxPwrOnWafer(reticle_auxpwr_grid.at(dnc.toEnum()));
 }
 
 } // v2

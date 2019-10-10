@@ -27,6 +27,16 @@ TEST(FormatHelper, ShortFormat) {
 	EXPECT_EQ(to_string(ag), "W002A1");
 	EXPECT_EQ(boost::get<ANANASGlobal>(from_string("W002A1")), ag);
 
+	AuxPwrOnWafer ap(Enum(1));
+	EXPECT_EQ(short_format(ap),  "AP1");
+	EXPECT_EQ(to_string(ap),  "AP1");
+	EXPECT_EQ(boost::get<AuxPwrOnWafer>(from_string("AP1")), ap);
+
+	AuxPwrGlobal apg(ap,w);
+	EXPECT_EQ(short_format(apg), "W002AP1");
+	EXPECT_EQ(to_string(apg), "W002AP1");
+	EXPECT_EQ(boost::get<AuxPwrGlobal>(from_string("W002AP1")), apg);
+
 	HICANNOnWafer h(Enum(3));
 	EXPECT_EQ(short_format(h),  "H003");
 	EXPECT_EQ(to_string(h),  "H003");

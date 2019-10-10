@@ -100,6 +100,11 @@ ANANASOnWafer TriggerOnWafer::toANANASOnWafer() const
 	return gridLookupANANASOnWafer(*this);
 }
 
+AuxPwrOnWafer DNCOnWafer::toAuxPwrOnWafer() const
+{
+	return gridLookupAuxPwrOnWafer(*this);
+}
+
 FPGAGlobal::FPGAGlobal()
     : FPGAGlobal(FPGAOnWafer{}, Wafer{}) // delegate to common ctor for range checks
 {}
@@ -146,6 +151,17 @@ ANANASGlobal::ANANASGlobal(ANANASOnWafer const& h, Wafer const& w) : base(h, w) 
 
 ANANASGlobal::ANANASGlobal(enum_type const& e) :
 	base(ANANASOnWafer(e % ANANASOnWafer::end), Wafer(e / ANANASOnWafer::end))
+{}
+
+AuxPwrGlobal::AuxPwrGlobal()
+    : AuxPwrGlobal(AuxPwrOnWafer{}, Wafer{}) // delegate to common ctor for range checks
+{}
+
+AuxPwrGlobal::AuxPwrGlobal(AuxPwrOnWafer const& h, Wafer const& w) : base(h, w) {
+}
+
+AuxPwrGlobal::AuxPwrGlobal(enum_type const& e) :
+	base(AuxPwrOnWafer(e % AuxPwrOnWafer::end), Wafer(e / AuxPwrOnWafer::end))
 {}
 
 const FPGAOnWafer FPGAOnWafer::Master = FPGAOnWafer(12);
