@@ -1,7 +1,9 @@
 #pragma once
 
+#include <algorithm>
 #include <string>
 #include <stdio.h>
+#include <vector>
 
 #include <boost/variant.hpp>
 
@@ -88,6 +90,20 @@ typedef boost::variant<
 
 // converts from short format to type
 format_type from_string(std::string const& s);
+
+#ifndef PYPLUSPLUS
+// converts from an iterable of type I of strings to types T; throws if it cannot convert
+template <typename T, typename I>
+std::vector<T> from_string(I const& vs)
+{
+	std::vector<T> types;
+	std::transform(std::begin(vs), std::end(vs), std::back_inserter(types), [](auto s) {
+		return boost::get<T>(from_string(s));
+	});
+
+	return types;
+}
+#endif
 
 } // v2
 } // hicann

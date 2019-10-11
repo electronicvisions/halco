@@ -102,6 +102,13 @@ TEST(FormatHelper, ShortFormat) {
 	EXPECT_ANY_THROW(from_string("W33X"));
 	EXPECT_ANY_THROW(from_string("W33F12 "));
 	EXPECT_ANY_THROW(from_string(" W33F12"));
+
+	std::vector<std::string> vs = {"W1", "W2", "W3"};
+	std::vector<Wafer> const expected_wafers = {Wafer(1), Wafer(2), Wafer(3)};
+	EXPECT_EQ(from_string<Wafer>(vs), expected_wafers);
+
+	std::vector<std::string> mixed_types_v = {"W1", "W1F1"};
+	EXPECT_ANY_THROW(from_string<Wafer>(mixed_types_v));
 }
 
 TEST(FormatHelper, SlurmLicense)
