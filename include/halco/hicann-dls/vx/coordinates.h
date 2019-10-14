@@ -3,6 +3,12 @@
 
 #include "halco/common/genpybind.h"
 
+GENPYBIND_TAG_HALCO_HICANN_DLS_VX
+GENPYBIND_MANUAL({
+	parent.attr("__variant__") = "pybind11";
+	parent->py::module::import("pyhalco_common");
+})
+
 #include "halco/hicann-dls/vx/background.h"
 #include "halco/hicann-dls/vx/cadc.h"
 #include "halco/hicann-dls/vx/capmem.h"
@@ -27,12 +33,6 @@
 #include "halco/hicann-dls/vx/synram.h"
 #include "halco/hicann-dls/vx/timing.h"
 #include "halco/hicann-dls/vx/xboard.h"
-
-GENPYBIND_TAG_HALCO_HICANN_DLS_VX
-GENPYBIND_MANUAL({
-	parent.attr("__variant__") = "pybind11";
-	parent->py::module::import("pyhalco_common");
-})
 
 GENPYBIND(postamble, tag(hicann_dls_vx))
 GENPYBIND_MANUAL({
