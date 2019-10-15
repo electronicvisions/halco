@@ -157,7 +157,10 @@ typedef ::testing::Types<
     SynapseRowOnDLS,
     SynapseOnSynapseRow,
     CADCSampleRowOnDLS,
-    SynapticInputOnNeuron>
+    SynapticInputOnNeuron,
+    NeuronOnNeuronBlock,
+    NeuronBlockOnDLS,
+    NeuronOnDLS>
     CoordinateTypes3;
 
 

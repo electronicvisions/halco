@@ -4,6 +4,16 @@
 
 namespace halco::hicann_dls::vx {
 
+CapMemColumnOnCapMemBlock NeuronOnNeuronBlock::toCapMemColumnOnCapMemBlock() const
+{
+	return CapMemColumnOnCapMemBlock(toEnum());
+}
+
+CapMemBlockOnDLS NeuronBlockOnDLS::toCapMemBlockOnDLS() const
+{
+	return CapMemBlockOnDLS(toEnum());
+}
+
 CapMemColumnOnCapMemBlock NeuronConfigOnNeuronConfigBlock::toCapMemColumnOnCapMemBlock() const
 {
 	return CapMemColumnOnCapMemBlock(toEnum());
@@ -29,6 +39,21 @@ NeuronResetOnDLS NeuronConfigOnDLS::toNeuronResetOnDLS() const
 	             ? NeuronConfigOnNeuronConfigBlock::size
 	             : 0)),
 	    block);
+}
+
+NeuronConfigOnDLS NeuronOnDLS::toNeuronConfigOnDLS() const
+{
+	return NeuronConfigOnDLS(toEnum());
+}
+
+NeuronResetOnDLS NeuronOnDLS::toNeuronResetOnDLS() const
+{
+	return toNeuronConfigOnDLS().toNeuronResetOnDLS();
+}
+
+NeuronBackendConfigOnDLS NeuronOnDLS::toNeuronBackendConfigOnDLS() const
+{
+	return NeuronBackendConfigOnDLS(toNeuronResetOnDLS().toEnum());
 }
 
 } // namespace halco::hicann_dls::vx
