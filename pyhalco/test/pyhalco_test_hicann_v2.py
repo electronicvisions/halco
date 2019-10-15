@@ -13,7 +13,7 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
     CrossbarSwitchOnCrossbarSwitchRow => grid, iterable
     DNCGlobal             =>
     DNCMergerOnHICANN     => linear, iterable
-    DNCMergerOnWafer      =>
+    DNCMergerOnWafer      => iterable
     DNCOnFPGA             => linear, iterable
     DNCOnWaferEnum        => ignore
     DNCOnWaferGrid        => ignore
@@ -36,7 +36,7 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
     HLineOnHICANN         => linear, iterable
     HLineOnWafer          => iterable
     HRepeaterOnHICANN     => grid, iterable
-    HRepeaterOnWafer      =>
+    HRepeaterOnWafer      => iterable
     Host                  =>
     IPv4                  =>
     JTAGFrequency         =>
@@ -46,13 +46,13 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
     Merger3OnHICANN       => linear, iterable
     NeuronBlockGlobal     =>
     NeuronBlockOnHICANN   => linear, iterable
-    NeuronBlockOnWafer    =>
+    NeuronBlockOnWafer    => iterable
     NeuronGlobal          =>
     NeuronOnFGBlock       => linear, iterable
     NeuronOnHICANN        => grid, iterable
     NeuronOnNeuronBlock   => grid, iterable
     NeuronOnQuad          => grid, iterable
-    NeuronOnWafer         =>
+    NeuronOnWafer         => iterable
     PMU                   =>
     PowerCoordinate       => linear, iterable
     OutputBufferOnHICANN  => ignore
@@ -66,7 +66,7 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
     SynapseColumnOnHICANN => linear, iterable
     SynapseDriverOnHICANN => grid, iterable
     SynapseDriverOnQuadrant => linear, iterable
-    SynapseDriverOnWafer  =>
+    SynapseDriverOnWafer  => iterable
     SynapseOnHICANN       => grid, iterable
     SynapseOnWafer        =>
     SynapseRowOnHICANN    => linear, iterable
@@ -74,7 +74,7 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
     SynapseSwitchOnHICANN => grid, iterable
     SynapseSwitchOnSynapseSwitchRow => grid, iterable
     SynapseSwitchRowOnHICANN => grid, iterable
-    SynapseSwitchRowOnWafer =>
+    SynapseSwitchRowOnWafer => iterable
     SynapticInputOnNeuron => linear, iterable
     SynapticInputOnHICANN => linear, iterable
     TriggerOnADC          => linear, iterable
@@ -85,7 +85,7 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
     VLineOnHICANN         => linear, iterable
     VLineOnWafer          => iterable
     VRepeaterOnHICANN     => grid, iterable
-    VRepeaterOnWafer      =>
+    VRepeaterOnWafer      => iterable
     Wafer                 => linear
     BSSWafer              => ignore
     CubeSetup             => ignore
