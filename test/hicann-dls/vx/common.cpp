@@ -160,7 +160,10 @@ typedef ::testing::Types<
     SynapticInputOnNeuron,
     NeuronOnNeuronBlock,
     NeuronBlockOnDLS,
-    NeuronOnDLS>
+    NeuronOnDLS,
+    DLSGlobal,
+    HemisphereOnDLS,
+    HemisphereGlobal>
     CoordinateTypes3;
 
 

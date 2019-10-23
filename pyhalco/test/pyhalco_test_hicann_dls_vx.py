@@ -7,6 +7,9 @@ from pyhalco_test_utils import parametrize, PyhalcoTest
 class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     # clang-format off
     COORDINATES = """
+    DLSGlobal                        => linear, iterable
+    HemisphereOnDLS                  => linear, iterable
+    HemisphereGlobal                 => linear, iterable
     EventOutputOnNeuronBackendBlock  => linear, iterable
     DACControlBlockOnBoard           => linear, iterable
     DACChannelBlockOnBoard           => linear, iterable
