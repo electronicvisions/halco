@@ -150,6 +150,7 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     ColumnCurrentQuadOnDLS => linear,iterable
     CADCChannelType => linear,iterable
     CADCReadoutType => linear,iterable
+    CADCSamplesOnDLS => linear, iterable
     CADCSampleQuadUnspecifiedReadoutOnSynram => iterable
     CADCSampleQuadOnSynram => iterable
     CADCSampleQuadOnDLS => iterable

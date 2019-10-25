@@ -185,6 +185,7 @@ typedef ::testing::Types<
     CoordinateTypes3;
 
 typedef ::testing::Types<
+    CADCSamplesOnDLS,
     MADCConfigOnDLS,
     BlockPostPulseOnDLS,
     CorrelationResetRowOnDLS,

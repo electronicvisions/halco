@@ -199,6 +199,12 @@ struct GENPYBIND(inline_base("*")) CADCOffsetSRAMTimingConfigOnDLS
 };
 
 
+struct GENPYBIND(inline_base("*")) CADCSamplesOnDLS
+    : public common::detail::RantWrapper<CADCSamplesOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit CADCSamplesOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
 } // namespace halco::hicann_dls::vx
 
 namespace std {
@@ -214,5 +220,6 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCChannelConfigOnSynram)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCChannelConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCSampleRowOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCOffsetSRAMTimingConfigOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCSamplesOnDLS)
 
 } // namespace std
