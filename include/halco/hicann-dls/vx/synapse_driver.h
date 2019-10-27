@@ -11,6 +11,8 @@ namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
    SynapseDriver
 \*****************/
 
+struct PADIBusOnPADIBusBlock;
+
 struct GENPYBIND(inline_base("*")) SynapseDriverOnSynapseDriverBlock
     : public common::detail::RantWrapper<SynapseDriverOnSynapseDriverBlock, uint_fast16_t, 127, 0>
 {
@@ -18,10 +20,14 @@ struct GENPYBIND(inline_base("*")) SynapseDriverOnSynapseDriverBlock
 	    GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
+
+	PADIBusOnPADIBusBlock toPADIBusOnPADIBusBlock() const;
 };
 
 
 struct CommonSynapseDriverConfigOnDLS;
+struct SynramOnDLS;
+struct PADIEventOnDLS;
 
 struct GENPYBIND(inline_base("*")) SynapseDriverBlockOnDLS
     : public common::detail::RantWrapper<SynapseDriverBlockOnDLS, uint_fast16_t, 1, 0>
@@ -32,6 +38,8 @@ struct GENPYBIND(inline_base("*")) SynapseDriverBlockOnDLS
 	{}
 
 	CommonSynapseDriverConfigOnDLS toCommonSynapseDriverConfigOnDLS() const;
+	SynramOnDLS toSynramOnDLS() const;
+	PADIEventOnDLS toPADIEventOnDLS() const;
 
 	static const SynapseDriverBlockOnDLS top;
 	static const SynapseDriverBlockOnDLS bottom;

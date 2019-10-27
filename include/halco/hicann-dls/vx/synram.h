@@ -6,8 +6,6 @@
 #include "halco/common/geometry.th"
 #include "halco/common/mixin.h"
 
-#include "halco/hicann-dls/vx/ppu.h"
-
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 /************\
@@ -15,16 +13,21 @@ namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 \************/
 
 struct CommonSynramConfigOnDLS;
+struct PPUOnDLS;
+struct SynapseDriverBlockOnDLS;
+struct PADIEventOnDLS;
 
 struct GENPYBIND(inline_base("*")) SynramOnDLS
-    : public common::detail::RantWrapper<SynramOnDLS, uint_fast16_t, PPUOnDLS::max, PPUOnDLS::min>
+    : public common::detail::RantWrapper<SynramOnDLS, uint_fast16_t, 1, 0>
 {
 	constexpr explicit SynramOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
 
 	CommonSynramConfigOnDLS toCommonSynramConfigOnDLS() const;
-	PPUOnDLS toPPUOnDLS() const { return PPUOnDLS(toEnum()); }
+	PPUOnDLS toPPUOnDLS() const;
+	SynapseDriverBlockOnDLS toSynapseDriverBlockOnDLS() const;
+	PADIEventOnDLS toPADIEventOnDLS() const;
 
 	static const SynramOnDLS top;
 	static const SynramOnDLS bottom;
@@ -41,7 +44,7 @@ struct GENPYBIND(inline_base("*")) CommonSynramConfigOnDLS
 	    rant_t(val)
 	{}
 
-	PPUOnDLS toPPUOnDLS() const { return PPUOnDLS(toEnum()); }
+	PPUOnDLS toPPUOnDLS() const;
 	SynramOnDLS toSynramOnDLS() const;
 
 	static const CommonSynramConfigOnDLS top;

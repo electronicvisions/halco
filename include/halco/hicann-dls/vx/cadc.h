@@ -123,6 +123,10 @@ struct GENPYBIND(inline_base("*CADCChannelTypeMixin*")) CADCChannelConfigOnSynra
 	explicit CADCChannelConfigOnSynram(enum_type const& e) : mixin_t(e) {}
 
 	CADCChannelColumnOnSynram toCADCChannelColumnOnSynram() const { return This(); }
+	SynapseOnSynapseRow toSynapseOnSynapseRow() const
+	{
+		return SynapseOnSynapseRow(int(toCADCChannelColumnOnSynram().toEnum()));
+	}
 };
 
 
