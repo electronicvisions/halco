@@ -1,18 +1,9 @@
 #include "halco/hicann-dls/vx/neuron.h"
 
 #include "halco/hicann-dls/vx/capmem.h"
+#include "halco/hicann-dls/vx/synapse.h"
 
 namespace halco::hicann_dls::vx {
-
-CapMemColumnOnCapMemBlock NeuronOnNeuronBlock::toCapMemColumnOnCapMemBlock() const
-{
-	return CapMemColumnOnCapMemBlock(toEnum());
-}
-
-CapMemBlockOnDLS NeuronBlockOnDLS::toCapMemBlockOnDLS() const
-{
-	return CapMemBlockOnDLS(toEnum());
-}
 
 CapMemColumnOnCapMemBlock NeuronConfigOnNeuronConfigBlock::toCapMemColumnOnCapMemBlock() const
 {
@@ -41,6 +32,16 @@ NeuronResetOnDLS NeuronConfigOnDLS::toNeuronResetOnDLS() const
 	    block);
 }
 
+SynapseOnSynapseRow NeuronColumnOnDLS::toSynapseOnSynapseRow() const
+{
+	return SynapseOnSynapseRow(toEnum());
+}
+
+CapMemColumnOnCapMemBlock NeuronColumnOnDLS::toCapMemColumnOnCapMemBlock() const
+{
+	return CapMemColumnOnCapMemBlock(toEnum() % CapMemColumnOnCapMemBlock::size);
+}
+
 NeuronConfigOnDLS NeuronOnDLS::toNeuronConfigOnDLS() const
 {
 	return NeuronConfigOnDLS(toEnum());
@@ -54,6 +55,16 @@ NeuronResetOnDLS NeuronOnDLS::toNeuronResetOnDLS() const
 NeuronBackendConfigOnDLS NeuronOnDLS::toNeuronBackendConfigOnDLS() const
 {
 	return NeuronBackendConfigOnDLS(toNeuronResetOnDLS().toEnum());
+}
+
+CapMemColumnOnCapMemBlock NeuronOnDLS::toCapMemColumnOnCapMemBlock() const
+{
+	return toNeuronColumnOnDLS().toCapMemColumnOnCapMemBlock();
+}
+
+CapMemBlockOnDLS NeuronOnDLS::toCapMemBlockOnDLS() const
+{
+	return toNeuronConfigOnDLS().toNeuronConfigBlockOnDLS().toCapMemBlockOnDLS();
 }
 
 } // namespace halco::hicann_dls::vx

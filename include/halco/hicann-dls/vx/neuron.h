@@ -13,52 +13,60 @@ struct NeuronResetBlockOnDLS;
 struct NeuronResetOnDLS;
 struct NeuronConfigOnDLS;
 struct NeuronBackendConfigOnDLS;
+struct SynapseOnSynapseRow;
 
 /**********\
    Neuron
 \**********/
 
-struct GENPYBIND(inline_base("*")) NeuronOnNeuronBlock
-    : public common::detail::RantWrapper<NeuronOnNeuronBlock, uint_fast16_t, 127, 0>
+/**
+ * Horizontal neuron location on the two dimensional neuron grid.
+ */
+struct GENPYBIND(inline_base("*")) NeuronColumnOnDLS
+    : public common::detail::RantWrapper<NeuronColumnOnDLS, uint_fast16_t, 255, 0>
+    , public common::detail::XRangedTrait
 {
-	constexpr explicit NeuronOnNeuronBlock(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	constexpr explicit NeuronColumnOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
 
+	SynapseOnSynapseRow toSynapseOnSynapseRow() const;
 	CapMemColumnOnCapMemBlock toCapMemColumnOnCapMemBlock() const;
 };
 
 
-struct GENPYBIND(inline_base("*")) NeuronBlockOnDLS
-    : public common::detail::RantWrapper<NeuronBlockOnDLS, uint_fast16_t, 3, 0>
+/**
+ * Vertical neuron location on the two dimensional neuron grid.
+ */
+struct GENPYBIND(inline_base("*")) NeuronRowOnDLS
+    : public common::detail::RantWrapper<NeuronRowOnDLS, uint_fast16_t, 1, 0>
+    , public common::detail::YRangedTrait
 {
-	constexpr explicit NeuronBlockOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	constexpr explicit NeuronRowOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
-
-	CapMemBlockOnDLS toCapMemBlockOnDLS() const;
 };
 
 
-HALCO_COORDINATE_MIXIN(NeuronMixin, NeuronBlockOnDLS, neuron)
-
-struct GENPYBIND(inline_base("*NeuronMixin*")) NeuronOnDLS
-    : public NeuronMixin<NeuronOnDLS, NeuronOnNeuronBlock>
+/**
+ * DLS-global neuron location on the two dimensional neuron grid.
+ */
+struct GENPYBIND(inline_base("*")) NeuronOnDLS
+    : public common::detail::GridCoordinate<NeuronOnDLS, NeuronColumnOnDLS, NeuronRowOnDLS>
 {
-	NeuronOnDLS() = default;
+	GRID_COMMON_CONSTRUCTORS(NeuronOnDLS)
 
-	explicit NeuronOnDLS(
-	    NeuronOnNeuronBlock const& neuron, NeuronBlockOnDLS const& block = NeuronBlockOnDLS()) :
-	    mixin_t(neuron, block)
-	{}
+	NeuronColumnOnDLS toNeuronColumnOnDLS() const { return x(); }
+	NeuronRowOnDLS toNeuronRowOnDLS() const { return y(); }
 
-	explicit NeuronOnDLS(enum_type const& e) : mixin_t(e) {}
-
-	NeuronOnNeuronBlock toNeuronOnNeuronBlock() const { return This(); }
 	NeuronResetOnDLS toNeuronResetOnDLS() const;
 	NeuronConfigOnDLS toNeuronConfigOnDLS() const;
 	NeuronBackendConfigOnDLS toNeuronBackendConfigOnDLS() const;
+
+	CapMemBlockOnDLS toCapMemBlockOnDLS() const;
+	CapMemColumnOnCapMemBlock toCapMemColumnOnCapMemBlock() const;
 };
+
 
 struct GENPYBIND(inline_base("*")) NeuronConfigOnNeuronConfigBlock
     : public common::detail::RantWrapper<NeuronConfigOnNeuronConfigBlock, uint_fast16_t, 127, 0>
@@ -208,8 +216,8 @@ struct GENPYBIND(inline_base("*NeuronResetMixin*")) NeuronResetOnDLS
 
 namespace std {
 
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronOnNeuronBlock)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronBlockOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronColumnOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronRowOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronConfigOnNeuronConfigBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronConfigBlockOnDLS)

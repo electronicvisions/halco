@@ -110,8 +110,6 @@ struct GENPYBIND(inline_base("*SynapseQuadColumnMixin*")) SynapseOnSynapseRow
 	    mixin_t(syn_on_quad, quad)
 	{}
 
-	explicit SynapseOnSynapseRow(enum_type const& e) : mixin_t(e) {}
-
 	explicit SynapseOnSynapseRow(uintmax_t const value) GENPYBIND(implicit_conversion) :
 	    mixin_t(enum_type(value))
 	{}
