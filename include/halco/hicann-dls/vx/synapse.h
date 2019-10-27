@@ -12,6 +12,8 @@
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
+struct SynapseDriverOnSynapseDriverBlock;
+
 /***********\
    Synapse
 \***********/
@@ -48,6 +50,8 @@ struct GENPYBIND(inline_base("*")) SynapseRowOnSynram
 	constexpr explicit SynapseRowOnSynram(common::Y const& y) GENPYBIND(implicit_conversion) :
 	    rant_t(y)
 	{}
+
+	SynapseDriverOnSynapseDriverBlock toSynapseDriverOnSynapseDriverBlock() const;
 };
 
 
