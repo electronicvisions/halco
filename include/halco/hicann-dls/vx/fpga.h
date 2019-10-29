@@ -1,10 +1,8 @@
 #pragma once
 #include <stdint.h>
 
-#include "halco/common/common.h"
 #include "halco/common/genpybind.h"
-#include "halco/common/geometry.th"
-#include "halco/common/mixin.h"
+#include "halco/common/geometry.h"
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
