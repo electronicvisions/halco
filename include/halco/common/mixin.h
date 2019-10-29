@@ -29,7 +29,7 @@
 		     GENPYBIND(opaque(false));                                         \
 		HALCO_COORDINATE_MIXIN__SIZE_MEMBERS                                   \
                                                                                \
-		mixin() {}                                                             \
+		mixin() : T(), mValue() {}                                             \
 		explicit mixin(T const t, cls const v) : T(t), mValue(v) {}            \
 		explicit mixin(enum_type const& e)                                     \
 			: T(::halco::common::Enum(e PYPP_EXCLUDE( % local_type::size)))    \
