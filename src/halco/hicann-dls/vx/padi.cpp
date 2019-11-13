@@ -7,17 +7,6 @@
 
 namespace halco::hicann_dls::vx {
 
-CommonSynapseDriverConfigOnDLS SynapseDriverBlockOnDLS::toCommonSynapseDriverConfigOnDLS() const
-{
-	return CommonSynapseDriverConfigOnDLS(toEnum());
-}
-
-SynapseDriverBlockOnDLS const SynapseDriverBlockOnDLS::top{enum_vertical_top};
-SynapseDriverBlockOnDLS const SynapseDriverBlockOnDLS::bottom{enum_vertical_bottom};
-
-CommonSynapseDriverConfigOnDLS const CommonSynapseDriverConfigOnDLS::top{enum_vertical_top};
-CommonSynapseDriverConfigOnDLS const CommonSynapseDriverConfigOnDLS::bottom{enum_vertical_bottom};
-
 PADIBusBlockOnDLS const PADIBusBlockOnDLS::bottom{enum_vertical_bottom};
 PADIBusBlockOnDLS const PADIBusBlockOnDLS::top{enum_vertical_top};
 
