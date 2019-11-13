@@ -7,14 +7,11 @@
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
+#include "halco/hicann-dls/vx/hemisphere_fwd.h"
+
 /************\
     Synram
 \************/
-
-struct CommonSynramConfigOnDLS;
-struct PPUOnDLS;
-struct SynapseDriverBlockOnDLS;
-struct PADIEventOnDLS;
 
 struct GENPYBIND(inline_base("*")) SynramOnDLS
     : public common::detail::RantWrapper<SynramOnDLS, uint_fast16_t, 1, 0>
@@ -23,10 +20,7 @@ struct GENPYBIND(inline_base("*")) SynramOnDLS
 	    rant_t(val)
 	{}
 
-	CommonSynramConfigOnDLS toCommonSynramConfigOnDLS() const;
-	PPUOnDLS toPPUOnDLS() const;
-	SynapseDriverBlockOnDLS toSynapseDriverBlockOnDLS() const;
-	PADIEventOnDLS toPADIEventOnDLS() const;
+#include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
 	static const SynramOnDLS top;
 	static const SynramOnDLS bottom;
@@ -43,8 +37,7 @@ struct GENPYBIND(inline_base("*")) CommonSynramConfigOnDLS
 	    rant_t(val)
 	{}
 
-	PPUOnDLS toPPUOnDLS() const;
-	SynramOnDLS toSynramOnDLS() const;
+#include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
 	static const CommonSynramConfigOnDLS top;
 	static const CommonSynramConfigOnDLS bottom;

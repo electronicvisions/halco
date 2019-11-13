@@ -10,6 +10,8 @@
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
+#include "halco/hicann-dls/vx/hemisphere_fwd.h"
+
 /**********\
     CADC
 \**********/
@@ -19,7 +21,7 @@ struct GENPYBIND(inline_base("*")) CADCConfigOnDLS
 {
 	constexpr explicit CADCConfigOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 
-	PPUOnDLS toPPUOnDLS() const;
+#include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
 	static const CADCConfigOnDLS top;
 	static const CADCConfigOnDLS bottom;

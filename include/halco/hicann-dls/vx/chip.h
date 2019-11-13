@@ -7,6 +7,8 @@
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
+#include "halco/hicann-dls/vx/hemisphere_fwd.h"
+
 /**
  * Identifier for a hemisphere of a DLS chip.
  * A hemisphere consists of all elements _on_ a hemisphere, i.e. a PPU, a synapse array with
@@ -19,6 +21,8 @@ struct GENPYBIND(inline_base("*")) HemisphereOnDLS
 	    GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
+
+#include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 };
 
 

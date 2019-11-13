@@ -7,40 +7,17 @@ namespace halco::hicann_dls::vx {
 PPUOnDLS const PPUOnDLS::top{enum_vertical_top};
 PPUOnDLS const PPUOnDLS::bottom{enum_vertical_bottom};
 
-CADCConfigOnDLS PPUOnDLS::toCADCConfigOnDLS() const
-{
-	return CADCConfigOnDLS(toEnum());
-}
+#define HEMISPHERE_CLASS PPUOnDLS
+#include "halco/hicann-dls/vx/convert_hemisphere.h"
 
-PPUMemoryOnDLS PPUOnDLS::toPPUMemoryOnDLS() const
-{
-	return PPUMemoryOnDLS(toEnum());
-}
+#define HEMISPHERE_CLASS PPUMemoryOnDLS
+#include "halco/hicann-dls/vx/convert_hemisphere.h"
 
-PPUControlRegisterOnDLS PPUOnDLS::toPPUControlRegisterOnDLS() const
-{
-	return PPUControlRegisterOnDLS(toEnum());
-}
+#define HEMISPHERE_CLASS PPUControlRegisterOnDLS
+#include "halco/hicann-dls/vx/convert_hemisphere.h"
 
-PPUStatusRegisterOnDLS PPUOnDLS::toPPUStatusRegisterOnDLS() const
-{
-	return PPUStatusRegisterOnDLS(toEnum());
-}
-
-PPUOnDLS PPUMemoryOnDLS::toPPUOnDLS() const
-{
-	return PPUOnDLS(toEnum());
-}
-
-PPUOnDLS PPUControlRegisterOnDLS::toPPUOnDLS() const
-{
-	return PPUOnDLS(toEnum());
-}
-
-PPUOnDLS PPUStatusRegisterOnDLS::toPPUOnDLS() const
-{
-	return PPUOnDLS(toEnum());
-}
+#define HEMISPHERE_CLASS PPUStatusRegisterOnDLS
+#include "halco/hicann-dls/vx/convert_hemisphere.h"
 
 PPUMemoryBlockOnPPU const PPUMemoryBlockOnPPU::mailbox(
     PPUMemoryWordOnPPU(3072), PPUMemoryWordOnPPU(4095));

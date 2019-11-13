@@ -7,11 +7,9 @@
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
+#include "halco/hicann-dls/vx/hemisphere_fwd.h"
+
 struct CrossbarOutputOnDLS;
-struct SynramOnDLS;
-struct PADIEventOnDLS;
-struct CommonPADIBusConfigOnDLS;
-struct CommonSTPConfigOnDLS;
 
 /*****************\
    PADIBus
@@ -24,10 +22,7 @@ struct GENPYBIND(inline_base("*")) PADIBusBlockOnDLS
 	    rant_t(val)
 	{}
 
-	SynramOnDLS toSynramOnDLS() const;
-	PADIEventOnDLS toPADIEventOnDLS() const;
-	CommonPADIBusConfigOnDLS toCommonPADIBusConfigOnDLS() const;
-	CommonSTPConfigOnDLS toCommonSTPConfigOnDLS() const;
+#include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
 	static const PADIBusBlockOnDLS top;
 	static const PADIBusBlockOnDLS bottom;
@@ -69,7 +64,7 @@ struct GENPYBIND(inline_base("*")) CommonPADIBusConfigOnDLS
 {
 	constexpr explicit CommonPADIBusConfigOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 
-	PADIBusBlockOnDLS toPADIBusBlockOnDLS() const { return PADIBusBlockOnDLS(toEnum()); }
+#include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
 	static const CommonPADIBusConfigOnDLS top;
 	static const CommonPADIBusConfigOnDLS bottom;
@@ -81,7 +76,7 @@ struct GENPYBIND(inline_base("*")) CommonSTPConfigOnDLS
 {
 	constexpr explicit CommonSTPConfigOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 
-	PADIBusBlockOnDLS toPADIBusBlockOnDLS() const { return PADIBusBlockOnDLS(toEnum()); }
+#include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
 	static const CommonSTPConfigOnDLS top;
 	static const CommonSTPConfigOnDLS bottom;
@@ -95,7 +90,7 @@ struct GENPYBIND(inline_base("*")) PADIEventOnDLS
 	    rant_t(val)
 	{}
 
-	PADIBusBlockOnDLS toPADIBusBlockOnDLS() const { return PADIBusBlockOnDLS(toEnum()); }
+#include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
 	static const PADIEventOnDLS top;
 	static const PADIEventOnDLS bottom;

@@ -7,10 +7,7 @@
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
-struct CADCConfigOnDLS;
-struct PPUMemoryOnDLS;
-struct PPUControlRegisterOnDLS;
-struct PPUStatusRegisterOnDLS;
+#include "halco/hicann-dls/vx/hemisphere_fwd.h"
 
 /**********\
     PPU
@@ -23,10 +20,7 @@ struct GENPYBIND(inline_base("*")) PPUOnDLS
 	    rant_t(val)
 	{}
 
-	CADCConfigOnDLS toCADCConfigOnDLS() const;
-	PPUMemoryOnDLS toPPUMemoryOnDLS() const;
-	PPUControlRegisterOnDLS toPPUControlRegisterOnDLS() const;
-	PPUStatusRegisterOnDLS toPPUStatusRegisterOnDLS() const;
+#include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
 	static const PPUOnDLS top;
 	static const PPUOnDLS bottom;
@@ -74,7 +68,8 @@ struct GENPYBIND(inline_base("*")) PPUMemoryOnDLS
     : public common::detail::RantWrapper<PPUMemoryOnDLS, uint_fast16_t, 1, 0>
 {
 	constexpr explicit PPUMemoryOnDLS(uintmax_t const val = 0) : rant_t(val) {}
-	PPUOnDLS toPPUOnDLS() const;
+
+#include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 };
 
 
@@ -82,7 +77,8 @@ struct GENPYBIND(inline_base("*")) PPUControlRegisterOnDLS
     : public common::detail::RantWrapper<PPUControlRegisterOnDLS, uint_fast16_t, 1, 0>
 {
 	constexpr explicit PPUControlRegisterOnDLS(uintmax_t const val = 0) : rant_t(val) {}
-	PPUOnDLS toPPUOnDLS() const;
+
+#include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 };
 
 
@@ -90,7 +86,8 @@ struct GENPYBIND(inline_base("*")) PPUStatusRegisterOnDLS
     : public common::detail::RantWrapper<PPUStatusRegisterOnDLS, uint_fast16_t, 1, 0>
 {
 	constexpr explicit PPUStatusRegisterOnDLS(uintmax_t const val = 0) : rant_t(val) {}
-	PPUOnDLS toPPUOnDLS() const;
+
+#include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 };
 
 

@@ -234,3 +234,30 @@ TYPED_TEST(CommonVerticalHalfCoordinateTest, TopBottom)
 	EXPECT_EQ(top.toEnum(), 0);
 	EXPECT_EQ(bottom.toEnum(), 1);
 }
+
+#define HEMISPHERE_COORDINATE(Name) Name,
+#define LAST_HEMISPHERE_COORDINATE(Name) Name
+typedef ::testing::Types<
+#include "halco/hicann-dls/vx/hemisphere.def"
+    >
+    CommonHemisphereCoordinateTypes;
+
+template <typename T>
+class CommonHemisphereCoordinateTest : public ::testing::Test
+{};
+
+TYPED_TEST_CASE(CommonHemisphereCoordinateTest, CommonHemisphereCoordinateTypes);
+
+TYPED_TEST(CommonHemisphereCoordinateTest, toOther)
+{
+	for (auto const coord : iter_all<TypeParam>()) {
+// clang-format off
+#define HEMISPHERE_COORDINATE(Name)                                                                \
+		{                                                                                          \
+			auto const other = coord.to##Name();                                                   \
+			EXPECT_EQ(other.toEnum(), coord.toEnum());                                             \
+		}
+// clang-format on
+#include "halco/hicann-dls/vx/hemisphere.def"
+	}
+}

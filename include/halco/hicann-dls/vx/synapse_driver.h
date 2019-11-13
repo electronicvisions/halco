@@ -7,6 +7,8 @@
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
+#include "halco/hicann-dls/vx/hemisphere_fwd.h"
+
 /*****************\
    SynapseDriver
 \*****************/
@@ -25,10 +27,6 @@ struct GENPYBIND(inline_base("*")) SynapseDriverOnSynapseDriverBlock
 };
 
 
-struct CommonSynapseDriverConfigOnDLS;
-struct SynramOnDLS;
-struct PADIEventOnDLS;
-
 struct GENPYBIND(inline_base("*")) SynapseDriverBlockOnDLS
     : public common::detail::RantWrapper<SynapseDriverBlockOnDLS, uint_fast16_t, 1, 0>
 {
@@ -37,9 +35,7 @@ struct GENPYBIND(inline_base("*")) SynapseDriverBlockOnDLS
 	    rant_t(val)
 	{}
 
-	CommonSynapseDriverConfigOnDLS toCommonSynapseDriverConfigOnDLS() const;
-	SynramOnDLS toSynramOnDLS() const;
-	PADIEventOnDLS toPADIEventOnDLS() const;
+#include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
 	static const SynapseDriverBlockOnDLS top;
 	static const SynapseDriverBlockOnDLS bottom;
@@ -70,10 +66,7 @@ struct GENPYBIND(inline_base("*")) CommonSynapseDriverConfigOnDLS
 {
 	constexpr explicit CommonSynapseDriverConfigOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 
-	SynapseDriverBlockOnDLS toSynapseDriverBlockOnDLS() const
-	{
-		return SynapseDriverBlockOnDLS(toEnum());
-	}
+#include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
 	static const CommonSynapseDriverConfigOnDLS top;
 	static const CommonSynapseDriverConfigOnDLS bottom;
