@@ -70,6 +70,9 @@ struct GENPYBIND(inline_base("*")) NeuronLabel
 };
 
 
+struct CrossbarInputOnDLS;
+struct CrossbarL2OutputOnDLS;
+
 /**********\
     SPL1
 \**********/
@@ -80,6 +83,9 @@ struct GENPYBIND(inline_base("*")) SPL1Address
 	constexpr explicit SPL1Address(uintmax_t value = 0) GENPYBIND(implicit_conversion) :
 	    rant_t(value)
 	{}
+
+	CrossbarInputOnDLS toCrossbarInputOnDLS() const;
+	CrossbarL2OutputOnDLS toCrossbarL2OutputOnDLS() const;
 };
 
 } // namespace halco::hicann_dls::vx

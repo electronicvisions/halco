@@ -34,6 +34,12 @@ TEST(CrossbarL2OutputOnDLS, toCrossbarOutputOnDLS)
 	EXPECT_EQ(coord.toCrossbarOutputOnDLS(), CrossbarOutputOnDLS(3 + 8));
 }
 
+TEST(SPL1Address, toCrossbarInputOnDLS)
+{
+	SPL1Address coord(3);
+	EXPECT_EQ(coord.toCrossbarInputOnDLS(), CrossbarInputOnDLS(3 + 8));
+}
+
 TEST(PPUOnDLS, RespectsBounds)
 {
 	EXPECT_ANY_THROW(PPUOnDLS(2));
