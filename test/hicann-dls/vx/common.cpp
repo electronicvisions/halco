@@ -61,9 +61,7 @@ typedef ::testing::Types<
     PPUOnDLS,
     PPUMemoryWordOnPPU,
     PPUMemoryWordOnDLS,
-    PPUStatusRegisterOnPPU,
     PPUStatusRegisterOnDLS,
-    PPUControlRegisterOnPPU,
     PPUControlRegisterOnDLS,
     CapMemCellOnDLS,
     CapMemCellOnCapMemBlock,
@@ -80,7 +78,6 @@ typedef ::testing::Types<
 typedef ::testing::Types<
     PPUMemoryBlockOnPPU,
     PPUMemoryBlockOnDLS,
-    PPUMemoryOnPPU,
     PPUMemoryOnDLS,
     NeuronConfigBlockOnDLS,
     NeuronConfigOnDLS,

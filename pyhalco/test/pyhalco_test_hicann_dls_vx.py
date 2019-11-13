@@ -43,11 +43,8 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     PPUMemoryBlockOnDLS              => iterable
     PPUMemoryBlockOnPPU              => interval, iterable
     PPUMemoryOnDLS                   => linear, iterable
-    PPUMemoryOnPPU                   => linear, iterable
     PPUMemoryBlockSize               => linear, iterable
-    PPUControlRegisterOnPPU          => linear, iterable
     PPUControlRegisterOnDLS          => linear, iterable
-    PPUStatusRegisterOnPPU           => linear, iterable
     PPUStatusRegisterOnDLS           => linear, iterable
     PPUOnDLS                         => linear, iterable
     ResetChipOnDLS                   => linear, iterable

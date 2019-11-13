@@ -8,6 +8,9 @@
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 struct CADCConfigOnDLS;
+struct PPUMemoryOnDLS;
+struct PPUControlRegisterOnDLS;
+struct PPUStatusRegisterOnDLS;
 
 /**********\
     PPU
@@ -21,6 +24,9 @@ struct GENPYBIND(inline_base("*")) PPUOnDLS
 	{}
 
 	CADCConfigOnDLS toCADCConfigOnDLS() const;
+	PPUMemoryOnDLS toPPUMemoryOnDLS() const;
+	PPUControlRegisterOnDLS toPPUControlRegisterOnDLS() const;
+	PPUStatusRegisterOnDLS toPPUStatusRegisterOnDLS() const;
 
 	static const PPUOnDLS top;
 	static const PPUOnDLS bottom;
@@ -64,24 +70,27 @@ struct GENPYBIND(inline_base("*")) PPUMemoryBlockOnPPU
 };
 
 
-struct GENPYBIND(inline_base("*")) PPUMemoryOnPPU
-    : public common::detail::RantWrapper<PPUMemoryOnPPU, uint_fast16_t, 0, 0>
+struct GENPYBIND(inline_base("*")) PPUMemoryOnDLS
+    : public common::detail::RantWrapper<PPUMemoryOnDLS, uint_fast16_t, 1, 0>
 {
-	constexpr explicit PPUMemoryOnPPU(uintmax_t const val = 0) : rant_t(val) {}
+	constexpr explicit PPUMemoryOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+	PPUOnDLS toPPUOnDLS() const;
 };
 
 
-struct GENPYBIND(inline_base("*")) PPUControlRegisterOnPPU
-    : public common::detail::RantWrapper<PPUControlRegisterOnPPU, uint_fast16_t, 0, 0>
+struct GENPYBIND(inline_base("*")) PPUControlRegisterOnDLS
+    : public common::detail::RantWrapper<PPUControlRegisterOnDLS, uint_fast16_t, 1, 0>
 {
-	constexpr explicit PPUControlRegisterOnPPU(uintmax_t const val = 0) : rant_t(val) {}
+	constexpr explicit PPUControlRegisterOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+	PPUOnDLS toPPUOnDLS() const;
 };
 
 
-struct GENPYBIND(inline_base("*")) PPUStatusRegisterOnPPU
-    : public common::detail::RantWrapper<PPUStatusRegisterOnPPU, uint_fast16_t, 0, 0>
+struct GENPYBIND(inline_base("*")) PPUStatusRegisterOnDLS
+    : public common::detail::RantWrapper<PPUStatusRegisterOnDLS, uint_fast16_t, 1, 0>
 {
-	constexpr explicit PPUStatusRegisterOnPPU(uintmax_t const val = 0) : rant_t(val) {}
+	constexpr explicit PPUStatusRegisterOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+	PPUOnDLS toPPUOnDLS() const;
 };
 
 
@@ -100,53 +109,6 @@ struct GENPYBIND(inline_base("*PPUMixin*")) PPUMemoryBlockOnDLS
 	explicit PPUMemoryBlockOnDLS(enum_type const& e) : mixin_t(e) {}
 
 	PPUMemoryBlockOnPPU toPPUMemoryBlockOnPPU() const { return This(); }
-};
-
-
-struct GENPYBIND(inline_base("*PPUMixin*")) PPUMemoryOnDLS
-    : public PPUMixin<PPUMemoryOnDLS, PPUMemoryOnPPU>
-{
-	PPUMemoryOnDLS() = default;
-
-	explicit PPUMemoryOnDLS(PPUMemoryOnPPU const& reg, PPUOnDLS const& ppu = PPUOnDLS()) :
-	    mixin_t(reg, ppu)
-	{}
-
-	explicit PPUMemoryOnDLS(enum_type const& e) : mixin_t(e) {}
-
-	PPUMemoryOnPPU toPPUMemoryOnPPU() const { return This(); }
-};
-
-
-struct GENPYBIND(inline_base("*PPUMixin*")) PPUControlRegisterOnDLS
-    : public PPUMixin<PPUControlRegisterOnDLS, PPUControlRegisterOnPPU>
-{
-	PPUControlRegisterOnDLS() = default;
-
-	explicit PPUControlRegisterOnDLS(
-	    PPUControlRegisterOnPPU const& reg, PPUOnDLS const& ppu = PPUOnDLS()) :
-	    mixin_t(reg, ppu)
-	{}
-
-	explicit PPUControlRegisterOnDLS(enum_type const& e) : mixin_t(e) {}
-
-	PPUControlRegisterOnPPU toPPUControlRegisterOnPPU() const { return This(); }
-};
-
-
-struct GENPYBIND(inline_base("*PPUMixin*")) PPUStatusRegisterOnDLS
-    : public PPUMixin<PPUStatusRegisterOnDLS, PPUStatusRegisterOnPPU>
-{
-	PPUStatusRegisterOnDLS() = default;
-
-	explicit PPUStatusRegisterOnDLS(
-	    PPUStatusRegisterOnPPU const& reg, PPUOnDLS const& ppu = PPUOnDLS()) :
-	    mixin_t(reg, ppu)
-	{}
-
-	explicit PPUStatusRegisterOnDLS(enum_type const& e) : mixin_t(e) {}
-
-	PPUStatusRegisterOnPPU toPPUStatusRegisterOnPPU() const { return This(); }
 };
 
 
@@ -172,12 +134,9 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUMemoryWordOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUMemoryWordOnPPU)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUMemoryBlockOnPPU)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUMemoryBlockOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUMemoryOnPPU)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUMemoryOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUMemoryBlockSize)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUStatusRegisterOnPPU)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUStatusRegisterOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUControlRegisterOnPPU)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUControlRegisterOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PPUOnDLS)
 

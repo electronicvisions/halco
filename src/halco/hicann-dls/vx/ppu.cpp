@@ -12,6 +12,36 @@ CADCConfigOnDLS PPUOnDLS::toCADCConfigOnDLS() const
 	return CADCConfigOnDLS(toEnum());
 }
 
+PPUMemoryOnDLS PPUOnDLS::toPPUMemoryOnDLS() const
+{
+	return PPUMemoryOnDLS(toEnum());
+}
+
+PPUControlRegisterOnDLS PPUOnDLS::toPPUControlRegisterOnDLS() const
+{
+	return PPUControlRegisterOnDLS(toEnum());
+}
+
+PPUStatusRegisterOnDLS PPUOnDLS::toPPUStatusRegisterOnDLS() const
+{
+	return PPUStatusRegisterOnDLS(toEnum());
+}
+
+PPUOnDLS PPUMemoryOnDLS::toPPUOnDLS() const
+{
+	return PPUOnDLS(toEnum());
+}
+
+PPUOnDLS PPUControlRegisterOnDLS::toPPUOnDLS() const
+{
+	return PPUOnDLS(toEnum());
+}
+
+PPUOnDLS PPUStatusRegisterOnDLS::toPPUOnDLS() const
+{
+	return PPUOnDLS(toEnum());
+}
+
 PPUMemoryBlockOnPPU const PPUMemoryBlockOnPPU::mailbox(
     PPUMemoryWordOnPPU(3072), PPUMemoryWordOnPPU(4095));
 
