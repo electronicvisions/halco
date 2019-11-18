@@ -123,6 +123,13 @@ public:
 	GENPYBIND(expose_as(__int__))
 	PYPP_CONSTEXPR operator value_type() const { return mValue; }
 
+	GENPYBIND_MANUAL({
+		parent.def("__index__", [](GENPYBIND_PARENT_TYPE const& self) {
+			return static_cast<typename std::remove_cv<
+			    typename std::remove_reference<decltype(self)>::type>::type::value_type>(self);
+		});
+	})
+
 	PYPP_CONSTEXPR value_type value() const { return mValue; }
 	PYPP_CONSTEXPR Enum toEnum() const;
 
@@ -236,6 +243,13 @@ public:
 
 	GENPYBIND(expose_as(__int__))
 	PYPP_CONSTEXPR operator value_type() const { return static_cast<value_type>(mValue); }
+
+	GENPYBIND_MANUAL({
+		parent.def("__index__", [](GENPYBIND_PARENT_TYPE const& self) {
+			return static_cast<typename std::remove_cv<
+			    typename std::remove_reference<decltype(self)>::type>::type::value_type>(self);
+		});
+	})
 
 	PYPP_CONSTEXPR value_type value() const { return mValue; }
 	PYPP_CONSTEXPR Enum toEnum() const { return Enum(mValue); }

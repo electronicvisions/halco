@@ -120,6 +120,17 @@ class PyhalcoTest(object):
         cls = self.get_coordinate_class(name)
         x = int(cls())
 
+    @for_coordinates_with_category('linear')
+    def test_usable_as_index(self, name):
+        # __index__ only implemented for genpybind-based wrapping
+        if getattr(self.get_module(), "__variant__", None) != "pybind11":
+            return
+        cls = self.get_coordinate_class(name)
+        x = hex(cls())
+        x = bin(cls())
+        l = []
+        l.insert(cls(), None)
+
     @for_coordinates_with_category('all')
     def test_copy_constructor(self, name):
         cls = self.get_coordinate_class(name)
