@@ -161,7 +161,8 @@ typedef ::testing::Types<
     DLSGlobal,
     HemisphereOnDLS,
     HemisphereGlobal,
-    MADCControlOnDLS>
+    MADCControlOnDLS,
+    SynapseBiasSelectionOnDLS>
     CoordinateTypes3;
 
 
