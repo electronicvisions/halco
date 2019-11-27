@@ -278,6 +278,12 @@ struct GENPYBIND(inline_base("*CapMemMixin*")) CapMemCellOnDLS
 	static const CapMemCellOnDLS hagen_ibias_dac_bottom;
 };
 
+struct GENPYBIND(inline_base("*")) ReferenceGeneratorConfigOnDLS
+    : public common::detail::RantWrapper<ReferenceGeneratorConfigOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit ReferenceGeneratorConfigOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
 } // namespace halco::hicann_dls::vx
 
 namespace std {
@@ -288,5 +294,6 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemBlockConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemCellOnCapMemBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemCellOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ReferenceGeneratorConfigOnDLS)
 
 } // namespace std
