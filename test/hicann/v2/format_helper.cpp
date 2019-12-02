@@ -82,6 +82,11 @@ TEST(FormatHelper, ShortFormat) {
 	EXPECT_EQ(to_string(vr), "VR006");
 	EXPECT_EQ(boost::get<VRepeaterOnHICANN>(from_string("VR006")), vr);
 
+	RepeaterBlockOnWafer rb_on_wafer(rb, h);
+	EXPECT_EQ(short_format(rb_on_wafer), "H003RB2");
+	EXPECT_EQ(to_string(rb_on_wafer), "H003RB2");
+	EXPECT_EQ(boost::get<RepeaterBlockOnWafer>(from_string("H003RB2")), rb_on_wafer);
+
 	HRepeaterOnWafer hr_on_wafer(hr, h);
 	EXPECT_EQ(short_format(hr_on_wafer), "H003HR005");
 	EXPECT_EQ(to_string(hr_on_wafer), "H003HR005");

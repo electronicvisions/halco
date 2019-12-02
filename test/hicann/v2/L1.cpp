@@ -313,20 +313,36 @@ TEST(DNCMergerOnHICANN, toSendingRepeater) {
 	    HLineOnHICANN(62), m0.toSendingRepeaterOnHICANN().toHRepeaterOnHICANN().toHLineOnHICANN());
 }
 
-TEST(HRepeaterOnWafer, toHRepeaterOnHICANN_toHICANNOnWafer) {
+TEST(HRepeaterOnWafer, toHRepeaterOnHICANN_toHICANNOnWafer_toRepeaterBlockOnWafer) {
 	for (auto hicann_on_wafer : iter_all<HICANNOnWafer>()) {
 		for (auto hrepeater_on_hicann : iter_all<HRepeaterOnHICANN>()) {
-			EXPECT_EQ(HRepeaterOnWafer(hrepeater_on_hicann, hicann_on_wafer).toHICANNOnWafer(), hicann_on_wafer);
-			EXPECT_EQ(HRepeaterOnWafer(hrepeater_on_hicann, hicann_on_wafer).toHRepeaterOnHICANN(), hrepeater_on_hicann);
+			HRepeaterOnWafer hrepeater_on_wafer(hrepeater_on_hicann, hicann_on_wafer);
+			EXPECT_EQ(hrepeater_on_wafer.toHICANNOnWafer(), hicann_on_wafer);
+			EXPECT_EQ(hrepeater_on_wafer.toHRepeaterOnHICANN(), hrepeater_on_hicann);
+			EXPECT_EQ(hrepeater_on_wafer.toRepeaterBlockOnWafer(),
+				RepeaterBlockOnWafer(hrepeater_on_hicann.toRepeaterBlockOnHICANN(), hicann_on_wafer));
 		}
 	}
 }
 
-TEST(VRepeaterOnWafer, toVRepeaterOnHICANN_toHICANNOnWafer) {
+TEST(VRepeaterOnWafer, toVRepeaterOnHICANN_toHICANNOnWafer_toRepeaterBlockOnWafer) {
 	for (auto hicann_on_wafer : iter_all<HICANNOnWafer>()) {
 		for (auto vrepeater_on_hicann : iter_all<VRepeaterOnHICANN>()) {
-			EXPECT_EQ(VRepeaterOnWafer(vrepeater_on_hicann, hicann_on_wafer).toHICANNOnWafer(), hicann_on_wafer);
-			EXPECT_EQ(VRepeaterOnWafer(vrepeater_on_hicann, hicann_on_wafer).toVRepeaterOnHICANN(), vrepeater_on_hicann);
+			VRepeaterOnWafer vrepeater_on_wafer(vrepeater_on_hicann, hicann_on_wafer);
+			EXPECT_EQ(vrepeater_on_wafer.toHICANNOnWafer(), hicann_on_wafer);
+			EXPECT_EQ(vrepeater_on_wafer.toVRepeaterOnHICANN(), vrepeater_on_hicann);
+			EXPECT_EQ(vrepeater_on_wafer.toRepeaterBlockOnWafer(),
+				RepeaterBlockOnWafer(vrepeater_on_hicann.toRepeaterBlockOnHICANN(), hicann_on_wafer));
+		}
+	}
+}
+
+TEST(RepeaterBlockOnWafer, RepeaterBlockOnHICANN_toHICANNOnWafer) {
+	for (auto hicann_on_wafer : iter_all<HICANNOnWafer>()) {
+		for (auto rb_on_hicann : iter_all<RepeaterBlockOnHICANN>()) {
+			RepeaterBlockOnWafer rb_on_wafer(rb_on_hicann, hicann_on_wafer);
+			EXPECT_EQ(rb_on_wafer.toHICANNOnWafer(), hicann_on_wafer);
+			EXPECT_EQ(rb_on_wafer.toRepeaterBlockOnHICANN(), rb_on_hicann);
 		}
 	}
 }

@@ -74,6 +74,7 @@ typedef ::testing::Types<
 	QuadOnHICANN,
 	QuadrantOnHICANN,
 	RepeaterBlockOnHICANN,
+	RepeaterBlockOnWafer,
 	RowOnSynapseDriver,
 	SendingRepeaterOnHICANN,
 	SideHorizontal,

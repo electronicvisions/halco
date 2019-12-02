@@ -84,6 +84,12 @@ std::string short_format(const VRepeaterOnHICANN& vr) {
 	return ss.str();
 }
 
+std::string short_format(const RepeaterBlockOnWafer& rb) {
+	std::stringstream ss;
+	ss << short_format(rb.toHICANNOnWafer()) + short_format(rb.toRepeaterBlockOnHICANN());
+	return ss.str();
+}
+
 std::string short_format(const HRepeaterOnWafer& hr) {
 	std::stringstream ss;
 	ss << short_format(hr.toHICANNOnWafer()) + short_format(hr.toHRepeaterOnHICANN());
@@ -156,6 +162,7 @@ typedef boost::variant<
     HICANNGlobal,
     FPGAGlobal,
     TriggerGlobal,
+    RepeaterBlockOnWafer,
     HRepeaterOnWafer,
     VRepeaterOnWafer>
     compound_type;
@@ -213,6 +220,10 @@ struct to_compound : public boost::static_visitor<compound_type>
 	TriggerGlobal operator()(Wafer const& w, TriggerOnWafer const& t) const
 	{
 		return TriggerGlobal(t, w);
+	}
+	RepeaterBlockOnWafer operator()(HICANNOnWafer const& h, RepeaterBlockOnHICANN const& rb) const
+	{
+		return RepeaterBlockOnWafer(rb, h);
 	}
 	HRepeaterOnWafer operator()(HICANNOnWafer const& h, HRepeaterOnHICANN const& hr) const
 	{

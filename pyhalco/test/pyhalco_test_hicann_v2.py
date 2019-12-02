@@ -62,6 +62,7 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
     QuadrantOnHICANN      => grid, iterable
     TestPortOnRepeaterBlock => linear, iterable
     RepeaterBlockOnHICANN => grid, iterable
+    RepeaterBlockOnWafer  => iterable
     RowOnSynapseDriver    => linear, iterable
     SendingRepeaterOnHICANN => linear, iterable
     SynapseArrayOnHICANN  => linear, iterable
@@ -220,6 +221,13 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
         self.assertEqual(C.from_string("VL006"), vl)
         self.assertEqual(C.from_string("VL06"), vl)
         self.assertEqual(C.from_string("VL6"), vl)
+
+        rb_on_wafer = C.RepeaterBlockOnWafer(rb, h)
+        self.assertEqual(C.short_format(rb_on_wafer), "H003RB2")
+        self.assertEqual(C.to_string(rb_on_wafer), "H003RB2")
+        self.assertEqual(C.from_string("H003RB2"), rb_on_wafer)
+        self.assertEqual(C.from_string("H03RB2"), rb_on_wafer)
+        self.assertEqual(C.from_string("H3RB2"), rb_on_wafer)
 
         with self.assertRaises(RuntimeError):
             C.from_string("")

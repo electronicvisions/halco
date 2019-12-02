@@ -261,6 +261,27 @@ struct RepeaterBlockOnHICANN
 	GRID_COMMON_CONSTRUCTORS(RepeaterBlockOnHICANN)
 };
 
+struct RepeaterBlockOnWafer : public HICANNMixin<RepeaterBlockOnWafer, RepeaterBlockOnHICANN>
+{
+private:
+	typedef HICANNMixin<RepeaterBlockOnWafer, RepeaterBlockOnHICANN> base;
+
+public:
+	using base::enum_type;
+
+	PYPP_DEFAULT(RepeaterBlockOnWafer());
+
+	explicit RepeaterBlockOnWafer(
+	    RepeaterBlockOnHICANN const& repeater_block, HICANNOnWafer const& h = HICANNOnWafer())
+	    : base(repeater_block, h)
+	{}
+
+	explicit RepeaterBlockOnWafer(enum_type const& e) : base(e) {}
+
+	RepeaterBlockOnHICANN toRepeaterBlockOnHICANN() const { return This(); }
+
+};
+
 struct SendingRepeaterOnHICANN
     : public common::detail::RantWrapper<SendingRepeaterOnHICANN, size_t, 7, 0> {
 	PYPP_CONSTEXPR explicit SendingRepeaterOnHICANN(uintmax_t const val = 0) : rant_t(val) {}
@@ -332,6 +353,10 @@ public:
 	explicit HRepeaterOnWafer(enum_type const& e) : base(e) {}
 
 	HRepeaterOnHICANN toHRepeaterOnHICANN() const { return This(); }
+	RepeaterBlockOnWafer toRepeaterBlockOnWafer() const {
+		return RepeaterBlockOnWafer(toHRepeaterOnHICANN().toRepeaterBlockOnHICANN(),
+		                            toHICANNOnWafer());
+	}
 
 	/* L1 repeaters are connected to two L1 lines. One on the local
 	   HICANN, the other on a neighboring HICANN.
@@ -420,6 +445,10 @@ public:
 	explicit VRepeaterOnWafer(enum_type const& e) : base(e) {}
 
 	VRepeaterOnHICANN toVRepeaterOnHICANN() const { return This(); }
+	RepeaterBlockOnWafer toRepeaterBlockOnWafer() const {
+		return RepeaterBlockOnWafer(toVRepeaterOnHICANN().toRepeaterBlockOnHICANN(),
+		                            toHICANNOnWafer());
+	}
 
 	/* L1 repeaters are connected to two L1 lines. One on the local
 	   HICANN, the other on a neighboring HICANN.
@@ -450,6 +479,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::VRepeaterOnHICANN)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::VRepeaterOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::TestPortOnRepeaterBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::RepeaterBlockOnHICANN)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::RepeaterBlockOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SendingRepeaterOnHICANN)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::BackgroundGeneratorOnHICANN)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::DNCMergerOnHICANN)
@@ -457,6 +487,9 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::DNCMergerOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(
     halco::hicann::v2::HICANNMixin<halco::hicann::v2::DNCMergerOnWafer BOOST_PP_COMMA()
     halco::hicann::v2::DNCMergerOnHICANN>)
+HALCO_GEOMETRY_HASH_CLASS(
+    halco::hicann::v2::HICANNMixin<halco::hicann::v2::RepeaterBlockOnWafer BOOST_PP_COMMA()
+    halco::hicann::v2::RepeaterBlockOnHICANN>)
 HALCO_GEOMETRY_HASH_CLASS(
     halco::hicann::v2::HICANNMixin<halco::hicann::v2::VRepeaterOnWafer BOOST_PP_COMMA()
     halco::hicann::v2::VRepeaterOnHICANN>)
