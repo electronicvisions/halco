@@ -71,6 +71,14 @@ def build(bld):
     )
 
     bld(
+        target       = 'halco_common_tests',
+        features     = 'gtest cxx cxxprogram',
+        source       = bld.path.ant_glob('test/common/*.cpp'),
+        use          = ['halco_common', 'GTEST'],
+        install_path = '${PREFIX}/bin'
+    )
+
+    bld(
         target       = 'halco_hicann_v2_tests',
         features     = 'gtest cxx cxxprogram',
         source       = bld.path.ant_glob('test/hicann/v2/*.cpp'),
