@@ -163,7 +163,10 @@ typedef ::testing::Types<
     HemisphereGlobal,
     MADCControlOnDLS,
     SynapseBiasSelectionOnDLS,
-    ReferenceGeneratorConfigOnDLS>
+    ReferenceGeneratorConfigOnDLS,
+    ReadoutMuxConfigOnDLS,
+    ReadoutBufferConfigBlockOnDLS,
+    ReadoutBufferConfigOnReadoutBufferConfigBlock>
     CoordinateTypes3;
 
 

@@ -137,6 +137,9 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     MADCControlOnDLS                 => linear, iterable
     SynapseBiasSelectionOnDLS        => linear, iterable
     ReferenceGeneratorConfigOnDLS    => linear, iterable
+    ReadoutMuxConfigOnDLS            => linear, iterable
+    ReadoutBufferConfigBlockOnDLS    => linear, iterable
+    ReadoutBufferConfigOnReadoutBufferConfigBlock => linear, iterable
     """
     # clang-format on
     @staticmethod
