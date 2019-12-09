@@ -33,9 +33,9 @@ TEST(SynapseBlockOnDLS, RespectsBounds)
 
 TEST(SynapseBlockOnDLS, HasId)
 {
-	EXPECT_EQ(9, SynapseBlockOnDLS(X(1), Y(1)).id());
-	EXPECT_EQ(31, SynapseBlockOnDLS(X(7), Y(3)).id());
-	EXPECT_NE(5, SynapseBlockOnDLS(X(7), Y(1)).id());
+	EXPECT_EQ(9, SynapseBlockOnDLS(X(1), Y(1)).toEnum());
+	EXPECT_EQ(31, SynapseBlockOnDLS(X(7), Y(3)).toEnum());
+	EXPECT_NE(5, SynapseBlockOnDLS(X(7), Y(1)).toEnum());
 }
 
 TEST(SynapseBlockOnDLS, toSynapseDriverOnDLS)
@@ -111,9 +111,9 @@ TEST(SynapseOnDLS, RespectsBounds)
 
 TEST(SynapseOnDLS, HasId)
 {
-	EXPECT_EQ(33, SynapseOnDLS(SynapseColumnOnDLS(1), SynapseRowOnDLS(1)).id());
-	EXPECT_EQ(127, SynapseOnDLS(SynapseColumnOnDLS(31), SynapseRowOnDLS(3)).id());
-	EXPECT_NE(0, SynapseOnDLS(SynapseColumnOnDLS(1), SynapseRowOnDLS(1)).id());
+	EXPECT_EQ(33, SynapseOnDLS(SynapseColumnOnDLS(1), SynapseRowOnDLS(1)).toEnum());
+	EXPECT_EQ(127, SynapseOnDLS(SynapseColumnOnDLS(31), SynapseRowOnDLS(3)).toEnum());
+	EXPECT_NE(0, SynapseOnDLS(SynapseColumnOnDLS(1), SynapseRowOnDLS(1)).toEnum());
 }
 
 TEST(SynapseOnDLS, toSynapseRowOnDLS)

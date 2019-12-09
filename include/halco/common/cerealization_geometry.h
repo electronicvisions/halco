@@ -33,7 +33,7 @@ void CEREAL_SERIALIZE_FUNCTION_NAME(
 
 	// despite not part of the class's layout the enum coordinate is
 	// serialized as well for Bjoern's visualization.
-	auto e = grid.id();
+	auto e = grid.toEnum();
 	ar(CEREAL_NVP(e));
 	if (halco::common::detail::GridCoordinate<Derived, XT, YT, EnumSize>(e) != grid) {
 		throw std::runtime_error("Deserialized enum and x, y of GridCoordinate don't match.");
@@ -52,7 +52,7 @@ void CEREAL_SERIALIZE_FUNCTION_NAME(
 
 	// despite not part of the class's layout the enum coordinate is
 	// serialized as well for Bjoern's visualization.
-	auto e = interval.id();
+	auto e = interval.toEnum();
 	ar(CEREAL_NVP(e));
 	if (halco::common::detail::IntervalCoordinate<Derived, T, EnumSize>(e) != interval) {
 		throw std::runtime_error(

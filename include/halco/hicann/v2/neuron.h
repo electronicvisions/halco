@@ -132,12 +132,12 @@ struct NeuronOnHICANN
 	// Shared Neuron Parameter are assigned differently to FGBlocks than
 	// individual neuron parameters.
 	FGBlockOnHICANN toSharedFGBlockOnHICANN() const {
-		return FGBlockOnHICANN(toNeuronOnQuad().id());
+		return FGBlockOnHICANN(toNeuronOnQuad().toEnum());
 	}
 
-	FGBlockOnHICANN toNeuronFGBlock() const { return FGBlockOnHICANN(common::Enum(id() / 128)); }
+	FGBlockOnHICANN toNeuronFGBlock() const { return FGBlockOnHICANN(common::Enum(toEnum() / 128)); }
 
-	NeuronOnFGBlock toNeuronOnFGBlock() const { return NeuronOnFGBlock(id() % 128); }
+	NeuronOnFGBlock toNeuronOnFGBlock() const { return NeuronOnFGBlock(toEnum() % 128); }
 };
 
 struct NeuronOnWafer : public HICANNMixin<NeuronOnWafer, NeuronOnHICANN> {

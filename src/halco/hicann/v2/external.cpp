@@ -36,7 +36,7 @@ DNCOnWafer::enum_type DNCOnWafer::to_enum(x_type const& x, y_type const& y) {
 }
 
 PowerCoordinate DNCOnWafer::toPowerCoordinate() const {
-	int power_coordinate = reticle_power_grid.at(id());
+	int power_coordinate = reticle_power_grid.at(toEnum());
 	return PowerCoordinate(power_coordinate);
 }
 

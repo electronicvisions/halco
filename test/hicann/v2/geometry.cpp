@@ -241,32 +241,32 @@ TEST(HMFGeometryTest, GridCoordinate) {
 	ASSERT_EQ(grid_t::enum_type::max, 26);
 
 	grid_t g0(X(2), Y(0));
-	EXPECT_EQ(g0.id(), 0);
+	EXPECT_EQ(g0.toEnum(), 0);
 	EXPECT_EQ(g0.x(), 2);
 	EXPECT_EQ(g0.y(), 0);
 
 	grid_t g1(Enum(1));
-	EXPECT_EQ(g1.id(), 1);
+	EXPECT_EQ(g1.toEnum(), 1);
 	EXPECT_EQ(g1.x(), 3);
 	EXPECT_EQ(g1.y(), 0);
 
 	grid_t g5(Enum(5));
-	EXPECT_EQ(g5.id(), 5);
+	EXPECT_EQ(g5.toEnum(), 5);
 	EXPECT_EQ(g5.x(), 7);
 	EXPECT_EQ(g5.y(), 0);
 
 	grid_t g8(Enum(8));
-	EXPECT_EQ(g8.id(), 8);
+	EXPECT_EQ(g8.toEnum(), 8);
 	EXPECT_EQ(g8.x(), 10);
 	EXPECT_EQ(g8.y(), 0);
 
 	grid_t g12(Enum(12));
-	EXPECT_EQ(g12.id(), 12);
+	EXPECT_EQ(g12.toEnum(), 12);
 	EXPECT_EQ(g12.x(), 5);
 	EXPECT_EQ(g12.y(), 1);
 
 	grid_t g26(Enum(26));
-	EXPECT_EQ(g26.id(), 26);
+	EXPECT_EQ(g26.toEnum(), 26);
 	EXPECT_EQ(g26.x(), 10);
 	EXPECT_EQ(g26.y(), 2);
 }

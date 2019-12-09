@@ -40,7 +40,7 @@ TYPED_TEST(GridCoordinateTest, test_xy_to_enum_to_xy) {
 	using namespace halco::hicann::v2;
 	for (auto c : iter_all<TypeParam>()) {
 		TypeParam xy(c.x(), c.y());
-		TypeParam e(xy.id());
+		TypeParam e(xy.toEnum());
 		EXPECT_EQ(c, xy) << c << " -> " << xy << " via x, y constructor failed";
 		EXPECT_EQ(c, e) << c << " -> " << e << "via enum, via x, y constructor failed";
 	}

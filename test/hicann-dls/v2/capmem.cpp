@@ -35,8 +35,8 @@ TEST(CapMemCellOnDLS, RespectsBounds) {
 }
 
 TEST(CapMemCellOnDLS, HasId) {
-	EXPECT_EQ(34, CapMemCellOnDLS(CapMemColumnOnDLS(1), CapMemRowOnDLS(1)).id());
-	EXPECT_EQ(131, CapMemCellOnDLS(CapMemColumnOnDLS(32), CapMemRowOnDLS(3)).id());
+	EXPECT_EQ(34, CapMemCellOnDLS(CapMemColumnOnDLS(1), CapMemRowOnDLS(1)).toEnum());
+	EXPECT_EQ(131, CapMemCellOnDLS(CapMemColumnOnDLS(32), CapMemRowOnDLS(3)).toEnum());
 }
 
 TEST(CapMemCellOnDLS, toCapMemColumnOnDLS) {

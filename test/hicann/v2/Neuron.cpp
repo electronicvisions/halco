@@ -14,7 +14,7 @@ TEST(NeuronOnQuad, RespectsBounds) {
 }
 
 TEST(NeuronOnQuad, HasId) {
-	EXPECT_EQ(3, NeuronOnQuad(X(1), Y(1)).id());
+	EXPECT_EQ(3, NeuronOnQuad(X(1), Y(1)).toEnum());
 }
 
 TEST(QuadOnHICANN, RespectsBounds) {
@@ -32,7 +32,7 @@ TEST(NeuronOnHICANN, RespectsBounds) {
 
 TEST(NeuronOnHICANN, toQuadOnHICANN) {
 	NeuronOnHICANN noh{Enum(511)};
-	EXPECT_EQ(511, noh.id());
+	EXPECT_EQ(511, noh.toEnum());
 	EXPECT_EQ(QuadOnHICANN(127), noh.toQuadOnHICANN());
 }
 

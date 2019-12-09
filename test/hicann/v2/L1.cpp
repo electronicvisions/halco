@@ -149,22 +149,22 @@ TEST(RepeaterBlockOnHICANN, EnumIsBackwardsCompatible) {
 	RepeaterBlockOnHICANN block;
 
 	block = RepeaterBlockOnHICANN(X(0), Y(0));
-	EXPECT_EQ(0, block.id());
+	EXPECT_EQ(0, block.toEnum());
 
 	block = RepeaterBlockOnHICANN(X(1), Y(0));
-	EXPECT_EQ(1, block.id());
+	EXPECT_EQ(1, block.toEnum());
 
 	block = RepeaterBlockOnHICANN(X(0), Y(1));
-	EXPECT_EQ(2, block.id());
+	EXPECT_EQ(2, block.toEnum());
 
 	block = RepeaterBlockOnHICANN(X(1), Y(1));
-	EXPECT_EQ(3, block.id());
+	EXPECT_EQ(3, block.toEnum());
 
 	block = RepeaterBlockOnHICANN(X(0), Y(2));
-	EXPECT_EQ(4, block.id());
+	EXPECT_EQ(4, block.toEnum());
 
 	block = RepeaterBlockOnHICANN(X(1), Y(2));
-	EXPECT_EQ(5, block.id());
+	EXPECT_EQ(5, block.toEnum());
 }
 
 TEST(HRepeaterOnHICANN, DoesNotExistOnEveryGridPoint) {

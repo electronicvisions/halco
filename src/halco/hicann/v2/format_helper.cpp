@@ -11,7 +11,7 @@ namespace v2 {
 
 std::string short_format(const HICANNOnWafer& h) {
 	std::stringstream ss;
-	ss << "H" << std::setw(3) << std::setfill('0') << h.id().value();
+	ss << "H" << std::setw(3) << std::setfill('0') << h.toEnum().value();
 	return ss.str();
 }
 
@@ -68,13 +68,13 @@ std::string short_format(const AuxPwrGlobal& apg) {
 
 std::string short_format(const HRepeaterOnHICANN& hr) {
 	std::stringstream ss;
-	ss << "HR" << std::setw(3) << std::setfill('0') << hr.id().value();
+	ss << "HR" << std::setw(3) << std::setfill('0') << hr.toEnum().value();
 	return ss.str();
 }
 
 std::string short_format(const VRepeaterOnHICANN& vr) {
 	std::stringstream ss;
-	ss << "VR" << std::setw(3) << std::setfill('0') << vr.id().value();
+	ss << "VR" << std::setw(3) << std::setfill('0') << vr.toEnum().value();
 	return ss.str();
 }
 

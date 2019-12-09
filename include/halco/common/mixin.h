@@ -94,9 +94,6 @@
 				mValue.toEnum() * local_type::size + This().toEnum());         \
 		}                                                                      \
                                                                                \
-	private:                                                                   \
-		PYPP_DELETE(void id());                                                \
-                                                                               \
 	protected:                                                                 \
 		cls mValue;                                                            \
                                                                                \

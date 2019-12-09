@@ -411,7 +411,7 @@ struct GridCoordinate {
 	{}
 
 	explicit GridCoordinate(x_type const& x, y_type const& y) :
-		mX(x), mY(y) { id(); /* throws for invalid x/y combination */ }
+		mX(x), mY(y) { toEnum(); /* throws for invalid x/y combination */ }
 
 	PYPP_CONSTEXPR GridCoordinate() :
 		mX(static_cast<Derived const*>(this)->to_x(enum_type(0))),
@@ -421,19 +421,18 @@ struct GridCoordinate {
 	PYPP_DEFAULT(PYPP_CONSTEXPR GridCoordinate(GridCoordinate const&));
 	PYPP_DEFAULT(GridCoordinate& operator= (GridCoordinate const&));
 
-	enum_type id() const { return static_cast<Derived const*>(this)->to_enum(mX, mY); }
 	enum_type toEnum() const { return static_cast<Derived const*>(this)->to_enum(mX, mY); }
 	x_type    x()  const { return mX; }
 	y_type    y()  const { return mY; }
 
 	friend bool operator<(Derived const& a, Derived const&b)
 	{
-		return a.id() < b.id();
+		return a.toEnum() < b.toEnum();
 	}
 
 	friend bool operator>(Derived const& a, Derived const&b)
 	{
-		return a.id() > b.id();
+		return a.toEnum() > b.toEnum();
 	}
 
 	friend bool operator==(Derived const& a, Derived const&b)
@@ -458,7 +457,7 @@ struct GridCoordinate {
 	{
 		static std::string const name =
 			ZTL::typestring<Derived>().substr(ZTL::typestring<Derived>().rfind(':') + 1);
-		os << name << "(" << c.id() << ")";
+		os << name << "(" << c.toEnum() << ")";
 		return os;
 	}
 
@@ -511,7 +510,7 @@ private:
 
 		// despite not part of the class's layout the enum coordinate is
 		// serailized as well for Bjoern's visualization.
-		enum_type e = id();
+		enum_type e = toEnum();
 		ar & make_nvp("e", e);
 	}
 };
@@ -549,7 +548,6 @@ struct IntervalCoordinate {
 	PYPP_DEFAULT(PYPP_CONSTEXPR IntervalCoordinate(IntervalCoordinate const&));
 	PYPP_DEFAULT(IntervalCoordinate& operator= (IntervalCoordinate const&));
 
-	enum_type id() const { return static_cast<Derived const*>(this)->to_enum(mMin, mMax); }
 	enum_type toEnum() const { return static_cast<Derived const*>(this)->to_enum(mMin, mMax); }
 	bound_type toMin() const { return mMin; }
 	bound_type toMax() const { return mMax; }
@@ -583,12 +581,12 @@ struct IntervalCoordinate {
 
 	friend bool operator<(Derived const& a, Derived const&b)
 	{
-		return a.id() < b.id();
+		return a.toEnum() < b.toEnum();
 	}
 
 	friend bool operator>(Derived const& a, Derived const&b)
 	{
-		return a.id() > b.id();
+		return a.toEnum() > b.toEnum();
 	}
 
 	friend bool operator==(Derived const& a, Derived const&b)
@@ -674,7 +672,7 @@ private:
 
 		// despite not part of the class's layout the enum coordinate is
 		// serialized as well for Bjoern's visualization.
-		enum_type e = id();
+		enum_type e = toEnum();
 		ar & make_nvp("e", e);
 	}
 };
