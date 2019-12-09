@@ -28,6 +28,38 @@ TEST(NeuronConfigBlockOnDLS, toNeuronResetBlockOnDLS)
 	EXPECT_EQ(coord.toNeuronResetBlockOnDLS(), NeuronResetBlockOnDLS(1));
 }
 
+TEST(NeuronConfigOnDLS, toNeuronSpikeCounterReadOnDLS)
+{
+	NeuronConfigOnDLS coord(NeuronConfigOnNeuronConfigBlock(23), NeuronConfigBlockOnDLS(1));
+	EXPECT_EQ(
+	    coord.toNeuronSpikeCounterReadOnDLS(),
+	    NeuronSpikeCounterReadOnDLS(
+	        NeuronSpikeCounterReadOnNeuronSpikeCounterReadBlock(23),
+	        NeuronSpikeCounterReadBlockOnDLS(1)));
+}
+
+TEST(NeuronConfigBlockOnDLS, toNeuronSpikeCounterReadBlockOnDLS)
+{
+	NeuronConfigBlockOnDLS coord(1);
+	EXPECT_EQ(coord.toNeuronSpikeCounterReadBlockOnDLS(), NeuronSpikeCounterReadBlockOnDLS(1));
+}
+
+TEST(NeuronConfigOnDLS, toNeuronSpikeCounterResetOnDLS)
+{
+	NeuronConfigOnDLS coord(NeuronConfigOnNeuronConfigBlock(23), NeuronConfigBlockOnDLS(1));
+	EXPECT_EQ(
+	    coord.toNeuronSpikeCounterResetOnDLS(),
+	    NeuronSpikeCounterResetOnDLS(
+	        NeuronSpikeCounterResetOnNeuronSpikeCounterResetBlock(23),
+	        NeuronSpikeCounterResetBlockOnDLS(1)));
+}
+
+TEST(NeuronConfigBlockOnDLS, toNeuronSpikeCounterResetBlockOnDLS)
+{
+	NeuronConfigBlockOnDLS coord(1);
+	EXPECT_EQ(coord.toNeuronSpikeCounterResetBlockOnDLS(), NeuronSpikeCounterResetBlockOnDLS(1));
+}
+
 TEST(CrossbarL2OutputOnDLS, toCrossbarOutputOnDLS)
 {
 	CrossbarL2OutputOnDLS coord(3);

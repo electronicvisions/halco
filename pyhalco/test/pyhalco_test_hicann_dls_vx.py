@@ -99,6 +99,12 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     NeuronResetOnNeuronResetBlock    => linear, iterable
     NeuronResetBlockOnDLS            => linear, iterable
     NeuronResetOnDLS                 => iterable
+    NeuronSpikeCounterReadOnNeuronSpikeCounterReadBlock    => linear, iterable
+    NeuronSpikeCounterReadBlockOnDLS                       => linear, iterable
+    NeuronSpikeCounterReadOnDLS                            => iterable
+    NeuronSpikeCounterResetOnNeuronSpikeCounterResetBlock  => linear, iterable
+    NeuronSpikeCounterResetBlockOnDLS                      => linear, iterable
+    NeuronSpikeCounterResetOnDLS                           => iterable
     NeuronLabel                      => linear, iterable
     SPL1Address                      => linear, iterable
     CommonSynramConfigOnDLS          => linear, iterable

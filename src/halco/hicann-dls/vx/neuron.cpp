@@ -32,6 +32,27 @@ NeuronResetOnDLS NeuronConfigOnDLS::toNeuronResetOnDLS() const
 	    block);
 }
 
+NeuronSpikeCounterReadBlockOnDLS NeuronConfigBlockOnDLS::toNeuronSpikeCounterReadBlockOnDLS() const
+{
+	return NeuronSpikeCounterReadBlockOnDLS(toEnum() % NeuronSpikeCounterReadBlockOnDLS::size);
+}
+
+NeuronSpikeCounterReadOnDLS NeuronConfigOnDLS::toNeuronSpikeCounterReadOnDLS() const
+{
+	return NeuronSpikeCounterReadOnDLS(toNeuronResetOnDLS().toEnum());
+}
+
+NeuronSpikeCounterResetBlockOnDLS NeuronConfigBlockOnDLS::toNeuronSpikeCounterResetBlockOnDLS()
+    const
+{
+	return NeuronSpikeCounterResetBlockOnDLS(toEnum() % NeuronSpikeCounterResetBlockOnDLS::size);
+}
+
+NeuronSpikeCounterResetOnDLS NeuronConfigOnDLS::toNeuronSpikeCounterResetOnDLS() const
+{
+	return NeuronSpikeCounterResetOnDLS(toNeuronResetOnDLS().toEnum());
+}
+
 SynapseOnSynapseRow NeuronColumnOnDLS::toSynapseOnSynapseRow() const
 {
 	return SynapseOnSynapseRow(toEnum());
@@ -50,6 +71,16 @@ NeuronConfigOnDLS NeuronOnDLS::toNeuronConfigOnDLS() const
 NeuronResetOnDLS NeuronOnDLS::toNeuronResetOnDLS() const
 {
 	return toNeuronConfigOnDLS().toNeuronResetOnDLS();
+}
+
+NeuronSpikeCounterReadOnDLS NeuronOnDLS::toNeuronSpikeCounterReadOnDLS() const
+{
+	return toNeuronConfigOnDLS().toNeuronSpikeCounterReadOnDLS();
+}
+
+NeuronSpikeCounterResetOnDLS NeuronOnDLS::toNeuronSpikeCounterResetOnDLS() const
+{
+	return toNeuronConfigOnDLS().toNeuronSpikeCounterResetOnDLS();
 }
 
 NeuronBackendConfigOnDLS NeuronOnDLS::toNeuronBackendConfigOnDLS() const
