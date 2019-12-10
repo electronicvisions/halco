@@ -113,3 +113,5 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::WaferMixin<
     halco::hicann::v2::HICANNGlobal BOOST_PP_COMMA() halco::hicann::v2::HICANNOnWafer>)
 
 } // std
+
+PYPP_INSTANTIATE(std::vector<halco::hicann::v2::HICANNOnWafer>)
