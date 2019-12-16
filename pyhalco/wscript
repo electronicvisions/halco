@@ -5,7 +5,6 @@ from waflib.extras.gtest import summary
 import os.path
 
 def depends(ctx):
-    ctx('pyublas')
     ctx('pywrap')
     ctx('halco')
 
@@ -111,7 +110,7 @@ def build(bld):
                 gen_defines    = 'PYPLUSPLUS __STRICT_ANSI__',
                 defines        = 'PYBINDINGS',
                 headers        = '../include/halco/common/common.h',
-                use            = ['halco_common', 'pyublas', 'BOOST4HALCO', 'BOOST4PYHALCO', 'PYHALCO', 'pywrap', 'pywrapstdvector', 'pycellparameters', 'pyhalco_common_files'],
+                use            = ['halco_common', 'BOOST4HALCO', 'BOOST4PYHALCO', 'PYHALCO', 'pywrap', 'pywrapstdvector', 'pycellparameters', 'pyhalco_common_files'],
                 install_path   = '${PREFIX}/lib',
                 linkflags      = '-Wl,-z,defs',
                 includes       = '.',
