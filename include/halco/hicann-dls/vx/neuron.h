@@ -11,10 +11,10 @@ struct CapMemColumnOnCapMemBlock;
 struct CapMemBlockOnDLS;
 struct NeuronResetBlockOnDLS;
 struct NeuronResetOnDLS;
-struct NeuronSpikeCounterReadBlockOnDLS;
-struct NeuronSpikeCounterReadOnDLS;
-struct NeuronSpikeCounterResetBlockOnDLS;
-struct NeuronSpikeCounterResetOnDLS;
+struct SpikeCounterReadBlockOnDLS;
+struct SpikeCounterReadOnDLS;
+struct SpikeCounterResetBlockOnDLS;
+struct SpikeCounterResetOnDLS;
 struct NeuronConfigOnDLS;
 struct NeuronBackendConfigOnDLS;
 struct SynapseOnSynapseRow;
@@ -64,8 +64,8 @@ struct GENPYBIND(inline_base("*")) NeuronOnDLS
 	NeuronRowOnDLS toNeuronRowOnDLS() const { return y(); }
 
 	NeuronResetOnDLS toNeuronResetOnDLS() const;
-	NeuronSpikeCounterReadOnDLS toNeuronSpikeCounterReadOnDLS() const;
-	NeuronSpikeCounterResetOnDLS toNeuronSpikeCounterResetOnDLS() const;
+	SpikeCounterReadOnDLS toSpikeCounterReadOnDLS() const;
+	SpikeCounterResetOnDLS toSpikeCounterResetOnDLS() const;
 	NeuronConfigOnDLS toNeuronConfigOnDLS() const;
 	NeuronBackendConfigOnDLS toNeuronBackendConfigOnDLS() const;
 
@@ -96,8 +96,8 @@ struct GENPYBIND(inline_base("*")) NeuronConfigBlockOnDLS
 
 	CapMemBlockOnDLS toCapMemBlockOnDLS() const;
 	NeuronResetBlockOnDLS toNeuronResetBlockOnDLS() const;
-	NeuronSpikeCounterReadBlockOnDLS toNeuronSpikeCounterReadBlockOnDLS() const;
-	NeuronSpikeCounterResetBlockOnDLS toNeuronSpikeCounterResetBlockOnDLS() const;
+	SpikeCounterReadBlockOnDLS toSpikeCounterReadBlockOnDLS() const;
+	SpikeCounterResetBlockOnDLS toSpikeCounterResetBlockOnDLS() const;
 };
 
 
@@ -118,8 +118,8 @@ struct GENPYBIND(inline_base("*NeuronConfigMixin*")) NeuronConfigOnDLS
 
 	NeuronConfigOnNeuronConfigBlock toNeuronConfigOnNeuronConfigBlock() const { return This(); }
 	NeuronResetOnDLS toNeuronResetOnDLS() const;
-	NeuronSpikeCounterReadOnDLS toNeuronSpikeCounterReadOnDLS() const;
-	NeuronSpikeCounterResetOnDLS toNeuronSpikeCounterResetOnDLS() const;
+	SpikeCounterReadOnDLS toSpikeCounterReadOnDLS() const;
+	SpikeCounterResetOnDLS toSpikeCounterResetOnDLS() const;
 };
 
 
@@ -169,40 +169,40 @@ struct GENPYBIND(inline_base("*")) NeuronResetBlockOnDLS
 };
 
 
-struct GENPYBIND(inline_base("*")) NeuronSpikeCounterReadOnNeuronSpikeCounterReadBlock
+struct GENPYBIND(inline_base("*")) SpikeCounterReadOnSpikeCounterReadBlock
     : public common::detail::
-          RantWrapper<NeuronSpikeCounterReadOnNeuronSpikeCounterReadBlock, uint_fast16_t, 255, 0>
+          RantWrapper<SpikeCounterReadOnSpikeCounterReadBlock, uint_fast16_t, 255, 0>
 {
-	constexpr explicit NeuronSpikeCounterReadOnNeuronSpikeCounterReadBlock(uintmax_t const val = 0)
+	constexpr explicit SpikeCounterReadOnSpikeCounterReadBlock(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
 };
 
-struct GENPYBIND(inline_base("*")) NeuronSpikeCounterReadBlockOnDLS
-    : public common::detail::RantWrapper<NeuronSpikeCounterReadBlockOnDLS, uint_fast16_t, 1, 0>
+struct GENPYBIND(inline_base("*")) SpikeCounterReadBlockOnDLS
+    : public common::detail::RantWrapper<SpikeCounterReadBlockOnDLS, uint_fast16_t, 1, 0>
 {
-	constexpr explicit NeuronSpikeCounterReadBlockOnDLS(uintmax_t const val = 0)
+	constexpr explicit SpikeCounterReadBlockOnDLS(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
 };
 
 
-struct GENPYBIND(inline_base("*")) NeuronSpikeCounterResetOnNeuronSpikeCounterResetBlock
+struct GENPYBIND(inline_base("*")) SpikeCounterResetOnSpikeCounterResetBlock
     : public common::detail::
-          RantWrapper<NeuronSpikeCounterResetOnNeuronSpikeCounterResetBlock, uint_fast16_t, 255, 0>
+          RantWrapper<SpikeCounterResetOnSpikeCounterResetBlock, uint_fast16_t, 255, 0>
 {
-	constexpr explicit NeuronSpikeCounterResetOnNeuronSpikeCounterResetBlock(
-	    uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	constexpr explicit SpikeCounterResetOnSpikeCounterResetBlock(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
 };
 
-struct GENPYBIND(inline_base("*")) NeuronSpikeCounterResetBlockOnDLS
-    : public common::detail::RantWrapper<NeuronSpikeCounterResetBlockOnDLS, uint_fast16_t, 1, 0>
+struct GENPYBIND(inline_base("*")) SpikeCounterResetBlockOnDLS
+    : public common::detail::RantWrapper<SpikeCounterResetBlockOnDLS, uint_fast16_t, 1, 0>
 {
-	constexpr explicit NeuronSpikeCounterResetBlockOnDLS(uintmax_t const val = 0)
+	constexpr explicit SpikeCounterResetBlockOnDLS(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
@@ -263,50 +263,46 @@ struct GENPYBIND(inline_base("*NeuronResetMixin*")) NeuronResetOnDLS
 };
 
 
-HALCO_COORDINATE_MIXIN(NeuronSpikeCounterReadMixin, NeuronSpikeCounterReadBlockOnDLS, neuron)
+HALCO_COORDINATE_MIXIN(SpikeCounterReadMixin, SpikeCounterReadBlockOnDLS, neuron)
 
-struct GENPYBIND(inline_base("*NeuronSpikeCounterReadMixin*")) NeuronSpikeCounterReadOnDLS
-    : public NeuronSpikeCounterReadMixin<
-          NeuronSpikeCounterReadOnDLS,
-          NeuronSpikeCounterReadOnNeuronSpikeCounterReadBlock>
+struct GENPYBIND(inline_base("*SpikeCounterReadMixin*")) SpikeCounterReadOnDLS
+    : public SpikeCounterReadMixin<SpikeCounterReadOnDLS, SpikeCounterReadOnSpikeCounterReadBlock>
 {
-	NeuronSpikeCounterReadOnDLS() = default;
+	SpikeCounterReadOnDLS() = default;
 
-	explicit NeuronSpikeCounterReadOnDLS(
-	    NeuronSpikeCounterReadOnNeuronSpikeCounterReadBlock const& neuron,
-	    NeuronSpikeCounterReadBlockOnDLS const& block = NeuronSpikeCounterReadBlockOnDLS()) :
+	explicit SpikeCounterReadOnDLS(
+	    SpikeCounterReadOnSpikeCounterReadBlock const& neuron,
+	    SpikeCounterReadBlockOnDLS const& block = SpikeCounterReadBlockOnDLS()) :
 	    mixin_t(neuron, block)
 	{}
 
-	explicit NeuronSpikeCounterReadOnDLS(enum_type const& e) : mixin_t(e) {}
+	explicit SpikeCounterReadOnDLS(enum_type const& e) : mixin_t(e) {}
 
-	NeuronSpikeCounterReadOnNeuronSpikeCounterReadBlock
-	toNeuronSpikeCounterReadOnNeuronSpikeCounterReadBlock() const
+	SpikeCounterReadOnSpikeCounterReadBlock toSpikeCounterReadOnSpikeCounterReadBlock() const
 	{
 		return This();
 	}
 };
 
 
-HALCO_COORDINATE_MIXIN(NeuronSpikeCounterResetMixin, NeuronSpikeCounterResetBlockOnDLS, neuron)
+HALCO_COORDINATE_MIXIN(SpikeCounterResetMixin, SpikeCounterResetBlockOnDLS, neuron)
 
-struct GENPYBIND(inline_base("*NeuronSpikeCounterResetMixin*")) NeuronSpikeCounterResetOnDLS
-    : public NeuronSpikeCounterResetMixin<
-          NeuronSpikeCounterResetOnDLS,
-          NeuronSpikeCounterResetOnNeuronSpikeCounterResetBlock>
+struct GENPYBIND(inline_base("*SpikeCounterResetMixin*")) SpikeCounterResetOnDLS
+    : public SpikeCounterResetMixin<
+          SpikeCounterResetOnDLS,
+          SpikeCounterResetOnSpikeCounterResetBlock>
 {
-	NeuronSpikeCounterResetOnDLS() = default;
+	SpikeCounterResetOnDLS() = default;
 
-	explicit NeuronSpikeCounterResetOnDLS(
-	    NeuronSpikeCounterResetOnNeuronSpikeCounterResetBlock const& neuron,
-	    NeuronSpikeCounterResetBlockOnDLS const& block = NeuronSpikeCounterResetBlockOnDLS()) :
+	explicit SpikeCounterResetOnDLS(
+	    SpikeCounterResetOnSpikeCounterResetBlock const& neuron,
+	    SpikeCounterResetBlockOnDLS const& block = SpikeCounterResetBlockOnDLS()) :
 	    mixin_t(neuron, block)
 	{}
 
-	explicit NeuronSpikeCounterResetOnDLS(enum_type const& e) : mixin_t(e) {}
+	explicit SpikeCounterResetOnDLS(enum_type const& e) : mixin_t(e) {}
 
-	NeuronSpikeCounterResetOnNeuronSpikeCounterResetBlock
-	toNeuronSpikeCounterResetOnNeuronSpikeCounterResetBlock() const
+	SpikeCounterResetOnSpikeCounterResetBlock toSpikeCounterResetOnSpikeCounterResetBlock() const
 	{
 		return This();
 	}
@@ -330,13 +326,11 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::EventOutputOnNeuronBackendBlock
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronResetOnNeuronResetBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronResetBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronResetOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(
-    halco::hicann_dls::vx::NeuronSpikeCounterReadOnNeuronSpikeCounterReadBlock)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronSpikeCounterReadBlockOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronSpikeCounterReadOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(
-    halco::hicann_dls::vx::NeuronSpikeCounterResetOnNeuronSpikeCounterResetBlock)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronSpikeCounterResetBlockOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronSpikeCounterResetOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikeCounterReadOnSpikeCounterReadBlock)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikeCounterReadBlockOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikeCounterReadOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikeCounterResetOnSpikeCounterResetBlock)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikeCounterResetBlockOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikeCounterResetOnDLS)
 
 } // namespace std

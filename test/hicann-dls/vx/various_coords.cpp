@@ -28,36 +28,34 @@ TEST(NeuronConfigBlockOnDLS, toNeuronResetBlockOnDLS)
 	EXPECT_EQ(coord.toNeuronResetBlockOnDLS(), NeuronResetBlockOnDLS(1));
 }
 
-TEST(NeuronConfigOnDLS, toNeuronSpikeCounterReadOnDLS)
+TEST(NeuronConfigOnDLS, toSpikeCounterReadOnDLS)
 {
 	NeuronConfigOnDLS coord(NeuronConfigOnNeuronConfigBlock(23), NeuronConfigBlockOnDLS(1));
 	EXPECT_EQ(
-	    coord.toNeuronSpikeCounterReadOnDLS(),
-	    NeuronSpikeCounterReadOnDLS(
-	        NeuronSpikeCounterReadOnNeuronSpikeCounterReadBlock(23),
-	        NeuronSpikeCounterReadBlockOnDLS(1)));
+	    coord.toSpikeCounterReadOnDLS(),
+	    SpikeCounterReadOnDLS(
+	        SpikeCounterReadOnSpikeCounterReadBlock(23), SpikeCounterReadBlockOnDLS(1)));
 }
 
-TEST(NeuronConfigBlockOnDLS, toNeuronSpikeCounterReadBlockOnDLS)
+TEST(NeuronConfigBlockOnDLS, toSpikeCounterReadBlockOnDLS)
 {
 	NeuronConfigBlockOnDLS coord(1);
-	EXPECT_EQ(coord.toNeuronSpikeCounterReadBlockOnDLS(), NeuronSpikeCounterReadBlockOnDLS(1));
+	EXPECT_EQ(coord.toSpikeCounterReadBlockOnDLS(), SpikeCounterReadBlockOnDLS(1));
 }
 
-TEST(NeuronConfigOnDLS, toNeuronSpikeCounterResetOnDLS)
+TEST(NeuronConfigOnDLS, toSpikeCounterResetOnDLS)
 {
 	NeuronConfigOnDLS coord(NeuronConfigOnNeuronConfigBlock(23), NeuronConfigBlockOnDLS(1));
 	EXPECT_EQ(
-	    coord.toNeuronSpikeCounterResetOnDLS(),
-	    NeuronSpikeCounterResetOnDLS(
-	        NeuronSpikeCounterResetOnNeuronSpikeCounterResetBlock(23),
-	        NeuronSpikeCounterResetBlockOnDLS(1)));
+	    coord.toSpikeCounterResetOnDLS(),
+	    SpikeCounterResetOnDLS(
+	        SpikeCounterResetOnSpikeCounterResetBlock(23), SpikeCounterResetBlockOnDLS(1)));
 }
 
-TEST(NeuronConfigBlockOnDLS, toNeuronSpikeCounterResetBlockOnDLS)
+TEST(NeuronConfigBlockOnDLS, toSpikeCounterResetBlockOnDLS)
 {
 	NeuronConfigBlockOnDLS coord(1);
-	EXPECT_EQ(coord.toNeuronSpikeCounterResetBlockOnDLS(), NeuronSpikeCounterResetBlockOnDLS(1));
+	EXPECT_EQ(coord.toSpikeCounterResetBlockOnDLS(), SpikeCounterResetBlockOnDLS(1));
 }
 
 TEST(CrossbarL2OutputOnDLS, toCrossbarOutputOnDLS)

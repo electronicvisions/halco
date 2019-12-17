@@ -32,25 +32,24 @@ NeuronResetOnDLS NeuronConfigOnDLS::toNeuronResetOnDLS() const
 	    block);
 }
 
-NeuronSpikeCounterReadBlockOnDLS NeuronConfigBlockOnDLS::toNeuronSpikeCounterReadBlockOnDLS() const
+SpikeCounterReadBlockOnDLS NeuronConfigBlockOnDLS::toSpikeCounterReadBlockOnDLS() const
 {
-	return NeuronSpikeCounterReadBlockOnDLS(toEnum() % NeuronSpikeCounterReadBlockOnDLS::size);
+	return SpikeCounterReadBlockOnDLS(toEnum() % SpikeCounterReadBlockOnDLS::size);
 }
 
-NeuronSpikeCounterReadOnDLS NeuronConfigOnDLS::toNeuronSpikeCounterReadOnDLS() const
+SpikeCounterReadOnDLS NeuronConfigOnDLS::toSpikeCounterReadOnDLS() const
 {
-	return NeuronSpikeCounterReadOnDLS(toNeuronResetOnDLS().toEnum());
+	return SpikeCounterReadOnDLS(toNeuronResetOnDLS().toEnum());
 }
 
-NeuronSpikeCounterResetBlockOnDLS NeuronConfigBlockOnDLS::toNeuronSpikeCounterResetBlockOnDLS()
-    const
+SpikeCounterResetBlockOnDLS NeuronConfigBlockOnDLS::toSpikeCounterResetBlockOnDLS() const
 {
-	return NeuronSpikeCounterResetBlockOnDLS(toEnum() % NeuronSpikeCounterResetBlockOnDLS::size);
+	return SpikeCounterResetBlockOnDLS(toEnum() % SpikeCounterResetBlockOnDLS::size);
 }
 
-NeuronSpikeCounterResetOnDLS NeuronConfigOnDLS::toNeuronSpikeCounterResetOnDLS() const
+SpikeCounterResetOnDLS NeuronConfigOnDLS::toSpikeCounterResetOnDLS() const
 {
-	return NeuronSpikeCounterResetOnDLS(toNeuronResetOnDLS().toEnum());
+	return SpikeCounterResetOnDLS(toNeuronResetOnDLS().toEnum());
 }
 
 SynapseOnSynapseRow NeuronColumnOnDLS::toSynapseOnSynapseRow() const
@@ -73,14 +72,14 @@ NeuronResetOnDLS NeuronOnDLS::toNeuronResetOnDLS() const
 	return toNeuronConfigOnDLS().toNeuronResetOnDLS();
 }
 
-NeuronSpikeCounterReadOnDLS NeuronOnDLS::toNeuronSpikeCounterReadOnDLS() const
+SpikeCounterReadOnDLS NeuronOnDLS::toSpikeCounterReadOnDLS() const
 {
-	return toNeuronConfigOnDLS().toNeuronSpikeCounterReadOnDLS();
+	return toNeuronConfigOnDLS().toSpikeCounterReadOnDLS();
 }
 
-NeuronSpikeCounterResetOnDLS NeuronOnDLS::toNeuronSpikeCounterResetOnDLS() const
+SpikeCounterResetOnDLS NeuronOnDLS::toSpikeCounterResetOnDLS() const
 {
-	return toNeuronConfigOnDLS().toNeuronSpikeCounterResetOnDLS();
+	return toNeuronConfigOnDLS().toSpikeCounterResetOnDLS();
 }
 
 NeuronBackendConfigOnDLS NeuronOnDLS::toNeuronBackendConfigOnDLS() const
