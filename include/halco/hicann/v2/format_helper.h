@@ -27,6 +27,7 @@ std::string short_format(const FPGAOnWafer& f);
 std::string short_format(const TriggerOnWafer& t);
 std::string short_format(const Wafer& w);
 
+std::string short_format(const RepeaterBlockOnHICANN& rb);
 std::string short_format(const HRepeaterOnHICANN& hr);
 std::string short_format(const VRepeaterOnHICANN& vr);
 
@@ -59,6 +60,7 @@ template std::string to_string(FPGAOnWafer const&);
 template std::string to_string(TriggerOnWafer const&);
 template std::string to_string(Wafer const&);
 
+template std::string to_string(RepeaterBlockOnHICANN const&);
 template std::string to_string(HRepeaterOnHICANN const&);
 template std::string to_string(VRepeaterOnHICANN const&);
 
@@ -80,6 +82,7 @@ typedef boost::variant<
     ANANASOnWafer,
     AuxPwrOnWafer,
     Wafer,
+    RepeaterBlockOnHICANN,
     HRepeaterOnHICANN,
     VRepeaterOnHICANN,
     HRepeaterOnWafer,

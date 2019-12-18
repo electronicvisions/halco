@@ -188,6 +188,11 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
         self.assertEqual(C.from_string("W02T1"), tg)
         self.assertEqual(C.from_string("W2T1"), tg)
 
+        rb = C.RepeaterBlockOnHICANN(Enum(2))
+        self.assertEqual(C.short_format(rb), "RB2")
+        self.assertEqual(C.to_string(rb), "RB2")
+        self.assertEqual(C.from_string("RB2"), rb)
+
         hr = C.HRepeaterOnHICANN(Enum(5))
         self.assertEqual(C.short_format(hr), "HR005")
         self.assertEqual(C.to_string(hr), "HR005")

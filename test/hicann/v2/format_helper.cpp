@@ -67,6 +67,11 @@ TEST(FormatHelper, ShortFormat) {
 	EXPECT_EQ(to_string(tg), "W002T03");
 	EXPECT_EQ(boost::get<TriggerGlobal>(from_string("W002T03")), tg);
 
+	RepeaterBlockOnHICANN rb(Enum(2));
+	EXPECT_EQ(short_format(rb), "RB2");
+	EXPECT_EQ(to_string(rb), "RB2");
+	EXPECT_EQ(boost::get<RepeaterBlockOnHICANN>(from_string("RB2")), rb);
+
 	HRepeaterOnHICANN hr(Enum(5));
 	EXPECT_EQ(short_format(hr), "HR005");
 	EXPECT_EQ(to_string(hr), "HR005");

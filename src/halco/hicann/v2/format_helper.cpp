@@ -66,6 +66,12 @@ std::string short_format(const AuxPwrGlobal& apg) {
 	return short_format(apg.toWafer()) + short_format(apg.toAuxPwrOnWafer());
 }
 
+std::string short_format(const RepeaterBlockOnHICANN& rb) {
+	std::stringstream ss;
+	ss << "RB" << rb.toEnum().value();
+	return ss.str();
+}
+
 std::string short_format(const HRepeaterOnHICANN& hr) {
 	std::stringstream ss;
 	ss << "HR" << std::setw(3) << std::setfill('0') << hr.toEnum().value();
@@ -136,6 +142,7 @@ typedef boost::variant<
     ANANASOnWafer,
     AuxPwrOnWafer,
     Wafer,
+    RepeaterBlockOnHICANN,
     HRepeaterOnHICANN,
     VRepeaterOnHICANN,
     HLineOnHICANN,
@@ -167,6 +174,8 @@ local_type to_local(std::string const& type, std::string const& value)
 		return Wafer(num);
 	} else if (type == "T") {
 		return TriggerOnWafer(e);
+	} else if (type == "RB") {
+		return RepeaterBlockOnHICANN(e);
 	} else if (type == "HR") {
 		return HRepeaterOnHICANN(e);
 	} else if (type == "VR") {
