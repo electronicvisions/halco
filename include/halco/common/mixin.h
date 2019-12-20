@@ -93,6 +93,9 @@
 			return enum_type(                                                  \
 				mValue.toEnum() * local_type::size + This().toEnum());         \
 		}                                                                      \
+		                                                                       \
+		GENPYBIND(expose_as(__int__))                                          \
+		PYPP_CONSTEXPR operator typename enum_type::value_type() const { return toEnum().value(); } \
                                                                                \
 	protected:                                                                 \
 		cls mValue;                                                            \

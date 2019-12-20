@@ -321,5 +321,16 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
         # HICANN 0 does not have a neighbor up
         self.assertEqual(None, C.VLineOnWafer(C.VLineOnHICANN(Enum(0)), C.HICANNOnWafer(Enum(0))).toVRepeaterOnWafer()[1])
 
+    def test_explicit_conversion(self):
+        import pyhalco_hicann_v2 as C
+
+        # use some wafer != 0
+        fg = C.FPGAGlobal(C.FPGAOnWafer(), C.Wafer(33))
+        self.assertEqual(int(fg), fg.toEnum().value())
+
+        # compare same FPGA on different wafers
+        self.assertNotEqual(int(C.FPGAGlobal(C.FPGAOnWafer(), C.Wafer(0))),
+                            int(C.FPGAGlobal(C.FPGAOnWafer(), C.Wafer(1))))
+
 if __name__ == '__main__':
     unittest.main()
