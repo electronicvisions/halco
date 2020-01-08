@@ -21,6 +21,12 @@ std::string short_format(const FPGAOnWafer& f) {
 	return ss.str();
 }
 
+std::string short_format(const DNCOnWafer& f) {
+	std::stringstream ss;
+	ss << "D" << std::setw(3) << std::setfill('0') << f.toEnum().value();
+	return ss.str();
+}
+
 std::string short_format(const TriggerOnWafer& f)
 {
 	std::stringstream ss;
@@ -52,6 +58,10 @@ std::string short_format(const HICANNGlobal& hg) {
 
 std::string short_format(const FPGAGlobal& fg) {
 	return short_format(fg.toWafer()) + short_format(fg.toFPGAOnWafer());
+}
+
+std::string short_format(const DNCGlobal& dg) {
+	return short_format(dg.toWafer()) + short_format(dg.toDNCOnWafer());
 }
 
 std::string short_format(const TriggerGlobal& fg) {
@@ -144,6 +154,7 @@ namespace {
 typedef boost::variant<
     HICANNOnWafer,
     FPGAOnWafer,
+    DNCOnWafer,
     TriggerOnWafer,
     ANANASOnWafer,
     AuxPwrOnWafer,
@@ -161,6 +172,7 @@ typedef boost::variant<
     AuxPwrGlobal,
     HICANNGlobal,
     FPGAGlobal,
+    DNCGlobal,
     TriggerGlobal,
     RepeaterBlockOnWafer,
     HRepeaterOnWafer,
@@ -177,6 +189,8 @@ local_type to_local(std::string const& type, std::string const& value)
 		return HICANNOnWafer(e);
 	} else if (type == "F") {
 		return FPGAOnWafer(e);
+	} else if (type == "D") {
+		return DNCOnWafer(e);
 	} else if (type == "W") {
 		return Wafer(num);
 	} else if (type == "T") {
@@ -209,6 +223,7 @@ struct to_compound : public boost::static_visitor<compound_type>
 		return HICANNGlobal(h, w);
 	}
 	FPGAGlobal operator()(Wafer const& w, FPGAOnWafer const& f) const { return FPGAGlobal(f, w); }
+	DNCGlobal operator()(Wafer const& w, DNCOnWafer const& f) const { return DNCGlobal(f, w); }
 	ANANASGlobal operator()(Wafer const& w, ANANASOnWafer const& a) const
 	{
 		return ANANASGlobal(a, w);

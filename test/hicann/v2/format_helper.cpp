@@ -57,6 +57,16 @@ TEST(FormatHelper, ShortFormat) {
 	EXPECT_EQ(to_string(fg), "W002F004");
 	EXPECT_EQ(boost::get<FPGAGlobal>(from_string("W002F004")), fg);
 
+	DNCOnWafer d(Enum(4));
+	EXPECT_EQ(short_format(d),  "D004");
+	EXPECT_EQ(to_string(d),  "D004");
+	EXPECT_EQ(boost::get<DNCOnWafer>(from_string("D004")), d);
+
+	DNCGlobal dg(d,w);
+	EXPECT_EQ(short_format(dg), "W002D004");
+	EXPECT_EQ(to_string(dg), "W002D004");
+	EXPECT_EQ(boost::get<DNCGlobal>(from_string("W002D004")), dg);
+
 	TriggerOnWafer t(Enum(3));
 	EXPECT_EQ(short_format(t),  "T03");
 	EXPECT_EQ(to_string(t), "T03");

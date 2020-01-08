@@ -48,6 +48,8 @@ def build(bld):
         install_path    = '${PREFIX}/lib',
         linkflags       = '-Wl,-z,defs',
         use             = ['halco_common', 'BOOST4HALCO'],
+        defines         = ['BOOST_MPL_CFG_NO_PREPROCESSED_HEADERS', 'BOOST_MPL_LIMIT_LIST_SIZE=30'],
+        export_defines  = ['BOOST_MPL_CFG_NO_PREPROCESSED_HEADERS', 'BOOST_MPL_LIMIT_LIST_SIZE=30'],
     )
 
     bld.shlib(

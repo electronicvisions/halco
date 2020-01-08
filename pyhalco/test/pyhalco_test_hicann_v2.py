@@ -176,6 +176,20 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
         self.assertEqual(C.from_string("W02F04"), fg)
         self.assertEqual(C.from_string("W2F4"), fg)
 
+        d = C.DNCOnWafer(Enum(4))
+        self.assertEqual(C.short_format(d),  "D004")
+        self.assertEqual(C.to_string(d),  "D004")
+        self.assertEqual(C.from_string("D004"), d)
+        self.assertEqual(C.from_string("D04"), d)
+        self.assertEqual(C.from_string("D4"), d)
+
+        dg = C.DNCGlobal(d,w)
+        self.assertEqual(C.short_format(dg), "W002D004")
+        self.assertEqual(C.to_string(dg), "W002D004")
+        self.assertEqual(C.from_string("W002D004"), dg)
+        self.assertEqual(C.from_string("W02D04"), dg)
+        self.assertEqual(C.from_string("W2D4"), dg)
+
         t = C.TriggerOnWafer(Enum(1))
         self.assertEqual(C.short_format(t), "T01")
         self.assertEqual(C.to_string(t), "T01")

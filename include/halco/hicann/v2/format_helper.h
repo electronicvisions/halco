@@ -19,11 +19,13 @@ std::string short_format(const ANANASGlobal& a);
 std::string short_format(const AuxPwrGlobal& apg);
 std::string short_format(const HICANNGlobal& hg);
 std::string short_format(const FPGAGlobal& fg);
+std::string short_format(const DNCGlobal& fg);
 std::string short_format(const TriggerGlobal& t);
 std::string short_format(const ANANASOnWafer& a);
 std::string short_format(const AuxPwrOnWafer& a);
 std::string short_format(const HICANNOnWafer& h);
 std::string short_format(const FPGAOnWafer& f);
+std::string short_format(const DNCOnWafer& f);
 std::string short_format(const TriggerOnWafer& t);
 std::string short_format(const RepeaterBlockOnWafer& rb);
 std::string short_format(const HRepeaterOnWafer& hr);
@@ -52,11 +54,13 @@ template std::string to_string(ANANASGlobal const&);
 template std::string to_string(AuxPwrGlobal const&);
 template std::string to_string(HICANNGlobal const&);
 template std::string to_string(FPGAGlobal const&);
+template std::string to_string(DNCGlobal const&);
 template std::string to_string(TriggerGlobal const&);
 template std::string to_string(ANANASOnWafer const&);
 template std::string to_string(AuxPwrOnWafer const&);
 template std::string to_string(HICANNOnWafer const&);
 template std::string to_string(FPGAOnWafer const&);
+template std::string to_string(DNCOnWafer const&);
 template std::string to_string(TriggerOnWafer const&);
 template std::string to_string(RepeaterBlockOnWafer const&);
 template std::string to_string(HRepeaterOnWafer const&);
@@ -75,9 +79,11 @@ typedef boost::variant<
     AuxPwrGlobal,
     HICANNGlobal,
     FPGAGlobal,
+    DNCGlobal,
     TriggerGlobal,
     HICANNOnWafer,
     FPGAOnWafer,
+    DNCOnWafer,
     TriggerOnWafer,
     ANANASOnWafer,
     AuxPwrOnWafer,
