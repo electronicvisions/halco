@@ -387,14 +387,50 @@ SendingRepeaterOnHICANN DNCMergerOnHICANN::toSendingRepeaterOnHICANN() const {
 	return SendingRepeaterOnHICANN(max - value());
 }
 
-HRepeaterOnWafer HLineOnWafer::toHRepeaterOnWafer() const
+boost::tuple<HRepeaterOnWafer, boost::optional<HRepeaterOnWafer> >  HLineOnWafer::toHRepeaterOnWafer() const
 {
-	return HRepeaterOnWafer(toHLineOnHICANN().toHRepeaterOnHICANN(), toHICANNOnWafer());
+	boost::tuple<HRepeaterOnWafer, boost::optional<HRepeaterOnWafer> > ret;
+
+	HRepeaterOnHICANN const hrepeater_on_this = toHRepeaterOnHICANN();
+
+	ret.get<0>() = HRepeaterOnWafer(hrepeater_on_this, toHICANNOnWafer());
+
+	if (hrepeater_on_this.isLeft()) {
+		if (toHICANNOnWafer().has_east()) {
+			ret.get<1>() = HRepeaterOnWafer(
+			    this->east().toHRepeaterOnHICANN(), toHICANNOnWafer().east());
+		}
+	} else {
+		if (toHICANNOnWafer().has_west()) {
+			ret.get<1>() = HRepeaterOnWafer(
+			    this->west().toHRepeaterOnHICANN(), toHICANNOnWafer().west());
+		}
+	}
+
+	return ret;
 }
 
-VRepeaterOnWafer VLineOnWafer::toVRepeaterOnWafer() const
+boost::tuple<VRepeaterOnWafer, boost::optional<VRepeaterOnWafer> > VLineOnWafer::toVRepeaterOnWafer() const
 {
-	return VRepeaterOnWafer(toVLineOnHICANN().toVRepeaterOnHICANN(), toHICANNOnWafer());
+	boost::tuple<VRepeaterOnWafer, boost::optional<VRepeaterOnWafer> > ret;
+
+	VRepeaterOnHICANN const vrepeater_on_this = toVRepeaterOnHICANN();
+
+	ret.get<0>() = VRepeaterOnWafer(vrepeater_on_this, toHICANNOnWafer());
+
+	if (vrepeater_on_this.isTop()) {
+		if (toHICANNOnWafer().has_south()) {
+			ret.get<1>() = VRepeaterOnWafer(
+			    this->south().toVRepeaterOnHICANN(), toHICANNOnWafer().south());
+		}
+	} else {
+		if (toHICANNOnWafer().has_north()) {
+			ret.get<1>() = VRepeaterOnWafer(
+			    this->north().toVRepeaterOnHICANN(), toHICANNOnWafer().north());
+		}
+	}
+
+	return ret;
 }
 
 boost::tuple<HLineOnWafer, boost::optional<HLineOnWafer>>

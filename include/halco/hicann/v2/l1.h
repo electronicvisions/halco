@@ -192,7 +192,13 @@ public:
 	explicit HLineOnWafer(enum_type const& e) : base(e) {}
 
 	HLineOnHICANN toHLineOnHICANN() const { return This(); }
-	HRepeaterOnWafer toHRepeaterOnWafer() const;
+
+	/* L1 lines are connected to two L1 repeaters. One on the local
+	   HICANN, the other on a neighboring HICANN.
+
+	   The HRepeater on the local HICANN is guaranteed to be in the first element of the tuple.
+	 */
+	boost::tuple<HRepeaterOnWafer, boost::optional<HRepeaterOnWafer> > toHRepeaterOnWafer() const;
 };
 
 class VRepeaterOnWafer;
@@ -215,7 +221,13 @@ public:
 	explicit VLineOnWafer(enum_type const& e) : base(e) {}
 
 	VLineOnHICANN toVLineOnHICANN() const { return This(); }
-	VRepeaterOnWafer toVRepeaterOnWafer() const;
+
+	/* L1 lines are connected to two L1 repeaters. One on the local
+	   HICANN, the other on a neighboring HICANN.
+
+	   The VRepeater on the local HICANN is guaranteed to be in the first element of the tuple.
+	 */
+	boost::tuple<VRepeaterOnWafer, boost::optional<VRepeaterOnWafer> > toVRepeaterOnWafer() const;
 };
 
 

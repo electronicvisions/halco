@@ -263,22 +263,22 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
         from pyhalco_common import Enum
 
         # neighbour HICANN is connected right
-        hrepeater = C.HLineOnWafer(C.HLineOnHICANN(Enum(3)), C.HICANNOnWafer(Enum(13))).toHRepeaterOnWafer()
+        hrepeater = C.HLineOnWafer(C.HLineOnHICANN(Enum(3)), C.HICANNOnWafer(Enum(13))).toHRepeaterOnWafer()[0]
         self.assertEqual(hrepeater.toHLineOnWafer()[1],
                          C.HLineOnWafer(C.HLineOnHICANN(Enum(5)), C.HICANNOnWafer(Enum(14))))
 
         # neighbor HICANN is connected left
-        hrepeater = C.HLineOnWafer(C.HLineOnHICANN(Enum(2)), C.HICANNOnWafer(Enum(13))).toHRepeaterOnWafer()
+        hrepeater = C.HLineOnWafer(C.HLineOnHICANN(Enum(2)), C.HICANNOnWafer(Enum(13))).toHRepeaterOnWafer()[0]
         self.assertEqual(hrepeater.toHLineOnWafer()[1],
                          C.HLineOnWafer(C.HLineOnHICANN(Enum(0)), C.HICANNOnWafer(Enum(12))))
 
         # neighbor HICANN is connected up
-        vrepeater = C.VLineOnWafer(C.VLineOnHICANN(Enum(1)), C.HICANNOnWafer(Enum(12))).toVRepeaterOnWafer()
+        vrepeater = C.VLineOnWafer(C.VLineOnHICANN(Enum(1)), C.HICANNOnWafer(Enum(12))).toVRepeaterOnWafer()[0]
         self.assertEqual(vrepeater.toVLineOnWafer()[1],
                          C.VLineOnWafer(C.VLineOnHICANN(Enum(3)), C.HICANNOnWafer(Enum(0))))
 
         # neighbor HICANN is connected down
-        vrepeater = C.VLineOnWafer(C.VLineOnHICANN(Enum(2)), C.HICANNOnWafer(Enum(12))).toVRepeaterOnWafer()
+        vrepeater = C.VLineOnWafer(C.VLineOnHICANN(Enum(2)), C.HICANNOnWafer(Enum(12))).toVRepeaterOnWafer()[0]
         self.assertEqual(vrepeater.toVLineOnWafer()[1],
                          C.VLineOnWafer(C.VLineOnHICANN(Enum(0)), C.HICANNOnWafer(Enum(28))))
 
@@ -287,6 +287,39 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
 
         # HICANN 0 does not have a neighbor up
         self.assertEqual(None, C.VRepeaterOnWafer(C.VRepeaterOnHICANN(Enum(0)), C.HICANNOnWafer(Enum(0))).toVLineOnWafer()[1])
+
+    def test_neighbor_l1_repeaters(self):
+        """
+        spot checks conversion to L1 repeaters on neighbor HICANN
+        """
+        import pyhalco_hicann_v2 as C
+        from pyhalco_common import Enum
+
+        # neighbour HICANN is connected right
+        hline = C.HLineOnWafer(C.HLineOnHICANN(Enum(4)), C.HICANNOnWafer(Enum(13)))
+        self.assertEqual(hline.toHRepeaterOnWafer()[1],
+                         C.HRepeaterOnWafer(C.HRepeaterOnHICANN(Enum(6)), C.HICANNOnWafer(Enum(14))))
+
+        # neighbour HICANN is connected left
+        hline = C.HLineOnWafer(C.HLineOnHICANN(Enum(5)), C.HICANNOnWafer(Enum(13)))
+        self.assertEqual(hline.toHRepeaterOnWafer()[1],
+                         C.HRepeaterOnWafer(C.HRepeaterOnHICANN(Enum(3)), C.HICANNOnWafer(Enum(12))))
+
+        # neighbour HICANN is connected up
+        vline = C.VLineOnWafer(C.VLineOnHICANN(Enum(0)), C.HICANNOnWafer(Enum(12)))
+        self.assertEqual(vline.toVRepeaterOnWafer()[1],
+                         C.VRepeaterOnWafer(C.VLineOnHICANN(Enum(2)).toVRepeaterOnHICANN(), C.HICANNOnWafer(Enum(0))))
+
+        # neighbour HICANN is connected down
+        vline = C.VLineOnWafer(C.VLineOnHICANN(Enum(3)), C.HICANNOnWafer(Enum(12)))
+        self.assertEqual(vline.toVRepeaterOnWafer()[1],
+                         C.VRepeaterOnWafer(C.VLineOnHICANN(Enum(1)).toVRepeaterOnHICANN(), C.HICANNOnWafer(Enum(28))))
+
+        # HICANN 0 does not have a neighbor to the left
+        self.assertEqual(None, C.HLineOnWafer(C.HLineOnHICANN(Enum(1)), C.HICANNOnWafer(Enum(0))).toHRepeaterOnWafer()[1])
+
+        # HICANN 0 does not have a neighbor up
+        self.assertEqual(None, C.VLineOnWafer(C.VLineOnHICANN(Enum(0)), C.HICANNOnWafer(Enum(0))).toVRepeaterOnWafer()[1])
 
 if __name__ == '__main__':
     unittest.main()

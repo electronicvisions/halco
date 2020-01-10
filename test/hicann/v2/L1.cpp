@@ -349,8 +349,9 @@ TEST(RepeaterBlockOnWafer, RepeaterBlockOnHICANN_toHICANNOnWafer) {
 
 TEST(HRepeaterOnWafer, toHLineOnWaferLocalFirst) {
 	for (auto hline_on_wafer : iter_all<HLineOnWafer>()) {
-		auto const hrepeater = hline_on_wafer.toHRepeaterOnWafer();
-		auto const hlines = hrepeater.toHLineOnWafer();
+		auto const hrepeater = hline_on_wafer.toHLineOnHICANN().toHRepeaterOnHICANN();
+		auto const hlines =
+		    HRepeaterOnWafer(hrepeater, hline_on_wafer.toHICANNOnWafer()).toHLineOnWafer();
 
 		EXPECT_EQ(hline_on_wafer, hlines.get<0>());
 	}
@@ -359,8 +360,9 @@ TEST(HRepeaterOnWafer, toHLineOnWaferLocalFirst) {
 TEST(HRepeaterOnWafer, toHLineOnWaferHasNeighbor) {
 	for (auto hline_on_wafer : iter_all<HLineOnWafer>()) {
 		auto const hicann = hline_on_wafer.toHICANNOnWafer();
-		auto const hrepeater = hline_on_wafer.toHRepeaterOnWafer();
-		auto const hlines = hrepeater.toHLineOnWafer();
+		auto const hrepeater = hline_on_wafer.toHLineOnHICANN().toHRepeaterOnHICANN();
+		auto const hlines =
+		    HRepeaterOnWafer(hrepeater, hline_on_wafer.toHICANNOnWafer()).toHLineOnWafer();
 
 		if (hrepeater.isLeft()) {
 			EXPECT_EQ(hicann.has_west(), hlines.get<1>().has_value());
@@ -370,12 +372,13 @@ TEST(HRepeaterOnWafer, toHLineOnWaferHasNeighbor) {
 	}
 }
 
-TEST(HRepeaterOnWafer, toHLineOnWaferMoves)
-{
+TEST(HRepeaterOnWafer, toHLineOnWaferMoves) {
 	for (auto hline_on_wafer : iter_all<HLineOnWafer>()) {
 		auto const hicann = hline_on_wafer.toHICANNOnWafer();
-		auto const hrepeater = hline_on_wafer.toHRepeaterOnWafer();
-		auto const hlines = hrepeater.toHLineOnWafer();
+		auto const hrepeater = hline_on_wafer.toHLineOnHICANN().toHRepeaterOnHICANN();
+		auto const hlines =
+		    HRepeaterOnWafer(hrepeater, hline_on_wafer.toHICANNOnWafer()).toHLineOnWafer();
+
 		if (hrepeater.isLeft()) {
 			if (hicann.has_west()) {
 				EXPECT_EQ(hicann.west(), hlines.get<1>()->toHICANNOnWafer());
@@ -396,8 +399,9 @@ TEST(HRepeaterOnWafer, toHLineOnWaferMoves)
 
 TEST(VRepeaterOnWafer, toVLineOnWaferLocalFirst) {
 	for (auto vline_on_wafer : iter_all<VLineOnWafer>()) {
-		auto const vrepeater = vline_on_wafer.toVRepeaterOnWafer();
-		auto const vlines = vrepeater.toVLineOnWafer();
+		auto const vrepeater = vline_on_wafer.toVLineOnHICANN().toVRepeaterOnHICANN();
+		auto const vlines =
+		    VRepeaterOnWafer(vrepeater, vline_on_wafer.toHICANNOnWafer()).toVLineOnWafer();
 
 		EXPECT_EQ(vline_on_wafer, vlines.get<0>());
 	}
@@ -406,8 +410,9 @@ TEST(VRepeaterOnWafer, toVLineOnWaferLocalFirst) {
 TEST(VRepeaterOnWafer, toVLineOnWaferHasNeighbor) {
 	for (auto vline_on_wafer : iter_all<VLineOnWafer>()) {
 		auto const hicann = vline_on_wafer.toHICANNOnWafer();
-		auto const vrepeater = vline_on_wafer.toVRepeaterOnWafer();
-		auto const vlines = vrepeater.toVLineOnWafer();
+		auto const vrepeater = vline_on_wafer.toVLineOnHICANN().toVRepeaterOnHICANN();
+		auto const vlines =
+		    VRepeaterOnWafer(vrepeater, vline_on_wafer.toHICANNOnWafer()).toVLineOnWafer();
 
 		if (vrepeater.isTop()) {
 			EXPECT_EQ(hicann.has_north(), vlines.get<1>().has_value());
@@ -417,12 +422,13 @@ TEST(VRepeaterOnWafer, toVLineOnWaferHasNeighbor) {
 	}
 }
 
-TEST(VRepeaterOnWafer, toVLineOnWaferMoves)
-{
+TEST(VRepeaterOnWafer, toVLineOnWaferMoves) {
 	for (auto vline_on_wafer : iter_all<VLineOnWafer>()) {
 		auto const hicann = vline_on_wafer.toHICANNOnWafer();
-		auto const vrepeater = vline_on_wafer.toVRepeaterOnWafer();
-		auto const vlines = vrepeater.toVLineOnWafer();
+		auto const vrepeater = vline_on_wafer.toVLineOnHICANN().toVRepeaterOnHICANN();
+		auto const vlines =
+		    VRepeaterOnWafer(vrepeater, vline_on_wafer.toHICANNOnWafer()).toVLineOnWafer();
+
 		if (vrepeater.isBottom()) {
 			if (hicann.has_south()) {
 				EXPECT_EQ(hicann.south(), vlines.get<1>()->toHICANNOnWafer());
@@ -436,6 +442,118 @@ TEST(VRepeaterOnWafer, toVLineOnWaferMoves)
 				EXPECT_EQ(
 				    vline_on_wafer.toVLineOnHICANN().north(),
 				    vlines.get<1>()->toVLineOnHICANN());
+			}
+		}
+	}
+}
+
+TEST(HLineOnWafer, toHRepeaterOnWaferLocalFirst) {
+	for (auto hline_on_wafer : iter_all<HRepeaterOnWafer>()) {
+		auto const hrepeater = hline_on_wafer.toHRepeaterOnHICANN().toHLineOnHICANN();
+		auto const hlines =
+		    HLineOnWafer(hrepeater, hline_on_wafer.toHICANNOnWafer()).toHRepeaterOnWafer();
+
+		EXPECT_EQ(hline_on_wafer, hlines.get<0>());
+	}
+}
+
+TEST(HLineOnWafer, toHRepeaterOnWaferHasNeighbor) {
+	for (auto hrepeater_on_wafer : iter_all<HRepeaterOnWafer>()) {
+		auto const hicann = hrepeater_on_wafer.toHICANNOnWafer();
+		auto const hline = hrepeater_on_wafer.toHRepeaterOnHICANN().toHLineOnHICANN();
+		auto const hrepeaters =
+		    HLineOnWafer(hline, hrepeater_on_wafer.toHICANNOnWafer()).toHRepeaterOnWafer();
+
+		if (hline.toHRepeaterOnHICANN().isLeft()) {
+			EXPECT_EQ(hicann.has_east(), hrepeaters.get<1>().has_value());
+		} else {
+			EXPECT_EQ(hicann.has_west(), hrepeaters.get<1>().has_value());
+		}
+	}
+}
+
+TEST(HLineOnWafer, toHRepeaterOnWaferMoves) {
+	for (auto hrepeater_on_wafer : iter_all<HRepeaterOnWafer>()) {
+		auto const hicann = hrepeater_on_wafer.toHICANNOnWafer();
+		auto const hline = hrepeater_on_wafer.toHRepeaterOnHICANN().toHLineOnHICANN();
+		auto const hrepeaters =
+		    HLineOnWafer(hline, hrepeater_on_wafer.toHICANNOnWafer()).toHRepeaterOnWafer();
+
+		if (hline.toHRepeaterOnHICANN().isLeft()) {
+			if (hicann.has_east()) {
+				EXPECT_EQ(hicann.east(), hrepeaters.get<1>()->toHICANNOnWafer());
+				EXPECT_EQ(
+				    hrepeater_on_wafer.toHRepeaterOnHICANN()
+				        .toHLineOnHICANN()
+				        .east()
+				        .toHRepeaterOnHICANN(),
+				    hrepeaters.get<1>()->toHRepeaterOnHICANN());
+			}
+		} else {
+			if (hicann.has_west()) {
+				EXPECT_EQ(hicann.west(), hrepeaters.get<1>()->toHICANNOnWafer());
+				EXPECT_EQ(
+				    hrepeater_on_wafer.toHRepeaterOnHICANN()
+				        .toHLineOnHICANN()
+				        .west()
+				        .toHRepeaterOnHICANN(),
+				    hrepeaters.get<1>()->toHRepeaterOnHICANN());
+			}
+		}
+	}
+}
+
+TEST(VLineOnWafer, toVRepeaterOnWaferLocalFirst) {
+	for (auto vline_on_wafer : iter_all<VRepeaterOnWafer>()) {
+		auto const vrepeater = vline_on_wafer.toVRepeaterOnHICANN().toVLineOnHICANN();
+		auto const vlines =
+		    VLineOnWafer(vrepeater, vline_on_wafer.toHICANNOnWafer()).toVRepeaterOnWafer();
+
+		EXPECT_EQ(vline_on_wafer, vlines.get<0>());
+	}
+}
+
+TEST(VLineOnWafer, toVRepeaterOnWaferHasNeighbor) {
+	for (auto vrepeater_on_wafer : iter_all<VRepeaterOnWafer>()) {
+		auto const hicann = vrepeater_on_wafer.toHICANNOnWafer();
+		auto const vline = vrepeater_on_wafer.toVRepeaterOnHICANN().toVLineOnHICANN();
+		auto const vrepeaters =
+		    VLineOnWafer(vline, vrepeater_on_wafer.toHICANNOnWafer()).toVRepeaterOnWafer();
+
+		if (vline.toVRepeaterOnHICANN().isTop()) {
+			EXPECT_EQ(hicann.has_south(), vrepeaters.get<1>().has_value());
+		} else {
+			EXPECT_EQ(hicann.has_north(), vrepeaters.get<1>().has_value());
+		}
+	}
+}
+
+TEST(VLineOnWafer, toVRepeaterOnWaferMoves) {
+	for (auto vrepeater_on_wafer : iter_all<VRepeaterOnWafer>()) {
+		auto const hicann = vrepeater_on_wafer.toHICANNOnWafer();
+		auto const vline = vrepeater_on_wafer.toVRepeaterOnHICANN().toVLineOnHICANN();
+		auto const vrepeaters =
+		    VLineOnWafer(vline, vrepeater_on_wafer.toHICANNOnWafer()).toVRepeaterOnWafer();
+
+		if (vline.toVRepeaterOnHICANN().isTop()) {
+			if (hicann.has_south()) {
+				EXPECT_EQ(hicann.south(), vrepeaters.get<1>()->toHICANNOnWafer());
+				EXPECT_EQ(
+				    vrepeater_on_wafer.toVRepeaterOnHICANN()
+				        .toVLineOnHICANN()
+				        .south ()
+				        .toVRepeaterOnHICANN(),
+				    vrepeaters.get<1>()->toVRepeaterOnHICANN());
+			}
+		} else {
+			if (hicann.has_north()) {
+				EXPECT_EQ(hicann.north(), vrepeaters.get<1>()->toHICANNOnWafer());
+				EXPECT_EQ(
+				    vrepeater_on_wafer.toVRepeaterOnHICANN()
+				        .toVLineOnHICANN()
+				        .north()
+				        .toVRepeaterOnHICANN(),
+				    vrepeaters.get<1>()->toVRepeaterOnHICANN());
 			}
 		}
 	}
