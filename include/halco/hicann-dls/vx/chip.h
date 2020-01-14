@@ -30,9 +30,9 @@ struct GENPYBIND(inline_base("*")) HemisphereOnDLS
  * Global identifier for a physical DLS chip instance.
  */
 struct GENPYBIND(inline_base("*")) DLSGlobal
-    : public common::detail::RantWrapper<DLSGlobal, uint_fast8_t, 254, 0> // arbitrary limit, ranged
-                                                                          // type needed for mixin
-                                                                          // below to work (#3423)
+    : public common::detail::RantWrapper<DLSGlobal, uint_fast32_t, 254, 0> // arbitrary limit, ranged
+                                                                           // type needed for mixin
+                                                                           // below to work (#3423)
 {
 	constexpr explicit DLSGlobal(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
 	    rant_t(val)
