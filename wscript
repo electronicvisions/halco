@@ -31,7 +31,6 @@ def configure(conf):
 def build(bld):
     bld(
         target          = 'halco_inc',
-        use             = ['ZTL', 'rant', 'pywrap_inc',  'boost_serialization'],
         export_includes = ['include'],
     )
 
@@ -40,7 +39,7 @@ def build(bld):
         source          = bld.path.ant_glob('src/halco/common/*.cpp'),
         install_path    = '${PREFIX}/lib',
         linkflags       = '-Wl,-z,defs',
-        use             = ['halco_inc', 'LOG4CXX'],
+        use             = ['rant', 'ZTL', 'pywrap', 'halco_inc', 'LOG4CXX', 'boost_serialization'],
     )
 
     bld.shlib(
