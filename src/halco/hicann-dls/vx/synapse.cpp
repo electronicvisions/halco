@@ -1,5 +1,6 @@
 #include "halco/hicann-dls/vx/synapse.h"
 
+#include "halco/hicann-dls/vx/neuron.h"
 #include "halco/hicann-dls/vx/synapse_driver.h"
 
 namespace halco::hicann_dls::vx {

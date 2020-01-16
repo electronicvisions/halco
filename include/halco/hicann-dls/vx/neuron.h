@@ -5,6 +5,9 @@
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
 
+#include "halco/hicann-dls/vx/synapse.h"
+#include "halco/hicann-dls/vx/synram.h"
+
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 struct CapMemColumnOnCapMemBlock;
@@ -17,7 +20,6 @@ struct SpikeCounterResetBlockOnDLS;
 struct SpikeCounterResetOnDLS;
 struct NeuronConfigOnDLS;
 struct NeuronBackendConfigOnDLS;
-struct SynapseOnSynapseRow;
 
 /**********\
    Neuron
@@ -263,6 +265,22 @@ struct GENPYBIND(inline_base("*NeuronResetMixin*")) NeuronResetOnDLS
 };
 
 
+struct GENPYBIND(inline_base("*SynramMixin*")) NeuronResetQuadOnDLS
+    : public SynramMixin<NeuronResetQuadOnDLS, SynapseQuadColumnOnDLS>
+{
+	NeuronResetQuadOnDLS() = default;
+
+	explicit NeuronResetQuadOnDLS(
+	    SynapseQuadColumnOnDLS const& quad, SynramOnDLS const& synram = SynramOnDLS()) :
+	    mixin_t(quad, synram)
+	{}
+
+	explicit NeuronResetQuadOnDLS(enum_type const& e) : mixin_t(e) {}
+
+	SynapseQuadColumnOnDLS toSynapseQuadColumnOnDLS() const { return This(); }
+};
+
+
 HALCO_COORDINATE_MIXIN(SpikeCounterReadMixin, SpikeCounterReadBlockOnDLS, neuron)
 
 struct GENPYBIND(inline_base("*SpikeCounterReadMixin*")) SpikeCounterReadOnDLS
@@ -326,6 +344,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::EventOutputOnNeuronBackendBlock
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronResetOnNeuronResetBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronResetBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronResetOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronResetQuadOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikeCounterReadOnSpikeCounterReadBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikeCounterReadBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikeCounterReadOnDLS)

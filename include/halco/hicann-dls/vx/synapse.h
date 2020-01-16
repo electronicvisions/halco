@@ -6,24 +6,20 @@
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
 
-#include "halco/hicann-dls/vx/neuron.h"
 #include "halco/hicann-dls/vx/quad.h"
 #include "halco/hicann-dls/vx/synram.h"
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 struct SynapseDriverOnSynapseDriverBlock;
+struct NeuronConfigBlockOnDLS;
 
 /***********\
    Synapse
 \***********/
 
 struct GENPYBIND(inline_base("*")) SynapseQuadColumnOnDLS
-    : public common::detail::RantWrapper<
-          SynapseQuadColumnOnDLS,
-          uint_fast16_t,
-          NeuronConfigOnNeuronConfigBlock::size * 2 / 4 - 1,
-          0>
+    : public common::detail::RantWrapper<SynapseQuadColumnOnDLS, uint_fast16_t, 63, 0>
     , public common::detail::XRangedTrait
 {
 	constexpr explicit SynapseQuadColumnOnDLS(uintmax_t const val = 0)

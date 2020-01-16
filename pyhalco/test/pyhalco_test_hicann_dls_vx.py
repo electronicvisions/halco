@@ -147,6 +147,7 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     ReadoutBufferConfigBlockOnDLS    => linear, iterable
     ReadoutBufferConfigOnReadoutBufferConfigBlock => linear, iterable
     CorrelationResetOnDLS            => iterable
+    NeuronResetQuadOnDLS             => iterable
     """
     # clang-format on
     @staticmethod
