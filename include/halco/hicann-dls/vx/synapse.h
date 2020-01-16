@@ -137,6 +137,21 @@ struct GENPYBIND(inline_base("*")) SynapseBiasSelectionOnDLS
 	constexpr explicit SynapseBiasSelectionOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
 
+struct GENPYBIND(inline_base("*SynramMixin*")) CorrelationResetOnDLS
+    : public SynramMixin<CorrelationResetOnDLS, SynapseQuadOnSynram>
+{
+	CorrelationResetOnDLS() = default;
+
+	explicit CorrelationResetOnDLS(
+	    SynapseQuadOnSynram const& block, SynramOnDLS const& synram = SynramOnDLS()) :
+	    mixin_t(block, synram)
+	{}
+
+	explicit CorrelationResetOnDLS(enum_type const& e) : mixin_t(e) {}
+
+	SynapseQuadOnSynram toSynapseQuadOnSynram() const { return This(); }
+};
+
 } // namespace halco::hicann_dls::vx
 
 namespace std {
@@ -149,5 +164,6 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseQuadOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseOnSynapseRow)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapticInputOnNeuron)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseBiasSelectionOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CorrelationResetOnDLS)
 
 } // namespace std

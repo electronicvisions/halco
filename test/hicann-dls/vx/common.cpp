@@ -172,7 +172,8 @@ typedef ::testing::Types<
     ReferenceGeneratorConfigOnDLS,
     ReadoutMuxConfigOnDLS,
     ReadoutBufferConfigBlockOnDLS,
-    ReadoutBufferConfigOnReadoutBufferConfigBlock>
+    ReadoutBufferConfigOnReadoutBufferConfigBlock,
+    CorrelationResetOnDLS>
     CoordinateTypes3;
 
 
