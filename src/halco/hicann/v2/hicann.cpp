@@ -17,7 +17,7 @@ HICANNOnWafer::y_type HICANNOnWafer::to_y(enum_type const& e) {
 
 HICANNOnWafer::enum_type HICANNOnWafer::to_enum(x_type const& x, y_type const& y) {
 	// throws out_of_range if x or y is not available on wafer.
-	int const en = HICANNOnWaferEnum.at(x).at(y);
+	int const en = HICANNOnWaferEnum.at(y).at(x);
 	if (en == invalid)
 		throw std::domain_error("Invalid combination of X and Y for a HICANN");
 	return enum_type(en);
@@ -41,7 +41,7 @@ bool HICANNOnWafer::has_east() const
 	if (x() == x_type::max) {
 		return false;
 	}
-	return HICANNOnWaferEnum.at(x_type(x() + 1)).at(y()) != invalid;
+	return HICANNOnWaferEnum.at(y()).at(x_type(x() + 1)) != invalid;
 }
 
 bool HICANNOnWafer::has_west() const
@@ -49,21 +49,21 @@ bool HICANNOnWafer::has_west() const
 	if (x() == x_type::min) {
 		return false;
 	}
-	return HICANNOnWaferEnum.at(x_type(x() - 1)).at(y()) != invalid;
+	return HICANNOnWaferEnum.at(y()).at(x_type(x() - 1)) != invalid;
 }
 bool HICANNOnWafer::has_north() const
 {
 	if (y() == y_type::min) {
 		return false;
 	}
-	return HICANNOnWaferEnum.at(x()).at(y_type(y() - 1)) != invalid;
+	return HICANNOnWaferEnum.at(y_type(y() - 1)).at(x()) != invalid;
 }
 bool HICANNOnWafer::has_south() const
 {
 	if (y() == y_type::max) {
 		return false;
 	}
-	return HICANNOnWaferEnum.at(x()).at(y_type(y() + 1)) != invalid;
+	return HICANNOnWaferEnum.at(y_type(y() + 1)).at(x()) != invalid;
 }
 
 bool HICANNOnWafer::can_move(Direction const& direction) const

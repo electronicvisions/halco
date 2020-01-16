@@ -28,7 +28,7 @@ DNCOnWafer::y_type DNCOnWafer::to_y(enum_type const& e) {
 
 DNCOnWafer::enum_type DNCOnWafer::to_enum(x_type const& x, y_type const& y) {
 	// throws out_of_range if x or y is not available on wafer.
-	int enum_tmp = DNCOnWaferEnum.at(x).at(y);
+	int enum_tmp = DNCOnWaferEnum.at(y).at(x);
 	if (enum_tmp >= 0)
 		return enum_type(enum_tmp);
 	else

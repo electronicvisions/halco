@@ -18,13 +18,13 @@ static const int invalid = halco::common::detail::invalid;
 extern std::array<std::pair<int, int>, 384> const HICANNOnWaferGrid;
 
 /// HICANNOnWafer (x, y) -> enum
-extern std::array<std::array<int, 16>, 36> const HICANNOnWaferEnum;
+extern std::array<std::array<int, 36>, 16> const HICANNOnWaferEnum;
 
 /// List of available DNCOnWafer Coordinates
 extern std::array<std::pair<int, int>, 48> const DNCOnWaferGrid;
 
 /// DNCOnWafer (x, y) -> enum
-extern std::array<std::array<int, 8>, 9> const DNCOnWaferEnum;
+extern std::array<std::array<int, 9>, 8> const DNCOnWaferEnum;
 
 /// THE power number, rotated by 90, etc.
 extern std::array<int, 48> const reticle_power_grid;

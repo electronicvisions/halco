@@ -21,7 +21,15 @@ void set_invalid(std::array<Data, N>& ar)
 		*(begin++) = invalid;
 }
 
-template <size_t x_size, size_t y_size, size_t enum_size>
+/**
+ * Generate a dense enum lookup matrix from a list of valid entries in the sparse grid.
+ * The matrix follows row-major order, the allowed matrix entries are expected to be of format x,y.
+ * @tparam y_size Number of rows
+ * @tparam x_size Number of columns
+ * @tparam enum_size Number of valid entries
+ * @param grid Array of valid entries as pairs in the format {x,y}
+ */
+template <size_t y_size, size_t x_size, size_t enum_size>
 std::array<std::array<int, x_size>, y_size> generateEnum(
     std::array<std::pair<int, int>, enum_size> const& grid)
 {
@@ -31,7 +39,7 @@ std::array<std::array<int, x_size>, y_size> generateEnum(
 		auto const& item = grid.at(ii);
 		size_t x = item.first;
 		size_t y = item.second;
-		result[x][y] = ii;
+		result[y][x] = ii;
 	}
 	return result;
 }

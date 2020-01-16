@@ -53,7 +53,7 @@ CrossbarNodeOnDLS::y_type CrossbarNodeOnDLS::to_y(enum_type const& e)
 CrossbarNodeOnDLS::enum_type CrossbarNodeOnDLS::to_enum(x_type const& x, y_type const& y)
 {
 	// throws out_of_range if x or y is not available on wafer.
-	int const en = CrossbarNodeOnDLSEnum.at(x).at(y);
+	int const en = CrossbarNodeOnDLSEnum.at(y).at(x);
 	if (en == halco::common::detail::invalid)
 		throw std::domain_error("Invalid combination of X and Y for a CrossbarNode");
 	return enum_type(en);

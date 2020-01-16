@@ -51,7 +51,7 @@ array< pair<int, int>, 384 >  const HICANNOnWaferGrid = {{
                                                                                                                                                             {{12},{15}}, {{13},{15}}, {{14},{15}}, {{15},{15}}, {{16},{15}}, {{17},{15}}, {{18},{15}}, {{19},{15}}, {{20},{15}}, {{21},{15}}, {{22},{15}}, {{23},{15}}
 }};
 
-array<array<int, 16>, 36> const HICANNOnWaferEnum = detail::generateEnum<16, 36, 384>(HICANNOnWaferGrid);
+array<array<int, 36>, 16> const HICANNOnWaferEnum = detail::generateEnum<16, 36, 384>(HICANNOnWaferGrid);
 
 array< pair<int, int>, 48 > const DNCOnWaferGrid = {{
                                  {{3},{0}}, {{4},{0}}, {{5},{0}},
@@ -64,7 +64,7 @@ array< pair<int, int>, 48 > const DNCOnWaferGrid = {{
                                  {{3},{7}}, {{4},{7}}, {{5},{7}}
 }};
 
-array<array<int, 8>, 9> const DNCOnWaferEnum = detail::generateEnum<8, 9, 48>(DNCOnWaferGrid);
+array<array<int, 9>, 8> const DNCOnWaferEnum = detail::generateEnum<8, 9, 48>(DNCOnWaferGrid);
 
 // power grid numbering starts at ONE!
 std::array<int, 48> const reticle_power_grid = {{
