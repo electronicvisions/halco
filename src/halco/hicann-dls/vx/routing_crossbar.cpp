@@ -37,7 +37,7 @@ std::array<std::pair<int, int>, CrossbarNodeOnDLS::size> const CrossbarNodeOnDLS
 // clang-format on
 
 auto const CrossbarNodeOnDLSEnum = halco::common::detail::
-    generateEnum<CrossbarOutputOnDLS::size, CrossbarInputOnDLS::size, CrossbarNodeOnDLS::size>(
+    generateEnum<CrossbarInputOnDLS::size, CrossbarOutputOnDLS::size, CrossbarNodeOnDLS::size>(
         CrossbarNodeOnDLSGrid);
 
 CrossbarNodeOnDLS::x_type CrossbarNodeOnDLS::to_x(enum_type const& e)

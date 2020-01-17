@@ -139,11 +139,11 @@ TEST(CapMemColumnOnCapMemBlock, isShared)
 TEST(CrossbarNodeOnDLS, Construction)
 {
 	// valid node
-	auto input = CrossbarInputOnDLS(3);
-	auto output = CrossbarOutputOnDLS(7);
+	auto input = CrossbarInputOnDLS(13);
+	auto output = CrossbarOutputOnDLS(9);
 
 	auto node = CrossbarNodeOnDLS(output, input);
-	EXPECT_EQ(node.toEnum(), Enum(3 * 3 + 1));
+	EXPECT_EQ(node.toEnum(), Enum(63));
 
 	// invalid combination of output and input
 	EXPECT_THROW(CrossbarNodeOnDLS(output, CrossbarInputOnDLS(2)), std::domain_error);
