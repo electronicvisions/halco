@@ -554,7 +554,16 @@ struct IntervalCoordinate {
 	size_t length() const { return mMax - mMin + 1; }
 
 	GENPYBIND(expose_as(__getitem__))
-	bound_type get(size_t i) const;
+	bound_type get(size_t i) const
+	{
+		if (!(i < length())) {
+			std::stringstream ss;
+			ss << "coordinate index (" << i << ") is out of interval range";
+			throw std::out_of_range(ss.str());
+		}
+		return bound_type(mMin.toEnum() + i);
+	}
+
 
 	bound_type const operator[](size_t i) const
 	{
