@@ -13,6 +13,7 @@ GENPYBIND_MANUAL({
 #include "halco/hicann-dls/vx/cadc.h"
 #include "halco/hicann-dls/vx/capmem.h"
 #include "halco/hicann-dls/vx/chip.h"
+#include "halco/hicann-dls/vx/correlation.h"
 #include "halco/hicann-dls/vx/dac.h"
 #include "halco/hicann-dls/vx/event.h"
 #include "halco/hicann-dls/vx/fpga.h"
