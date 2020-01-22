@@ -27,6 +27,16 @@ struct GENPYBIND(inline_base("*")) HemisphereOnDLS
 
 
 /**
+ * Unique identifier for a chip on a DLS setup.
+ */
+struct GENPYBIND(inline_base("*")) ChipOnDLS
+    : public common::detail::RantWrapper<ChipOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit ChipOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+
+/**
  * Global identifier for a physical DLS chip instance.
  */
 struct GENPYBIND(inline_base("*")) DLSGlobal
@@ -64,6 +74,7 @@ struct GENPYBIND(inline_base("*DLSMixin*")) HemisphereGlobal
 namespace std {
 
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::DLSGlobal)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ChipOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::HemisphereOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::HemisphereGlobal)
 

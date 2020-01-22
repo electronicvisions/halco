@@ -175,7 +175,8 @@ typedef ::testing::Types<
     ReadoutBufferConfigOnReadoutBufferConfigBlock,
     CorrelationResetOnDLS,
     NeuronResetQuadOnDLS,
-    CommonCorrelationConfigOnDLS>
+    CommonCorrelationConfigOnDLS,
+    ChipOnDLS>
     CoordinateTypes3;
 
 
