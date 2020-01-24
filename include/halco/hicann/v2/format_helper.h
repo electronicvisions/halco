@@ -26,14 +26,13 @@ std::string short_format(const HICANNOnWafer& h);
 std::string short_format(const FPGAOnWafer& f);
 std::string short_format(const TriggerOnWafer& t);
 std::string short_format(const RepeaterBlockOnWafer& rb);
+std::string short_format(const HRepeaterOnWafer& hr);
+std::string short_format(const VRepeaterOnWafer& vr);
 std::string short_format(const Wafer& w);
 
 std::string short_format(const RepeaterBlockOnHICANN& rb);
 std::string short_format(const HRepeaterOnHICANN& hr);
 std::string short_format(const VRepeaterOnHICANN& vr);
-
-std::string short_format(const HRepeaterOnWafer& hr);
-std::string short_format(const VRepeaterOnWafer& vr);
 
 std::string short_format(const HLineOnHICANN& hl);
 std::string short_format(const VLineOnHICANN& vl);
@@ -60,14 +59,13 @@ template std::string to_string(HICANNOnWafer const&);
 template std::string to_string(FPGAOnWafer const&);
 template std::string to_string(TriggerOnWafer const&);
 template std::string to_string(RepeaterBlockOnWafer const&);
+template std::string to_string(HRepeaterOnWafer const&);
+template std::string to_string(VRepeaterOnWafer const&);
 template std::string to_string(Wafer const&);
 
 template std::string to_string(RepeaterBlockOnHICANN const&);
 template std::string to_string(HRepeaterOnHICANN const&);
 template std::string to_string(VRepeaterOnHICANN const&);
-
-template std::string to_string(HRepeaterOnWafer const&);
-template std::string to_string(VRepeaterOnWafer const&);
 
 template std::string to_string(HLineOnHICANN const&);
 template std::string to_string(VLineOnHICANN const&);
