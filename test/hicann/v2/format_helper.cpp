@@ -117,6 +117,16 @@ TEST(FormatHelper, ShortFormat) {
 	EXPECT_EQ(to_string(vl), "VL006");
 	EXPECT_EQ(boost::get<VLineOnHICANN>(from_string("VL006")), vl);
 
+	HLineOnWafer hl_on_wafer(hl, h);
+	EXPECT_EQ(short_format(hl_on_wafer), "H003HL005");
+	EXPECT_EQ(to_string(hl_on_wafer), "H003HL005");
+	EXPECT_EQ(boost::get<HLineOnWafer>(from_string("H003HL005")), hl_on_wafer);
+
+	VLineOnWafer vl_on_wafer(vl, h);
+	EXPECT_EQ(short_format(vl_on_wafer), "H003VL006");
+	EXPECT_EQ(to_string(vl_on_wafer), "H003VL006");
+	EXPECT_EQ(boost::get<VLineOnWafer>(from_string("H003VL006")), vl_on_wafer);
+
 	EXPECT_ANY_THROW(from_string(""));
 	EXPECT_ANY_THROW(from_string("123W33"));
 	EXPECT_ANY_THROW(from_string("W33X"));

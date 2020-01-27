@@ -30,6 +30,8 @@ std::string short_format(const TriggerOnWafer& t);
 std::string short_format(const RepeaterBlockOnWafer& rb);
 std::string short_format(const HRepeaterOnWafer& hr);
 std::string short_format(const VRepeaterOnWafer& vr);
+std::string short_format(const HLineOnWafer& hl);
+std::string short_format(const VLineOnWafer& vl);
 std::string short_format(const Wafer& w);
 
 std::string short_format(const RepeaterBlockOnHICANN& rb);
@@ -65,6 +67,8 @@ template std::string to_string(TriggerOnWafer const&);
 template std::string to_string(RepeaterBlockOnWafer const&);
 template std::string to_string(HRepeaterOnWafer const&);
 template std::string to_string(VRepeaterOnWafer const&);
+template std::string to_string(HLineOnWafer const&);
+template std::string to_string(VLineOnWafer const&);
 template std::string to_string(Wafer const&);
 
 template std::string to_string(RepeaterBlockOnHICANN const&);
@@ -95,7 +99,9 @@ typedef boost::variant<
     HRepeaterOnWafer,
     VRepeaterOnWafer,
     HLineOnHICANN,
-    VLineOnHICANN>
+    VLineOnHICANN,
+    HLineOnWafer,
+    VLineOnWafer>
     format_type;
 
 // converts from short format to type

@@ -124,6 +124,14 @@ std::string short_format(const VLineOnHICANN& vl) {
 	return ss.str();
 }
 
+std::string short_format(const HLineOnWafer& hl) {
+	return short_format(hl.toHICANNOnWafer()) + short_format(hl.toHLineOnHICANN());
+}
+
+std::string short_format(const VLineOnWafer& vl) {
+	return short_format(vl.toHICANNOnWafer()) + short_format(vl.toVLineOnHICANN());
+}
+
 std::string slurm_license(ANANASGlobal const& ag)
 {
 	return "W" + std::to_string(ag.toWafer().toEnum()) + "A" +
@@ -176,7 +184,9 @@ typedef boost::variant<
     TriggerGlobal,
     RepeaterBlockOnWafer,
     HRepeaterOnWafer,
-    VRepeaterOnWafer>
+    VRepeaterOnWafer,
+    HLineOnWafer,
+    VLineOnWafer>
     compound_type;
 
 // converts type and value to a local type
@@ -247,6 +257,14 @@ struct to_compound : public boost::static_visitor<compound_type>
 	VRepeaterOnWafer operator()(HICANNOnWafer const& h, VRepeaterOnHICANN const& hr) const
 	{
 		return VRepeaterOnWafer(hr, h);
+	}
+	HLineOnWafer operator()(HICANNOnWafer const& h, HLineOnHICANN const& hl) const
+	{
+		return HLineOnWafer(hl, h);
+	}
+	VLineOnWafer operator()(HICANNOnWafer const& h, VLineOnHICANN const& vl) const
+	{
+		return VLineOnWafer(vl, h);
 	}
 
 	template <typename T, typename V>
