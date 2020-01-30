@@ -32,6 +32,16 @@ NeuronResetOnDLS NeuronConfigOnDLS::toNeuronResetOnDLS() const
 	    block);
 }
 
+NeuronBackendConfigBlockOnDLS BlockPostPulseOnDLS::toNeuronBackendConfigBlockOnDLS() const
+{
+	return NeuronBackendConfigBlockOnDLS(toEnum());
+}
+
+BlockPostPulseOnDLS NeuronBackendConfigBlockOnDLS::toBlockPostPulseOnDLS() const
+{
+	return BlockPostPulseOnDLS(toEnum());
+}
+
 SpikeCounterReadBlockOnDLS NeuronConfigBlockOnDLS::toSpikeCounterReadBlockOnDLS() const
 {
 	return SpikeCounterReadBlockOnDLS(toEnum() % SpikeCounterReadBlockOnDLS::size);

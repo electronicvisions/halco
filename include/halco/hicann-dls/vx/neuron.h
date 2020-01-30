@@ -20,6 +20,7 @@ struct SpikeCounterResetBlockOnDLS;
 struct SpikeCounterResetOnDLS;
 struct NeuronConfigOnDLS;
 struct NeuronBackendConfigOnDLS;
+struct BlockPostPulseOnDLS;
 
 /**********\
    Neuron
@@ -149,6 +150,8 @@ struct GENPYBIND(inline_base("*")) NeuronBackendConfigBlockOnDLS
 	    GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
+
+	BlockPostPulseOnDLS toBlockPostPulseOnDLS() const;
 };
 
 
@@ -168,6 +171,16 @@ struct GENPYBIND(inline_base("*")) NeuronResetBlockOnDLS
 	    GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
+};
+
+struct GENPYBIND(inline_base("*")) BlockPostPulseOnDLS
+    : public common::detail::RantWrapper<BlockPostPulseOnDLS, uint_fast8_t, 1, 0>
+{
+	constexpr explicit BlockPostPulseOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+
+	NeuronBackendConfigBlockOnDLS toNeuronBackendConfigBlockOnDLS() const;
 };
 
 
@@ -345,6 +358,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronResetOnNeuronResetBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronResetBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronResetOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronResetQuadOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::BlockPostPulseOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikeCounterReadOnSpikeCounterReadBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikeCounterReadBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikeCounterReadOnDLS)
