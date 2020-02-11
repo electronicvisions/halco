@@ -151,6 +151,7 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     NeuronResetQuadOnDLS             => iterable
     CommonCorrelationConfigOnDLS     => linear, iterable
     BlockPostPulseOnDLS              => linear, iterable
+    CorrelationResetRowOnDLS         => iterable
     """
     # clang-format on
     @staticmethod

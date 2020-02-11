@@ -183,7 +183,10 @@ typedef ::testing::Types<
     ChipOnDLS>
     CoordinateTypes3;
 
-typedef ::testing::Types<BlockPostPulseOnDLS> CoordinateTypes4;
+typedef ::testing::Types<
+    BlockPostPulseOnDLS,
+    CorrelationResetRowOnDLS>
+    CoordinateTypes4;
 
 
 TYPED_TEST_CASE(CommonCoordinateTest1, CoordinateTypes1);
