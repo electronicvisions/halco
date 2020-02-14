@@ -340,6 +340,14 @@ VLineOnHICANN::toSynapseDriverOnHICANN(SideHorizontal const& side) const
 	}};
 	// clang-format on
 }
+
+std::array<HLineOnHICANN, 2> VLineOnHICANN::toHLineOnHICANN() const
+{
+	size_t const offset =
+	    isLeft() ? 2 * ((63 - toEnum().value()) % 32) : 2 * (toEnum().value() % 32);
+	return std::array<HLineOnHICANN, 2>{{HLineOnHICANN{offset + 0}, HLineOnHICANN{offset + 1}}};
+}
+
 HRepeaterOnHICANN SendingRepeaterOnHICANN::toHRepeaterOnHICANN() const {
 	return HRepeaterOnHICANN(*this);
 }

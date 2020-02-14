@@ -170,6 +170,8 @@ struct VLineOnHICANN : public common::detail::RantWrapper<VLineOnHICANN, size_t,
 	/// specified side of this or the adjacent hicann.
 	std::array<SynapseDriverOnHICANN, switches_per_side> toSynapseDriverOnHICANN(
 		common::SideHorizontal const& side) const;
+
+	std::array<HLineOnHICANN, 2> toHLineOnHICANN() const;
 };
 
 class HRepeaterOnWafer;

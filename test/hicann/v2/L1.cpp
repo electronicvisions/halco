@@ -48,6 +48,21 @@ TEST(HLineOnHICANN, toVLineOnHICANN) {
 	// TODO: continue...
 }
 
+TEST(VLineOnHICANN, toHLineOnHICANN)
+{
+	// picked random vline on left side of HICANN and corresponding hlines
+	VLineOnHICANN vline(42);
+	std::array<HLineOnHICANN, 2> hlines1 = {{HLineOnHICANN{42}, HLineOnHICANN{43}}};
+	auto hlines2 = vline.toHLineOnHICANN();
+	EXPECT_EQ(hlines1, hlines2);
+
+	// picked random vline on right side of HICANN and corresponding hlines
+	VLineOnHICANN vline2(131);
+	hlines1 = {{HLineOnHICANN{6}, HLineOnHICANN{7}}};
+	hlines2 = vline2.toHLineOnHICANN();
+	EXPECT_EQ(hlines1, hlines2);
+}
+
 TEST(HLineOnHICANN, ImplicitConvToUInt) {
 	for (size_t ii = 0; ii < HLineOnHICANN::end; ++ii) {
 		HLineOnHICANN h(ii);
