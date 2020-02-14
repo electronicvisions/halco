@@ -73,7 +73,7 @@ typedef ::testing::Types<
     CapMemRowOnCapMemBlock,
     CapMemBlockConfigOnDLS,
     CapMemBlockOnDLS,
-    CommonNeuronConfigOnDLS,
+    CommonNeuronBackendConfigOnDLS,
     NeuronConfigOnNeuronConfigBlock,
     PerfTestOnFPGA,
     PerfTestStatusOnFPGA>

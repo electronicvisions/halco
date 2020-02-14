@@ -37,6 +37,18 @@ NeuronBackendConfigBlockOnDLS BlockPostPulseOnDLS::toNeuronBackendConfigBlockOnD
 	return NeuronBackendConfigBlockOnDLS(toEnum());
 }
 
+NeuronBackendConfigBlockOnDLS CommonNeuronBackendConfigOnDLS::toNeuronBackendConfigBlockOnDLS()
+    const
+{
+	return NeuronBackendConfigBlockOnDLS(toEnum());
+}
+
+CommonNeuronBackendConfigOnDLS NeuronBackendConfigBlockOnDLS::toCommonNeuronBackendConfigOnDLS()
+    const
+{
+	return CommonNeuronBackendConfigOnDLS(toEnum());
+}
+
 BlockPostPulseOnDLS NeuronBackendConfigBlockOnDLS::toBlockPostPulseOnDLS() const
 {
 	return BlockPostPulseOnDLS(toEnum());
