@@ -64,8 +64,7 @@ def build(bld):
             source='../include/halco/common/common.h',
             genpybind_tags='common',
             features='genpybind cxx cxxshlib pyext',
-            use=['halco_common', 'PYBIND11HALCO',
-                 'pywrap_inc', 'pyhalco_common_files'],
+            use=['halco_common', 'PYBIND11HALCO', 'pyhalco_common_files'],
             install_path='${PREFIX}/lib',
             linkflags='-Wl,-z,defs'
         )
@@ -76,7 +75,7 @@ def build(bld):
             genpybind_tags='hicann_dls_v2',
             features='genpybind cxx cxxshlib pyext',
             use=['halco_common', 'halco_hicann_dls_v2',
-                 'PYBIND11HALCO', 'pywrap_inc', 'pyhalco_common'],
+                 'PYBIND11HALCO', 'pyhalco_common'],
             install_path='${PREFIX}/lib',
             linkflags='-Wl,-z,defs'
         )
@@ -87,7 +86,6 @@ def build(bld):
             features='use pytest',
             use='pyhalco_hicann_dls_v2',
             install_path='${PREFIX}/bin',
-            linkflags='-Wl,-z,defs',
             pythonpath=['test'],
         )
 
@@ -97,7 +95,7 @@ def build(bld):
             genpybind_tags='hicann_dls_vx',
             features='genpybind cxx cxxshlib pyext',
             use=['halco_common', 'halco_hicann_dls_vx',
-                 'PYBIND11HALCO', 'pywrap_inc', 'pyhalco_common'],
+                 'PYBIND11HALCO', 'pyhalco_common'],
             install_path='${PREFIX}/lib',
             linkflags='-Wl,-z,defs'
         )
@@ -108,7 +106,6 @@ def build(bld):
             features='use pytest',
             use='pyhalco_hicann_dls_vx',
             install_path='${PREFIX}/bin',
-            linkflags='-Wl,-z,defs',
             pythonpath=['test'],
         )
 
@@ -148,7 +145,6 @@ def build(bld):
             features='use pytest',
             use='pyhalco_hicann_v2',
             install_path='${PREFIX}/bin',
-            linkflags='-Wl,-z,defs',
             pythonpath=['test'],
             test_environ={'PYHALCO_API_CHECK': '1'},
         )
@@ -159,7 +155,6 @@ def build(bld):
         features='use pytest',
         use='pyhalco_common',
         install_path='${PREFIX}/bin',
-        linkflags='-Wl,-z,defs',
         pythonpath=['test'],
     )
 

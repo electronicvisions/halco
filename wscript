@@ -17,11 +17,6 @@ def options(opt):
 def configure(conf):
     conf.load('compiler_cxx')
     conf.load('boost')
-    conf.load('pytest')
-    conf.check_boost(lib='program_options system',
-                     uselib_store='BOOST4TOOLS')
-    conf.check_boost(lib='system serialization iostreams filesystem thread',
-                     uselib_store='BOOST4HALCO')
 
     conf.check_cxx(mandatory=True, header_name='cereal/cereal.hpp')
 
@@ -48,7 +43,7 @@ def build(bld):
         source=bld.path.ant_glob('src/halco/hicann/v2/*.cpp'),
         install_path='${PREFIX}/lib',
         linkflags='-Wl,-z,defs',
-        use=['halco_common', 'BOOST4HALCO'],
+        use=['halco_common'],
         defines=['BOOST_MPL_CFG_NO_PREPROCESSED_HEADERS',
                  'BOOST_MPL_LIMIT_LIST_SIZE=30'],
         export_defines=['BOOST_MPL_CFG_NO_PREPROCESSED_HEADERS',
@@ -59,14 +54,16 @@ def build(bld):
         target='halco_hicann_dls_v2',
         source=bld.path.ant_glob('src/halco/hicann-dls/v2/*.cpp'),
         install_path='${PREFIX}/lib',
-        use=['halco_common', 'BOOST4HALCO'],
+        linkflags='-Wl,-z,defs',
+        use=['halco_common'],
     )
 
     bld.shlib(
         target='halco_hicann_dls_vx',
         source=bld.path.ant_glob('src/halco/hicann-dls/vx/*.cpp'),
         install_path='${PREFIX}/lib',
-        use=['halco_common', 'BOOST4HALCO'],
+        linkflags='-Wl,-z,defs',
+        use=['halco_common'],
     )
 
     bld(
@@ -86,8 +83,7 @@ def build(bld):
         target='halco_hicann_v2_tests',
         features='gtest cxx cxxprogram',
         source=bld.path.ant_glob('test/hicann/v2/*.cpp'),
-        use=['halco_hicann_v2', 'GTEST', 'BOOST4TOOLS',
-             'pythonic', 'halco_test_inc'],
+        use=['halco_hicann_v2', 'GTEST', 'halco_test_inc'],
         install_path='${PREFIX}/bin'
     )
 
@@ -95,7 +91,7 @@ def build(bld):
         target='halco_hicann_dls_v2_tests',
         features='gtest cxx cxxprogram',
         source=bld.path.ant_glob('test/hicann-dls/v2/*.cpp'),
-        use=['halco_hicann_dls_v2', 'GTEST', 'BOOST4TOOLS', 'halco_test_inc'],
+        use=['halco_hicann_dls_v2', 'GTEST', 'halco_test_inc'],
         install_path='${PREFIX}/bin'
     )
 
@@ -103,7 +99,7 @@ def build(bld):
         target='halco_hicann_dls_vx_tests',
         features='gtest cxx cxxprogram',
         source=bld.path.ant_glob('test/hicann-dls/vx/*.cpp'),
-        use=['halco_hicann_dls_vx', 'GTEST', 'BOOST4TOOLS', 'halco_test_inc'],
+        use=['halco_hicann_dls_vx', 'GTEST', 'halco_test_inc'],
         install_path='${PREFIX}/bin'
     )
 
