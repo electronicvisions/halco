@@ -187,7 +187,11 @@ typedef ::testing::Types<
 typedef ::testing::Types<
     MADCConfigOnDLS,
     BlockPostPulseOnDLS,
-    CorrelationResetRowOnDLS>
+    CorrelationResetRowOnDLS,
+    CADCOffsetSRAMTimingConfigOnDLS,
+    SynapseDriverSRAMTimingConfigOnDLS,
+    NeuronSRAMTimingConfigOnDLS,
+    NeuronBackendSRAMTimingConfigOnDLS>
     CoordinateTypes4;
 
 

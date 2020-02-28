@@ -169,6 +169,17 @@ public:
 	SynramOnDLS toSynramOnDLS() const { return split().first; }
 };
 
+
+struct GENPYBIND(inline_base("*")) CADCOffsetSRAMTimingConfigOnDLS
+    : public common::detail::RantWrapper<CADCOffsetSRAMTimingConfigOnDLS, uint_fast16_t, 3, 0>
+{
+	constexpr explicit CADCOffsetSRAMTimingConfigOnDLS(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+
 } // namespace halco::hicann_dls::vx
 
 namespace std {
@@ -183,5 +194,6 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCChannelColumnOnSynram)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCChannelConfigOnSynram)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCChannelConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCSampleRowOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CADCOffsetSRAMTimingConfigOnDLS)
 
 } // namespace std

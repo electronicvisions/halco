@@ -84,6 +84,21 @@ struct GENPYBIND(inline_base("*")) CommonSynapseDriverConfigOnDLS
 	static const CommonSynapseDriverConfigOnDLS bottom;
 };
 
+
+struct GENPYBIND(inline_base("*")) SynapseDriverSRAMTimingConfigOnDLS
+    : public common::detail::RantWrapper<SynapseDriverSRAMTimingConfigOnDLS, uint_fast16_t, 1, 0>
+{
+	constexpr explicit SynapseDriverSRAMTimingConfigOnDLS(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+
+#include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
+
+	static const SynapseDriverSRAMTimingConfigOnDLS top;
+	static const SynapseDriverSRAMTimingConfigOnDLS bottom;
+};
+
 } // namespace halco::hicann_dls::vx
 
 namespace std {
@@ -92,5 +107,6 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseDriverOnSynapseDriverBlo
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseDriverBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseDriverOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CommonSynapseDriverConfigOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseDriverSRAMTimingConfigOnDLS)
 
 } // namespace std

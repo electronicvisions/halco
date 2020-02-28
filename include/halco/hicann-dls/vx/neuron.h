@@ -380,6 +380,25 @@ struct GENPYBIND(inline_base("*SpikeCounterResetMixin*")) SpikeCounterResetOnDLS
 	}
 };
 
+
+struct GENPYBIND(inline_base("*")) NeuronSRAMTimingConfigOnDLS
+    : public common::detail::RantWrapper<NeuronSRAMTimingConfigOnDLS, uint_fast16_t, 3, 0>
+{
+	constexpr explicit NeuronSRAMTimingConfigOnDLS(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+struct GENPYBIND(inline_base("*")) NeuronBackendSRAMTimingConfigOnDLS
+    : public common::detail::RantWrapper<NeuronBackendSRAMTimingConfigOnDLS, uint_fast16_t, 1, 0>
+{
+	constexpr explicit NeuronBackendSRAMTimingConfigOnDLS(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
 } // namespace halco::hicann_dls::vx
 
 namespace std {
@@ -406,5 +425,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikeCounterReadOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikeCounterResetOnSpikeCounterResetBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikeCounterResetBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikeCounterResetOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronSRAMTimingConfigOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronBackendSRAMTimingConfigOnDLS)
 
 } // namespace std

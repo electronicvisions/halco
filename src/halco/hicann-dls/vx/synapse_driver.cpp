@@ -20,10 +20,17 @@ SynapseDriverBlockOnDLS const SynapseDriverBlockOnDLS::bottom{enum_vertical_bott
 CommonSynapseDriverConfigOnDLS const CommonSynapseDriverConfigOnDLS::top{enum_vertical_top};
 CommonSynapseDriverConfigOnDLS const CommonSynapseDriverConfigOnDLS::bottom{enum_vertical_bottom};
 
+SynapseDriverSRAMTimingConfigOnDLS const SynapseDriverSRAMTimingConfigOnDLS::top{enum_vertical_top};
+SynapseDriverSRAMTimingConfigOnDLS const SynapseDriverSRAMTimingConfigOnDLS::bottom{
+    enum_vertical_bottom};
+
 #define HEMISPHERE_CLASS SynapseDriverBlockOnDLS
 #include "halco/hicann-dls/vx/convert_hemisphere.h"
 
 #define HEMISPHERE_CLASS CommonSynapseDriverConfigOnDLS
+#include "halco/hicann-dls/vx/convert_hemisphere.h"
+
+#define HEMISPHERE_CLASS SynapseDriverSRAMTimingConfigOnDLS
 #include "halco/hicann-dls/vx/convert_hemisphere.h"
 
 PADIBusOnPADIBusBlock SynapseDriverOnSynapseDriverBlock::toPADIBusOnPADIBusBlock() const
