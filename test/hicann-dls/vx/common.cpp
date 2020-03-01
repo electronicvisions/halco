@@ -99,6 +99,7 @@ typedef ::testing::Types<
     SpikePackFromFPGAOnDLS,
     MADCSamplePackFromFPGAOnDLS,
     NullPayloadReadableOnFPGA,
+    EventRecordingConfigOnFPGA,
     HicannARQStatusOnFPGA,
     PhyStatusOnFPGA,
     I2CIdRegisterOnBoard,

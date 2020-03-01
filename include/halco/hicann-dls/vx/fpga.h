@@ -35,11 +35,26 @@ struct GENPYBIND(inline_base("*")) NullPayloadReadableOnFPGA
 	constexpr explicit NullPayloadReadableOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
 };
 
+/************************************\
+   Event recording control register
+\************************************/
+
+/**
+ * Control register to enable/disable the "recording", i.e. forwarding, of events (spikes, MADC samples).
+ * The FPGA simply drops events arriving from the chip and does not forward them to the host.
+ */
+struct GENPYBIND(inline_base("*")) EventRecordingConfigOnFPGA
+    : public common::detail::RantWrapper<EventRecordingConfigOnFPGA, uint_fast16_t, 0, 0>
+{
+	constexpr explicit EventRecordingConfigOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
+};
+
 } // namespace halco::hicann_dls::vx
 
 namespace std {
 
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::FPGADeviceDNAOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NullPayloadReadableOnFPGA)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::EventRecordingConfigOnFPGA)
 
 } // namespace std

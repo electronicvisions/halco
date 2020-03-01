@@ -18,6 +18,7 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     SpikePackFromFPGAOnDLS           => linear, iterable
     MADCSamplePackFromFPGAOnDLS      => linear, iterable
     NullPayloadReadableOnFPGA        => linear, iterable
+    EventRecordingConfigOnFPGA       => linear, iterable
     I2CIdRegisterOnBoard             => linear, iterable
     I2CINA219RoRegisterOnINA219      => linear, iterable
     I2CINA219RwRegisterOnINA219      => linear, iterable
