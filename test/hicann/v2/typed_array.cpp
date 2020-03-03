@@ -158,3 +158,17 @@ TEST(TypedArray, WorksWithEnum)
 	test[ABC::A] = true;
 	EXPECT_TRUE(test.at(ABC::A));
 }
+
+TEST(TypedArray, WorksWithSideVertical)
+{
+	typed_array<size_t, SideVertical> test = {2, 3};
+	EXPECT_EQ(test[top], 2);
+	EXPECT_EQ(test[bottom], 3);
+}
+
+TEST(TypedArray, WorksWithSideHorizontal)
+{
+	typed_array<size_t, SideHorizontal> test = {3, 2};
+	EXPECT_EQ(test[left], 3);
+	EXPECT_EQ(test[right], 2);
+}
