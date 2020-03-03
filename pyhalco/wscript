@@ -4,25 +4,31 @@ from waflib.extras import symwaf2ic
 from waflib.extras.gtest import summary
 import os.path
 
+
 def depends(ctx):
     ctx('pywrap')
     ctx('halco')
 
+
 def options(opt):
     hopts = opt.add_option_group('pybind11')
-    hopts.add_withoption('pybind', default=None, help='Use pybind11-based bindings')
+    hopts.add_withoption('pybind', default=None,
+                         help='Use pybind11-based bindings')
 
     opt.load('compiler_cxx')
     opt.load('gtest')
     opt.load('python')
     opt.load('pytest')
 
+
 def configure(cfg):
     cfg.env.with_pybind = getattr(cfg.options, 'with_pybind', None)
     if cfg.env.with_pybind not in [True, False]:
         toplevel_path = symwaf2ic.get_toplevel_path()
-        projects = set(str(os.path.relpath(p, toplevel_path)) for p in symwaf2ic.get_required_paths())
-        is_hicann_dls = any(project in projects for project in ['haldls', 'fisch'])
+        projects = set(str(os.path.relpath(p, toplevel_path))
+                       for p in symwaf2ic.get_required_paths())
+        is_hicann_dls = any(project in projects for project in [
+                            'haldls', 'fisch'])
         is_hicann = 'halbe' in projects
         if is_hicann_dls and is_hicann:
             cfg.fatal(
@@ -50,6 +56,7 @@ def configure(cfg):
             header_name='pybind11/pybind11.h',
         )
 
+
 def build(bld):
     if bld.env.with_pybind:
         bld(
@@ -57,7 +64,8 @@ def build(bld):
             source='../include/halco/common/common.h',
             genpybind_tags='common',
             features='genpybind cxx cxxshlib pyext',
-            use=['halco_common', 'PYBIND11HALCO', 'pywrap_inc', 'pyhalco_common_files'],
+            use=['halco_common', 'PYBIND11HALCO',
+                 'pywrap_inc', 'pyhalco_common_files'],
             install_path='${PREFIX}/lib',
             linkflags='-Wl,-z,defs'
         )
@@ -67,7 +75,8 @@ def build(bld):
             source='../include/halco/hicann-dls/v2/coordinates.h',
             genpybind_tags='hicann_dls_v2',
             features='genpybind cxx cxxshlib pyext',
-            use=['halco_common', 'halco_hicann_dls_v2', 'PYBIND11HALCO', 'pywrap_inc', 'pyhalco_common'],
+            use=['halco_common', 'halco_hicann_dls_v2',
+                 'PYBIND11HALCO', 'pywrap_inc', 'pyhalco_common'],
             install_path='${PREFIX}/lib',
             linkflags='-Wl,-z,defs'
         )
@@ -87,7 +96,8 @@ def build(bld):
             source='../include/halco/hicann-dls/vx/coordinates.h',
             genpybind_tags='hicann_dls_vx',
             features='genpybind cxx cxxshlib pyext',
-            use=['halco_common', 'halco_hicann_dls_vx', 'PYBIND11HALCO', 'pywrap_inc', 'pyhalco_common'],
+            use=['halco_common', 'halco_hicann_dls_vx',
+                 'PYBIND11HALCO', 'pywrap_inc', 'pyhalco_common'],
             install_path='${PREFIX}/lib',
             linkflags='-Wl,-z,defs'
         )
@@ -104,42 +114,43 @@ def build(bld):
 
     else:
         bld(
-                target         = 'pyhalco_common',
-                features       = 'cxx cxxshlib pypp pyembed pyext',
-                script         = 'common/generate_common_coordinate.py',
-                gen_defines    = 'PYPLUSPLUS __STRICT_ANSI__',
-                defines        = 'PYBINDINGS',
-                headers        = '../include/halco/common/common.h',
-                use            = ['halco_common', 'BOOST4HALCO', 'BOOST4PYHALCO', 'PYHALCO', 'pywrap', 'pywrapstdvector', 'pycellparameters', 'pyhalco_common_files'],
-                install_path   = '${PREFIX}/lib',
-                linkflags      = '-Wl,-z,defs',
-                includes       = '.',
+            target='pyhalco_common',
+            features='cxx cxxshlib pypp pyembed pyext',
+            script='common/generate_common_coordinate.py',
+            gen_defines='PYPLUSPLUS __STRICT_ANSI__',
+            defines='PYBINDINGS',
+            headers='../include/halco/common/common.h',
+            use=['halco_common', 'BOOST4HALCO', 'BOOST4PYHALCO', 'PYHALCO', 'pywrap',
+                 'pywrapstdvector', 'pycellparameters', 'pyhalco_common_files'],
+            install_path='${PREFIX}/lib',
+            linkflags='-Wl,-z,defs',
+            includes='.',
         )
 
         bld(
-                target         = 'pyhalco_hicann_v2',
-                features       = 'cxx cxxshlib pypp pyembed pyext',
-                script         = 'hicann/v2/generate_hicann_v2_coordinate.py',
-                gen_defines    = 'PYPLUSPLUS __STRICT_ANSI__ BOOST_PP_VARIADICS',
-                # gccxml requires non-variadic implementation of boost::variant for python wrappers
-                defines        = ['PYBINDINGS', 'BOOST_VARIANT_DO_NOT_USE_VARIADIC_TEMPLATES'],
-                export_defines = 'BOOST_VARIANT_DO_NOT_USE_VARIADIC_TEMPLATES',
-                headers        = '../include/halco/hicann/v2/coordinates.h',
-                use            = ['pyhalco_common', 'halco_hicann_v2'],
-                install_path   = '${PREFIX}/lib',
-                linkflags      = '-Wl,-z,defs',
-                includes       = '.',
+            target='pyhalco_hicann_v2',
+            features='cxx cxxshlib pypp pyembed pyext',
+            script='hicann/v2/generate_hicann_v2_coordinate.py',
+            gen_defines='PYPLUSPLUS __STRICT_ANSI__ BOOST_PP_VARIADICS',
+            # gccxml requires non-variadic implementation of boost::variant for python wrappers
+            defines=['PYBINDINGS', 'BOOST_VARIANT_DO_NOT_USE_VARIADIC_TEMPLATES'],
+            export_defines='BOOST_VARIANT_DO_NOT_USE_VARIADIC_TEMPLATES',
+            headers='../include/halco/hicann/v2/coordinates.h',
+            use=['pyhalco_common', 'halco_hicann_v2'],
+            install_path='${PREFIX}/lib',
+            linkflags='-Wl,-z,defs',
+            includes='.',
         )
 
         bld(
-                name            = "pyhalco_hicann_v2_tests",
-                tests           = 'test/pyhalco_test_hicann_v2.py',
-                features        = 'use pytest',
-                use             = 'pyhalco_hicann_v2',
-                install_path    = '${PREFIX}/bin',
-                linkflags      = '-Wl,-z,defs',
-                pythonpath      = ["test"],
-                test_environ    = { 'PYHALCO_API_CHECK' : '1' },
+            name='pyhalco_hicann_v2_tests',
+            tests='test/pyhalco_test_hicann_v2.py',
+            features='use pytest',
+            use='pyhalco_hicann_v2',
+            install_path='${PREFIX}/bin',
+            linkflags='-Wl,-z,defs',
+            pythonpath=['test'],
+            test_environ={'PYHALCO_API_CHECK': '1'},
         )
 
     bld(
@@ -154,11 +165,11 @@ def build(bld):
 
     # flat installation of all sources (and generated py{c,d}) into lib/
     bld(
-        features = 'py',
-        target   = 'pyhalco_common_files',
-        source   = bld.path.ant_glob('**/pyhalco_*.py'),
-        install_path = '${PREFIX}/lib',
-        relative_trick = False,
+        features='py',
+        target='pyhalco_common_files',
+        source=bld.path.ant_glob('**/pyhalco_*.py'),
+        install_path='${PREFIX}/lib',
+        relative_trick=False,
     )
 
     bld.add_post_fun(summary)
