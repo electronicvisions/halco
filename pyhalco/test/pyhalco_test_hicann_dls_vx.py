@@ -158,6 +158,7 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     CADCSamplesOnDLS => linear, iterable
     WaitUntilOnFPGA => linear, iterable
     BarrierOnFPGA => linear, iterable
+    CADCOnDLS => linear, iterable
     CADCSampleQuadUnspecifiedReadoutOnSynram => iterable
     CADCSampleQuadOnSynram => iterable
     CADCSampleQuadOnDLS => iterable

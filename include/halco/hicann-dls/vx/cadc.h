@@ -25,6 +25,18 @@ struct SynapseCorrelationCalibRowOnDLS;
     CADC
 \**********/
 
+struct GENPYBIND(inline_base("*")) CADCOnDLS
+    : public common::detail::RantWrapper<CADCOnDLS, uint_fast16_t, 1, 0>
+{
+	constexpr explicit CADCOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+
+#include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
+
+	static const CADCOnDLS top;
+	static const CADCOnDLS bottom;
+};
+
+
 struct GENPYBIND(inline_base("*")) CADCConfigOnDLS
     : public common::detail::RantWrapper<CADCConfigOnDLS, uint_fast16_t, 1, 0>
 {

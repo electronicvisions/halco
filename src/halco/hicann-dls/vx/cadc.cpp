@@ -11,8 +11,14 @@
 
 namespace halco::hicann_dls::vx {
 
+#define HEMISPHERE_CLASS CADCOnDLS
+#include "halco/hicann-dls/vx/convert_hemisphere.h"
+
 #define HEMISPHERE_CLASS CADCConfigOnDLS
 #include "halco/hicann-dls/vx/convert_hemisphere.h"
+
+CADCOnDLS const CADCOnDLS::top{enum_vertical_top};
+CADCOnDLS const CADCOnDLS::bottom{enum_vertical_bottom};
 
 CADCConfigOnDLS const CADCConfigOnDLS::top{enum_vertical_top};
 CADCConfigOnDLS const CADCConfigOnDLS::bottom{enum_vertical_bottom};
