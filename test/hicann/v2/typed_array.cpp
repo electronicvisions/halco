@@ -51,6 +51,14 @@ TEST(TypedArray, CanBeAggregateInitialized) {
 	EXPECT_EQ(7, test.back());
 }
 
+TEST(TypedArray, CanBeAggregateInitializedNested)
+{
+	typed_array<nb_array_type, SideVertical> test = {0, 1, 2, 3, 4, 5, 6, 7,
+	                                                 0, 1, 2, 3, 4, 5, 6, 8};
+	EXPECT_EQ(7, test[top].back());
+	EXPECT_EQ(8, test[bottom].back());
+}
+
 TEST(TypedArray, CanBeCopied) {
 	nb_array_type no_const{{0, 1, 2, 3, 4, 5, 6, 7}};
 	const nb_array_type yes_const{{0, 1, 2, 3, 4, 5, 6, 7}};
