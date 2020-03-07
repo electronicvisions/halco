@@ -120,7 +120,7 @@ TEST(VDDOnBoard, toDACChannelOnBoard)
 TEST(PhyConfigChipOnDLS, toJTAGPhyRegisterOnDLS)
 {
 	PhyConfigChipOnDLS phy_config(3);
-	EXPECT_EQ(phy_config.toJTAGPhyRegisterOnDLS(), JTAGPhyRegisterOnDLS(3));
+	EXPECT_EQ(phy_config.toJTAGPhyRegisterOnDLS(), JTAGPhyRegisterOnDLS(4));
 }
 
 TEST(CapMemColumnOnCapMemBlock, isShared)

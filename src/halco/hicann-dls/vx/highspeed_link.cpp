@@ -6,7 +6,7 @@ namespace halco::hicann_dls::vx {
 
 JTAGPhyRegisterOnDLS PhyConfigChipOnDLS::toJTAGPhyRegisterOnDLS() const
 {
-	return JTAGPhyRegisterOnDLS(toEnum());
+	return JTAGPhyRegisterOnDLS(max - toEnum());
 }
 
 } // namespace halco::hicann_dls::vx
