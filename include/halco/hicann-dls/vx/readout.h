@@ -7,28 +7,28 @@
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
-struct GENPYBIND(inline_base("*")) ReadoutMuxConfigOnDLS
-    : public common::detail::RantWrapper<ReadoutMuxConfigOnDLS, uint_fast16_t, 1, 0>
+struct GENPYBIND(inline_base("*")) PadMultiplexerConfigOnDLS
+    : public common::detail::RantWrapper<PadMultiplexerConfigOnDLS, uint_fast16_t, 1, 0>
 {
-	constexpr explicit ReadoutMuxConfigOnDLS(uintmax_t const val = 0)
+	constexpr explicit PadMultiplexerConfigOnDLS(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
 };
 
 
-struct GENPYBIND(inline_base("*")) ReadoutBufferConfigBlockOnDLS
-    : public common::detail::RantWrapper<ReadoutBufferConfigBlockOnDLS, uint_fast16_t, 0, 0>
+struct GENPYBIND(inline_base("*")) ReadoutSourceSelectionOnDLS
+    : public common::detail::RantWrapper<ReadoutSourceSelectionOnDLS, uint_fast16_t, 0, 0>
 {
-	constexpr explicit ReadoutBufferConfigBlockOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+	constexpr explicit ReadoutSourceSelectionOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
 
 
-struct GENPYBIND(inline_base("*")) ReadoutBufferConfigOnReadoutBufferConfigBlock
+struct GENPYBIND(inline_base("*")) SourceMultiplexerOnReadoutSourceSelection
     : public common::detail::
-          RantWrapper<ReadoutBufferConfigOnReadoutBufferConfigBlock, uint_fast16_t, 1, 0>
+          RantWrapper<SourceMultiplexerOnReadoutSourceSelection, uint_fast16_t, 1, 0>
 {
-	constexpr explicit ReadoutBufferConfigOnReadoutBufferConfigBlock(uintmax_t const val = 0)
+	constexpr explicit SourceMultiplexerOnReadoutSourceSelection(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
@@ -38,8 +38,8 @@ struct GENPYBIND(inline_base("*")) ReadoutBufferConfigOnReadoutBufferConfigBlock
 
 namespace std {
 
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ReadoutMuxConfigOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ReadoutBufferConfigBlockOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ReadoutBufferConfigOnReadoutBufferConfigBlock)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PadMultiplexerConfigOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ReadoutSourceSelectionOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SourceMultiplexerOnReadoutSourceSelection)
 
 } // namespace std
