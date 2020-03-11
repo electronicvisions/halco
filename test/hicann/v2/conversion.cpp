@@ -7,6 +7,15 @@
 using namespace halco::common;
 using namespace halco::hicann::v2;
 
+TEST(HMFCoordinateConversion, FPGAtoSocketOnWIO)
+{
+	for (auto fpga : iter_all<FPGAOnWafer>()) {
+		auto const wio = fpga.toWIOOnWafer();
+		auto const socket = fpga.toSocketOnWIO();
+		ASSERT_EQ(FPGAOnWafer(wio, socket), fpga);
+	}
+}
+
 TEST(HMFCoordinateConversion, HICANNOnDNCToHICANNOnWafer)
 {
 	std::set<HICANNOnWafer> hicann_on_wafer;

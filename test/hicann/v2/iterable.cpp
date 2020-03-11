@@ -6,9 +6,13 @@
 using namespace halco::common;
 using namespace halco::hicann::v2;
 
-template<typename T>
-class IterableCoordinateTest : public ::testing::Test
+template <typename T>
+class IterableCoordinateTestAtoM : public ::testing::Test
 {};
+template <typename T>
+class IterableCoordinateTestNtoZ : public ::testing::Test
+{};
+
 
 typedef ::testing::Types<
     AnalogOnHICANN,
@@ -33,7 +37,11 @@ typedef ::testing::Types<
     HRepeaterOnHICANN,
     Merger0OnHICANN,
     Merger1OnHICANN,
-    Merger2OnHICANN,
+    Merger2OnHICANN>
+    CoordinateIterableTypesAtoM;
+TYPED_TEST_CASE(IterableCoordinateTestAtoM, CoordinateIterableTypesAtoM);
+
+typedef ::testing::Types<
     NeuronBlockOnHICANN,
     NeuronBlockOnWafer,
     NeuronOnFGBlock,
@@ -47,6 +55,7 @@ typedef ::testing::Types<
     RepeaterBlockOnHICANN,
     RowOnSynapseDriver,
     SendingRepeaterOnHICANN,
+    SocketOnWIO,
     SideHorizontal,
     SideVertical,
     SynapseColumnOnHICANN,
@@ -62,19 +71,17 @@ typedef ::testing::Types<
     SynapseSwitchRowOnHICANN,
     TriggerOnADC,
     VLineOnHICANN,
-    VRepeaterOnHICANN>
-    CoordinateIterableTypes;
+    VRepeaterOnHICANN,
+    WIOOnWafer>
+    CoordinateIterableTypesNtoZ;
+TYPED_TEST_CASE(IterableCoordinateTestNtoZ, CoordinateIterableTypesNtoZ);
 
-TYPED_TEST_CASE(IterableCoordinateTest, CoordinateIterableTypes);
-
-TYPED_TEST(IterableCoordinateTest, iter_all) {
-	size_t count = 0;
-	for (auto c : iter_all<TypeParam>()) {
-		++count;
-		static_cast<void>(c);
-	}
-	EXPECT_LE(1, count);
-}
+#define COMMON_FIXTURE_NAME IterableCoordinateTestAtoM
+#include "HALCO_ITERABLE.cxx"
+#undef COMMON_FIXTURE_NAME
+#define COMMON_FIXTURE_NAME IterableCoordinateTestNtoZ
+#include "HALCO_ITERABLE.cxx"
+#undef COMMON_FIXTURE_NAME
 
 TEST(Merger3OnHICANN, iter_all) {
 	size_t count = 0;

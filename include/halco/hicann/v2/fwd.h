@@ -48,6 +48,7 @@ struct QuadrantOnHICANN;
 struct RepeaterBlockOnHICANN;
 struct RowOnSynapseDriver;
 struct SendingRepeaterOnHICANN;
+struct SocketOnWafer;
 struct SynapseColumnOnHICANN;
 struct SynapseDriverOnHICANN;
 struct SynapseDriverOnQuadrant;
@@ -71,6 +72,7 @@ struct UDPPort;
 struct VLineOnHICANN;
 struct VRepeaterOnHICANN;
 struct Wafer;
+struct WIOOnWafer;
 
 } // v2
 } // hicann

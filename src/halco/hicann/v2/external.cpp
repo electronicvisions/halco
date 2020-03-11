@@ -86,6 +86,16 @@ TriggerOnWafer FPGAOnWafer::toTriggerOnWafer() const
 	return gridLookupTriggerOnWafer(gridLookupDNCOnWafer(*this));
 }
 
+WIOOnWafer FPGAOnWafer::toWIOOnWafer() const
+{
+	return WIOOnWafer(value() / SocketOnWIO::size);
+}
+
+SocketOnWIO FPGAOnWafer::toSocketOnWIO() const
+{
+	return SocketOnWIO(value() % SocketOnWIO::size);
+}
+
 std::array<HICANNOnWafer, HICANNOnDNC::size> FPGAOnWafer::toHICANNOnWafer() const
 {
 	std::array<HICANNOnWafer, HICANNOnDNC::size> hicanns;
@@ -162,6 +172,10 @@ AuxPwrGlobal::AuxPwrGlobal(AuxPwrOnWafer const& h, Wafer const& w) : base(h, w) 
 
 AuxPwrGlobal::AuxPwrGlobal(enum_type const& e) :
 	base(AuxPwrOnWafer(e % AuxPwrOnWafer::end), Wafer(e / AuxPwrOnWafer::end))
+{}
+
+FPGAOnWafer::FPGAOnWafer(WIOOnWafer const& wio, SocketOnWIO const& s) :
+    FPGAOnWafer(wio.value() * s.size + s.value())
 {}
 
 const FPGAOnWafer FPGAOnWafer::Master = FPGAOnWafer(12);

@@ -80,6 +80,7 @@ typedef ::testing::Types<
 	SendingRepeaterOnHICANN,
 	SideHorizontal,
 	SideVertical,
+	SocketOnWIO,
 	SynapseColumnOnHICANN,
 	SynapseDriverOnHICANN,
 	SynapseDriverOnQuadrant,
@@ -103,6 +104,7 @@ typedef ::testing::Types<
 	VRepeaterOnHICANN,
 	VRepeaterOnWafer,
 	Wafer,
+	WIOOnWafer,
 	X,
 	Y
 > CoordinateTypesNtoZ;

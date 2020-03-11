@@ -65,6 +65,7 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
     RepeaterBlockOnWafer  => iterable
     RowOnSynapseDriver    => linear, iterable
     SendingRepeaterOnHICANN => linear, iterable
+    SocketOnWIO           => linear, iterable
     SynapseArrayOnHICANN  => linear, iterable
     SynapseColumnOnHICANN => linear, iterable
     SynapseDriverOnHICANN => grid, iterable
@@ -95,6 +96,7 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
     FACETSWafer           => ignore
     SetupType             => ignore
     VSetup                => ignore
+    WIOOnWafer            => linear, iterable
     """
 
     # remark: JTAGFrequency is iterable and linear but we skip tests as the range is large and

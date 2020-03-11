@@ -29,6 +29,16 @@ namespace v2 {
 typedef boost::asio::ip::address_v4 IPv4;
 typedef boost::asio::ip::address_v4::bytes_type IPv4_array_t;
 
+struct WIOOnWafer : public common::detail::RantWrapper<WIOOnWafer, uint_fast16_t, 3, 0>
+{
+	PYPP_CONSTEXPR explicit WIOOnWafer(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+struct SocketOnWIO : public common::detail::RantWrapper<SocketOnWIO, uint_fast16_t, 11, 0>
+{
+	PYPP_CONSTEXPR explicit SocketOnWIO(uintmax_t const val = 0) : rant_t(val) {}
+};
+
 struct GbitLinkOnHICANN
 	: public common::detail::RantWrapper<GbitLinkOnHICANN, uint_fast16_t, 7, 0> {
 	PYPP_CONSTEXPR explicit GbitLinkOnHICANN(uintmax_t const val = 0) : rant_t(val) {}
@@ -153,11 +163,15 @@ struct PMU : public common::detail::BaseType<PMU, size_t> {
 struct FPGAOnWafer : public common::detail::RantWrapper<FPGAOnWafer, size_t, 47, 0> {
 	PYPP_CONSTEXPR explicit FPGAOnWafer(uintmax_t const val = 0) : rant_t(val) {}
 
+	explicit FPGAOnWafer(WIOOnWafer const& wio, SocketOnWIO const& s);
+
 	// master FPGA for global sysstart
 	static const FPGAOnWafer Master;
 
 	DNCOnWafer toDNCOnWafer() const;
 	TriggerOnWafer toTriggerOnWafer() const;
+	WIOOnWafer toWIOOnWafer() const;
+	SocketOnWIO toSocketOnWIO() const;
 
 	std::array<HICANNOnWafer, HICANNOnDNC::size> toHICANNOnWafer() const;
 };
@@ -265,6 +279,8 @@ public:
 // std::hash specializations
 namespace std {
 
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::WIOOnWafer)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SocketOnWIO)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::DNCOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::DNCOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::HighspeedLinkOnDNC)
