@@ -3,6 +3,7 @@
 #include "halco/hicann-dls/vx/cadc.h"
 #include "halco/hicann-dls/vx/chip.h"
 #include "halco/hicann-dls/vx/correlation.h"
+#include "halco/hicann-dls/vx/neuron.h"
 #include "halco/hicann-dls/vx/padi.h"
 #include "halco/hicann-dls/vx/ppu.h"
 #include "halco/hicann-dls/vx/synram.h"

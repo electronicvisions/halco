@@ -145,6 +145,7 @@ struct GENPYBIND(inline_base("*SynramMixin*")) CADCChannelConfigOnDLS
 	explicit CADCChannelConfigOnDLS(enum_type const& e) : mixin_t(e) {}
 
 	CADCChannelConfigOnSynram toCADCChannelConfigOnSynram() const { return This(); }
+	NeuronConfigBlockOnDLS toNeuronConfigBlockOnDLS() const;
 };
 
 

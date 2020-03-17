@@ -10,6 +10,7 @@
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
+#include "halco/hicann-dls/vx/hemisphere_fwd.h"
 struct CapMemColumnOnCapMemBlock;
 struct CapMemBlockOnDLS;
 struct NeuronResetBlockOnDLS;
@@ -22,6 +23,8 @@ struct NeuronConfigOnDLS;
 struct NeuronBackendConfigOnDLS;
 struct NeuronBackendConfigBlockOnDLS;
 struct BlockPostPulseOnDLS;
+struct ColumnCorrelationQuadOnDLS;
+struct ColumnCurrentQuadOnDLS;
 
 /**********\
    Neuron
@@ -53,6 +56,11 @@ struct GENPYBIND(inline_base("*")) NeuronRowOnDLS
 	constexpr explicit NeuronRowOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
+
+#include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
+
+	static const NeuronRowOnDLS top;
+	static const NeuronRowOnDLS bottom;
 };
 
 
@@ -75,6 +83,10 @@ struct GENPYBIND(inline_base("*")) NeuronOnDLS
 
 	CapMemBlockOnDLS toCapMemBlockOnDLS() const;
 	CapMemColumnOnCapMemBlock toCapMemColumnOnCapMemBlock() const;
+	SynramOnDLS toSynramOnDLS() const;
+	SynapseQuadColumnOnDLS toSynapseQuadColumnOnDLS() const;
+	ColumnCorrelationQuadOnDLS toColumnCorrelationQuadOnDLS() const;
+	ColumnCurrentQuadOnDLS toColumnCurrentQuadOnDLS() const;
 };
 
 
@@ -105,6 +117,40 @@ struct GENPYBIND(inline_base("*")) NeuronConfigBlockOnDLS
 };
 
 
+struct GENPYBIND(inline_base("*")) NeuronBackendConfigOnNeuronBackendConfigBlock
+    : public common::detail::
+          RantWrapper<NeuronBackendConfigOnNeuronBackendConfigBlock, uint_fast16_t, 255, 0>
+{
+	constexpr explicit NeuronBackendConfigOnNeuronBackendConfigBlock(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+struct GENPYBIND(inline_base("*")) CommonNeuronBackendConfigOnDLS
+    : public common::detail::RantWrapper<CommonNeuronBackendConfigOnDLS, uint_fast16_t, 1, 0>
+{
+	constexpr explicit CommonNeuronBackendConfigOnDLS(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+
+	NeuronBackendConfigBlockOnDLS toNeuronBackendConfigBlockOnDLS() const;
+};
+
+struct GENPYBIND(inline_base("*")) NeuronBackendConfigBlockOnDLS
+    : public common::detail::RantWrapper<NeuronBackendConfigBlockOnDLS, uint_fast8_t, 1, 0>
+{
+	constexpr explicit NeuronBackendConfigBlockOnDLS(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+
+	BlockPostPulseOnDLS toBlockPostPulseOnDLS() const;
+	CommonNeuronBackendConfigOnDLS toCommonNeuronBackendConfigOnDLS() const;
+};
+
+
 HALCO_COORDINATE_MIXIN(NeuronConfigMixin, NeuronConfigBlockOnDLS, neuron)
 
 struct GENPYBIND(inline_base("*NeuronConfigMixin*")) NeuronConfigOnDLS
@@ -124,41 +170,19 @@ struct GENPYBIND(inline_base("*NeuronConfigMixin*")) NeuronConfigOnDLS
 	NeuronResetOnDLS toNeuronResetOnDLS() const;
 	SpikeCounterReadOnDLS toSpikeCounterReadOnDLS() const;
 	SpikeCounterResetOnDLS toSpikeCounterResetOnDLS() const;
-};
-
-
-struct GENPYBIND(inline_base("*")) CommonNeuronBackendConfigOnDLS
-    : public common::detail::RantWrapper<CommonNeuronBackendConfigOnDLS, uint_fast16_t, 1, 0>
-{
-	constexpr explicit CommonNeuronBackendConfigOnDLS(uintmax_t const val = 0)
-	    GENPYBIND(implicit_conversion) :
-	    rant_t(val)
-	{}
-
+	NeuronOnDLS toNeuronOnDLS() const;
+	SynapseQuadColumnOnDLS toSynapseQuadColumnOnDLS() const;
+	EntryOnQuad toEntryOnQuad() const;
+	NeuronRowOnDLS toNeuronRowOnDLS() const;
+	SynapseOnSynapseRow toSynapseOnSynapseRow() const;
 	NeuronBackendConfigBlockOnDLS toNeuronBackendConfigBlockOnDLS() const;
-};
-
-
-struct GENPYBIND(inline_base("*")) NeuronBackendConfigOnNeuronBackendConfigBlock
-    : public common::detail::
-          RantWrapper<NeuronBackendConfigOnNeuronBackendConfigBlock, uint_fast16_t, 255, 0>
-{
-	constexpr explicit NeuronBackendConfigOnNeuronBackendConfigBlock(uintmax_t const val = 0)
-	    GENPYBIND(implicit_conversion) :
-	    rant_t(val)
-	{}
-};
-
-struct GENPYBIND(inline_base("*")) NeuronBackendConfigBlockOnDLS
-    : public common::detail::RantWrapper<NeuronBackendConfigBlockOnDLS, uint_fast8_t, 1, 0>
-{
-	constexpr explicit NeuronBackendConfigBlockOnDLS(uintmax_t const val = 0)
-	    GENPYBIND(implicit_conversion) :
-	    rant_t(val)
-	{}
-
-	BlockPostPulseOnDLS toBlockPostPulseOnDLS() const;
+	NeuronBackendConfigOnNeuronBackendConfigBlock toNeuronBackendConfigOnNeuronBackendConfigBlock()
+	    const;
 	CommonNeuronBackendConfigOnDLS toCommonNeuronBackendConfigOnDLS() const;
+	NeuronBackendConfigOnDLS toNeuronBackendConfigOnDLS() const;
+	SynramOnDLS toSynramOnDLS() const;
+	ColumnCorrelationQuadOnDLS toColumnCorrelationQuadOnDLS() const;
+	ColumnCurrentQuadOnDLS toColumnCurrentQuadOnDLS() const;
 };
 
 
@@ -253,6 +277,14 @@ struct GENPYBIND(inline_base("*NeuronBackendConfigMixin*")) NeuronBackendConfigO
 	{
 		return This();
 	}
+
+	CommonNeuronBackendConfigOnDLS toCommonNeuronBackendConfigOnDLS() const;
+	SpikeCounterReadOnDLS toSpikeCounterReadOnDLS() const;
+	SpikeCounterResetOnDLS toSpikeCounterResetOnDLS() const;
+	NeuronConfigOnDLS toNeuronConfigOnDLS() const;
+	NeuronOnDLS toNeuronOnDLS() const;
+	SynramOnDLS toSynramOnDLS() const;
+	NeuronConfigBlockOnDLS toNeuronConfigBlockOnDLS() const;
 };
 
 

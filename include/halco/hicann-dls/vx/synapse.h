@@ -13,6 +13,9 @@ namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 struct SynapseDriverOnSynapseDriverBlock;
 struct NeuronConfigBlockOnDLS;
+struct NeuronColumnOnDLS;
+struct ColumnCorrelationQuadOnSynram;
+struct ColumnCurrentQuadOnSynram;
 
 /***********\
    Synapse
@@ -30,6 +33,9 @@ struct GENPYBIND(inline_base("*")) SynapseQuadColumnOnDLS
 	constexpr explicit SynapseQuadColumnOnDLS(common::X const& x) GENPYBIND(implicit_conversion) :
 	    rant_t(x)
 	{}
+
+	ColumnCorrelationQuadOnSynram toColumnCorrelationQuadOnSynram() const;
+	ColumnCurrentQuadOnSynram toColumnCurrentQuadOnSynram() const;
 };
 
 HALCO_COORDINATE_MIXIN(SynapseQuadColumnMixin, SynapseQuadColumnOnDLS, synapse_quad_column)
@@ -127,6 +133,7 @@ struct GENPYBIND(inline_base("*SynapseQuadColumnMixin*")) SynapseOnSynapseRow
 	{}
 
 	EntryOnQuad toEntryOnQuad() const { return This(); }
+	NeuronColumnOnDLS toNeuronColumnOnDLS() const;
 };
 
 
