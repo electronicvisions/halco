@@ -278,6 +278,8 @@ struct GENPYBIND(inline_base("*NeuronBackendConfigMixin*")) NeuronBackendConfigO
 		return This();
 	}
 
+	NeuronColumnOnDLS toNeuronColumnOnDLS() const;
+	NeuronRowOnDLS toNeuronRowOnDLS() const;
 	CommonNeuronBackendConfigOnDLS toCommonNeuronBackendConfigOnDLS() const;
 	SpikeCounterReadOnDLS toSpikeCounterReadOnDLS() const;
 	SpikeCounterResetOnDLS toSpikeCounterResetOnDLS() const;

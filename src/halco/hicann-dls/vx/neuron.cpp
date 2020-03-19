@@ -181,14 +181,28 @@ CommonNeuronBackendConfigOnDLS NeuronConfigOnDLS::toCommonNeuronBackendConfigOnD
 	return toNeuronBackendConfigBlockOnDLS().toCommonNeuronBackendConfigOnDLS();
 }
 
-NeuronConfigOnDLS NeuronBackendConfigOnDLS::toNeuronConfigOnDLS() const
+NeuronColumnOnDLS NeuronBackendConfigOnDLS::toNeuronColumnOnDLS() const
 {
-	return NeuronConfigOnDLS(toEnum());
+	return NeuronColumnOnDLS(
+	    (toNeuronBackendConfigOnNeuronBackendConfigBlock() %
+	     NeuronConfigOnNeuronConfigBlock::size) +
+	    (toNeuronBackendConfigBlockOnDLS() * NeuronConfigOnNeuronConfigBlock::size));
+}
+
+NeuronRowOnDLS NeuronBackendConfigOnDLS::toNeuronRowOnDLS() const
+{
+	return NeuronRowOnDLS(
+	    toNeuronBackendConfigOnNeuronBackendConfigBlock() / NeuronConfigOnNeuronConfigBlock::size);
 }
 
 NeuronOnDLS NeuronBackendConfigOnDLS::toNeuronOnDLS() const
 {
-	return toNeuronConfigOnDLS().toNeuronOnDLS();
+	return NeuronOnDLS(toNeuronColumnOnDLS(), toNeuronRowOnDLS());
+}
+
+NeuronConfigOnDLS NeuronBackendConfigOnDLS::toNeuronConfigOnDLS() const
+{
+	return toNeuronOnDLS().toNeuronConfigOnDLS();
 }
 
 SpikeCounterReadOnDLS NeuronBackendConfigOnDLS::toSpikeCounterReadOnDLS() const
@@ -203,7 +217,7 @@ SpikeCounterResetOnDLS NeuronBackendConfigOnDLS::toSpikeCounterResetOnDLS() cons
 
 CommonNeuronBackendConfigOnDLS NeuronBackendConfigOnDLS::toCommonNeuronBackendConfigOnDLS() const
 {
-	return CommonNeuronBackendConfigOnDLS(toEnum());
+	return toNeuronBackendConfigBlockOnDLS().toCommonNeuronBackendConfigOnDLS();
 }
 
 SynramOnDLS NeuronOnDLS::toSynramOnDLS() const
