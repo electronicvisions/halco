@@ -95,7 +95,7 @@ SynapseOnSynapseRow NeuronColumnOnDLS::toSynapseOnSynapseRow() const
 
 CapMemColumnOnCapMemBlock NeuronColumnOnDLS::toCapMemColumnOnCapMemBlock() const
 {
-	return CapMemColumnOnCapMemBlock(toEnum() % CapMemColumnOnCapMemBlock::size);
+	return CapMemColumnOnCapMemBlock(toEnum() % NeuronConfigOnNeuronConfigBlock::size);
 }
 
 NeuronConfigOnDLS NeuronOnDLS::toNeuronConfigOnDLS() const
