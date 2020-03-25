@@ -98,37 +98,37 @@ CapMemColumnOnCapMemBlock NeuronColumnOnDLS::toCapMemColumnOnCapMemBlock() const
 	return CapMemColumnOnCapMemBlock(toEnum() % NeuronConfigOnNeuronConfigBlock::size);
 }
 
-NeuronConfigOnDLS NeuronOnDLS::toNeuronConfigOnDLS() const
+NeuronConfigOnDLS AtomicNeuronOnDLS::toNeuronConfigOnDLS() const
 {
 	return NeuronConfigOnDLS(toEnum());
 }
 
-NeuronResetOnDLS NeuronOnDLS::toNeuronResetOnDLS() const
+NeuronResetOnDLS AtomicNeuronOnDLS::toNeuronResetOnDLS() const
 {
 	return toNeuronConfigOnDLS().toNeuronResetOnDLS();
 }
 
-SpikeCounterReadOnDLS NeuronOnDLS::toSpikeCounterReadOnDLS() const
+SpikeCounterReadOnDLS AtomicNeuronOnDLS::toSpikeCounterReadOnDLS() const
 {
 	return toNeuronConfigOnDLS().toSpikeCounterReadOnDLS();
 }
 
-SpikeCounterResetOnDLS NeuronOnDLS::toSpikeCounterResetOnDLS() const
+SpikeCounterResetOnDLS AtomicNeuronOnDLS::toSpikeCounterResetOnDLS() const
 {
 	return toNeuronConfigOnDLS().toSpikeCounterResetOnDLS();
 }
 
-NeuronBackendConfigOnDLS NeuronOnDLS::toNeuronBackendConfigOnDLS() const
+NeuronBackendConfigOnDLS AtomicNeuronOnDLS::toNeuronBackendConfigOnDLS() const
 {
 	return NeuronBackendConfigOnDLS(toNeuronResetOnDLS().toEnum());
 }
 
-CapMemColumnOnCapMemBlock NeuronOnDLS::toCapMemColumnOnCapMemBlock() const
+CapMemColumnOnCapMemBlock AtomicNeuronOnDLS::toCapMemColumnOnCapMemBlock() const
 {
 	return toNeuronColumnOnDLS().toCapMemColumnOnCapMemBlock();
 }
 
-CapMemBlockOnDLS NeuronOnDLS::toCapMemBlockOnDLS() const
+CapMemBlockOnDLS AtomicNeuronOnDLS::toCapMemBlockOnDLS() const
 {
 	return toNeuronConfigOnDLS().toNeuronConfigBlockOnDLS().toCapMemBlockOnDLS();
 }
@@ -143,9 +143,9 @@ SynapseOnSynapseRow NeuronConfigOnDLS::toSynapseOnSynapseRow() const
 	return SynapseOnSynapseRow(toEnum() % SynapseOnSynapseRow::size);
 }
 
-NeuronOnDLS NeuronConfigOnDLS::toNeuronOnDLS() const
+AtomicNeuronOnDLS NeuronConfigOnDLS::toAtomicNeuronOnDLS() const
 {
-	return NeuronOnDLS(toSynapseOnSynapseRow().toNeuronColumnOnDLS(), toNeuronRowOnDLS());
+	return AtomicNeuronOnDLS(toSynapseOnSynapseRow().toNeuronColumnOnDLS(), toNeuronRowOnDLS());
 }
 
 SynapseQuadColumnOnDLS NeuronConfigOnDLS::toSynapseQuadColumnOnDLS() const
@@ -160,20 +160,20 @@ EntryOnQuad NeuronConfigOnDLS::toEntryOnQuad() const
 
 NeuronBackendConfigBlockOnDLS NeuronConfigOnDLS::toNeuronBackendConfigBlockOnDLS() const
 {
-	return toNeuronOnDLS().toNeuronBackendConfigOnDLS().toNeuronBackendConfigBlockOnDLS();
+	return toAtomicNeuronOnDLS().toNeuronBackendConfigOnDLS().toNeuronBackendConfigBlockOnDLS();
 }
 
 NeuronBackendConfigOnNeuronBackendConfigBlock
 NeuronConfigOnDLS::toNeuronBackendConfigOnNeuronBackendConfigBlock() const
 {
-	return toNeuronOnDLS()
+	return toAtomicNeuronOnDLS()
 	    .toNeuronBackendConfigOnDLS()
 	    .toNeuronBackendConfigOnNeuronBackendConfigBlock();
 }
 
 NeuronBackendConfigOnDLS NeuronConfigOnDLS::toNeuronBackendConfigOnDLS() const
 {
-	return toNeuronOnDLS().toNeuronBackendConfigOnDLS();
+	return toAtomicNeuronOnDLS().toNeuronBackendConfigOnDLS();
 }
 
 CommonNeuronBackendConfigOnDLS NeuronConfigOnDLS::toCommonNeuronBackendConfigOnDLS() const
@@ -195,14 +195,14 @@ NeuronRowOnDLS NeuronBackendConfigOnDLS::toNeuronRowOnDLS() const
 	    toNeuronBackendConfigOnNeuronBackendConfigBlock() / NeuronConfigOnNeuronConfigBlock::size);
 }
 
-NeuronOnDLS NeuronBackendConfigOnDLS::toNeuronOnDLS() const
+AtomicNeuronOnDLS NeuronBackendConfigOnDLS::toAtomicNeuronOnDLS() const
 {
-	return NeuronOnDLS(toNeuronColumnOnDLS(), toNeuronRowOnDLS());
+	return AtomicNeuronOnDLS(toNeuronColumnOnDLS(), toNeuronRowOnDLS());
 }
 
 NeuronConfigOnDLS NeuronBackendConfigOnDLS::toNeuronConfigOnDLS() const
 {
-	return toNeuronOnDLS().toNeuronConfigOnDLS();
+	return toAtomicNeuronOnDLS().toNeuronConfigOnDLS();
 }
 
 SpikeCounterReadOnDLS NeuronBackendConfigOnDLS::toSpikeCounterReadOnDLS() const
@@ -220,19 +220,19 @@ CommonNeuronBackendConfigOnDLS NeuronBackendConfigOnDLS::toCommonNeuronBackendCo
 	return toNeuronBackendConfigBlockOnDLS().toCommonNeuronBackendConfigOnDLS();
 }
 
-SynramOnDLS NeuronOnDLS::toSynramOnDLS() const
+SynramOnDLS AtomicNeuronOnDLS::toSynramOnDLS() const
 {
 	return toNeuronRowOnDLS().toSynramOnDLS();
 }
 
 SynramOnDLS NeuronConfigOnDLS::toSynramOnDLS() const
 {
-	return toNeuronOnDLS().toSynramOnDLS();
+	return toAtomicNeuronOnDLS().toSynramOnDLS();
 }
 
 SynramOnDLS NeuronBackendConfigOnDLS::toSynramOnDLS() const
 {
-	return toNeuronOnDLS().toSynramOnDLS();
+	return toAtomicNeuronOnDLS().toSynramOnDLS();
 }
 
 NeuronConfigBlockOnDLS NeuronBackendConfigOnDLS::toNeuronConfigBlockOnDLS() const
@@ -240,18 +240,18 @@ NeuronConfigBlockOnDLS NeuronBackendConfigOnDLS::toNeuronConfigBlockOnDLS() cons
 	return toNeuronConfigOnDLS().toNeuronConfigBlockOnDLS();
 }
 
-SynapseQuadColumnOnDLS NeuronOnDLS::toSynapseQuadColumnOnDLS() const
+SynapseQuadColumnOnDLS AtomicNeuronOnDLS::toSynapseQuadColumnOnDLS() const
 {
 	return toNeuronConfigOnDLS().toSynapseQuadColumnOnDLS();
 }
 
-ColumnCorrelationQuadOnDLS NeuronOnDLS::toColumnCorrelationQuadOnDLS() const
+ColumnCorrelationQuadOnDLS AtomicNeuronOnDLS::toColumnCorrelationQuadOnDLS() const
 {
 	return ColumnCorrelationQuadOnDLS(
 	    toSynapseQuadColumnOnDLS().toColumnCorrelationQuadOnSynram(), toSynramOnDLS());
 }
 
-ColumnCurrentQuadOnDLS NeuronOnDLS::toColumnCurrentQuadOnDLS() const
+ColumnCurrentQuadOnDLS AtomicNeuronOnDLS::toColumnCurrentQuadOnDLS() const
 {
 	return ColumnCurrentQuadOnDLS(
 	    toSynapseQuadColumnOnDLS().toColumnCurrentQuadOnSynram(), toSynramOnDLS());
@@ -259,12 +259,12 @@ ColumnCurrentQuadOnDLS NeuronOnDLS::toColumnCurrentQuadOnDLS() const
 
 ColumnCorrelationQuadOnDLS NeuronConfigOnDLS::toColumnCorrelationQuadOnDLS() const
 {
-	return toNeuronOnDLS().toColumnCorrelationQuadOnDLS();
+	return toAtomicNeuronOnDLS().toColumnCorrelationQuadOnDLS();
 }
 
 ColumnCurrentQuadOnDLS NeuronConfigOnDLS::toColumnCurrentQuadOnDLS() const
 {
-	return toNeuronOnDLS().toColumnCurrentQuadOnDLS();
+	return toAtomicNeuronOnDLS().toColumnCurrentQuadOnDLS();
 }
 
 } // namespace halco::hicann_dls::vx

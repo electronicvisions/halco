@@ -168,7 +168,7 @@ typedef ::testing::Types<
     SynapticInputOnNeuron,
     NeuronColumnOnDLS,
     NeuronRowOnDLS,
-    NeuronOnDLS,
+    AtomicNeuronOnDLS,
     DLSGlobal,
     HemisphereOnDLS,
     HemisphereGlobal,

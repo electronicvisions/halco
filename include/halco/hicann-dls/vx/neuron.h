@@ -67,10 +67,10 @@ struct GENPYBIND(inline_base("*")) NeuronRowOnDLS
 /**
  * DLS-global neuron location on the two dimensional neuron grid.
  */
-struct GENPYBIND(inline_base("*")) NeuronOnDLS
-    : public common::detail::GridCoordinate<NeuronOnDLS, NeuronColumnOnDLS, NeuronRowOnDLS>
+struct GENPYBIND(inline_base("*")) AtomicNeuronOnDLS
+    : public common::detail::GridCoordinate<AtomicNeuronOnDLS, NeuronColumnOnDLS, NeuronRowOnDLS>
 {
-	GRID_COMMON_CONSTRUCTORS(NeuronOnDLS)
+	GRID_COMMON_CONSTRUCTORS(AtomicNeuronOnDLS)
 
 	NeuronColumnOnDLS toNeuronColumnOnDLS() const { return x(); }
 	NeuronRowOnDLS toNeuronRowOnDLS() const { return y(); }
@@ -170,7 +170,7 @@ struct GENPYBIND(inline_base("*NeuronConfigMixin*")) NeuronConfigOnDLS
 	NeuronResetOnDLS toNeuronResetOnDLS() const;
 	SpikeCounterReadOnDLS toSpikeCounterReadOnDLS() const;
 	SpikeCounterResetOnDLS toSpikeCounterResetOnDLS() const;
-	NeuronOnDLS toNeuronOnDLS() const;
+	AtomicNeuronOnDLS toAtomicNeuronOnDLS() const;
 	SynapseQuadColumnOnDLS toSynapseQuadColumnOnDLS() const;
 	EntryOnQuad toEntryOnQuad() const;
 	NeuronRowOnDLS toNeuronRowOnDLS() const;
@@ -284,7 +284,7 @@ struct GENPYBIND(inline_base("*NeuronBackendConfigMixin*")) NeuronBackendConfigO
 	SpikeCounterReadOnDLS toSpikeCounterReadOnDLS() const;
 	SpikeCounterResetOnDLS toSpikeCounterResetOnDLS() const;
 	NeuronConfigOnDLS toNeuronConfigOnDLS() const;
-	NeuronOnDLS toNeuronOnDLS() const;
+	AtomicNeuronOnDLS toAtomicNeuronOnDLS() const;
 	SynramOnDLS toSynramOnDLS() const;
 	NeuronConfigBlockOnDLS toNeuronConfigBlockOnDLS() const;
 };
@@ -405,7 +405,7 @@ namespace std {
 
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronColumnOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronRowOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::AtomicNeuronOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronConfigOnNeuronConfigBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronConfigBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronConfigOnDLS)
