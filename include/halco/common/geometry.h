@@ -170,6 +170,13 @@ public:
 		return t.hash();
 	}
 
+	GENPYBIND_MANUAL({
+		typedef typename decltype(parent)::type self_type;
+		parent.def(parent->py::pickle(
+		    [](GENPYBIND_PARENT_TYPE const& self) { return self.value(); },
+		    [](typename self_type::value_type const& value) { return self_type(value); }));
+	})
+
 private:
 	value_type mValue;
 
@@ -305,6 +312,13 @@ public:
 	friend size_t hash_value(rant_t t) {
 		return t.hash();
 	}
+
+	GENPYBIND_MANUAL({
+		typedef typename decltype(parent)::type self_type;
+		parent.def(parent->py::pickle(
+		    [](GENPYBIND_PARENT_TYPE const& self) { return self.value(); },
+		    [](typename self_type::value_type const& value) { return self_type(value); }));
+	})
 
 private:
 	rant::integral_range<T, Max, Min> mValue;
@@ -481,6 +495,15 @@ struct GridCoordinate {
 		return t.hash();
 	}
 
+	GENPYBIND_MANUAL({
+		typedef typename decltype(parent)::type self_type;
+		parent.def(parent->py::pickle(
+		    [](GENPYBIND_PARENT_TYPE const& self) { return self.toEnum().value(); },
+		    [](typename self_type::enum_type::value_type const& value) {
+			    return self_type(self_type::enum_type(value));
+		    }));
+	})
+
 protected:
 	x_type mX;
 	y_type mY;
@@ -644,6 +667,15 @@ struct IntervalCoordinate {
 	friend size_t hash_value(Derived const& t) {
 		return t.hash();
 	}
+
+	GENPYBIND_MANUAL({
+		typedef typename decltype(parent)::type self_type;
+		parent.def(parent->py::pickle(
+		    [](GENPYBIND_PARENT_TYPE const& self) { return self.toEnum().value(); },
+		    [](typename self_type::enum_type::value_type const& value) {
+			    return self_type(self_type::enum_type(value));
+		    }));
+	})
 
 protected:
 	bound_type mMin;

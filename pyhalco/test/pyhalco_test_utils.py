@@ -203,9 +203,6 @@ class PyhalcoTest(object):
     @for_coordinates_with_category('all')
     def test_pickling(self, name):
         module = self.get_module()
-        if getattr(module, "__variant__", None) == "pybind11":
-            self.skipTest(
-                "pickling has not been implemented yet")
         import pickle
         cls = self.get_coordinate_class(name)
         obj = cls()
@@ -215,9 +212,6 @@ class PyhalcoTest(object):
     @for_coordinates_with_category('all')
     def test_pickling_keeps_value(self, name):
         module = self.get_module()
-        if getattr(module, "__variant__", None) == "pybind11":
-            self.skipTest(
-                "pickling has not been implemented yet")
         import pickle
         cls, a, b = self.get_coordinate_instances(name)
 
