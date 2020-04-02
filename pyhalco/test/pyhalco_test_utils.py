@@ -121,6 +121,11 @@ class PyhalcoTest(object):
         x = int(cls())
 
     @for_coordinates_with_category('linear')
+    def test_convertable_to_bool(self, name):
+        cls = self.get_coordinate_class(name)
+        x = bool(cls())
+
+    @for_coordinates_with_category('linear')
     def test_usable_as_index(self, name):
         # __index__ only implemented for genpybind-based wrapping
         if getattr(self.get_module(), "__variant__", None) != "pybind11":

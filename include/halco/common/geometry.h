@@ -128,6 +128,8 @@ public:
 			return static_cast<typename std::remove_cv<
 			    typename std::remove_reference<decltype(self)>::type>::type::value_type>(self);
 		});
+		parent.def(
+		    "__bool__", [](GENPYBIND_PARENT_TYPE const& self) { return static_cast<bool>(self); });
 	})
 
 	PYPP_CONSTEXPR value_type value() const { return mValue; }
@@ -249,6 +251,8 @@ public:
 			return static_cast<typename std::remove_cv<
 			    typename std::remove_reference<decltype(self)>::type>::type::value_type>(self);
 		});
+		parent.def(
+		    "__bool__", [](GENPYBIND_PARENT_TYPE const& self) { return static_cast<bool>(self); });
 	})
 
 	PYPP_CONSTEXPR value_type value() const { return mValue; }
