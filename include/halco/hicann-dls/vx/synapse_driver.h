@@ -1,9 +1,12 @@
 #pragma once
+#include <array>
 #include <stdint.h>
 
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
+
+#include "halco/hicann-dls/vx/synapse.h"
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
@@ -14,6 +17,7 @@ namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 \*****************/
 
 struct PADIBusOnPADIBusBlock;
+struct CapMemBlockOnDLS;
 
 struct GENPYBIND(inline_base("*")) SynapseDriverOnSynapseDriverBlock
     : public common::detail::RantWrapper<SynapseDriverOnSynapseDriverBlock, uint_fast16_t, 127, 0>
@@ -58,6 +62,14 @@ struct GENPYBIND(inline_base("*SynapseDriverMixin*")) SynapseDriverOnDLS
 	explicit SynapseDriverOnDLS(enum_type const& e) : mixin_t(e) {}
 
 	SynapseDriverOnSynapseDriverBlock toSynapseDriverOnSynapseDriverBlock() const { return This(); }
+	CapMemBlockOnDLS toCapMemBlockOnDLS() const;
+	std::array<
+	    SynapseRowOnDLS,
+	    halco::hicann_dls::vx::SynapseRowOnDLS::size /
+	        halco::hicann_dls::vx::SynapseDriverMixin<
+	            halco::hicann_dls::vx::SynapseDriverOnDLS,
+	            halco::hicann_dls::vx::SynapseDriverOnSynapseDriverBlock>::size>
+	toSynapseRowOnDLS() const;
 };
 
 
