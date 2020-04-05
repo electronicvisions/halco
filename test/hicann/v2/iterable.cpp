@@ -30,6 +30,7 @@ typedef ::testing::Types<
     FGRowOnFGBlock,
     FPGAOnWafer,
     GbitLinkOnHICANN,
+    GbitLinkOnWafer,
     HICANNOnDNC,
     HighspeedLinkOnDNC,
     HICANNOnWafer,

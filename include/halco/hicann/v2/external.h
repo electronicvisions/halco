@@ -9,13 +9,14 @@ extern "C" {
 #include <boost/serialization/array.h>
 #include <boost/serialization/version.hpp>
 
-#include "pywrap/compat/array.hpp"
-#include "pywrap/compat/macros.hpp"
 #include "halco/common/geometry.h"
 #include "halco/common/relations.h"
 #include "halco/hicann/v2/fwd.h"
+#include "halco/hicann/v2/hicann.h"
 #include "halco/hicann/v2/l1.h"
 #include "halco/hicann/v2/wafer.h"
+#include "pywrap/compat/array.hpp"
+#include "pywrap/compat/macros.hpp"
 
 // Ensure that "pywrap/compat/array.hpp" is included before this and hope...
 #define BOOST_ASIO_HAS_STD_ARRAY
@@ -45,6 +46,30 @@ struct GbitLinkOnHICANN
 
 	DNCMergerOnHICANN toDNCMergerOnHICANN() const;
 };
+
+struct GbitLinkOnWafer : public HICANNMixin<GbitLinkOnWafer, GbitLinkOnHICANN>
+{
+private:
+	typedef HICANNMixin<GbitLinkOnWafer, GbitLinkOnHICANN> base;
+
+public:
+	using base::enum_type;
+
+	PYPP_DEFAULT(GbitLinkOnWafer());
+
+	explicit GbitLinkOnWafer(
+	    GbitLinkOnHICANN const& hline, HICANNOnWafer const& h = HICANNOnWafer()) :
+	    base(hline, h)
+	{}
+
+	explicit GbitLinkOnWafer(enum_type const& e) : base(e) {}
+
+	GbitLinkOnHICANN toGbitLinkOnHICANN() const
+	{
+		return This();
+	}
+};
+
 
 struct DNCOnWafer
 	: public common::detail::
@@ -299,6 +324,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::TriggerGlobal)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::ANANASGlobal)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::AuxPwrGlobal)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::GbitLinkOnHICANN)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::GbitLinkOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::WaferMixin<
     halco::hicann::v2::FPGAGlobal BOOST_PP_COMMA() halco::hicann::v2::FPGAOnWafer>)
 HALCO_GEOMETRY_HASH_CLASS(
@@ -312,6 +338,9 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::WaferMixin<
     halco::hicann::v2::DNCGlobal BOOST_PP_COMMA() halco::hicann::v2::DNCOnWafer>)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::DNCMixin<
     halco::hicann::v2::HighspeedLinkOnWafer BOOST_PP_COMMA() halco::hicann::v2::HighspeedLinkOnDNC>)
+HALCO_GEOMETRY_HASH_CLASS(
+    halco::hicann::v2::HICANNMixin<halco::hicann::v2::GbitLinkOnWafer BOOST_PP_COMMA()
+                                       halco::hicann::v2::GbitLinkOnHICANN>)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::UDPPort)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::TCPPort)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::PMU)

@@ -28,6 +28,7 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
     AuxPwrGlobal          =>
     AuxPwrOnWafer         => linear, iterable
     GbitLinkOnHICANN      => linear, iterable
+    GbitLinkOnWafer       => linear, iterable
     HICANNGlobal          =>
     HICANNOnWaferEnum     => ignore
     HICANNOnWaferGrid     => ignore
