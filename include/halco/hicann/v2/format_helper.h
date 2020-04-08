@@ -41,6 +41,8 @@ std::string short_format(const VRepeaterOnHICANN& vr);
 std::string short_format(const HLineOnHICANN& hl);
 std::string short_format(const VLineOnHICANN& vl);
 
+std::string short_format(const NeuronOnHICANN& vl);
+
 std::string slurm_license(ANANASGlobal const& ag);
 std::string slurm_license(FPGAGlobal const& fg);
 std::string slurm_license(HICANNGlobal const& hg);
@@ -78,6 +80,8 @@ template std::string to_string(VRepeaterOnHICANN const&);
 template std::string to_string(HLineOnHICANN const&);
 template std::string to_string(VLineOnHICANN const&);
 
+template std::string to_string(NeuronOnHICANN const&);
+
 typedef boost::variant<
     ANANASGlobal,
     AuxPwrGlobal,
@@ -101,7 +105,8 @@ typedef boost::variant<
     HLineOnHICANN,
     VLineOnHICANN,
     HLineOnWafer,
-    VLineOnWafer>
+    VLineOnWafer,
+    NeuronOnHICANN>
     format_type;
 
 // converts from short format to type

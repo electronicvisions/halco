@@ -139,6 +139,11 @@ TEST(FormatHelper, ShortFormat) {
 
 	std::vector<std::string> mixed_types_v = {"W1", "W1F1"};
 	EXPECT_ANY_THROW(from_string<Wafer>(mixed_types_v));
+
+	NeuronOnHICANN nrn(Enum(6));
+	EXPECT_EQ(short_format(nrn), "N006");
+	EXPECT_EQ(to_string(nrn), "N006");
+	EXPECT_EQ(boost::get<NeuronOnHICANN>(from_string("N006")), nrn);
 }
 
 TEST(FormatHelper, SlurmLicense)

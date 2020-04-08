@@ -124,6 +124,13 @@ std::string short_format(const VLineOnHICANN& vl) {
 	return ss.str();
 }
 
+std::string short_format(const NeuronOnHICANN& nrn)
+{
+	std::stringstream ss;
+	ss << "N" << std::setw(3) << std::setfill('0') << nrn.toEnum().value();
+	return ss.str();
+}
+
 std::string short_format(const HLineOnWafer& hl) {
 	return short_format(hl.toHICANNOnWafer()) + short_format(hl.toHLineOnHICANN());
 }
@@ -171,7 +178,8 @@ typedef boost::variant<
     HRepeaterOnHICANN,
     VRepeaterOnHICANN,
     HLineOnHICANN,
-    VLineOnHICANN>
+    VLineOnHICANN,
+    NeuronOnHICANN>
     local_type;
 
 // all compound types
@@ -215,6 +223,8 @@ local_type to_local(std::string const& type, std::string const& value)
 		return HLineOnHICANN(e);
 	} else if (type == "VL") {
 		return VLineOnHICANN(e);
+	} else if (type == "N") {
+		return NeuronOnHICANN(e);
 	} else if (type == "A") {
 		return ANANASOnWafer(e);
 	} else if (type == "AP") {

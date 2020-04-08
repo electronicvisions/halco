@@ -313,6 +313,13 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
         with self.assertRaises(RuntimeError):
             C.from_string(" W33F12")
 
+        nrn = C.NeuronOnHICANN(Enum(6))
+        self.assertEqual(C.short_format(nrn), "N006")
+        self.assertEqual(C.to_string(nrn), "N006")
+        self.assertEqual(C.from_string("N006"), nrn)
+        self.assertEqual(C.from_string("N06"), nrn)
+        self.assertEqual(C.from_string("N6"), nrn)
+
     def test_synapseswitchrow_driver(self):
         import pyhalco_hicann_v2 as C
         from pyhalco_common import Enum, left, Y
