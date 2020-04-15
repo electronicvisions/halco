@@ -70,26 +70,6 @@ def build(bld):
         )
 
         bld(
-            target='pyhalco_hicann_dls_v2',
-            source='../include/halco/hicann-dls/v2/coordinates.h',
-            genpybind_tags='hicann_dls_v2',
-            features='genpybind cxx cxxshlib pyext',
-            use=['halco_common', 'halco_hicann_dls_v2',
-                 'PYBIND11HALCO', 'pyhalco_common'],
-            install_path='${PREFIX}/lib',
-            linkflags='-Wl,-z,defs'
-        )
-
-        bld(
-            name='pyhalco_hicann_dls_v2_tests',
-            tests='test/pyhalco_test_hicann_dls_v2.py',
-            features='use pytest',
-            use='pyhalco_hicann_dls_v2',
-            install_path='${PREFIX}/bin',
-            pythonpath=['test'],
-        )
-
-        bld(
             target='pyhalco_hicann_dls_vx',
             source='../include/halco/hicann-dls/vx/coordinates.h',
             genpybind_tags='hicann_dls_vx',
