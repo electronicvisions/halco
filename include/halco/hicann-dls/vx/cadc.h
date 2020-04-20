@@ -10,6 +10,15 @@
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
+struct SynapseQuadOnDLS;
+struct SynapseWeightQuadOnDLS;
+struct SynapseLabelQuadOnDLS;
+struct SynapseCorrelationCalibQuadOnDLS;
+struct SynapseRowOnDLS;
+struct SynapseWeightRowOnDLS;
+struct SynapseLabelRowOnDLS;
+struct SynapseCorrelationCalibRowOnDLS;
+
 #include "halco/hicann-dls/vx/hemisphere_fwd.h"
 
 /**********\
@@ -102,6 +111,11 @@ struct GENPYBIND(inline_base("*SynramMixin*")) CADCSampleQuadOnDLS
 	explicit CADCSampleQuadOnDLS(enum_type const& e) : mixin_t(e) {}
 
 	CADCSampleQuadOnSynram toCADCSampleQuadOnSynram() const { return This(); }
+
+	SynapseQuadOnDLS toSynapseQuadOnDLS() const;
+	SynapseWeightQuadOnDLS toSynapseWeightQuadOnDLS() const;
+	SynapseLabelQuadOnDLS toSynapseLabelQuadOnDLS() const;
+	SynapseCorrelationCalibQuadOnDLS toSynapseCorrelationCalibQuadOnDLS() const;
 };
 
 
@@ -167,6 +181,11 @@ public:
 
 	SynapseRowOnSynram toSynapseRowOnSynram() const { return This(); }
 	SynramOnDLS toSynramOnDLS() const { return split().first; }
+
+	SynapseRowOnDLS toSynapseRowOnDLS() const;
+	SynapseWeightRowOnDLS toSynapseWeightRowOnDLS() const;
+	SynapseLabelRowOnDLS toSynapseLabelRowOnDLS() const;
+	SynapseCorrelationCalibRowOnDLS toSynapseCorrelationCalibRowOnDLS() const;
 };
 
 

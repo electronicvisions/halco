@@ -191,7 +191,16 @@ typedef ::testing::Types<
     CADCOffsetSRAMTimingConfigOnDLS,
     SynapseDriverSRAMTimingConfigOnDLS,
     NeuronSRAMTimingConfigOnDLS,
-    NeuronBackendSRAMTimingConfigOnDLS>
+    NeuronBackendSRAMTimingConfigOnDLS,
+    SynapseWeightQuadOnDLS,
+    SynapseLabelQuadOnDLS,
+    SynapseCorrelationCalibQuadOnDLS,
+    SynapseWeightRowOnDLS,
+    SynapseLabelRowOnDLS,
+    SynapseCorrelationCalibRowOnDLS,
+    SynapseWeightMatrixOnDLS,
+    SynapseLabelMatrixOnDLS,
+    SynapseCorrelationCalibMatrixOnDLS>
     CoordinateTypes4;
 
 

@@ -15,6 +15,14 @@ struct NeuronConfigBlockOnDLS;
 struct NeuronColumnOnDLS;
 struct ColumnCorrelationQuadOnSynram;
 struct ColumnCurrentQuadOnSynram;
+struct SynapseRowOnDLS;
+struct SynapseWeightRowOnDLS;
+struct SynapseLabelRowOnDLS;
+struct SynapseCorrelationCalibRowOnDLS;
+struct SynapseQuadOnDLS;
+struct SynapseWeightQuadOnDLS;
+struct SynapseLabelQuadOnDLS;
+struct SynapseCorrelationCalibQuadOnDLS;
 
 /***********\
    Synapse
@@ -69,6 +77,75 @@ struct GENPYBIND(inline_base("*SynramMixin*")) SynapseRowOnDLS
 	explicit SynapseRowOnDLS(enum_type const& e) : mixin_t(e) {}
 
 	SynapseRowOnSynram toSynapseRowOnSynram() const { return This(); }
+	SynapseWeightRowOnDLS toSynapseWeightRowOnDLS() const;
+	SynapseLabelRowOnDLS toSynapseLabelRowOnDLS() const;
+	SynapseCorrelationCalibRowOnDLS toSynapseCorrelationCalibRowOnDLS() const;
+};
+
+
+struct GENPYBIND(inline_base("*SynramMixin*")) SynapseWeightRowOnDLS
+    : public SynramMixin<SynapseWeightRowOnDLS, SynapseRowOnSynram>
+{
+	SynapseWeightRowOnDLS() = default;
+
+	explicit SynapseWeightRowOnDLS(
+	    SynapseRowOnSynram const& block, SynramOnDLS const& synram = SynramOnDLS()) :
+	    mixin_t(block, synram)
+	{}
+
+	explicit SynapseWeightRowOnDLS(enum_type const& e) : mixin_t(e) {}
+
+	SynapseRowOnSynram toSynapseRowOnSynram() const
+	{
+		return This();
+	}
+	SynapseRowOnDLS toSynapseRowOnDLS() const;
+	SynapseLabelRowOnDLS toSynapseLabelRowOnDLS() const;
+	SynapseCorrelationCalibRowOnDLS toSynapseCorrelationCalibRowOnDLS() const;
+};
+
+
+struct GENPYBIND(inline_base("*SynramMixin*")) SynapseLabelRowOnDLS
+    : public SynramMixin<SynapseLabelRowOnDLS, SynapseRowOnSynram>
+{
+	SynapseLabelRowOnDLS() = default;
+
+	explicit SynapseLabelRowOnDLS(
+	    SynapseRowOnSynram const& block, SynramOnDLS const& synram = SynramOnDLS()) :
+	    mixin_t(block, synram)
+	{}
+
+	explicit SynapseLabelRowOnDLS(enum_type const& e) : mixin_t(e) {}
+
+	SynapseRowOnSynram toSynapseRowOnSynram() const
+	{
+		return This();
+	}
+	SynapseRowOnDLS toSynapseRowOnDLS() const;
+	SynapseWeightRowOnDLS toSynapseWeightRowOnDLS() const;
+	SynapseCorrelationCalibRowOnDLS toSynapseCorrelationCalibRowOnDLS() const;
+};
+
+
+struct GENPYBIND(inline_base("*SynramMixin*")) SynapseCorrelationCalibRowOnDLS
+    : public SynramMixin<SynapseCorrelationCalibRowOnDLS, SynapseRowOnSynram>
+{
+	SynapseCorrelationCalibRowOnDLS() = default;
+
+	explicit SynapseCorrelationCalibRowOnDLS(
+	    SynapseRowOnSynram const& block, SynramOnDLS const& synram = SynramOnDLS()) :
+	    mixin_t(block, synram)
+	{}
+
+	explicit SynapseCorrelationCalibRowOnDLS(enum_type const& e) : mixin_t(e) {}
+
+	SynapseRowOnSynram toSynapseRowOnSynram() const
+	{
+		return This();
+	}
+	SynapseRowOnDLS toSynapseRowOnDLS() const;
+	SynapseLabelRowOnDLS toSynapseLabelRowOnDLS() const;
+	SynapseWeightRowOnDLS toSynapseWeightRowOnDLS() const;
 };
 
 
@@ -114,6 +191,81 @@ struct GENPYBIND(inline_base("*SynramMixin*")) SynapseQuadOnDLS
 	SynapseQuadOnSynram toSynapseQuadOnSynram() const { return This(); }
 
 	NeuronConfigBlockOnDLS toNeuronConfigBlockOnDLS() const;
+	SynapseWeightQuadOnDLS toSynapseWeightQuadOnDLS() const;
+	SynapseLabelQuadOnDLS toSynapseLabelQuadOnDLS() const;
+	SynapseCorrelationCalibQuadOnDLS toSynapseCorrelationCalibQuadOnDLS() const;
+};
+
+
+struct GENPYBIND(inline_base("*SynramMixin*")) SynapseWeightQuadOnDLS
+    : public SynramMixin<SynapseWeightQuadOnDLS, SynapseQuadOnSynram>
+{
+	SynapseWeightQuadOnDLS() = default;
+
+	explicit SynapseWeightQuadOnDLS(
+	    SynapseQuadOnSynram const& block, SynramOnDLS const& synram = SynramOnDLS()) :
+	    mixin_t(block, synram)
+	{}
+
+	explicit SynapseWeightQuadOnDLS(enum_type const& e) : mixin_t(e) {}
+
+	SynapseQuadOnSynram toSynapseQuadOnSynram() const
+	{
+		return This();
+	}
+
+	NeuronConfigBlockOnDLS toNeuronConfigBlockOnDLS() const;
+	SynapseQuadOnDLS toSynapseQuadOnDLS() const;
+	SynapseLabelQuadOnDLS toSynapseLabelQuadOnDLS() const;
+	SynapseCorrelationCalibQuadOnDLS toSynapseCorrelationCalibQuadOnDLS() const;
+};
+
+
+struct GENPYBIND(inline_base("*SynramMixin*")) SynapseLabelQuadOnDLS
+    : public SynramMixin<SynapseLabelQuadOnDLS, SynapseQuadOnSynram>
+{
+	SynapseLabelQuadOnDLS() = default;
+
+	explicit SynapseLabelQuadOnDLS(
+	    SynapseQuadOnSynram const& block, SynramOnDLS const& synram = SynramOnDLS()) :
+	    mixin_t(block, synram)
+	{}
+
+	explicit SynapseLabelQuadOnDLS(enum_type const& e) : mixin_t(e) {}
+
+	SynapseQuadOnSynram toSynapseQuadOnSynram() const
+	{
+		return This();
+	}
+
+	NeuronConfigBlockOnDLS toNeuronConfigBlockOnDLS() const;
+	SynapseWeightQuadOnDLS toSynapseWeightQuadOnDLS() const;
+	SynapseQuadOnDLS toSynapseQuadOnDLS() const;
+	SynapseCorrelationCalibQuadOnDLS toSynapseCorrelationCalibQuadOnDLS() const;
+};
+
+
+struct GENPYBIND(inline_base("*SynramMixin*")) SynapseCorrelationCalibQuadOnDLS
+    : public SynramMixin<SynapseCorrelationCalibQuadOnDLS, SynapseQuadOnSynram>
+{
+	SynapseCorrelationCalibQuadOnDLS() = default;
+
+	explicit SynapseCorrelationCalibQuadOnDLS(
+	    SynapseQuadOnSynram const& block, SynramOnDLS const& synram = SynramOnDLS()) :
+	    mixin_t(block, synram)
+	{}
+
+	explicit SynapseCorrelationCalibQuadOnDLS(enum_type const& e) : mixin_t(e) {}
+
+	SynapseQuadOnSynram toSynapseQuadOnSynram() const
+	{
+		return This();
+	}
+
+	NeuronConfigBlockOnDLS toNeuronConfigBlockOnDLS() const;
+	SynapseWeightQuadOnDLS toSynapseWeightQuadOnDLS() const;
+	SynapseLabelQuadOnDLS toSynapseLabelQuadOnDLS() const;
+	SynapseQuadOnDLS toSynapseQuadOnDLS() const;
 };
 
 
@@ -170,6 +322,51 @@ struct GENPYBIND(inline_base("*SynramMixin*")) CorrelationResetOnDLS
 	SynapseQuadOnSynram toSynapseQuadOnSynram() const { return This(); }
 };
 
+
+struct GENPYBIND(inline_base("*")) SynapseWeightMatrixOnDLS
+    : public common::detail::RantWrapper<SynapseWeightMatrixOnDLS, uint_fast16_t, 1, 0>
+{
+	constexpr explicit SynapseWeightMatrixOnDLS(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+
+#include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
+
+	static const SynapseWeightMatrixOnDLS top;
+	static const SynapseWeightMatrixOnDLS bottom;
+};
+
+
+struct GENPYBIND(inline_base("*")) SynapseLabelMatrixOnDLS
+    : public common::detail::RantWrapper<SynapseLabelMatrixOnDLS, uint_fast16_t, 1, 0>
+{
+	constexpr explicit SynapseLabelMatrixOnDLS(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+
+#include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
+
+	static const SynapseLabelMatrixOnDLS top;
+	static const SynapseLabelMatrixOnDLS bottom;
+};
+
+
+struct GENPYBIND(inline_base("*")) SynapseCorrelationCalibMatrixOnDLS
+    : public common::detail::RantWrapper<SynapseCorrelationCalibMatrixOnDLS, uint_fast16_t, 1, 0>
+{
+	constexpr explicit SynapseCorrelationCalibMatrixOnDLS(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+
+#include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
+
+	static const SynapseCorrelationCalibMatrixOnDLS top;
+	static const SynapseCorrelationCalibMatrixOnDLS bottom;
+};
+
 } // namespace halco::hicann_dls::vx
 
 namespace std {
@@ -177,12 +374,21 @@ namespace std {
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseQuadColumnOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseRowOnSynram)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseRowOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseWeightRowOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseLabelRowOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseCorrelationCalibRowOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseQuadOnSynram)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseQuadOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseWeightQuadOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseLabelQuadOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseCorrelationCalibQuadOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseOnSynapseRow)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapticInputOnNeuron)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseBiasSelectionOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CorrelationResetOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CorrelationResetRowOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseWeightMatrixOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseLabelMatrixOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseCorrelationCalibMatrixOnDLS)
 
 } // namespace std

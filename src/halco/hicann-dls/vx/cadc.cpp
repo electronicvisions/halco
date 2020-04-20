@@ -5,6 +5,7 @@
 #include "halco/hicann-dls/vx/neuron.h"
 #include "halco/hicann-dls/vx/padi.h"
 #include "halco/hicann-dls/vx/ppu.h"
+#include "halco/hicann-dls/vx/synapse.h"
 #include "halco/hicann-dls/vx/synapse_driver.h"
 #include "halco/hicann-dls/vx/synram.h"
 
@@ -21,6 +22,50 @@ CADCChannelType const CADCChannelType::acausal{1};
 
 CADCReadoutType const CADCReadoutType::trigger_read{0};
 CADCReadoutType const CADCReadoutType::buffered{1};
+
+SynapseQuadOnDLS CADCSampleQuadOnDLS::toSynapseQuadOnDLS() const
+{
+	return SynapseQuadOnDLS(
+	    toCADCSampleQuadOnSynram()
+	        .toCADCSampleQuadUnspecifiedReadoutOnSynram()
+	        .toSynapseQuadOnSynram(),
+	    toSynramOnDLS());
+}
+
+SynapseWeightQuadOnDLS CADCSampleQuadOnDLS::toSynapseWeightQuadOnDLS() const
+{
+	return toSynapseQuadOnDLS().toSynapseWeightQuadOnDLS();
+}
+
+SynapseLabelQuadOnDLS CADCSampleQuadOnDLS::toSynapseLabelQuadOnDLS() const
+{
+	return toSynapseQuadOnDLS().toSynapseLabelQuadOnDLS();
+}
+
+SynapseCorrelationCalibQuadOnDLS CADCSampleQuadOnDLS::toSynapseCorrelationCalibQuadOnDLS() const
+{
+	return toSynapseQuadOnDLS().toSynapseCorrelationCalibQuadOnDLS();
+}
+
+SynapseRowOnDLS CADCSampleRowOnDLS::toSynapseRowOnDLS() const
+{
+	return SynapseRowOnDLS(toEnum());
+}
+
+SynapseWeightRowOnDLS CADCSampleRowOnDLS::toSynapseWeightRowOnDLS() const
+{
+	return SynapseWeightRowOnDLS(toEnum());
+}
+
+SynapseLabelRowOnDLS CADCSampleRowOnDLS::toSynapseLabelRowOnDLS() const
+{
+	return SynapseLabelRowOnDLS(toEnum());
+}
+
+SynapseCorrelationCalibRowOnDLS CADCSampleRowOnDLS::toSynapseCorrelationCalibRowOnDLS() const
+{
+	return SynapseCorrelationCalibRowOnDLS(toEnum());
+}
 
 NeuronConfigBlockOnDLS CADCChannelConfigOnDLS::toNeuronConfigBlockOnDLS() const
 {

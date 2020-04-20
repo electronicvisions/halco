@@ -120,8 +120,17 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     SynramOnDLS                      => linear, iterable
     SynapseQuadOnSynram             => grid, iterable
     SynapseQuadOnDLS                => iterable
+    SynapseWeightQuadOnDLS          => iterable
+    SynapseLabelQuadOnDLS         => iterable
+    SynapseCorrelationCalibQuadOnDLS    => iterable
     SynapseOnSynapseRow             => linear, iterable
     SynapseRowOnDLS                 => linear, iterable
+    SynapseWeightRowOnDLS         => linear, iterable
+    SynapseLabelRowOnDLS        => linear, iterable
+    SynapseCorrelationCalibRowOnDLS => linear, iterable
+    SynapseWeightMatrixOnDLS         => linear, iterable
+    SynapseLabelMatrixOnDLS        => linear, iterable
+    SynapseCorrelationCalibMatrixOnDLS => linear, iterable
     SynapseDriverOnSynapseDriverBlock => linear, iterable
     SynapseDriverBlockOnDLS           => linear, iterable
     SynapseDriverOnDLS                => linear, iterable
