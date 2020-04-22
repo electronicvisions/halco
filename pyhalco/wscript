@@ -63,7 +63,7 @@ def build(bld):
             target='pyhalco_common',
             source='../include/halco/common/common.h',
             genpybind_tags='common',
-            features='genpybind cxx cxxshlib pyext',
+            features='genpybind cxx cxxshlib pyext pyembed',
             use=['halco_common', 'PYBIND11HALCO', 'pyhalco_common_files'],
             install_path='${PREFIX}/lib',
             linkflags='-Wl,-z,defs'
@@ -73,7 +73,7 @@ def build(bld):
             target='pyhalco_hicann_dls_vx',
             source='../include/halco/hicann-dls/vx/coordinates.h',
             genpybind_tags='hicann_dls_vx',
-            features='genpybind cxx cxxshlib pyext',
+            features='genpybind cxx cxxshlib pyext pyembed',
             use=['halco_common', 'halco_hicann_dls_vx',
                  'PYBIND11HALCO', 'pyhalco_common'],
             install_path='${PREFIX}/lib',
