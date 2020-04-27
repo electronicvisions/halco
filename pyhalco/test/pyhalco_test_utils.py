@@ -311,5 +311,3 @@ class PyhalcoTest(object):
         self.assertEqual(c, cls(min, max))
         self.assertEqual(c, cls(cls.bound_type(int(min)), cls.bound_type(int(max))))
 
-        self.assertRaises(RuntimeError, c = cls(max, min))
-        self.assertRaises(RuntimeError, c = cls(cls.bound_type(int(max)), cls.bound_type(int(min))))
