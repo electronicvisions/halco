@@ -34,6 +34,13 @@ struct GENPYBIND(inline_base("*")) TimerOnDLS
 	constexpr explicit TimerOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
 
+
+struct GENPYBIND(inline_base("*")) WaitUntilOnFPGA
+    : public common::detail::RantWrapper<WaitUntilOnFPGA, uint_fast16_t, 0, 0>
+{
+	constexpr explicit WaitUntilOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
+};
+
 } // namespace halco::hicann_dls::vx
 
 namespace std {
@@ -41,5 +48,6 @@ namespace std {
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SystimeSyncOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SystimeSyncBaseOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::TimerOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::WaitUntilOnFPGA)
 
 } // namespace std

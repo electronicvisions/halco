@@ -202,7 +202,9 @@ typedef ::testing::Types<
     SynapseWeightMatrixOnDLS,
     SynapseLabelMatrixOnDLS,
     SynapseCorrelationCalibMatrixOnDLS,
-    NeuronEventOutputOnDLS>
+    NeuronEventOutputOnDLS,
+    SyncOnFPGA,
+    WaitUntilOnFPGA>
     CoordinateTypes4;
 
 
