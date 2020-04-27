@@ -65,6 +65,7 @@ typedef ::testing::Types<
     // Note: Tested in separation below (full iteration takes too long)
     // SynapseOnWafer,
     SynapseRowOnHICANN,
+    SynapseRowOnWafer,
     SynapseRowOnArray,
     SynapseSwitchOnHICANN,
     SynapseSwitchOnSynapseSwitchRow,

@@ -74,6 +74,7 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
     SynapseOnHICANN       => grid, iterable
     SynapseOnWafer        =>
     SynapseRowOnHICANN    => linear, iterable
+    SynapseRowOnWafer     => linear, iterable
     SynapseRowOnArray     => linear, iterable
     SynapseSwitchOnHICANN => grid, iterable
     SynapseSwitchOnSynapseSwitchRow => grid, iterable

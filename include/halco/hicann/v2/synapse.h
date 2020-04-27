@@ -191,6 +191,33 @@ struct SynapseRowOnHICANN
 	SynapseRowOnArray toSynapseRowOnArray() const;
 };
 
+struct SynapseRowOnWafer : public HICANNMixin<SynapseRowOnWafer, SynapseRowOnHICANN>
+{
+private:
+	typedef HICANNMixin<SynapseRowOnWafer, SynapseRowOnHICANN> base;
+
+public:
+	using base::enum_type;
+
+	PYPP_DEFAULT(SynapseRowOnWafer());
+
+	explicit SynapseRowOnWafer(
+	    SynapseRowOnHICANN const& synapse, HICANNOnWafer const& h = HICANNOnWafer()) :
+	    base(synapse, h)
+	{}
+
+	explicit SynapseRowOnWafer(enum_type const& e) : base(e) {}
+
+	SynapseRowOnHICANN toSynapseRowOnHICANN() const
+	{
+		return This();
+	}
+	SynapseDriverOnWafer toSynapseDriverOnWafer() const
+	{
+		return SynapseDriverOnWafer(toSynapseDriverOnHICANN(), toHICANNOnWafer());
+	}
+};
+
 /** SynapseRow coordinate on (either top or botom) synapse array.
  * Each synapse driver drives two synapse rows.
  */
@@ -250,6 +277,10 @@ public:
 	NeuronOnWafer toNeuronOnWafer() const {
 		return NeuronOnWafer(toNeuronOnHICANN(), toHICANNOnWafer());
 	}
+	SynapseRowOnWafer toSynapseRowOnWafer() const
+	{
+		return SynapseRowOnWafer(toSynapseRowOnHICANN(), toHICANNOnWafer());
+	}
 };
 
 
@@ -265,6 +296,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SynapseSwitchRowOnHICANN)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SynapseSwitchRowOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::RowOnSynapseDriver)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SynapseRowOnHICANN)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SynapseRowOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SynapseRowOnArray)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SynapseColumnOnHICANN)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SynapseOnHICANN)
@@ -281,5 +313,8 @@ HALCO_GEOMETRY_HASH_CLASS(
 HALCO_GEOMETRY_HASH_CLASS(
     halco::hicann::v2::HICANNMixin<halco::hicann::v2::SynapseDriverOnWafer BOOST_PP_COMMA()
     halco::hicann::v2::SynapseDriverOnHICANN>)
+HALCO_GEOMETRY_HASH_CLASS(
+    halco::hicann::v2::HICANNMixin<halco::hicann::v2::SynapseRowOnWafer BOOST_PP_COMMA()
+                                       halco::hicann::v2::SynapseRowOnHICANN>)
 
 } // std
