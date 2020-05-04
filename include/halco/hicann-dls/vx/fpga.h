@@ -20,6 +20,15 @@ struct GENPYBIND(inline_base("*")) FPGADeviceDNAOnFPGA
 };
 
 
+struct GENPYBIND(inline_base("*")) FPGAMemoryByteOnFPGA
+    : public common::detail::RantWrapper<FPGAMemoryByteOnFPGA, uint_fast16_t, 0x20000 - 1, 0>
+{
+	constexpr explicit FPGAMemoryByteOnFPGA(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
 /************\
    Loopback
 \************/
@@ -56,5 +65,6 @@ namespace std {
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::FPGADeviceDNAOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NullPayloadReadableOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::EventRecordingConfigOnFPGA)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::FPGAMemoryByteOnFPGA)
 
 } // namespace std

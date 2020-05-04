@@ -206,7 +206,8 @@ typedef ::testing::Types<
     BarrierOnFPGA,
     WaitUntilOnFPGA,
     INA219ConfigOnBoard,
-    INA219StatusOnBoard>
+    INA219StatusOnBoard,
+    FPGAMemoryByteOnFPGA>
     CoordinateTypes4;
 
 
