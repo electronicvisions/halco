@@ -28,11 +28,27 @@ struct GENPYBIND(inline_base("*")) OmnibusAddress
 	{}
 };
 
+
+struct GENPYBIND(inline_base("*")) PollingOmnibusBlockOnFPGA
+    : public common::detail::RantWrapper<PollingOmnibusBlockOnFPGA, uint_fast8_t, 0, 0>
+{
+	constexpr explicit PollingOmnibusBlockOnFPGA(uintmax_t const val = 0) : base_t(val) {}
+};
+
+
+struct GENPYBIND(inline_base("*")) PollingOmnibusBlockConfigOnFPGA
+    : public common::detail::RantWrapper<PollingOmnibusBlockConfigOnFPGA, uint_fast8_t, 0, 0>
+{
+	constexpr explicit PollingOmnibusBlockConfigOnFPGA(uintmax_t const val = 0) : base_t(val) {}
+};
+
 } // namespace halco::hicann_dls::vx
 
 namespace std {
 
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::OmnibusChipOverJTAGAddress)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::OmnibusAddress)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PollingOmnibusBlockOnFPGA)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PollingOmnibusBlockConfigOnFPGA)
 
 } // namespace std

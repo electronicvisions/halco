@@ -210,7 +210,9 @@ typedef ::testing::Types<
     ExternalPPUMemoryBlockSize,
     ExternalPPUMemoryBlockOnFPGA,
     CapMemBlockOnHemisphere,
-    CADCOnDLS>
+    CADCOnDLS,
+    PollingOmnibusBlockOnFPGA,
+    PollingOmnibusBlockConfigOnFPGA>
     CoordinateTypes4;
 
 
