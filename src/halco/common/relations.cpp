@@ -1,5 +1,7 @@
 #include "halco/common/relations.h"
 
+#include <ostream>
+
 namespace halco {
 namespace common {
 
