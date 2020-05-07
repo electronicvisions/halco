@@ -4,7 +4,7 @@ extern "C" {
 #include <stdint.h>
 }
 
-#include <iostream>
+#include <ostream>
 
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
