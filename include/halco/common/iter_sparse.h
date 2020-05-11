@@ -34,11 +34,12 @@ std::vector<T> iter_sparse(std::optional<size_t> const num = std::nullopt)
 		throw std::runtime_error(
 		    "iter_sparse always adds first and last in range, provided num is too small.");
 	}
+	auto rd = std::make_unique<std::random_device>();
+	auto rng = std::make_unique<std::mt19937>((*rd)());
+
 	std::vector<T> ret;
 	ret.push_back(all.front());
-	std::sample(
-	    all.begin() + 1, all.end() - 1, std::back_inserter(ret), *num - 2,
-	    std::mt19937{std::random_device{}()});
+	std::sample(all.begin() + 1, all.end() - 1, std::back_inserter(ret), *num - 2, *rng);
 	ret.push_back(all.back());
 	return ret;
 }
