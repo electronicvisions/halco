@@ -38,6 +38,11 @@ PADIBusOnPADIBusBlock SynapseDriverOnSynapseDriverBlock::toPADIBusOnPADIBusBlock
 	return PADIBusOnPADIBusBlock(toEnum() % PADIBusOnPADIBusBlock::size);
 }
 
+SynapseDriverOnPADIBus SynapseDriverOnSynapseDriverBlock::toSynapseDriverOnPADIBus() const
+{
+	return SynapseDriverOnPADIBus(toEnum() / PADIBusOnPADIBusBlock::size);
+}
+
 CapMemBlockOnDLS SynapseDriverOnDLS::toCapMemBlockOnDLS() const
 {
 	int const hemisphere_id = toSynapseDriverBlockOnDLS().toHemisphereOnDLS().toEnum();

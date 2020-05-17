@@ -105,6 +105,12 @@ TEST(CrossbarInputOnDLS, toSPL1Address)
 	}
 }
 
+TEST(SynapseDriverOnSynapseDriverBlock, toSynapseDriverOnPADIBus)
+{
+	SynapseDriverOnSynapseDriverBlock coord(47);
+	EXPECT_EQ(coord.toSynapseDriverOnPADIBus(), SynapseDriverOnPADIBus(11));
+}
+
 TEST(CrossbarL2OutputOnDLS, toCrossbarOutputOnDLS)
 {
 	CrossbarL2OutputOnDLS coord(3);
