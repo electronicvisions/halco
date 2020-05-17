@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 #include "halco/common/iter_all.h"
+#include "halco/common/typed_array.h"
 #include "halco/hicann-dls/vx/coordinates.h"
 
 using namespace halco::common;
@@ -56,6 +57,52 @@ TEST(NeuronConfigBlockOnDLS, toSpikeCounterResetBlockOnDLS)
 {
 	NeuronConfigBlockOnDLS coord(1);
 	EXPECT_EQ(coord.toSpikeCounterResetBlockOnDLS(), SpikeCounterResetBlockOnDLS(1));
+}
+
+TEST(CrossbarOutputOnDLS, toCrossbarL2OutputOnDLS)
+{
+	halco::common::typed_array<std::optional<CrossbarL2OutputOnDLS>, CrossbarOutputOnDLS>
+	    expectation = {std::nullopt,
+	                   std::nullopt,
+	                   std::nullopt,
+	                   std::nullopt,
+	                   std::nullopt,
+	                   std::nullopt,
+	                   std::nullopt,
+	                   std::nullopt,
+	                   CrossbarL2OutputOnDLS(0),
+	                   CrossbarL2OutputOnDLS(1),
+	                   CrossbarL2OutputOnDLS(2),
+	                   CrossbarL2OutputOnDLS(3)};
+
+	for (auto o : iter_all<CrossbarOutputOnDLS>()) {
+		EXPECT_EQ(o.toCrossbarL2OutputOnDLS(), expectation[o]);
+	}
+}
+
+TEST(CrossbarOutputOnDLS, toPADIBusOnDLS)
+{
+	halco::common::typed_array<std::optional<PADIBusOnDLS>, CrossbarOutputOnDLS> expectation = {
+	    PADIBusOnDLS(Enum(0)), PADIBusOnDLS(Enum(1)), PADIBusOnDLS(Enum(2)), PADIBusOnDLS(Enum(3)),
+	    PADIBusOnDLS(Enum(4)), PADIBusOnDLS(Enum(5)), PADIBusOnDLS(Enum(6)), PADIBusOnDLS(Enum(7)),
+	    std::nullopt,          std::nullopt,          std::nullopt,          std::nullopt};
+
+	for (auto o : iter_all<CrossbarOutputOnDLS>()) {
+		EXPECT_EQ(o.toPADIBusOnDLS(), expectation[o]);
+	}
+}
+
+TEST(CrossbarInputOnDLS, toSPL1Address)
+{
+	halco::common::typed_array<std::optional<SPL1Address>, CrossbarInputOnDLS> expectation = {
+	    std::nullopt,   std::nullopt,   std::nullopt, std::nullopt,   std::nullopt,
+	    std::nullopt,   std::nullopt,   std::nullopt, SPL1Address(0), SPL1Address(1),
+	    SPL1Address(2), SPL1Address(3), std::nullopt, std::nullopt,   std::nullopt,
+	    std::nullopt,   std::nullopt,   std::nullopt, std::nullopt,   std::nullopt};
+
+	for (auto i : iter_all<CrossbarInputOnDLS>()) {
+		EXPECT_EQ(i.toSPL1Address(), expectation[i]);
+	}
 }
 
 TEST(CrossbarL2OutputOnDLS, toCrossbarOutputOnDLS)

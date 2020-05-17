@@ -1,13 +1,39 @@
 #include "halco/hicann-dls/vx/routing_crossbar.h"
 
 #include "halco/common/lookup_tables_helper.h"
+#include "halco/hicann-dls/vx/event.h"
+#include "halco/hicann-dls/vx/padi.h"
 
 namespace halco::hicann_dls::vx {
+
+std::optional<PADIBusOnDLS> CrossbarOutputOnDLS::toPADIBusOnDLS() const
+{
+	if (toEnum() >= PADIBusOnDLS::size) {
+		return std::nullopt;
+	}
+	return PADIBusOnDLS(toEnum());
+}
+
+std::optional<CrossbarL2OutputOnDLS> CrossbarOutputOnDLS::toCrossbarL2OutputOnDLS() const
+{
+	if (toPADIBusOnDLS()) {
+		return std::nullopt;
+	}
+	return CrossbarL2OutputOnDLS(toEnum() - PADIBusOnDLS::size);
+}
 
 CrossbarOutputOnDLS CrossbarL2OutputOnDLS::toCrossbarOutputOnDLS() const
 {
 	return CrossbarOutputOnDLS(
 	    toEnum() + (CrossbarOutputOnDLS::size - CrossbarL2OutputOnDLS::size));
+}
+
+std::optional<SPL1Address> CrossbarInputOnDLS::toSPL1Address() const
+{
+	if ((toEnum() < 8) || toEnum() >= 12) {
+		return std::nullopt;
+	}
+	return SPL1Address(toEnum() - 8);
 }
 
 // clang-format off

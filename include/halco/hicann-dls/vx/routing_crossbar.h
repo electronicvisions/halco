@@ -1,10 +1,15 @@
 #pragma once
+#include <optional>
 #include <stdint.h>
 
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
+
+struct PADIBusOnDLS;
+struct SPL1Address;
+struct CrossbarL2OutputOnDLS;
 
 /************\
    Crossbar
@@ -30,6 +35,9 @@ struct GENPYBIND(inline_base("*")) CrossbarOutputOnDLS
 	constexpr explicit CrossbarOutputOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
+
+	std::optional<PADIBusOnDLS> toPADIBusOnDLS() const;
+	std::optional<CrossbarL2OutputOnDLS> toCrossbarL2OutputOnDLS() const;
 };
 
 
@@ -59,6 +67,8 @@ struct GENPYBIND(inline_base("*")) CrossbarInputOnDLS
 	constexpr explicit CrossbarInputOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
+
+	std::optional<SPL1Address> toSPL1Address() const;
 };
 
 
