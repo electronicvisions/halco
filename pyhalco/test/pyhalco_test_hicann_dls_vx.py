@@ -117,6 +117,7 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     FPGADeviceDNAOnFPGA => linear,iterable
     SynapseQuadColumnOnDLS => linear,iterable
     SynapseRowOnSynram => linear,iterable
+    SynapseRowOnSynapseDriver => linear, iterable
     SynramOnDLS => linear,iterable
     SynapseQuadOnSynram => grid,iterable
     SynapseQuadOnDLS => iterable

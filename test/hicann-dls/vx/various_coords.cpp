@@ -7,6 +7,18 @@
 using namespace halco::common;
 using namespace halco::hicann_dls::vx;
 
+TEST(SynapseRowOnSynram, toSynapseRowOnSynapseDriver)
+{
+	{
+		SynapseRowOnSynram coord(23);
+		EXPECT_EQ(coord.toSynapseRowOnSynapseDriver(), SynapseRowOnSynapseDriver::top);
+	}
+	{
+		SynapseRowOnSynram coord(42);
+		EXPECT_EQ(coord.toSynapseRowOnSynapseDriver(), SynapseRowOnSynapseDriver::bottom);
+	}
+}
+
 TEST(SynapseQuadOnDLS, toNeuronConfigBlockOnDLS)
 {
 	SynapseQuadOnDLS coord(

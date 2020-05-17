@@ -93,9 +93,18 @@ SynapseQuadOnDLS SynapseCorrelationCalibQuadOnDLS::toSynapseQuadOnDLS() const
 	return SynapseQuadOnDLS(toEnum());
 }
 
+SynapseRowOnSynapseDriver const SynapseRowOnSynapseDriver::top{0};
+SynapseRowOnSynapseDriver const SynapseRowOnSynapseDriver::bottom{1};
+
 SynapseDriverOnSynapseDriverBlock SynapseRowOnSynram::toSynapseDriverOnSynapseDriverBlock() const
 {
 	return SynapseDriverOnSynapseDriverBlock(toEnum() / 2);
+}
+
+SynapseRowOnSynapseDriver SynapseRowOnSynram::toSynapseRowOnSynapseDriver() const
+{
+	return SynapseRowOnSynapseDriver(
+	    (toEnum() % 2 == 1) ? SynapseRowOnSynapseDriver::top : SynapseRowOnSynapseDriver::bottom);
 }
 
 SynapticInputOnNeuron const SynapticInputOnNeuron::excitatory{0};

@@ -48,6 +48,18 @@ struct GENPYBIND(inline_base("*")) SynapseQuadColumnOnDLS
 HALCO_COORDINATE_MIXIN(SynapseQuadColumnMixin, SynapseQuadColumnOnDLS, synapse_quad_column)
 
 
+struct GENPYBIND(inline_base("*")) SynapseRowOnSynapseDriver
+    : public common::detail::RantWrapper<SynapseRowOnSynapseDriver, uint_fast16_t, 1, 0>
+{
+	constexpr explicit SynapseRowOnSynapseDriver(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+
+	static const SynapseRowOnSynapseDriver top;
+	static const SynapseRowOnSynapseDriver bottom;
+};
+
 struct GENPYBIND(inline_base("*")) SynapseRowOnSynram
     : public common::detail::RantWrapper<SynapseRowOnSynram, uint_fast16_t, 255, 0>
     , public common::detail::YRangedTrait
@@ -61,8 +73,8 @@ struct GENPYBIND(inline_base("*")) SynapseRowOnSynram
 	{}
 
 	SynapseDriverOnSynapseDriverBlock toSynapseDriverOnSynapseDriverBlock() const;
+	SynapseRowOnSynapseDriver toSynapseRowOnSynapseDriver() const;
 };
-
 
 struct GENPYBIND(inline_base("*SynramMixin*")) SynapseRowOnDLS
     : public SynramMixin<SynapseRowOnDLS, SynapseRowOnSynram>
