@@ -7,6 +7,15 @@
 using namespace halco::common;
 using namespace halco::hicann_dls::vx;
 
+TEST(SynapseDriverOnSynapseDriverBlock, toSynapseRowOnSynram)
+{
+	SynapseDriverOnSynapseDriverBlock coord(23);
+
+	auto const synapse_rows = coord.toSynapseRowOnSynram();
+	EXPECT_EQ(synapse_rows[SynapseRowOnSynapseDriver::top], SynapseRowOnSynram(47));
+	EXPECT_EQ(synapse_rows[SynapseRowOnSynapseDriver::bottom], SynapseRowOnSynram(46));
+}
+
 TEST(SynapseRowOnSynram, toSynapseRowOnSynapseDriver)
 {
 	{

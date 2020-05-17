@@ -5,6 +5,7 @@
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
+#include "halco/common/typed_array.h"
 
 #include "halco/hicann-dls/vx/synapse.h"
 
@@ -18,6 +19,8 @@ namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 struct PADIBusOnPADIBusBlock;
 struct SynapseDriverOnPADIBus;
+struct SynapseRowOnSynram;
+struct SynapseRowOnSynapseDriver;
 struct CapMemBlockOnDLS;
 
 struct GENPYBIND(inline_base("*")) SynapseDriverOnSynapseDriverBlock
@@ -30,6 +33,8 @@ struct GENPYBIND(inline_base("*")) SynapseDriverOnSynapseDriverBlock
 
 	PADIBusOnPADIBusBlock toPADIBusOnPADIBusBlock() const;
 	SynapseDriverOnPADIBus toSynapseDriverOnPADIBus() const;
+
+	common::typed_array<SynapseRowOnSynram, SynapseRowOnSynapseDriver> toSynapseRowOnSynram() const;
 };
 
 

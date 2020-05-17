@@ -43,6 +43,12 @@ SynapseDriverOnPADIBus SynapseDriverOnSynapseDriverBlock::toSynapseDriverOnPADIB
 	return SynapseDriverOnPADIBus(toEnum() / PADIBusOnPADIBusBlock::size);
 }
 
+common::typed_array<SynapseRowOnSynram, SynapseRowOnSynapseDriver>
+SynapseDriverOnSynapseDriverBlock::toSynapseRowOnSynram() const
+{
+	return {SynapseRowOnSynram(toEnum() * 2 + 1), SynapseRowOnSynram(toEnum() * 2)};
+}
+
 CapMemBlockOnDLS SynapseDriverOnDLS::toCapMemBlockOnDLS() const
 {
 	int const hemisphere_id = toSynapseDriverBlockOnDLS().toHemisphereOnDLS().toEnum();
