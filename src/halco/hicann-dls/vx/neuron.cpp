@@ -6,6 +6,7 @@
 #include "halco/hicann-dls/vx/correlation.h"
 #include "halco/hicann-dls/vx/padi.h"
 #include "halco/hicann-dls/vx/ppu.h"
+#include "halco/hicann-dls/vx/routing_crossbar.h"
 #include "halco/hicann-dls/vx/switch_rows.h"
 #include "halco/hicann-dls/vx/synapse.h"
 #include "halco/hicann-dls/vx/synapse_driver.h"
@@ -96,6 +97,11 @@ SynapseOnSynapseRow NeuronColumnOnDLS::toSynapseOnSynapseRow() const
 CapMemColumnOnCapMemBlock NeuronColumnOnDLS::toCapMemColumnOnCapMemBlock() const
 {
 	return CapMemColumnOnCapMemBlock(toEnum() % NeuronConfigOnNeuronConfigBlock::size);
+}
+
+NeuronEventOutputOnDLS NeuronColumnOnDLS::toNeuronEventOutputOnDLS() const
+{
+	return NeuronEventOutputOnDLS(common::Enum(toEnum() / (size / NeuronEventOutputOnDLS::size)));
 }
 
 NeuronConfigOnDLS AtomicNeuronOnDLS::toNeuronConfigOnDLS() const
@@ -265,6 +271,19 @@ ColumnCorrelationQuadOnDLS NeuronConfigOnDLS::toColumnCorrelationQuadOnDLS() con
 ColumnCurrentQuadOnDLS NeuronConfigOnDLS::toColumnCurrentQuadOnDLS() const
 {
 	return toAtomicNeuronOnDLS().toColumnCurrentQuadOnDLS();
+}
+
+NeuronEventOutputOnNeuronBackendBlock
+NeuronBackendConfigOnNeuronBackendConfigBlock::toNeuronEventOutputOnNeuronBackendBlock() const
+{
+	return NeuronEventOutputOnNeuronBackendBlock(
+	    (toEnum() % NeuronConfigOnNeuronConfigBlock::size) /
+	    (NeuronConfigOnNeuronConfigBlock::size / NeuronEventOutputOnNeuronBackendBlock::size));
+}
+
+CrossbarInputOnDLS NeuronEventOutputOnDLS::toCrossbarInputOnDLS() const
+{
+	return CrossbarInputOnDLS(toEnum());
 }
 
 } // namespace halco::hicann_dls::vx

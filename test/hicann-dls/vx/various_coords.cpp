@@ -7,6 +7,57 @@
 using namespace halco::common;
 using namespace halco::hicann_dls::vx;
 
+TEST(NeuronBackendConfigOnNeuronBackendConfigBlock, toNeuronEventOutputOnNeuronBackendBlock)
+{
+	{
+		NeuronBackendConfigOnNeuronBackendConfigBlock coord(47);
+		EXPECT_EQ(
+		    coord.toNeuronEventOutputOnNeuronBackendBlock(),
+		    NeuronEventOutputOnNeuronBackendBlock(1));
+	}
+	{
+		NeuronBackendConfigOnNeuronBackendConfigBlock coord(128 + 65);
+		EXPECT_EQ(
+		    coord.toNeuronEventOutputOnNeuronBackendBlock(),
+		    NeuronEventOutputOnNeuronBackendBlock(2));
+	}
+}
+
+TEST(NeuronEventOutputOnDLS, toCrossbarInputOnDLS)
+{
+	NeuronEventOutputOnDLS coord(Enum(3));
+	EXPECT_EQ(coord.toCrossbarInputOnDLS(), CrossbarInputOnDLS(3));
+}
+
+TEST(CrossbarInputOnDLS, toNeuronEventOutputOnDLS)
+{
+	halco::common::typed_array<std::optional<NeuronEventOutputOnDLS>, CrossbarInputOnDLS>
+	    expectation = {NeuronEventOutputOnDLS(Enum(0)),
+	                   NeuronEventOutputOnDLS(Enum(1)),
+	                   NeuronEventOutputOnDLS(Enum(2)),
+	                   NeuronEventOutputOnDLS(Enum(3)),
+	                   NeuronEventOutputOnDLS(Enum(4)),
+	                   NeuronEventOutputOnDLS(Enum(5)),
+	                   NeuronEventOutputOnDLS(Enum(6)),
+	                   NeuronEventOutputOnDLS(Enum(7)),
+	                   std::nullopt,
+	                   std::nullopt,
+	                   std::nullopt,
+	                   std::nullopt,
+	                   std::nullopt,
+	                   std::nullopt,
+	                   std::nullopt,
+	                   std::nullopt,
+	                   std::nullopt,
+	                   std::nullopt,
+	                   std::nullopt,
+	                   std::nullopt};
+
+	for (auto i : iter_all<CrossbarInputOnDLS>()) {
+		EXPECT_EQ(i.toNeuronEventOutputOnDLS(), expectation[i]);
+	}
+}
+
 TEST(SynapseDriverOnSynapseDriverBlock, toSynapseRowOnSynram)
 {
 	SynapseDriverOnSynapseDriverBlock coord(23);

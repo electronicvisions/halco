@@ -7,6 +7,7 @@
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
+struct NeuronEventOutputOnDLS;
 struct PADIBusOnDLS;
 struct SPL1Address;
 struct CrossbarL2OutputOnDLS;
@@ -69,6 +70,7 @@ struct GENPYBIND(inline_base("*")) CrossbarInputOnDLS
 	{}
 
 	std::optional<SPL1Address> toSPL1Address() const;
+	std::optional<NeuronEventOutputOnDLS> toNeuronEventOutputOnDLS() const;
 };
 
 

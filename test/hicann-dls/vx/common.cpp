@@ -151,7 +151,7 @@ typedef ::testing::Types<
     CADCChannelColumnOnSynram,
     CADCChannelConfigOnSynram,
     CADCChannelConfigOnDLS,
-    EventOutputOnNeuronBackendBlock,
+    NeuronEventOutputOnNeuronBackendBlock,
     NeuronResetOnNeuronResetBlock,
     NeuronResetBlockOnDLS,
     NeuronResetOnDLS,
@@ -200,7 +200,8 @@ typedef ::testing::Types<
     SynapseCorrelationCalibRowOnDLS,
     SynapseWeightMatrixOnDLS,
     SynapseLabelMatrixOnDLS,
-    SynapseCorrelationCalibMatrixOnDLS>
+    SynapseCorrelationCalibMatrixOnDLS,
+    NeuronEventOutputOnDLS>
     CoordinateTypes4;
 
 

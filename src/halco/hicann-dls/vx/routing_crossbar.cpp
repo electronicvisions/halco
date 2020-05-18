@@ -2,6 +2,7 @@
 
 #include "halco/common/lookup_tables_helper.h"
 #include "halco/hicann-dls/vx/event.h"
+#include "halco/hicann-dls/vx/neuron.h"
 #include "halco/hicann-dls/vx/padi.h"
 
 namespace halco::hicann_dls::vx {
@@ -30,10 +31,19 @@ CrossbarOutputOnDLS CrossbarL2OutputOnDLS::toCrossbarOutputOnDLS() const
 
 std::optional<SPL1Address> CrossbarInputOnDLS::toSPL1Address() const
 {
-	if ((toEnum() < 8) || toEnum() >= 12) {
+	if ((toEnum() < NeuronEventOutputOnDLS::size) ||
+	    toEnum() >= (NeuronEventOutputOnDLS::size + SPL1Address::size)) {
 		return std::nullopt;
 	}
-	return SPL1Address(toEnum() - 8);
+	return SPL1Address(toEnum() - NeuronEventOutputOnDLS::size);
+}
+
+std::optional<NeuronEventOutputOnDLS> CrossbarInputOnDLS::toNeuronEventOutputOnDLS() const
+{
+	if (toEnum() >= NeuronEventOutputOnDLS::size) {
+		return std::nullopt;
+	}
+	return NeuronEventOutputOnDLS(toEnum());
 }
 
 // clang-format off

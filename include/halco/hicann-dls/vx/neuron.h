@@ -19,6 +19,9 @@ struct SpikeCounterReadBlockOnDLS;
 struct SpikeCounterReadOnDLS;
 struct SpikeCounterResetBlockOnDLS;
 struct SpikeCounterResetOnDLS;
+struct NeuronEventOutputOnNeuronBackendBlock;
+struct NeuronEventOutputOnDLS;
+struct CrossbarInputOnDLS;
 struct NeuronConfigOnDLS;
 struct NeuronBackendConfigOnDLS;
 struct NeuronBackendConfigBlockOnDLS;
@@ -43,6 +46,7 @@ struct GENPYBIND(inline_base("*")) NeuronColumnOnDLS
 
 	SynapseOnSynapseRow toSynapseOnSynapseRow() const;
 	CapMemColumnOnCapMemBlock toCapMemColumnOnCapMemBlock() const;
+	NeuronEventOutputOnDLS toNeuronEventOutputOnDLS() const;
 };
 
 
@@ -125,6 +129,8 @@ struct GENPYBIND(inline_base("*")) NeuronBackendConfigOnNeuronBackendConfigBlock
 	    GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
+
+	NeuronEventOutputOnNeuronBackendBlock toNeuronEventOutputOnNeuronBackendBlock() const;
 };
 
 struct GENPYBIND(inline_base("*")) CommonNeuronBackendConfigOnDLS
@@ -290,15 +296,36 @@ struct GENPYBIND(inline_base("*NeuronBackendConfigMixin*")) NeuronBackendConfigO
 };
 
 
-struct GENPYBIND(inline_base("*")) EventOutputOnNeuronBackendBlock
-    : public common::detail::RantWrapper<EventOutputOnNeuronBackendBlock, uint_fast16_t, 3, 0>
+struct GENPYBIND(inline_base("*")) NeuronEventOutputOnNeuronBackendBlock
+    : public common::detail::RantWrapper<NeuronEventOutputOnNeuronBackendBlock, uint_fast16_t, 3, 0>
 {
-	constexpr explicit EventOutputOnNeuronBackendBlock(uintmax_t const val = 0)
+	constexpr explicit NeuronEventOutputOnNeuronBackendBlock(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
 };
 
+
+struct GENPYBIND(inline_base("*NeuronBackendConfigMixin*")) NeuronEventOutputOnDLS
+    : public NeuronBackendConfigMixin<NeuronEventOutputOnDLS, NeuronEventOutputOnNeuronBackendBlock>
+{
+	NeuronEventOutputOnDLS() = default;
+
+	explicit NeuronEventOutputOnDLS(
+	    NeuronEventOutputOnNeuronBackendBlock const& output,
+	    NeuronBackendConfigBlockOnDLS const& block = NeuronBackendConfigBlockOnDLS()) :
+	    mixin_t(output, block)
+	{}
+
+	explicit NeuronEventOutputOnDLS(enum_type const& e) : mixin_t(e) {}
+
+	NeuronEventOutputOnNeuronBackendBlock toNeuronEventOutputOnNeuronBackendBlock() const
+	{
+		return This();
+	}
+
+	CrossbarInputOnDLS toCrossbarInputOnDLS() const;
+};
 
 HALCO_COORDINATE_MIXIN(NeuronResetMixin, NeuronResetBlockOnDLS, neuron)
 
@@ -413,7 +440,8 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CommonNeuronBackendConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronBackendConfigOnNeuronBackendConfigBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronBackendConfigBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronBackendConfigOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::EventOutputOnNeuronBackendBlock)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronEventOutputOnNeuronBackendBlock)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronEventOutputOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronResetOnNeuronResetBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronResetBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronResetOnDLS)

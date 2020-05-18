@@ -15,7 +15,8 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     DLSGlobal => linear,iterable
     HemisphereOnDLS => linear,iterable
     HemisphereGlobal => linear,iterable
-    EventOutputOnNeuronBackendBlock => linear,iterable
+    NeuronEventOutputOnNeuronBackendBlock => linear,iterable
+    NeuronEventOutputOnDLS => iterable
     DACControlBlockOnBoard => linear,iterable
     DACChannelBlockOnBoard => linear,iterable
     CADCSampleRowOnDLS => iterable
