@@ -77,8 +77,7 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     PLLSelfTestStatusOnDLS => linear,iterable
     TimerOnDLS => linear,iterable
     OmnibusChipOverJTAGAddress => linear
-    OmnibusChipAddress => linear
-    OmnibusFPGAAddress => linear
+    OmnibusAddress => linear
     ShiftRegisterOnBoard => linear,iterable
     SPIShiftRegisterOnBoard => linear,iterable
     SPIDACDataRegisterOnBoard => linear,iterable
