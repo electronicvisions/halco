@@ -1,5 +1,6 @@
 #include "halco/hicann-dls/vx/synapse.h"
 
+#include "halco/common/iter_all.h"
 #include "halco/hicann-dls/vx/cadc.h"
 #include "halco/hicann-dls/vx/chip.h"
 #include "halco/hicann-dls/vx/correlation.h"
@@ -11,6 +12,16 @@
 
 
 namespace halco::hicann_dls::vx {
+
+common::typed_array<NeuronColumnOnDLS, EntryOnQuad> SynapseQuadColumnOnDLS::toNeuronColumnOnDLS()
+    const
+{
+	common::typed_array<NeuronColumnOnDLS, EntryOnQuad> ret;
+	for (auto const e : common::iter_all<EntryOnQuad>()) {
+		ret[e] = NeuronColumnOnDLS(toEnum() * EntryOnQuad::size + e.toEnum());
+	}
+	return ret;
+}
 
 NeuronConfigBlockOnDLS SynapseQuadOnDLS::toNeuronConfigBlockOnDLS() const
 {

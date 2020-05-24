@@ -4,6 +4,7 @@
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
+#include "halco/common/typed_array.h"
 
 #include "halco/hicann-dls/vx/quad.h"
 #include "halco/hicann-dls/vx/synram.h"
@@ -43,6 +44,7 @@ struct GENPYBIND(inline_base("*")) SynapseQuadColumnOnDLS
 
 	ColumnCorrelationQuadOnSynram toColumnCorrelationQuadOnSynram() const;
 	ColumnCurrentQuadOnSynram toColumnCurrentQuadOnSynram() const;
+	common::typed_array<NeuronColumnOnDLS, EntryOnQuad> toNeuronColumnOnDLS() const;
 };
 
 HALCO_COORDINATE_MIXIN(SynapseQuadColumnMixin, SynapseQuadColumnOnDLS, synapse_quad_column)

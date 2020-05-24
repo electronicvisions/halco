@@ -1,5 +1,6 @@
 #include "halco/hicann-dls/vx/neuron.h"
 
+#include "halco/common/iter_all.h"
 #include "halco/hicann-dls/vx/cadc.h"
 #include "halco/hicann-dls/vx/capmem.h"
 #include "halco/hicann-dls/vx/chip.h"
@@ -284,6 +285,17 @@ NeuronBackendConfigOnNeuronBackendConfigBlock::toNeuronEventOutputOnNeuronBacken
 CrossbarInputOnDLS NeuronEventOutputOnDLS::toCrossbarInputOnDLS() const
 {
 	return CrossbarInputOnDLS(toEnum());
+}
+
+common::typed_array<NeuronResetOnDLS, EntryOnQuad> NeuronResetQuadOnDLS::toNeuronResetOnDLS() const
+{
+	common::typed_array<NeuronResetOnDLS, EntryOnQuad> ret;
+	auto const columns = toSynapseQuadColumnOnDLS().toNeuronColumnOnDLS();
+	for (auto const e : common::iter_all<EntryOnQuad>()) {
+		ret[e] =
+		    AtomicNeuronOnDLS(columns[e], toSynramOnDLS().toNeuronRowOnDLS()).toNeuronResetOnDLS();
+	}
+	return ret;
 }
 
 } // namespace halco::hicann_dls::vx

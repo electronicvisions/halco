@@ -4,6 +4,7 @@
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
+#include "halco/common/typed_array.h"
 
 #include "halco/hicann-dls/vx/synapse.h"
 #include "halco/hicann-dls/vx/synram.h"
@@ -359,6 +360,7 @@ struct GENPYBIND(inline_base("*SynramMixin*")) NeuronResetQuadOnDLS
 	explicit NeuronResetQuadOnDLS(enum_type const& e) : mixin_t(e) {}
 
 	SynapseQuadColumnOnDLS toSynapseQuadColumnOnDLS() const { return This(); }
+	common::typed_array<NeuronResetOnDLS, EntryOnQuad> toNeuronResetOnDLS() const;
 };
 
 
