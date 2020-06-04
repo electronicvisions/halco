@@ -16,6 +16,10 @@
 
 #endif
 
+#if defined(__GENPYBIND__) || defined(__GENPYBIND_GENERATED__)
+#include "halco/common/pybind11_numpy_helper.h"
+#endif
+
 namespace halco {
 namespace common GENPYBIND_TAG_HALCO_COMMON {
 
@@ -121,6 +125,13 @@ struct typed_array {
 		    "__iter__",
 		    [parent](GENPYBIND_PARENT_TYPE& self) { return parent->py::make_iterator(self); },
 		    parent->py::template keep_alive<0, 1>());
+
+		parent.def("to_numpy", [](GENPYBIND_PARENT_TYPE const& self) {
+			return ::halco::common::detail::to_numpy(self);
+		});
+		parent.def("from_numpy", [](GENPYBIND_PARENT_TYPE& self, pybind11::array const& array) {
+			::halco::common::detail::from_numpy(self, array);
+		});
 	})
 };
 

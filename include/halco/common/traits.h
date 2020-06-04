@@ -11,6 +11,13 @@
 
 namespace halco {
 namespace common {
+
+template <typename Value, typename Key, typename Limits>
+struct typed_array;
+
+template <typename Value, typename Key, typename Limits>
+struct typed_heap_array;
+
 namespace detail {
 
 #if defined(PYPLUSPLUS)
@@ -252,6 +259,42 @@ typename std::enable_if<std::is_enum<T>::value,
 to_number(T const& val) {
 	return static_cast<typename std::underlying_type<T>::type>(val);
 }
+
+/** Check whether a type is derived from BaseType. */
+template <typename Derived, typename = void>
+struct IsBaseType : std::false_type
+{};
+
+template <typename Derived, typename Value>
+struct IsBaseType<BaseType<Derived, Value>> : std::true_type
+{};
+
+/** Check whether a type is derived from RantWrapper. */
+template <typename Derived, typename = void>
+struct IsRantWrapper : std::false_type
+{};
+
+template <typename Derived, typename T, T Max, T Min>
+struct IsRantWrapper<RantWrapper<Derived, T, Max, Min>> : std::true_type
+{};
+
+/** Check whether a type is a typed_array. */
+template <typename T>
+struct IsTypedArray : std::false_type
+{};
+
+template <typename Value, typename Key, typename Limits>
+struct IsTypedArray<typed_array<Value, Key, Limits>> : std::true_type
+{};
+
+/** Check whether a type is a typed_heap_array. */
+template <typename T>
+struct IsTypedHeapArray : std::false_type
+{};
+
+template <typename Value, typename Key, typename Limits>
+struct IsTypedHeapArray<typed_heap_array<Value, Key, Limits>> : std::true_type
+{};
 
 #endif // !PYPLUSPLUS
 

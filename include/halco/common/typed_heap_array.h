@@ -10,6 +10,10 @@
 
 #include "halco/common/traits.h"
 
+#if defined(__GENPYBIND__) || defined(__GENPYBIND_GENERATED__)
+#include "halco/common/pybind11_numpy_helper.h"
+#endif
+
 #include "halco/common/genpybind.h"
 
 #include <boost/serialization/array.hpp>
@@ -137,6 +141,13 @@ public:
 			return parent->py::make_iterator(self);
 		},
 		parent->py::template keep_alive<0, 1>());
+
+		parent.def("to_numpy", [](GENPYBIND_PARENT_TYPE const& self) {
+			return ::halco::common::detail::to_numpy(self);
+		});
+		parent.def("from_numpy", [](GENPYBIND_PARENT_TYPE& self, pybind11::array const& array) {
+			::halco::common::detail::from_numpy(self, array);
+		});
 	})
 
 	bool operator==(typed_heap_array const& other) const { return elems == other.elems; }
@@ -219,6 +230,56 @@ bool operator>=(
 } // namespace common
 } // namespace halco
 
+#ifndef PYPLUSPLUS
+namespace std {
+
+// FIXME: unlike libstdc++, libcxx has enable_if here:
+// enable_if<is_swappable<Value>::value, void>::type
+template <typename Value, typename Key, typename Limits>
+void swap(
+    halco::common::typed_heap_array<Value, Key, Limits> const& x,
+    halco::common::typed_heap_array<Value, Key, Limits> const& y) noexcept(noexcept(x.swap(y)))
+{
+	x.swap(y);
+}
+
+template <typename Value, typename Key, typename Limits>
+struct tuple_size<halco::common::typed_heap_array<Value, Key, Limits> >
+    : public std::integral_constant<size_t, Limits::size>
+{};
+
+template <size_t Pos, typename Value, typename Key, typename Limits>
+struct tuple_element<Pos, halco::common::typed_heap_array<Value, Key, Limits> >
+{
+public:
+	typedef Value type;
+};
+
+template <size_t Pos, typename Value, typename Key, typename Limits>
+inline constexpr Value& get(halco::common::typed_heap_array<Value, Key, Limits>& a) noexcept
+{
+	static_assert(Pos < Limits::size, "Index out of bounds in std::get<> (typed_heap_array)");
+	return a.elems[Pos];
+}
+
+template <size_t Pos, typename Value, typename Key, typename Limits>
+inline constexpr Value const& get(
+    halco::common::typed_heap_array<Value, Key, Limits> const& a) noexcept
+{
+	static_assert(Pos < Limits::size, "Index out of bounds in std::get<> (typed_heap_array)");
+	return a.elems[Pos];
+}
+
+template <size_t Pos, typename Value, typename Key, typename Limits>
+inline constexpr Value&& get(halco::common::typed_heap_array<Value, Key, Limits>&& a) noexcept
+{
+	static_assert(Pos < Limits::size, "Index out of bounds in std::get<> (typed_heap_array)");
+	return std::move(a.elems[Pos]);
+}
+
+} // namespace std
+
+#endif // PYPLUSPLUS
 namespace boost {
 namespace serialization {
 
