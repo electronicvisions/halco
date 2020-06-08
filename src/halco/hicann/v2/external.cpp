@@ -214,9 +214,7 @@ AnanasSliceGlobal::AnanasSliceGlobal() :
 
 AnanasSliceGlobal::AnanasSliceGlobal(AnanasSliceOnWafer const& h, Wafer const& w) : base(h, w) {}
 
-AnanasSliceGlobal::AnanasSliceGlobal(enum_type const& e) :
-    base(AnanasSliceOnWafer(e % AnanasSliceOnWafer::end), Wafer(e / AnanasSliceOnWafer::end))
-{}
+AnanasSliceGlobal::AnanasSliceGlobal(enum_type const& e) : base(e) {}
 
 AnanasOnWafer AnanasGlobal::toAnanasOnWafer() const
 {
