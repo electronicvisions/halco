@@ -227,7 +227,12 @@ template<typename Derived, typename T>
 PYPP_CONSTEXPR Enum detail::BaseType<Derived, T>::toEnum() const
 {
 #ifndef PYPLUSPLUS
-	return Enum{mValue};
+	if constexpr (std::is_signed_v<T>) {
+		return Enum{static_cast<size_t>(mValue) -
+		            static_cast<size_t>(std::numeric_limits<T>::min())};
+	} else {
+		return Enum{mValue};
+	}
 #endif
 }
 
