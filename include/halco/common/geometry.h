@@ -107,6 +107,9 @@ public:
 	typedef T value_type;
 	typedef BaseType<Derived, T> base_t;
 
+	PYPP_CONSTEXPR_STATIC T max PYPP_HIDE_BODY(= std::numeric_limits<T>::max());
+	PYPP_CONSTEXPR_STATIC T min PYPP_HIDE_BODY(= std::numeric_limits<T>::min());
+
 	static const bool is_interval = false;
 
 	PYPP_CONSTEXPR explicit BaseType(value_type const& val = 0) GENPYBIND(implicit_conversion) :
