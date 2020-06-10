@@ -128,6 +128,14 @@ public:
 			return static_cast<typename std::remove_cv<
 			    typename std::remove_reference<decltype(self)>::type>::type::value_type>(self);
 		});
+		parent.def("__hex__", [parent](GENPYBIND_PARENT_TYPE const& self) {
+			std::stringstream ss;
+			ss << "0x" << std::hex
+			   << static_cast<typename std::remove_cv<
+			          typename std::remove_reference<decltype(self)>::type>::type::value_type>(
+			          self);
+			return parent->py::bytes(ss.str());
+		});
 		parent.def(
 		    "__bool__", [](GENPYBIND_PARENT_TYPE const& self) { return static_cast<bool>(self); });
 	})
@@ -257,6 +265,14 @@ public:
 		parent.def("__index__", [](GENPYBIND_PARENT_TYPE const& self) {
 			return static_cast<typename std::remove_cv<
 			    typename std::remove_reference<decltype(self)>::type>::type::value_type>(self);
+		});
+		parent.def("__hex__", [parent](GENPYBIND_PARENT_TYPE const& self) {
+			std::stringstream ss;
+			ss << "0x" << std::hex
+			   << static_cast<typename std::remove_cv<
+			          typename std::remove_reference<decltype(self)>::type>::type::value_type>(
+			          self);
+			return parent->py::bytes(ss.str());
 		});
 		parent.def(
 		    "__bool__", [](GENPYBIND_PARENT_TYPE const& self) { return static_cast<bool>(self); });
