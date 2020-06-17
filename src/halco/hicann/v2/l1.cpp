@@ -466,6 +466,50 @@ boost::tuple<HLineOnWafer, boost::optional<HLineOnWafer>> HRepeaterOnWafer::toHL
 	return ret;
 }
 
+boost::optional<HRepeaterOnWafer> HRepeaterOnWafer::east() const
+{
+	boost::optional<HRepeaterOnWafer> ret;
+
+	if (toHICANNOnWafer().has_east()) {
+		// if we are located left (right), we first take the local (neighbor) hline and
+		// then the connected repeater on the neighbor (local) HICANN
+		// we do not need to check the optionals again as we have checked for has_east above
+		if (isLeft()) {
+			auto const hline = toHLineOnWafer().get<0>();                   // local
+			auto const east_repeater = hline.toHRepeaterOnWafer().get<1>(); // neighbor
+			ret = *east_repeater;
+		} else {
+			auto const hline = toHLineOnWafer().get<1>();                    // neighbor
+			auto const east_repeater = hline->toHRepeaterOnWafer().get<0>(); // local
+			ret = east_repeater;
+		}
+	}
+
+	return ret;
+}
+
+boost::optional<HRepeaterOnWafer> HRepeaterOnWafer::west() const
+{
+	boost::optional<HRepeaterOnWafer> ret;
+
+	if (toHICANNOnWafer().has_west()) {
+		// if we are located right (left), we first take the local (neighbor) hline and
+		// then the connected repeater on the neighbor (local) HICANN
+		// we do not need to check the optionals again as we have checked for has_west above
+		if (isRight()) {
+			auto const hline = toHLineOnWafer().get<0>();                   // local
+			auto const west_repeater = hline.toHRepeaterOnWafer().get<1>(); // neighbor
+			ret = *west_repeater;
+		} else {
+			auto const hline = toHLineOnWafer().get<1>();                    // neighbor
+			auto const west_repeater = hline->toHRepeaterOnWafer().get<0>(); // local
+			ret = west_repeater;
+		}
+	}
+
+	return ret;
+}
+
 boost::tuple<VLineOnWafer, boost::optional<VLineOnWafer>> VRepeaterOnWafer::toVLineOnWafer() const
 {
 	VLineOnHICANN const vline_on_this = toVRepeaterOnHICANN().toVLineOnHICANN();
@@ -483,6 +527,48 @@ boost::tuple<VLineOnWafer, boost::optional<VLineOnWafer>> VRepeaterOnWafer::toVL
 		if (toHICANNOnWafer().has_north()) {
 			boost::tuples::get<1>(ret) =
 			    VLineOnWafer(vline_on_this.north(), toHICANNOnWafer().north());
+		}
+	}
+
+	return ret;
+}
+
+boost::optional<VRepeaterOnWafer> VRepeaterOnWafer::north() const
+{
+	boost::optional<VRepeaterOnWafer> ret;
+
+	if (toHICANNOnWafer().has_north()) {
+		// if we are located bottom (top), we first take the local (neighbor) vline and
+		// then the connected repeater on the neighbor (local) HICANN
+		if (isBottom()) {
+			auto const vline = toVLineOnWafer().get<0>();
+			auto const north_repeater = vline.toVRepeaterOnWafer().get<1>();
+			ret = *north_repeater;
+		} else {
+			auto const vline = toVLineOnWafer().get<1>();
+			auto const north_repeater = vline->toVRepeaterOnWafer().get<0>();
+			ret = north_repeater;
+		}
+	}
+
+	return ret;
+}
+
+boost::optional<VRepeaterOnWafer> VRepeaterOnWafer::south() const
+{
+	boost::optional<VRepeaterOnWafer> ret;
+
+	if (toHICANNOnWafer().has_south()) {
+		// if we are located top (bottom), we first take the local (neighbor) vline and
+		// then the connected repeater on the neighbor (local) HICANN
+		if (isTop()) {
+			auto const vline = toVLineOnWafer().get<0>();
+			auto const north_repeater = vline.toVRepeaterOnWafer().get<1>();
+			ret = *north_repeater;
+		} else {
+			auto const vline = toVLineOnWafer().get<1>();
+			auto const north_repeater = vline->toVRepeaterOnWafer().get<0>();
+			ret = north_repeater;
 		}
 	}
 

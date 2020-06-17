@@ -464,6 +464,9 @@ public:
 			return std::tuple{t.template get<0>(), t.template get<1>()};
 		});
 	})
+
+	boost::optional<HRepeaterOnWafer> east() const;
+	boost::optional<HRepeaterOnWafer> west() const;
 };
 
 
@@ -570,6 +573,9 @@ public:
 			return std::tuple{t.template get<0>(), t.template get<1>()};
 		});
 	})
+
+	boost::optional<VRepeaterOnWafer> north() const;
+	boost::optional<VRepeaterOnWafer> south() const;
 };
 
 } // v2

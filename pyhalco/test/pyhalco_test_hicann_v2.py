@@ -498,6 +498,27 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
             # HICANN 0 does not have a neighbor up
             self.assertEqual(None, C.VLineOnWafer(C.VLineOnHICANN(Enum(0)), C.HICANNOnWafer(Enum(0))).toVRepeaterOnWafer()[1])
 
+    def test_neighbor_l1_repeaters_cardinal(self):
+        """
+        spot checks moving L1 repeaters in cardinal points
+        """
+        import pyhalco_hicann_v2 as C
+        from pyhalco_common import Enum
+
+        hrepeater = C.HRepeaterOnWafer(C.HRepeaterOnHICANN(Enum(0)), C.HICANNOnWafer(Enum(0)))
+        self.assertEqual(None, hrepeater.west())
+        self.assertEqual(C.HRepeaterOnWafer(C.HRepeaterOnHICANN(Enum(2)), C.HICANNOnWafer(Enum(1))), hrepeater.east())
+
+        hrepeater = C.HRepeaterOnWafer(C.HRepeaterOnHICANN(Enum(0)), C.HICANNOnWafer(Enum(1)))
+        self.assertEqual(C.HRepeaterOnWafer(C.HRepeaterOnHICANN(Enum(62)), C.HICANNOnWafer(Enum(0))), hrepeater.west())
+
+        vrepeater = C.VRepeaterOnWafer(C.VRepeaterOnHICANN(Enum(129)), C.HICANNOnWafer(Enum(0)))
+        self.assertEqual(None, vrepeater.north())
+        self.assertEqual(C.VRepeaterOnWafer(C.VRepeaterOnHICANN(Enum(128)), C.HICANNOnWafer(Enum(12))), vrepeater.south())
+
+        vrepeater = C.VRepeaterOnWafer(C.VRepeaterOnHICANN(Enum(0)), C.HICANNOnWafer(Enum(12)))
+        self.assertEqual(C.VRepeaterOnWafer(C.VRepeaterOnHICANN(Enum(1)), C.HICANNOnWafer(Enum(0))), vrepeater.north())
+
     def test_explicit_conversion(self):
         if GENPYBIND_POSTFIX:
             import pyhalco_hicann_v2_genpybind as C
