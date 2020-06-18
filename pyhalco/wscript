@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from waflib import Utils
 from waflib.extras import symwaf2ic
 from waflib.extras.gtest import summary
 import os.path
@@ -189,5 +190,13 @@ def build(bld):
         install_path='${PREFIX}/lib',
         relative_trick=False,
     )
+
+    bld(name="pyhalco_hicann_v2_tools",
+        features="py use",
+        source=bld.path.ant_glob('**/hicann/v2/tools/*.py'),
+        install_from="hicann/v2/tools",
+        install_path="${PREFIX}/bin",
+        chmod = Utils.O755,
+        use="pyhalco_hicann_v2")
 
     bld.add_post_fun(summary)
