@@ -28,6 +28,8 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     I2CINA219RoRegisterOnINA219 => linear,iterable
     I2CINA219RwRegisterOnINA219 => linear,iterable
     INA219OnBoard => linear,iterable
+    INA219ConfigOnBoard => linear,iterable
+    INA219StatusOnBoard => linear,iterable
     I2CINA219RoRegisterOnBoard => linear,iterable
     I2CINA219RwRegisterOnBoard => linear,iterable
     HicannARQStatusOnFPGA => linear,iterable

@@ -8,6 +8,8 @@
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 struct DACChannelOnBoard;
+struct INA219ConfigOnBoard;
+struct INA219StatusOnBoard;
 
 /************\
     xBoard
@@ -92,6 +94,43 @@ struct GENPYBIND(inline_base("*")) INA219OnBoard
 	static const INA219OnBoard vdd25_analog;
 	static const INA219OnBoard vdd12_madc;
 	static const INA219OnBoard vdd12_pll;
+
+	INA219ConfigOnBoard toINA219ConfigOnBoard() const;
+	INA219StatusOnBoard toINA219StatusOnBoard() const;
+};
+
+
+struct GENPYBIND(inline_base("*")) INA219ConfigOnBoard
+    : public common::detail::RantWrapper<INA219ConfigOnBoard, uint_fast16_t, 5, 0>
+{
+	constexpr explicit INA219ConfigOnBoard(uintmax_t const val = 0) : rant_t(val) {}
+
+	static const INA219ConfigOnBoard vdd12_digital;
+	static const INA219ConfigOnBoard vdd25_digital;
+	static const INA219ConfigOnBoard vdd12_analog;
+	static const INA219ConfigOnBoard vdd25_analog;
+	static const INA219ConfigOnBoard vdd12_madc;
+	static const INA219ConfigOnBoard vdd12_pll;
+
+	INA219OnBoard toINA219OnBoard() const;
+	INA219StatusOnBoard toINA219StatusOnBoard() const;
+};
+
+
+struct GENPYBIND(inline_base("*")) INA219StatusOnBoard
+    : public common::detail::RantWrapper<INA219StatusOnBoard, uint_fast16_t, 5, 0>
+{
+	constexpr explicit INA219StatusOnBoard(uintmax_t const val = 0) : rant_t(val) {}
+
+	static const INA219StatusOnBoard vdd12_digital;
+	static const INA219StatusOnBoard vdd25_digital;
+	static const INA219StatusOnBoard vdd12_analog;
+	static const INA219StatusOnBoard vdd25_analog;
+	static const INA219StatusOnBoard vdd12_madc;
+	static const INA219StatusOnBoard vdd12_pll;
+
+	INA219OnBoard toINA219OnBoard() const;
+	INA219ConfigOnBoard toINA219ConfigOnBoard() const;
 };
 
 } // namespace halco::hicann_dls::vx
@@ -104,5 +143,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::LEDOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::VDDOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ADCOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::INA219OnBoard)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::INA219ConfigOnBoard)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::INA219StatusOnBoard)
 
 } // namespace std

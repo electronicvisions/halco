@@ -204,7 +204,9 @@ typedef ::testing::Types<
     SynapseCorrelationCalibMatrixOnDLS,
     NeuronEventOutputOnDLS,
     SyncOnFPGA,
-    WaitUntilOnFPGA>
+    WaitUntilOnFPGA,
+    INA219ConfigOnBoard,
+    INA219StatusOnBoard>
     CoordinateTypes4;
 
 

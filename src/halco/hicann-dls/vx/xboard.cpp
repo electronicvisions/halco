@@ -41,4 +41,48 @@ INA219OnBoard const INA219OnBoard::vdd25_analog{3};
 INA219OnBoard const INA219OnBoard::vdd12_madc{4};
 INA219OnBoard const INA219OnBoard::vdd12_pll{5};
 
+INA219ConfigOnBoard const INA219ConfigOnBoard::vdd12_digital{0};
+INA219ConfigOnBoard const INA219ConfigOnBoard::vdd25_digital{1};
+INA219ConfigOnBoard const INA219ConfigOnBoard::vdd12_analog{2};
+INA219ConfigOnBoard const INA219ConfigOnBoard::vdd25_analog{3};
+INA219ConfigOnBoard const INA219ConfigOnBoard::vdd12_madc{4};
+INA219ConfigOnBoard const INA219ConfigOnBoard::vdd12_pll{5};
+
+INA219StatusOnBoard const INA219StatusOnBoard::vdd12_digital{0};
+INA219StatusOnBoard const INA219StatusOnBoard::vdd25_digital{1};
+INA219StatusOnBoard const INA219StatusOnBoard::vdd12_analog{2};
+INA219StatusOnBoard const INA219StatusOnBoard::vdd25_analog{3};
+INA219StatusOnBoard const INA219StatusOnBoard::vdd12_madc{4};
+INA219StatusOnBoard const INA219StatusOnBoard::vdd12_pll{5};
+
+INA219ConfigOnBoard INA219OnBoard::toINA219ConfigOnBoard() const
+{
+	return INA219ConfigOnBoard(toEnum());
+}
+
+INA219StatusOnBoard INA219OnBoard::toINA219StatusOnBoard() const
+{
+	return INA219StatusOnBoard(toEnum());
+}
+
+INA219OnBoard INA219ConfigOnBoard::toINA219OnBoard() const
+{
+	return INA219OnBoard(toEnum());
+}
+
+INA219StatusOnBoard INA219ConfigOnBoard::toINA219StatusOnBoard() const
+{
+	return INA219StatusOnBoard(toEnum());
+}
+
+INA219OnBoard INA219StatusOnBoard::toINA219OnBoard() const
+{
+	return INA219OnBoard(toEnum());
+}
+
+INA219ConfigOnBoard INA219StatusOnBoard::toINA219ConfigOnBoard() const
+{
+	return INA219ConfigOnBoard(toEnum());
+}
+
 } // namespace halco::hicann_dls::vx
