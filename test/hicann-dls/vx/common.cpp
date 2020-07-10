@@ -203,7 +203,7 @@ typedef ::testing::Types<
     SynapseLabelMatrixOnDLS,
     SynapseCorrelationCalibMatrixOnDLS,
     NeuronEventOutputOnDLS,
-    SyncOnFPGA,
+    BarrierOnFPGA,
     WaitUntilOnFPGA,
     INA219ConfigOnBoard,
     INA219StatusOnBoard>
