@@ -42,6 +42,15 @@ private:
 #ifndef PYPLUSPLUS
 	std::vector<value_type> elems;
 
+	template <typename V, typename K, typename L>
+	friend bool operator<(typed_heap_array<V, K, L> const& x, typed_heap_array<V, K, L> const& y);
+	template <typename V, typename K, typename L>
+	friend bool operator>(typed_heap_array<V, K, L> const& x, typed_heap_array<V, K, L> const& y);
+	template <typename V, typename K, typename L>
+	friend bool operator<=(typed_heap_array<V, K, L> const& x, typed_heap_array<V, K, L> const& y);
+	template <typename V, typename K, typename L>
+	friend bool operator>=(typed_heap_array<V, K, L> const& x, typed_heap_array<V, K, L> const& y);
+
 public:
 	typed_heap_array() : elems(Limits::size > 0 ? Limits::size : 1) {}
 #endif
@@ -133,14 +142,6 @@ public:
 	bool operator==(typed_heap_array const& other) const { return elems == other.elems; }
 
 	bool operator!=(typed_heap_array const& other) const { return !(*this == other); }
-
-	bool operator<(typed_heap_array const& other) const { return elems < other.elems; }
-
-	bool operator>(typed_heap_array const& other) const { return elems > other.elems; }
-
-	bool operator<=(typed_heap_array const& other) const { return elems <= other.elems; }
-
-	bool operator>=(typed_heap_array const& other) const { return elems >= other.elems; }
 };
 
 #ifndef PYPLUSPLUS
@@ -183,6 +184,37 @@ auto typed_heap_array<Value, Key, Limits>::at(key_type const& key) const -> cons
 }
 
 #endif
+
+// extern operators to allow usage with value types for which these operators are not available
+// in the context of "opaque" python wrapping with genpybind, otherwise genpybind tries to
+// instantiate all the operators even if they are not instantiatable
+template <typename Value, typename Key, typename Limits>
+bool operator<(
+    typed_heap_array<Value, Key, Limits> const& x, typed_heap_array<Value, Key, Limits> const& y)
+{
+	return x.elems < y.elems;
+}
+
+template <typename Value, typename Key, typename Limits>
+bool operator>(
+    typed_heap_array<Value, Key, Limits> const& x, typed_heap_array<Value, Key, Limits> const& y)
+{
+	return x.elems > y.elems;
+}
+
+template <typename Value, typename Key, typename Limits>
+bool operator<=(
+    typed_heap_array<Value, Key, Limits> const& x, typed_heap_array<Value, Key, Limits> const& y)
+{
+	return x.elems <= y.elems;
+}
+
+template <typename Value, typename Key, typename Limits>
+bool operator>=(
+    typed_heap_array<Value, Key, Limits> const& x, typed_heap_array<Value, Key, Limits> const& y)
+{
+	return x.elems >= y.elems;
+}
 
 } // namespace common
 } // namespace halco
