@@ -29,6 +29,29 @@ struct GENPYBIND(inline_base("*")) FPGAMemoryByteOnFPGA
 	{}
 };
 
+
+struct GENPYBIND(inline_base("*")) FPGAMemoryBlockSize
+    : public common::detail::
+          RantWrapper<FPGAMemoryBlockSize, uint_fast16_t, FPGAMemoryByteOnFPGA::size, 1>
+{
+	constexpr explicit FPGAMemoryBlockSize(uintmax_t const val = 1) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+
+struct GENPYBIND(inline_base("*")) FPGAMemoryBlockOnFPGA
+    : public common::detail::IntervalCoordinate<FPGAMemoryBlockOnFPGA, FPGAMemoryByteOnFPGA>
+{
+	INTERVAL_COMMON_CONSTRUCTORS(FPGAMemoryBlockOnFPGA)
+
+	FPGAMemoryBlockSize toFPGAMemoryBlockSize() const
+	{
+		return FPGAMemoryBlockSize(length());
+	}
+};
+
+
 /************\
    Loopback
 \************/
@@ -66,5 +89,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::FPGADeviceDNAOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NullPayloadReadableOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::EventRecordingConfigOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::FPGAMemoryByteOnFPGA)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::FPGAMemoryBlockSize)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::FPGAMemoryBlockOnFPGA)
 
 } // namespace std
