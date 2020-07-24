@@ -207,9 +207,9 @@ typedef ::testing::Types<
     WaitUntilOnFPGA,
     INA219ConfigOnBoard,
     INA219StatusOnBoard,
-    FPGAMemoryByteOnFPGA,
-    FPGAMemoryBlockSize,
-    FPGAMemoryBlockOnFPGA>
+    ExternalPPUMemoryByteOnFPGA,
+    ExternalPPUMemoryBlockSize,
+    ExternalPPUMemoryBlockOnFPGA>
     CoordinateTypes4;
 
 

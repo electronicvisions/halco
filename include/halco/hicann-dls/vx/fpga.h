@@ -20,34 +20,39 @@ struct GENPYBIND(inline_base("*")) FPGADeviceDNAOnFPGA
 };
 
 
-struct GENPYBIND(inline_base("*")) FPGAMemoryByteOnFPGA
-    : public common::detail::RantWrapper<FPGAMemoryByteOnFPGA, uint_fast16_t, 0x20000 - 1, 0>
+struct GENPYBIND(inline_base("*")) ExternalPPUMemoryByteOnFPGA
+    : public common::detail::RantWrapper<ExternalPPUMemoryByteOnFPGA, uint_fast16_t, 0x20000 - 1, 0>
 {
-	constexpr explicit FPGAMemoryByteOnFPGA(uintmax_t const val = 0)
+	constexpr explicit ExternalPPUMemoryByteOnFPGA(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
 };
 
 
-struct GENPYBIND(inline_base("*")) FPGAMemoryBlockSize
-    : public common::detail::
-          RantWrapper<FPGAMemoryBlockSize, uint_fast16_t, FPGAMemoryByteOnFPGA::size, 1>
+struct GENPYBIND(inline_base("*")) ExternalPPUMemoryBlockSize
+    : public common::detail::RantWrapper<
+          ExternalPPUMemoryBlockSize,
+          uint_fast16_t,
+          ExternalPPUMemoryByteOnFPGA::size,
+          1>
 {
-	constexpr explicit FPGAMemoryBlockSize(uintmax_t const val = 1) GENPYBIND(implicit_conversion) :
+	constexpr explicit ExternalPPUMemoryBlockSize(uintmax_t const val = 1)
+	    GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
 };
 
 
-struct GENPYBIND(inline_base("*")) FPGAMemoryBlockOnFPGA
-    : public common::detail::IntervalCoordinate<FPGAMemoryBlockOnFPGA, FPGAMemoryByteOnFPGA>
+struct GENPYBIND(inline_base("*")) ExternalPPUMemoryBlockOnFPGA
+    : public common::detail::
+          IntervalCoordinate<ExternalPPUMemoryBlockOnFPGA, ExternalPPUMemoryByteOnFPGA>
 {
-	INTERVAL_COMMON_CONSTRUCTORS(FPGAMemoryBlockOnFPGA)
+	INTERVAL_COMMON_CONSTRUCTORS(ExternalPPUMemoryBlockOnFPGA)
 
-	FPGAMemoryBlockSize toFPGAMemoryBlockSize() const
+	ExternalPPUMemoryBlockSize toExternalPPUMemoryBlockSize() const
 	{
-		return FPGAMemoryBlockSize(length());
+		return ExternalPPUMemoryBlockSize(length());
 	}
 };
 
@@ -88,8 +93,8 @@ namespace std {
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::FPGADeviceDNAOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NullPayloadReadableOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::EventRecordingConfigOnFPGA)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::FPGAMemoryByteOnFPGA)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::FPGAMemoryBlockSize)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::FPGAMemoryBlockOnFPGA)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExternalPPUMemoryByteOnFPGA)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExternalPPUMemoryBlockSize)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExternalPPUMemoryBlockOnFPGA)
 
 } // namespace std
