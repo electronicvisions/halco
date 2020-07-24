@@ -9,6 +9,8 @@
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
+struct CapMemBlockOnHemisphere;
+
 /**********\
    CapMem
 \**********/
@@ -129,12 +131,27 @@ struct GENPYBIND(inline_base("*")) CapMemRowOnCapMemBlock
 };
 
 
+struct GENPYBIND(inline_base("*")) CapMemBlockOnHemisphere
+    : public common::detail::RantWrapper<CapMemBlockOnHemisphere, uint_fast16_t, 1, 0>
+{
+	constexpr explicit CapMemBlockOnHemisphere(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+
+	static const CapMemBlockOnHemisphere left;
+	static const CapMemBlockOnHemisphere right;
+};
+
+
 struct GENPYBIND(inline_base("*")) CapMemBlockOnDLS
     : public common::detail::RantWrapper<CapMemBlockOnDLS, uint_fast16_t, 3, 0>
 {
 	constexpr explicit CapMemBlockOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
+
+	CapMemBlockOnHemisphere toCapMemBlockOnHemisphere() const;
 };
 
 
@@ -146,6 +163,8 @@ struct GENPYBIND(inline_base("*")) CapMemBlockConfigOnDLS
 	    GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
+
+	CapMemBlockOnHemisphere toCapMemBlockOnHemisphere() const;
 };
 
 
@@ -290,6 +309,7 @@ namespace std {
 
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemColumnOnCapMemBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemRowOnCapMemBlock)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemBlockOnHemisphere)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemBlockConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemCellOnCapMemBlock)

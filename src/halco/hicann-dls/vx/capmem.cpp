@@ -7,6 +7,19 @@ bool CapMemCellOnCapMemBlock::isShared() const
 	return x().isShared();
 }
 
+CapMemBlockOnHemisphere const CapMemBlockOnHemisphere::left{0};
+CapMemBlockOnHemisphere const CapMemBlockOnHemisphere::right{1};
+
+CapMemBlockOnHemisphere CapMemBlockOnDLS::toCapMemBlockOnHemisphere() const
+{
+	return CapMemBlockOnHemisphere(toEnum() % CapMemBlockOnHemisphere::size);
+}
+
+CapMemBlockOnHemisphere CapMemBlockConfigOnDLS::toCapMemBlockOnHemisphere() const
+{
+	return CapMemBlockOnHemisphere(toEnum() % CapMemBlockOnHemisphere::size);
+}
+
 CapMemCellOnCapMemBlock const CapMemCellOnCapMemBlock::stp_v_charge_0{
     CapMemColumnOnCapMemBlock(128), CapMemRowOnCapMemBlock(0)};
 CapMemCellOnCapMemBlock const CapMemCellOnCapMemBlock::stp_v_charge_1{

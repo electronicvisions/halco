@@ -208,7 +208,8 @@ typedef ::testing::Types<
     INA219StatusOnBoard,
     ExternalPPUMemoryByteOnFPGA,
     ExternalPPUMemoryBlockSize,
-    ExternalPPUMemoryBlockOnFPGA>
+    ExternalPPUMemoryBlockOnFPGA,
+    CapMemBlockOnHemisphere>
     CoordinateTypes4;
 
 
