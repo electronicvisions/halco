@@ -29,6 +29,7 @@ GENPYBIND_MANUAL({
 		    return parent->std::string("IPv4(") + self.to_string() + ")";
 	    },
 	    ism);
+	my_ipv4.attr("__repr__") = my_ipv4.attr("__str__");
 })
 
 } // common
