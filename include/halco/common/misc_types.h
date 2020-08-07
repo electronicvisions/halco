@@ -7,10 +7,10 @@
 #define BOOST_ASIO_HAS_STD_ARRAY
 #endif
 #include <boost/asio/ip/address.hpp>
-#include <boost/functional/hash.hpp>
 #include <boost/serialization/nvp.hpp>
 
 #include "halco/common/genpybind.h"
+#include "pywrap/compat/hash.hpp"
 
 namespace halco {
 namespace common GENPYBIND_TAG_HALCO_COMMON {
