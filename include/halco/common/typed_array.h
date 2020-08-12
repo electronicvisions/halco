@@ -54,12 +54,14 @@ struct typed_array {
 
 	void fill(value_type const& val) PYPP_HIDE_BODY({ std::fill_n(elems, Limits::size, val); })
 
+// clang-format off
 #ifndef PYPLUSPLUS
 	void GENPYBIND(hidden) swap(typed_array& other)
-	  noexcept(noexcept(std::declval<std::array<Value, Limits::size> >().swap(
-	    std::declval<std::array<Value, Limits::size> >()))) {
+		noexcept(noexcept(std::swap(std::declval<value_type&>(), std::declval<value_type&>())))
+	{
 		std::swap_ranges(elems, elems + Limits::size, other.elems);
 	}
+	// clang-format on
 
 	iterator GENPYBIND(hidden) begin() noexcept { return iterator(elems); }
 	const_iterator GENPYBIND(hidden) begin() const noexcept { return const_iterator(elems); }
