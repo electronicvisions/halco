@@ -3,9 +3,9 @@
 import unittest
 from pyhalco_test_utils import parametrize, PyhalcoTest
 
+
 @parametrize
 class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
-    # clang-format off
     COORDINATES = """
     CADCOffsetSRAMTimingConfigOnDLS => linear,iterable
     NeuronSRAMTimingConfigOnDLS => linear,iterable
@@ -182,11 +182,12 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     BlockPostPulseOnDLS => linear,iterable
     CorrelationResetRowOnDLS => iterable
     """
-    # clang-format on
+
     @staticmethod
     def get_module():
-        import pyhalco_hicann_dls_vx
-        return pyhalco_hicann_dls_vx
+        import pyhalco_hicann_dls_vx_v1
+        return pyhalco_hicann_dls_vx_v1
+
 
 if __name__ == '__main__':
     unittest.main()

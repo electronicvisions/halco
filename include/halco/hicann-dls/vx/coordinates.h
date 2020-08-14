@@ -1,6 +1,4 @@
 #pragma once
-#include <stdint.h>
-
 #include "halco/common/genpybind.h"
 
 GENPYBIND_TAG_HALCO_HICANN_DLS_VX

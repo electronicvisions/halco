@@ -3,13 +3,13 @@
 #include "halco/common/cerealization_geometry.h"
 #include "halco/common/iter_all.h"
 #include "halco/common/typed_array.h"
-#include "halco/hicann-dls/vx/coordinates.h"
+#include "halco/hicann-dls/vx/v1/coordinates.h"
 
 #include <cereal/archives/json.hpp>
 #include <cereal/cereal.hpp>
 
 using namespace halco::common;
-using namespace halco::hicann_dls::vx;
+using namespace halco::hicann_dls::vx::v1;
 
 TEST(NeuronBackendConfigOnNeuronBackendConfigBlock, toNeuronEventOutputOnNeuronBackendBlock)
 {
