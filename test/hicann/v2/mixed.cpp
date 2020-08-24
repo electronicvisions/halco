@@ -2,6 +2,9 @@
 
 #include "halco/hicann/v2/coordinates.h"
 
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
+
 using namespace halco::common;
 using namespace halco::hicann::v2;
 
@@ -90,4 +93,23 @@ TYPED_TEST(MixedGlobalCoordinateTest, DoesNotIgnoreMixedInTypeInComparison) {
 	TypeParam a(typename TypeParam::local_type(), typename TypeParam::mixed_in_type(Enum(2)));
 	TypeParam b(typename TypeParam::local_type(), typename TypeParam::mixed_in_type(Enum(3)));
 	ASSERT_NE(a, b);
+}
+
+TEST(SynapseOnWafer, Cerealization)
+{
+	SynapseOnWafer obj1(Enum(512 * 224 * 2));
+	SynapseOnWafer obj2;
+
+	std::ostringstream ostream;
+	{
+		boost::archive::text_oarchive oa(ostream);
+		oa& obj1;
+	}
+
+	std::istringstream istream(ostream.str());
+	{
+		boost::archive::text_iarchive ia(istream);
+		ia& obj2;
+	}
+	EXPECT_EQ(obj2, obj1);
 }

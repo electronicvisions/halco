@@ -156,4 +156,12 @@ struct EnumMixin<T, Enum, typename boost::enable_if_has_type<decltype(Enum::size
 			ar& boost::serialization::make_nvp(BOOST_PP_STRINGIZE(fct), mValue);                   \
 			boost::serialization::access::serialize(ar, This(), v);                                \
 		}                                                                                          \
-	};
+	};                                                                                             \
+                                                                                                   \
+	template <typename Archive, typename Derived, typename T>                                      \
+	void serialize(Archive& ar, mixin<Derived, T>& m)                                              \
+	{                                                                                              \
+		typename mixin<Derived, T>::enum_type e = m.toEnum();                                      \
+		ar& e;                                                                                     \
+		m = mixin<Derived, T>(e);                                                                  \
+	}

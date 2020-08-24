@@ -1,8 +1,12 @@
 #include <gtest/gtest.h>
 
+#include "halco/common/cerealization_geometry.h"
 #include "halco/common/iter_all.h"
 #include "halco/common/typed_array.h"
 #include "halco/hicann-dls/vx/coordinates.h"
+
+#include <cereal/archives/json.hpp>
+#include <cereal/cereal.hpp>
 
 using namespace halco::common;
 using namespace halco::hicann_dls::vx;
@@ -383,4 +387,23 @@ TYPED_TEST(CommonHemisphereCoordinateTest, toOther)
 // clang-format on
 #include "halco/hicann-dls/vx/hemisphere.def"
 	}
+}
+
+TEST(SynapseDriverOnDLS, Cerealization)
+{
+	SynapseDriverOnDLS obj1(SynapseDriverOnSynapseDriverBlock(32), SynapseDriverBlockOnDLS(1));
+	SynapseDriverOnDLS obj2;
+
+	std::ostringstream ostream;
+	{
+		cereal::JSONOutputArchive oa(ostream);
+		oa(obj1);
+	}
+
+	std::istringstream istream(ostream.str());
+	{
+		cereal::JSONInputArchive ia(istream);
+		ia(obj2);
+	}
+	EXPECT_EQ(obj2, obj1);
 }
