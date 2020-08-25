@@ -30,6 +30,7 @@
 #include "halco/hicann-dls/vx/v2/synram.h"
 #include "halco/hicann-dls/vx/v2/timing.h"
 #include "halco/hicann-dls/vx/v2/ultra96.h"
+#include "halco/hicann-dls/vx/v2/vector_generator.h"
 #include "halco/hicann-dls/vx/v2/xboard.h"
 
 namespace halco::hicann_dls::vx::v2 {

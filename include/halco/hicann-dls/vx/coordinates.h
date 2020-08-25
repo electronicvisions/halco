@@ -35,6 +35,7 @@ GENPYBIND_MANUAL({
 #include "halco/hicann-dls/vx/synram.h"
 #include "halco/hicann-dls/vx/timing.h"
 #include "halco/hicann-dls/vx/ultra96.h"
+#include "halco/hicann-dls/vx/vector_generator.h"
 #include "halco/hicann-dls/vx/xboard.h"
 
 GENPYBIND(postamble, tag(hicann_dls_vx))

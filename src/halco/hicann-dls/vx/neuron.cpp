@@ -1,16 +1,10 @@
 #include "halco/hicann-dls/vx/neuron.h"
 
 #include "halco/common/iter_all.h"
-#include "halco/hicann-dls/vx/cadc.h"
 #include "halco/hicann-dls/vx/capmem.h"
-#include "halco/hicann-dls/vx/chip.h"
-#include "halco/hicann-dls/vx/correlation.h"
-#include "halco/hicann-dls/vx/padi.h"
-#include "halco/hicann-dls/vx/ppu.h"
+#include "halco/hicann-dls/vx/hemisphere.h"
 #include "halco/hicann-dls/vx/routing_crossbar.h"
 #include "halco/hicann-dls/vx/synapse.h"
-#include "halco/hicann-dls/vx/synapse_driver.h"
-#include "halco/hicann-dls/vx/synram.h"
 
 namespace halco::hicann_dls::vx {
 

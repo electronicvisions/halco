@@ -7,6 +7,15 @@ from pyhalco_test_utils import parametrize, PyhalcoTest
 @parametrize
 class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     COORDINATES = """
+    SourceOnVectorGenerator => linear,iterable
+    VectorGeneratorOnFPGA => linear,iterable
+    VectorGeneratorControlOnFPGA => linear,iterable
+    VectorGeneratorLUTOnFPGA => linear,iterable
+    VectorGeneratorLUTEntryOnVectorGeneratorLUT => linear,iterable
+    VectorGeneratorLUTEntryOnFPGA => iterable
+    VectorGeneratorNotificationAddressOnFPGA => iterable
+    VectorGeneratorFIFOWordOnFPGA => iterable
+    VectorGeneratorTriggerOnFPGA => iterable
     CADCOffsetSRAMTimingConfigOnDLS => linear,iterable
     NeuronSRAMTimingConfigOnDLS => linear,iterable
     NeuronBackendSRAMTimingConfigOnDLS => linear,iterable
