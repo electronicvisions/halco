@@ -84,7 +84,7 @@ auto to_numpy(T const& self)
 }
 
 template <typename T>
-void from_numpy(T& self, pybind11::array array)
+void from_numpy(T& self, pybind11::array const& array)
 {
 	auto const check_1d = [](auto const& a, auto const& s) {
 		if (a.ndim() != 1) {
@@ -95,7 +95,7 @@ void from_numpy(T& self, pybind11::array array)
 		}
 	};
 
-	auto const copy_1d = [](auto& a, auto& s) {
+	auto const copy_1d = [](auto const& a, auto& s) {
 		size_t index = 0;
 		for (auto& elem : s) {
 			elem = std::remove_reference_t<std::remove_cv_t<decltype(s.front())>>(a(index));
@@ -103,7 +103,7 @@ void from_numpy(T& self, pybind11::array array)
 		}
 	};
 
-	auto const copy_2d = [](auto& a, auto& s) {
+	auto const copy_2d = [](auto const& a, auto& s) {
 		if (static_cast<size_t>(a.shape(0)) != s.size() ||
 		    static_cast<size_t>(a.shape(1)) !=
 		        std::tuple_size<typename std::remove_reference_t<decltype(s)>::value_type>::value) {
@@ -125,13 +125,17 @@ void from_numpy(T& self, pybind11::array array)
 		    ::halco::common::detail::IsBaseType<typename T::value_type::base_t>::value ||
 		    ::halco::common::detail::IsRantWrapper<typename T::value_type::base_t>::value) {
 			check_1d(array, self);
-			auto access = array.mutable_unchecked<typename T::value_type::value_type>();
+			auto const array_t = pybind11::array_t<typename T::value_type::value_type>(array);
+			auto const access = array_t.template unchecked<1>();
 			copy_1d(access, self);
+			return;
 		}
 	} else if constexpr (std::is_arithmetic_v<typename T::value_type>) {
 		check_1d(array, self);
-		auto access = array.mutable_unchecked<typename T::value_type>();
+		auto const array_t = pybind11::array_t<typename T::value_type>(array);
+		auto const access = array_t.template unchecked<1>();
 		copy_1d(access, self);
+		return;
 	} else if constexpr ( // 2D
 	    ::halco::common::detail::IsTypedArray<typename T::value_type>::value ||
 	    ::halco::common::detail::IsTypedHeapArray<typename T::value_type>::value) {
@@ -144,17 +148,20 @@ void from_numpy(T& self, pybind11::array array)
 			        typename T::value_type::value_type::base_t>::value ||
 			    ::halco::common::detail::IsRantWrapper<
 			        typename T::value_type::value_type::base_t>::value) {
-				auto access =
-				    array.mutable_unchecked<typename T::value_type::value_type::value_type, 2>();
+				auto const array_t =
+				    pybind11::array_t<typename T::value_type::value_type::value_type>(array);
+				auto const access = array_t.template unchecked<2>();
 				copy_2d(access, self);
+				return;
 			}
 		} else if constexpr (std::is_arithmetic_v<typename T::value_type::value_type>) {
-			auto access = array.mutable_unchecked<typename T::value_type, 2>();
+			auto const array_t = pybind11::array_t<typename T::value_type::value_type>(array);
+			auto const access = array_t.template unchecked<2>();
 			copy_2d(access, self);
+			return;
 		}
-	} else {
-		throw std::runtime_error("from_numpy: No known conversion of numpy array to value type.");
 	}
+	throw std::runtime_error("from_numpy: No known conversion of numpy array to value type.");
 }
 
 } // namespace halco::common::detail
