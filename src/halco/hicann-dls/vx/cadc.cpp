@@ -29,30 +29,6 @@ CADCChannelType const CADCChannelType::acausal{1};
 CADCReadoutType const CADCReadoutType::trigger_read{0};
 CADCReadoutType const CADCReadoutType::buffered{1};
 
-SynapseQuadOnDLS CADCSampleQuadOnDLS::toSynapseQuadOnDLS() const
-{
-	return SynapseQuadOnDLS(
-	    toCADCSampleQuadOnSynram()
-	        .toCADCSampleQuadUnspecifiedReadoutOnSynram()
-	        .toSynapseQuadOnSynram(),
-	    toSynramOnDLS());
-}
-
-SynapseWeightQuadOnDLS CADCSampleQuadOnDLS::toSynapseWeightQuadOnDLS() const
-{
-	return toSynapseQuadOnDLS().toSynapseWeightQuadOnDLS();
-}
-
-SynapseLabelQuadOnDLS CADCSampleQuadOnDLS::toSynapseLabelQuadOnDLS() const
-{
-	return toSynapseQuadOnDLS().toSynapseLabelQuadOnDLS();
-}
-
-SynapseCorrelationCalibQuadOnDLS CADCSampleQuadOnDLS::toSynapseCorrelationCalibQuadOnDLS() const
-{
-	return toSynapseQuadOnDLS().toSynapseCorrelationCalibQuadOnDLS();
-}
-
 SynapseRowOnDLS CADCSampleRowOnDLS::toSynapseRowOnDLS() const
 {
 	return SynapseRowOnDLS(toEnum());
@@ -73,10 +49,4 @@ SynapseCorrelationCalibRowOnDLS CADCSampleRowOnDLS::toSynapseCorrelationCalibRow
 	return SynapseCorrelationCalibRowOnDLS(toEnum());
 }
 
-NeuronConfigBlockOnDLS CADCChannelConfigOnDLS::toNeuronConfigBlockOnDLS() const
-{
-	return NeuronConfigBlockOnDLS(
-	    (2 * toSynramOnDLS().toEnum()) +
-	    (toSynapseOnSynapseRow() / NeuronConfigOnNeuronConfigBlock::size));
-}
 } // namespace halco::hicann_dls::vx

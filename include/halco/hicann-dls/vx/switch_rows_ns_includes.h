@@ -1,4 +1,3 @@
-#pragma once
 #include <stdint.h>
 
 #include "halco/common/genpybind.h"
@@ -6,8 +5,6 @@
 
 #include "halco/hicann-dls/vx/synapse.h"
 #include "halco/hicann-dls/vx/synram.h"
-
-namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 /************************\
   ColumnCorrelationQuad
@@ -50,7 +47,10 @@ struct GENPYBIND(inline_base("*SynramMixin*")) ColumnCorrelationQuadOnDLS
 
 	explicit ColumnCorrelationQuadOnDLS(enum_type const& e) : mixin_t(e) {}
 
-	ColumnCorrelationQuadOnSynram toColumnCorrelationQuadOnSynram() const { return This(); }
+	ColumnCorrelationQuadOnSynram toColumnCorrelationQuadOnSynram() const
+	{
+		return This();
+	}
 };
 
 
@@ -95,16 +95,8 @@ struct GENPYBIND(inline_base("*SynramMixin*")) ColumnCurrentQuadOnDLS
 
 	explicit ColumnCurrentQuadOnDLS(enum_type const& e) : mixin_t(e) {}
 
-	ColumnCurrentQuadOnSynram toColumnCurrentQuadOnSynram() const { return This(); }
+	ColumnCurrentQuadOnSynram toColumnCurrentQuadOnSynram() const
+	{
+		return This();
+	}
 };
-
-} // namespace halco::hicann_dls::vx
-
-namespace std {
-
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ColumnCorrelationQuadOnSynram)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ColumnCurrentQuadOnSynram)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ColumnCorrelationQuadOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ColumnCurrentQuadOnDLS)
-
-} // namespace std

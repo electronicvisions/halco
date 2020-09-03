@@ -1,34 +1,48 @@
 #pragma once
 #include "halco/common/genpybind.h"
 #include "halco/hicann-dls/vx/synapse.h"
+#include "halco/hicann-dls/vx/v1/quad.h"
+#include "halco/hicann-dls/vx/v1/synram.h"
 
 namespace halco::hicann_dls::vx::v1 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V1 {
 
-using SynapseQuadColumnOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::SynapseQuadColumnOnDLS;
-using SynapseRowOnSynapseDriver GENPYBIND(visible) =
-    halco::hicann_dls::vx::SynapseRowOnSynapseDriver;
-using SynapseRowOnSynram GENPYBIND(visible) = halco::hicann_dls::vx::SynapseRowOnSynram;
-using SynapseRowOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::SynapseRowOnDLS;
-using SynapseWeightRowOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::SynapseWeightRowOnDLS;
-using SynapseLabelRowOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::SynapseLabelRowOnDLS;
-using SynapseCorrelationCalibRowOnDLS GENPYBIND(visible) =
-    halco::hicann_dls::vx::SynapseCorrelationCalibRowOnDLS;
-using CorrelationResetRowOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::CorrelationResetRowOnDLS;
-using CorrelationResetOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::CorrelationResetOnDLS;
-using SynapseQuadOnSynram GENPYBIND(visible) = halco::hicann_dls::vx::SynapseQuadOnSynram;
-using SynapseQuadOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::SynapseQuadOnDLS;
-using SynapseWeightQuadOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::SynapseWeightQuadOnDLS;
-using SynapseLabelQuadOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::SynapseLabelQuadOnDLS;
-using SynapseCorrelationCalibQuadOnDLS GENPYBIND(visible) =
-    halco::hicann_dls::vx::SynapseCorrelationCalibQuadOnDLS;
-using SynapseOnSynapseRow GENPYBIND(visible) = halco::hicann_dls::vx::SynapseOnSynapseRow;
-using SynapticInputOnNeuron GENPYBIND(visible) = halco::hicann_dls::vx::SynapticInputOnNeuron;
-using SynapseBiasSelectionOnDLS GENPYBIND(visible) =
-    halco::hicann_dls::vx::SynapseBiasSelectionOnDLS;
-using SynapseWeightMatrixOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::SynapseWeightMatrixOnDLS;
-using SynapseLabelMatrixOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::SynapseLabelMatrixOnDLS;
-using SynapseCorrelationCalibMatrixOnDLS GENPYBIND(visible) =
-    halco::hicann_dls::vx::SynapseCorrelationCalibMatrixOnDLS;
+#include "halco/hicann-dls/vx/synapse_ns_includes.h"
+
+HALCO_COORDINATE_MIXIN(SynapseQuadColumnMixin, SynapseQuadColumnOnDLS, synapse_quad_column)
+
+struct GENPYBIND(inline_base("*SynapseQuadColumnMixin*")) SynapseOnSynapseRow
+    : public SynapseQuadColumnMixin<SynapseOnSynapseRow, EntryOnQuad>
+{
+	SynapseOnSynapseRow() = default;
+
+	explicit SynapseOnSynapseRow(
+	    EntryOnQuad const& syn_on_quad, SynapseQuadColumnOnDLS const& quad) :
+	    mixin_t(syn_on_quad, quad)
+	{}
+
+	explicit SynapseOnSynapseRow(uintmax_t const value) GENPYBIND(implicit_conversion) :
+	    mixin_t(enum_type(value))
+	{}
+
+	EntryOnQuad toEntryOnQuad() const
+	{
+		return This();
+	}
+	NeuronColumnOnDLS toNeuronColumnOnDLS() const;
+};
 
 
 } // namespace halco::hicann_dls::vx::v1
+
+namespace std {
+
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::v1::SynapseQuadColumnOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::v1::SynapseQuadOnSynram)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::v1::SynapseOnSynapseRow)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::v1::SynapseQuadOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::v1::SynapseWeightQuadOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::v1::SynapseLabelQuadOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::v1::SynapseCorrelationCalibQuadOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::v1::CorrelationResetOnDLS)
+
+} // namespace std
