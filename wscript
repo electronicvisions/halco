@@ -66,6 +66,14 @@ def build(bld):
         use=['halco_common', 'halco_hicann_dls_vx'],
     )
 
+    bld.shlib(
+        target='halco_hicann_dls_vx_v2',
+        source=bld.path.ant_glob('src/halco/hicann-dls/vx/v2/*.cpp'),
+        install_path='${PREFIX}/lib',
+        linkflags='-Wl,-z,defs',
+        use=['halco_common', 'halco_hicann_dls_vx'],
+    )
+
     bld(
         target='halco_test_inc',
         export_includes=['test'],
@@ -92,6 +100,14 @@ def build(bld):
         features='gtest cxx cxxprogram',
         source=bld.path.ant_glob('test/hicann-dls/vx/v1/*.cpp'),
         use=['halco_hicann_dls_vx_v1', 'GTEST', 'halco_test_inc'],
+        install_path='${PREFIX}/bin'
+    )
+
+    bld(
+        target='halco_hicann_dls_vx_v2_tests',
+        features='gtest cxx cxxprogram',
+        source=bld.path.ant_glob('test/hicann-dls/vx/v2/*.cpp'),
+        use=['halco_hicann_dls_vx_v2', 'GTEST', 'halco_test_inc'],
         install_path='${PREFIX}/bin'
     )
 
