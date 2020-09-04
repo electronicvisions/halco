@@ -63,7 +63,7 @@ typedef ::testing::Types<
 	Merger2OnHICANN,
 	Merger3OnHICANN
 > CoordinateTypesAtoM;
-TYPED_TEST_CASE(CommonCoordinateTestAtoM, CoordinateTypesAtoM);
+TYPED_TEST_SUITE(CommonCoordinateTestAtoM, CoordinateTypesAtoM);
 
 typedef ::testing::Types<
 	NeuronBlockGlobal,
@@ -113,7 +113,7 @@ typedef ::testing::Types<
 	X,
 	Y
 > CoordinateTypesNtoZ;
-TYPED_TEST_CASE(CommonCoordinateTestNtoZ, CoordinateTypesNtoZ);
+TYPED_TEST_SUITE(CommonCoordinateTestNtoZ, CoordinateTypesNtoZ);
 #define COMMON_FIXTURE_NAME CommonCoordinateTestAtoM
 #include "HALCO_COMMON.cxx"
 #undef COMMON_FIXTURE_NAME

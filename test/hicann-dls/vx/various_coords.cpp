@@ -351,7 +351,7 @@ typedef ::testing::Types<
     PADIEventOnDLS>
     CommonVerticalHalfCoordinateTypes;
 
-TYPED_TEST_CASE(CommonVerticalHalfCoordinateTest, CommonVerticalHalfCoordinateTypes);
+TYPED_TEST_SUITE(CommonVerticalHalfCoordinateTest, CommonVerticalHalfCoordinateTypes);
 
 TYPED_TEST(CommonVerticalHalfCoordinateTest, TopBottom)
 {
@@ -373,7 +373,7 @@ template <typename T>
 class CommonHemisphereCoordinateTest : public ::testing::Test
 {};
 
-TYPED_TEST_CASE(CommonHemisphereCoordinateTest, CommonHemisphereCoordinateTypes);
+TYPED_TEST_SUITE(CommonHemisphereCoordinateTest, CommonHemisphereCoordinateTypes);
 
 TYPED_TEST(CommonHemisphereCoordinateTest, toOther)
 {

@@ -17,7 +17,7 @@ typedef ::testing::Types<
 	SynapseSwitchOnHICANN
 > CoordinateGridTypes;
 
-TYPED_TEST_CASE(GridCoordinateTest, CoordinateGridTypes);
+TYPED_TEST_SUITE(GridCoordinateTest, CoordinateGridTypes);
 
 template<typename T>
 struct GridOrder

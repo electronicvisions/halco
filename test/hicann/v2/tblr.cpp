@@ -21,7 +21,7 @@ typedef ::testing::Types<
 	FGBlockOnHICANN
 > CoordinateTopBottomTypes;
 
-TYPED_TEST_CASE(TopBottomCoordinateTest, CoordinateTopBottomTypes);
+TYPED_TEST_SUITE(TopBottomCoordinateTest, CoordinateTopBottomTypes);
 
 TYPED_TEST(TopBottomCoordinateTest, WorksForExtremeValues) {
 	TypeParam top{Enum{TypeParam::enum_type::min}};
@@ -45,7 +45,7 @@ typedef ::testing::Types<
 	FGBlockOnHICANN
 > CoordinateLeftRightTypes;
 
-TYPED_TEST_CASE(LeftRightCoordinateTest, CoordinateLeftRightTypes);
+TYPED_TEST_SUITE(LeftRightCoordinateTest, CoordinateLeftRightTypes);
 
 TEST(LeftRightCoordinateTest, VLineOnHICANNWorksForExtremeValues) {
 	VLineOnHICANN left{VLineOnHICANN::min};

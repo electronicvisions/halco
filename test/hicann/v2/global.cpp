@@ -23,7 +23,7 @@ typedef ::testing::Types<
 > CoordinateGlobalTypes;
 // clang-format on
 
-TYPED_TEST_CASE(GlobalCoordinateTest, CoordinateGlobalTypes);
+TYPED_TEST_SUITE(GlobalCoordinateTest, CoordinateGlobalTypes);
 
 TYPED_TEST(GlobalCoordinateTest, toWafer) {
 	TypeParam coord;

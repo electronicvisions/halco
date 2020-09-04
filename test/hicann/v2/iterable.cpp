@@ -40,7 +40,7 @@ typedef ::testing::Types<
     Merger1OnHICANN,
     Merger2OnHICANN>
     CoordinateIterableTypesAtoM;
-TYPED_TEST_CASE(IterableCoordinateTestAtoM, CoordinateIterableTypesAtoM);
+TYPED_TEST_SUITE(IterableCoordinateTestAtoM, CoordinateIterableTypesAtoM);
 
 typedef ::testing::Types<
     NeuronBlockOnHICANN,
@@ -76,7 +76,7 @@ typedef ::testing::Types<
     VRepeaterOnHICANN,
     WIOOnWafer>
     CoordinateIterableTypesNtoZ;
-TYPED_TEST_CASE(IterableCoordinateTestNtoZ, CoordinateIterableTypesNtoZ);
+TYPED_TEST_SUITE(IterableCoordinateTestNtoZ, CoordinateIterableTypesNtoZ);
 
 #define COMMON_FIXTURE_NAME IterableCoordinateTestAtoM
 #include "HALCO_ITERABLE.cxx"

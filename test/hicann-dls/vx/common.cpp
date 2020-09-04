@@ -216,10 +216,10 @@ typedef ::testing::Types<
     CoordinateTypes4;
 
 
-TYPED_TEST_CASE(CommonCoordinateTest1, CoordinateTypes1);
-TYPED_TEST_CASE(CommonCoordinateTest2, CoordinateTypes2);
-TYPED_TEST_CASE(CommonCoordinateTest3, CoordinateTypes3);
-TYPED_TEST_CASE(CommonCoordinateTest4, CoordinateTypes4);
+TYPED_TEST_SUITE(CommonCoordinateTest1, CoordinateTypes1);
+TYPED_TEST_SUITE(CommonCoordinateTest2, CoordinateTypes2);
+TYPED_TEST_SUITE(CommonCoordinateTest3, CoordinateTypes3);
+TYPED_TEST_SUITE(CommonCoordinateTest4, CoordinateTypes4);
 
 #define TEST_CEREAL
 

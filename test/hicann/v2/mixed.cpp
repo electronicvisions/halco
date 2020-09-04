@@ -20,7 +20,7 @@ typedef ::testing::Types<
 	NeuronGlobal
 > CoordinateGlobalTypes;
 
-TYPED_TEST_CASE(MixedGlobalCoordinateTest, CoordinateGlobalTypes);
+TYPED_TEST_SUITE(MixedGlobalCoordinateTest, CoordinateGlobalTypes);
 
 template<typename T>
 class MixedOnWaferCoordinateTest : public ::testing::Test
@@ -33,7 +33,7 @@ typedef ::testing::Types<
 	SynapseOnWafer
 > CoordinateOnWaferTypes;
 
-TYPED_TEST_CASE(MixedOnWaferCoordinateTest, CoordinateOnWaferTypes);
+TYPED_TEST_SUITE(MixedOnWaferCoordinateTest, CoordinateOnWaferTypes);
 
 template<typename T>
 class MixedOnHICANNCoordinateTest : public ::testing::Test
@@ -43,7 +43,7 @@ typedef ::testing::Types<
 	SynapticInputOnHICANN
 > CoordinateOnHICANNTypes;
 
-TYPED_TEST_CASE(MixedOnHICANNCoordinateTest, CoordinateOnHICANNTypes);
+TYPED_TEST_SUITE(MixedOnHICANNCoordinateTest, CoordinateOnHICANNTypes);
 
 TEST(MixedCoordinateTest, HICANNGlobalCanBeSplitted) {
 	HICANNGlobal mixed;
