@@ -17,6 +17,15 @@ struct CrossbarL2OutputOnDLS;
 \************/
 
 /**
+ * Unique coordinate for crossbar configuration.
+ */
+struct GENPYBIND(inline_base("*")) CrossbarOnDLS
+    : public common::detail::RantWrapper<CrossbarOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit CrossbarOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+/**
  * Unique coordinate for crossbar output configuration.
  */
 struct GENPYBIND(inline_base("*")) CrossbarOutputConfigOnDLS
@@ -134,6 +143,7 @@ namespace std {
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CrossbarInputOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CrossbarL2OutputOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CrossbarNodeOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CrossbarOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CrossbarOutputConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CrossbarOutputOnDLS)
 

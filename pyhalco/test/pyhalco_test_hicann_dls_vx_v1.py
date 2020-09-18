@@ -34,6 +34,7 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     I2CINA219RwRegisterOnBoard => linear,iterable
     HicannARQStatusOnFPGA => linear,iterable
     BackgroundSpikeSourceOnDLS => linear,iterable
+    CrossbarOnDLS => linear,iterable
     CrossbarOutputConfigOnDLS => linear,iterable
     CrossbarOutputOnDLS => linear,iterable
     CrossbarL2OutputOnDLS => linear,iterable

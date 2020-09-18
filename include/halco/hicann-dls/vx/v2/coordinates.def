@@ -126,6 +126,7 @@ COORDINATE(PadMultiplexerConfigOnDLS, halco::hicann_dls::vx::v2::PadMultiplexerC
 COORDINATE(ReadoutSourceSelectionOnDLS, halco::hicann_dls::vx::v2::ReadoutSourceSelectionOnDLS)
 COORDINATE(SourceMultiplexerOnReadoutSourceSelection, halco::hicann_dls::vx::v2::SourceMultiplexerOnReadoutSourceSelection)
 COORDINATE(ResetChipOnDLS, halco::hicann_dls::vx::v2::ResetChipOnDLS)
+COORDINATE(CrossbarOnDLS, halco::hicann_dls::vx::v2::CrossbarOnDLS)
 COORDINATE(CrossbarOutputConfigOnDLS, halco::hicann_dls::vx::v2::CrossbarOutputConfigOnDLS)
 COORDINATE(CrossbarOutputOnDLS, halco::hicann_dls::vx::v2::CrossbarOutputOnDLS)
 COORDINATE(CrossbarL2OutputOnDLS, halco::hicann_dls::vx::v2::CrossbarL2OutputOnDLS)

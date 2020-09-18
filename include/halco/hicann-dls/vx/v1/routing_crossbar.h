@@ -4,6 +4,7 @@
 
 namespace halco::hicann_dls::vx::v1 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V1 {
 
+using CrossbarOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::CrossbarOnDLS;
 using CrossbarOutputConfigOnDLS GENPYBIND(visible) =
     halco::hicann_dls::vx::CrossbarOutputConfigOnDLS;
 using CrossbarOutputOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::CrossbarOutputOnDLS;
