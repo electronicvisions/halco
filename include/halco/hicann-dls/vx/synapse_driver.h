@@ -45,6 +45,9 @@ struct GENPYBIND(inline_base("*")) SynapseDriverOnPADIBus
 	    GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
+
+	common::typed_array<SynapseDriverOnSynapseDriverBlock, PADIBusOnPADIBusBlock>
+	toSynapseDriverOnSynapseDriverBlock() const;
 };
 
 

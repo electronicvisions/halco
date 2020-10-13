@@ -49,6 +49,19 @@ SynapseDriverOnSynapseDriverBlock::toSynapseRowOnSynram() const
 	return {SynapseRowOnSynram(toEnum() * 2 + 1), SynapseRowOnSynram(toEnum() * 2)};
 }
 
+common::typed_array<SynapseDriverOnSynapseDriverBlock, PADIBusOnPADIBusBlock>
+SynapseDriverOnPADIBus::toSynapseDriverOnSynapseDriverBlock() const
+{
+	common::typed_array<SynapseDriverOnSynapseDriverBlock, PADIBusOnPADIBusBlock> ret;
+
+	size_t i = 0;
+	for (auto& e : ret) {
+		e = SynapseDriverOnSynapseDriverBlock((toEnum() * PADIBusOnPADIBusBlock::size) + i);
+		i++;
+	}
+	return ret;
+}
+
 CapMemBlockOnDLS SynapseDriverOnDLS::toCapMemBlockOnDLS() const
 {
 	int const hemisphere_id = toSynapseDriverBlockOnDLS().toHemisphereOnDLS().toEnum();
