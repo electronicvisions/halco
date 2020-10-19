@@ -499,7 +499,7 @@ struct GridCoordinate {
 	{
 		static std::string const name =
 			ZTL::typestring<Derived>().substr(ZTL::typestring<Derived>().rfind(':') + 1);
-		os << name << "(" << c.toEnum() << ")";
+		os << name << "(" << c.x() << ", " << c.y() << "; " << c.toEnum() << ")";
 		return os;
 	}
 
