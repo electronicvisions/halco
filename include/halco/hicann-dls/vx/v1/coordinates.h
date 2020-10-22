@@ -29,6 +29,7 @@
 #include "halco/hicann-dls/vx/v1/synapse_driver.h"
 #include "halco/hicann-dls/vx/v1/synram.h"
 #include "halco/hicann-dls/vx/v1/timing.h"
+#include "halco/hicann-dls/vx/v1/ultra96.h"
 #include "halco/hicann-dls/vx/v1/xboard.h"
 
 namespace halco::hicann_dls::vx::v1 {

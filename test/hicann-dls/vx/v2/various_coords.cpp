@@ -246,6 +246,13 @@ TEST(VDDOnBoard, toDACChannelOnBoard)
 	}
 }
 
+TEST(TCA9554ChannelOnBoard, toTCA9554OnBoard)
+{
+	for (auto channel : iter_all<TCA9554ChannelOnBoard>()) {
+		EXPECT_NO_THROW(channel.toTCA9554OnBoard());
+	}
+}
+
 TEST(PhyConfigChipOnDLS, toJTAGPhyRegisterOnDLS)
 {
 	PhyConfigChipOnDLS phy_config(3);

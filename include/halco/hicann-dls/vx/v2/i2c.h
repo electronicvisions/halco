@@ -13,5 +13,13 @@ using I2CINA219RoRegisterOnBoard GENPYBIND(visible) =
     halco::hicann_dls::vx::I2CINA219RoRegisterOnBoard;
 using I2CINA219RwRegisterOnBoard GENPYBIND(visible) =
     halco::hicann_dls::vx::I2CINA219RwRegisterOnBoard;
+using I2CTCA9554RoRegisterOnTCA9554 GENPYBIND(visible) =
+    halco::hicann_dls::vx::I2CTCA9554RoRegisterOnTCA9554;
+using I2CTCA9554RwRegisterOnTCA9554 GENPYBIND(visible) =
+    halco::hicann_dls::vx::I2CTCA9554RwRegisterOnTCA9554;
+using I2CTCA9554RoRegisterOnBoard GENPYBIND(visible) =
+    halco::hicann_dls::vx::I2CTCA9554RoRegisterOnBoard;
+using I2CTCA9554RwRegisterOnBoard GENPYBIND(visible) =
+    halco::hicann_dls::vx::I2CTCA9554RwRegisterOnBoard;
 
 } // namespace halco::hicann_dls::vx::v2
