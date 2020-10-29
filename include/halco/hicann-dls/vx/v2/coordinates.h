@@ -1,12 +1,6 @@
 #pragma once
 #include "halco/common/genpybind.h"
 
-GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V2
-GENPYBIND_MANUAL({
-	parent.attr("__variant__") = "pybind11";
-	parent->py::module::import("pyhalco_common");
-})
-
 #include "halco/hicann-dls/vx/v2/background.h"
 #include "halco/hicann-dls/vx/v2/barrier.h"
 #include "halco/hicann-dls/vx/v2/cadc.h"
@@ -36,11 +30,6 @@ GENPYBIND_MANUAL({
 #include "halco/hicann-dls/vx/v2/synram.h"
 #include "halco/hicann-dls/vx/v2/timing.h"
 #include "halco/hicann-dls/vx/v2/xboard.h"
-
-GENPYBIND(postamble, tag(hicann_dls_vx_v2))
-GENPYBIND_MANUAL({
-	parent->py::module::import("pyhalco_hicann_dls_vx_patch").attr("patch")(parent);
-})
 
 namespace halco::hicann_dls::vx::v2 {
 #define COORDINATE(Name, Type) typedef Type Name;

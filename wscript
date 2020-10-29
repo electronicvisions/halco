@@ -60,7 +60,7 @@ def build(bld):
 
     bld.shlib(
         target='halco_hicann_dls_vx_v1',
-        source=bld.path.ant_glob('src/halco/hicann-dls/vx/v1/*.cpp'),
+        source=bld.path.ant_glob('src/halco/hicann-dls/vx/v1/*.cpp', excl=['**/py*.cpp']),
         install_path='${PREFIX}/lib',
         linkflags='-Wl,-z,defs',
         use=['halco_common', 'halco_hicann_dls_vx'],
@@ -68,7 +68,7 @@ def build(bld):
 
     bld.shlib(
         target='halco_hicann_dls_vx_v2',
-        source=bld.path.ant_glob('src/halco/hicann-dls/vx/v2/*.cpp'),
+        source=bld.path.ant_glob('src/halco/hicann-dls/vx/v2/*.cpp', excl=['**/py*.cpp']),
         install_path='${PREFIX}/lib',
         linkflags='-Wl,-z,defs',
         use=['halco_common', 'halco_hicann_dls_vx'],
