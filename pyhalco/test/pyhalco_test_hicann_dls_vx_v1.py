@@ -182,6 +182,7 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     CommonCorrelationConfigOnDLS => linear,iterable
     BlockPostPulseOnDLS => linear,iterable
     CorrelationResetRowOnDLS => iterable
+    Coordinate => ignore
     """
 
     @staticmethod
