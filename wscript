@@ -4,7 +4,7 @@
 def depends(ctx):
     ctx('rant')
     ctx('ztl')
-    ctx('pywrap')
+    ctx('pywrap') # also needed in non-python mode! (compatibility headers!)
     ctx('lib-boost-patches')
 
 
@@ -13,6 +13,10 @@ def options(opt):
     opt.load('boost')
     opt.recurse('pyhalco')
 
+    hopts = opt.add_option_group('halco options')
+    hopts.add_withoption('halco-python-bindings', default=True,
+                         help='Toggle the generation and build of halco python bindings')
+
 
 def configure(conf):
     conf.load('compiler_cxx')
@@ -20,7 +24,8 @@ def configure(conf):
 
     conf.check_cxx(mandatory=True, header_name='cereal/cereal.hpp')
 
-    conf.recurse('pyhalco')
+    if getattr(conf.options, 'with_halco_python_bindings', True):
+        conf.recurse('pyhalco')
 
 
 def build(bld):
@@ -111,4 +116,5 @@ def build(bld):
         install_path='${PREFIX}/bin'
     )
 
-    bld.recurse('pyhalco')
+    if getattr(bld.options, 'with_halco_python_bindings', True):
+        bld.recurse('pyhalco')
