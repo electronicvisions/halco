@@ -182,6 +182,28 @@ struct GENPYBIND(inline_base("*AD5252ChannelMixin*")) I2CAD5252RwRegisterOnBoard
 	};
 };
 
+
+struct GENPYBIND(inline_base("*DAC6573Mixin*")) I2CDAC6573RwRegisterOnBoard
+    : public DAC6573Mixin<I2CDAC6573RwRegisterOnBoard, DAC6573ChannelOnDAC6573>
+{
+	I2CDAC6573RwRegisterOnBoard() = default;
+
+	explicit I2CDAC6573RwRegisterOnBoard(
+	    DAC6573ChannelOnDAC6573 const& ch, DAC6573OnBoard const& dac = DAC6573OnBoard()) :
+	    mixin_t(ch, dac)
+	{}
+
+	explicit I2CDAC6573RwRegisterOnBoard(enum_type const& e) : mixin_t(e) {}
+
+	DAC6573ChannelOnDAC6573 toDAC6573ChannelOnDAC6573() const
+	{
+		return This();
+	}
+
+	// MSBs of the command byte signaling immediate update of the DAC in write mode
+	static constexpr uint8_t register_base_addr = 0x10;
+};
+
 } // namespace halco::hicann_dls::vx
 
 namespace std {
@@ -200,5 +222,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::I2CTCA9554RwRegisterOnBoard)
 
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::I2CAD5252RwRegisterOnAD5252Channel)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::I2CAD5252RwRegisterOnBoard)
+
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::I2CDAC6573RwRegisterOnBoard)
 
 } // namespace std

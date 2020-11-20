@@ -122,4 +122,9 @@ AD5252ChannelConfigOnBoard AD5252ChannelConfigPersistentOnBoard::toAD5252Channel
 	return AD5252ChannelConfigOnBoard(toEnum());
 }
 
+
+DAC6573ChannelOnBoard const DAC6573ChannelOnBoard::v_reset{DAC6573ChannelOnDAC6573{0}};
+DAC6573ChannelOnBoard const DAC6573ChannelOnBoard::i_ref_board{DAC6573ChannelOnDAC6573{1}};
+DAC6573ChannelOnBoard const DAC6573ChannelOnBoard::v_res_meas{DAC6573ChannelOnDAC6573{2}};
+DAC6573ChannelOnBoard const DAC6573ChannelOnBoard::v_readout{DAC6573ChannelOnDAC6573{3}};
 } // namespace halco::hicann_dls::vx

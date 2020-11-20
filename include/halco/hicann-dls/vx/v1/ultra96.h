@@ -16,4 +16,8 @@ using AD5252ChannelConfigOnBoard GENPYBIND(visible) =
 using AD5252ChannelConfigPersistentOnBoard GENPYBIND(visible) =
     halco::hicann_dls::vx::AD5252ChannelConfigPersistentOnBoard;
 
+using DAC6573OnBoard GENPYBIND(visible) = halco::hicann_dls::vx::DAC6573OnBoard;
+using DAC6573ChannelOnDAC6573 GENPYBIND(visible) = halco::hicann_dls::vx::DAC6573ChannelOnDAC6573;
+using DAC6573ChannelOnBoard GENPYBIND(visible) = halco::hicann_dls::vx::DAC6573ChannelOnBoard;
+
 } // namespace halco::hicann_dls::vx::v1

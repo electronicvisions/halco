@@ -21,6 +21,10 @@ struct AD5252ChannelOnBoard;
 struct AD5252ChannelConfigOnBoard;
 struct AD5252ChannelConfigPersistentOnBoard;
 
+struct DAC6573OnBoard;
+struct DAC6573ChannelOnDAC6573;
+struct DAC6573ChannelOnBoard;
+
 
 struct GENPYBIND(inline_base("*")) TCA9554OnBoard
     : public common::detail::RantWrapper<TCA9554OnBoard, uint_fast16_t, 0, 0>
@@ -176,6 +180,44 @@ struct GENPYBIND(inline_base("*AD5252Mixin*")) AD5252ChannelConfigPersistentOnBo
 };
 
 
+struct GENPYBIND(inline_base("*")) DAC6573OnBoard
+    : public common::detail::RantWrapper<DAC6573OnBoard, uint_fast16_t, 0, 0>
+{
+	constexpr explicit DAC6573OnBoard() : rant_t(0) {}
+	constexpr explicit DAC6573OnBoard(uintmax_t const val) : rant_t(val) {}
+};
+
+struct GENPYBIND(inline_base("*")) DAC6573ChannelOnDAC6573
+    : public common::detail::RantWrapper<DAC6573ChannelOnDAC6573, uint_fast16_t, 3, 0>
+{
+	constexpr explicit DAC6573ChannelOnDAC6573() : rant_t(0) {}
+	constexpr explicit DAC6573ChannelOnDAC6573(uintmax_t const val) : rant_t(val) {}
+};
+
+HALCO_COORDINATE_MIXIN(DAC6573Mixin, DAC6573OnBoard, dac6573mixin)
+
+struct GENPYBIND(inline_base("*DAC6573Mixin*")) DAC6573ChannelOnBoard
+    : public DAC6573Mixin<DAC6573ChannelOnBoard, DAC6573ChannelOnDAC6573>
+{
+	DAC6573ChannelOnBoard() = default;
+
+	explicit DAC6573ChannelOnBoard(
+	    DAC6573ChannelOnDAC6573 const& reg, DAC6573OnBoard const& dac = DAC6573OnBoard()) :
+	    mixin_t(reg, dac)
+	{}
+	explicit DAC6573ChannelOnBoard(enum_type const& e) : mixin_t(e) {}
+
+	static const DAC6573ChannelOnBoard v_reset;
+	static const DAC6573ChannelOnBoard i_ref_board;
+	static const DAC6573ChannelOnBoard v_res_meas;
+	static const DAC6573ChannelOnBoard v_readout;
+
+	DAC6573ChannelOnDAC6573 toDAC6573ChannelOnDAC6573() const
+	{
+		return This();
+	}
+};
+
 } // namespace halco::hicann_dls::vx
 
 namespace std {
@@ -189,4 +231,8 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::AD5252OnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::AD5252ChannelOnAD5252)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::AD5252ChannelOnBoard)
 
-}
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::DAC6573OnBoard)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::DAC6573ChannelOnDAC6573)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::DAC6573ChannelOnBoard)
+
+} // namespace std
