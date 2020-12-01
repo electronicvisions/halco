@@ -171,6 +171,8 @@ COORDINATE(SynapseWeightQuadOnDLS, halco::hicann_dls::vx::v2::SynapseWeightQuadO
 COORDINATE(SynapseLabelQuadOnDLS, halco::hicann_dls::vx::v2::SynapseLabelQuadOnDLS)
 COORDINATE(SynapseCorrelationCalibQuadOnDLS, halco::hicann_dls::vx::v2::SynapseCorrelationCalibQuadOnDLS)
 COORDINATE(SynapseOnSynapseRow, halco::hicann_dls::vx::v2::SynapseOnSynapseRow)
+COORDINATE(SynapseOnSynram, halco::hicann_dls::vx::v2::SynapseOnSynram)
+COORDINATE(SynapseOnDLS, halco::hicann_dls::vx::v2::SynapseOnDLS)
 COORDINATE(SynapticInputOnNeuron, halco::hicann_dls::vx::v2::SynapticInputOnNeuron)
 COORDINATE(SynapseBiasSelectionOnDLS, halco::hicann_dls::vx::v2::SynapseBiasSelectionOnDLS)
 COORDINATE(SynapseWeightMatrixOnDLS, halco::hicann_dls::vx::v2::SynapseWeightMatrixOnDLS)

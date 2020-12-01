@@ -160,6 +160,8 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     SynapseLabelQuadOnDLS => iterable
     SynapseCorrelationCalibQuadOnDLS => iterable
     SynapseOnSynapseRow => linear,iterable
+    SynapseOnSynram => grid,iterable
+    SynapseOnDLS => iterable
     SynapseRowOnDLS => linear,iterable
     SynapseWeightRowOnDLS => linear,iterable
     SynapseLabelRowOnDLS => linear,iterable
