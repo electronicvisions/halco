@@ -40,6 +40,13 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     I2CINA219RwRegisterOnBoard => linear,iterable
     I2CTCA9554RoRegisterOnBoard => linear,iterable
     I2CTCA9554RwRegisterOnBoard => linear,iterable
+    AD5252OnBoard => linear,iterable
+    AD5252ChannelOnAD5252 => linear,iterable
+    AD5252ChannelOnBoard => linear,iterable
+    I2CAD5252RwRegisterOnAD5252Channel => linear,iterable
+    I2CAD5252RwRegisterOnBoard => linear,iterable
+    AD5252ChannelConfigOnBoard => linear,iterable
+    AD5252ChannelConfigPersistentOnBoard => linear,iterable
     HicannARQStatusOnFPGA => linear,iterable
     BackgroundSpikeSourceOnDLS => linear,iterable
     CrossbarOnDLS => linear,iterable

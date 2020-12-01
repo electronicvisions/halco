@@ -142,6 +142,46 @@ struct GENPYBIND(inline_base("*TCA9554Mixin*")) I2CTCA9554RwRegisterOnBoard
 	}
 };
 
+
+struct GENPYBIND(inline_base("*")) I2CAD5252RwRegisterOnAD5252Channel
+    : public common::detail::RantWrapper<I2CAD5252RwRegisterOnAD5252Channel, uint_fast16_t, 1, 0>
+{
+	constexpr explicit I2CAD5252RwRegisterOnAD5252Channel(uintmax_t const val = 0) : rant_t(val) {}
+
+	static const I2CAD5252RwRegisterOnAD5252Channel rdac_volatile;
+	static const I2CAD5252RwRegisterOnAD5252Channel eemem_persistent;
+
+	// Command byte prefixes for the register types
+	static constexpr uint8_t rdac_volatile_prefix = 0x00;
+	static constexpr uint8_t eemem_persistent_prefix = 0x20;
+};
+
+
+HALCO_COORDINATE_MIXIN(AD5252ChannelMixin, AD5252ChannelOnBoard, ad5252channel)
+
+struct GENPYBIND(inline_base("*AD5252ChannelMixin*")) I2CAD5252RwRegisterOnBoard
+    : public AD5252ChannelMixin<I2CAD5252RwRegisterOnBoard, I2CAD5252RwRegisterOnAD5252Channel>
+{
+	I2CAD5252RwRegisterOnBoard() = default;
+
+	explicit I2CAD5252RwRegisterOnBoard(
+	    I2CAD5252RwRegisterOnAD5252Channel const& reg,
+	    AD5252ChannelOnBoard const& ad = AD5252ChannelOnBoard()) :
+	    mixin_t(reg, ad)
+	{}
+
+	explicit I2CAD5252RwRegisterOnBoard(enum_type const& e) : mixin_t(e) {}
+
+	I2CAD5252RwRegisterOnAD5252Channel toI2CAD5252RwRegisterOnAD5252Channel() const
+	{
+		return This();
+	}
+	AD5252ChannelOnAD5252 toAD5252ChannelOnAD5252() const
+	{
+		return toAD5252ChannelOnBoard().toAD5252ChannelOnAD5252();
+	};
+};
+
 } // namespace halco::hicann_dls::vx
 
 namespace std {
@@ -157,5 +197,8 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::I2CTCA9554RoRegisterOnTCA9554)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::I2CTCA9554RwRegisterOnTCA9554)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::I2CTCA9554RoRegisterOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::I2CTCA9554RwRegisterOnBoard)
+
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::I2CAD5252RwRegisterOnAD5252Channel)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::I2CAD5252RwRegisterOnBoard)
 
 } // namespace std

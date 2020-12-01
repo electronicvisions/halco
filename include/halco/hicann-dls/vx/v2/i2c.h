@@ -21,5 +21,7 @@ using I2CTCA9554RoRegisterOnBoard GENPYBIND(visible) =
     halco::hicann_dls::vx::I2CTCA9554RoRegisterOnBoard;
 using I2CTCA9554RwRegisterOnBoard GENPYBIND(visible) =
     halco::hicann_dls::vx::I2CTCA9554RwRegisterOnBoard;
+using I2CAD5252RwRegisterOnBoard GENPYBIND(visible) =
+    halco::hicann_dls::vx::I2CAD5252RwRegisterOnBoard;
 
 } // namespace halco::hicann_dls::vx::v2
