@@ -90,6 +90,11 @@ std::ostream & _write(std::ostream& os, T const & t)
 {
 	static std::string const name = ZTL::typestring<T>().substr(
 		ZTL::typestring<T>().rfind(':')+1);
+	// clang-format off
+	if PYPP_CONSTEXPR (boost::is_same<T, char>::value || boost::is_same<T, unsigned char>::value) {
+		return os << name << "(" << _print(static_cast<int>(t.value())) << ")";
+	}
+	// clang-format on
 	return os << name << "(" << _print(t.value()) << ")";
 }
 
