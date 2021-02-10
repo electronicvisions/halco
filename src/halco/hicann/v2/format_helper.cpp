@@ -133,12 +133,24 @@ std::string short_format(const NeuronOnHICANN& nrn)
 	return ss.str();
 }
 
+std::string short_format(const SendingRepeaterOnHICANN& sr)
+{
+	std::stringstream ss;
+	ss << "SR" << std::setw(3) << std::setfill('0') << sr.value();
+	return ss.str();
+}
+
 std::string short_format(const HLineOnWafer& hl) {
 	return short_format(hl.toHICANNOnWafer()) + short_format(hl.toHLineOnHICANN());
 }
 
 std::string short_format(const VLineOnWafer& vl) {
 	return short_format(vl.toHICANNOnWafer()) + short_format(vl.toVLineOnHICANN());
+}
+
+std::string short_format(const SendingRepeaterOnWafer& sr)
+{
+	return short_format(sr.toHICANNOnWafer()) + short_format(sr.toSendingRepeaterOnHICANN());
 }
 
 std::string slurm_license(AnanasGlobal const& ag)
@@ -181,7 +193,8 @@ typedef boost::variant<
     VRepeaterOnHICANN,
     HLineOnHICANN,
     VLineOnHICANN,
-    NeuronOnHICANN>
+    NeuronOnHICANN,
+    SendingRepeaterOnHICANN>
     local_type;
 
 // all compound types
@@ -196,7 +209,8 @@ typedef boost::variant<
     HRepeaterOnWafer,
     VRepeaterOnWafer,
     HLineOnWafer,
-    VLineOnWafer>
+    VLineOnWafer,
+    SendingRepeaterOnWafer>
     compound_type;
 
 // converts type and value to a local type
@@ -231,6 +245,8 @@ local_type to_local(std::string const& type, std::string const& value)
 		return AnanasOnWafer(e);
 	} else if (type == "AP") {
 		return AuxPwrOnWafer(e);
+	} else if (type == "SR") {
+		return SendingRepeaterOnHICANN(e);
 	} else {
 		throw std::runtime_error(
 		    "halco::hicann::v2::to_local: unknown local type \"" + type + "\"");
@@ -277,6 +293,11 @@ struct to_compound : public boost::static_visitor<compound_type>
 	VLineOnWafer operator()(HICANNOnWafer const& h, VLineOnHICANN const& vl) const
 	{
 		return VLineOnWafer(vl, h);
+	}
+	SendingRepeaterOnWafer operator()(
+	    HICANNOnWafer const& h, SendingRepeaterOnHICANN const& vl) const
+	{
+		return SendingRepeaterOnWafer(vl, h);
 	}
 
 	template <typename T, typename V>

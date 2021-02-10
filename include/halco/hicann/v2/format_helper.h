@@ -79,6 +79,8 @@ GENPYBIND(visible)
 std::string short_format(const TriggerOnWafer& t);
 GENPYBIND(visible)
 std::string short_format(const Wafer& w);
+GENPYBIND(visible)
+std::string short_format(const SendingRepeaterOnWafer& sr);
 
 GENPYBIND(visible)
 std::string short_format(const HRepeaterOnHICANN& hr);
@@ -90,6 +92,8 @@ GENPYBIND(visible)
 std::string short_format(const VLineOnHICANN& vl);
 GENPYBIND(visible)
 std::string short_format(const NeuronOnHICANN& vl);
+GENPYBIND(visible)
+std::string short_format(const SendingRepeaterOnHICANN& sr);
 
 GENPYBIND(visible)
 std::string slurm_license(AnanasGlobal const& ag);
@@ -123,6 +127,7 @@ template std::string to_string(HRepeaterOnWafer const&);
 template std::string to_string(VRepeaterOnWafer const&);
 template std::string to_string(HLineOnWafer const&);
 template std::string to_string(VLineOnWafer const&);
+template std::string to_string(SendingRepeaterOnWafer const&);
 template std::string to_string(Wafer const&);
 
 template std::string to_string(RepeaterBlockOnHICANN const&);
@@ -133,6 +138,8 @@ template std::string to_string(HLineOnHICANN const&);
 template std::string to_string(VLineOnHICANN const&);
 
 template std::string to_string(NeuronOnHICANN const&);
+
+template std::string to_string(SendingRepeaterOnHICANN const&);
 
 typedef boost::variant<
     AnanasGlobal,
@@ -158,7 +165,9 @@ typedef boost::variant<
     VLineOnHICANN,
     HLineOnWafer,
     VLineOnWafer,
-    NeuronOnHICANN>
+    NeuronOnHICANN,
+    SendingRepeaterOnWafer,
+    SendingRepeaterOnHICANN>
     format_type;
 
 // converts from short format to type

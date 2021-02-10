@@ -56,6 +56,7 @@ typedef ::testing::Types<
     RepeaterBlockOnHICANN,
     RowOnSynapseDriver,
     SendingRepeaterOnHICANN,
+    SendingRepeaterOnWafer,
     SocketOnWIO,
     SideHorizontal,
     SideVertical,

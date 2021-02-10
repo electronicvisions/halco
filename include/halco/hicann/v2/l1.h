@@ -378,6 +378,32 @@ struct GENPYBIND(inline_base("*")) SendingRepeaterOnHICANN
 	DNCMergerOnHICANN toDNCMergerOnHICANN() const;
 };
 
+
+struct GENPYBIND(inline_base("*HICANNMixin*")) SendingRepeaterOnWafer
+    : public HICANNMixin<SendingRepeaterOnWafer, SendingRepeaterOnHICANN>
+{
+private:
+	typedef HICANNMixin<SendingRepeaterOnWafer, SendingRepeaterOnHICANN> base;
+
+public:
+	typedef base::enum_type enum_type GENPYBIND(opaque(false));
+
+	PYPP_DEFAULT(SendingRepeaterOnWafer());
+
+	explicit SendingRepeaterOnWafer(
+	    SendingRepeaterOnHICANN const& sending_repeater, HICANNOnWafer const& h = HICANNOnWafer()) :
+	    base(sending_repeater, h)
+	{}
+
+	explicit SendingRepeaterOnWafer(enum_type const& e) : base(e) {}
+
+	SendingRepeaterOnHICANN toSendingRepeaterOnHICANN() const
+	{
+		return This();
+	}
+};
+
+
 struct GENPYBIND(inline_base("*")) HRepeaterOnHICANN
     : public common::detail::GridCoordinate<
           HRepeaterOnHICANN,
@@ -601,6 +627,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::TestPortOnRepeaterBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::RepeaterBlockOnHICANN)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::RepeaterBlockOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SendingRepeaterOnHICANN)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SendingRepeaterOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::BackgroundGeneratorOnHICANN)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::DNCMergerOnHICANN)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::DNCMergerOnWafer)
@@ -622,5 +649,8 @@ HALCO_GEOMETRY_HASH_CLASS(
 HALCO_GEOMETRY_HASH_CLASS(
     halco::hicann::v2::HICANNMixin<halco::hicann::v2::VLineOnWafer BOOST_PP_COMMA()
     halco::hicann::v2::VLineOnHICANN>)
+HALCO_GEOMETRY_HASH_CLASS(
+    halco::hicann::v2::HICANNMixin<halco::hicann::v2::SendingRepeaterOnWafer BOOST_PP_COMMA()
+                                       halco::hicann::v2::SendingRepeaterOnHICANN>)
 
 } // std

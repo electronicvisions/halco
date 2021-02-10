@@ -144,6 +144,16 @@ TEST(FormatHelper, ShortFormat) {
 	EXPECT_EQ(short_format(nrn), "N006");
 	EXPECT_EQ(to_string(nrn), "N006");
 	EXPECT_EQ(boost::get<NeuronOnHICANN>(from_string("N006")), nrn);
+
+	SendingRepeaterOnHICANN sr(Enum(2));
+	EXPECT_EQ(short_format(sr), "SR002");
+	EXPECT_EQ(to_string(sr), "SR002");
+	EXPECT_EQ(boost::get<SendingRepeaterOnHICANN>(from_string("SR002")), sr);
+
+	SendingRepeaterOnWafer sr_on_wafer(sr, h);
+	EXPECT_EQ(short_format(sr_on_wafer), "H003SR002");
+	EXPECT_EQ(to_string(sr_on_wafer), "H003SR002");
+	EXPECT_EQ(boost::get<SendingRepeaterOnWafer>(from_string("H003SR002")), sr_on_wafer);
 }
 
 TEST(FormatHelper, SlurmLicense)

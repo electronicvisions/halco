@@ -53,6 +53,7 @@ struct QuadrantOnHICANN;
 struct RepeaterBlockOnHICANN;
 struct RowOnSynapseDriver;
 struct SendingRepeaterOnHICANN;
+struct SendingRepeaterOnWafer;
 struct SocketOnWafer;
 struct SynapseColumnOnHICANN;
 struct SynapseDriverOnHICANN;

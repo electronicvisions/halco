@@ -75,6 +75,7 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
     RepeaterBlockOnWafer  => iterable
     RowOnSynapseDriver    => linear, iterable
     SendingRepeaterOnHICANN => linear, iterable
+    SendingRepeaterOnWafer => iterable
     SocketOnWIO           => linear, iterable
     SynapseArrayOnHICANN  => linear, iterable
     SynapseColumnOnHICANN => linear, iterable
@@ -363,6 +364,31 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
         self.assertEqual(C.from_string("N006"), nrn)
         self.assertEqual(C.from_string("N06"), nrn)
         self.assertEqual(C.from_string("N6"), nrn)
+
+        if GENPYBIND_POSTFIX and sys.version_info.major == 2:
+            sr = C.SendingRepeaterOnHICANN(int(Enum(3)))
+        else:
+            sr = C.SendingRepeaterOnHICANN(Enum(3))
+
+        self.assertEqual(C.short_format(sr), "SR003")
+        self.assertEqual(C.to_string(sr), "SR003")
+        self.assertEqual(C.from_string("SR003"), sr)
+        self.assertEqual(C.from_string("SR03"), sr)
+        self.assertEqual(C.from_string("SR3"), sr)
+
+        sr_on_wafer = C.SendingRepeaterOnWafer(sr, h)
+        self.assertEqual(C.short_format(sr_on_wafer), "H003SR003")
+        self.assertEqual(C.to_string(sr_on_wafer), "H003SR003")
+        self.assertEqual(C.from_string("H003SR003"), sr_on_wafer)
+        self.assertEqual(C.from_string("H03SR003"), sr_on_wafer)
+        self.assertEqual(C.from_string("H3SR003"), sr_on_wafer)
+        self.assertEqual(C.from_string("H003SR03"), sr_on_wafer)
+        self.assertEqual(C.from_string("H03SR03"), sr_on_wafer)
+        self.assertEqual(C.from_string("H3SR03"), sr_on_wafer)
+        self.assertEqual(C.from_string("H003SR3"), sr_on_wafer)
+        self.assertEqual(C.from_string("H03SR3"), sr_on_wafer)
+        self.assertEqual(C.from_string("H3SR3"), sr_on_wafer)
+
 
     def test_synapseswitchrow_driver(self):
         if GENPYBIND_POSTFIX:

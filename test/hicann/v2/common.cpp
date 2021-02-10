@@ -83,6 +83,7 @@ typedef ::testing::Types<
 	RepeaterBlockOnWafer,
 	RowOnSynapseDriver,
 	SendingRepeaterOnHICANN,
+	SendingRepeaterOnWafer,
 	SideHorizontal,
 	SideVertical,
 	SocketOnWIO,

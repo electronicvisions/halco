@@ -27,11 +27,12 @@ class MixedOnWaferCoordinateTest : public ::testing::Test
 {};
 
 typedef ::testing::Types<
-	DNCMergerOnWafer,
-	NeuronBlockOnWafer,
-	NeuronOnWafer,
-	SynapseOnWafer
-> CoordinateOnWaferTypes;
+    DNCMergerOnWafer,
+    NeuronBlockOnWafer,
+    NeuronOnWafer,
+    SynapseOnWafer,
+    SendingRepeaterOnWafer>
+    CoordinateOnWaferTypes;
 
 TYPED_TEST_SUITE(MixedOnWaferCoordinateTest, CoordinateOnWaferTypes);
 
