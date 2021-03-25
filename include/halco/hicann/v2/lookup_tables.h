@@ -53,6 +53,10 @@ DNCOnWafer gridLookupDNCOnWafer(FPGAOnWafer const f);
 // Return the Trigger position on a Wafer
 TriggerOnWafer gridLookupTriggerOnWafer(DNCOnWafer const dnc);
 
+// Return the ADCGroup connected to a DNC
+// Each group corresponds to {P1|P4,P2|P5,P3|P6}{top_anab,bottom_anab}. c.f. 2240, 3877
+ADCGroupOnWafer gridLookupADCGroupOnWafer(DNCOnWafer const dnc);
+
 // Return the Ananas connected to a Trigger
 AnanasOnWafer gridLookupAnanasOnWafer(TriggerOnWafer const trigger);
 

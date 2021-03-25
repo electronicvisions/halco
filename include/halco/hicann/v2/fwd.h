@@ -4,6 +4,7 @@ namespace v2 {
 
 struct AnalogOnDNC;
 struct AnalogOnHICANN;
+struct ADCGroupOnWafer;
 struct BackgroundGeneratorOnHICANN;
 struct ChannelOnADC;
 struct DNCGlobal;

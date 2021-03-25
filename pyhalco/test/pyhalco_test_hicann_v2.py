@@ -10,6 +10,7 @@ GENPYBIND_POSTFIX = os.environ.get("GENPYBIND_POSTFIX", False)
 @parametrize
 class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
     COORDINATES = """
+    ADCGroupOnWafer       => linear, iterable
     AnalogOnDNC           => linear, iterable
     AnalogOnHICANN        => linear, iterable
     BackgroundGeneratorOnHICANN  =>  linear, iterable

@@ -50,6 +50,11 @@ TriggerOnWafer DNCOnWafer::toTriggerOnWafer() const
 	return gridLookupTriggerOnWafer(*this);
 }
 
+ADCGroupOnWafer DNCOnWafer::toADCGroupOnWafer() const
+{
+	return gridLookupADCGroupOnWafer(*this);
+}
+
 std::array<AnanasChannelOnAnanasSlice, AnalogOnDNC::size> DNCOnWafer::toAnanasChannelOnAnanasSlice()
     const
 {

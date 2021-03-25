@@ -134,6 +134,17 @@ std::array<size_t, 48> const reticle_adc_trigger_grid = {{
               0,  0,  0
 }};
 
+std::array<size_t, 48> const reticle_adc_group_grid = {{
+              0,  0,  0,
+          1,  0,  0,  0,  0,
+      1,  1,  1,  2,  2,  0,  2,
+  1,  1,  1,  1,  2,  2,  2,  2,  2,
+  3,  3,  3,  3,  4,  4,  4,  4,  4,
+      3,  3,  3,  4,  4,  5,  4,
+          3,  5,  5,  5,  5,
+              5,  5,  5
+}};
+
 std::array<size_t, 12> const adc_trigger_ananas_grid = {{0,0,0,1,1,1,1,1,1,0,0,0}};
 
 std::array<size_t, 12> const adc_trigger_ananasslice_grid = {{0,1,2,3,4,5,0,1,2,3,4,5}};
@@ -186,6 +197,11 @@ DNCOnWafer gridLookupDNCOnWafer(FPGAOnWafer const f)
 TriggerOnWafer gridLookupTriggerOnWafer(DNCOnWafer const dnc)
 {
 	return TriggerOnWafer(reticle_adc_trigger_grid.at(dnc.toEnum()));
+}
+
+ADCGroupOnWafer gridLookupADCGroupOnWafer(DNCOnWafer const dnc)
+{
+	return ADCGroupOnWafer(reticle_adc_group_grid.at(dnc.toEnum()));
 }
 
 AnanasOnWafer gridLookupAnanasOnWafer(TriggerOnWafer const trigger)

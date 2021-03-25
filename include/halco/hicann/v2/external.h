@@ -121,6 +121,7 @@ struct GENPYBIND(inline_base("*")) DNCOnWafer
 	FPGAOnWafer toFPGAOnWafer() const;
 	PowerCoordinate toPowerCoordinate() const;
 	TriggerOnWafer toTriggerOnWafer() const;
+	ADCGroupOnWafer toADCGroupOnWafer() const;
 	std::array<AnanasChannelOnAnanasSlice, ::halco::hicann::v2::AnalogOnDNC::size>
 	toAnanasChannelOnAnanasSlice() const;
 	AuxPwrOnWafer toAuxPwrOnWafer() const;
@@ -439,6 +440,15 @@ struct GENPYBIND(inline_base("*")) TriggerOnWafer
 	AnanasSliceOnWafer toAnanasSliceOnWafer() const;
 };
 
+struct GENPYBIND(inline_base("*")) ADCGroupOnWafer
+    : public common::detail::RantWrapper<ADCGroupOnWafer, uint_fast16_t, 5, 0>
+{
+	PYPP_CONSTEXPR explicit ADCGroupOnWafer(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
 struct GENPYBIND(inline_base("*WaferMixin*")) TriggerGlobal
     : public WaferMixin<TriggerGlobal, TriggerOnWafer>
 {
@@ -480,6 +490,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::AnanasSliceOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::AuxPwrOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::TriggerOnADC)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::TriggerOnWafer)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::ADCGroupOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::AnalogOnHICANN)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::AnalogOnDNC)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::ChannelOnADC)

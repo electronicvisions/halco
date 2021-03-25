@@ -22,6 +22,7 @@ class CommonCoordinateTestNtoZ : public ::testing::Test {};
 typedef ::testing::Types<
 	AnalogOnDNC,
 	AnalogOnHICANN,
+	ADCGroupOnWafer,
 	BackgroundGeneratorOnHICANN,
 	ChannelOnADC,
 	CrossbarSwitchOnHICANN,
