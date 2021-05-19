@@ -1,5 +1,13 @@
 # Coordinate Systems for BrainScaleS architectures
 
+In order to configure specific components in a hardware system they have to be uniquely identifiable.
+`halco` provides a coordinate system for the neuromorphic BrainScaleS platform.
+In combination with the associated configurational data ([halbe](https://github.com/electronicvisions/halbe) for BrainScaleS-1 and [haldls](https://github.com/electronicvisions/haldls) for BrainScaleS-2) they provide the basis to configure the neuromorphic system.
+
+More information about the design principle of `halco` can be found in the documentation.
+The raw version can be found in [this repository](doc/index.rst).
+A compiled version is hosted on [github pages](https://electronicvisions.github.io/documentation-brainscales2/halco/index.html).
+
 ## License
 
 ```
