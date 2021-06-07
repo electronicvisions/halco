@@ -21,6 +21,14 @@ template <typename T>
 struct has_base_t<T, std::void_t<typename T::base_t>> : std::true_type
 {};
 
+template <typename T, typename = void>
+struct has_enum_type : std::false_type
+{};
+
+template <typename T>
+struct has_enum_type<T, std::void_t<typename T::enum_type>> : std::true_type
+{};
+
 template <typename T>
 auto to_numpy(T const& self)
 {
@@ -50,8 +58,15 @@ auto to_numpy(T const& self)
 		if constexpr (
 		    ::halco::common::detail::IsBaseType<typename T::value_type::base_t>::value ||
 		    ::halco::common::detail::IsRantWrapper<typename T::value_type::base_t>::value) {
-			auto ret =
-			    pybind11::array_t<typename T::value_type::value_type>(std::tuple_size<T>::value);
+			auto ret = [&] {
+				if constexpr (has_enum_type<typename T::value_type>::value) {
+					return pybind11::array_t<typename T::value_type::local_type>(
+					    std::tuple_size<T>::value);
+				} else {
+					return pybind11::array_t<typename T::value_type::value_type>(
+					    std::tuple_size<T>::value);
+				}
+			}();
 			copy_1d(self, ret);
 			return ret;
 		}
@@ -125,7 +140,13 @@ void from_numpy(T& self, pybind11::array const& array)
 		    ::halco::common::detail::IsBaseType<typename T::value_type::base_t>::value ||
 		    ::halco::common::detail::IsRantWrapper<typename T::value_type::base_t>::value) {
 			check_1d(array, self);
-			auto const array_t = pybind11::array_t<typename T::value_type::value_type>(array);
+			auto const array_t = [&] {
+				if constexpr (has_enum_type<typename T::value_type>::value) {
+					return pybind11::array_t<typename T::value_type::local_type>(array);
+				} else {
+					return pybind11::array_t<typename T::value_type::value_type>(array);
+				}
+			}();
 			auto const access = array_t.template unchecked<1>();
 			copy_1d(access, self);
 			return;
