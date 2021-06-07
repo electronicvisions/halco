@@ -34,7 +34,9 @@ struct GENPYBIND(inline_base("*")) SynapseDriverOnSynapseDriverBlock
 	PADIBusOnPADIBusBlock toPADIBusOnPADIBusBlock() const;
 	SynapseDriverOnPADIBus toSynapseDriverOnPADIBus() const;
 
-	common::typed_array<SynapseRowOnSynram, SynapseRowOnSynapseDriver> toSynapseRowOnSynram() const;
+	typedef common::typed_array<SynapseRowOnSynram, SynapseRowOnSynapseDriver> synapse_row_type
+	    GENPYBIND(opaque(false));
+	synapse_row_type toSynapseRowOnSynram() const;
 };
 
 
@@ -46,8 +48,9 @@ struct GENPYBIND(inline_base("*")) SynapseDriverOnPADIBus
 	    rant_t(val)
 	{}
 
-	common::typed_array<SynapseDriverOnSynapseDriverBlock, PADIBusOnPADIBusBlock>
-	toSynapseDriverOnSynapseDriverBlock() const;
+	typedef common::typed_array<SynapseDriverOnSynapseDriverBlock, PADIBusOnPADIBusBlock>
+	    synapse_driver_type GENPYBIND(opaque(false));
+	synapse_driver_type toSynapseDriverOnSynapseDriverBlock() const;
 };
 
 

@@ -166,5 +166,7 @@ struct GENPYBIND(inline_base("*SynramMixin*")) NeuronResetQuadOnDLS
 	{
 		return This();
 	}
-	common::typed_array<NeuronResetOnDLS, EntryOnQuad> toNeuronResetOnDLS() const;
+	typedef common::typed_array<NeuronResetOnDLS, EntryOnQuad> neuron_reset_type
+	    GENPYBIND(opaque(false));
+	neuron_reset_type toNeuronResetOnDLS() const;
 };

@@ -38,7 +38,9 @@ struct GENPYBIND(inline_base("*")) SynapseQuadColumnOnDLS
 
 	ColumnCorrelationQuadOnSynram toColumnCorrelationQuadOnSynram() const;
 	ColumnCurrentQuadOnSynram toColumnCurrentQuadOnSynram() const;
-	common::typed_array<NeuronColumnOnDLS, EntryOnQuad> toNeuronColumnOnDLS() const;
+	typedef common::typed_array<NeuronColumnOnDLS, EntryOnQuad> neuron_column_type
+	    GENPYBIND(opaque(false));
+	neuron_column_type toNeuronColumnOnDLS() const;
 };
 
 struct GENPYBIND(inline_base("*")) SynapseQuadOnSynram
