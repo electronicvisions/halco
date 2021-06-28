@@ -171,6 +171,36 @@ struct GENPYBIND(inline_base("*")) SynapseBiasSelectionOnDLS
 };
 
 
+struct GENPYBIND(inline_base("*")) ColumnCorrelationRowOnDLS
+    : public common::detail::RantWrapper<ColumnCorrelationRowOnDLS, uint_fast16_t, 1, 0>
+{
+	constexpr explicit ColumnCorrelationRowOnDLS(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+
+#include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
+
+	static const ColumnCorrelationRowOnDLS top;
+	static const ColumnCorrelationRowOnDLS bottom;
+};
+
+
+struct GENPYBIND(inline_base("*")) ColumnCurrentRowOnDLS
+    : public common::detail::RantWrapper<ColumnCurrentRowOnDLS, uint_fast16_t, 1, 0>
+{
+	constexpr explicit ColumnCurrentRowOnDLS(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+
+#include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
+
+	static const ColumnCurrentRowOnDLS top;
+	static const ColumnCurrentRowOnDLS bottom;
+};
+
+
 struct GENPYBIND(inline_base("*")) SynapseWeightMatrixOnDLS
     : public common::detail::RantWrapper<SynapseWeightMatrixOnDLS, uint_fast16_t, 1, 0>
 {
@@ -227,6 +257,8 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseCorrelationCalibRowOnDLS
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapticInputOnNeuron)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseBiasSelectionOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CorrelationResetRowOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ColumnCorrelationRowOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ColumnCurrentRowOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseWeightMatrixOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseLabelMatrixOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseCorrelationCalibMatrixOnDLS)

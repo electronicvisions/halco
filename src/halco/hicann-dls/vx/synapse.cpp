@@ -87,6 +87,12 @@ SynapseRowOnDLS SynapseCorrelationCalibRowOnDLS::toSynapseRowOnDLS() const
 	return SynapseRowOnDLS(toEnum());
 }
 
+#define HEMISPHERE_CLASS ColumnCorrelationRowOnDLS
+#include "halco/hicann-dls/vx/convert_hemisphere.h"
+
+#define HEMISPHERE_CLASS ColumnCurrentRowOnDLS
+#include "halco/hicann-dls/vx/convert_hemisphere.h"
+
 #define HEMISPHERE_CLASS SynapseWeightMatrixOnDLS
 #include "halco/hicann-dls/vx/convert_hemisphere.h"
 
@@ -95,6 +101,12 @@ SynapseRowOnDLS SynapseCorrelationCalibRowOnDLS::toSynapseRowOnDLS() const
 
 #define HEMISPHERE_CLASS SynapseCorrelationCalibMatrixOnDLS
 #include "halco/hicann-dls/vx/convert_hemisphere.h"
+
+ColumnCorrelationRowOnDLS const ColumnCorrelationRowOnDLS::top{enum_vertical_top};
+ColumnCorrelationRowOnDLS const ColumnCorrelationRowOnDLS::bottom{enum_vertical_bottom};
+
+ColumnCurrentRowOnDLS const ColumnCurrentRowOnDLS::top{enum_vertical_top};
+ColumnCurrentRowOnDLS const ColumnCurrentRowOnDLS::bottom{enum_vertical_bottom};
 
 SynapseWeightMatrixOnDLS const SynapseWeightMatrixOnDLS::top{enum_vertical_top};
 SynapseWeightMatrixOnDLS const SynapseWeightMatrixOnDLS::bottom{enum_vertical_bottom};

@@ -12,6 +12,8 @@ COORDINATE(AtomicNeuronOnLogicalNeuron, halco::hicann_dls::vx::v1::AtomicNeuronO
 COORDINATE(NeuronColumnOnLogicalNeuron, halco::hicann_dls::vx::v1::NeuronColumnOnLogicalNeuron)
 COORDINATE(NeuronRowOnLogicalNeuron, halco::hicann_dls::vx::v1::NeuronRowOnLogicalNeuron)
 COORDINATE(CompartmentOnLogicalNeuron, halco::hicann_dls::vx::v1::CompartmentOnLogicalNeuron)
+COORDINATE(ColumnCorrelationRowOnDLS, halco::hicann_dls::vx::v1::ColumnCorrelationRowOnDLS)
+COORDINATE(ColumnCurrentRowOnDLS, halco::hicann_dls::vx::v1::ColumnCurrentRowOnDLS)
 COORDINATE(VectorGeneratorFIFOWordOnFPGA, halco::hicann_dls::vx::v1::VectorGeneratorFIFOWordOnFPGA)
 COORDINATE(VectorGeneratorTriggerOnFPGA, halco::hicann_dls::vx::v1::VectorGeneratorTriggerOnFPGA)
 COORDINATE(VectorGeneratorNotificationAddressOnFPGA, halco::hicann_dls::vx::v1::VectorGeneratorNotificationAddressOnFPGA)

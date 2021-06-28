@@ -15,6 +15,9 @@ using SynapseLabelRowOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::SynapseLa
 using SynapseCorrelationCalibRowOnDLS GENPYBIND(visible) =
     halco::hicann_dls::vx::SynapseCorrelationCalibRowOnDLS;
 using CorrelationResetRowOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::CorrelationResetRowOnDLS;
+using ColumnCorrelationRowOnDLS GENPYBIND(visible) =
+    halco::hicann_dls::vx::ColumnCorrelationRowOnDLS;
+using ColumnCurrentRowOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::ColumnCurrentRowOnDLS;
 using SynapticInputOnNeuron GENPYBIND(visible) = halco::hicann_dls::vx::SynapticInputOnNeuron;
 using SynapseBiasSelectionOnDLS GENPYBIND(visible) =
     halco::hicann_dls::vx::SynapseBiasSelectionOnDLS;
