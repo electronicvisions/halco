@@ -37,6 +37,7 @@ TEST_THAT(IsPrintable) {
 	ASSERT_FALSE(tmp.str().empty());
 }
 
+#ifndef TEST_CEREAL
 TEST_THAT(HasSerialization) {
 	TypeParam obj, obj2;
 
@@ -54,6 +55,7 @@ TEST_THAT(HasSerialization) {
 
 	ASSERT_EQ(obj2, obj);
 }
+#endif
 
 #ifdef TEST_CEREAL
 TEST_THAT(HasCerealization) {

@@ -296,6 +296,24 @@ struct GENPYBIND(inline_base("*")) NeuronBackendSRAMTimingConfigOnDLS
 	{}
 };
 
+
+/**
+ * Vertical neuron location on a logical neuron.
+ */
+struct GENPYBIND(inline_base("*")) NeuronRowOnLogicalNeuron
+    : public common::detail::RantWrapper<
+          NeuronRowOnLogicalNeuron,
+          uint_fast16_t,
+          NeuronRowOnDLS::max,
+          NeuronRowOnDLS::min>
+    , public common::detail::YRangedTrait
+{
+	constexpr explicit NeuronRowOnLogicalNeuron(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
 } // namespace halco::hicann_dls::vx
 
 namespace std {
@@ -320,5 +338,6 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikeCounterResetBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikeCounterResetOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronSRAMTimingConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronBackendSRAMTimingConfigOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronRowOnLogicalNeuron)
 
 } // namespace std

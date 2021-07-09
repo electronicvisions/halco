@@ -11,6 +11,83 @@
 using namespace halco::common;
 using namespace halco::hicann_dls::vx::v1;
 
+TEST(LogicalNeuronCompartments, Constructor)
+{
+	LogicalNeuronCompartments::Compartments correct{
+	    {CompartmentOnLogicalNeuron(0),
+	     {AtomicNeuronOnLogicalNeuron(Enum(0)), AtomicNeuronOnLogicalNeuron(Enum(1))}},
+	    {CompartmentOnLogicalNeuron(1), {AtomicNeuronOnLogicalNeuron(Enum(2))}},
+	};
+	EXPECT_NO_THROW(LogicalNeuronCompartments{correct});
+
+	LogicalNeuronCompartments::Compartments not_unique_neurons{
+	    {CompartmentOnLogicalNeuron(0),
+	     {AtomicNeuronOnLogicalNeuron(Enum(1)), AtomicNeuronOnLogicalNeuron(Enum(1))}},
+	    {CompartmentOnLogicalNeuron(1), {AtomicNeuronOnLogicalNeuron(Enum(2))}},
+	};
+	EXPECT_THROW(LogicalNeuronCompartments{not_unique_neurons}, std::runtime_error);
+
+	LogicalNeuronCompartments::Compartments not_unique_neurons_different_compartments{
+	    {CompartmentOnLogicalNeuron(0),
+	     {AtomicNeuronOnLogicalNeuron(Enum(1)), AtomicNeuronOnLogicalNeuron(Enum(2))}},
+	    {CompartmentOnLogicalNeuron(1), {AtomicNeuronOnLogicalNeuron(Enum(2))}}};
+	EXPECT_THROW(
+	    LogicalNeuronCompartments{not_unique_neurons_different_compartments}, std::runtime_error);
+}
+
+TEST(LogicalNeuronCompartments, FlipX)
+{
+	{
+		LogicalNeuronCompartments::Compartments compartments{
+		    {CompartmentOnLogicalNeuron(0),
+		     {AtomicNeuronOnLogicalNeuron(Enum(0)), AtomicNeuronOnLogicalNeuron(Enum(1))}},
+		    {CompartmentOnLogicalNeuron(1), {AtomicNeuronOnLogicalNeuron(Enum(2))}},
+		};
+		LogicalNeuronCompartments logical_neuron_compartments(compartments);
+		auto const flipped_logical_neuron_compartments = logical_neuron_compartments.flip_x();
+
+		LogicalNeuronCompartments::Compartments flipped_compartments{
+		    {CompartmentOnLogicalNeuron(0),
+		     {AtomicNeuronOnLogicalNeuron(Enum(2)), AtomicNeuronOnLogicalNeuron(Enum(1))}},
+		    {CompartmentOnLogicalNeuron(1), {AtomicNeuronOnLogicalNeuron(Enum(0))}},
+		};
+		EXPECT_EQ(flipped_logical_neuron_compartments.get_compartments(), flipped_compartments);
+	}
+	{
+		LogicalNeuronCompartments::Compartments compartments{
+		    {CompartmentOnLogicalNeuron(0),
+		     {AtomicNeuronOnLogicalNeuron(Enum(0)), AtomicNeuronOnLogicalNeuron(Enum(1))}},
+		    {CompartmentOnLogicalNeuron(1), {AtomicNeuronOnLogicalNeuron(Enum(128))}},
+		};
+		LogicalNeuronCompartments logical_neuron_compartments(compartments);
+		auto const flipped_logical_neuron_compartments = logical_neuron_compartments.flip_x();
+		LogicalNeuronCompartments::Compartments flipped_compartments{
+		    {CompartmentOnLogicalNeuron(0),
+		     {AtomicNeuronOnLogicalNeuron(Enum(1)), AtomicNeuronOnLogicalNeuron(Enum(0))}},
+		    {CompartmentOnLogicalNeuron(1), {AtomicNeuronOnLogicalNeuron(Enum(129))}},
+		};
+		EXPECT_EQ(flipped_logical_neuron_compartments.get_compartments(), flipped_compartments);
+	}
+}
+
+TEST(LogicalNeuronCompartments, FlipY)
+{
+	LogicalNeuronCompartments::Compartments compartments{
+	    {CompartmentOnLogicalNeuron(0),
+	     {AtomicNeuronOnLogicalNeuron(Enum(0)), AtomicNeuronOnLogicalNeuron(Enum(1))}},
+	    {CompartmentOnLogicalNeuron(1), {AtomicNeuronOnLogicalNeuron(Enum(128))}},
+	};
+	LogicalNeuronCompartments logical_neuron_compartments(compartments);
+	auto const flipped_logical_neuron_compartments = logical_neuron_compartments.flip_y();
+
+	LogicalNeuronCompartments::Compartments flipped_compartments{
+	    {CompartmentOnLogicalNeuron(0),
+	     {AtomicNeuronOnLogicalNeuron(Enum(128)), AtomicNeuronOnLogicalNeuron(Enum(129))}},
+	    {CompartmentOnLogicalNeuron(1), {AtomicNeuronOnLogicalNeuron(Enum(0))}},
+	};
+	EXPECT_EQ(flipped_logical_neuron_compartments.get_compartments(), flipped_compartments);
+}
+
 TEST(NeuronBackendConfigOnNeuronBackendConfigBlock, toNeuronEventOutputOnNeuronBackendBlock)
 {
 	{

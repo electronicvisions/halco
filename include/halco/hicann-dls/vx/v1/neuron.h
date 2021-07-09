@@ -14,6 +14,9 @@
 #include "halco/hicann-dls/vx/v1/synapse_driver.h"
 #include "halco/hicann-dls/vx/v1/synram.h"
 
+namespace cereal {
+class access;
+} // namespace cereal
 
 namespace halco::hicann_dls::vx::v1 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V1 {
 

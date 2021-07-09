@@ -214,3 +214,258 @@ common::typed_array<NeuronResetOnDLS, EntryOnQuad> NeuronResetQuadOnDLS::toNeuro
 	}
 	return ret;
 }
+
+LogicalNeuronCompartments::LogicalNeuronCompartments(Compartments const& compartments)
+{
+	std::set<AtomicNeuronOnLogicalNeuron> unique;
+	size_t n = 0;
+	for (auto const& [_, compartment] : compartments) {
+		unique.insert(compartment.begin(), compartment.end());
+		n += compartment.size();
+	}
+	if (unique.size() != n) {
+		throw std::runtime_error("Multiple compartments contain the same neuron(s).");
+	}
+	m_compartments = compartments;
+}
+
+LogicalNeuronCompartments::Compartments const& LogicalNeuronCompartments::get_compartments() const
+{
+	return m_compartments;
+}
+
+NeuronColumnOnLogicalNeuron LogicalNeuronCompartments::get_left_most_column() const
+{
+	NeuronColumnOnLogicalNeuron lmost(NeuronColumnOnLogicalNeuron::max);
+	for (auto const& [_, compartment] : m_compartments) {
+		auto const lm =
+		    std::min_element(
+		        compartment.begin(), compartment.end(),
+		        [](auto const& a, auto const& b) {
+			        return a.toNeuronColumnOnLogicalNeuron() < b.toNeuronColumnOnLogicalNeuron();
+		        })
+		        ->toNeuronColumnOnLogicalNeuron();
+		lmost = std::min(lm, lmost);
+	}
+	return lmost;
+}
+
+NeuronColumnOnLogicalNeuron LogicalNeuronCompartments::get_right_most_column() const
+{
+	NeuronColumnOnLogicalNeuron rmost(NeuronColumnOnLogicalNeuron::min);
+	for (auto const& [_, compartment] : m_compartments) {
+		auto const rm =
+		    std::max_element(
+		        compartment.begin(), compartment.end(),
+		        [](auto const& a, auto const& b) {
+			        return a.toNeuronColumnOnLogicalNeuron() < b.toNeuronColumnOnLogicalNeuron();
+		        })
+		        ->toNeuronColumnOnLogicalNeuron();
+		rmost = std::max(rm, rmost);
+	}
+	return rmost;
+}
+
+NeuronRowOnLogicalNeuron LogicalNeuronCompartments::get_top_most_row() const
+{
+	NeuronRowOnLogicalNeuron tmost(NeuronRowOnLogicalNeuron::max);
+	for (auto const& [_, compartment] : m_compartments) {
+		auto const tm =
+		    std::min_element(
+		        compartment.begin(), compartment.end(),
+		        [](auto const& a, auto const& b) {
+			        return a.toNeuronRowOnLogicalNeuron() < b.toNeuronRowOnLogicalNeuron();
+		        })
+		        ->toNeuronRowOnLogicalNeuron();
+		tmost = std::min(tm, tmost);
+	}
+	return tmost;
+}
+
+NeuronRowOnLogicalNeuron LogicalNeuronCompartments::get_bottom_most_row() const
+{
+	NeuronRowOnLogicalNeuron bmost(NeuronRowOnLogicalNeuron::min);
+	for (auto const& [_, compartment] : m_compartments) {
+		auto const bm =
+		    std::max_element(
+		        compartment.begin(), compartment.end(),
+		        [](auto const& a, auto const& b) {
+			        return a.toNeuronRowOnLogicalNeuron() < b.toNeuronRowOnLogicalNeuron();
+		        })
+		        ->toNeuronRowOnLogicalNeuron();
+		bmost = std::max(bm, bmost);
+	}
+	return bmost;
+}
+
+LogicalNeuronCompartments LogicalNeuronCompartments::flip_x() const
+{
+	Compartments flipped_compartments;
+	auto const lmost = get_left_most_column();
+	auto const rmost = get_right_most_column();
+	for (auto const& [index, compartment] : m_compartments) {
+		Compartment& flipped_compartment = flipped_compartments[index];
+		for (auto const& neuron : compartment) {
+			flipped_compartment.push_back(AtomicNeuronOnLogicalNeuron(
+			    NeuronColumnOnLogicalNeuron(
+			        lmost.value() + rmost.value() - neuron.toNeuronColumnOnLogicalNeuron().value()),
+			    neuron.toNeuronRowOnLogicalNeuron()));
+		}
+	}
+	return LogicalNeuronCompartments(flipped_compartments);
+}
+
+LogicalNeuronCompartments LogicalNeuronCompartments::flip_y() const
+{
+	Compartments flipped_compartments;
+	auto const tmost = get_top_most_row();
+	auto const bmost = get_bottom_most_row();
+	for (auto const& [index, compartment] : m_compartments) {
+		Compartment& flipped_compartment = flipped_compartments[index];
+		for (auto const& neuron : compartment) {
+			flipped_compartment.push_back(AtomicNeuronOnLogicalNeuron(
+			    neuron.toNeuronColumnOnLogicalNeuron(),
+			    NeuronRowOnLogicalNeuron(
+			        tmost.value() + bmost.value() - neuron.toNeuronRowOnLogicalNeuron().value())));
+		}
+	}
+	return LogicalNeuronCompartments(flipped_compartments);
+}
+
+bool LogicalNeuronCompartments::operator==(LogicalNeuronCompartments const& other) const
+{
+	return m_compartments == other.m_compartments;
+}
+
+bool LogicalNeuronCompartments::operator!=(LogicalNeuronCompartments const& other) const
+{
+	return !(*this == other);
+}
+
+bool LogicalNeuronCompartments::operator<(LogicalNeuronCompartments const& other) const
+{
+	return m_compartments < other.m_compartments;
+}
+
+bool LogicalNeuronCompartments::operator>(LogicalNeuronCompartments const& other) const
+{
+	return m_compartments > other.m_compartments;
+}
+
+bool LogicalNeuronCompartments::operator<=(LogicalNeuronCompartments const& other) const
+{
+	return m_compartments <= other.m_compartments;
+}
+
+bool LogicalNeuronCompartments::operator>=(LogicalNeuronCompartments const& other) const
+{
+	return m_compartments >= other.m_compartments;
+}
+
+std::ostream& operator<<(std::ostream& os, LogicalNeuronCompartments const& config)
+{
+	os << "LogicalNeuronCompartments(\n";
+	for (auto const& [index, compartment] : config.m_compartments) {
+		os << index << "\n";
+		for (auto const& neuron : compartment) {
+			os << "\t" << neuron << "\n";
+		}
+	}
+	os << ")";
+	return os;
+}
+
+template <typename Archive>
+void LogicalNeuronCompartments::serialize(Archive& ar, uint32_t const)
+{
+	ar(m_compartments);
+}
+
+LogicalNeuronOnDLS::LogicalNeuronOnDLS(
+    LogicalNeuronCompartments const& compartments, AtomicNeuronOnDLS const& anchor)
+{
+	auto const lmost = compartments.get_left_most_column();
+	auto const rmost = compartments.get_right_most_column();
+	auto const bmost = compartments.get_bottom_most_row();
+	auto const tmost = compartments.get_top_most_row();
+	auto const height = bmost.value() - tmost.value();
+	auto const width = rmost.value() - lmost.value();
+
+	if ((anchor.toNeuronRowOnDLS().value() + height) > NeuronRowOnDLS::max) {
+		throw std::runtime_error(
+		    "LogicalNeuron anchor results in placement of compartments outside of neuron grid.");
+	}
+	if ((((anchor.toNeuronColumnOnDLS().value()) < NeuronColumnOnLogicalNeuron::max) &&
+	     ((anchor.toNeuronColumnOnDLS().value() + width) > NeuronColumnOnLogicalNeuron::max)) ||
+	    (((anchor.toNeuronColumnOnDLS().value()) > NeuronColumnOnLogicalNeuron::max) &&
+	     ((anchor.toNeuronColumnOnDLS().value() + width) > NeuronColumnOnDLS::max))) {
+		throw std::runtime_error(
+		    "LogicalNeuron anchor results in placement of compartments outside of neuron grid.");
+	}
+	for (auto const& [index, compartment] : compartments.get_compartments()) {
+		auto& placed_compartment = m_compartments[index];
+		for (auto const& neuron : compartment) {
+			placed_compartment.push_back(AtomicNeuronOnDLS(
+			    NeuronColumnOnDLS(
+			        anchor.toNeuronColumnOnDLS().value() +
+			        neuron.toNeuronColumnOnLogicalNeuron().value() - lmost.value()),
+			    NeuronRowOnDLS(
+			        anchor.toNeuronRowOnDLS().value() +
+			        neuron.toNeuronRowOnLogicalNeuron().value() - tmost.value())));
+		}
+	}
+}
+
+LogicalNeuronOnDLS::PlacedCompartments LogicalNeuronOnDLS::get_placed_compartments() const
+{
+	return m_compartments;
+}
+
+bool LogicalNeuronOnDLS::operator==(LogicalNeuronOnDLS const& other) const
+{
+	return (m_compartments == other.m_compartments);
+}
+
+bool LogicalNeuronOnDLS::operator!=(LogicalNeuronOnDLS const& other) const
+{
+	return !(*this == other);
+}
+
+bool LogicalNeuronOnDLS::operator<(LogicalNeuronOnDLS const& other) const
+{
+	return m_compartments < other.m_compartments;
+}
+
+bool LogicalNeuronOnDLS::operator>(LogicalNeuronOnDLS const& other) const
+{
+	return m_compartments > other.m_compartments;
+}
+
+bool LogicalNeuronOnDLS::operator<=(LogicalNeuronOnDLS const& other) const
+{
+	return m_compartments <= other.m_compartments;
+}
+
+bool LogicalNeuronOnDLS::operator>=(LogicalNeuronOnDLS const& other) const
+{
+	return m_compartments >= other.m_compartments;
+}
+
+std::ostream& operator<<(std::ostream& os, LogicalNeuronOnDLS const& config)
+{
+	os << "LogicalNeuronOnDLS(\n";
+	for (auto const& [index, compartment] : config.m_compartments) {
+		os << index << "\n";
+		for (auto const& neuron : compartment) {
+			os << "\t" << neuron << "\n";
+		}
+	}
+	os << ")";
+	return os;
+}
+
+template <typename Archive>
+void LogicalNeuronOnDLS::serialize(Archive& ar, uint32_t const)
+{
+	ar(m_compartments);
+}

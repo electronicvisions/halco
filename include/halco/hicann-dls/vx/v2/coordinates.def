@@ -6,6 +6,12 @@
 #define LAST_COORDINATE(Name, Type) COORDINATE(Name, Type)
 #endif
 
+COORDINATE(LogicalNeuronOnDLS, halco::hicann_dls::vx::v2::LogicalNeuronOnDLS)
+COORDINATE(LogicalNeuronCompartments, halco::hicann_dls::vx::v2::LogicalNeuronCompartments)
+COORDINATE(AtomicNeuronOnLogicalNeuron, halco::hicann_dls::vx::v2::AtomicNeuronOnLogicalNeuron)
+COORDINATE(NeuronColumnOnLogicalNeuron, halco::hicann_dls::vx::v2::NeuronColumnOnLogicalNeuron)
+COORDINATE(NeuronRowOnLogicalNeuron, halco::hicann_dls::vx::v2::NeuronRowOnLogicalNeuron)
+COORDINATE(CompartmentOnLogicalNeuron, halco::hicann_dls::vx::v2::CompartmentOnLogicalNeuron)
 COORDINATE(VectorGeneratorFIFOWordOnFPGA, halco::hicann_dls::vx::v2::VectorGeneratorFIFOWordOnFPGA)
 COORDINATE(VectorGeneratorTriggerOnFPGA, halco::hicann_dls::vx::v2::VectorGeneratorTriggerOnFPGA)
 COORDINATE(VectorGeneratorNotificationAddressOnFPGA, halco::hicann_dls::vx::v2::VectorGeneratorNotificationAddressOnFPGA)

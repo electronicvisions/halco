@@ -33,6 +33,8 @@ using NeuronSRAMTimingConfigOnDLS GENPYBIND(visible) =
     halco::hicann_dls::vx::NeuronSRAMTimingConfigOnDLS;
 using NeuronBackendSRAMTimingConfigOnDLS GENPYBIND(visible) =
     halco::hicann_dls::vx::NeuronBackendSRAMTimingConfigOnDLS;
+using NeuronRowOnLogicalNeuron = halco::hicann_dls::vx::NeuronRowOnLogicalNeuron;
+
 
 /**
  * Horizontal neuron location on the two dimensional neuron grid.
@@ -80,6 +82,171 @@ struct GENPYBIND(inline_base("*")) AtomicNeuronOnDLS
 	ColumnCorrelationQuadOnDLS toColumnCorrelationQuadOnDLS() const;
 	ColumnCurrentQuadOnDLS toColumnCurrentQuadOnDLS() const;
 };
+
+
+/**
+ * Horizontal neuron location on a logical neuron.
+ */
+struct GENPYBIND(inline_base("*")) NeuronColumnOnLogicalNeuron
+    : public common::detail::RantWrapper<
+          NeuronColumnOnLogicalNeuron,
+          uint_fast16_t,
+          (NeuronColumnOnDLS::size / NeuronBackendConfigBlockOnDLS::size) - 1,
+          0>
+    , public common::detail::XRangedTrait
+{
+	constexpr explicit NeuronColumnOnLogicalNeuron(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+
+/**
+ * Local neuron location on a logical neuron.
+ */
+struct GENPYBIND(inline_base("*")) AtomicNeuronOnLogicalNeuron
+    : public common::detail::GridCoordinate<
+          AtomicNeuronOnLogicalNeuron,
+          NeuronColumnOnLogicalNeuron,
+          NeuronRowOnLogicalNeuron>
+{
+	GRID_COMMON_CONSTRUCTORS(AtomicNeuronOnLogicalNeuron)
+
+	NeuronColumnOnLogicalNeuron toNeuronColumnOnLogicalNeuron() const
+	{
+		return x();
+	}
+	NeuronRowOnLogicalNeuron toNeuronRowOnLogicalNeuron() const
+	{
+		return y();
+	}
+};
+
+
+/**
+ * Compartment index.
+ * Its range is chosen such that the maximally possible number of compartments in a neuron backend
+ * block can be created. This is size-2, because one compartment has to connect top and bottom row
+ * and therefore consists of two atomic neuron circuits.
+ */
+struct GENPYBIND(inline_base("*")) CompartmentOnLogicalNeuron
+    : public common::detail::RantWrapper<
+          CompartmentOnLogicalNeuron,
+          uint_fast16_t,
+          (AtomicNeuronOnDLS::size / NeuronBackendConfigBlockOnDLS::size) - 2,
+          0>
+{
+	constexpr explicit CompartmentOnLogicalNeuron(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+
+/**
+ * Logical neuron compartments.
+ */
+struct GENPYBIND(visible) LogicalNeuronCompartments
+{
+	typedef std::vector<AtomicNeuronOnLogicalNeuron> Compartment;
+	typedef std::map<CompartmentOnLogicalNeuron, Compartment> Compartments;
+
+	LogicalNeuronCompartments() = default;
+	/**
+	 * Construct logical neuron compartments from compartments.
+	 * The compartment members are to be unique.
+	 * @param compartments Compartments to construct neuron from
+	 */
+	explicit LogicalNeuronCompartments(Compartments const& compartments);
+
+	Compartments const& get_compartments() const;
+
+	/**
+	 * Flip locations in the x dimension.
+	 * 1 2 3 4 becomes 4 3 2 1
+	 * 5 6                 6 5
+	 * @return Flipped compartments
+	 */
+	LogicalNeuronCompartments flip_x() const;
+
+	/**
+	 * Flip locations in the y dimension.
+	 * 1 2 3 4 becomes 5 6
+	 * 5 6             1 2 3 4
+	 * @return Flipped compartments
+	 */
+	LogicalNeuronCompartments flip_y() const;
+
+	NeuronColumnOnLogicalNeuron get_left_most_column() const;
+	NeuronColumnOnLogicalNeuron get_right_most_column() const;
+
+	NeuronRowOnLogicalNeuron get_top_most_row() const;
+	NeuronRowOnLogicalNeuron get_bottom_most_row() const;
+
+	bool operator==(LogicalNeuronCompartments const& other) const;
+	bool operator!=(LogicalNeuronCompartments const& other) const;
+
+	bool operator<(LogicalNeuronCompartments const& other) const;
+	bool operator>(LogicalNeuronCompartments const& other) const;
+	bool operator<=(LogicalNeuronCompartments const& other) const;
+	bool operator>=(LogicalNeuronCompartments const& other) const;
+
+	GENPYBIND(stringstream)
+	friend std::ostream& operator<<(std::ostream& os, LogicalNeuronCompartments const& config);
+
+private:
+	friend class cereal::access;
+	template <typename Archive>
+	void serialize(Archive& ar, uint32_t);
+
+	Compartments m_compartments;
+};
+
+
+/**
+ * Logical neuron location on the neuron grid.
+ */
+struct GENPYBIND(visible) LogicalNeuronOnDLS
+{
+	typedef std::map<CompartmentOnLogicalNeuron, std::vector<AtomicNeuronOnDLS>> PlacedCompartments;
+
+	LogicalNeuronOnDLS() = default;
+
+	/**
+	 * Construct logical neuron location from compartments and global anchor.
+	 * The compartments' relative coordinates are anchored at the left top corner.
+	 * @param compartments Compartments to construct neuron from
+	 * @param anchor Anchor to construct neuron from
+	 */
+	LogicalNeuronOnDLS(
+	    LogicalNeuronCompartments const& compartments, AtomicNeuronOnDLS const& anchor);
+
+	/**
+	 * Get compartments placed by anchor.
+	 * @return Placed compartments
+	 */
+	PlacedCompartments get_placed_compartments() const;
+
+	bool operator==(LogicalNeuronOnDLS const& other) const;
+	bool operator!=(LogicalNeuronOnDLS const& other) const;
+
+	GENPYBIND(stringstream)
+	friend std::ostream& operator<<(std::ostream& os, LogicalNeuronOnDLS const& config);
+
+	bool operator<(LogicalNeuronOnDLS const& other) const;
+	bool operator>(LogicalNeuronOnDLS const& other) const;
+	bool operator<=(LogicalNeuronOnDLS const& other) const;
+	bool operator>=(LogicalNeuronOnDLS const& other) const;
+
+private:
+	friend class cereal::access;
+	template <typename Archive>
+	void serialize(Archive& ar, uint32_t);
+
+	PlacedCompartments m_compartments;
+};
+
 
 HALCO_COORDINATE_MIXIN(NeuronConfigMixin, NeuronConfigBlockOnDLS, neuron)
 

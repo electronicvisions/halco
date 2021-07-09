@@ -7,6 +7,12 @@ from pyhalco_test_utils import parametrize, PyhalcoTest
 @parametrize
 class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     COORDINATES = """
+    NeuronColumnOnLogicalNeuron => linear, iterable
+    NeuronRowOnLogicalNeuron => linear, iterable
+    CompartmentOnLogicalNeuron => linear, iterable
+    AtomicNeuronOnLogicalNeuron => grid, iterable
+    LogicalNeuronCompartments => ignore
+    LogicalNeuronOnDLS => ignore
     SourceOnVectorGenerator => linear,iterable
     VectorGeneratorOnFPGA => linear,iterable
     VectorGeneratorControlOnFPGA => linear,iterable
