@@ -8,6 +8,7 @@ namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 struct CrossbarInputOnDLS;
 struct CrossbarL2OutputOnDLS;
+struct PADIBusOnDLS;
 
 /*************************\
    BackgroundSpikeSource
@@ -23,6 +24,7 @@ struct GENPYBIND(inline_base("*")) BackgroundSpikeSourceOnDLS
 
 	CrossbarInputOnDLS toCrossbarInputOnDLS() const;
 	CrossbarL2OutputOnDLS toCrossbarL2OutputOnDLS() const;
+	PADIBusOnDLS toPADIBusOnDLS() const;
 };
 
 } // namespace halco::hicann_dls::vx
