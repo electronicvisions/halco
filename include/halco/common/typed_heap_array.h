@@ -127,7 +127,7 @@ public:
 	value_type const* GENPYBIND(hidden) data() const noexcept { return elems.data(); }
 #endif
 
-	GENPYBIND(expose_as(__getitem__), return_value_policy(reference))
+	GENPYBIND(expose_as(__getitem__), return_value_policy(reference_internal))
 	const_reference get(Key const& key) const PYPP_HIDE_BODY({ return at(key); })
 
 	GENPYBIND(expose_as(__setitem__))

@@ -220,6 +220,11 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
         import pyhalco_hicann_dls_vx_v2
         return pyhalco_hicann_dls_vx_v2
 
+    def test_typed_array_element_access(self):
+        import pyhalco_hicann_dls_vx_v2 as halco
+        column = halco.SynapseQuadColumnOnDLS()
+        self.assertEqual(column.toNeuronColumnOnDLS()[halco.EntryOnQuad(0)], 0)
+
 
 if __name__ == '__main__':
     unittest.main()
