@@ -35,7 +35,7 @@ def _patch_enum(enum):
 
 
 def _patch_enums(module_dict):
-    for name, enum in module_dict.iteritems():
+    for name, enum in module_dict.items():
         if isinstance(enum, type) and issubclass(enum,int) and not (enum is int):
             _patch_enum(enum)
 

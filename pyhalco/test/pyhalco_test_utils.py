@@ -60,7 +60,7 @@ class PyhalcoTest(object):
 
         by_category['all'].difference_update(by_category['ignore'])
 
-        return {k: frozenset(v) for k, v in by_category.items()}
+        return {k: frozenset(v) for k, v in list(by_category.items())}
 
     @classmethod
     def coordinates_with_category(cls, name):
