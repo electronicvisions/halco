@@ -8,6 +8,7 @@
 #endif
 #include <boost/asio/ip/address.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/version.hpp>
 
 #include "halco/common/genpybind.h"
 #include "pywrap/compat/hash.hpp"
@@ -35,6 +36,8 @@ GENPYBIND_MANUAL({
 } // common
 } // halco
 
+// Hash already implemented in boost versions > 1.75
+#if BOOST_VERSION < 107600
 namespace std {
 
 template <>
@@ -50,6 +53,7 @@ struct hash<halco::common::IPv4>
 };
 
 } // std
+#endif // BOOST_VERSION
 
 namespace boost {
 namespace serialization {
