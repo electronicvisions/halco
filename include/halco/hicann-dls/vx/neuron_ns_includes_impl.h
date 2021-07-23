@@ -215,6 +215,23 @@ common::typed_array<NeuronResetOnDLS, EntryOnQuad> NeuronResetQuadOnDLS::toNeuro
 	return ret;
 }
 
+AtomicNeuronOnLogicalNeuron AtomicNeuronOnLogicalNeuron::get_right_neighbor() const
+{
+	AtomicNeuronOnLogicalNeuron neighbor(NeuronColumnOnLogicalNeuron(x().value() + 1), y());
+	return neighbor;
+}
+AtomicNeuronOnLogicalNeuron AtomicNeuronOnLogicalNeuron::get_left_neighbor() const
+{
+	AtomicNeuronOnLogicalNeuron neighbor(NeuronColumnOnLogicalNeuron(x().value() - 1), y());
+	return neighbor;
+}
+AtomicNeuronOnLogicalNeuron AtomicNeuronOnLogicalNeuron::get_opposite_row_neighbor() const
+{
+	AtomicNeuronOnLogicalNeuron neighbor(
+	    x(), NeuronRowOnLogicalNeuron((y().value() + 1) % NeuronRowOnLogicalNeuron::size));
+	return neighbor;
+}
+
 LogicalNeuronCompartments::LogicalNeuronCompartments(Compartments const& compartments)
 {
 	std::set<AtomicNeuronOnLogicalNeuron> unique;
