@@ -6,6 +6,15 @@
 #ifndef BOOST_ASIO_HAS_STD_ARRAY
 #define BOOST_ASIO_HAS_STD_ARRAY
 #endif
+
+// GCCXML has problems with atomics -> removed before boost asio is included
+#ifdef PYPLUSPLUS
+#undef __ATOMIC_RELAXED
+#undef __ATOMIC_ACQUIRE
+#undef __ATOMIC_RELEASE
+#undef __ATOMIC_ACQ_REL
+#endif // PYPLUSPLUS
+
 #include <boost/asio/ip/address.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/version.hpp>
