@@ -70,62 +70,34 @@ def build(bld):
             linkflags='-Wl,-z,defs'
         )
 
-        bld(
-            features='cxx pyembed',
-            target='pyhalco_hicann_dls_vx_v1_obj',
-            source='../src/halco/hicann-dls/vx/v1/pycoordinates.cpp',
-            use='halco_hicann_dls_vx_v1'
-        )
+        for hx_version in [1, 2]:
+            bld(
+                features='cxx pyembed',
+                target='pyhalco_hicann_dls_vx_v%s_obj' % hx_version,
+                source='../src/halco/hicann-dls/vx/v%s/pycoordinates.cpp' % hx_version,
+                use='halco_hicann_dls_vx_v%s' % hx_version
+            )
 
-        bld(
-            target='pyhalco_hicann_dls_vx_v1',
-            source='../include/halco/hicann-dls/vx/v1/pycoordinates.h',
-            genpybind_tags=['hicann_dls_vx', 'hicann_dls_vx_v1'],
-            features='genpybind cxx cxxshlib pyext pyembed',
-            use=['halco_common', 'halco_hicann_dls_vx_v1',
-                 'PYBIND11HALCO', 'pyhalco_common',
-                 'pyhalco_hicann_dls_vx_v1_obj'],
-            install_path='${PREFIX}/lib',
-            linkflags='-Wl,-z,defs'
-        )
+            bld(
+                target='pyhalco_hicann_dls_vx_v%s' % hx_version,
+                source='../include/halco/hicann-dls/vx/v%s/pycoordinates.h' % hx_version,
+                genpybind_tags=['hicann_dls_vx', 'hicann_dls_vx_v%s' % hx_version],
+                features='genpybind cxx cxxshlib pyext pyembed',
+                use=['halco_common', 'halco_hicann_dls_vx_v%s' % hx_version,
+                     'PYBIND11HALCO', 'pyhalco_common',
+                     'pyhalco_hicann_dls_vx_v%s_obj' % hx_version],
+                install_path='${PREFIX}/lib',
+                linkflags='-Wl,-z,defs'
+            )
 
-
-        bld(
-            features='cxx pyembed',
-            target='pyhalco_hicann_dls_vx_v2_obj',
-            source='../src/halco/hicann-dls/vx/v2/pycoordinates.cpp',
-            use='halco_hicann_dls_vx_v2'
-        )
-
-        bld(
-            target='pyhalco_hicann_dls_vx_v2',
-            source='../include/halco/hicann-dls/vx/v2/pycoordinates.h',
-            genpybind_tags=['hicann_dls_vx', 'hicann_dls_vx_v2'],
-            features='genpybind cxx cxxshlib pyext pyembed',
-            use=['halco_common', 'halco_hicann_dls_vx_v2',
-                 'PYBIND11HALCO', 'pyhalco_common',
-                 'pyhalco_hicann_dls_vx_v2_obj'],
-            install_path='${PREFIX}/lib',
-            linkflags='-Wl,-z,defs'
-        )
-
-        bld(
-            name='pyhalco_hicann_dls_vx_v1_tests',
-            tests='test/pyhalco_test_hicann_dls_vx_v1.py',
-            features='use pytest',
-            use='pyhalco_hicann_dls_vx_v1',
-            install_path='${PREFIX}/bin',
-            pythonpath=['test'],
-        )
-
-        bld(
-            name='pyhalco_hicann_dls_vx_v2_tests',
-            tests='test/pyhalco_test_hicann_dls_vx_v2.py',
-            features='use pytest',
-            use='pyhalco_hicann_dls_vx_v2',
-            install_path='${PREFIX}/bin',
-            pythonpath=['test'],
-        )
+            bld(
+                name='pyhalco_hicann_dls_vx_v%s_tests' % hx_version,
+                tests='test/pyhalco_test_hicann_dls_vx_v%s.py' % hx_version,
+                features='use pytest',
+                use='pyhalco_hicann_dls_vx_v%s' % hx_version,
+                install_path='${PREFIX}/bin',
+                pythonpath=['test'],
+            )
 
     else:
         # in the transition time we also build genpybind targets and
