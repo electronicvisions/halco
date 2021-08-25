@@ -70,7 +70,7 @@ def build(bld):
             linkflags='-Wl,-z,defs'
         )
 
-        for hx_version in [1, 2]:
+        for hx_version in [1, 2, 3]:
             bld(
                 features='cxx pyembed',
                 target='pyhalco_hicann_dls_vx_v%s_obj' % hx_version,
