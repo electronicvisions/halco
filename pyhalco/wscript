@@ -136,7 +136,7 @@ def build(bld):
             name            = "pyhalco_hicann_v2_tests_genpybind",
             tests           = 'test/pyhalco_test_hicann_v2.py',
             features        = 'use pytest',
-            use             = 'pyhalco_hicann_v2_genpybind',
+            use             = ['pyhalco_hicann_v2_genpybind', 'pycellparameters'],
             install_path    = '${PREFIX}/bin',
             linkflags      = '-Wl,-z,defs',
             pythonpath      = ["test"],
