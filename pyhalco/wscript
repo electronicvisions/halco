@@ -36,7 +36,7 @@ def configure(cfg):
                 'cannot build python bindings of both HICANN/DLS at the same time\n'
                 '(please specify --with-pybind / --without-pybind explicitly)'
             )
-        cfg.env.with_pybind = is_hicann_dls
+        cfg.env.with_pybind = not is_hicann
     cfg.msg(
         'Using pybind11-based python bindings',
         ['no', 'yes'][cfg.env.with_pybind])
