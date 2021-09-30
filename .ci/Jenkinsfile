@@ -4,11 +4,12 @@ wafDefaultPipeline(projects: ["halco"],
                    moduleOptions: [modules: ["ppu-toolchain"]],
                    container: [app: "dls-core"],
                    testSlurmResource: [partition: "jenkins"],
-                   configureInstallOptions: "--with-pybind",
+                   configureInstallOptions: "--with-pybind --build-profile=ci",
                    notificationChannel: "#dls-software")
 
 wafDefaultPipeline(projects: ["halco"],
                    moduleOptions: [modules: ["ppu-toolchain"]],
                    container: [app: "wafer"],
                    testSlurmResource: [partition: "jenkins"],
-                   notificationChannel: "#softies")
+                   notificationChannel: "#softies",
+                   configureInstallOptions: "--build-profile=ci")
