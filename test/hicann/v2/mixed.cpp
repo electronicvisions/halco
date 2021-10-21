@@ -79,15 +79,15 @@ TYPED_TEST(MixedOnHICANNCoordinateTest, CanBeSplitted) {
 }
 
 TYPED_TEST(MixedGlobalCoordinateTest, ProvidesTypedefs) {
-	TypeParam mixed(typename TypeParam::local_type(), typename TypeParam::mixed_in_type());
+	TypeParam mixed{typename TypeParam::local_type(), typename TypeParam::mixed_in_type()};
 }
 
 TYPED_TEST(MixedOnWaferCoordinateTest, ProvidesTypedefs) {
-	TypeParam mixed(typename TypeParam::local_type(), typename TypeParam::mixed_in_type());
+	TypeParam mixed{typename TypeParam::local_type(), typename TypeParam::mixed_in_type()};
 }
 
 TYPED_TEST(MixedOnHICANNCoordinateTest, ProvidesTypedefs) {
-	TypeParam mixed(typename TypeParam::local_type(), typename TypeParam::mixed_in_type());
+	TypeParam mixed{typename TypeParam::local_type(), typename TypeParam::mixed_in_type()};
 }
 
 TYPED_TEST(MixedGlobalCoordinateTest, DoesNotIgnoreMixedInTypeInComparison) {
