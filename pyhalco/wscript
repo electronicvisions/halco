@@ -56,15 +56,14 @@ def build(bld):
             target='pyhalco_common',
             source='../include/halco/common/common.h',
             genpybind_tags='common',
-            features='genpybind cxx cxxshlib pyext pyembed',
+            features='genpybind cxx cxxshlib pyext',
             use=['halco_common', 'pyhalco_common_files'],
             install_path='${PREFIX}/lib',
-            linkflags='-Wl,-z,defs'
         )
 
         for hx_version in [1, 2, 3]:
             bld(
-                features='cxx pyembed',
+                features='cxx pyext',
                 target='pyhalco_hicann_dls_vx_v%s_obj' % hx_version,
                 source='../src/halco/hicann-dls/vx/v%s/pycoordinates.cpp' % hx_version,
                 use='halco_hicann_dls_vx_v%s' % hx_version
@@ -74,12 +73,11 @@ def build(bld):
                 target='pyhalco_hicann_dls_vx_v%s' % hx_version,
                 source='../include/halco/hicann-dls/vx/v%s/pycoordinates.h' % hx_version,
                 genpybind_tags=['hicann_dls_vx', 'hicann_dls_vx_v%s' % hx_version],
-                features='genpybind cxx cxxshlib pyext pyembed',
+                features='genpybind cxx cxxshlib pyext',
                 use=['halco_common', 'halco_hicann_dls_vx_v%s' % hx_version,
                      'pyhalco_common',
                      'pyhalco_hicann_dls_vx_v%s_obj' % hx_version],
                 install_path='${PREFIX}/lib',
-                linkflags='-Wl,-z,defs'
             )
 
             bld(
@@ -94,7 +92,7 @@ def build(bld):
     else:
         bld(
             target='pyhalco_common',
-            features='cxx cxxshlib pypp pyembed pyext',
+            features='cxx cxxshlib pypp pyext',
             script='common/generate_common_coordinate.py',
             gen_defines='PYPLUSPLUS __STRICT_ANSI__',
             defines='PYBINDINGS',
@@ -102,13 +100,12 @@ def build(bld):
             use=['halco_common', 'BOOST4HALCO', 'BOOST4PYHALCO', 'PYHALCO', 'pywrap',
                  'pywrapstdvector', 'pycellparameters', 'pyhalco_common_files'],
             install_path='${PREFIX}/lib',
-            linkflags='-Wl,-z,defs',
             includes='.',
         )
 
         bld(
             target='pyhalco_hicann_v2',
-            features='cxx cxxshlib pypp pyembed pyext',
+            features='cxx cxxshlib pypp pyext',
             script='hicann/v2/generate_hicann_v2_coordinate.py',
             gen_defines='PYPLUSPLUS __STRICT_ANSI__ BOOST_PP_VARIADICS',
             # gccxml requires non-variadic implementation of boost::variant for python wrappers
@@ -117,7 +114,6 @@ def build(bld):
             headers='../include/halco/hicann/v2/coordinates.h',
             use=['pyhalco_common', 'halco_hicann_v2'],
             install_path='${PREFIX}/lib',
-            linkflags='-Wl,-z,defs',
             includes='.',
         )
 
