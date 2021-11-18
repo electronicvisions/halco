@@ -49,14 +49,6 @@ def configure(cfg):
 
     if cfg.env.with_pybind:
         cfg.load('genpybind')
-        cfg.check(
-            compiler='cxx',
-            features='cxx pyembed',
-            uselib_store='PYBIND11HALCO',
-            mandatory=True,
-            header_name='pybind11/pybind11.h',
-        )
-
 
 def build(bld):
     if bld.env.with_pybind:
@@ -65,7 +57,7 @@ def build(bld):
             source='../include/halco/common/common.h',
             genpybind_tags='common',
             features='genpybind cxx cxxshlib pyext pyembed',
-            use=['halco_common', 'PYBIND11HALCO', 'pyhalco_common_files'],
+            use=['halco_common', 'pyhalco_common_files'],
             install_path='${PREFIX}/lib',
             linkflags='-Wl,-z,defs'
         )
@@ -84,7 +76,7 @@ def build(bld):
                 genpybind_tags=['hicann_dls_vx', 'hicann_dls_vx_v%s' % hx_version],
                 features='genpybind cxx cxxshlib pyext pyembed',
                 use=['halco_common', 'halco_hicann_dls_vx_v%s' % hx_version,
-                     'PYBIND11HALCO', 'pyhalco_common',
+                     'pyhalco_common',
                      'pyhalco_hicann_dls_vx_v%s_obj' % hx_version],
                 install_path='${PREFIX}/lib',
                 linkflags='-Wl,-z,defs'
