@@ -215,21 +215,28 @@ common::typed_array<NeuronResetOnDLS, EntryOnQuad> NeuronResetQuadOnDLS::toNeuro
 	return ret;
 }
 
-AtomicNeuronOnLogicalNeuron AtomicNeuronOnLogicalNeuron::get_right_neighbor() const
+AtomicNeuronOnLogicalNeuron AtomicNeuronOnLogicalNeuron::get_neighbor(
+    Direction const& direction) const
 {
-	AtomicNeuronOnLogicalNeuron neighbor(NeuronColumnOnLogicalNeuron(x().value() + 1), y());
-	return neighbor;
-}
-AtomicNeuronOnLogicalNeuron AtomicNeuronOnLogicalNeuron::get_left_neighbor() const
-{
-	AtomicNeuronOnLogicalNeuron neighbor(NeuronColumnOnLogicalNeuron(x().value() - 1), y());
-	return neighbor;
-}
-AtomicNeuronOnLogicalNeuron AtomicNeuronOnLogicalNeuron::get_opposite_row_neighbor() const
-{
-	AtomicNeuronOnLogicalNeuron neighbor(
-	    x(), NeuronRowOnLogicalNeuron((y().value() + 1) % NeuronRowOnLogicalNeuron::size));
-	return neighbor;
+	switch (direction) {
+		case Direction::left: {
+			AtomicNeuronOnLogicalNeuron neighbor(NeuronColumnOnLogicalNeuron(x().value() - 1), y());
+			return neighbor;
+		}
+		case Direction::right: {
+			AtomicNeuronOnLogicalNeuron neighbor(NeuronColumnOnLogicalNeuron(x().value() + 1), y());
+			return neighbor;
+		}
+		case Direction::opposite_row: {
+			AtomicNeuronOnLogicalNeuron neighbor(
+			    x(), NeuronRowOnLogicalNeuron((y().value() + 1) % NeuronRowOnLogicalNeuron::size));
+			return neighbor;
+		}
+		default: {
+			throw std::logic_error(
+			    "Unsupported direction for neighbor for AtomicNeuronOnLogicalNeuron was chosen.");
+		}
+	}
 }
 
 LogicalNeuronCompartments::LogicalNeuronCompartments(Compartments const& compartments)

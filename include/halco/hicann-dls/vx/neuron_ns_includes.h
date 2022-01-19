@@ -122,25 +122,19 @@ struct GENPYBIND(inline_base("*")) AtomicNeuronOnLogicalNeuron
 		return y();
 	}
 
+	enum class Direction
+	{
+		left,
+		right,
+		opposite_row
+	};
+
 	/**
-	 * Get right neighbor if it exists on the chip.
+	 * Get neighbor if it exists on the chip.
 	 * @throws OverflowError if neighbor does not exist
 	 * @return AtomicNeuronOnLogicalNeuron
 	 */
-	AtomicNeuronOnLogicalNeuron get_right_neighbor() const;
-
-	/**
-	 * Get left neighbor if it exists on the chip.
-	 * @throws OverflowError if neighbor does not exist
-	 * @return AtomicNeuronOnLogicalNeuron
-	 */
-	AtomicNeuronOnLogicalNeuron get_left_neighbor() const;
-
-	/**
-	 * Get neighbor on the opposite row/hemisphere of the chip.
-	 * @return AtomicNeuronOnLogicalNeuron
-	 */
-	AtomicNeuronOnLogicalNeuron get_opposite_row_neighbor() const;
+	AtomicNeuronOnLogicalNeuron get_neighbor(Direction const& direction) const;
 };
 
 
