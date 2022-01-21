@@ -33,17 +33,29 @@ namespace detail {
 		return lhs.value() OP rhs.value(); \
 	}
 
-#define DETAIL_BINOP(NAME, OP)\
-	friend NAME operator OP (NAME const& lhs, NAME const& rhs) \
-	{ \
-		return NAME(lhs.mValue OP rhs.mValue); \
+#define DETAIL_BINOP(NAME, OP)                                                                     \
+	friend NAME operator OP(NAME const& lhs, NAME const& rhs)                                      \
+	{                                                                                              \
+		/* circumvent -Wint-in-bool-context */                                                     \
+		if PYPP_CONSTEXPR (boost::is_same<value_type, bool>::value) {                              \
+			return NAME(static_cast<int>(lhs.mValue) OP static_cast<int>(rhs.mValue) > 0);         \
+		} else {                                                                                   \
+			return NAME(lhs.mValue OP rhs.mValue);                                                 \
+		}                                                                                          \
 	}
 
-#define DETAIL_ASSIGNOP(NAME, OP)\
-	friend NAME& operator OP (NAME& lhs, NAME const& rhs) \
-	{ \
-		lhs.mValue OP rhs.mValue; \
-		return lhs;\
+#define DETAIL_ASSIGNOP(NAME, OP)                                                                  \
+	friend NAME& operator OP(NAME& lhs, NAME const& rhs)                                           \
+	{                                                                                              \
+		/* circumvent -Wint-in-bool-context */                                                     \
+		if PYPP_CONSTEXPR (boost::is_same<value_type, bool>::value) {                              \
+			int tmp = static_cast<int>(lhs.mValue);                                                \
+			tmp OP static_cast<int>(rhs.mValue);                                                   \
+			lhs.mValue = static_cast<bool>(tmp);                                                   \
+		} else {                                                                                   \
+			lhs.mValue OP rhs.mValue;                                                              \
+		}                                                                                          \
+		return lhs;                                                                                \
 	}
 
 #define DETAIL_UNOP(NAME, OP)\
