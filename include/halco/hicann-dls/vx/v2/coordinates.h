@@ -10,6 +10,7 @@
 #include "halco/hicann-dls/vx/v2/current_dac.h"
 #include "halco/hicann-dls/vx/v2/dac.h"
 #include "halco/hicann-dls/vx/v2/event.h"
+#include "halco/hicann-dls/vx/v2/extoll.h"
 #include "halco/hicann-dls/vx/v2/fpga.h"
 #include "halco/hicann-dls/vx/v2/highspeed_link.h"
 #include "halco/hicann-dls/vx/v2/i2c.h"

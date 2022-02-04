@@ -1,0 +1,69 @@
+#pragma once
+#include "halco/common/genpybind.h"
+#include "halco/hicann-dls/vx/extoll.h"
+
+namespace halco::hicann_dls::vx::v3 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V3 {
+
+using ExtollAddress GENPYBIND(visible) = halco::hicann_dls::vx::ExtollAddress;
+using ExtollSpikeCommBucketTriggerConfigOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommBucketTriggerConfigOnFPGA;
+using ExtollSpikeCommBucketDestinationConfigOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommBucketDestinationConfigOnFPGA;
+using ExtollSpikeCommBucketNumPktsSentOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommBucketNumPktsSentOnFPGA;
+using ExtollSpikeCommBucketCounterResetOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommBucketCounterResetOnFPGA;
+using ExtollSpikeCommSplitOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommSplitOnFPGA;
+using ExtollSpikeCommRouterLookupConfigOnSpikeCommSplit GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommRouterLookupConfigOnSpikeCommSplit;
+using ExtollSpikeCommRouterLookupConfigOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommRouterLookupConfigOnFPGA;
+using ExtollSpikeCommRouterConfigOnSpikeCommSplit GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommRouterConfigOnSpikeCommSplit;
+using ExtollSpikeCommRouterConfigOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommRouterConfigOnFPGA;
+using ExtollSpikeCommRouterEventLossDisabledOnSpikeCommSplit GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommRouterEventLossDisabledOnSpikeCommSplit;
+using ExtollSpikeCommRouterEventLossDisabledOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommRouterEventLossDisabledOnFPGA;
+using ExtollSpikeCommRouterEventLossMisconfOnSpikeCommSplit GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommRouterEventLossMisconfOnSpikeCommSplit;
+using ExtollSpikeCommRouterEventLossMisconfOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommRouterEventLossMisconfOnFPGA;
+using ExtollSpikeCommRouterEventsRoutedOnSpikeCommSplit GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommRouterEventsRoutedOnSpikeCommSplit;
+using ExtollSpikeCommRouterEventsRoutedOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommRouterEventsRoutedOnFPGA;
+using ExtollSpikeCommRouterCounterResetOnSpikeCommSplit GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommRouterCounterResetOnSpikeCommSplit;
+using ExtollSpikeCommRouterCounterResetOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommRouterCounterResetOnFPGA;
+using ExtollSpikeCommDecoderNumEventsReceivedOnSpikeCommSplit GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommDecoderNumEventsReceivedOnSpikeCommSplit;
+using ExtollSpikeCommDecoderNumEventsReceivedOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommDecoderNumEventsReceivedOnFPGA;
+using ExtollSpikeCommDecoderCounterResetOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommDecoderCounterResetOnFPGA;
+using ExtollSpikeCommTimestampDelayConfigOnSpikeCommSplit GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommTimestampDelayConfigOnSpikeCommSplit;
+using ExtollSpikeCommTimestampDelayConfigOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommTimestampDelayConfigOnFPGA;
+using ExtollSpikeCommTimestampDelayNumEventsReceivedOnSpikeCommSplit GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommTimestampDelayNumEventsReceivedOnSpikeCommSplit;
+using ExtollSpikeCommTimestampDelayNumEventsReceivedOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommTimestampDelayNumEventsReceivedOnFPGA;
+using ExtollSpikeCommTimestampDelayEventLossFullOnSpikeCommSplit GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommTimestampDelayEventLossFullOnSpikeCommSplit;
+using ExtollSpikeCommTimestampDelayEventLossFullOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommTimestampDelayEventLossFullOnFPGA;
+using ExtollSpikeCommTimestampDelayEventLossExpiredOnSpikeCommSplit GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommTimestampDelayEventLossExpiredOnSpikeCommSplit;
+using ExtollSpikeCommTimestampDelayEventLossExpiredOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommTimestampDelayEventLossExpiredOnFPGA;
+using ExtollSpikeCommTimestampDelayCounterResetOnSpikeCommSplit GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommTimestampDelayCounterResetOnSpikeCommSplit;
+using ExtollSpikeCommTimestampDelayCounterResetOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommTimestampDelayCounterResetOnFPGA;
+
+} // namespace halco::hicann_dls::vx::v3
