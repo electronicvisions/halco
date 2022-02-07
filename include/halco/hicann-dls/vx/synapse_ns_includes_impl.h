@@ -87,3 +87,8 @@ NeuronColumnOnDLS SynapseOnSynapseRow::toNeuronColumnOnDLS() const
 {
 	return NeuronColumnOnDLS(toEnum());
 }
+
+CADCChannelColumnOnSynram SynapseOnSynapseRow::toCADCChannelColumnOnSynram() const
+{
+	return CADCChannelColumnOnSynram(toEnum());
+}

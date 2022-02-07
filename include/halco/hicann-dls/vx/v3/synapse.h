@@ -1,5 +1,6 @@
 #pragma once
 #include "halco/common/genpybind.h"
+#include "halco/hicann-dls/vx/cadc.h"
 #include "halco/hicann-dls/vx/synapse.h"
 #include "halco/hicann-dls/vx/v3/quad.h"
 #include "halco/hicann-dls/vx/v3/synram.h"
@@ -23,6 +24,7 @@ struct GENPYBIND(inline_base("*")) SynapseOnSynapseRow
 	EntryOnQuad toEntryOnQuad() const;
 	SynapseQuadColumnOnDLS toSynapseQuadColumnOnDLS() const;
 	NeuronColumnOnDLS toNeuronColumnOnDLS() const;
+	CADCChannelColumnOnSynram toCADCChannelColumnOnSynram() const;
 };
 
 struct GENPYBIND(inline_base("*")) SynapseOnSynram
