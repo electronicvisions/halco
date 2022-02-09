@@ -214,6 +214,7 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     MADCControlOnDLS => linear,iterable
     MADCConfigOnDLS => linear,iterable
     SynapseBiasSelectionOnDLS => linear,iterable
+    CapMemOnDLS => linear,iterable
     ReferenceGeneratorConfigOnDLS => linear,iterable
     PadMultiplexerConfigOnDLS => linear,iterable
     ReadoutSourceSelectionOnDLS => linear,iterable

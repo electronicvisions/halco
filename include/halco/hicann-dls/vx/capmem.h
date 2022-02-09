@@ -81,6 +81,13 @@ struct GENPYBIND(inline_base("*")) ReferenceGeneratorConfigOnDLS
 	constexpr explicit ReferenceGeneratorConfigOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
 
+
+struct GENPYBIND(inline_base("*")) CapMemOnDLS
+    : public common::detail::RantWrapper<CapMemOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit CapMemOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
 } // namespace halco::hicann_dls::vx
 
 namespace std {
@@ -90,5 +97,6 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemBlockOnHemisphere)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemBlockConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ReferenceGeneratorConfigOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CapMemOnDLS)
 
 } // namespace std

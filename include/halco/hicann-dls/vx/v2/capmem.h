@@ -11,6 +11,7 @@ using CapMemBlockOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::CapMemBlockOn
 using CapMemBlockConfigOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::CapMemBlockConfigOnDLS;
 using ReferenceGeneratorConfigOnDLS GENPYBIND(visible) =
     halco::hicann_dls::vx::ReferenceGeneratorConfigOnDLS;
+using CapMemOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::CapMemOnDLS;
 
 struct GENPYBIND(inline_base("*")) CapMemRowOnCapMemBlock
     : public common::detail::RantWrapper<CapMemRowOnCapMemBlock, uint_fast16_t, 23, 0>
