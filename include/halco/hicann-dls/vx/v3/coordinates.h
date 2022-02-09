@@ -14,6 +14,7 @@
 #include "halco/hicann-dls/vx/v3/i2c.h"
 #include "halco/hicann-dls/vx/v3/jtag.h"
 #include "halco/hicann-dls/vx/v3/madc.h"
+#include "halco/hicann-dls/vx/v3/memory_timing.h"
 #include "halco/hicann-dls/vx/v3/neuron.h"
 #include "halco/hicann-dls/vx/v3/omnibus.h"
 #include "halco/hicann-dls/vx/v3/padi.h"

@@ -20,6 +20,7 @@ GENPYBIND_MANUAL({
 #include "halco/hicann-dls/vx/i2c.h"
 #include "halco/hicann-dls/vx/jtag.h"
 #include "halco/hicann-dls/vx/madc.h"
+#include "halco/hicann-dls/vx/memory_timing.h"
 #include "halco/hicann-dls/vx/neuron.h"
 #include "halco/hicann-dls/vx/omnibus.h"
 #include "halco/hicann-dls/vx/padi.h"

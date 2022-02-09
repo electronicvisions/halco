@@ -7,6 +7,7 @@ from pyhalco_test_utils import parametrize, PyhalcoTest
 @parametrize
 class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     COORDINATES = """
+    MemoryTimingOnDLS => linear, iterable
     NeuronColumnOnLogicalNeuron => linear, iterable
     NeuronRowOnLogicalNeuron => linear, iterable
     CompartmentOnLogicalNeuron => linear, iterable
