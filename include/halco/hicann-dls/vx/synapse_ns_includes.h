@@ -25,6 +25,7 @@ using SynapseWeightMatrixOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::Synap
 using SynapseLabelMatrixOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::SynapseLabelMatrixOnDLS;
 using SynapseCorrelationCalibMatrixOnDLS GENPYBIND(visible) =
     halco::hicann_dls::vx::SynapseCorrelationCalibMatrixOnDLS;
+using SynapseBlockOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::SynapseBlockOnDLS;
 
 struct GENPYBIND(inline_base("*")) SynapseQuadColumnOnDLS
     : public common::detail::RantWrapper<SynapseQuadColumnOnDLS, uint_fast16_t, 63, 0>

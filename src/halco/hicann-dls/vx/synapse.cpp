@@ -102,6 +102,9 @@ SynapseRowOnDLS SynapseCorrelationCalibRowOnDLS::toSynapseRowOnDLS() const
 #define HEMISPHERE_CLASS SynapseCorrelationCalibMatrixOnDLS
 #include "halco/hicann-dls/vx/convert_hemisphere.h"
 
+#define HEMISPHERE_CLASS SynapseBlockOnDLS
+#include "halco/hicann-dls/vx/convert_hemisphere.h"
+
 ColumnCorrelationRowOnDLS const ColumnCorrelationRowOnDLS::top{enum_vertical_top};
 ColumnCorrelationRowOnDLS const ColumnCorrelationRowOnDLS::bottom{enum_vertical_bottom};
 
@@ -117,5 +120,8 @@ SynapseLabelMatrixOnDLS const SynapseLabelMatrixOnDLS::bottom{enum_vertical_bott
 SynapseCorrelationCalibMatrixOnDLS const SynapseCorrelationCalibMatrixOnDLS::top{enum_vertical_top};
 SynapseCorrelationCalibMatrixOnDLS const SynapseCorrelationCalibMatrixOnDLS::bottom{
     enum_vertical_bottom};
+
+SynapseBlockOnDLS const SynapseBlockOnDLS::top{enum_vertical_top};
+SynapseBlockOnDLS const SynapseBlockOnDLS::bottom{enum_vertical_bottom};
 
 } // namespace halco::hicann_dls::vx

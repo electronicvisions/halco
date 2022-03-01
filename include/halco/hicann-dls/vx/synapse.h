@@ -245,6 +245,20 @@ struct GENPYBIND(inline_base("*")) SynapseCorrelationCalibMatrixOnDLS
 	static const SynapseCorrelationCalibMatrixOnDLS bottom;
 };
 
+
+struct GENPYBIND(inline_base("*")) SynapseBlockOnDLS
+    : public common::detail::RantWrapper<SynapseBlockOnDLS, uint_fast16_t, 1, 0>
+{
+	constexpr explicit SynapseBlockOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+
+#include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
+
+	static const SynapseBlockOnDLS top;
+	static const SynapseBlockOnDLS bottom;
+};
+
 } // namespace halco::hicann_dls::vx
 
 namespace std {
@@ -262,5 +276,6 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ColumnCurrentRowOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseWeightMatrixOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseLabelMatrixOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseCorrelationCalibMatrixOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseBlockOnDLS)
 
 } // namespace std

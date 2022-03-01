@@ -188,6 +188,7 @@ COORDINATE(SynapseBiasSelectionOnDLS, halco::hicann_dls::vx::v1::SynapseBiasSele
 COORDINATE(SynapseWeightMatrixOnDLS, halco::hicann_dls::vx::v1::SynapseWeightMatrixOnDLS)
 COORDINATE(SynapseLabelMatrixOnDLS, halco::hicann_dls::vx::v1::SynapseLabelMatrixOnDLS)
 COORDINATE(SynapseCorrelationCalibMatrixOnDLS, halco::hicann_dls::vx::v1::SynapseCorrelationCalibMatrixOnDLS)
+COORDINATE(SynapseBlockOnDLS, halco::hicann_dls::vx::v1::SynapseBlockOnDLS)
 COORDINATE(SynapseDriverOnSynapseDriverBlock, halco::hicann_dls::vx::v1::SynapseDriverOnSynapseDriverBlock)
 COORDINATE(SynapseDriverOnPADIBus, halco::hicann_dls::vx::v1::SynapseDriverOnPADIBus)
 COORDINATE(SynapseDriverBlockOnDLS, halco::hicann_dls::vx::v1::SynapseDriverBlockOnDLS)
