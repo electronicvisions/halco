@@ -10,5 +10,6 @@ using ReadoutSourceSelectionOnDLS GENPYBIND(visible) =
     halco::hicann_dls::vx::ReadoutSourceSelectionOnDLS;
 using SourceMultiplexerOnReadoutSourceSelection GENPYBIND(visible) =
     halco::hicann_dls::vx::SourceMultiplexerOnReadoutSourceSelection;
+using ReadoutChainOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::ReadoutChainOnDLS;
 
 } // namespace halco::hicann::dls::vx

@@ -32,10 +32,18 @@ struct GENPYBIND(inline_base("*")) SourceMultiplexerOnReadoutSourceSelection
 	{}
 };
 
+
+struct GENPYBIND(inline_base("*")) ReadoutChainOnDLS
+    : public common::detail::RantWrapper<ReadoutChainOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit ReadoutChainOnDLS(uintmax_t const val = 0) : rant_t(val) {}
+};
+
 } // namespace halco::hicann::dls::vx
 
 namespace std {
 
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ReadoutChainOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PadMultiplexerConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ReadoutSourceSelectionOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SourceMultiplexerOnReadoutSourceSelection)
