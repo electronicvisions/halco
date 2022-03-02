@@ -87,6 +87,7 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     ExternalPPUMemoryQuadOnFPGA => linear, iterable
     ExternalPPUMemoryBlockSize => linear, iterable
     ExternalPPUMemoryBlockOnFPGA => iterable
+    ExternalPPUMemoryOnFPGA => iterable
     PPUMemoryWordOnDLS => linear,iterable
     PPUMemoryWordOnPPU => linear,iterable
     PPUMemoryBlockOnDLS => iterable

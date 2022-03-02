@@ -71,6 +71,7 @@ COORDINATE(ExternalPPUMemoryByteOnFPGA, halco::hicann_dls::vx::v3::ExternalPPUMe
 COORDINATE(ExternalPPUMemoryQuadOnFPGA, halco::hicann_dls::vx::v3::ExternalPPUMemoryQuadOnFPGA)
 COORDINATE(ExternalPPUMemoryBlockSize, halco::hicann_dls::vx::v3::ExternalPPUMemoryBlockSize)
 COORDINATE(ExternalPPUMemoryBlockOnFPGA, halco::hicann_dls::vx::v3::ExternalPPUMemoryBlockOnFPGA)
+COORDINATE(ExternalPPUMemoryOnFPGA, halco::hicann_dls::vx::v3::ExternalPPUMemoryOnFPGA)
 COORDINATE(NullPayloadReadableOnFPGA, halco::hicann_dls::vx::v3::NullPayloadReadableOnFPGA)
 COORDINATE(EventRecordingConfigOnFPGA, halco::hicann_dls::vx::v3::EventRecordingConfigOnFPGA)
 COORDINATE(HicannARQStatusOnFPGA, halco::hicann_dls::vx::v3::HicannARQStatusOnFPGA)
