@@ -314,6 +314,15 @@ struct GENPYBIND(inline_base("*")) NeuronRowOnLogicalNeuron
 	{}
 };
 
+
+struct GENPYBIND(inline_base("*")) NeuronBlockOnDLS
+    : public common::detail::RantWrapper<NeuronBlockOnDLS, uint_fast16_t, 0, 0>
+{
+	constexpr explicit NeuronBlockOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
 } // namespace halco::hicann_dls::vx
 
 namespace std {
@@ -339,5 +348,6 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikeCounterResetOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronSRAMTimingConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronBackendSRAMTimingConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronRowOnLogicalNeuron)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronBlockOnDLS)
 
 } // namespace std

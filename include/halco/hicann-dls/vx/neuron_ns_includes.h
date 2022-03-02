@@ -34,6 +34,7 @@ using NeuronSRAMTimingConfigOnDLS GENPYBIND(visible) =
 using NeuronBackendSRAMTimingConfigOnDLS GENPYBIND(visible) =
     halco::hicann_dls::vx::NeuronBackendSRAMTimingConfigOnDLS;
 using NeuronRowOnLogicalNeuron = halco::hicann_dls::vx::NeuronRowOnLogicalNeuron;
+using NeuronBlockOnDLS = halco::hicann_dls::vx::NeuronBlockOnDLS;
 
 
 /**

@@ -6,6 +6,7 @@
 #define LAST_COORDINATE(Name, Type) COORDINATE(Name, Type)
 #endif
 
+COORDINATE(NeuronBlockOnDLS, halco::hicann_dls::vx::v1::NeuronBlockOnDLS)
 COORDINATE(MemoryTimingOnDLS, halco::hicann_dls::vx::v1::MemoryTimingOnDLS)
 COORDINATE(LogicalNeuronOnDLS, halco::hicann_dls::vx::v1::LogicalNeuronOnDLS)
 COORDINATE(LogicalNeuronCompartments, halco::hicann_dls::vx::v1::LogicalNeuronCompartments)
