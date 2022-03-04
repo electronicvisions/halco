@@ -30,6 +30,16 @@ struct GENPYBIND(inline_base("*")) ExternalPPUMemoryByteOnFPGA
 };
 
 
+struct GENPYBIND(inline_base("*")) ExternalPPUMemoryQuadOnFPGA
+    : public common::detail::RantWrapper<ExternalPPUMemoryQuadOnFPGA, uint_fast16_t, 0x08000 - 1, 0>
+{
+	constexpr explicit ExternalPPUMemoryQuadOnFPGA(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+
 struct GENPYBIND(inline_base("*")) ExternalPPUMemoryBlockSize
     : public common::detail::RantWrapper<
           ExternalPPUMemoryBlockSize,
@@ -94,6 +104,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::FPGADeviceDNAOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NullPayloadReadableOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::EventRecordingConfigOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExternalPPUMemoryByteOnFPGA)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExternalPPUMemoryQuadOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExternalPPUMemoryBlockSize)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExternalPPUMemoryBlockOnFPGA)
 

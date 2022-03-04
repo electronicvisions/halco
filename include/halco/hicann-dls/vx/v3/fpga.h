@@ -7,6 +7,8 @@ namespace halco::hicann_dls::vx::v3 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V3 {
 using FPGADeviceDNAOnFPGA GENPYBIND(visible) = halco::hicann_dls::vx::FPGADeviceDNAOnFPGA;
 using ExternalPPUMemoryByteOnFPGA GENPYBIND(visible) =
     halco::hicann_dls::vx::ExternalPPUMemoryByteOnFPGA;
+using ExternalPPUMemoryQuadOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExternalPPUMemoryQuadOnFPGA;
 using ExternalPPUMemoryBlockSize GENPYBIND(visible) =
     halco::hicann_dls::vx::ExternalPPUMemoryBlockSize;
 using ExternalPPUMemoryBlockOnFPGA GENPYBIND(visible) =

@@ -83,6 +83,7 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     SystimeSyncBaseOnDLS => linear,iterable
     CADCConfigOnDLS => linear,iterable
     ExternalPPUMemoryByteOnFPGA => linear, iterable
+    ExternalPPUMemoryQuadOnFPGA => linear, iterable
     ExternalPPUMemoryBlockSize => linear, iterable
     ExternalPPUMemoryBlockOnFPGA => iterable
     PPUMemoryWordOnDLS => linear,iterable
