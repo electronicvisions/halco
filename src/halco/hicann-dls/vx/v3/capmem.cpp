@@ -47,6 +47,8 @@ CapMemCellOnCapMemBlock const CapMemCellOnCapMemBlock::neuron_i_bias_leak_source
     CapMemColumnOnCapMemBlock(128), CapMemRowOnCapMemBlock(19)};
 CapMemCellOnCapMemBlock const CapMemCellOnCapMemBlock::neuron_i_bias_spike_comparator{
     CapMemColumnOnCapMemBlock(128), CapMemRowOnCapMemBlock(20)};
+CapMemCellOnCapMemBlock const CapMemCellOnCapMemBlock::neuron_i_bias_synin_drop{
+    CapMemColumnOnCapMemBlock(129), CapMemRowOnCapMemBlock(23)};
 
 CapMemCellOnDLS const CapMemCellOnDLS::readout_sc_amp_v_ref{
     CapMemCellOnCapMemBlock(CapMemColumnOnCapMemBlock(128), CapMemRowOnCapMemBlock(6)),
@@ -114,11 +116,11 @@ CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::v_adapt_ref{7};
 CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_bias_leak{8};
 CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_bias_reset{9};
 CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_bias_synin_exc_tau{10};
-CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_bias_synin_exc_drop{11};
+CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_bias_synin_exc_coba{11};
 CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_bias_synin_exc_shift{12};
 CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_bias_synin_exc_gm{13};
 CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_bias_synin_inh_tau{14};
-CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_bias_synin_inh_drop{15};
+CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_bias_synin_inh_coba{15};
 CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_bias_synin_inh_shift{16};
 CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_bias_synin_inh_gm{17};
 CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_bias_adapt_tau{18};

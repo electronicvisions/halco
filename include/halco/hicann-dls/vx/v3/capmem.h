@@ -33,10 +33,10 @@ struct GENPYBIND(inline_base("*")) CapMemRowOnCapMemBlock
 	/** Threshold potential. */
 	static const CapMemRowOnCapMemBlock v_threshold;
 
-	/** Reversal potential of the excitatory synaptic input. Unused in the HXv3 CUBA neuron. */
+	/** Reversal potential of the excitatory synaptic input. Used only in COBA mode. */
 	static const CapMemRowOnCapMemBlock e_synin_exc_rev;
 
-	/** Reversal potential of the inhibitory synaptic input. Unused in the HXv3 CUBA neuron. */
+	/** Reversal potential of the inhibitory synaptic input. Used only in COBA mode. */
 	static const CapMemRowOnCapMemBlock e_synin_inh_rev;
 
 	/** Leak potential of adaptation term. */
@@ -58,12 +58,6 @@ struct GENPYBIND(inline_base("*")) CapMemRowOnCapMemBlock
 	static const CapMemRowOnCapMemBlock i_bias_synin_exc_tau;
 
 	/**
-	 * Bias current for the source follower controlling the drop of the excitatory synaptic
-	 * input voltage before the OTA's input.
-	 */
-	static const CapMemRowOnCapMemBlock i_bias_synin_exc_drop;
-
-	/**
 	 * Bias current for the source follower controlling the reference voltage for the
 	 * excitatory synaptic input's OTA.
 	 */
@@ -72,14 +66,11 @@ struct GENPYBIND(inline_base("*")) CapMemRowOnCapMemBlock
 	/** Bias current of excitatory synaptic input OTA for current-based input. */
 	static const CapMemRowOnCapMemBlock i_bias_synin_exc_gm;
 
+	/** Bias current of excitatory synaptic input OTA for conductance-based input. */
+	static const CapMemRowOnCapMemBlock i_bias_synin_exc_coba;
+
 	/** Bias current for the RC circuit controlling the inhibitory synaptic input time constant. */
 	static const CapMemRowOnCapMemBlock i_bias_synin_inh_tau;
-
-	/**
-	 * Bias current for the source follower controlling the drop of the inhibitory synaptic
-	 * input voltage before the OTA's input.
-	 */
-	static const CapMemRowOnCapMemBlock i_bias_synin_inh_drop;
 
 	/**
 	 * Bias current for the source follower controlling the reference voltage for the
@@ -89,6 +80,9 @@ struct GENPYBIND(inline_base("*")) CapMemRowOnCapMemBlock
 
 	/** Bias current of inhibitory synaptic input OTA for current-based input. */
 	static const CapMemRowOnCapMemBlock i_bias_synin_inh_gm;
+
+	/** Bias current of inhibitory synaptic input OTA for conductance-based input. */
+	static const CapMemRowOnCapMemBlock i_bias_synin_inh_coba;
 
 	/** Bias current controlling the adaptation time constant. */
 	static const CapMemRowOnCapMemBlock i_bias_adapt_tau;
@@ -186,11 +180,22 @@ struct GENPYBIND(inline_base("*")) CapMemCellOnCapMemBlock
 	/** Bias current for the neuron's readout amplifier. */
 	static const CapMemCellOnCapMemBlock neuron_i_bias_readout_amp;
 
-	/** Bias current for the leak/reset input voltage drop source follower. */
+	/**
+	 * Bias current for the leak/reset input voltage drop source follower.
+	 * Note that also the potentials v_adapt_ref, v_adapt_leak, v_exp,
+	 * e_synin_exc_rev, e_synin_inh_rev are buffered by a source follower
+	 * and affected by this parameter.*/
 	static const CapMemCellOnCapMemBlock neuron_i_bias_leak_source_follower;
 
 	/** Bias current for the threshold comparator. */
 	static const CapMemCellOnCapMemBlock neuron_i_bias_spike_comparator;
+
+	/**
+	 * Bias current for the source followers controlling the drop of the synaptic
+	 * input voltage before the OTAs' input. Applies to both excitatory and inhibitory
+	 * synaptic inputs.
+	 */
+	static const CapMemCellOnCapMemBlock neuron_i_bias_synin_drop;
 };
 
 HALCO_COORDINATE_MIXIN(CapMemMixin, CapMemBlockOnDLS, capmem)
