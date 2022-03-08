@@ -24,8 +24,7 @@ struct GENPYBIND(inline_base("*")) ReadoutSourceSelectionOnDLS
 
 
 struct GENPYBIND(inline_base("*")) SourceMultiplexerOnReadoutSourceSelection
-    : public common::detail::
-          RantWrapper<SourceMultiplexerOnReadoutSourceSelection, uint_fast16_t, 1, 0>
+    : public common::detail::RantWrapper<SourceMultiplexerOnReadoutSourceSelection, uint8_t, 1, 0>
 {
 	constexpr explicit SourceMultiplexerOnReadoutSourceSelection(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
