@@ -129,6 +129,7 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     DACChannelOnDAC => linear,iterable
     ADCOnBoard => linear,iterable
     CapMemCellOnDLS => iterable
+    UnusedCapMemCellOnDLS => linear,iterable
     CapMemCellOnCapMemBlock => grid,iterable
     CapMemColumnOnCapMemBlock => linear,iterable
     CapMemRowOnCapMemBlock => linear,iterable

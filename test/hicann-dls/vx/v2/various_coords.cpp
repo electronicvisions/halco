@@ -11,6 +11,13 @@
 using namespace halco::common;
 using namespace halco::hicann_dls::vx::v2;
 
+TEST(UnusedCapMemCellOnDLS, toCapMemCellOnDLS)
+{
+	for (auto const unused : iter_all<UnusedCapMemCellOnDLS>()) {
+		EXPECT_NO_THROW(unused.toCapMemCellOnDLS());
+	}
+}
+
 TEST(LogicalNeuronCompartments, Constructor)
 {
 	LogicalNeuronCompartments::Compartments correct{

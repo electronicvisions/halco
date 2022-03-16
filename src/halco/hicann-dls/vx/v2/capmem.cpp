@@ -1,5 +1,7 @@
 #include "halco/hicann-dls/vx/v2/capmem.h"
 
+#include "halco/common/iter_all.h"
+
 namespace halco::hicann_dls::vx::v2 {
 
 bool CapMemCellOnCapMemBlock::isShared() const
@@ -127,5 +129,52 @@ CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_bias_adapt_b{20};
 CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_bias_exp{21};
 CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_mem_offset{22};
 CapMemRowOnCapMemBlock const CapMemRowOnCapMemBlock::i_bias_nmda{23};
+
+CapMemCellOnDLS UnusedCapMemCellOnDLS::toCapMemCellOnDLS() const
+{
+	using namespace halco::common;
+	static const std::array<CapMemCellOnDLS, size> cells = []() {
+		std::array<CapMemCellOnDLS, size> cs;
+		size_t i = 0;
+		// unused rows in column 128
+		cs.at(i) = CapMemCellOnDLS(
+		    CapMemCellOnCapMemBlock(CapMemRowOnCapMemBlock(23), CapMemColumnOnCapMemBlock(128)),
+		    CapMemBlockOnDLS(1));
+		i++;
+		cs.at(i) = CapMemCellOnDLS(
+		    CapMemCellOnCapMemBlock(CapMemRowOnCapMemBlock(23), CapMemColumnOnCapMemBlock(128)),
+		    CapMemBlockOnDLS(3));
+		i++;
+		for (size_t j = 21; j < 24; ++j) {
+			cs.at(i) = CapMemCellOnDLS(
+			    CapMemCellOnCapMemBlock(CapMemRowOnCapMemBlock(j), CapMemColumnOnCapMemBlock(128)),
+			    CapMemBlockOnDLS(2));
+			i++;
+		}
+		// unused rows in column 129
+		for (size_t j = 0; j < 8; ++j) {
+			cs.at(i) = CapMemCellOnDLS(
+			    CapMemCellOnCapMemBlock(CapMemRowOnCapMemBlock(j), CapMemColumnOnCapMemBlock(129)),
+			    CapMemBlockOnDLS(0));
+			i++;
+		}
+		for (size_t j = 15; j < 24; ++j) {
+			cs.at(i) = CapMemCellOnDLS(
+			    CapMemCellOnCapMemBlock(CapMemRowOnCapMemBlock(j), CapMemColumnOnCapMemBlock(129)),
+			    CapMemBlockOnDLS(0));
+			i++;
+		}
+		for (size_t b = 1; b < 4; ++b) {
+			for (auto const row : iter_all<CapMemRowOnCapMemBlock>()) {
+				cs.at(i) = CapMemCellOnDLS(
+				    CapMemCellOnCapMemBlock(row, CapMemColumnOnCapMemBlock(129)),
+				    CapMemBlockOnDLS(b));
+				i++;
+			}
+		}
+		return cs;
+	}();
+	return cells.at(value());
+}
 
 } // namespace halco::hicann_dls::vx
