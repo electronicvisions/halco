@@ -1,14 +1,16 @@
 @Library("jenlib") _
 
-wafDefaultPipeline(projects: ["halco"],
-                   moduleOptions: [modules: ["ppu-toolchain"]],
-                   container: [app: "dls-core"],
-                   testSlurmResource: [partition: "jenkins"],
-                   configureInstallOptions: "--with-pybind --build-profile=ci",
-                   notificationChannel: "#dls-software")
+withCcache() {
+	wafDefaultPipeline(projects: ["halco"],
+	                   moduleOptions: [modules: ["ppu-toolchain"]],
+	                   container: [app: "dls-core"],
+	                   testSlurmResource: [partition: "jenkins"],
+	                   configureInstallOptions: "--with-pybind --build-profile=ci",
+	                   notificationChannel: "#dls-software")
 
-wafDefaultPipeline(projects: ["halco"],
-                   container: [app: "wafer"],
-                   testSlurmResource: [partition: "jenkins"],
-                   notificationChannel: "#softies",
-                   configureInstallOptions: "--build-profile=ci")
+	wafDefaultPipeline(projects: ["halco"],
+	                   container: [app: "wafer"],
+	                   testSlurmResource: [partition: "jenkins"],
+	                   notificationChannel: "#softies",
+	                   configureInstallOptions: "--build-profile=ci")
+}
