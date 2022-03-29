@@ -222,6 +222,7 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     PadMultiplexerConfigOnDLS => linear,iterable
     ReadoutSourceSelectionOnDLS => linear,iterable
     SourceMultiplexerOnReadoutSourceSelection => linear,iterable
+    CurrentDACOnDLS => linear,iterable
     CorrelationResetOnDLS => iterable
     NeuronResetQuadOnDLS => iterable
     CommonCorrelationConfigOnDLS => linear,iterable

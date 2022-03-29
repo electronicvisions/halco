@@ -7,6 +7,7 @@
 #include "halco/hicann-dls/vx/v3/capmem.h"
 #include "halco/hicann-dls/vx/v3/chip.h"
 #include "halco/hicann-dls/vx/v3/correlation.h"
+#include "halco/hicann-dls/vx/v3/current_dac.h"
 #include "halco/hicann-dls/vx/v3/dac.h"
 #include "halco/hicann-dls/vx/v3/event.h"
 #include "halco/hicann-dls/vx/v3/fpga.h"

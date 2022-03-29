@@ -46,6 +46,7 @@ COORDINATE(CapMemBlockOnHemisphere, halco::hicann_dls::vx::v1::CapMemBlockOnHemi
 COORDINATE(CapMemBlockOnDLS, halco::hicann_dls::vx::v1::CapMemBlockOnDLS)
 COORDINATE(CapMemBlockConfigOnDLS, halco::hicann_dls::vx::v1::CapMemBlockConfigOnDLS)
 COORDINATE(CapMemCellOnCapMemBlock, halco::hicann_dls::vx::v1::CapMemCellOnCapMemBlock)
+COORDINATE(CurrentDACOnDLS, halco::hicann_dls::vx::v1::CurrentDACOnDLS)
 COORDINATE(CapMemCellOnDLS, halco::hicann_dls::vx::v1::CapMemCellOnDLS)
 COORDINATE(UnusedCapMemCellOnDLS, halco::hicann_dls::vx::v1::UnusedCapMemCellOnDLS)
 COORDINATE(CapMemOnDLS, halco::hicann_dls::vx::v1::CapMemOnDLS)
