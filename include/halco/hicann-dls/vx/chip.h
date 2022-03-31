@@ -22,6 +22,9 @@ struct GENPYBIND(inline_base("*")) HemisphereOnDLS
 	    rant_t(val)
 	{}
 
+	static const HemisphereOnDLS top;
+	static const HemisphereOnDLS bottom;
+
 #include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 };
 
