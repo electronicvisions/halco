@@ -5,6 +5,7 @@
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
 
+#include "halco/hicann-dls/vx/chip.h"
 #include "halco/hicann-dls/vx/neuron.h"
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
@@ -58,7 +59,13 @@ struct GENPYBIND(inline_base("*")) CapMemBlockOnDLS
 	    rant_t(val)
 	{}
 
+	constexpr explicit CapMemBlockOnDLS(CapMemBlockOnHemisphere x, HemisphereOnDLS y)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(x + CapMemBlockOnHemisphere::size * y)
+	{}
+
 	CapMemBlockOnHemisphere toCapMemBlockOnHemisphere() const;
+	HemisphereOnDLS toHemisphereOnDLS() const;
 };
 
 
@@ -72,6 +79,7 @@ struct GENPYBIND(inline_base("*")) CapMemBlockConfigOnDLS
 	{}
 
 	CapMemBlockOnHemisphere toCapMemBlockOnHemisphere() const;
+	HemisphereOnDLS toHemisphereOnDLS() const;
 };
 
 
