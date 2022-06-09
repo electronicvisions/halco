@@ -61,7 +61,7 @@ def build(bld):
             install_path='${PREFIX}/lib',
         )
 
-        for hx_version in [1, 2, 3]:
+        for hx_version in [2, 3]:
             bld(
                 features='cxx pyext',
                 target='pyhalco_hicann_dls_vx_v%s_obj' % hx_version,

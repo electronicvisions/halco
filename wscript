@@ -74,7 +74,7 @@ def build(bld):
         use=['halco_common'],
     )
 
-    for hx_version in [1, 2, 3]:
+    for hx_version in [2, 3]:
         bld.shlib(
             target='halco_hicann_dls_vx_v%s' % hx_version,
             source=bld.path.ant_glob('src/halco/hicann-dls/vx/v%s/*.cpp' % hx_version,
@@ -94,7 +94,7 @@ def build(bld):
             env = bld.all_envs['nux_vx'],
         )
 
-        for hx_version in [1, 2, 3]:
+        for hx_version in [2, 3]:
             bld.stlib(
                 target='halco_hicann_dls_ppu_vx_v%s' % hx_version,
                 source=bld.path.ant_glob('src/halco/hicann-dls/vx/v%s/*.cpp' % hx_version,
@@ -126,7 +126,7 @@ def build(bld):
         install_path='${PREFIX}/bin'
     )
 
-    for hx_version in [1, 2, 3]:
+    for hx_version in [2, 3]:
         bld(
             target='halco_hicann_dls_vx_v%s_tests' % hx_version,
             features='gtest cxx cxxprogram',
