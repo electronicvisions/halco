@@ -57,12 +57,15 @@ def build(bld):
     )
 
     if bld.env.have_ppu_toolchain:
+        env = bld.all_envs['nux_vx'].derive()
+        env.detach()
+
         bld.stlib(
             target='halco_common_ppu_vx',
             source=bld.path.ant_glob('src/halco/common/*.cpp'),
             install_path='${PREFIX}/lib/ppu',
             use=['halco_inc', 'ZTL', 'rant', 'pywrap_inc'],
-            env=bld.all_envs['nux_vx'],
+            env=env,
             linkflags='-Wl,-z,defs',
         )
 
@@ -85,16 +88,22 @@ def build(bld):
         )
 
     if bld.env.have_ppu_toolchain:
+        env = bld.all_envs['nux_vx'].derive()
+        env.detach()
+
         bld.stlib(
             target='halco_hicann_dls_ppu_vx',
             source=bld.path.ant_glob('src/halco/hicann-dls/vx/*.cpp'),
             install_path='${PREFIX}/lib/ppu',
             linkflags='-Wl,-z,defs',
             use=['halco_common_ppu_vx'],
-            env = bld.all_envs['nux_vx'],
+            env = env,
         )
 
         for hx_version in [2, 3]:
+            env = bld.all_envs['nux_vx_v%s' % hx_version].derive()
+            env.detach()
+
             bld.stlib(
                 target='halco_hicann_dls_ppu_vx_v%s' % hx_version,
                 source=bld.path.ant_glob('src/halco/hicann-dls/vx/v%s/*.cpp' % hx_version,
@@ -102,7 +111,7 @@ def build(bld):
                 install_path='${PREFIX}/lib/ppu',
                 linkflags='-Wl,-z,defs',
                 use=['halco_common_ppu_vx', 'halco_hicann_dls_ppu_vx'],
-                env = bld.all_envs['nux_vx_v%s' % hx_version],
+                env = env,
             )
 
     bld(
