@@ -2,34 +2,56 @@
 #include "halco/common/genpybind.h"
 #include "halco/common/iter_all.h"
 #include "halco/hicann-dls/vx/neuron.h"
-#include "halco/hicann-dls/vx/v2/cadc.h"
-#include "halco/hicann-dls/vx/v2/capmem.h"
-#include "halco/hicann-dls/vx/v2/chip.h"
-#include "halco/hicann-dls/vx/v2/correlation.h"
-#include "halco/hicann-dls/vx/v2/padi.h"
-#include "halco/hicann-dls/vx/v2/ppu.h"
-#include "halco/hicann-dls/vx/v2/routing_crossbar.h"
-#include "halco/hicann-dls/vx/v2/switch_rows.h"
-#include "halco/hicann-dls/vx/v2/synapse.h"
-#include "halco/hicann-dls/vx/v2/synapse_driver.h"
-#include "halco/hicann-dls/vx/v2/synram.h"
-
-namespace cereal {
-class access;
-} // namespace cereal
 
 namespace halco::hicann_dls::vx::v2 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V2 {
 
-#include "halco/hicann-dls/vx/neuron_ns_includes.h"
+using NeuronRowOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::NeuronRowOnDLS;
+using NeuronConfigOnNeuronConfigBlock GENPYBIND(visible) =
+    halco::hicann_dls::vx::NeuronConfigOnNeuronConfigBlock;
+using NeuronConfigBlockOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::NeuronConfigBlockOnDLS;
+using NeuronBackendConfigOnNeuronBackendConfigBlock GENPYBIND(visible) =
+    halco::hicann_dls::vx::NeuronBackendConfigOnNeuronBackendConfigBlock;
+using NeuronBackendConfigBlockOnDLS GENPYBIND(visible) =
+    halco::hicann_dls::vx::NeuronBackendConfigBlockOnDLS;
+using CommonNeuronBackendConfigOnDLS GENPYBIND(visible) =
+    halco::hicann_dls::vx::CommonNeuronBackendConfigOnDLS;
+using NeuronResetOnNeuronResetBlock GENPYBIND(visible) =
+    halco::hicann_dls::vx::NeuronResetOnNeuronResetBlock;
+using NeuronResetBlockOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::NeuronResetBlockOnDLS;
+using NeuronResetOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::NeuronResetOnDLS;
+using BlockPostPulseOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::BlockPostPulseOnDLS;
+using SpikeCounterReadOnSpikeCounterReadBlock GENPYBIND(visible) =
+    halco::hicann_dls::vx::SpikeCounterReadOnSpikeCounterReadBlock;
+using SpikeCounterReadBlockOnDLS GENPYBIND(visible) =
+    halco::hicann_dls::vx::SpikeCounterReadBlockOnDLS;
+using SpikeCounterReadOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::SpikeCounterReadOnDLS;
+using SpikeCounterResetOnSpikeCounterResetBlock GENPYBIND(visible) =
+    halco::hicann_dls::vx::SpikeCounterResetOnSpikeCounterResetBlock;
+using SpikeCounterResetBlockOnDLS GENPYBIND(visible) =
+    halco::hicann_dls::vx::SpikeCounterResetBlockOnDLS;
+using SpikeCounterResetOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::SpikeCounterResetOnDLS;
+using NeuronEventOutputOnNeuronBackendBlock GENPYBIND(visible) =
+    halco::hicann_dls::vx::NeuronEventOutputOnNeuronBackendBlock;
+using NeuronEventOutputOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::NeuronEventOutputOnDLS;
+using NeuronSRAMTimingConfigOnDLS GENPYBIND(visible) =
+    halco::hicann_dls::vx::NeuronSRAMTimingConfigOnDLS;
+using NeuronBackendSRAMTimingConfigOnDLS GENPYBIND(visible) =
+    halco::hicann_dls::vx::NeuronBackendSRAMTimingConfigOnDLS;
+using NeuronRowOnLogicalNeuron = halco::hicann_dls::vx::NeuronRowOnLogicalNeuron;
+using NeuronBlockOnDLS = halco::hicann_dls::vx::NeuronBlockOnDLS;
+using NeuronColumnOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::NeuronColumnOnDLS;
+using AtomicNeuronOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::AtomicNeuronOnDLS;
+using NeuronConfigOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::NeuronConfigOnDLS;
+using NeuronBackendConfigOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::NeuronBackendConfigOnDLS;
+using NeuronResetQuadOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::NeuronResetQuadOnDLS;
+using LogicalNeuronOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::LogicalNeuronOnDLS;
+using LogicalNeuronCompartments GENPYBIND(visible) =
+    halco::hicann_dls::vx::LogicalNeuronCompartments;
+using AtomicNeuronOnLogicalNeuron GENPYBIND(visible) =
+    halco::hicann_dls::vx::AtomicNeuronOnLogicalNeuron;
+using NeuronColumnOnLogicalNeuron GENPYBIND(visible) =
+    halco::hicann_dls::vx::NeuronColumnOnLogicalNeuron;
+using CompartmentOnLogicalNeuron GENPYBIND(visible) =
+    halco::hicann_dls::vx::CompartmentOnLogicalNeuron;
 
 } // namespace halco::hicann_dls::vx::v2
-
-namespace std {
-
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::v2::NeuronColumnOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::v2::AtomicNeuronOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::v2::NeuronConfigOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::v2::NeuronBackendConfigOnDLS)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::v2::NeuronResetQuadOnDLS)
-
-} // namespace std
