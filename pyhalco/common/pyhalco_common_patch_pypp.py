@@ -42,6 +42,18 @@ def _patch_enums(module_dict):
 _patch_enums(globals())
 
 
+def _patch_numpy_enums(module):
+    # transform numpy int to int to create Enums
+    import numpy as np
+    fun = module.Enum
+    inner_fun = fun.__init__
+
+    def wrap(self, *args, **kwargs):
+        args = (a.item() if isinstance(a, np.integer) else a for a in args)
+        inner_fun(self, *args, **kwargs)
+    setattr(fun, "__init__", wrap)
+
+
 def patch(module):
     """
     This hook will be executed at the end of the pyhalco module generation
@@ -51,3 +63,4 @@ def patch(module):
     module._patch_enums = _patch_enums
     module.__unpickle_boost_enum_helper = __unpickle_boost_enum_helper
     _patch_enums(module.__dict__)
+    _patch_numpy_enums(module)
