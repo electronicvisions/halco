@@ -103,6 +103,19 @@ struct GENPYBIND(inline_base("*")) EventRecordingConfigOnFPGA
 	constexpr explicit EventRecordingConfigOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
 };
 
+/******************************\
+   Instruction timeout config
+\******************************/
+
+/**
+ * Configuration register of instruction timeout duration of playback executor.
+ */
+struct GENPYBIND(inline_base("*")) InstructionTimeoutConfigOnFPGA
+    : public common::detail::RantWrapper<InstructionTimeoutConfigOnFPGA, uint_fast16_t, 0, 0>
+{
+	constexpr explicit InstructionTimeoutConfigOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
+};
+
 } // namespace halco::hicann_dls::vx
 
 namespace std {
@@ -110,6 +123,7 @@ namespace std {
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::FPGADeviceDNAOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NullPayloadReadableOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::EventRecordingConfigOnFPGA)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::InstructionTimeoutConfigOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExternalPPUMemoryByteOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExternalPPUMemoryQuadOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExternalPPUMemoryBlockSize)

@@ -18,5 +18,7 @@ using NullPayloadReadableOnFPGA GENPYBIND(visible) =
     halco::hicann_dls::vx::NullPayloadReadableOnFPGA;
 using EventRecordingConfigOnFPGA GENPYBIND(visible) =
     halco::hicann_dls::vx::EventRecordingConfigOnFPGA;
+using InstructionTimeoutConfigOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::InstructionTimeoutConfigOnFPGA;
 
 } // namespace halco::hicann_dls::vx::v2
