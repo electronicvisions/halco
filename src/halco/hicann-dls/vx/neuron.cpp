@@ -549,6 +549,15 @@ LogicalNeuronOnDLS::PlacedCompartments LogicalNeuronOnDLS::get_placed_compartmen
 	return m_compartments;
 }
 
+LogicalNeuronOnDLS::AtomicNeuronList LogicalNeuronOnDLS::get_atomic_neurons() const
+{
+	AtomicNeuronList neurons;
+	for (auto const& entry : m_compartments) {
+		neurons.insert(neurons.end(), entry.second.begin(), entry.second.end());
+	}
+	return neurons;
+}
+
 bool LogicalNeuronOnDLS::operator==(LogicalNeuronOnDLS const& other) const
 {
 	return (m_compartments == other.m_compartments);

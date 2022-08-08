@@ -520,6 +520,7 @@ private:
  */
 struct GENPYBIND(visible) LogicalNeuronOnDLS
 {
+	typedef std::vector<AtomicNeuronOnDLS> AtomicNeuronList;
 	typedef std::map<CompartmentOnLogicalNeuron, std::vector<AtomicNeuronOnDLS>> PlacedCompartments;
 
 	LogicalNeuronOnDLS() = default;
@@ -538,6 +539,12 @@ struct GENPYBIND(visible) LogicalNeuronOnDLS
 	 * @return Placed compartments
 	 */
 	PlacedCompartments get_placed_compartments() const;
+
+	/**
+	 * Get all AtomicNeuronOnDLS which are involved in this logical neuron.
+	 * @return List of AtomicNeuronOnDLS which are part of the logical neuron.
+	 */
+	AtomicNeuronList get_atomic_neurons() const;
 
 	bool operator==(LogicalNeuronOnDLS const& other) const;
 	bool operator!=(LogicalNeuronOnDLS const& other) const;
