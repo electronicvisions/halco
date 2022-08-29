@@ -243,14 +243,14 @@ NeuronConfigBlockOnDLS SynapseQuadOnDLS::toNeuronConfigBlockOnDLS() const
 SynapseOnSynapseRow::SynapseOnSynapseRow(
     EntryOnQuad const& syn_on_quad, SynapseQuadColumnOnDLS const& quad) :
     rant_t(
-        (3 - syn_on_quad.toEnum()) * 2 +
+        syn_on_quad.toEnum() * 2 +
         (quad.toEnum() % (SynapseQuadColumnOnDLS::size / 2)) * EntryOnQuad::size * 2 +
         quad.toEnum() / (SynapseQuadColumnOnDLS::size / 2))
 {}
 
 EntryOnQuad SynapseOnSynapseRow::toEntryOnQuad() const
 {
-	return EntryOnQuad(3 - ((toEnum() / 2) % EntryOnQuad::size));
+	return EntryOnQuad((toEnum() / 2) % EntryOnQuad::size);
 }
 
 SynapseQuadColumnOnDLS SynapseOnSynapseRow::toSynapseQuadColumnOnDLS() const
