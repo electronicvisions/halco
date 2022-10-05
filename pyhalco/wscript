@@ -87,6 +87,7 @@ def build(bld):
                 use='pyhalco_hicann_dls_vx_v%s' % hx_version,
                 install_path='${PREFIX}/bin',
                 pythonpath=['test'],
+                test_timeout=120,
             )
 
     else:

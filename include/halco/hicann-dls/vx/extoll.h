@@ -4,17 +4,82 @@
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
+#include "halco/hicann-dls/vx/omnibus.h"
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
+// the RantWrapper is needed, as BaseType is not supported for mixins.
+// We limit the range to the size of the Tourmalet-RF which has 23-bit address-space.
 struct GENPYBIND(inline_base("*")) ExtollAddress
-    : public common::detail::BaseType<ExtollAddress, uint64_t>
+    : public common::detail::RantWrapper<ExtollAddress, uint64_t, 0x007f'ffffull, 0>
 {
 	constexpr explicit ExtollAddress(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
-	    base_t(val)
+	    rant_t(val)
 	{}
 };
 
+struct GENPYBIND(inline_base("*")) ExtollChipType
+    : public common::detail::RantWrapper<ExtollChipType, uint8_t, 1, 0>
+{
+	constexpr explicit ExtollChipType(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+
+	static const ExtollChipType fpga;
+	static const ExtollChipType tourmalet;
+};
+
+HALCO_COORDINATE_MIXIN(ChipTypeMixin, ExtollChipType, chip_type)
+
+struct GENPYBIND(inline_base("*")) ExtollNodeId
+    : public common::detail::RantWrapper<ExtollNodeId, uint32_t, 0x1'0000ull, 0>
+{
+	constexpr explicit ExtollNodeId(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+
+	static const ExtollNodeId self;
+};
+
+struct GENPYBIND(inline_base("*ChipTypeMixin*")) ExtollNodeIdOnExtollNetwork
+    : public ChipTypeMixin<ExtollNodeIdOnExtollNetwork, ExtollNodeId>
+{
+	explicit ExtollNodeIdOnExtollNetwork(
+	    ExtollNodeId const& nodeid = ExtollNodeId(halco::hicann_dls::vx::ExtollNodeId::self),
+	    ExtollChipType const& chiptype =
+	        ExtollChipType(halco::hicann_dls::vx::ExtollChipType::fpga)) :
+	    mixin_t(nodeid, chiptype)
+	{}
+
+	explicit ExtollNodeIdOnExtollNetwork(enum_type const& e) : mixin_t(e) {}
+
+	ExtollNodeId toExtollNodeId() const
+	{
+		return This();
+	}
+};
+
+HALCO_COORDINATE_MIXIN(NodeIdMixin, ExtollNodeIdOnExtollNetwork, node_id)
+
+struct GENPYBIND(inline_base("*NodeIdMixin*")) ExtollAddressOnExtollNetwork
+    : public NodeIdMixin<ExtollAddressOnExtollNetwork, ExtollAddress>
+{
+	ExtollAddressOnExtollNetwork() = default;
+
+	explicit ExtollAddressOnExtollNetwork(
+	    ExtollAddress const& extaddr,
+	    ExtollNodeIdOnExtollNetwork const& nodeid =
+	        ExtollNodeIdOnExtollNetwork(halco::hicann_dls::vx::ExtollNodeIdOnExtollNetwork::self)) :
+	    mixin_t(extaddr, nodeid)
+	{}
+
+	explicit ExtollAddressOnExtollNetwork(enum_type const& e) : mixin_t(e) {}
+
+	ExtollAddress toExtollAddress() const
+	{
+		return This();
+	}
+};
 
 /*
  *  FPGA-Event-Switch:
@@ -498,11 +563,226 @@ struct GENPYBIND(inline_base("*SpikeCommSplitMixin*"))
 };
 
 
+/*
+ *  BARRIER & INTERRUPT:
+ */
+
+
+struct GENPYBIND(inline_base("*")) ExtollBarrierTriggerReachedOnExtollNodeId
+    : public common::detail::
+          RantWrapper<ExtollBarrierTriggerReachedOnExtollNodeId, uint_fast8_t, 15, 0>
+{
+	constexpr explicit ExtollBarrierTriggerReachedOnExtollNodeId(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+struct GENPYBIND(inline_base("*NodeIdMixin*")) ExtollBarrierTriggerReachedOnExtollNetwork
+    : public NodeIdMixin<
+          ExtollBarrierTriggerReachedOnExtollNetwork,
+          ExtollBarrierTriggerReachedOnExtollNodeId>
+{
+	ExtollBarrierTriggerReachedOnExtollNetwork() = default;
+
+	explicit ExtollBarrierTriggerReachedOnExtollNetwork(
+	    ExtollBarrierTriggerReachedOnExtollNodeId const& control,
+	    ExtollNodeIdOnExtollNetwork const& nodeid =
+	        ExtollNodeIdOnExtollNetwork(halco::hicann_dls::vx::ExtollNodeIdOnExtollNetwork::self)) :
+	    mixin_t(control, nodeid)
+	{}
+
+	explicit ExtollBarrierTriggerReachedOnExtollNetwork(enum_type const& e) : mixin_t(e) {}
+
+	ExtollBarrierTriggerReachedOnExtollNodeId toExtollBarrierTriggerReachedOnExtollNodeId() const
+	{
+		return This();
+	}
+};
+
+
+struct GENPYBIND(inline_base("*")) ExtollBarrierReleasedOnExtollNodeId
+    : public common::detail::RantWrapper<ExtollBarrierReleasedOnExtollNodeId, uint_fast8_t, 15, 0>
+{
+	constexpr explicit ExtollBarrierReleasedOnExtollNodeId(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+struct GENPYBIND(inline_base("*NodeIdMixin*")) ExtollBarrierReleasedOnExtollNetwork
+    : public NodeIdMixin<ExtollBarrierReleasedOnExtollNetwork, ExtollBarrierReleasedOnExtollNodeId>
+{
+	ExtollBarrierReleasedOnExtollNetwork() = default;
+
+	explicit ExtollBarrierReleasedOnExtollNetwork(
+	    ExtollBarrierReleasedOnExtollNodeId const& control,
+	    ExtollNodeIdOnExtollNetwork const& nodeid =
+	        ExtollNodeIdOnExtollNetwork(halco::hicann_dls::vx::ExtollNodeIdOnExtollNetwork::self)) :
+	    mixin_t(control, nodeid)
+	{}
+
+	explicit ExtollBarrierReleasedOnExtollNetwork(enum_type const& e) : mixin_t(e) {}
+
+	ExtollBarrierReleasedOnExtollNodeId toExtollBarrierReleasedOnExtollNodeId() const
+	{
+		return This();
+	}
+};
+
+
+struct GENPYBIND(inline_base("*")) LinkOnExtollNode
+    : public common::detail::RantWrapper<LinkOnExtollNode, uint_fast8_t, 6, 0>
+{
+	constexpr explicit LinkOnExtollNode(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+
+struct GENPYBIND(inline_base("*")) ExtollBarrierConfigOnExtollNodeId
+    : public common::detail::RantWrapper<ExtollBarrierConfigOnExtollNodeId, uint_fast8_t, 15, 0>
+{
+	constexpr explicit ExtollBarrierConfigOnExtollNodeId(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+struct GENPYBIND(inline_base("*NodeIdMixin*")) ExtollBarrierConfigOnExtollNetwork
+    : public NodeIdMixin<ExtollBarrierConfigOnExtollNetwork, ExtollBarrierConfigOnExtollNodeId>
+{
+	ExtollBarrierConfigOnExtollNetwork() = default;
+
+	explicit ExtollBarrierConfigOnExtollNetwork(
+	    ExtollBarrierConfigOnExtollNodeId const& config,
+	    ExtollNodeIdOnExtollNetwork const& nodeid =
+	        ExtollNodeIdOnExtollNetwork(halco::hicann_dls::vx::ExtollNodeIdOnExtollNetwork::self)) :
+	    mixin_t(config, nodeid)
+	{}
+
+	explicit ExtollBarrierConfigOnExtollNetwork(enum_type const& e) : mixin_t(e) {}
+
+	ExtollBarrierConfigOnExtollNodeId toExtollBarrierConfigOnExtollNodeId() const
+	{
+		return This();
+	}
+};
+
+
+struct GENPYBIND(inline_base("*")) ExtollInterruptControlOnExtollNodeId
+    : public common::detail::RantWrapper<ExtollInterruptControlOnExtollNodeId, uint_fast8_t, 3, 0>
+{
+	constexpr explicit ExtollInterruptControlOnExtollNodeId(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+struct GENPYBIND(inline_base("*NodeIdMixin*")) ExtollInterruptControlOnExtollNetwork
+    : public NodeIdMixin<
+          ExtollInterruptControlOnExtollNetwork,
+          ExtollInterruptControlOnExtollNodeId>
+{
+	ExtollInterruptControlOnExtollNetwork() = default;
+
+	explicit ExtollInterruptControlOnExtollNetwork(
+	    ExtollInterruptControlOnExtollNodeId const& control,
+	    ExtollNodeIdOnExtollNetwork const& nodeid =
+	        ExtollNodeIdOnExtollNetwork(halco::hicann_dls::vx::ExtollNodeIdOnExtollNetwork::self)) :
+	    mixin_t(control, nodeid)
+	{}
+
+	explicit ExtollInterruptControlOnExtollNetwork(enum_type const& e) : mixin_t(e) {}
+
+	ExtollInterruptControlOnExtollNodeId toExtollInterruptControlOnExtollNodeId() const
+	{
+		return This();
+	}
+};
+
+
+struct GENPYBIND(inline_base("*")) ExtollInterruptConfigOnExtollNodeId
+    : public common::detail::RantWrapper<ExtollInterruptConfigOnExtollNodeId, uint_fast8_t, 15, 0>
+{
+	constexpr explicit ExtollInterruptConfigOnExtollNodeId(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+struct GENPYBIND(inline_base("*NodeIdMixin*")) ExtollInterruptConfigOnExtollNetwork
+    : public NodeIdMixin<ExtollInterruptConfigOnExtollNetwork, ExtollInterruptConfigOnExtollNodeId>
+{
+	ExtollInterruptConfigOnExtollNetwork() = default;
+
+	explicit ExtollInterruptConfigOnExtollNetwork(
+	    ExtollInterruptConfigOnExtollNodeId const& config,
+	    ExtollNodeIdOnExtollNetwork const& nodeid =
+	        ExtollNodeIdOnExtollNetwork(halco::hicann_dls::vx::ExtollNodeIdOnExtollNetwork::self)) :
+	    mixin_t(config, nodeid)
+	{}
+
+	explicit ExtollInterruptConfigOnExtollNetwork(enum_type const& e) : mixin_t(e) {}
+
+	ExtollInterruptConfigOnExtollNodeId toExtollInterruptConfigOnExtollNodeId() const
+	{
+		return This();
+	}
+};
+
+
+struct GENPYBIND(inline_base("*")) ExtollBarrierInterruptInportErrorCountOnFPGA
+    : public common::detail::
+          RantWrapper<ExtollBarrierInterruptInportErrorCountOnFPGA, uint_fast8_t, 0, 0>
+{
+	constexpr explicit ExtollBarrierInterruptInportErrorCountOnFPGA(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+struct GENPYBIND(inline_base("*")) ExtollBarrierInterruptInportCounterResetOnFPGA
+    : public common::detail::
+          RantWrapper<ExtollBarrierInterruptInportCounterResetOnFPGA, uint_fast8_t, 0, 0>
+{
+	constexpr explicit ExtollBarrierInterruptInportCounterResetOnFPGA(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+
 } // namespace halco::hicann_dls::vx
 
 namespace std {
 
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExtollAddress)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExtollNodeId)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExtollChipType)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExtollNodeIdOnExtollNetwork)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExtollAddressOnExtollNetwork)
+
+
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExtollBarrierTriggerReachedOnExtollNodeId)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExtollBarrierTriggerReachedOnExtollNetwork)
+
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExtollBarrierReleasedOnExtollNodeId)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExtollBarrierReleasedOnExtollNetwork)
+
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::LinkOnExtollNode)
+
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExtollBarrierConfigOnExtollNodeId)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExtollBarrierConfigOnExtollNetwork)
+
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExtollInterruptControlOnExtollNodeId)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExtollInterruptControlOnExtollNetwork)
+
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExtollInterruptConfigOnExtollNodeId)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExtollInterruptConfigOnExtollNetwork)
+
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExtollBarrierInterruptInportErrorCountOnFPGA)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExtollBarrierInterruptInportCounterResetOnFPGA)
 
 
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::EventSwitchSourceOnFPGA)

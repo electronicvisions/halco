@@ -6,6 +6,37 @@ namespace halco::hicann_dls::vx::v2 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V2 {
 
 using EventSwitchSourceOnFPGA GENPYBIND(visible) = halco::hicann_dls::vx::EventSwitchSourceOnFPGA;
 using ExtollAddress GENPYBIND(visible) = halco::hicann_dls::vx::ExtollAddress;
+using ExtollChipType GENPYBIND(visible) = halco::hicann_dls::vx::ExtollChipType;
+using ExtollNodeId GENPYBIND(visible) = halco::hicann_dls::vx::ExtollNodeId;
+using ExtollNodeIdOnExtollNetwork GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollNodeIdOnExtollNetwork;
+using ExtollAddressOnExtollNetwork GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollAddressOnExtollNetwork;
+using ExtollBarrierTriggerReachedOnExtollNodeId GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollBarrierTriggerReachedOnExtollNodeId;
+using ExtollBarrierTriggerReachedOnExtollNetwork GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollBarrierTriggerReachedOnExtollNetwork;
+using ExtollBarrierReleasedOnExtollNodeId GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollBarrierReleasedOnExtollNodeId;
+using ExtollBarrierReleasedOnExtollNetwork GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollBarrierReleasedOnExtollNetwork;
+using LinkOnExtollNode GENPYBIND(visible) = halco::hicann_dls::vx::LinkOnExtollNode;
+using ExtollBarrierConfigOnExtollNodeId GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollBarrierConfigOnExtollNodeId;
+using ExtollBarrierConfigOnExtollNetwork GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollBarrierConfigOnExtollNetwork;
+using ExtollInterruptControlOnExtollNodeId GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollInterruptControlOnExtollNodeId;
+using ExtollInterruptControlOnExtollNetwork GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollInterruptControlOnExtollNetwork;
+using ExtollInterruptConfigOnExtollNodeId GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollInterruptConfigOnExtollNodeId;
+using ExtollInterruptConfigOnExtollNetwork GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollInterruptConfigOnExtollNetwork;
+using ExtollBarrierInterruptInportErrorCountOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollBarrierInterruptInportErrorCountOnFPGA;
+using ExtollBarrierInterruptInportCounterResetOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollBarrierInterruptInportCounterResetOnFPGA;
 using ExtollSpikeCommBucketTriggerConfigOnFPGA GENPYBIND(visible) =
     halco::hicann_dls::vx::ExtollSpikeCommBucketTriggerConfigOnFPGA;
 using ExtollSpikeCommBucketDestinationConfigOnFPGA GENPYBIND(visible) =
