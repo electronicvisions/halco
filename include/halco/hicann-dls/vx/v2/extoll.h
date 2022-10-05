@@ -5,6 +5,8 @@
 namespace halco::hicann_dls::vx::v2 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V2 {
 
 using EventSwitchSourceOnFPGA GENPYBIND(visible) = halco::hicann_dls::vx::EventSwitchSourceOnFPGA;
+using EventSwitchReadoutOnFPGA GENPYBIND(visible) = halco::hicann_dls::vx::EventSwitchReadoutOnFPGA;
+using EventSwitchConfigOnFPGA GENPYBIND(visible) = halco::hicann_dls::vx::EventSwitchConfigOnFPGA;
 using ExtollAddress GENPYBIND(visible) = halco::hicann_dls::vx::ExtollAddress;
 using ExtollChipType GENPYBIND(visible) = halco::hicann_dls::vx::ExtollChipType;
 using ExtollNodeId GENPYBIND(visible) = halco::hicann_dls::vx::ExtollNodeId;

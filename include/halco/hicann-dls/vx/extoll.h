@@ -98,6 +98,28 @@ struct GENPYBIND(inline_base("*")) EventSwitchSourceOnFPGA
 	static const EventSwitchSourceOnFPGA to_external;
 };
 
+struct GENPYBIND(inline_base("*")) EventSwitchReadoutOnFPGA
+    : public common::detail::RantWrapper<EventSwitchReadoutOnFPGA, uint_fast8_t, 2, 0>
+{
+	constexpr explicit EventSwitchReadoutOnFPGA(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+
+	static const EventSwitchReadoutOnFPGA systime_offset;
+	static const EventSwitchReadoutOnFPGA global_systime;
+	static const EventSwitchReadoutOnFPGA last_global_systime;
+};
+
+struct GENPYBIND(inline_base("*")) EventSwitchConfigOnFPGA
+    : public common::detail::RantWrapper<EventSwitchConfigOnFPGA, uint_fast8_t, 0, 0>
+{
+	constexpr explicit EventSwitchConfigOnFPGA(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
 
 /*
  *  Accumulation-BUCKET:
@@ -786,6 +808,8 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExtollBarrierInterruptInportCou
 
 
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::EventSwitchSourceOnFPGA)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::EventSwitchReadoutOnFPGA)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::EventSwitchConfigOnFPGA)
 
 
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExtollSpikeCommBucketTriggerConfigOnFPGA)

@@ -171,6 +171,8 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     FPGASystimeSyncLastAsicSystimeOnFPGA => linear,iterable
     FPGASystimeSyncActiveStateOnFPGA => linear,iterable
     EventSwitchSourceOnFPGA => linear,iterable
+    EventSwitchReadoutOnFPGA => linear,iterable
+    EventSwitchConfigOnFPGA => linear,iterable
     ExtollAddress => linear
     ExtollChipType => linear,iterable
     ExtollNodeId => linear

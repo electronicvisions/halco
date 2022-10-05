@@ -74,6 +74,8 @@ COORDINATE(FPGASystimeSyncLastRTTOnFPGA, halco::hicann_dls::vx::v2::FPGASystimeS
 COORDINATE(FPGASystimeSyncLastAsicSystimeOnFPGA, halco::hicann_dls::vx::v2::FPGASystimeSyncLastAsicSystimeOnFPGA)
 COORDINATE(FPGASystimeSyncActiveStateOnFPGA, halco::hicann_dls::vx::v2::FPGASystimeSyncActiveStateOnFPGA)
 COORDINATE(EventSwitchSourceOnFPGA, halco::hicann_dls::vx::v2::EventSwitchSourceOnFPGA)
+COORDINATE(EventSwitchReadoutOnFPGA, halco::hicann_dls::vx::v2::EventSwitchReadoutOnFPGA)
+COORDINATE(EventSwitchConfigOnFPGA, halco::hicann_dls::vx::v2::EventSwitchConfigOnFPGA)
 COORDINATE(ExtollAddress, halco::hicann_dls::vx::v2::ExtollAddress)
 COORDINATE(ExtollChipType, halco::hicann_dls::vx::v2::ExtollChipType)
 COORDINATE(ExtollNodeId, halco::hicann_dls::vx::v2::ExtollNodeId)
