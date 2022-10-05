@@ -12,5 +12,6 @@ using MADCSamplePackFromFPGAOnDLS GENPYBIND(visible) =
     halco::hicann_dls::vx::MADCSamplePackFromFPGAOnDLS;
 using NeuronLabel GENPYBIND(visible) = halco::hicann_dls::vx::NeuronLabel;
 using SPL1Address GENPYBIND(visible) = halco::hicann_dls::vx::SPL1Address;
+using SpikeLabel GENPYBIND(visible) = halco::hicann_dls::vx::SpikeLabel;
 
 } // namespace halco::hicann_dls::vx::v2

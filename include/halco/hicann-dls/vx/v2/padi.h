@@ -10,5 +10,6 @@ using PADIBusOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::PADIBusOnDLS;
 using CommonPADIBusConfigOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::CommonPADIBusConfigOnDLS;
 using CommonSTPConfigOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::CommonSTPConfigOnDLS;
 using PADIEventOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::PADIEventOnDLS;
+using PADIRowSelectAddress GENPYBIND(visible) = halco::hicann_dls::vx::PADIRowSelectAddress;
 
 } // namespace halco::hicann_dls::vx::v2

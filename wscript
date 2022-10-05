@@ -7,6 +7,7 @@ def depends(ctx):
     ctx('pywrap') # also needed in non-python mode! (compatibility headers!)
     ctx('lib-boost-patches')
     ctx('libnux')
+    ctx('hate')
 
 
 def options(opt):
@@ -41,7 +42,7 @@ def build(bld):
         install_path='${PREFIX}/lib',
         linkflags='-Wl,-z,defs',
         use=['rant', 'ZTL', 'pywrap', 'halco_inc',
-             'LOG4CXX', 'boost_serialization'],
+             'LOG4CXX', 'boost_serialization', 'hate_inc'],
     )
 
     bld.shlib(
@@ -64,7 +65,7 @@ def build(bld):
             target='halco_common_ppu_vx',
             source=bld.path.ant_glob('src/halco/common/*.cpp'),
             install_path='${PREFIX}/lib/ppu',
-            use=['halco_inc', 'ZTL', 'rant', 'pywrap_inc'],
+            use=['halco_inc', 'ZTL', 'rant', 'pywrap_inc', 'hate_inc'],
             env=env,
             linkflags='-Wl,-z,defs',
         )

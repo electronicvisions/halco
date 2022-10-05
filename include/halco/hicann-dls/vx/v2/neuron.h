@@ -43,6 +43,7 @@ using NeuronColumnOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::NeuronColumn
 using AtomicNeuronOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::AtomicNeuronOnDLS;
 using NeuronConfigOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::NeuronConfigOnDLS;
 using NeuronBackendConfigOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::NeuronBackendConfigOnDLS;
+using NeuronBackendAddressOut GENPYBIND(visible) = halco::hicann_dls::vx::NeuronBackendAddressOut;
 using NeuronResetQuadOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::NeuronResetQuadOnDLS;
 using LogicalNeuronOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::LogicalNeuronOnDLS;
 using LogicalNeuronCompartments GENPYBIND(visible) =

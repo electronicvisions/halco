@@ -160,6 +160,7 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     SpikeCounterResetOnDLS => iterable
     NeuronLabel => linear,iterable
     SPL1Address => linear,iterable
+    SpikeLabel => linear
     CommonSynramConfigOnDLS => linear,iterable
     FPGADeviceDNAOnFPGA => linear,iterable
     SynapseQuadColumnOnDLS => linear,iterable
@@ -191,6 +192,7 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     CommonSynapseDriverConfigOnDLS => linear,iterable
     CommonPADIBusConfigOnDLS => linear,iterable
     CommonSTPConfigOnDLS => linear,iterable
+    PADIRowSelectAddress => linear,iterable
     PADIBusBlockOnDLS => linear,iterable
     PADIBusOnDLS => linear,iterable
     PADIBusOnPADIBusBlock => linear,iterable
@@ -226,7 +228,9 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     ReadoutChainOnDLS => linear,iterable
     CurrentDACOnDLS => linear,iterable
     CorrelationResetOnDLS => iterable
+    SynapseLabel => linear,iterable
     NeuronResetQuadOnDLS => iterable
+    NeuronBackendAddressOut => linear,iterable
     CommonCorrelationConfigOnDLS => linear,iterable
     BlockPostPulseOnDLS => linear,iterable
     CorrelationResetRowOnDLS => iterable

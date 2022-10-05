@@ -96,6 +96,14 @@ struct GENPYBIND(inline_base("*")) PADIEventOnDLS
 	static const PADIEventOnDLS bottom;
 };
 
+struct GENPYBIND(inline_base("*")) PADIRowSelectAddress
+    : public halco::common::detail::RantWrapper<PADIRowSelectAddress, uint_fast16_t, 31, 0>
+{
+	constexpr explicit PADIRowSelectAddress(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
 } // namespace halco::hicann_dls::vx
 
 namespace std {
@@ -106,5 +114,6 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PADIBusOnPADIBusBlock)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PADIEventOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CommonPADIBusConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CommonSTPConfigOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PADIRowSelectAddress)
 
 } // namespace std

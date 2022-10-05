@@ -649,6 +649,18 @@ struct GENPYBIND(inline_base("*SynramMixin*")) NeuronResetQuadOnDLS
 	neuron_reset_type toNeuronResetOnDLS() const;
 };
 
+/**
+ * Address of the spikes sent out by a neuron.
+ */
+struct GENPYBIND(inline_base("*")) NeuronBackendAddressOut
+    : public halco::common::detail::RantWrapper<NeuronBackendAddressOut, uint_fast16_t, 255, 0>
+{
+	constexpr explicit NeuronBackendAddressOut(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
 } // namespace halco::hicann_dls::vx
 
 namespace std {
@@ -683,5 +695,6 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CompartmentOnLogicalNeuron)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronBackendConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronResetQuadOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronBackendAddressOut)
 
 } // namespace std

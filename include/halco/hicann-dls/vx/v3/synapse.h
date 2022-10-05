@@ -30,6 +30,7 @@ using SynapseQuadOnSynram GENPYBIND(visible) = halco::hicann_dls::vx::SynapseQua
 using SynapseOnSynapseRow GENPYBIND(visible) = halco::hicann_dls::vx::SynapseOnSynapseRow;
 using SynapseOnSynram GENPYBIND(visible) = halco::hicann_dls::vx::SynapseOnSynram;
 using SynapseOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::SynapseOnDLS;
+using SynapseLabel GENPYBIND(visible) = halco::hicann_dls::vx::SynapseLabel;
 using SynapseQuadOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::SynapseQuadOnDLS;
 using SynapseWeightQuadOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::SynapseWeightQuadOnDLS;
 using SynapseLabelQuadOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::SynapseLabelQuadOnDLS;

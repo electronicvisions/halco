@@ -471,6 +471,17 @@ struct GENPYBIND(inline_base("*SynramMixin*")) SynapseOnDLS
 	}
 };
 
+/**
+ * Value type of a single synapse label configuration.
+ */
+struct GENPYBIND(inline_base("*")) SynapseLabel
+    : public halco::common::detail::RantWrapper<SynapseLabel, uint8_t, 63, 0>
+{
+	constexpr explicit SynapseLabel(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
 } // namespace halco::hicann_dls::vx
 
 namespace std {
@@ -499,5 +510,6 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseWeightQuadOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseLabelQuadOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseCorrelationCalibQuadOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CorrelationResetOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SynapseLabel)
 
 } // namespace std
