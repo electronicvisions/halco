@@ -4,6 +4,7 @@
 
 namespace halco::hicann_dls::vx::v2 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V2 {
 
+using EventSwitchSourceOnFPGA GENPYBIND(visible) = halco::hicann_dls::vx::EventSwitchSourceOnFPGA;
 using ExtollAddress GENPYBIND(visible) = halco::hicann_dls::vx::ExtollAddress;
 using ExtollSpikeCommBucketTriggerConfigOnFPGA GENPYBIND(visible) =
     halco::hicann_dls::vx::ExtollSpikeCommBucketTriggerConfigOnFPGA;

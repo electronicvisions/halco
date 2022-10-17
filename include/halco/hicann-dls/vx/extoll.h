@@ -17,6 +17,24 @@ struct GENPYBIND(inline_base("*")) ExtollAddress
 
 
 /*
+ *  FPGA-Event-Switch:
+ */
+
+struct GENPYBIND(inline_base("*")) EventSwitchSourceOnFPGA
+    : public common::detail::RantWrapper<EventSwitchSourceOnFPGA, uint_fast8_t, 2, 0>
+{
+	constexpr explicit EventSwitchSourceOnFPGA(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+
+	static const EventSwitchSourceOnFPGA to_executor;
+	static const EventSwitchSourceOnFPGA to_asic;
+	static const EventSwitchSourceOnFPGA to_external;
+};
+
+
+/*
  *  Accumulation-BUCKET:
  */
 
@@ -485,6 +503,9 @@ struct GENPYBIND(inline_base("*SpikeCommSplitMixin*"))
 namespace std {
 
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExtollAddress)
+
+
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::EventSwitchSourceOnFPGA)
 
 
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExtollSpikeCommBucketTriggerConfigOnFPGA)

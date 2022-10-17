@@ -73,6 +73,7 @@ COORDINATE(FPGASystimeSyncNumRetriesOnFPGA, halco::hicann_dls::vx::v3::FPGASysti
 COORDINATE(FPGASystimeSyncLastRTTOnFPGA, halco::hicann_dls::vx::v3::FPGASystimeSyncLastRTTOnFPGA)
 COORDINATE(FPGASystimeSyncLastAsicSystimeOnFPGA, halco::hicann_dls::vx::v3::FPGASystimeSyncLastAsicSystimeOnFPGA)
 COORDINATE(FPGASystimeSyncActiveStateOnFPGA, halco::hicann_dls::vx::v3::FPGASystimeSyncActiveStateOnFPGA)
+COORDINATE(EventSwitchSourceOnFPGA, halco::hicann_dls::vx::v3::EventSwitchSourceOnFPGA)
 COORDINATE(ExtollAddress, halco::hicann_dls::vx::v3::ExtollAddress)
 COORDINATE(ExtollSpikeCommBucketTriggerConfigOnFPGA, halco::hicann_dls::vx::v3::ExtollSpikeCommBucketTriggerConfigOnFPGA)
 COORDINATE(ExtollSpikeCommBucketDestinationConfigOnFPGA, halco::hicann_dls::vx::v3::ExtollSpikeCommBucketDestinationConfigOnFPGA)
