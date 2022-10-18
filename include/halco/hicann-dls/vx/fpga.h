@@ -11,6 +11,36 @@ namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 \******/
 
 /**
+ * Systime Sync from Chip.
+ */
+
+struct GENPYBIND(inline_base("*")) FPGASystimeSyncNumRetriesOnFPGA
+    : public common::detail::RantWrapper<FPGASystimeSyncNumRetriesOnFPGA, uint_fast16_t, 0, 0>
+{
+	constexpr explicit FPGASystimeSyncNumRetriesOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+struct GENPYBIND(inline_base("*")) FPGASystimeSyncLastRTTOnFPGA
+    : public common::detail::RantWrapper<FPGASystimeSyncLastRTTOnFPGA, uint_fast16_t, 0, 0>
+{
+	constexpr explicit FPGASystimeSyncLastRTTOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+struct GENPYBIND(inline_base("*")) FPGASystimeSyncLastAsicSystimeOnFPGA
+    : public common::detail::RantWrapper<FPGASystimeSyncLastAsicSystimeOnFPGA, uint_fast16_t, 0, 0>
+{
+	constexpr explicit FPGASystimeSyncLastAsicSystimeOnFPGA(uintmax_t const val = 0) : rant_t(val)
+	{}
+};
+
+struct GENPYBIND(inline_base("*")) FPGASystimeSyncActiveStateOnFPGA
+    : public common::detail::RantWrapper<FPGASystimeSyncActiveStateOnFPGA, uint_fast16_t, 0, 0>
+{
+	constexpr explicit FPGASystimeSyncActiveStateOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+
+/**
  * Unique identifier on FPGA.
  */
 struct GENPYBIND(inline_base("*")) FPGADeviceDNAOnFPGA

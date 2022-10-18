@@ -4,6 +4,14 @@
 
 namespace halco::hicann_dls::vx::v2 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V2 {
 
+using FPGASystimeSyncNumRetriesOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::FPGASystimeSyncNumRetriesOnFPGA;
+using FPGASystimeSyncLastRTTOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::FPGASystimeSyncLastRTTOnFPGA;
+using FPGASystimeSyncLastAsicSystimeOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::FPGASystimeSyncLastAsicSystimeOnFPGA;
+using FPGASystimeSyncActiveStateOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::FPGASystimeSyncActiveStateOnFPGA;
 using FPGADeviceDNAOnFPGA GENPYBIND(visible) = halco::hicann_dls::vx::FPGADeviceDNAOnFPGA;
 using ExternalPPUMemoryByteOnFPGA GENPYBIND(visible) =
     halco::hicann_dls::vx::ExternalPPUMemoryByteOnFPGA;

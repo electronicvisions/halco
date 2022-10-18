@@ -166,6 +166,10 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     SPL1Address => linear,iterable
     SpikeLabel => linear
     CommonSynramConfigOnDLS => linear,iterable
+    FPGASystimeSyncNumRetriesOnFPGA => linear,iterable
+    FPGASystimeSyncLastRTTOnFPGA => linear,iterable
+    FPGASystimeSyncLastAsicSystimeOnFPGA => linear,iterable
+    FPGASystimeSyncActiveStateOnFPGA => linear,iterable
     FPGADeviceDNAOnFPGA => linear,iterable
     SynapseQuadColumnOnDLS => linear,iterable
     SynapseRowOnSynram => linear,iterable
