@@ -116,6 +116,68 @@ struct GENPYBIND(inline_base("*")) InstructionTimeoutConfigOnFPGA
 	constexpr explicit InstructionTimeoutConfigOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
 };
 
+/***********\
+   SpikeIO
+\***********/
+
+/**
+ * Serial width of the on-FPGA SpikeIO module, in bits.
+ */
+static constexpr size_t spikeio_serial_bits = 8;
+
+// Forward declaration from 'halco/hicann-dls/vx/fpga.h'
+struct SpikeIOInputRouteOnFPGA;
+
+// Forward declaration from 'halco/hicann-dls/vx/event.h'
+struct SpikeLabel;
+
+/**
+ * Serial address/label value for a single event transferred via SpikeIO.
+ */
+struct GENPYBIND(inline_base("*")) SpikeIOAddress
+    : public halco::common::detail::
+          RantWrapper<SpikeIOAddress, uint_fast16_t, (1 << spikeio_serial_bits) - 1, 0>
+{
+	constexpr explicit SpikeIOAddress(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+
+	SpikeIOInputRouteOnFPGA toSpikeIOInputRouteOnFPGA() const;
+};
+
+/**
+ * Configuration register for on-FPGA SpikeIO module.
+ */
+struct GENPYBIND(inline_base("*")) SpikeIOConfigOnFPGA
+    : public common::detail::RantWrapper<SpikeIOConfigOnFPGA, uint_fast16_t, 0, 0>
+{
+	constexpr explicit SpikeIOConfigOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+/**
+ * (Serial) address of spikes received through the on-FPGA SpikeIO module.
+ */
+struct GENPYBIND(inline_base("*")) SpikeIOInputRouteOnFPGA
+    : public halco::common::detail::
+          RantWrapper<SpikeIOInputRouteOnFPGA, uint_fast16_t, (1u << spikeio_serial_bits) - 1, 0>
+{
+	constexpr explicit SpikeIOInputRouteOnFPGA(uintmax_t value = 0) : rant_t(value) {}
+
+	SpikeIOAddress toSpikeIOAddress() const;
+};
+
+/**
+ * SpikeLabel of event to be sent via the on-FPGA SpikeIO module.
+ */
+struct GENPYBIND(inline_base("*")) SpikeIOOutputRouteOnFPGA
+    : public halco::common::detail::
+          RantWrapper<SpikeIOOutputRouteOnFPGA, uint_fast32_t, (1u << 16) - 1, 0>
+{
+	constexpr explicit SpikeIOOutputRouteOnFPGA(uintmax_t value = 0) : rant_t(value) {}
+
+	SpikeLabel toSpikeLabel() const;
+};
+
 } // namespace halco::hicann_dls::vx
 
 namespace std {
@@ -129,5 +191,9 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExternalPPUMemoryQuadOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExternalPPUMemoryBlockSize)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExternalPPUMemoryBlockOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExternalPPUMemoryOnFPGA)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikeIOAddress)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikeIOConfigOnFPGA)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikeIOInputRouteOnFPGA)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikeIOOutputRouteOnFPGA)
 
 } // namespace std

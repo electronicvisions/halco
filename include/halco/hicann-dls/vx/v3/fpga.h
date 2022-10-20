@@ -20,5 +20,9 @@ using EventRecordingConfigOnFPGA GENPYBIND(visible) =
     halco::hicann_dls::vx::EventRecordingConfigOnFPGA;
 using InstructionTimeoutConfigOnFPGA GENPYBIND(visible) =
     halco::hicann_dls::vx::InstructionTimeoutConfigOnFPGA;
+using SpikeIOAddress GENPYBIND(visible) = halco::hicann_dls::vx::SpikeIOAddress;
+using SpikeIOConfigOnFPGA GENPYBIND(visible) = halco::hicann_dls::vx::SpikeIOConfigOnFPGA;
+using SpikeIOInputRouteOnFPGA GENPYBIND(visible) = halco::hicann_dls::vx::SpikeIOInputRouteOnFPGA;
+using SpikeIOOutputRouteOnFPGA GENPYBIND(visible) = halco::hicann_dls::vx::SpikeIOOutputRouteOnFPGA;
 
 } // namespace halco::hicann_dls::vx::v3

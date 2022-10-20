@@ -94,6 +94,10 @@ struct GENPYBIND(inline_base("*")) SPL1Address
 /****************\
     SpikeLabel
 \****************/
+
+// Forward declaration from 'halco/hicann-dls/vx/fpga.h'
+struct SpikeIOOutputRouteOnFPGA;
+
 struct GENPYBIND(inline_base("*")) SpikeLabel
     : public halco::common::detail::BaseType<SpikeLabel, uint16_t>
 {
@@ -149,6 +153,8 @@ struct GENPYBIND(inline_base("*")) SpikeLabel
 	SynapseLabel get_synapse_label() const;
 	GENPYBIND(setter_for(synapse_label))
 	void set_synapse_label(SynapseLabel value);
+
+	SpikeIOOutputRouteOnFPGA toSpikeIOOutputRouteOnFPGA() const;
 };
 
 } // namespace halco::hicann_dls::vx

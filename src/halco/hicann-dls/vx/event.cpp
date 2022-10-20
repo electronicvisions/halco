@@ -1,6 +1,7 @@
 #include "halco/hicann-dls/vx/event.h"
 
 #include "halco/hicann-dls/vx/background.h"
+#include "halco/hicann-dls/vx/fpga.h"
 #include "halco/hicann-dls/vx/padi.h"
 #include "halco/hicann-dls/vx/routing_crossbar.h"
 
@@ -98,6 +99,11 @@ SynapseLabel SpikeLabel::get_synapse_label() const
 void SpikeLabel::set_synapse_label(SynapseLabel const value)
 {
 	operator=(SpikeLabel((static_cast<uint16_t>(value) & 0x3f) | (this->value() & 0xffc0)));
+}
+
+SpikeIOOutputRouteOnFPGA SpikeLabel::toSpikeIOOutputRouteOnFPGA() const
+{
+	return SpikeIOOutputRouteOnFPGA(toEnum());
 }
 
 } // namespace halco::hicann_dls::vx

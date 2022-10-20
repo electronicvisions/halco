@@ -42,6 +42,10 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     NullPayloadReadableOnFPGA => linear,iterable
     EventRecordingConfigOnFPGA => linear,iterable
     InstructionTimeoutConfigOnFPGA => linear,iterable
+    SpikeIOAddress => linear,iterable
+    SpikeIOConfigOnFPGA => linear,iterable
+    SpikeIOInputRouteOnFPGA => linear,iterable
+    SpikeIOOutputRouteOnFPGA => linear,iterable
     I2CIdRegisterOnBoard => linear,iterable
     I2CINA219RoRegisterOnINA219 => linear,iterable
     I2CINA219RwRegisterOnINA219 => linear,iterable
