@@ -123,7 +123,7 @@ struct GENPYBIND(inline_base("*")) InstructionTimeoutConfigOnFPGA
 /**
  * Serial width of the on-FPGA SpikeIO module, in bits.
  */
-static constexpr size_t spikeio_serial_bits = 8;
+static constexpr size_t GENPYBIND(visible) spikeio_serial_bits = 8;
 
 // Forward declaration from 'halco/hicann-dls/vx/fpga.h'
 struct SpikeIOInputRouteOnFPGA;
