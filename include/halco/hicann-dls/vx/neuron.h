@@ -11,7 +11,7 @@
 #include "halco/hicann-dls/vx/synram.h"
 
 namespace cereal {
-class access;
+struct access;
 } // namespace cereal
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
@@ -507,7 +507,7 @@ struct GENPYBIND(visible) LogicalNeuronCompartments
 	friend std::ostream& operator<<(std::ostream& os, LogicalNeuronCompartments const& config);
 
 private:
-	friend class cereal::access;
+	friend struct cereal::access;
 	template <typename Archive>
 	void serialize(Archive& ar, uint32_t);
 
@@ -551,7 +551,7 @@ struct GENPYBIND(visible) LogicalNeuronOnDLS
 	bool operator>=(LogicalNeuronOnDLS const& other) const;
 
 private:
-	friend class cereal::access;
+	friend struct cereal::access;
 	template <typename Archive>
 	void serialize(Archive& ar, uint32_t);
 

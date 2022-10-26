@@ -203,7 +203,7 @@ struct GENPYBIND(inline_base("*")) VLineOnHICANN
 	std::array<HLineOnHICANN, 2> toHLineOnHICANN() const;
 };
 
-class HRepeaterOnWafer;
+struct HRepeaterOnWafer;
 
 struct GENPYBIND(inline_base("*HICANNMixin*")) HLineOnWafer
     : public HICANNMixin<HLineOnWafer, HLineOnHICANN>
@@ -242,7 +242,7 @@ public:
 	})
 };
 
-class VRepeaterOnWafer;
+struct VRepeaterOnWafer;
 
 struct GENPYBIND(inline_base("*HICANNMixin*")) VLineOnWafer
     : public HICANNMixin<VLineOnWafer, VLineOnHICANN>

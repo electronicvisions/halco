@@ -204,7 +204,7 @@ public:
 	HICANNGlobal toHICANNGlobal() const;
 }; // NeuronGlobal
 
-class GENPYBIND(inline_base("*")) SynapticInputOnNeuron
+struct GENPYBIND(inline_base("*")) SynapticInputOnNeuron
     : public common::detail::RantWrapper<SynapticInputOnNeuron, uint_fast16_t, 1, 0>
 {
 public:
@@ -223,7 +223,7 @@ public:
 
 HALCO_COORDINATE_MIXIN(NeuronMixin, NeuronOnHICANN, neuron)
 
-class GENPYBIND(inline_base("*NeuronMixin*")) SynapticInputOnHICANN
+struct GENPYBIND(inline_base("*NeuronMixin*")) SynapticInputOnHICANN
     : public NeuronMixin<SynapticInputOnHICANN, SynapticInputOnNeuron>
 {
 private:
