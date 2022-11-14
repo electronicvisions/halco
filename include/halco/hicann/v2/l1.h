@@ -123,6 +123,30 @@ struct GENPYBIND(inline_base("*")) SynapseSwitchOnHICANN
 };
 
 
+struct GENPYBIND(inline_base("*HICANNMixin*")) SynapseSwitchOnWafer
+    : public HICANNMixin<SynapseSwitchOnWafer, SynapseSwitchOnHICANN>
+{
+private:
+	typedef HICANNMixin<SynapseSwitchOnWafer, SynapseSwitchOnHICANN> base;
+
+public:
+	using base::enum_type;
+
+	PYPP_DEFAULT(SynapseSwitchOnWafer());
+
+	explicit SynapseSwitchOnWafer(
+	    SynapseSwitchOnHICANN const& synapse_switch, HICANNOnWafer const& h = HICANNOnWafer()) :
+	    base(synapse_switch, h)
+	{}
+
+	explicit SynapseSwitchOnWafer(enum_type const& e) : base(e) {}
+
+	SynapseSwitchOnHICANN toSynapseSwitchRowOnHICANN() const
+	{
+		return This();
+	}
+};
+
 struct GENPYBIND(inline_base("*")) HLineOnHICANN
     : public common::detail::RantWrapper<HLineOnHICANN, size_t, 63, 0>
     , public common::detail::YRangedTrait
@@ -625,6 +649,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::CrossbarSwitchOnCrossbarSwitchRow)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SynapseSwitchOnSynapseSwitchRow)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::CrossbarSwitchOnHICANN)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SynapseSwitchOnHICANN)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SynapseSwitchOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::HRepeaterOnHICANN)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::HRepeaterOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::VRepeaterOnHICANN)
@@ -658,5 +683,8 @@ HALCO_GEOMETRY_HASH_CLASS(
 HALCO_GEOMETRY_HASH_CLASS(
     halco::hicann::v2::HICANNMixin<halco::hicann::v2::SendingRepeaterOnWafer BOOST_PP_COMMA()
                                        halco::hicann::v2::SendingRepeaterOnHICANN>)
+HALCO_GEOMETRY_HASH_CLASS(
+    halco::hicann::v2::HICANNMixin<halco::hicann::v2::SynapseSwitchOnWafer BOOST_PP_COMMA()
+                                       halco::hicann::v2::SynapseSwitchOnHICANN>)
 
 } // std

@@ -66,6 +66,7 @@ struct SynapseRowOnArray;
 struct CrossbarSwitchOnHICANN;
 struct CrossbarSwitchOnCrossbarSwitchRow;
 struct SynapseSwitchOnHICANN;
+struct SynapseSwitchOnWafer;
 struct SynapseSwitchOnSynapseSwitchRow;
 struct SynapseSwitchRowOnHICANN;
 struct SynapticInputOnNeuron;

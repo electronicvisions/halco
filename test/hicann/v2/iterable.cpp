@@ -70,6 +70,7 @@ typedef ::testing::Types<
     SynapseRowOnWafer,
     SynapseRowOnArray,
     SynapseSwitchOnHICANN,
+    SynapseSwitchOnWafer,
     SynapseSwitchOnSynapseSwitchRow,
     SynapseSwitchRowOnHICANN,
     TriggerOnADC,
