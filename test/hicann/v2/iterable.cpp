@@ -19,6 +19,7 @@ typedef ::testing::Types<
     BackgroundGeneratorOnHICANN,
     ChannelOnADC,
     CrossbarSwitchOnHICANN,
+    CrossbarSwitchOnWafer,
     CrossbarSwitchOnCrossbarSwitchRow,
     DNCMergerOnHICANN,
     DNCMergerOnWafer,

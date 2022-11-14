@@ -90,6 +90,30 @@ struct GENPYBIND(inline_base("*")) CrossbarSwitchOnHICANN
 	static enum_type to_enum(x_type const& x, y_type const& y) SYMBOL_VISIBLE;
 };
 
+struct GENPYBIND(inline_base("*HICANNMixin*")) CrossbarSwitchOnWafer
+    : public HICANNMixin<CrossbarSwitchOnWafer, CrossbarSwitchOnHICANN>
+{
+private:
+	typedef HICANNMixin<CrossbarSwitchOnWafer, CrossbarSwitchOnHICANN> base;
+
+public:
+	using base::enum_type;
+
+	PYPP_DEFAULT(CrossbarSwitchOnWafer());
+
+	explicit CrossbarSwitchOnWafer(
+	    CrossbarSwitchOnHICANN const& crossbar_switch, HICANNOnWafer const& h = HICANNOnWafer()) :
+	    base(crossbar_switch, h)
+	{}
+
+	explicit CrossbarSwitchOnWafer(enum_type const& e) : base(e) {}
+
+	CrossbarSwitchOnHICANN toCrossbarSwitchRowOnHICANN() const
+	{
+		return This();
+	}
+};
+
 struct GENPYBIND(inline_base("*")) SynapseSwitchOnHICANN
     : public common::detail::GridCoordinate<
           SynapseSwitchOnHICANN,
@@ -648,6 +672,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::VLineOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::CrossbarSwitchOnCrossbarSwitchRow)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SynapseSwitchOnSynapseSwitchRow)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::CrossbarSwitchOnHICANN)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::CrossbarSwitchOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SynapseSwitchOnHICANN)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SynapseSwitchOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::HRepeaterOnHICANN)
@@ -686,5 +711,8 @@ HALCO_GEOMETRY_HASH_CLASS(
 HALCO_GEOMETRY_HASH_CLASS(
     halco::hicann::v2::HICANNMixin<halco::hicann::v2::SynapseSwitchOnWafer BOOST_PP_COMMA()
                                        halco::hicann::v2::SynapseSwitchOnHICANN>)
+HALCO_GEOMETRY_HASH_CLASS(
+    halco::hicann::v2::HICANNMixin<halco::hicann::v2::CrossbarSwitchOnWafer BOOST_PP_COMMA()
+                                       halco::hicann::v2::CrossbarSwitchOnHICANN>)
 
 } // std

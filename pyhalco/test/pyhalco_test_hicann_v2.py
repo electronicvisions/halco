@@ -16,6 +16,7 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
     BackgroundGeneratorOnHICANN  =>  linear, iterable
     ChannelOnADC          => linear, iterable
     CrossbarSwitchOnHICANN => grid, iterable
+    CrossbarSwitchOnWafer  => iterable
     CrossbarSwitchOnCrossbarSwitchRow => grid, iterable
     DNCGlobal             =>
     DNCMergerOnHICANN     => linear, iterable
