@@ -61,6 +61,7 @@ typedef ::testing::Types<
     SocketOnWIO,
     SideHorizontal,
     SideVertical,
+    SynapseArrayOnWafer,
     SynapseColumnOnHICANN,
     SynapseDriverOnHICANN,
     SynapseDriverOnQuadrant,

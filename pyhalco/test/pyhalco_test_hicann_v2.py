@@ -80,6 +80,7 @@ class Test_PyhalcoHICANNv2(unittest.TestCase, PyhalcoTest):
     SendingRepeaterOnWafer => iterable
     SocketOnWIO           => linear, iterable
     SynapseArrayOnHICANN  => linear, iterable
+    SynapseArrayOnWafer   => linear, iterable
     SynapseColumnOnHICANN => linear, iterable
     SynapseDriverOnHICANN => grid, iterable
     SynapseDriverOnQuadrant => linear, iterable

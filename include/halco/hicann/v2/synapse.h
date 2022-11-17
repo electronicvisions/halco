@@ -35,6 +35,30 @@ struct GENPYBIND(inline_base("*")) SynapseArrayOnHICANN
 	{}
 };
 
+struct GENPYBIND(inline_base("*HICANNMixin*")) SynapseArrayOnWafer
+    : public HICANNMixin<SynapseArrayOnWafer, SynapseArrayOnHICANN>
+{
+private:
+	typedef HICANNMixin<SynapseArrayOnWafer, SynapseArrayOnHICANN> base;
+
+public:
+	typedef base::enum_type enum_type GENPYBIND(opaque(false));
+
+	PYPP_DEFAULT(SynapseArrayOnWafer());
+
+	explicit SynapseArrayOnWafer(
+	    SynapseArrayOnHICANN const& array, HICANNOnWafer const& h = HICANNOnWafer()) :
+	    base(array, h)
+	{}
+
+	explicit SynapseArrayOnWafer(enum_type const& e) : base(e) {}
+
+	SynapseArrayOnHICANN toSynapseArrayOnHICANN() const
+	{
+		return This();
+	}
+};
+
 /** SynapseSwitchRowOnHICANN coordinate.
  * Syndriver switch rows are accesses with a common::Side (left or right) and an index
  * within the side.
@@ -343,6 +367,7 @@ public:
 namespace std {
 
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SynapseArrayOnHICANN)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SynapseArrayOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SynapseSwitchRowOnHICANN)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::SynapseSwitchRowOnWafer)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann::v2::RowOnSynapseDriver)
@@ -367,5 +392,8 @@ HALCO_GEOMETRY_HASH_CLASS(
 HALCO_GEOMETRY_HASH_CLASS(
     halco::hicann::v2::HICANNMixin<halco::hicann::v2::SynapseRowOnWafer BOOST_PP_COMMA()
                                        halco::hicann::v2::SynapseRowOnHICANN>)
+HALCO_GEOMETRY_HASH_CLASS(
+    halco::hicann::v2::HICANNMixin<halco::hicann::v2::SynapseArrayOnWafer BOOST_PP_COMMA()
+                                       halco::hicann::v2::SynapseArrayOnHICANN>)
 
 } // std

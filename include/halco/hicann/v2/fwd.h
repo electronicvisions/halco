@@ -56,6 +56,7 @@ struct RowOnSynapseDriver;
 struct SendingRepeaterOnHICANN;
 struct SendingRepeaterOnWafer;
 struct SocketOnWafer;
+struct SynapseArrayOnWafer;
 struct SynapseColumnOnHICANN;
 struct SynapseDriverOnHICANN;
 struct SynapseDriverOnQuadrant;
