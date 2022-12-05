@@ -31,9 +31,17 @@ def configure(conf):
 
 
 def build(bld):
+    bld.install_files(
+        dest='${PREFIX}/',
+        files=bld.path.ant_glob('include/halco/**/*.(h|def|tcc)'),
+        name='halco_header',
+        relative_trick=True
+    )
+
     bld(
         target='halco_inc',
         export_includes=['include'],
+        depends_on='halco_header',
     )
 
     bld.shlib(
