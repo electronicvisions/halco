@@ -146,6 +146,20 @@ struct GENPYBIND(inline_base("*")) InstructionTimeoutConfigOnFPGA
 	constexpr explicit InstructionTimeoutConfigOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
 };
 
+/******************************\
+   Interrupt Barrier config
+\******************************/
+
+/**
+ * Configuration register of systime-correction barrier activation of playback executor.
+ */
+struct GENPYBIND(inline_base("*")) SystimeCorrectionBarrierConfigOnFPGA
+    : public common::detail::RantWrapper<SystimeCorrectionBarrierConfigOnFPGA, uint_fast16_t, 0, 0>
+{
+	constexpr explicit SystimeCorrectionBarrierConfigOnFPGA(uintmax_t const val = 0) : rant_t(val)
+	{}
+};
+
 /***********\
    SpikeIO
 \***********/
@@ -216,6 +230,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::FPGADeviceDNAOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NullPayloadReadableOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::EventRecordingConfigOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::InstructionTimeoutConfigOnFPGA)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SystimeCorrectionBarrierConfigOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExternalPPUMemoryByteOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExternalPPUMemoryQuadOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExternalPPUMemoryBlockSize)

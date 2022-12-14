@@ -133,6 +133,7 @@ COORDINATE(ExternalPPUMemoryOnFPGA, halco::hicann_dls::vx::v3::ExternalPPUMemory
 COORDINATE(NullPayloadReadableOnFPGA, halco::hicann_dls::vx::v3::NullPayloadReadableOnFPGA)
 COORDINATE(EventRecordingConfigOnFPGA, halco::hicann_dls::vx::v3::EventRecordingConfigOnFPGA)
 COORDINATE(InstructionTimeoutConfigOnFPGA, halco::hicann_dls::vx::v3::InstructionTimeoutConfigOnFPGA)
+COORDINATE(SystimeCorrectionBarrierConfigOnFPGA, halco::hicann_dls::vx::v3::SystimeCorrectionBarrierConfigOnFPGA)
 COORDINATE(SpikeIOAddress, halco::hicann_dls::vx::v3::SpikeIOAddress)
 COORDINATE(SpikeIOConfigOnFPGA, halco::hicann_dls::vx::v3::SpikeIOConfigOnFPGA)
 COORDINATE(SpikeIOInputRouteOnFPGA, halco::hicann_dls::vx::v3::SpikeIOInputRouteOnFPGA)
