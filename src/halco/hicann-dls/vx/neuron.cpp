@@ -519,7 +519,7 @@ LogicalNeuronOnDLS::LogicalNeuronOnDLS(
 		exit(1);
 #endif
 	}
-	if ((((anchor.toNeuronColumnOnDLS().value()) < NeuronColumnOnLogicalNeuron::max) &&
+	if ((((anchor.toNeuronColumnOnDLS().value()) <= NeuronColumnOnLogicalNeuron::max) &&
 	     ((anchor.toNeuronColumnOnDLS().value() + width) > NeuronColumnOnLogicalNeuron::max)) ||
 	    (((anchor.toNeuronColumnOnDLS().value()) > NeuronColumnOnLogicalNeuron::max) &&
 	     ((anchor.toNeuronColumnOnDLS().value() + width) > NeuronColumnOnDLS::max))) {
