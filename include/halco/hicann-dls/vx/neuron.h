@@ -515,6 +515,8 @@ private:
 };
 
 
+struct LogicalNeuronOnDLS;
+size_t hash_value(LogicalNeuronOnDLS const& ln);
 /**
  * Logical neuron location on the neuron grid.
  */
@@ -551,6 +553,11 @@ struct GENPYBIND(visible) LogicalNeuronOnDLS
 
 	GENPYBIND(stringstream)
 	friend std::ostream& operator<<(std::ostream& os, LogicalNeuronOnDLS const& config);
+
+	friend size_t hash_value(LogicalNeuronOnDLS const& ln);
+
+	GENPYBIND(expose_as(__hash__))
+	size_t hash() const;
 
 	bool operator<(LogicalNeuronOnDLS const& other) const;
 	bool operator>(LogicalNeuronOnDLS const& other) const;
@@ -696,6 +703,7 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronRowOnLogicalNeuron)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronBlockOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronColumnOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::AtomicNeuronOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::LogicalNeuronOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronColumnOnLogicalNeuron)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::AtomicNeuronOnLogicalNeuron)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::CompartmentOnLogicalNeuron)

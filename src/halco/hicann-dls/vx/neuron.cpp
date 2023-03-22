@@ -7,6 +7,8 @@
 #include "halco/hicann-dls/vx/switch_rows.h"
 #include "halco/hicann-dls/vx/synapse.h"
 
+#include "hate/type_index.h"
+
 #ifndef __ppu__
 #include "halco/common/cerealization_geometry.h"
 #include <cereal/archives/json.hpp>
@@ -586,6 +588,31 @@ bool LogicalNeuronOnDLS::operator<=(LogicalNeuronOnDLS const& other) const
 bool LogicalNeuronOnDLS::operator>=(LogicalNeuronOnDLS const& other) const
 {
 	return m_compartments >= other.m_compartments;
+}
+
+size_t hash_value(LogicalNeuronOnDLS const& ln)
+{
+	size_t hash = 0;
+	for (auto const& [compartment, atomic_neurons] : ln.get_placed_compartments()) {
+		boost::hash_combine(
+		    hash, boost::hash<halco::hicann_dls::vx::CompartmentOnLogicalNeuron>()(compartment));
+		for (auto const& neuron : atomic_neurons) {
+			boost::hash_combine(hash, boost::hash<AtomicNeuronOnDLS>()(neuron));
+		}
+	}
+	return hash;
+}
+
+size_t LogicalNeuronOnDLS::hash() const
+{
+#ifndef __ppu__
+	static const size_t seed = boost::hash_value(hate::full_name<LogicalNeuronOnDLS>());
+	size_t hash = seed;
+#else
+	size_t hash = 0;
+#endif
+	boost::hash_combine(hash, hash_value(*this));
+	return hash;
 }
 
 #ifndef __ppu__
