@@ -1,14 +1,16 @@
-@Library("jenlib") _
+@Library("jenlib@ebrains-4.0") _
 
 withCcache() {
 	wafDefaultPipeline(projects: ["halco"],
+	                   setupOptions: "--release-branch=ebrains-4.0",
 	                   moduleOptions: [modules: ["ppu-toolchain"]],
 	                   container: [app: "dls-core"],
 	                   configureInstallOptions: "--with-pybind --build-profile=ci",
 	                   notificationChannel: "#dls-software")
 
-	wafDefaultPipeline(projects: ["halco"],
-	                   container: [app: "wafer"],
-	                   notificationChannel: "#softies",
-	                   configureInstallOptions: "--build-profile=ci")
+// Don't test BSS1
+//	wafDefaultPipeline(projects: ["halco"],
+//	                   container: [app: "wafer"],
+//	                   notificationChannel: "#softies",
+//	                   configureInstallOptions: "--build-profile=ci")
 }
