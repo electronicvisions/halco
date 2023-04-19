@@ -1,4 +1,5 @@
 #pragma once
+#include "halco/common/coordinate.h"
 #include "halco/common/genpybind.h"
 #include "halco/hicann-dls/vx/capmem.h"
 
@@ -201,8 +202,9 @@ struct GENPYBIND(inline_base("*")) CapMemCellOnCapMemBlock
 
 HALCO_COORDINATE_MIXIN(CapMemMixin, CapMemBlockOnDLS, capmem)
 
-struct GENPYBIND(inline_base("*CapMemMixin*")) CapMemCellOnDLS
+struct GENPYBIND(inline_base("*CapMemMixin*"), inline_base("*CoordinateBase*")) CapMemCellOnDLS
     : public CapMemMixin<CapMemCellOnDLS, CapMemCellOnCapMemBlock>
+    , common::CoordinateBase<CapMemCellOnDLS>
 {
 	CapMemCellOnDLS() = default;
 

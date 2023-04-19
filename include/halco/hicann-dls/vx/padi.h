@@ -1,6 +1,7 @@
 #pragma once
 #include <stdint.h>
 
+#include "halco/common/coordinate.h"
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
@@ -59,8 +60,10 @@ struct GENPYBIND(inline_base("*PADIBusMixin*")) PADIBusOnDLS
 };
 
 
-struct GENPYBIND(inline_base("*")) CommonPADIBusConfigOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    CommonPADIBusConfigOnDLS
     : public common::detail::RantWrapper<CommonPADIBusConfigOnDLS, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<CommonPADIBusConfigOnDLS>
 {
 	constexpr explicit CommonPADIBusConfigOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 
@@ -71,8 +74,9 @@ struct GENPYBIND(inline_base("*")) CommonPADIBusConfigOnDLS
 };
 
 
-struct GENPYBIND(inline_base("*")) CommonSTPConfigOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) CommonSTPConfigOnDLS
     : public common::detail::RantWrapper<CommonSTPConfigOnDLS, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<CommonSTPConfigOnDLS>
 {
 	constexpr explicit CommonSTPConfigOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 
@@ -83,8 +87,9 @@ struct GENPYBIND(inline_base("*")) CommonSTPConfigOnDLS
 };
 
 
-struct GENPYBIND(inline_base("*")) PADIEventOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) PADIEventOnDLS
     : public common::detail::RantWrapper<PADIEventOnDLS, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<PADIEventOnDLS>
 {
 	constexpr explicit PADIEventOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
 	    rant_t(val)

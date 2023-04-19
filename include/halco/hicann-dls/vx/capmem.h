@@ -52,8 +52,9 @@ struct GENPYBIND(inline_base("*")) CapMemBlockOnHemisphere
 };
 
 
-struct GENPYBIND(inline_base("*")) CapMemBlockOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) CapMemBlockOnDLS
     : public common::detail::RantWrapper<CapMemBlockOnDLS, uint_fast16_t, 3, 0>
+    , common::CoordinateBase<CapMemBlockOnDLS>
 {
 	constexpr explicit CapMemBlockOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
 	    rant_t(val)
@@ -69,9 +70,11 @@ struct GENPYBIND(inline_base("*")) CapMemBlockOnDLS
 };
 
 
-struct GENPYBIND(inline_base("*")) CapMemBlockConfigOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    CapMemBlockConfigOnDLS
     : public common::detail::
           RantWrapper<CapMemBlockConfigOnDLS, uint_fast16_t, CapMemBlockOnDLS::max, 0>
+    , common::CoordinateBase<CapMemBlockConfigOnDLS>
 {
 	constexpr explicit CapMemBlockConfigOnDLS(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -83,15 +86,18 @@ struct GENPYBIND(inline_base("*")) CapMemBlockConfigOnDLS
 };
 
 
-struct GENPYBIND(inline_base("*")) ReferenceGeneratorConfigOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    ReferenceGeneratorConfigOnDLS
     : public common::detail::RantWrapper<ReferenceGeneratorConfigOnDLS, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<ReferenceGeneratorConfigOnDLS>
 {
 	constexpr explicit ReferenceGeneratorConfigOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
 
 
-struct GENPYBIND(inline_base("*")) CapMemOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) CapMemOnDLS
     : public common::detail::RantWrapper<CapMemOnDLS, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<CapMemOnDLS>
 {
 	constexpr explicit CapMemOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };

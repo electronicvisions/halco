@@ -44,4 +44,6 @@ struct GENPYBIND(hidden) Coordinates
 #include "halco/hicann-dls/vx/v3/coordinates.def"
 };
 
+typedef common::Coordinate Coordinate GENPYBIND(visible);
+
 } // halco::hicann_dsl::vx:v3

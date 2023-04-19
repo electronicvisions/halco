@@ -2,6 +2,7 @@
 #include <optional>
 #include <stdint.h>
 
+#include "halco/common/coordinate.h"
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 
@@ -19,8 +20,9 @@ struct CrossbarL2OutputOnDLS;
 /**
  * Unique coordinate for crossbar configuration.
  */
-struct GENPYBIND(inline_base("*")) CrossbarOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) CrossbarOnDLS
     : public common::detail::RantWrapper<CrossbarOnDLS, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<CrossbarOnDLS>
 {
 	constexpr explicit CrossbarOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
@@ -28,8 +30,10 @@ struct GENPYBIND(inline_base("*")) CrossbarOnDLS
 /**
  * Unique coordinate for crossbar output configuration.
  */
-struct GENPYBIND(inline_base("*")) CrossbarOutputConfigOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    CrossbarOutputConfigOnDLS
     : public common::detail::RantWrapper<CrossbarOutputConfigOnDLS, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<CrossbarOutputConfigOnDLS>
 {
 	constexpr explicit CrossbarOutputConfigOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
@@ -38,9 +42,13 @@ struct GENPYBIND(inline_base("*")) CrossbarOutputConfigOnDLS
 /**
  * Coordinate of a crossbar output channel.
  */
-struct GENPYBIND(inline_base("*")) CrossbarOutputOnDLS
+struct GENPYBIND(
+    inline_base("*RantWrapper*"),
+    inline_base("*CoordinateBase*"),
+    inline_base("*XRangedTrait*")) CrossbarOutputOnDLS
     : public common::detail::RantWrapper<CrossbarOutputOnDLS, uint_fast16_t, 11, 0>
     , public common::detail::XRangedTrait
+    , public halco::common::CoordinateBase<CrossbarOutputOnDLS>
 {
 	constexpr explicit CrossbarOutputOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
 	    rant_t(val)
@@ -70,8 +78,12 @@ struct GENPYBIND(inline_base("*")) CrossbarL2OutputOnDLS
 /**
  * Coordinate of a crossbar input channel.
  */
-struct GENPYBIND(inline_base("*")) CrossbarInputOnDLS
+struct GENPYBIND(
+    inline_base("*RantWrapper*"),
+    inline_base("*CoordinateBase*"),
+    inline_base("*YRangedTrait*")) CrossbarInputOnDLS
     : public common::detail::RantWrapper<CrossbarInputOnDLS, uint_fast16_t, 19, 0>
+    , common::CoordinateBase<CrossbarInputOnDLS>
     , public common::detail::YRangedTrait
 {
 	constexpr explicit CrossbarInputOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
@@ -120,9 +132,10 @@ struct GENPYBIND(inline_base("*")) CrossbarInputOnDLS
  * The nodes are counted continuously from the top-left to the bottom-right corner of
  * the schematic.
  */
-struct GENPYBIND(inline_base("*")) CrossbarNodeOnDLS
+struct GENPYBIND(inline_base("*GridCoordinate*"), inline_base("*CoordinateBase*")) CrossbarNodeOnDLS
     : public common::detail::
           GridCoordinate<CrossbarNodeOnDLS, CrossbarOutputOnDLS, CrossbarInputOnDLS, 76>
+    , common::CoordinateBase<CrossbarNodeOnDLS>
 {
 	GRID_COMMON_CONSTRUCTORS(CrossbarNodeOnDLS)
 

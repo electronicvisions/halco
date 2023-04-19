@@ -59,8 +59,9 @@ struct GENPYBIND(inline_base("*")) SynapseRowOnSynram
 	SynapseRowOnSynapseDriver toSynapseRowOnSynapseDriver() const;
 };
 
-struct GENPYBIND(inline_base("*SynramMixin*")) SynapseRowOnDLS
+struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*")) SynapseRowOnDLS
     : public SynramMixin<SynapseRowOnDLS, SynapseRowOnSynram>
+    , common::CoordinateBase<SynapseRowOnDLS>
 {
 	SynapseRowOnDLS() = default;
 
@@ -78,8 +79,10 @@ struct GENPYBIND(inline_base("*SynramMixin*")) SynapseRowOnDLS
 };
 
 
-struct GENPYBIND(inline_base("*SynramMixin*")) SynapseWeightRowOnDLS
+struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*"))
+    SynapseWeightRowOnDLS
     : public SynramMixin<SynapseWeightRowOnDLS, SynapseRowOnSynram>
+    , common::CoordinateBase<SynapseWeightRowOnDLS>
 {
 	SynapseWeightRowOnDLS() = default;
 
@@ -100,8 +103,9 @@ struct GENPYBIND(inline_base("*SynramMixin*")) SynapseWeightRowOnDLS
 };
 
 
-struct GENPYBIND(inline_base("*SynramMixin*")) SynapseLabelRowOnDLS
+struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*")) SynapseLabelRowOnDLS
     : public SynramMixin<SynapseLabelRowOnDLS, SynapseRowOnSynram>
+    , common::CoordinateBase<SynapseLabelRowOnDLS>
 {
 	SynapseLabelRowOnDLS() = default;
 
@@ -122,8 +126,10 @@ struct GENPYBIND(inline_base("*SynramMixin*")) SynapseLabelRowOnDLS
 };
 
 
-struct GENPYBIND(inline_base("*SynramMixin*")) SynapseCorrelationCalibRowOnDLS
+struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*"))
+    SynapseCorrelationCalibRowOnDLS
     : public SynramMixin<SynapseCorrelationCalibRowOnDLS, SynapseRowOnSynram>
+    , common::CoordinateBase<SynapseCorrelationCalibRowOnDLS>
 {
 	SynapseCorrelationCalibRowOnDLS() = default;
 
@@ -144,8 +150,10 @@ struct GENPYBIND(inline_base("*SynramMixin*")) SynapseCorrelationCalibRowOnDLS
 };
 
 
-struct GENPYBIND(inline_base("*SynramMixin*")) CorrelationResetRowOnDLS
+struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*"))
+    CorrelationResetRowOnDLS
     : public SynramMixin<CorrelationResetRowOnDLS, SynapseRowOnSynram>
+    , common::CoordinateBase<CorrelationResetRowOnDLS>
 {
 	CorrelationResetRowOnDLS() = default;
 
@@ -173,15 +181,19 @@ struct GENPYBIND(inline_base("*")) SynapticInputOnNeuron
 	static const SynapticInputOnNeuron inhibitory;
 };
 
-struct GENPYBIND(inline_base("*")) SynapseBiasSelectionOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    SynapseBiasSelectionOnDLS
     : public common::detail::RantWrapper<SynapseBiasSelectionOnDLS, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<SynapseBiasSelectionOnDLS>
 {
 	constexpr explicit SynapseBiasSelectionOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
 
 
-struct GENPYBIND(inline_base("*")) ColumnCorrelationRowOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    ColumnCorrelationRowOnDLS
     : public common::detail::RantWrapper<ColumnCorrelationRowOnDLS, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<ColumnCorrelationRowOnDLS>
 {
 	constexpr explicit ColumnCorrelationRowOnDLS(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -195,8 +207,10 @@ struct GENPYBIND(inline_base("*")) ColumnCorrelationRowOnDLS
 };
 
 
-struct GENPYBIND(inline_base("*")) ColumnCurrentRowOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    ColumnCurrentRowOnDLS
     : public common::detail::RantWrapper<ColumnCurrentRowOnDLS, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<ColumnCurrentRowOnDLS>
 {
 	constexpr explicit ColumnCurrentRowOnDLS(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -210,8 +224,10 @@ struct GENPYBIND(inline_base("*")) ColumnCurrentRowOnDLS
 };
 
 
-struct GENPYBIND(inline_base("*")) SynapseWeightMatrixOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    SynapseWeightMatrixOnDLS
     : public common::detail::RantWrapper<SynapseWeightMatrixOnDLS, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<SynapseWeightMatrixOnDLS>
 {
 	constexpr explicit SynapseWeightMatrixOnDLS(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -225,8 +241,10 @@ struct GENPYBIND(inline_base("*")) SynapseWeightMatrixOnDLS
 };
 
 
-struct GENPYBIND(inline_base("*")) SynapseLabelMatrixOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    SynapseLabelMatrixOnDLS
     : public common::detail::RantWrapper<SynapseLabelMatrixOnDLS, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<SynapseLabelMatrixOnDLS>
 {
 	constexpr explicit SynapseLabelMatrixOnDLS(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -240,8 +258,10 @@ struct GENPYBIND(inline_base("*")) SynapseLabelMatrixOnDLS
 };
 
 
-struct GENPYBIND(inline_base("*")) SynapseCorrelationCalibMatrixOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    SynapseCorrelationCalibMatrixOnDLS
     : public common::detail::RantWrapper<SynapseCorrelationCalibMatrixOnDLS, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<SynapseCorrelationCalibMatrixOnDLS>
 {
 	constexpr explicit SynapseCorrelationCalibMatrixOnDLS(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -255,8 +275,9 @@ struct GENPYBIND(inline_base("*")) SynapseCorrelationCalibMatrixOnDLS
 };
 
 
-struct GENPYBIND(inline_base("*")) SynapseBlockOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) SynapseBlockOnDLS
     : public common::detail::RantWrapper<SynapseBlockOnDLS, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<SynapseBlockOnDLS>
 {
 	constexpr explicit SynapseBlockOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
 	    rant_t(val)
@@ -305,8 +326,9 @@ struct GENPYBIND(inline_base("*")) SynapseQuadOnSynram
 	}
 };
 
-struct GENPYBIND(inline_base("*SynramMixin*")) SynapseQuadOnDLS
+struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*")) SynapseQuadOnDLS
     : public SynramMixin<SynapseQuadOnDLS, SynapseQuadOnSynram>
+    , common::CoordinateBase<SynapseQuadOnDLS>
 {
 	SynapseQuadOnDLS() = default;
 
@@ -328,8 +350,10 @@ struct GENPYBIND(inline_base("*SynramMixin*")) SynapseQuadOnDLS
 	SynapseCorrelationCalibQuadOnDLS toSynapseCorrelationCalibQuadOnDLS() const;
 };
 
-struct GENPYBIND(inline_base("*SynramMixin*")) CorrelationResetOnDLS
+struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*"))
+    CorrelationResetOnDLS
     : public SynramMixin<CorrelationResetOnDLS, SynapseQuadOnSynram>
+    , common::CoordinateBase<CorrelationResetOnDLS>
 {
 	CorrelationResetOnDLS() = default;
 
@@ -346,8 +370,10 @@ struct GENPYBIND(inline_base("*SynramMixin*")) CorrelationResetOnDLS
 	}
 };
 
-struct GENPYBIND(inline_base("*SynramMixin*")) SynapseWeightQuadOnDLS
+struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*"))
+    SynapseWeightQuadOnDLS
     : public SynramMixin<SynapseWeightQuadOnDLS, SynapseQuadOnSynram>
+    , common::CoordinateBase<SynapseWeightQuadOnDLS>
 {
 	SynapseWeightQuadOnDLS() = default;
 
@@ -370,8 +396,10 @@ struct GENPYBIND(inline_base("*SynramMixin*")) SynapseWeightQuadOnDLS
 };
 
 
-struct GENPYBIND(inline_base("*SynramMixin*")) SynapseLabelQuadOnDLS
+struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*"))
+    SynapseLabelQuadOnDLS
     : public SynramMixin<SynapseLabelQuadOnDLS, SynapseQuadOnSynram>
+    , common::CoordinateBase<SynapseLabelQuadOnDLS>
 {
 	SynapseLabelQuadOnDLS() = default;
 
@@ -394,8 +422,10 @@ struct GENPYBIND(inline_base("*SynramMixin*")) SynapseLabelQuadOnDLS
 };
 
 
-struct GENPYBIND(inline_base("*SynramMixin*")) SynapseCorrelationCalibQuadOnDLS
+struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*"))
+    SynapseCorrelationCalibQuadOnDLS
     : public SynramMixin<SynapseCorrelationCalibQuadOnDLS, SynapseQuadOnSynram>
+    , common::CoordinateBase<SynapseCorrelationCalibQuadOnDLS>
 {
 	SynapseCorrelationCalibQuadOnDLS() = default;
 

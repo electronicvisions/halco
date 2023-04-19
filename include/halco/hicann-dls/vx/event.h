@@ -1,6 +1,7 @@
 #pragma once
 #include <stdint.h>
 
+#include "halco/common/coordinate.h"
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 #include "halco/hicann-dls/vx/neuron.h"
@@ -18,22 +19,28 @@ namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
  * as separate coordinate types of length 1.
  */
 
-struct GENPYBIND(inline_base("*")) SpikePack1ToChipOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    SpikePack1ToChipOnDLS
     : public common::detail::RantWrapper<SpikePack1ToChipOnDLS, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<SpikePack1ToChipOnDLS>
 {
 	constexpr explicit SpikePack1ToChipOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
 
 
-struct GENPYBIND(inline_base("*")) SpikePack2ToChipOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    SpikePack2ToChipOnDLS
     : public common::detail::RantWrapper<SpikePack2ToChipOnDLS, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<SpikePack2ToChipOnDLS>
 {
 	constexpr explicit SpikePack2ToChipOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
 
 
-struct GENPYBIND(inline_base("*")) SpikePack3ToChipOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    SpikePack3ToChipOnDLS
     : public common::detail::RantWrapper<SpikePack3ToChipOnDLS, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<SpikePack3ToChipOnDLS>
 {
 	constexpr explicit SpikePack3ToChipOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };

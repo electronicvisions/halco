@@ -10,6 +10,7 @@
 GENPYBIND_TAG_HALCO_COMMON
 GENPYBIND_MANUAL({ parent.attr("__variant__") = "pybind11"; })
 
+#include "halco/common/coordinate.h"
 #include "halco/common/geometry.h"
 #include "halco/common/iter_all.h"
 #include "halco/common/misc_types.h"

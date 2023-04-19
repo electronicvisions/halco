@@ -2,6 +2,7 @@
 #include <array>
 #include <stdint.h>
 
+#include "halco/common/coordinate.h"
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
@@ -54,8 +55,10 @@ struct GENPYBIND(inline_base("*")) SynapseDriverOnPADIBus
 };
 
 
-struct GENPYBIND(inline_base("*")) SynapseDriverBlockOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    SynapseDriverBlockOnDLS
     : public common::detail::RantWrapper<SynapseDriverBlockOnDLS, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<SynapseDriverBlockOnDLS>
 {
 	constexpr explicit SynapseDriverBlockOnDLS(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -71,8 +74,10 @@ struct GENPYBIND(inline_base("*")) SynapseDriverBlockOnDLS
 
 HALCO_COORDINATE_MIXIN(SynapseDriverMixin, SynapseDriverBlockOnDLS, synapse_driver)
 
-struct GENPYBIND(inline_base("*SynapseDriverMixin*")) SynapseDriverOnDLS
+struct GENPYBIND(inline_base("*SynapseDriverMixin*"), inline_base("*CoordinateBase*"))
+    SynapseDriverOnDLS
     : public SynapseDriverMixin<SynapseDriverOnDLS, SynapseDriverOnSynapseDriverBlock>
+    , common::CoordinateBase<SynapseDriverOnDLS>
 {
 	SynapseDriverOnDLS() = default;
 
@@ -96,8 +101,10 @@ struct GENPYBIND(inline_base("*SynapseDriverMixin*")) SynapseDriverOnDLS
 };
 
 
-struct GENPYBIND(inline_base("*")) CommonSynapseDriverConfigOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    CommonSynapseDriverConfigOnDLS
     : public common::detail::RantWrapper<CommonSynapseDriverConfigOnDLS, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<CommonSynapseDriverConfigOnDLS>
 {
 	constexpr explicit CommonSynapseDriverConfigOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 
@@ -108,8 +115,10 @@ struct GENPYBIND(inline_base("*")) CommonSynapseDriverConfigOnDLS
 };
 
 
-struct GENPYBIND(inline_base("*")) SynapseDriverSRAMTimingConfigOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    SynapseDriverSRAMTimingConfigOnDLS
     : public common::detail::RantWrapper<SynapseDriverSRAMTimingConfigOnDLS, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<SynapseDriverSRAMTimingConfigOnDLS>
 {
 	constexpr explicit SynapseDriverSRAMTimingConfigOnDLS(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :

@@ -1,4 +1,5 @@
 #pragma once
+#include "halco/common/coordinate.h"
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 #include "halco/hicann-dls/vx/synapse.h"
@@ -36,8 +37,10 @@ struct GENPYBIND(inline_base("*")) ColumnCorrelationQuadOnSynram
 };
 
 
-struct GENPYBIND(inline_base("*SynramMixin*")) ColumnCorrelationQuadOnDLS
+struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*"))
+    ColumnCorrelationQuadOnDLS
     : public SynramMixin<ColumnCorrelationQuadOnDLS, ColumnCorrelationQuadOnSynram>
+    , common::CoordinateBase<ColumnCorrelationQuadOnDLS>
 {
 	ColumnCorrelationQuadOnDLS() = default;
 
@@ -84,8 +87,10 @@ struct GENPYBIND(inline_base("*")) ColumnCurrentQuadOnSynram
 };
 
 
-struct GENPYBIND(inline_base("*SynramMixin*")) ColumnCurrentQuadOnDLS
+struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*"))
+    ColumnCurrentQuadOnDLS
     : public SynramMixin<ColumnCurrentQuadOnDLS, ColumnCurrentQuadOnSynram>
+    , common::CoordinateBase<ColumnCurrentQuadOnDLS>
 {
 	ColumnCurrentQuadOnDLS() = default;
 

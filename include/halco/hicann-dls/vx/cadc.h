@@ -1,6 +1,7 @@
 #pragma once
 #include <stdint.h>
 
+#include "halco/common/coordinate.h"
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
@@ -21,8 +22,9 @@ struct SynapseCorrelationCalibRowOnDLS;
     CADC
 \**********/
 
-struct GENPYBIND(inline_base("*")) CADCOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) CADCOnDLS
     : public common::detail::RantWrapper<CADCOnDLS, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<CADCOnDLS>
 {
 	constexpr explicit CADCOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 
@@ -33,8 +35,9 @@ struct GENPYBIND(inline_base("*")) CADCOnDLS
 };
 
 
-struct GENPYBIND(inline_base("*")) CADCConfigOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) CADCConfigOnDLS
     : public common::detail::RantWrapper<CADCConfigOnDLS, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<CADCConfigOnDLS>
 {
 	constexpr explicit CADCConfigOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 
@@ -72,8 +75,9 @@ struct GENPYBIND(inline_base("*")) CADCChannelColumnOnSynram
 };
 
 
-struct GENPYBIND(inline_base("*SynramMixin*")) CADCSampleRowOnDLS
+struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*")) CADCSampleRowOnDLS
     : public SynramMixin<CADCSampleRowOnDLS, SynapseRowOnSynram>
+    , common::CoordinateBase<CADCSampleRowOnDLS>
 {
 private:
 	typedef SynramMixin<CADCSampleRowOnDLS, SynapseRowOnSynram> base;
@@ -98,8 +102,10 @@ public:
 };
 
 
-struct GENPYBIND(inline_base("*")) CADCOffsetSRAMTimingConfigOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    CADCOffsetSRAMTimingConfigOnDLS
     : public common::detail::RantWrapper<CADCOffsetSRAMTimingConfigOnDLS, uint_fast16_t, 3, 0>
+    , common::CoordinateBase<CADCOffsetSRAMTimingConfigOnDLS>
 {
 	constexpr explicit CADCOffsetSRAMTimingConfigOnDLS(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -108,8 +114,9 @@ struct GENPYBIND(inline_base("*")) CADCOffsetSRAMTimingConfigOnDLS
 };
 
 
-struct GENPYBIND(inline_base("*")) CADCSamplesOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) CADCSamplesOnDLS
     : public common::detail::RantWrapper<CADCSamplesOnDLS, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<CADCSamplesOnDLS>
 {
 	constexpr explicit CADCSamplesOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
@@ -165,8 +172,9 @@ struct GENPYBIND(inline_base("*CADCReadoutTypeMixin*")) CADCSampleQuadOnSynram
 	}
 };
 
-struct GENPYBIND(inline_base("*SynramMixin*")) CADCSampleQuadOnDLS
+struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*")) CADCSampleQuadOnDLS
     : public SynramMixin<CADCSampleQuadOnDLS, CADCSampleQuadOnSynram>
+    , common::CoordinateBase<CADCSampleQuadOnDLS>
 {
 	CADCSampleQuadOnDLS() = default;
 
@@ -210,8 +218,10 @@ struct GENPYBIND(inline_base("*CADCChannelTypeMixin*")) CADCChannelConfigOnSynra
 };
 
 
-struct GENPYBIND(inline_base("*SynramMixin*")) CADCChannelConfigOnDLS
+struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*"))
+    CADCChannelConfigOnDLS
     : public SynramMixin<CADCChannelConfigOnDLS, CADCChannelConfigOnSynram>
+    , common::CoordinateBase<CADCChannelConfigOnDLS>
 {
 	CADCChannelConfigOnDLS() = default;
 

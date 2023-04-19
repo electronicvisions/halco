@@ -544,6 +544,11 @@ struct GridCoordinate {
 		return os;
 	}
 
+	friend std::ostream& operator<<(std::ostream& os, const Derived& c)
+	{
+		return os << static_cast<GridCoordinate const&>(c);
+	}
+
 	GENPYBIND(expose_as(__hash__))
 	size_t hash() const
 	{
@@ -723,6 +728,11 @@ struct IntervalCoordinate {
 		os << "[" << c.toMin().toEnum().value() << "," << c.toMax().toEnum().value() << "]";
 #endif
 		return os;
+	}
+
+	friend std::ostream& operator<<(std::ostream& os, const Derived& c)
+	{
+		return os << static_cast<IntervalCoordinate const&>(c);
 	}
 
 	GENPYBIND(expose_as(__hash__))

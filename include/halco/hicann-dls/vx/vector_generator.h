@@ -1,6 +1,7 @@
 #pragma once
 #include <stdint.h>
 
+#include "halco/common/coordinate.h"
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
@@ -12,8 +13,10 @@ namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 /**
  * Coordinate describing the location of a vector generator on the FPGA.
  */
-struct GENPYBIND(inline_base("*")) VectorGeneratorOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    VectorGeneratorOnFPGA
     : public common::detail::RantWrapper<VectorGeneratorOnFPGA, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<VectorGeneratorOnFPGA>
 {
 	constexpr explicit VectorGeneratorOnFPGA(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -29,8 +32,10 @@ struct GENPYBIND(inline_base("*")) VectorGeneratorOnFPGA
 /**
  * Coordinate describing the location of a vector generator control on the FPGA.
  */
-struct GENPYBIND(inline_base("*")) VectorGeneratorControlOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    VectorGeneratorControlOnFPGA
     : public common::detail::RantWrapper<VectorGeneratorControlOnFPGA, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<VectorGeneratorControlOnFPGA>
 {
 	constexpr explicit VectorGeneratorControlOnFPGA(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -61,8 +66,10 @@ struct GENPYBIND(inline_base("*")) VectorGeneratorLUTEntryOnVectorGeneratorLUT
 /**
  * Coordinate describing the location of a vector generator lookup table on the FPGA.
  */
-struct GENPYBIND(inline_base("*")) VectorGeneratorLUTOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    VectorGeneratorLUTOnFPGA
     : public common::detail::RantWrapper<VectorGeneratorLUTOnFPGA, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<VectorGeneratorLUTOnFPGA>
 {
 	constexpr explicit VectorGeneratorLUTOnFPGA(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -81,10 +88,12 @@ HALCO_COORDINATE_MIXIN(VectorGeneratorLUTMixin, VectorGeneratorLUTOnFPGA, lookup
 /**
  * Coordinate describing the location of a vector generator lookup table entry on the FPGA.
  */
-struct GENPYBIND(inline_base("*VectorGeneratorLUTMixin*")) VectorGeneratorLUTEntryOnFPGA
+struct GENPYBIND(inline_base("*VectorGeneratorLUTMixin*"), inline_base("*CoordinateBase*"))
+    VectorGeneratorLUTEntryOnFPGA
     : public VectorGeneratorLUTMixin<
           VectorGeneratorLUTEntryOnFPGA,
           VectorGeneratorLUTEntryOnVectorGeneratorLUT>
+    , common::CoordinateBase<VectorGeneratorLUTEntryOnFPGA>
 {
 	VectorGeneratorLUTEntryOnFPGA() = default;
 
@@ -107,9 +116,11 @@ struct GENPYBIND(inline_base("*VectorGeneratorLUTMixin*")) VectorGeneratorLUTEnt
 /**
  * Coordinate describing the location of a vector generator notification address on the FPGA.
  */
-struct GENPYBIND(inline_base("*")) VectorGeneratorNotificationAddressOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    VectorGeneratorNotificationAddressOnFPGA
     : public common::detail::
           RantWrapper<VectorGeneratorNotificationAddressOnFPGA, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<VectorGeneratorNotificationAddressOnFPGA>
 {
 	constexpr explicit VectorGeneratorNotificationAddressOnFPGA(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -126,8 +137,10 @@ struct GENPYBIND(inline_base("*")) VectorGeneratorNotificationAddressOnFPGA
 /**
  * Coordinate describing the location of a vector generator trigger on the FPGA.
  */
-struct GENPYBIND(inline_base("*")) VectorGeneratorTriggerOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    VectorGeneratorTriggerOnFPGA
     : public common::detail::RantWrapper<VectorGeneratorTriggerOnFPGA, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<VectorGeneratorTriggerOnFPGA>
 {
 	constexpr explicit VectorGeneratorTriggerOnFPGA(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -144,8 +157,10 @@ struct GENPYBIND(inline_base("*")) VectorGeneratorTriggerOnFPGA
 /**
  * Coordinate describing the location of a vector generator input FIFO on the FPGA.
  */
-struct GENPYBIND(inline_base("*")) VectorGeneratorFIFOWordOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    VectorGeneratorFIFOWordOnFPGA
     : public common::detail::RantWrapper<VectorGeneratorFIFOWordOnFPGA, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<VectorGeneratorFIFOWordOnFPGA>
 {
 	constexpr explicit VectorGeneratorFIFOWordOnFPGA(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :

@@ -1,6 +1,7 @@
 #pragma once
 #include <stdint.h>
 
+#include "halco/common/coordinate.h"
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
@@ -26,8 +27,9 @@ struct DAC6573ChannelOnDAC6573;
 struct DAC6573ChannelOnBoard;
 
 
-struct GENPYBIND(inline_base("*")) TCA9554OnBoard
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) TCA9554OnBoard
     : public common::detail::RantWrapper<TCA9554OnBoard, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<TCA9554OnBoard>
 {
 	constexpr explicit TCA9554OnBoard(uintmax_t const val = 0) : rant_t(val) {}
 
@@ -36,8 +38,9 @@ struct GENPYBIND(inline_base("*")) TCA9554OnBoard
 };
 
 
-struct GENPYBIND(inline_base("*")) TCA9554InputsOnBoard
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) TCA9554InputsOnBoard
     : public common::detail::RantWrapper<TCA9554InputsOnBoard, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<TCA9554InputsOnBoard>
 {
 	constexpr explicit TCA9554InputsOnBoard(uintmax_t const val = 0) : rant_t(val) {}
 
@@ -46,8 +49,9 @@ struct GENPYBIND(inline_base("*")) TCA9554InputsOnBoard
 };
 
 
-struct GENPYBIND(inline_base("*")) TCA9554ConfigOnBoard
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) TCA9554ConfigOnBoard
     : public common::detail::RantWrapper<TCA9554ConfigOnBoard, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<TCA9554ConfigOnBoard>
 {
 	constexpr explicit TCA9554ConfigOnBoard(uintmax_t const val = 0) : rant_t(val) {}
 
@@ -56,8 +60,10 @@ struct GENPYBIND(inline_base("*")) TCA9554ConfigOnBoard
 };
 
 
-struct GENPYBIND(inline_base("*")) TCA9554ChannelOnBoard
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    TCA9554ChannelOnBoard
     : public common::detail::RantWrapper<TCA9554ChannelOnBoard, uint_fast16_t, 7, 0>
+    , common::CoordinateBase<TCA9554ChannelOnBoard>
 {
 	constexpr explicit TCA9554ChannelOnBoard(uintmax_t const val = 0) : rant_t(val) {}
 
@@ -75,8 +81,9 @@ struct GENPYBIND(inline_base("*")) TCA9554ChannelOnBoard
 };
 
 
-struct GENPYBIND(inline_base("*")) AD5252OnBoard
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) AD5252OnBoard
     : public common::detail::RantWrapper<AD5252OnBoard, uint_fast16_t, 2, 0>
+    , common::CoordinateBase<AD5252OnBoard>
 {
 	constexpr explicit AD5252OnBoard() : rant_t(0) {}
 	constexpr explicit AD5252OnBoard(uintmax_t const val) : rant_t(val) {}
@@ -98,8 +105,9 @@ struct GENPYBIND(inline_base("*")) AD5252ChannelOnAD5252
 
 HALCO_COORDINATE_MIXIN(AD5252Mixin, AD5252OnBoard, ad5252)
 
-struct GENPYBIND(inline_base("*AD5252Mixin*")) AD5252ChannelOnBoard
+struct GENPYBIND(inline_base("*AD5252Mixin*"), inline_base("*CoordinateBase*")) AD5252ChannelOnBoard
     : public AD5252Mixin<AD5252ChannelOnBoard, AD5252ChannelOnAD5252>
+    , common::CoordinateBase<AD5252ChannelOnBoard>
 {
 	AD5252ChannelOnBoard() = default;
 
@@ -125,8 +133,10 @@ struct GENPYBIND(inline_base("*AD5252Mixin*")) AD5252ChannelOnBoard
 	AD5252ChannelConfigPersistentOnBoard toAD5252ChannelConfigPersistentOnBoard() const;
 };
 
-struct GENPYBIND(inline_base("*AD5252Mixin*")) AD5252ChannelConfigOnBoard
+struct GENPYBIND(inline_base("*AD5252Mixin*"), inline_base("*CoordinateBase*"))
+    AD5252ChannelConfigOnBoard
     : public AD5252Mixin<AD5252ChannelConfigOnBoard, AD5252ChannelOnAD5252>
+    , common::CoordinateBase<AD5252ChannelConfigOnBoard>
 {
 	AD5252ChannelConfigOnBoard() = default;
 
@@ -152,8 +162,10 @@ struct GENPYBIND(inline_base("*AD5252Mixin*")) AD5252ChannelConfigOnBoard
 	AD5252ChannelConfigPersistentOnBoard toAD5252ChannelConfigPersistentOnBoard() const;
 };
 
-struct GENPYBIND(inline_base("*AD5252Mixin*")) AD5252ChannelConfigPersistentOnBoard
+struct GENPYBIND(inline_base("*AD5252Mixin*"), inline_base("*CoordinateBase*"))
+    AD5252ChannelConfigPersistentOnBoard
     : public AD5252Mixin<AD5252ChannelConfigPersistentOnBoard, AD5252ChannelOnAD5252>
+    , common::CoordinateBase<AD5252ChannelConfigPersistentOnBoard>
 {
 	AD5252ChannelConfigPersistentOnBoard() = default;
 
@@ -180,8 +192,9 @@ struct GENPYBIND(inline_base("*AD5252Mixin*")) AD5252ChannelConfigPersistentOnBo
 };
 
 
-struct GENPYBIND(inline_base("*")) DAC6573OnBoard
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) DAC6573OnBoard
     : public common::detail::RantWrapper<DAC6573OnBoard, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<DAC6573OnBoard>
 {
 	constexpr explicit DAC6573OnBoard() : rant_t(0) {}
 	constexpr explicit DAC6573OnBoard(uintmax_t const val) : rant_t(val) {}
@@ -196,8 +209,10 @@ struct GENPYBIND(inline_base("*")) DAC6573ChannelOnDAC6573
 
 HALCO_COORDINATE_MIXIN(DAC6573Mixin, DAC6573OnBoard, dac6573mixin)
 
-struct GENPYBIND(inline_base("*DAC6573Mixin*")) DAC6573ChannelOnBoard
+struct GENPYBIND(inline_base("*DAC6573Mixin*"), inline_base("*CoordinateBase*"))
+    DAC6573ChannelOnBoard
     : public DAC6573Mixin<DAC6573ChannelOnBoard, DAC6573ChannelOnDAC6573>
+    , common::CoordinateBase<DAC6573ChannelOnBoard>
 {
 	DAC6573ChannelOnBoard() = default;
 

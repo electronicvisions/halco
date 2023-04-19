@@ -2,9 +2,7 @@
 pyhalco_hicann_dls_vx.so will load this module and execute patch() during initialization
 """
 
-import sys
 import pyhalco_common
-from typing import Union
 
 
 def patch(module):
@@ -13,4 +11,3 @@ def patch(module):
     """
     module.iter_all = pyhalco_common.iter_all
     module.common = pyhalco_common
-    module.Coordinate = Union[tuple(module.coordinates)]

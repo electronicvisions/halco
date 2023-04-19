@@ -9,6 +9,7 @@ GENPYBIND_POSTFIX = os.environ.get("GENPYBIND_POSTFIX", False)
 @parametrize
 class Test_PyhalcoCommon(unittest.TestCase, PyhalcoTest):
     COORDINATES = """
+    Coordinate            => ignore
     Direction             =>
     Enum                  => linear
     Orientation           => iterable

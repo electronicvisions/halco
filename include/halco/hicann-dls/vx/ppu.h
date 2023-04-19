@@ -1,6 +1,7 @@
 #pragma once
 #include <stdint.h>
 
+#include "halco/common/coordinate.h"
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
@@ -64,8 +65,9 @@ struct GENPYBIND(inline_base("*")) PPUMemoryBlockOnPPU
 };
 
 
-struct GENPYBIND(inline_base("*")) PPUMemoryOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) PPUMemoryOnDLS
     : public common::detail::RantWrapper<PPUMemoryOnDLS, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<PPUMemoryOnDLS>
 {
 	constexpr explicit PPUMemoryOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 
@@ -73,8 +75,10 @@ struct GENPYBIND(inline_base("*")) PPUMemoryOnDLS
 };
 
 
-struct GENPYBIND(inline_base("*")) PPUControlRegisterOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    PPUControlRegisterOnDLS
     : public common::detail::RantWrapper<PPUControlRegisterOnDLS, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<PPUControlRegisterOnDLS>
 {
 	constexpr explicit PPUControlRegisterOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 
@@ -82,8 +86,10 @@ struct GENPYBIND(inline_base("*")) PPUControlRegisterOnDLS
 };
 
 
-struct GENPYBIND(inline_base("*")) PPUStatusRegisterOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    PPUStatusRegisterOnDLS
     : public common::detail::RantWrapper<PPUStatusRegisterOnDLS, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<PPUStatusRegisterOnDLS>
 {
 	constexpr explicit PPUStatusRegisterOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 
@@ -94,8 +100,9 @@ struct GENPYBIND(inline_base("*")) PPUStatusRegisterOnDLS
 HALCO_COORDINATE_MIXIN(PPUMixin, PPUOnDLS, ppu)
 
 
-struct GENPYBIND(inline_base("*PPUMixin*")) PPUMemoryBlockOnDLS
+struct GENPYBIND(inline_base("*PPUMixin*"), inline_base("*CoordinateBase*")) PPUMemoryBlockOnDLS
     : public PPUMixin<PPUMemoryBlockOnDLS, PPUMemoryBlockOnPPU>
+    , common::CoordinateBase<PPUMemoryBlockOnDLS>
 {
 	PPUMemoryBlockOnDLS() = default;
 
@@ -109,8 +116,9 @@ struct GENPYBIND(inline_base("*PPUMixin*")) PPUMemoryBlockOnDLS
 };
 
 
-struct GENPYBIND(inline_base("*PPUMixin*")) PPUMemoryWordOnDLS
+struct GENPYBIND(inline_base("*PPUMixin*"), inline_base("*CoordinateBase*")) PPUMemoryWordOnDLS
     : public PPUMixin<PPUMemoryWordOnDLS, PPUMemoryWordOnPPU>
+    , common::CoordinateBase<PPUMemoryWordOnDLS>
 {
 	PPUMemoryWordOnDLS() = default;
 

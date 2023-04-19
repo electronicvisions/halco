@@ -85,8 +85,10 @@ struct GENPYBIND(inline_base("*NodeIdMixin*")) ExtollAddressOnExtollNetwork
  *  FPGA-Event-Switch:
  */
 
-struct GENPYBIND(inline_base("*")) EventSwitchSourceOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    EventSwitchSourceOnFPGA
     : public common::detail::RantWrapper<EventSwitchSourceOnFPGA, uint_fast8_t, 2, 0>
+    , common::CoordinateBase<EventSwitchSourceOnFPGA>
 {
 	constexpr explicit EventSwitchSourceOnFPGA(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -98,8 +100,10 @@ struct GENPYBIND(inline_base("*")) EventSwitchSourceOnFPGA
 	static const EventSwitchSourceOnFPGA to_external;
 };
 
-struct GENPYBIND(inline_base("*")) EventSwitchReadoutOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    EventSwitchReadoutOnFPGA
     : public common::detail::RantWrapper<EventSwitchReadoutOnFPGA, uint_fast8_t, 2, 0>
+    , common::CoordinateBase<EventSwitchReadoutOnFPGA>
 {
 	constexpr explicit EventSwitchReadoutOnFPGA(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -111,8 +115,10 @@ struct GENPYBIND(inline_base("*")) EventSwitchReadoutOnFPGA
 	static const EventSwitchReadoutOnFPGA last_global_systime;
 };
 
-struct GENPYBIND(inline_base("*")) EventSwitchConfigOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    EventSwitchConfigOnFPGA
     : public common::detail::RantWrapper<EventSwitchConfigOnFPGA, uint_fast8_t, 0, 0>
+    , common::CoordinateBase<EventSwitchConfigOnFPGA>
 {
 	constexpr explicit EventSwitchConfigOnFPGA(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -125,9 +131,11 @@ struct GENPYBIND(inline_base("*")) EventSwitchConfigOnFPGA
  *  Accumulation-BUCKET:
  */
 
-struct GENPYBIND(inline_base("*")) ExtollSpikeCommBucketTriggerConfigOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    ExtollSpikeCommBucketTriggerConfigOnFPGA
     : public common::detail::
           RantWrapper<ExtollSpikeCommBucketTriggerConfigOnFPGA, uint_fast8_t, 7, 0>
+    , common::CoordinateBase<ExtollSpikeCommBucketTriggerConfigOnFPGA>
 {
 	constexpr explicit ExtollSpikeCommBucketTriggerConfigOnFPGA(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -135,9 +143,11 @@ struct GENPYBIND(inline_base("*")) ExtollSpikeCommBucketTriggerConfigOnFPGA
 	{}
 };
 
-struct GENPYBIND(inline_base("*")) ExtollSpikeCommBucketDestinationConfigOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    ExtollSpikeCommBucketDestinationConfigOnFPGA
     : public common::detail::
           RantWrapper<ExtollSpikeCommBucketDestinationConfigOnFPGA, uint_fast8_t, 7, 0>
+    , common::CoordinateBase<ExtollSpikeCommBucketDestinationConfigOnFPGA>
 {
 	constexpr explicit ExtollSpikeCommBucketDestinationConfigOnFPGA(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -145,8 +155,10 @@ struct GENPYBIND(inline_base("*")) ExtollSpikeCommBucketDestinationConfigOnFPGA
 	{}
 };
 
-struct GENPYBIND(inline_base("*")) ExtollSpikeCommBucketNumPktsSentOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    ExtollSpikeCommBucketNumPktsSentOnFPGA
     : public common::detail::RantWrapper<ExtollSpikeCommBucketNumPktsSentOnFPGA, uint_fast8_t, 7, 0>
+    , common::CoordinateBase<ExtollSpikeCommBucketNumPktsSentOnFPGA>
 {
 	constexpr explicit ExtollSpikeCommBucketNumPktsSentOnFPGA(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -154,9 +166,11 @@ struct GENPYBIND(inline_base("*")) ExtollSpikeCommBucketNumPktsSentOnFPGA
 	{}
 };
 
-struct GENPYBIND(inline_base("*")) ExtollSpikeCommBucketCounterResetOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    ExtollSpikeCommBucketCounterResetOnFPGA
     : public common::detail::
           RantWrapper<ExtollSpikeCommBucketCounterResetOnFPGA, uint_fast8_t, 7, 0>
+    , common::CoordinateBase<ExtollSpikeCommBucketCounterResetOnFPGA>
 {
 	constexpr explicit ExtollSpikeCommBucketCounterResetOnFPGA(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -170,8 +184,10 @@ struct GENPYBIND(inline_base("*")) ExtollSpikeCommBucketCounterResetOnFPGA
  */
 
 
-struct GENPYBIND(inline_base("*")) ExtollSpikeCommSplitOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    ExtollSpikeCommSplitOnFPGA
     : public common::detail::RantWrapper<ExtollSpikeCommSplitOnFPGA, uint_fast8_t, 1, 0>
+    , common::CoordinateBase<ExtollSpikeCommSplitOnFPGA>
 {
 	constexpr explicit ExtollSpikeCommSplitOnFPGA(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -201,10 +217,12 @@ struct GENPYBIND(inline_base("*")) ExtollSpikeCommRouterLookupConfigOnSpikeCommS
 	{}
 };
 
-struct GENPYBIND(inline_base("*SpikeCommSplitMixin*")) ExtollSpikeCommRouterLookupConfigOnFPGA
+struct GENPYBIND(inline_base("*SpikeCommSplitMixin*"), inline_base("*CoordinateBase*"))
+    ExtollSpikeCommRouterLookupConfigOnFPGA
     : public SpikeCommSplitMixin<
           ExtollSpikeCommRouterLookupConfigOnFPGA,
           ExtollSpikeCommRouterLookupConfigOnSpikeCommSplit>
+    , common::CoordinateBase<ExtollSpikeCommRouterLookupConfigOnFPGA>
 {
 	ExtollSpikeCommRouterLookupConfigOnFPGA() = default;
 
@@ -234,10 +252,12 @@ struct GENPYBIND(inline_base("*")) ExtollSpikeCommRouterConfigOnSpikeCommSplit
 	{}
 };
 
-struct GENPYBIND(inline_base("*SpikeCommSplitMixin*")) ExtollSpikeCommRouterConfigOnFPGA
+struct GENPYBIND(inline_base("*SpikeCommSplitMixin*"), inline_base("*CoordinateBase*"))
+    ExtollSpikeCommRouterConfigOnFPGA
     : public SpikeCommSplitMixin<
           ExtollSpikeCommRouterConfigOnFPGA,
           ExtollSpikeCommRouterConfigOnSpikeCommSplit>
+    , common::CoordinateBase<ExtollSpikeCommRouterConfigOnFPGA>
 {
 	explicit ExtollSpikeCommRouterConfigOnFPGA(
 	    ExtollSpikeCommSplitOnFPGA const& split = ExtollSpikeCommSplitOnFPGA()) :
@@ -264,10 +284,12 @@ struct GENPYBIND(inline_base("*")) ExtollSpikeCommRouterEventLossDisabledOnSpike
 	{}
 };
 
-struct GENPYBIND(inline_base("*SpikeCommSplitMixin*")) ExtollSpikeCommRouterEventLossDisabledOnFPGA
+struct GENPYBIND(inline_base("*SpikeCommSplitMixin*"), inline_base("*CoordinateBase*"))
+    ExtollSpikeCommRouterEventLossDisabledOnFPGA
     : public SpikeCommSplitMixin<
           ExtollSpikeCommRouterEventLossDisabledOnFPGA,
           ExtollSpikeCommRouterEventLossDisabledOnSpikeCommSplit>
+    , common::CoordinateBase<ExtollSpikeCommRouterEventLossDisabledOnFPGA>
 {
 	explicit ExtollSpikeCommRouterEventLossDisabledOnFPGA(
 	    ExtollSpikeCommSplitOnFPGA const& split = ExtollSpikeCommSplitOnFPGA()) :
@@ -294,10 +316,12 @@ struct GENPYBIND(inline_base("*")) ExtollSpikeCommRouterEventLossMisconfOnSpikeC
 	{}
 };
 
-struct GENPYBIND(inline_base("*SpikeCommSplitMixin*")) ExtollSpikeCommRouterEventLossMisconfOnFPGA
+struct GENPYBIND(inline_base("*SpikeCommSplitMixin*"), inline_base("*CoordinateBase*"))
+    ExtollSpikeCommRouterEventLossMisconfOnFPGA
     : public SpikeCommSplitMixin<
           ExtollSpikeCommRouterEventLossMisconfOnFPGA,
           ExtollSpikeCommRouterEventLossMisconfOnSpikeCommSplit>
+    , common::CoordinateBase<ExtollSpikeCommRouterEventLossMisconfOnFPGA>
 {
 	explicit ExtollSpikeCommRouterEventLossMisconfOnFPGA(
 	    ExtollSpikeCommSplitOnFPGA const& split = ExtollSpikeCommSplitOnFPGA()) :
@@ -323,10 +347,12 @@ struct GENPYBIND(inline_base("*")) ExtollSpikeCommRouterEventsRoutedOnSpikeCommS
 	{}
 };
 
-struct GENPYBIND(inline_base("*SpikeCommSplitMixin*")) ExtollSpikeCommRouterEventsRoutedOnFPGA
+struct GENPYBIND(inline_base("*SpikeCommSplitMixin*"), inline_base("*CoordinateBase*"))
+    ExtollSpikeCommRouterEventsRoutedOnFPGA
     : public SpikeCommSplitMixin<
           ExtollSpikeCommRouterEventsRoutedOnFPGA,
           ExtollSpikeCommRouterEventsRoutedOnSpikeCommSplit>
+    , common::CoordinateBase<ExtollSpikeCommRouterEventsRoutedOnFPGA>
 {
 	explicit ExtollSpikeCommRouterEventsRoutedOnFPGA(
 	    ExtollSpikeCommSplitOnFPGA const& split = ExtollSpikeCommSplitOnFPGA()) :
@@ -352,10 +378,12 @@ struct GENPYBIND(inline_base("*")) ExtollSpikeCommRouterCounterResetOnSpikeCommS
 	{}
 };
 
-struct GENPYBIND(inline_base("*SpikeCommSplitMixin*")) ExtollSpikeCommRouterCounterResetOnFPGA
+struct GENPYBIND(inline_base("*SpikeCommSplitMixin*"), inline_base("*CoordinateBase*"))
+    ExtollSpikeCommRouterCounterResetOnFPGA
     : public SpikeCommSplitMixin<
           ExtollSpikeCommRouterCounterResetOnFPGA,
           ExtollSpikeCommRouterCounterResetOnSpikeCommSplit>
+    , common::CoordinateBase<ExtollSpikeCommRouterCounterResetOnFPGA>
 {
 	explicit ExtollSpikeCommRouterCounterResetOnFPGA(
 	    ExtollSpikeCommSplitOnFPGA const& split = ExtollSpikeCommSplitOnFPGA()) :
@@ -386,10 +414,12 @@ struct GENPYBIND(inline_base("*")) ExtollSpikeCommDecoderNumEventsReceivedOnSpik
 	{}
 };
 
-struct GENPYBIND(inline_base("*SpikeCommSplitMixin*")) ExtollSpikeCommDecoderNumEventsReceivedOnFPGA
+struct GENPYBIND(inline_base("*SpikeCommSplitMixin*"), inline_base("*CoordinateBase*"))
+    ExtollSpikeCommDecoderNumEventsReceivedOnFPGA
     : public SpikeCommSplitMixin<
           ExtollSpikeCommDecoderNumEventsReceivedOnFPGA,
           ExtollSpikeCommDecoderNumEventsReceivedOnSpikeCommSplit>
+    , common::CoordinateBase<ExtollSpikeCommDecoderNumEventsReceivedOnFPGA>
 {
 	explicit ExtollSpikeCommDecoderNumEventsReceivedOnFPGA(
 	    ExtollSpikeCommSplitOnFPGA const& split = ExtollSpikeCommSplitOnFPGA()) :
@@ -406,9 +436,11 @@ struct GENPYBIND(inline_base("*SpikeCommSplitMixin*")) ExtollSpikeCommDecoderNum
 };
 
 
-struct GENPYBIND(inline_base("*")) ExtollSpikeCommDecoderCounterResetOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    ExtollSpikeCommDecoderCounterResetOnFPGA
     : public common::detail::
           RantWrapper<ExtollSpikeCommDecoderCounterResetOnFPGA, uint_fast8_t, 0, 0>
+    , halco::common::CoordinateBase<ExtollSpikeCommDecoderCounterResetOnFPGA>
 {
 	constexpr explicit ExtollSpikeCommDecoderCounterResetOnFPGA(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -431,10 +463,12 @@ struct GENPYBIND(inline_base("*")) ExtollSpikeCommTimestampDelayConfigOnSpikeCom
 	{}
 };
 
-struct GENPYBIND(inline_base("*SpikeCommSplitMixin*")) ExtollSpikeCommTimestampDelayConfigOnFPGA
+struct GENPYBIND(inline_base("*SpikeCommSplitMixin*"), inline_base("*CoordinateBase*"))
+    ExtollSpikeCommTimestampDelayConfigOnFPGA
     : public SpikeCommSplitMixin<
           ExtollSpikeCommTimestampDelayConfigOnFPGA,
           ExtollSpikeCommTimestampDelayConfigOnSpikeCommSplit>
+    , common::CoordinateBase<ExtollSpikeCommTimestampDelayConfigOnFPGA>
 {
 	explicit ExtollSpikeCommTimestampDelayConfigOnFPGA(
 	    ExtollSpikeCommSplitOnFPGA const& split = ExtollSpikeCommSplitOnFPGA()) :
@@ -464,11 +498,12 @@ struct GENPYBIND(inline_base("*")) ExtollSpikeCommTimestampDelayNumEventsReceive
 	{}
 };
 
-struct GENPYBIND(inline_base("*SpikeCommSplitMixin*"))
+struct GENPYBIND(inline_base("*SpikeCommSplitMixin*"), inline_base("*CoordinateBase*"))
     ExtollSpikeCommTimestampDelayNumEventsReceivedOnFPGA
     : public SpikeCommSplitMixin<
           ExtollSpikeCommTimestampDelayNumEventsReceivedOnFPGA,
           ExtollSpikeCommTimestampDelayNumEventsReceivedOnSpikeCommSplit>
+    , common::CoordinateBase<ExtollSpikeCommTimestampDelayNumEventsReceivedOnFPGA>
 {
 	explicit ExtollSpikeCommTimestampDelayNumEventsReceivedOnFPGA(
 	    ExtollSpikeCommSplitOnFPGA const& split = ExtollSpikeCommSplitOnFPGA()) :
@@ -499,11 +534,12 @@ struct GENPYBIND(inline_base("*")) ExtollSpikeCommTimestampDelayEventLossFullOnS
 	{}
 };
 
-struct GENPYBIND(inline_base("*SpikeCommSplitMixin*"))
+struct GENPYBIND(inline_base("*SpikeCommSplitMixin*"), inline_base("*CoordinateBase*"))
     ExtollSpikeCommTimestampDelayEventLossFullOnFPGA
     : public SpikeCommSplitMixin<
           ExtollSpikeCommTimestampDelayEventLossFullOnFPGA,
           ExtollSpikeCommTimestampDelayEventLossFullOnSpikeCommSplit>
+    , common::CoordinateBase<ExtollSpikeCommTimestampDelayEventLossFullOnFPGA>
 {
 	explicit ExtollSpikeCommTimestampDelayEventLossFullOnFPGA(
 	    ExtollSpikeCommSplitOnFPGA const& split = ExtollSpikeCommSplitOnFPGA()) :
@@ -533,11 +569,12 @@ struct GENPYBIND(inline_base("*")) ExtollSpikeCommTimestampDelayEventLossExpired
 	{}
 };
 
-struct GENPYBIND(inline_base("*SpikeCommSplitMixin*"))
+struct GENPYBIND(inline_base("*SpikeCommSplitMixin*"), inline_base("*CoordinateBase*"))
     ExtollSpikeCommTimestampDelayEventLossExpiredOnFPGA
     : public SpikeCommSplitMixin<
           ExtollSpikeCommTimestampDelayEventLossExpiredOnFPGA,
           ExtollSpikeCommTimestampDelayEventLossExpiredOnSpikeCommSplit>
+    , common::CoordinateBase<ExtollSpikeCommTimestampDelayEventLossExpiredOnFPGA>
 {
 	explicit ExtollSpikeCommTimestampDelayEventLossExpiredOnFPGA(
 	    ExtollSpikeCommSplitOnFPGA const& split = ExtollSpikeCommSplitOnFPGA()) :
@@ -564,11 +601,12 @@ struct GENPYBIND(inline_base("*")) ExtollSpikeCommTimestampDelayCounterResetOnSp
 	{}
 };
 
-struct GENPYBIND(inline_base("*SpikeCommSplitMixin*"))
+struct GENPYBIND(inline_base("*SpikeCommSplitMixin*"), inline_base("*CoordinateBase*"))
     ExtollSpikeCommTimestampDelayCounterResetOnFPGA
     : public SpikeCommSplitMixin<
           ExtollSpikeCommTimestampDelayCounterResetOnFPGA,
           ExtollSpikeCommTimestampDelayCounterResetOnSpikeCommSplit>
+    , common::CoordinateBase<ExtollSpikeCommTimestampDelayCounterResetOnFPGA>
 {
 	explicit ExtollSpikeCommTimestampDelayCounterResetOnFPGA(
 	    ExtollSpikeCommSplitOnFPGA const& split = ExtollSpikeCommSplitOnFPGA()) :
@@ -600,10 +638,12 @@ struct GENPYBIND(inline_base("*")) ExtollBarrierTriggerReachedOnExtollNodeId
 	{}
 };
 
-struct GENPYBIND(inline_base("*NodeIdMixin*")) ExtollBarrierTriggerReachedOnExtollNetwork
+struct GENPYBIND(inline_base("*NodeIdMixin*"), inline_base("*CoordinateBase*"))
+    ExtollBarrierTriggerReachedOnExtollNetwork
     : public NodeIdMixin<
           ExtollBarrierTriggerReachedOnExtollNetwork,
           ExtollBarrierTriggerReachedOnExtollNodeId>
+    , halco::common::CoordinateBase<ExtollBarrierTriggerReachedOnExtollNetwork>
 {
 	ExtollBarrierTriggerReachedOnExtollNetwork() = default;
 
@@ -632,8 +672,10 @@ struct GENPYBIND(inline_base("*")) ExtollBarrierReleasedOnExtollNodeId
 	{}
 };
 
-struct GENPYBIND(inline_base("*NodeIdMixin*")) ExtollBarrierReleasedOnExtollNetwork
+struct GENPYBIND(inline_base("*NodeIdMixin*"), inline_base("*CoordinateBase*"))
+    ExtollBarrierReleasedOnExtollNetwork
     : public NodeIdMixin<ExtollBarrierReleasedOnExtollNetwork, ExtollBarrierReleasedOnExtollNodeId>
+    , halco::common::CoordinateBase<ExtollBarrierReleasedOnExtollNetwork>
 {
 	ExtollBarrierReleasedOnExtollNetwork() = default;
 
@@ -671,8 +713,10 @@ struct GENPYBIND(inline_base("*")) ExtollBarrierConfigOnExtollNodeId
 	{}
 };
 
-struct GENPYBIND(inline_base("*NodeIdMixin*")) ExtollBarrierConfigOnExtollNetwork
+struct GENPYBIND(inline_base("*NodeIdMixin*"), inline_base("*CoordinateBase*"))
+    ExtollBarrierConfigOnExtollNetwork
     : public NodeIdMixin<ExtollBarrierConfigOnExtollNetwork, ExtollBarrierConfigOnExtollNodeId>
+    , halco::common::CoordinateBase<ExtollBarrierConfigOnExtollNetwork>
 {
 	ExtollBarrierConfigOnExtollNetwork() = default;
 
@@ -701,10 +745,12 @@ struct GENPYBIND(inline_base("*")) ExtollInterruptControlOnExtollNodeId
 	{}
 };
 
-struct GENPYBIND(inline_base("*NodeIdMixin*")) ExtollInterruptControlOnExtollNetwork
+struct GENPYBIND(inline_base("*NodeIdMixin*"), inline_base("*CoordinateBase*"))
+    ExtollInterruptControlOnExtollNetwork
     : public NodeIdMixin<
           ExtollInterruptControlOnExtollNetwork,
           ExtollInterruptControlOnExtollNodeId>
+    , halco::common::CoordinateBase<ExtollInterruptControlOnExtollNetwork>
 {
 	ExtollInterruptControlOnExtollNetwork() = default;
 
@@ -733,8 +779,10 @@ struct GENPYBIND(inline_base("*")) ExtollInterruptConfigOnExtollNodeId
 	{}
 };
 
-struct GENPYBIND(inline_base("*NodeIdMixin*")) ExtollInterruptConfigOnExtollNetwork
+struct GENPYBIND(inline_base("*NodeIdMixin*"), inline_base("*CoordinateBase*"))
+    ExtollInterruptConfigOnExtollNetwork
     : public NodeIdMixin<ExtollInterruptConfigOnExtollNetwork, ExtollInterruptConfigOnExtollNodeId>
+    , halco::common::CoordinateBase<ExtollInterruptConfigOnExtollNetwork>
 {
 	ExtollInterruptConfigOnExtollNetwork() = default;
 
@@ -754,9 +802,11 @@ struct GENPYBIND(inline_base("*NodeIdMixin*")) ExtollInterruptConfigOnExtollNetw
 };
 
 
-struct GENPYBIND(inline_base("*")) ExtollBarrierInterruptInportErrorCountOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    ExtollBarrierInterruptInportErrorCountOnFPGA
     : public common::detail::
           RantWrapper<ExtollBarrierInterruptInportErrorCountOnFPGA, uint_fast8_t, 0, 0>
+    , halco::common::CoordinateBase<ExtollBarrierInterruptInportErrorCountOnFPGA>
 {
 	constexpr explicit ExtollBarrierInterruptInportErrorCountOnFPGA(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -764,9 +814,11 @@ struct GENPYBIND(inline_base("*")) ExtollBarrierInterruptInportErrorCountOnFPGA
 	{}
 };
 
-struct GENPYBIND(inline_base("*")) ExtollBarrierInterruptInportCounterResetOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    ExtollBarrierInterruptInportCounterResetOnFPGA
     : public common::detail::
           RantWrapper<ExtollBarrierInterruptInportCounterResetOnFPGA, uint_fast8_t, 0, 0>
+    , common::CoordinateBase<ExtollBarrierInterruptInportCounterResetOnFPGA>
 {
 	constexpr explicit ExtollBarrierInterruptInportCounterResetOnFPGA(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :

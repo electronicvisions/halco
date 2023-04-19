@@ -90,8 +90,8 @@ for ns in [ns_coordinate, ns_detail]:
 namespaces.exclude_by_access_type(mb, ['variables', 'calldefs', 'classes'], 'private')
 namespaces.exclude_by_access_type(mb, ['variables', 'calldefs', 'classes'], 'protected')
 
-# exclude names begining with a single underscore or ending with Cpp
-namespaces.exclude_by_regex(mb, ['calldefs', 'classes', 'variables'], r'(^_[^_])|(.*Cpp$)|(^impl$)')
+# exclude names begining with a single underscore or ending with Cpp or are named Coordinate
+namespaces.exclude_by_regex(mb, ['calldefs', 'classes', 'variables'], r'(^_[^_])|(.*Cpp$)|(^impl$)|Coordinate')
 
 # Add python import callback
 mb.add_registration_code(

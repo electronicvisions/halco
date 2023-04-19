@@ -1,6 +1,7 @@
 #pragma once
 #include <stdint.h>
 
+#include "halco/common/coordinate.h"
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
@@ -32,8 +33,9 @@ struct GENPYBIND(inline_base("*")) HemisphereOnDLS
 /**
  * Unique identifier for a chip on a DLS setup.
  */
-struct GENPYBIND(inline_base("*")) ChipOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) ChipOnDLS
     : public common::detail::RantWrapper<ChipOnDLS, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<ChipOnDLS>
 {
 	constexpr explicit ChipOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };

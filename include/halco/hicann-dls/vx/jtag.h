@@ -1,6 +1,7 @@
 #pragma once
 #include <stdint.h>
 
+#include "halco/common/coordinate.h"
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 
@@ -10,22 +11,25 @@ namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
     JTAG
 \***********/
 
-struct GENPYBIND(inline_base("*")) ResetJTAGTapOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) ResetJTAGTapOnDLS
     : public common::detail::RantWrapper<ResetJTAGTapOnDLS, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<ResetJTAGTapOnDLS>
 {
 	constexpr explicit ResetJTAGTapOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
 
 
-struct GENPYBIND(inline_base("*")) JTAGClockScalerOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) JTAGClockScalerOnDLS
     : public common::detail::RantWrapper<JTAGClockScalerOnDLS, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<JTAGClockScalerOnDLS>
 {
 	constexpr explicit JTAGClockScalerOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
 
 
-struct GENPYBIND(inline_base("*")) JTAGIdCodeOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) JTAGIdCodeOnDLS
     : public common::detail::RantWrapper<JTAGIdCodeOnDLS, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<JTAGIdCodeOnDLS>
 {
 	constexpr explicit JTAGIdCodeOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };

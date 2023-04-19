@@ -1,6 +1,7 @@
 #pragma once
 #include <stdint.h>
 
+#include "halco/common/coordinate.h"
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 
@@ -14,8 +15,10 @@ struct PADIBusOnDLS;
    BackgroundSpikeSource
 \*************************/
 
-struct GENPYBIND(inline_base("*")) BackgroundSpikeSourceOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    BackgroundSpikeSourceOnDLS
     : public common::detail::RantWrapper<BackgroundSpikeSourceOnDLS, uint_fast16_t, 7, 0>
+    , common::CoordinateBase<BackgroundSpikeSourceOnDLS>
 {
 	constexpr explicit BackgroundSpikeSourceOnDLS(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :

@@ -1,6 +1,7 @@
 #pragma once
 #include <stdint.h>
 
+#include "halco/common/coordinate.h"
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
@@ -15,8 +16,9 @@ struct INA219StatusOnBoard;
     xBoard
 \************/
 
-struct GENPYBIND(inline_base("*")) ShiftRegisterOnBoard
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) ShiftRegisterOnBoard
     : public common::detail::RantWrapper<ShiftRegisterOnBoard, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<ShiftRegisterOnBoard>
 {
 	constexpr explicit ShiftRegisterOnBoard(uintmax_t const val = 0) : rant_t(val) {}
 };
@@ -83,8 +85,9 @@ struct GENPYBIND(inline_base("*")) ADCOnBoard
 };
 
 
-struct GENPYBIND(inline_base("*")) INA219OnBoard
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) INA219OnBoard
     : public common::detail::RantWrapper<INA219OnBoard, uint_fast16_t, 5, 0>
+    , common::CoordinateBase<INA219OnBoard>
 {
 	constexpr explicit INA219OnBoard(uintmax_t const val = 0) : rant_t(val) {}
 
@@ -100,8 +103,9 @@ struct GENPYBIND(inline_base("*")) INA219OnBoard
 };
 
 
-struct GENPYBIND(inline_base("*")) INA219ConfigOnBoard
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) INA219ConfigOnBoard
     : public common::detail::RantWrapper<INA219ConfigOnBoard, uint_fast16_t, 5, 0>
+    , common::CoordinateBase<INA219ConfigOnBoard>
 {
 	constexpr explicit INA219ConfigOnBoard(uintmax_t const val = 0) : rant_t(val) {}
 
@@ -117,8 +121,9 @@ struct GENPYBIND(inline_base("*")) INA219ConfigOnBoard
 };
 
 
-struct GENPYBIND(inline_base("*")) INA219StatusOnBoard
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) INA219StatusOnBoard
     : public common::detail::RantWrapper<INA219StatusOnBoard, uint_fast16_t, 5, 0>
+    , common::CoordinateBase<INA219StatusOnBoard>
 {
 	constexpr explicit INA219StatusOnBoard(uintmax_t const val = 0) : rant_t(val) {}
 

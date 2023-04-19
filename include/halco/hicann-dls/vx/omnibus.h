@@ -1,6 +1,7 @@
 #pragma once
 #include <stdint.h>
 
+#include "halco/common/coordinate.h"
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 
@@ -31,13 +32,16 @@ struct GENPYBIND(inline_base("*")) OmnibusAddress
 
 struct GENPYBIND(inline_base("*")) PollingOmnibusBlockOnFPGA
     : public common::detail::RantWrapper<PollingOmnibusBlockOnFPGA, uint_fast8_t, 0, 0>
+    , common::CoordinateBase<PollingOmnibusBlockOnFPGA>
 {
 	constexpr explicit PollingOmnibusBlockOnFPGA(uintmax_t const val = 0) : base_t(val) {}
 };
 
 
-struct GENPYBIND(inline_base("*")) PollingOmnibusBlockConfigOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    PollingOmnibusBlockConfigOnFPGA
     : public common::detail::RantWrapper<PollingOmnibusBlockConfigOnFPGA, uint_fast8_t, 0, 0>
+    , common::CoordinateBase<PollingOmnibusBlockConfigOnFPGA>
 {
 	constexpr explicit PollingOmnibusBlockConfigOnFPGA(uintmax_t const val = 0) : base_t(val) {}
 };

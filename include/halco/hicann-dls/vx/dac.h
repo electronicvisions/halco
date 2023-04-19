@@ -1,6 +1,7 @@
 #pragma once
 #include <stdint.h>
 
+#include "halco/common/coordinate.h"
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
@@ -12,8 +13,9 @@ struct VDDOnBoard;
 /**
  * Coordinate describing the location of a DAC instance on the xBoard.
  */
-struct GENPYBIND(inline_base("*")) DACOnBoard
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) DACOnBoard
     : public common::detail::RantWrapper<DACOnBoard, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<DACOnBoard>
 {
 	constexpr explicit DACOnBoard(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
 	    rant_t(val)
@@ -38,8 +40,9 @@ HALCO_COORDINATE_MIXIN(DACMixin, DACOnBoard, dac)
 /**
  * Coordinate describing the location of a DAC channel on the xBoard.
  */
-struct GENPYBIND(inline_base("*DACMixin*")) DACChannelOnBoard
+struct GENPYBIND(inline_base("*DACMixin*"), inline_base("*CoordinateBase*")) DACChannelOnBoard
     : public DACMixin<DACChannelOnBoard, DACChannelOnDAC>
+    , common::CoordinateBase<DACChannelOnBoard>
 {
 	DACChannelOnBoard() = default;
 
@@ -78,8 +81,10 @@ struct GENPYBIND(inline_base("*DACMixin*")) DACChannelOnBoard
  * Unique coordinate describing the location of the collection of all DAC control instances on the
  * xBoard.
  */
-struct GENPYBIND(inline_base("*")) DACControlBlockOnBoard
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    DACControlBlockOnBoard
     : public common::detail::RantWrapper<DACControlBlockOnBoard, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<DACControlBlockOnBoard>
 {
 	constexpr explicit DACControlBlockOnBoard(uintmax_t const val = 0) : rant_t(val) {}
 };
@@ -89,8 +94,10 @@ struct GENPYBIND(inline_base("*")) DACControlBlockOnBoard
  * Unique coordinate describing the location of the collection of all DAC channel instances on the
  * xBoard.
  */
-struct GENPYBIND(inline_base("*")) DACChannelBlockOnBoard
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    DACChannelBlockOnBoard
     : public common::detail::RantWrapper<DACChannelBlockOnBoard, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<DACChannelBlockOnBoard>
 {
 	constexpr explicit DACChannelBlockOnBoard(uintmax_t const val = 0) : rant_t(val) {}
 };

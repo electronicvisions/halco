@@ -1,13 +1,16 @@
 #pragma once
 #include <stdint.h>
 
+#include "halco/common/coordinate.h"
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
-struct GENPYBIND(inline_base("*")) PadMultiplexerConfigOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    PadMultiplexerConfigOnDLS
     : public common::detail::RantWrapper<PadMultiplexerConfigOnDLS, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<PadMultiplexerConfigOnDLS>
 {
 	constexpr explicit PadMultiplexerConfigOnDLS(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -16,8 +19,10 @@ struct GENPYBIND(inline_base("*")) PadMultiplexerConfigOnDLS
 };
 
 
-struct GENPYBIND(inline_base("*")) ReadoutSourceSelectionOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    ReadoutSourceSelectionOnDLS
     : public common::detail::RantWrapper<ReadoutSourceSelectionOnDLS, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<ReadoutSourceSelectionOnDLS>
 {
 	constexpr explicit ReadoutSourceSelectionOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
@@ -33,8 +38,9 @@ struct GENPYBIND(inline_base("*")) SourceMultiplexerOnReadoutSourceSelection
 };
 
 
-struct GENPYBIND(inline_base("*")) ReadoutChainOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) ReadoutChainOnDLS
     : public common::detail::RantWrapper<ReadoutChainOnDLS, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<ReadoutChainOnDLS>
 {
 	constexpr explicit ReadoutChainOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };

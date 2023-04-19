@@ -1,6 +1,7 @@
 #pragma once
 #include <stdint.h>
 
+#include "halco/common/coordinate.h"
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
@@ -70,8 +71,10 @@ struct GENPYBIND(inline_base("*")) NeuronConfigOnNeuronConfigBlock
 };
 
 
-struct GENPYBIND(inline_base("*")) NeuronConfigBlockOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    NeuronConfigBlockOnDLS
     : public common::detail::RantWrapper<NeuronConfigBlockOnDLS, uint_fast16_t, 3, 0>
+    , common::CoordinateBase<NeuronConfigBlockOnDLS>
 {
 	constexpr explicit NeuronConfigBlockOnDLS(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -97,8 +100,10 @@ struct GENPYBIND(inline_base("*")) NeuronBackendConfigOnNeuronBackendConfigBlock
 	NeuronEventOutputOnNeuronBackendBlock toNeuronEventOutputOnNeuronBackendBlock() const;
 };
 
-struct GENPYBIND(inline_base("*")) CommonNeuronBackendConfigOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    CommonNeuronBackendConfigOnDLS
     : public common::detail::RantWrapper<CommonNeuronBackendConfigOnDLS, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<CommonNeuronBackendConfigOnDLS>
 {
 	constexpr explicit CommonNeuronBackendConfigOnDLS(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -108,8 +113,10 @@ struct GENPYBIND(inline_base("*")) CommonNeuronBackendConfigOnDLS
 	NeuronBackendConfigBlockOnDLS toNeuronBackendConfigBlockOnDLS() const;
 };
 
-struct GENPYBIND(inline_base("*")) NeuronBackendConfigBlockOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    NeuronBackendConfigBlockOnDLS
     : public common::detail::RantWrapper<NeuronBackendConfigBlockOnDLS, uint_fast8_t, 1, 0>
+    , common::CoordinateBase<NeuronBackendConfigBlockOnDLS>
 {
 	constexpr explicit NeuronBackendConfigBlockOnDLS(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -130,8 +137,10 @@ struct GENPYBIND(inline_base("*")) NeuronResetOnNeuronResetBlock
 	{}
 };
 
-struct GENPYBIND(inline_base("*")) NeuronResetBlockOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    NeuronResetBlockOnDLS
     : public common::detail::RantWrapper<NeuronResetBlockOnDLS, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<NeuronResetBlockOnDLS>
 {
 	constexpr explicit NeuronResetBlockOnDLS(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -139,8 +148,9 @@ struct GENPYBIND(inline_base("*")) NeuronResetBlockOnDLS
 	{}
 };
 
-struct GENPYBIND(inline_base("*")) BlockPostPulseOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) BlockPostPulseOnDLS
     : public common::detail::RantWrapper<BlockPostPulseOnDLS, uint_fast8_t, 1, 0>
+    , common::CoordinateBase<BlockPostPulseOnDLS>
 {
 	constexpr explicit BlockPostPulseOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
 	    rant_t(val)
@@ -160,8 +170,10 @@ struct GENPYBIND(inline_base("*")) SpikeCounterReadOnSpikeCounterReadBlock
 	{}
 };
 
-struct GENPYBIND(inline_base("*")) SpikeCounterReadBlockOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    SpikeCounterReadBlockOnDLS
     : public common::detail::RantWrapper<SpikeCounterReadBlockOnDLS, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<SpikeCounterReadBlockOnDLS>
 {
 	constexpr explicit SpikeCounterReadBlockOnDLS(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -180,8 +192,10 @@ struct GENPYBIND(inline_base("*")) SpikeCounterResetOnSpikeCounterResetBlock
 	{}
 };
 
-struct GENPYBIND(inline_base("*")) SpikeCounterResetBlockOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    SpikeCounterResetBlockOnDLS
     : public common::detail::RantWrapper<SpikeCounterResetBlockOnDLS, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<SpikeCounterResetBlockOnDLS>
 {
 	constexpr explicit SpikeCounterResetBlockOnDLS(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -201,8 +215,10 @@ struct GENPYBIND(inline_base("*")) NeuronEventOutputOnNeuronBackendBlock
 
 HALCO_COORDINATE_MIXIN(NeuronBackendConfigMixin, NeuronBackendConfigBlockOnDLS, neuron_backend)
 
-struct GENPYBIND(inline_base("*NeuronBackendConfigMixin*")) NeuronEventOutputOnDLS
+struct GENPYBIND(inline_base("*NeuronBackendConfigMixin*"), inline_base("*CoordinateBase*"))
+    NeuronEventOutputOnDLS
     : public NeuronBackendConfigMixin<NeuronEventOutputOnDLS, NeuronEventOutputOnNeuronBackendBlock>
+    , common::CoordinateBase<NeuronEventOutputOnDLS>
 {
 	NeuronEventOutputOnDLS() = default;
 
@@ -224,8 +240,10 @@ struct GENPYBIND(inline_base("*NeuronBackendConfigMixin*")) NeuronEventOutputOnD
 
 HALCO_COORDINATE_MIXIN(NeuronResetMixin, NeuronResetBlockOnDLS, neuron)
 
-struct GENPYBIND(inline_base("*NeuronResetMixin*")) NeuronResetOnDLS
+struct GENPYBIND(inline_base("*NeuronResetMixin*"), inline_base("*CoordinateBase*"))
+    NeuronResetOnDLS
     : public NeuronResetMixin<NeuronResetOnDLS, NeuronResetOnNeuronResetBlock>
+    , public halco::common::CoordinateBase<NeuronResetOnDLS>
 {
 	NeuronResetOnDLS() = default;
 
@@ -243,8 +261,10 @@ struct GENPYBIND(inline_base("*NeuronResetMixin*")) NeuronResetOnDLS
 
 HALCO_COORDINATE_MIXIN(SpikeCounterReadMixin, SpikeCounterReadBlockOnDLS, neuron)
 
-struct GENPYBIND(inline_base("*SpikeCounterReadMixin*")) SpikeCounterReadOnDLS
+struct GENPYBIND(inline_base("*SpikeCounterReadMixin*"), inline_base("*CoordinateBase*"))
+    SpikeCounterReadOnDLS
     : public SpikeCounterReadMixin<SpikeCounterReadOnDLS, SpikeCounterReadOnSpikeCounterReadBlock>
+    , common::CoordinateBase<SpikeCounterReadOnDLS>
 {
 	SpikeCounterReadOnDLS() = default;
 
@@ -265,10 +285,12 @@ struct GENPYBIND(inline_base("*SpikeCounterReadMixin*")) SpikeCounterReadOnDLS
 
 HALCO_COORDINATE_MIXIN(SpikeCounterResetMixin, SpikeCounterResetBlockOnDLS, neuron)
 
-struct GENPYBIND(inline_base("*SpikeCounterResetMixin*")) SpikeCounterResetOnDLS
+struct GENPYBIND(inline_base("*SpikeCounterResetMixin*"), inline_base("*CoordinateBase*"))
+    SpikeCounterResetOnDLS
     : public SpikeCounterResetMixin<
           SpikeCounterResetOnDLS,
           SpikeCounterResetOnSpikeCounterResetBlock>
+    , common::CoordinateBase<SpikeCounterResetOnDLS>
 {
 	SpikeCounterResetOnDLS() = default;
 
@@ -287,8 +309,10 @@ struct GENPYBIND(inline_base("*SpikeCounterResetMixin*")) SpikeCounterResetOnDLS
 };
 
 
-struct GENPYBIND(inline_base("*")) NeuronSRAMTimingConfigOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    NeuronSRAMTimingConfigOnDLS
     : public common::detail::RantWrapper<NeuronSRAMTimingConfigOnDLS, uint_fast16_t, 3, 0>
+    , common::CoordinateBase<NeuronSRAMTimingConfigOnDLS>
 {
 	constexpr explicit NeuronSRAMTimingConfigOnDLS(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -296,8 +320,10 @@ struct GENPYBIND(inline_base("*")) NeuronSRAMTimingConfigOnDLS
 	{}
 };
 
-struct GENPYBIND(inline_base("*")) NeuronBackendSRAMTimingConfigOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    NeuronBackendSRAMTimingConfigOnDLS
     : public common::detail::RantWrapper<NeuronBackendSRAMTimingConfigOnDLS, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<NeuronBackendSRAMTimingConfigOnDLS>
 {
 	constexpr explicit NeuronBackendSRAMTimingConfigOnDLS(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -324,8 +350,9 @@ struct GENPYBIND(inline_base("*")) NeuronRowOnLogicalNeuron
 };
 
 
-struct GENPYBIND(inline_base("*")) NeuronBlockOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) NeuronBlockOnDLS
     : public common::detail::RantWrapper<NeuronBlockOnDLS, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<NeuronBlockOnDLS>
 {
 	constexpr explicit NeuronBlockOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
 	    rant_t(val)
@@ -352,8 +379,9 @@ struct GENPYBIND(inline_base("*")) NeuronColumnOnDLS
 /**
  * DLS-global neuron location on the two dimensional neuron grid.
  */
-struct GENPYBIND(inline_base("*")) AtomicNeuronOnDLS
+struct GENPYBIND(inline_base("*GridCoordinate*"), inline_base("*CoordinateBase*")) AtomicNeuronOnDLS
     : public common::detail::GridCoordinate<AtomicNeuronOnDLS, NeuronColumnOnDLS, NeuronRowOnDLS>
+    , common::CoordinateBase<AtomicNeuronOnDLS>
 {
 	GRID_COMMON_CONSTRUCTORS(AtomicNeuronOnDLS)
 
@@ -520,7 +548,8 @@ size_t hash_value(LogicalNeuronOnDLS const& ln);
 /**
  * Logical neuron location on the neuron grid.
  */
-struct GENPYBIND(visible) LogicalNeuronOnDLS
+struct GENPYBIND(inline_base("*CoordinateBase*")) LogicalNeuronOnDLS
+    : common::CoordinateBase<LogicalNeuronOnDLS>
 {
 	typedef std::vector<AtomicNeuronOnDLS> AtomicNeuronList;
 	typedef std::map<CompartmentOnLogicalNeuron, std::vector<AtomicNeuronOnDLS>> PlacedCompartments;
@@ -575,8 +604,10 @@ private:
 
 HALCO_COORDINATE_MIXIN(NeuronConfigMixin, NeuronConfigBlockOnDLS, neuron)
 
-struct GENPYBIND(inline_base("*NeuronConfigMixin*")) NeuronConfigOnDLS
+struct GENPYBIND(inline_base("*NeuronConfigMixin*"), inline_base("*CoordinateBase*"))
+    NeuronConfigOnDLS
     : public NeuronConfigMixin<NeuronConfigOnDLS, NeuronConfigOnNeuronConfigBlock>
+    , common::CoordinateBase<NeuronConfigOnDLS>
 {
 	NeuronConfigOnDLS() = default;
 
@@ -610,10 +641,12 @@ struct GENPYBIND(inline_base("*NeuronConfigMixin*")) NeuronConfigOnDLS
 	ColumnCurrentQuadOnDLS toColumnCurrentQuadOnDLS() const;
 };
 
-struct GENPYBIND(inline_base("*NeuronBackendConfigMixin*")) NeuronBackendConfigOnDLS
+struct GENPYBIND(inline_base("*NeuronBackendConfigMixin*"), inline_base("*CoordinateBase*"))
+    NeuronBackendConfigOnDLS
     : public NeuronBackendConfigMixin<
           NeuronBackendConfigOnDLS,
           NeuronBackendConfigOnNeuronBackendConfigBlock>
+    , common::CoordinateBase<NeuronBackendConfigOnDLS>
 {
 	NeuronBackendConfigOnDLS() = default;
 
@@ -642,8 +675,9 @@ struct GENPYBIND(inline_base("*NeuronBackendConfigMixin*")) NeuronBackendConfigO
 	NeuronConfigBlockOnDLS toNeuronConfigBlockOnDLS() const;
 };
 
-struct GENPYBIND(inline_base("*SynramMixin*")) NeuronResetQuadOnDLS
+struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*")) NeuronResetQuadOnDLS
     : public SynramMixin<NeuronResetQuadOnDLS, SynapseQuadColumnOnDLS>
+    , common::CoordinateBase<NeuronResetQuadOnDLS>
 {
 	NeuronResetQuadOnDLS() = default;
 

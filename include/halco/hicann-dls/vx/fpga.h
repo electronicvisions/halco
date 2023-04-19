@@ -1,6 +1,7 @@
 #pragma once
 #include <stdint.h>
 
+#include "halco/common/coordinate.h"
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 
@@ -14,27 +15,35 @@ namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
  * Systime Sync from Chip.
  */
 
-struct GENPYBIND(inline_base("*")) FPGASystimeSyncNumRetriesOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    FPGASystimeSyncNumRetriesOnFPGA
     : public common::detail::RantWrapper<FPGASystimeSyncNumRetriesOnFPGA, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<FPGASystimeSyncNumRetriesOnFPGA>
 {
 	constexpr explicit FPGASystimeSyncNumRetriesOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
 };
 
-struct GENPYBIND(inline_base("*")) FPGASystimeSyncLastRTTOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    FPGASystimeSyncLastRTTOnFPGA
     : public common::detail::RantWrapper<FPGASystimeSyncLastRTTOnFPGA, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<FPGASystimeSyncLastRTTOnFPGA>
 {
 	constexpr explicit FPGASystimeSyncLastRTTOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
 };
 
-struct GENPYBIND(inline_base("*")) FPGASystimeSyncLastAsicSystimeOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    FPGASystimeSyncLastAsicSystimeOnFPGA
     : public common::detail::RantWrapper<FPGASystimeSyncLastAsicSystimeOnFPGA, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<FPGASystimeSyncLastAsicSystimeOnFPGA>
 {
 	constexpr explicit FPGASystimeSyncLastAsicSystimeOnFPGA(uintmax_t const val = 0) : rant_t(val)
 	{}
 };
 
-struct GENPYBIND(inline_base("*")) FPGASystimeSyncActiveStateOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    FPGASystimeSyncActiveStateOnFPGA
     : public common::detail::RantWrapper<FPGASystimeSyncActiveStateOnFPGA, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<FPGASystimeSyncActiveStateOnFPGA>
 {
 	constexpr explicit FPGASystimeSyncActiveStateOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
 };
@@ -43,15 +52,18 @@ struct GENPYBIND(inline_base("*")) FPGASystimeSyncActiveStateOnFPGA
 /**
  * Unique identifier on FPGA.
  */
-struct GENPYBIND(inline_base("*")) FPGADeviceDNAOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) FPGADeviceDNAOnFPGA
     : public common::detail::RantWrapper<FPGADeviceDNAOnFPGA, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<FPGADeviceDNAOnFPGA>
 {
 	constexpr explicit FPGADeviceDNAOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
 };
 
 
-struct GENPYBIND(inline_base("*")) ExternalPPUMemoryByteOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    ExternalPPUMemoryByteOnFPGA
     : public common::detail::RantWrapper<ExternalPPUMemoryByteOnFPGA, uint_fast16_t, 0x20000 - 1, 0>
+    , common::CoordinateBase<ExternalPPUMemoryByteOnFPGA>
 {
 	constexpr explicit ExternalPPUMemoryByteOnFPGA(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -60,8 +72,10 @@ struct GENPYBIND(inline_base("*")) ExternalPPUMemoryByteOnFPGA
 };
 
 
-struct GENPYBIND(inline_base("*")) ExternalPPUMemoryQuadOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    ExternalPPUMemoryQuadOnFPGA
     : public common::detail::RantWrapper<ExternalPPUMemoryQuadOnFPGA, uint_fast16_t, 0x08000 - 1, 0>
+    , common::CoordinateBase<ExternalPPUMemoryQuadOnFPGA>
 {
 	constexpr explicit ExternalPPUMemoryQuadOnFPGA(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
@@ -84,9 +98,11 @@ struct GENPYBIND(inline_base("*")) ExternalPPUMemoryBlockSize
 };
 
 
-struct GENPYBIND(inline_base("*")) ExternalPPUMemoryBlockOnFPGA
+struct GENPYBIND(inline_base("*IntervalCoordinate*"), inline_base("*CoordinateBase*"))
+    ExternalPPUMemoryBlockOnFPGA
     : public common::detail::
           IntervalCoordinate<ExternalPPUMemoryBlockOnFPGA, ExternalPPUMemoryByteOnFPGA>
+    , common::CoordinateBase<ExternalPPUMemoryBlockOnFPGA>
 {
 	INTERVAL_COMMON_CONSTRUCTORS(ExternalPPUMemoryBlockOnFPGA)
 
@@ -97,8 +113,10 @@ struct GENPYBIND(inline_base("*")) ExternalPPUMemoryBlockOnFPGA
 };
 
 
-struct GENPYBIND(inline_base("*")) ExternalPPUMemoryOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    ExternalPPUMemoryOnFPGA
     : public common::detail::RantWrapper<ExternalPPUMemoryOnFPGA, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<ExternalPPUMemoryOnFPGA>
 {
 	constexpr explicit ExternalPPUMemoryOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
 };
@@ -113,8 +131,10 @@ struct GENPYBIND(inline_base("*")) ExternalPPUMemoryOnFPGA
  * The read response is issued as fast as possible, which e.g. enables usage for synchronization of
  * from-FPGA time annotation and to-FPGA Playback time annotation.
  */
-struct GENPYBIND(inline_base("*")) NullPayloadReadableOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    NullPayloadReadableOnFPGA
     : public common::detail::RantWrapper<NullPayloadReadableOnFPGA, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<NullPayloadReadableOnFPGA>
 {
 	constexpr explicit NullPayloadReadableOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
 };
@@ -127,8 +147,10 @@ struct GENPYBIND(inline_base("*")) NullPayloadReadableOnFPGA
  * Control register to enable/disable the "recording", i.e. forwarding, of events (spikes, MADC samples).
  * The FPGA simply drops events arriving from the chip and does not forward them to the host.
  */
-struct GENPYBIND(inline_base("*")) EventRecordingConfigOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    EventRecordingConfigOnFPGA
     : public common::detail::RantWrapper<EventRecordingConfigOnFPGA, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<EventRecordingConfigOnFPGA>
 {
 	constexpr explicit EventRecordingConfigOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
 };
@@ -140,8 +162,10 @@ struct GENPYBIND(inline_base("*")) EventRecordingConfigOnFPGA
 /**
  * Configuration register of instruction timeout duration of playback executor.
  */
-struct GENPYBIND(inline_base("*")) InstructionTimeoutConfigOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    InstructionTimeoutConfigOnFPGA
     : public common::detail::RantWrapper<InstructionTimeoutConfigOnFPGA, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<InstructionTimeoutConfigOnFPGA>
 {
 	constexpr explicit InstructionTimeoutConfigOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
 };
@@ -153,8 +177,10 @@ struct GENPYBIND(inline_base("*")) InstructionTimeoutConfigOnFPGA
 /**
  * Configuration register of systime-correction barrier activation of playback executor.
  */
-struct GENPYBIND(inline_base("*")) SystimeCorrectionBarrierConfigOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    SystimeCorrectionBarrierConfigOnFPGA
     : public common::detail::RantWrapper<SystimeCorrectionBarrierConfigOnFPGA, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<SystimeCorrectionBarrierConfigOnFPGA>
 {
 	constexpr explicit SystimeCorrectionBarrierConfigOnFPGA(uintmax_t const val = 0) : rant_t(val)
 	{}
@@ -192,8 +218,9 @@ struct GENPYBIND(inline_base("*")) SpikeIOAddress
 /**
  * Configuration register for on-FPGA SpikeIO module.
  */
-struct GENPYBIND(inline_base("*")) SpikeIOConfigOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) SpikeIOConfigOnFPGA
     : public common::detail::RantWrapper<SpikeIOConfigOnFPGA, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<SpikeIOConfigOnFPGA>
 {
 	constexpr explicit SpikeIOConfigOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
 };
@@ -201,9 +228,11 @@ struct GENPYBIND(inline_base("*")) SpikeIOConfigOnFPGA
 /**
  * (Serial) address of spikes received through the on-FPGA SpikeIO module.
  */
-struct GENPYBIND(inline_base("*")) SpikeIOInputRouteOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    SpikeIOInputRouteOnFPGA
     : public halco::common::detail::
           RantWrapper<SpikeIOInputRouteOnFPGA, uint_fast16_t, (1u << spikeio_serial_bits) - 1, 0>
+    , common::CoordinateBase<SpikeIOInputRouteOnFPGA>
 {
 	constexpr explicit SpikeIOInputRouteOnFPGA(uintmax_t value = 0) : rant_t(value) {}
 
@@ -213,9 +242,11 @@ struct GENPYBIND(inline_base("*")) SpikeIOInputRouteOnFPGA
 /**
  * SpikeLabel of event to be sent via the on-FPGA SpikeIO module.
  */
-struct GENPYBIND(inline_base("*")) SpikeIOOutputRouteOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    SpikeIOOutputRouteOnFPGA
     : public halco::common::detail::
           RantWrapper<SpikeIOOutputRouteOnFPGA, uint_fast32_t, (1u << 16) - 1, 0>
+    , common::CoordinateBase<SpikeIOOutputRouteOnFPGA>
 {
 	constexpr explicit SpikeIOOutputRouteOnFPGA(uintmax_t value = 0) : rant_t(value) {}
 

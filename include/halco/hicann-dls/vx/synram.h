@@ -1,6 +1,7 @@
 #pragma once
 #include <stdint.h>
 
+#include "halco/common/coordinate.h"
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
@@ -13,8 +14,9 @@ namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
     Synram
 \************/
 
-struct GENPYBIND(inline_base("*")) SynramOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) SynramOnDLS
     : public common::detail::RantWrapper<SynramOnDLS, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<SynramOnDLS>
 {
 	constexpr explicit SynramOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
 	    rant_t(val)
@@ -29,8 +31,10 @@ struct GENPYBIND(inline_base("*")) SynramOnDLS
 HALCO_COORDINATE_MIXIN(SynramMixin, SynramOnDLS, synram)
 
 
-struct GENPYBIND(inline_base("*")) CommonSynramConfigOnDLS
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    CommonSynramConfigOnDLS
     : public common::detail::RantWrapper<CommonSynramConfigOnDLS, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<CommonSynramConfigOnDLS>
 {
 	constexpr explicit CommonSynramConfigOnDLS(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
