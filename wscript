@@ -109,7 +109,7 @@ def build(bld):
             env = env,
         )
 
-        for hx_version in [2, 3]:
+        for hx_version in [3]:
             env = bld.all_envs['nux_vx_v%s' % hx_version].derive()
             env.detach()
 
