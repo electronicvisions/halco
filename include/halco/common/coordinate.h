@@ -1,5 +1,6 @@
 #pragma once
 #include "halco/common/genpybind.h"
+#include "hate/visibility.h"
 #if (not defined(__ppu__)) and (not defined(PYPLUSPLUS))
 #include <iosfwd>
 #include <memory>
@@ -12,7 +13,7 @@ namespace common GENPYBIND_TAG_HALCO_COMMON {
 /**
  * Coordinate base type for containers.
  */
-struct GENPYBIND(visible) Coordinate
+struct SYMBOL_VISIBLE GENPYBIND(visible) Coordinate
 {
 #if (not defined(__ppu__)) and (not defined(PYPLUSPLUS))
 	virtual ~Coordinate() = 0;
@@ -21,7 +22,7 @@ struct GENPYBIND(visible) Coordinate
 
 	virtual std::ostream& print(std::ostream& os) const GENPYBIND(hidden) = 0;
 
-	friend std::ostream& operator<<(std::ostream& os, Coordinate const& coordinate);
+	friend std::ostream& operator<<(std::ostream& os, Coordinate const& coordinate) SYMBOL_VISIBLE;
 
 	virtual bool operator==(Coordinate const& other) const = 0;
 	virtual bool operator!=(Coordinate const& other) const = 0;

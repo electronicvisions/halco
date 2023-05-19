@@ -5,6 +5,7 @@
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
+#include "hate/visibility.h"
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
@@ -31,16 +32,16 @@ struct GENPYBIND(inline_base("*")) ADCSourceOnBoard
 	    rant_t(val)
 	{}
 
-	static const ADCSourceOnBoard readout_chain_0;
-	static const ADCSourceOnBoard readout_chain_1;
-	static const ADCSourceOnBoard mux_rfu_0;
-	static const ADCSourceOnBoard v_reset;
-	static const ADCSourceOnBoard vdd_res_meas;
-	static const ADCSourceOnBoard mux_dac_25;
-	static const ADCSourceOnBoard i_ref;
-	static const ADCSourceOnBoard mux_rfu_1;
-	static const ADCSourceOnBoard mux_rfu_2;
-	static const ADCSourceOnBoard none;
+	static const SYMBOL_VISIBLE ADCSourceOnBoard readout_chain_0;
+	static const SYMBOL_VISIBLE ADCSourceOnBoard readout_chain_1;
+	static const SYMBOL_VISIBLE ADCSourceOnBoard mux_rfu_0;
+	static const SYMBOL_VISIBLE ADCSourceOnBoard v_reset;
+	static const SYMBOL_VISIBLE ADCSourceOnBoard vdd_res_meas;
+	static const SYMBOL_VISIBLE ADCSourceOnBoard mux_dac_25;
+	static const SYMBOL_VISIBLE ADCSourceOnBoard i_ref;
+	static const SYMBOL_VISIBLE ADCSourceOnBoard mux_rfu_1;
+	static const SYMBOL_VISIBLE ADCSourceOnBoard mux_rfu_2;
+	static const SYMBOL_VISIBLE ADCSourceOnBoard none;
 };
 
 
@@ -51,12 +52,12 @@ struct GENPYBIND(inline_base("*")) LEDOnBoard
 	    rant_t(val)
 	{}
 
-	static const LEDOnBoard led_1;
-	static const LEDOnBoard led_2;
-	static const LEDOnBoard led_3;
-	static const LEDOnBoard led_4;
-	static const LEDOnBoard led_7;
-	static const LEDOnBoard led_8;
+	static const SYMBOL_VISIBLE LEDOnBoard led_1;
+	static const SYMBOL_VISIBLE LEDOnBoard led_2;
+	static const SYMBOL_VISIBLE LEDOnBoard led_3;
+	static const SYMBOL_VISIBLE LEDOnBoard led_4;
+	static const SYMBOL_VISIBLE LEDOnBoard led_7;
+	static const SYMBOL_VISIBLE LEDOnBoard led_8;
 };
 
 
@@ -67,14 +68,14 @@ struct GENPYBIND(inline_base("*")) VDDOnBoard
 	    rant_t(val)
 	{}
 
-	static const VDDOnBoard vdd25_digital;
-	static const VDDOnBoard vdd12_digital;
-	static const VDDOnBoard vdd25_analog;
-	static const VDDOnBoard vdd12_analog;
-	static const VDDOnBoard vdd12_madc;
-	static const VDDOnBoard vdd12_pll;
+	static const SYMBOL_VISIBLE VDDOnBoard vdd25_digital;
+	static const SYMBOL_VISIBLE VDDOnBoard vdd12_digital;
+	static const SYMBOL_VISIBLE VDDOnBoard vdd25_analog;
+	static const SYMBOL_VISIBLE VDDOnBoard vdd12_analog;
+	static const SYMBOL_VISIBLE VDDOnBoard vdd12_madc;
+	static const SYMBOL_VISIBLE VDDOnBoard vdd12_pll;
 
-	DACChannelOnBoard toDACChannelOnBoard() const;
+	DACChannelOnBoard toDACChannelOnBoard() const SYMBOL_VISIBLE;
 };
 
 
@@ -91,15 +92,15 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) 
 {
 	constexpr explicit INA219OnBoard(uintmax_t const val = 0) : rant_t(val) {}
 
-	static const INA219OnBoard vdd12_digital;
-	static const INA219OnBoard vdd25_digital;
-	static const INA219OnBoard vdd12_analog;
-	static const INA219OnBoard vdd25_analog;
-	static const INA219OnBoard vdd12_madc;
-	static const INA219OnBoard vdd12_pll;
+	static const SYMBOL_VISIBLE INA219OnBoard vdd12_digital;
+	static const SYMBOL_VISIBLE INA219OnBoard vdd25_digital;
+	static const SYMBOL_VISIBLE INA219OnBoard vdd12_analog;
+	static const SYMBOL_VISIBLE INA219OnBoard vdd25_analog;
+	static const SYMBOL_VISIBLE INA219OnBoard vdd12_madc;
+	static const SYMBOL_VISIBLE INA219OnBoard vdd12_pll;
 
-	INA219ConfigOnBoard toINA219ConfigOnBoard() const;
-	INA219StatusOnBoard toINA219StatusOnBoard() const;
+	INA219ConfigOnBoard toINA219ConfigOnBoard() const SYMBOL_VISIBLE;
+	INA219StatusOnBoard toINA219StatusOnBoard() const SYMBOL_VISIBLE;
 };
 
 
@@ -109,15 +110,15 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) 
 {
 	constexpr explicit INA219ConfigOnBoard(uintmax_t const val = 0) : rant_t(val) {}
 
-	static const INA219ConfigOnBoard vdd12_digital;
-	static const INA219ConfigOnBoard vdd25_digital;
-	static const INA219ConfigOnBoard vdd12_analog;
-	static const INA219ConfigOnBoard vdd25_analog;
-	static const INA219ConfigOnBoard vdd12_madc;
-	static const INA219ConfigOnBoard vdd12_pll;
+	static const SYMBOL_VISIBLE INA219ConfigOnBoard vdd12_digital;
+	static const SYMBOL_VISIBLE INA219ConfigOnBoard vdd25_digital;
+	static const SYMBOL_VISIBLE INA219ConfigOnBoard vdd12_analog;
+	static const SYMBOL_VISIBLE INA219ConfigOnBoard vdd25_analog;
+	static const SYMBOL_VISIBLE INA219ConfigOnBoard vdd12_madc;
+	static const SYMBOL_VISIBLE INA219ConfigOnBoard vdd12_pll;
 
-	INA219OnBoard toINA219OnBoard() const;
-	INA219StatusOnBoard toINA219StatusOnBoard() const;
+	INA219OnBoard toINA219OnBoard() const SYMBOL_VISIBLE;
+	INA219StatusOnBoard toINA219StatusOnBoard() const SYMBOL_VISIBLE;
 };
 
 
@@ -127,15 +128,15 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) 
 {
 	constexpr explicit INA219StatusOnBoard(uintmax_t const val = 0) : rant_t(val) {}
 
-	static const INA219StatusOnBoard vdd12_digital;
-	static const INA219StatusOnBoard vdd25_digital;
-	static const INA219StatusOnBoard vdd12_analog;
-	static const INA219StatusOnBoard vdd25_analog;
-	static const INA219StatusOnBoard vdd12_madc;
-	static const INA219StatusOnBoard vdd12_pll;
+	static const SYMBOL_VISIBLE INA219StatusOnBoard vdd12_digital;
+	static const SYMBOL_VISIBLE INA219StatusOnBoard vdd25_digital;
+	static const SYMBOL_VISIBLE INA219StatusOnBoard vdd12_analog;
+	static const SYMBOL_VISIBLE INA219StatusOnBoard vdd25_analog;
+	static const SYMBOL_VISIBLE INA219StatusOnBoard vdd12_madc;
+	static const SYMBOL_VISIBLE INA219StatusOnBoard vdd12_pll;
 
-	INA219OnBoard toINA219OnBoard() const;
-	INA219ConfigOnBoard toINA219ConfigOnBoard() const;
+	INA219OnBoard toINA219OnBoard() const SYMBOL_VISIBLE;
+	INA219ConfigOnBoard toINA219ConfigOnBoard() const SYMBOL_VISIBLE;
 };
 
 } // namespace halco::hicann_dls::vx

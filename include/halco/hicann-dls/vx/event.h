@@ -6,6 +6,7 @@
 #include "halco/common/geometry.h"
 #include "halco/hicann-dls/vx/neuron.h"
 #include "halco/hicann-dls/vx/padi.h"
+#include "hate/visibility.h"
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
@@ -93,8 +94,8 @@ struct GENPYBIND(inline_base("*")) SPL1Address
 	    rant_t(value)
 	{}
 
-	CrossbarInputOnDLS toCrossbarInputOnDLS() const;
-	CrossbarL2OutputOnDLS toCrossbarL2OutputOnDLS() const;
+	CrossbarInputOnDLS toCrossbarInputOnDLS() const SYMBOL_VISIBLE;
+	CrossbarL2OutputOnDLS toCrossbarL2OutputOnDLS() const SYMBOL_VISIBLE;
 };
 
 
@@ -112,15 +113,15 @@ struct GENPYBIND(inline_base("*")) SpikeLabel
 
 	/** SPL1-label, bits 14-15. */
 	GENPYBIND(getter_for(spl1_address))
-	SPL1Address get_spl1_address() const;
+	SPL1Address get_spl1_address() const SYMBOL_VISIBLE;
 	GENPYBIND(setter_for(spl1_address))
-	void set_spl1_address(SPL1Address value);
+	void set_spl1_address(SPL1Address value) SYMBOL_VISIBLE;
 
 	/** Label type processed by Crossbar, bits 0-13. */
 	GENPYBIND(getter_for(neuron_label))
-	NeuronLabel get_neuron_label() const;
+	NeuronLabel get_neuron_label() const SYMBOL_VISIBLE;
 	GENPYBIND(setter_for(neuron_label))
-	void set_neuron_label(NeuronLabel value);
+	void set_neuron_label(NeuronLabel value) SYMBOL_VISIBLE;
 
 	/** Label type processed by PADI-bus, bits 0-10. */
 	struct GENPYBIND(inline_base("*")) PADILabel
@@ -133,35 +134,35 @@ struct GENPYBIND(inline_base("*")) SpikeLabel
 
 	/** PADI-bus label, bits 0-10. */
 	GENPYBIND(getter_for(padi_label))
-	PADILabel get_padi_label() const;
+	PADILabel get_padi_label() const SYMBOL_VISIBLE;
 	GENPYBIND(setter_for(padi_label))
-	void set_padi_label(PADILabel value);
+	void set_padi_label(PADILabel value) SYMBOL_VISIBLE;
 
 	/** Neuron event output of on-chip neurons, bits 8-10. */
 	GENPYBIND(getter_for(neuron_event_output))
-	NeuronEventOutputOnDLS get_neuron_event_output() const;
+	NeuronEventOutputOnDLS get_neuron_event_output() const SYMBOL_VISIBLE;
 	GENPYBIND(setter_for(neuron_event_output))
-	void set_neuron_event_output(NeuronEventOutputOnDLS value);
+	void set_neuron_event_output(NeuronEventOutputOnDLS value) SYMBOL_VISIBLE;
 
 	/** Configurable neuron backend output label, bits 0-7. */
 	GENPYBIND(getter_for(neuron_backend_address_out))
-	NeuronBackendAddressOut get_neuron_backend_address_out() const;
+	NeuronBackendAddressOut get_neuron_backend_address_out() const SYMBOL_VISIBLE;
 	GENPYBIND(setter_for(neuron_backend_address_out))
-	void set_neuron_backend_address_out(NeuronBackendAddressOut value);
+	void set_neuron_backend_address_out(NeuronBackendAddressOut value) SYMBOL_VISIBLE;
 
 	/** Configurable row select address on PADIBus, bits 6-10. */
 	GENPYBIND(getter_for(row_select_address))
-	PADIRowSelectAddress get_row_select_address() const;
+	PADIRowSelectAddress get_row_select_address() const SYMBOL_VISIBLE;
 	GENPYBIND(setter_for(row_select_address))
-	void set_row_select_address(PADIRowSelectAddress);
+	void set_row_select_address(PADIRowSelectAddress) SYMBOL_VISIBLE;
 
 	/** Configurable synapse address, bits 0-5. */
 	GENPYBIND(getter_for(synapse_label))
-	SynapseLabel get_synapse_label() const;
+	SynapseLabel get_synapse_label() const SYMBOL_VISIBLE;
 	GENPYBIND(setter_for(synapse_label))
-	void set_synapse_label(SynapseLabel value);
+	void set_synapse_label(SynapseLabel value) SYMBOL_VISIBLE;
 
-	SpikeIOOutputRouteOnFPGA toSpikeIOOutputRouteOnFPGA() const;
+	SpikeIOOutputRouteOnFPGA toSpikeIOOutputRouteOnFPGA() const SYMBOL_VISIBLE;
 };
 
 } // namespace halco::hicann_dls::vx

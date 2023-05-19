@@ -11,8 +11,14 @@
 #include "halco/hicann-dls/vx/synapse.h"
 #include "halco/hicann-dls/vx/synram.h"
 
+#include "hate/visibility.h"
+
 namespace cereal {
 struct access;
+class JSONOutputArchive;
+class JSONInputArchive;
+class PortableBinaryOutputArchive;
+class PortableBinaryInputArchive;
 } // namespace cereal
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
@@ -54,8 +60,8 @@ struct GENPYBIND(inline_base("*")) NeuronRowOnDLS
 
 #include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
-	static const NeuronRowOnDLS top;
-	static const NeuronRowOnDLS bottom;
+	static const SYMBOL_VISIBLE NeuronRowOnDLS top;
+	static const SYMBOL_VISIBLE NeuronRowOnDLS bottom;
 };
 
 
@@ -67,7 +73,7 @@ struct GENPYBIND(inline_base("*")) NeuronConfigOnNeuronConfigBlock
 	    rant_t(val)
 	{}
 
-	CapMemColumnOnCapMemBlock toCapMemColumnOnCapMemBlock() const;
+	CapMemColumnOnCapMemBlock toCapMemColumnOnCapMemBlock() const SYMBOL_VISIBLE;
 };
 
 
@@ -81,10 +87,10 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 	    rant_t(val)
 	{}
 
-	CapMemBlockOnDLS toCapMemBlockOnDLS() const;
-	NeuronResetBlockOnDLS toNeuronResetBlockOnDLS() const;
-	SpikeCounterReadBlockOnDLS toSpikeCounterReadBlockOnDLS() const;
-	SpikeCounterResetBlockOnDLS toSpikeCounterResetBlockOnDLS() const;
+	CapMemBlockOnDLS toCapMemBlockOnDLS() const SYMBOL_VISIBLE;
+	NeuronResetBlockOnDLS toNeuronResetBlockOnDLS() const SYMBOL_VISIBLE;
+	SpikeCounterReadBlockOnDLS toSpikeCounterReadBlockOnDLS() const SYMBOL_VISIBLE;
+	SpikeCounterResetBlockOnDLS toSpikeCounterResetBlockOnDLS() const SYMBOL_VISIBLE;
 };
 
 
@@ -97,7 +103,8 @@ struct GENPYBIND(inline_base("*")) NeuronBackendConfigOnNeuronBackendConfigBlock
 	    rant_t(val)
 	{}
 
-	NeuronEventOutputOnNeuronBackendBlock toNeuronEventOutputOnNeuronBackendBlock() const;
+	NeuronEventOutputOnNeuronBackendBlock toNeuronEventOutputOnNeuronBackendBlock() const
+	    SYMBOL_VISIBLE;
 };
 
 struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
@@ -110,7 +117,7 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 	    rant_t(val)
 	{}
 
-	NeuronBackendConfigBlockOnDLS toNeuronBackendConfigBlockOnDLS() const;
+	NeuronBackendConfigBlockOnDLS toNeuronBackendConfigBlockOnDLS() const SYMBOL_VISIBLE;
 };
 
 struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
@@ -123,8 +130,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 	    rant_t(val)
 	{}
 
-	BlockPostPulseOnDLS toBlockPostPulseOnDLS() const;
-	CommonNeuronBackendConfigOnDLS toCommonNeuronBackendConfigOnDLS() const;
+	BlockPostPulseOnDLS toBlockPostPulseOnDLS() const SYMBOL_VISIBLE;
+	CommonNeuronBackendConfigOnDLS toCommonNeuronBackendConfigOnDLS() const SYMBOL_VISIBLE;
 };
 
 
@@ -156,7 +163,7 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) 
 	    rant_t(val)
 	{}
 
-	NeuronBackendConfigBlockOnDLS toNeuronBackendConfigBlockOnDLS() const;
+	NeuronBackendConfigBlockOnDLS toNeuronBackendConfigBlockOnDLS() const SYMBOL_VISIBLE;
 };
 
 
@@ -235,7 +242,7 @@ struct GENPYBIND(inline_base("*NeuronBackendConfigMixin*"), inline_base("*Coordi
 		return This();
 	}
 
-	CrossbarInputOnDLS toCrossbarInputOnDLS() const;
+	CrossbarInputOnDLS toCrossbarInputOnDLS() const SYMBOL_VISIBLE;
 };
 
 HALCO_COORDINATE_MIXIN(NeuronResetMixin, NeuronResetBlockOnDLS, neuron)
@@ -371,9 +378,9 @@ struct GENPYBIND(inline_base("*")) NeuronColumnOnDLS
 	    rant_t(val)
 	{}
 
-	SynapseOnSynapseRow toSynapseOnSynapseRow() const;
-	CapMemColumnOnCapMemBlock toCapMemColumnOnCapMemBlock() const;
-	NeuronEventOutputOnDLS toNeuronEventOutputOnDLS() const;
+	SynapseOnSynapseRow toSynapseOnSynapseRow() const SYMBOL_VISIBLE;
+	CapMemColumnOnCapMemBlock toCapMemColumnOnCapMemBlock() const SYMBOL_VISIBLE;
+	NeuronEventOutputOnDLS toNeuronEventOutputOnDLS() const SYMBOL_VISIBLE;
 };
 
 /**
@@ -394,18 +401,18 @@ struct GENPYBIND(inline_base("*GridCoordinate*"), inline_base("*CoordinateBase*"
 		return y();
 	}
 
-	NeuronResetOnDLS toNeuronResetOnDLS() const;
-	SpikeCounterReadOnDLS toSpikeCounterReadOnDLS() const;
-	SpikeCounterResetOnDLS toSpikeCounterResetOnDLS() const;
-	NeuronConfigOnDLS toNeuronConfigOnDLS() const;
-	NeuronBackendConfigOnDLS toNeuronBackendConfigOnDLS() const;
+	NeuronResetOnDLS toNeuronResetOnDLS() const SYMBOL_VISIBLE;
+	SpikeCounterReadOnDLS toSpikeCounterReadOnDLS() const SYMBOL_VISIBLE;
+	SpikeCounterResetOnDLS toSpikeCounterResetOnDLS() const SYMBOL_VISIBLE;
+	NeuronConfigOnDLS toNeuronConfigOnDLS() const SYMBOL_VISIBLE;
+	NeuronBackendConfigOnDLS toNeuronBackendConfigOnDLS() const SYMBOL_VISIBLE;
 
-	CapMemBlockOnDLS toCapMemBlockOnDLS() const;
-	CapMemColumnOnCapMemBlock toCapMemColumnOnCapMemBlock() const;
-	SynramOnDLS toSynramOnDLS() const;
-	SynapseQuadColumnOnDLS toSynapseQuadColumnOnDLS() const;
-	ColumnCorrelationQuadOnDLS toColumnCorrelationQuadOnDLS() const;
-	ColumnCurrentQuadOnDLS toColumnCurrentQuadOnDLS() const;
+	CapMemBlockOnDLS toCapMemBlockOnDLS() const SYMBOL_VISIBLE;
+	CapMemColumnOnCapMemBlock toCapMemColumnOnCapMemBlock() const SYMBOL_VISIBLE;
+	SynramOnDLS toSynramOnDLS() const SYMBOL_VISIBLE;
+	SynapseQuadColumnOnDLS toSynapseQuadColumnOnDLS() const SYMBOL_VISIBLE;
+	ColumnCorrelationQuadOnDLS toColumnCorrelationQuadOnDLS() const SYMBOL_VISIBLE;
+	ColumnCurrentQuadOnDLS toColumnCurrentQuadOnDLS() const SYMBOL_VISIBLE;
 };
 
 
@@ -459,7 +466,7 @@ struct GENPYBIND(inline_base("*")) AtomicNeuronOnLogicalNeuron
 	 * @throws OverflowError if neighbor does not exist
 	 * @return AtomicNeuronOnLogicalNeuron
 	 */
-	AtomicNeuronOnLogicalNeuron get_neighbor(Direction const& direction) const;
+	AtomicNeuronOnLogicalNeuron get_neighbor(Direction const& direction) const SYMBOL_VISIBLE;
 };
 
 
@@ -497,9 +504,9 @@ struct GENPYBIND(visible) LogicalNeuronCompartments
 	 * The compartment members are to be unique.
 	 * @param compartments Compartments to construct neuron from
 	 */
-	explicit LogicalNeuronCompartments(Compartments const& compartments);
+	explicit LogicalNeuronCompartments(Compartments const& compartments) SYMBOL_VISIBLE;
 
-	Compartments const& get_compartments() const;
+	Compartments const& get_compartments() const SYMBOL_VISIBLE;
 
 	/**
 	 * Flip locations in the x dimension.
@@ -507,7 +514,7 @@ struct GENPYBIND(visible) LogicalNeuronCompartments
 	 * 5 6                 6 5
 	 * @return Flipped compartments
 	 */
-	LogicalNeuronCompartments flip_x() const;
+	LogicalNeuronCompartments flip_x() const SYMBOL_VISIBLE;
 
 	/**
 	 * Flip locations in the y dimension.
@@ -515,24 +522,25 @@ struct GENPYBIND(visible) LogicalNeuronCompartments
 	 * 5 6             1 2 3 4
 	 * @return Flipped compartments
 	 */
-	LogicalNeuronCompartments flip_y() const;
+	LogicalNeuronCompartments flip_y() const SYMBOL_VISIBLE;
 
-	NeuronColumnOnLogicalNeuron get_left_most_column() const;
-	NeuronColumnOnLogicalNeuron get_right_most_column() const;
+	NeuronColumnOnLogicalNeuron get_left_most_column() const SYMBOL_VISIBLE;
+	NeuronColumnOnLogicalNeuron get_right_most_column() const SYMBOL_VISIBLE;
 
-	NeuronRowOnLogicalNeuron get_top_most_row() const;
-	NeuronRowOnLogicalNeuron get_bottom_most_row() const;
+	NeuronRowOnLogicalNeuron get_top_most_row() const SYMBOL_VISIBLE;
+	NeuronRowOnLogicalNeuron get_bottom_most_row() const SYMBOL_VISIBLE;
 
-	bool operator==(LogicalNeuronCompartments const& other) const;
-	bool operator!=(LogicalNeuronCompartments const& other) const;
+	bool operator==(LogicalNeuronCompartments const& other) const SYMBOL_VISIBLE;
+	bool operator!=(LogicalNeuronCompartments const& other) const SYMBOL_VISIBLE;
 
-	bool operator<(LogicalNeuronCompartments const& other) const;
-	bool operator>(LogicalNeuronCompartments const& other) const;
-	bool operator<=(LogicalNeuronCompartments const& other) const;
-	bool operator>=(LogicalNeuronCompartments const& other) const;
+	bool operator<(LogicalNeuronCompartments const& other) const SYMBOL_VISIBLE;
+	bool operator>(LogicalNeuronCompartments const& other) const SYMBOL_VISIBLE;
+	bool operator<=(LogicalNeuronCompartments const& other) const SYMBOL_VISIBLE;
+	bool operator>=(LogicalNeuronCompartments const& other) const SYMBOL_VISIBLE;
 
 	GENPYBIND(stringstream)
-	friend std::ostream& operator<<(std::ostream& os, LogicalNeuronCompartments const& config);
+	friend std::ostream& operator<<(std::ostream& os, LogicalNeuronCompartments const& config)
+	    SYMBOL_VISIBLE;
 
 private:
 	friend struct cereal::access;
@@ -563,35 +571,37 @@ struct GENPYBIND(inline_base("*CoordinateBase*")) LogicalNeuronOnDLS
 	 * @param anchor Anchor to construct neuron from
 	 */
 	LogicalNeuronOnDLS(
-	    LogicalNeuronCompartments const& compartments, AtomicNeuronOnDLS const& anchor);
+	    LogicalNeuronCompartments const& compartments,
+	    AtomicNeuronOnDLS const& anchor) SYMBOL_VISIBLE;
 
 	/**
 	 * Get compartments placed by anchor.
 	 * @return Placed compartments
 	 */
-	PlacedCompartments get_placed_compartments() const;
+	PlacedCompartments get_placed_compartments() const SYMBOL_VISIBLE;
 
 	/**
 	 * Get all AtomicNeuronOnDLS which are involved in this logical neuron.
 	 * @return List of AtomicNeuronOnDLS which are part of the logical neuron.
 	 */
-	AtomicNeuronList get_atomic_neurons() const;
+	AtomicNeuronList get_atomic_neurons() const SYMBOL_VISIBLE;
 
-	bool operator==(LogicalNeuronOnDLS const& other) const;
-	bool operator!=(LogicalNeuronOnDLS const& other) const;
+	bool operator==(LogicalNeuronOnDLS const& other) const SYMBOL_VISIBLE;
+	bool operator!=(LogicalNeuronOnDLS const& other) const SYMBOL_VISIBLE;
 
 	GENPYBIND(stringstream)
-	friend std::ostream& operator<<(std::ostream& os, LogicalNeuronOnDLS const& config);
+	friend std::ostream& operator<<(std::ostream& os, LogicalNeuronOnDLS const& config)
+	    SYMBOL_VISIBLE;
 
-	friend size_t hash_value(LogicalNeuronOnDLS const& ln);
+	friend size_t hash_value(LogicalNeuronOnDLS const& ln) SYMBOL_VISIBLE;
 
 	GENPYBIND(expose_as(__hash__))
-	size_t hash() const;
+	size_t hash() const SYMBOL_VISIBLE;
 
-	bool operator<(LogicalNeuronOnDLS const& other) const;
-	bool operator>(LogicalNeuronOnDLS const& other) const;
-	bool operator<=(LogicalNeuronOnDLS const& other) const;
-	bool operator>=(LogicalNeuronOnDLS const& other) const;
+	bool operator<(LogicalNeuronOnDLS const& other) const SYMBOL_VISIBLE;
+	bool operator>(LogicalNeuronOnDLS const& other) const SYMBOL_VISIBLE;
+	bool operator<=(LogicalNeuronOnDLS const& other) const SYMBOL_VISIBLE;
+	bool operator>=(LogicalNeuronOnDLS const& other) const SYMBOL_VISIBLE;
 
 private:
 	friend struct cereal::access;
@@ -623,22 +633,22 @@ struct GENPYBIND(inline_base("*NeuronConfigMixin*"), inline_base("*CoordinateBas
 	{
 		return This();
 	}
-	NeuronResetOnDLS toNeuronResetOnDLS() const;
-	SpikeCounterReadOnDLS toSpikeCounterReadOnDLS() const;
-	SpikeCounterResetOnDLS toSpikeCounterResetOnDLS() const;
-	AtomicNeuronOnDLS toAtomicNeuronOnDLS() const;
-	SynapseQuadColumnOnDLS toSynapseQuadColumnOnDLS() const;
-	EntryOnQuad toEntryOnQuad() const;
-	NeuronRowOnDLS toNeuronRowOnDLS() const;
-	SynapseOnSynapseRow toSynapseOnSynapseRow() const;
-	NeuronBackendConfigBlockOnDLS toNeuronBackendConfigBlockOnDLS() const;
+	NeuronResetOnDLS toNeuronResetOnDLS() const SYMBOL_VISIBLE;
+	SpikeCounterReadOnDLS toSpikeCounterReadOnDLS() const SYMBOL_VISIBLE;
+	SpikeCounterResetOnDLS toSpikeCounterResetOnDLS() const SYMBOL_VISIBLE;
+	AtomicNeuronOnDLS toAtomicNeuronOnDLS() const SYMBOL_VISIBLE;
+	SynapseQuadColumnOnDLS toSynapseQuadColumnOnDLS() const SYMBOL_VISIBLE;
+	EntryOnQuad toEntryOnQuad() const SYMBOL_VISIBLE;
+	NeuronRowOnDLS toNeuronRowOnDLS() const SYMBOL_VISIBLE;
+	SynapseOnSynapseRow toSynapseOnSynapseRow() const SYMBOL_VISIBLE;
+	NeuronBackendConfigBlockOnDLS toNeuronBackendConfigBlockOnDLS() const SYMBOL_VISIBLE;
 	NeuronBackendConfigOnNeuronBackendConfigBlock toNeuronBackendConfigOnNeuronBackendConfigBlock()
-	    const;
-	CommonNeuronBackendConfigOnDLS toCommonNeuronBackendConfigOnDLS() const;
-	NeuronBackendConfigOnDLS toNeuronBackendConfigOnDLS() const;
-	SynramOnDLS toSynramOnDLS() const;
-	ColumnCorrelationQuadOnDLS toColumnCorrelationQuadOnDLS() const;
-	ColumnCurrentQuadOnDLS toColumnCurrentQuadOnDLS() const;
+	    const SYMBOL_VISIBLE;
+	CommonNeuronBackendConfigOnDLS toCommonNeuronBackendConfigOnDLS() const SYMBOL_VISIBLE;
+	NeuronBackendConfigOnDLS toNeuronBackendConfigOnDLS() const SYMBOL_VISIBLE;
+	SynramOnDLS toSynramOnDLS() const SYMBOL_VISIBLE;
+	ColumnCorrelationQuadOnDLS toColumnCorrelationQuadOnDLS() const SYMBOL_VISIBLE;
+	ColumnCurrentQuadOnDLS toColumnCurrentQuadOnDLS() const SYMBOL_VISIBLE;
 };
 
 struct GENPYBIND(inline_base("*NeuronBackendConfigMixin*"), inline_base("*CoordinateBase*"))
@@ -664,15 +674,15 @@ struct GENPYBIND(inline_base("*NeuronBackendConfigMixin*"), inline_base("*Coordi
 		return This();
 	}
 
-	NeuronColumnOnDLS toNeuronColumnOnDLS() const;
-	NeuronRowOnDLS toNeuronRowOnDLS() const;
-	CommonNeuronBackendConfigOnDLS toCommonNeuronBackendConfigOnDLS() const;
-	SpikeCounterReadOnDLS toSpikeCounterReadOnDLS() const;
-	SpikeCounterResetOnDLS toSpikeCounterResetOnDLS() const;
-	NeuronConfigOnDLS toNeuronConfigOnDLS() const;
-	AtomicNeuronOnDLS toAtomicNeuronOnDLS() const;
-	SynramOnDLS toSynramOnDLS() const;
-	NeuronConfigBlockOnDLS toNeuronConfigBlockOnDLS() const;
+	NeuronColumnOnDLS toNeuronColumnOnDLS() const SYMBOL_VISIBLE;
+	NeuronRowOnDLS toNeuronRowOnDLS() const SYMBOL_VISIBLE;
+	CommonNeuronBackendConfigOnDLS toCommonNeuronBackendConfigOnDLS() const SYMBOL_VISIBLE;
+	SpikeCounterReadOnDLS toSpikeCounterReadOnDLS() const SYMBOL_VISIBLE;
+	SpikeCounterResetOnDLS toSpikeCounterResetOnDLS() const SYMBOL_VISIBLE;
+	NeuronConfigOnDLS toNeuronConfigOnDLS() const SYMBOL_VISIBLE;
+	AtomicNeuronOnDLS toAtomicNeuronOnDLS() const SYMBOL_VISIBLE;
+	SynramOnDLS toSynramOnDLS() const SYMBOL_VISIBLE;
+	NeuronConfigBlockOnDLS toNeuronConfigBlockOnDLS() const SYMBOL_VISIBLE;
 };
 
 struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*")) NeuronResetQuadOnDLS
@@ -694,7 +704,7 @@ struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*")) 
 	}
 	typedef common::typed_array<NeuronResetOnDLS, EntryOnQuad> neuron_reset_type
 	    GENPYBIND(opaque(false));
-	neuron_reset_type toNeuronResetOnDLS() const;
+	neuron_reset_type toNeuronResetOnDLS() const SYMBOL_VISIBLE;
 };
 
 /**
@@ -747,3 +757,22 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronResetQuadOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::NeuronBackendAddressOut)
 
 } // namespace std
+
+#ifndef __ppu__
+extern template SYMBOL_VISIBLE void halco::hicann_dls::vx::LogicalNeuronCompartments::serialize(
+    cereal::JSONOutputArchive&, std::uint32_t const);
+extern template SYMBOL_VISIBLE void halco::hicann_dls::vx::LogicalNeuronCompartments::serialize(
+    cereal::JSONInputArchive&, std::uint32_t const);
+extern template SYMBOL_VISIBLE void halco::hicann_dls::vx::LogicalNeuronCompartments::serialize(
+    cereal::PortableBinaryOutputArchive&, std::uint32_t const);
+extern template SYMBOL_VISIBLE void halco::hicann_dls::vx::LogicalNeuronCompartments::serialize(
+    cereal::PortableBinaryInputArchive&, std::uint32_t const);
+extern template SYMBOL_VISIBLE void halco::hicann_dls::vx::LogicalNeuronOnDLS::serialize(
+    cereal::JSONOutputArchive&, std::uint32_t const);
+extern template SYMBOL_VISIBLE void halco::hicann_dls::vx::LogicalNeuronOnDLS::serialize(
+    cereal::JSONInputArchive&, std::uint32_t const);
+extern template SYMBOL_VISIBLE void halco::hicann_dls::vx::LogicalNeuronOnDLS::serialize(
+    cereal::PortableBinaryOutputArchive&, std::uint32_t const);
+extern template SYMBOL_VISIBLE void halco::hicann_dls::vx::LogicalNeuronOnDLS::serialize(
+    cereal::PortableBinaryInputArchive&, std::uint32_t const);
+#endif

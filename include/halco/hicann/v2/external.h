@@ -16,6 +16,7 @@ extern "C" {
 #include "halco/hicann/v2/hicann.h"
 #include "halco/hicann/v2/l1.h"
 #include "halco/hicann/v2/wafer.h"
+#include "hate/visibility.h"
 #include "pywrap/compat/array.hpp"
 #include "pywrap/compat/macros.hpp"
 
@@ -48,7 +49,7 @@ struct GENPYBIND(inline_base("*")) AnalogOnHICANN
 	    rant_t(val)
 	{}
 
-	AnalogOnDNC toAnalogOnDNC() const;
+	AnalogOnDNC toAnalogOnDNC() const SYMBOL_VISIBLE;
 };
 
 /// corresponds to the analog outputs of each reticle, same as AnalogOnHICANN (but multiple HICANNs
@@ -84,7 +85,7 @@ struct GENPYBIND(inline_base("*")) GbitLinkOnHICANN
 	    rant_t(val)
 	{}
 
-	DNCMergerOnHICANN toDNCMergerOnHICANN() const;
+	DNCMergerOnHICANN toDNCMergerOnHICANN() const SYMBOL_VISIBLE;
 };
 
 struct GENPYBIND(inline_base("*HICANNMixin*")) GbitLinkOnWafer
@@ -118,18 +119,18 @@ struct GENPYBIND(inline_base("*")) DNCOnWafer
 {
 	GRID_COMMON_CONSTRUCTORS(DNCOnWafer)
 
-	FPGAOnWafer toFPGAOnWafer() const;
-	PowerCoordinate toPowerCoordinate() const;
-	TriggerOnWafer toTriggerOnWafer() const;
-	ADCGroupOnWafer toADCGroupOnWafer() const;
+	FPGAOnWafer toFPGAOnWafer() const SYMBOL_VISIBLE;
+	PowerCoordinate toPowerCoordinate() const SYMBOL_VISIBLE;
+	TriggerOnWafer toTriggerOnWafer() const SYMBOL_VISIBLE;
+	ADCGroupOnWafer toADCGroupOnWafer() const SYMBOL_VISIBLE;
 	std::array<AnanasChannelOnAnanasSlice, ::halco::hicann::v2::AnalogOnDNC::size>
-	toAnanasChannelOnAnanasSlice() const;
-	AuxPwrOnWafer toAuxPwrOnWafer() const;
+	toAnanasChannelOnAnanasSlice() const SYMBOL_VISIBLE;
+	AuxPwrOnWafer toAuxPwrOnWafer() const SYMBOL_VISIBLE;
 
 	/* implementation detail, not part of public API: */
-	static x_type to_x(enum_type const& e);
-	static y_type to_y(enum_type const& e);
-	static enum_type to_enum(x_type const& x, y_type const& y);
+	static x_type to_x(enum_type const& e) SYMBOL_VISIBLE;
+	static y_type to_y(enum_type const& e) SYMBOL_VISIBLE;
+	static enum_type to_enum(x_type const& x, y_type const& y) SYMBOL_VISIBLE;
 };
 
 // DNC Coordinate relative to FPGA
@@ -141,7 +142,7 @@ struct GENPYBIND(inline_base("*")) DNCOnFPGA
 	{}
 
 	// TODO: rename toDNCGlobal
-	DNCGlobal toDNCOnWafer(FPGAGlobal const&) const;
+	DNCGlobal toDNCOnWafer(FPGAGlobal const&) const SYMBOL_VISIBLE;
 };
 
 HALCO_COORDINATE_MIXIN(DNCMixin, DNCOnWafer, dnc)
@@ -172,9 +173,9 @@ public:
 	    : base(DNCOnWafer(x, y), w) {}
 
 	DNCOnWafer toDNCOnWafer() const { return This(); }
-	DNCOnFPGA toDNCOnFPGA() const;
-	FPGAOnWafer toFPGAOnWafer() const;
-	FPGAGlobal toFPGAGlobal() const;
+	DNCOnFPGA toDNCOnFPGA() const SYMBOL_VISIBLE;
+	FPGAOnWafer toFPGAOnWafer() const SYMBOL_VISIBLE;
+	FPGAGlobal toFPGAGlobal() const SYMBOL_VISIBLE;
 };
 
 // HighspeedLink coordinate between HICANN and DNC(FPGA)
@@ -186,7 +187,7 @@ struct GENPYBIND(inline_base("*")) HighspeedLinkOnDNC
 	    rant_t(val)
 	{}
 
-	HICANNOnDNC toHICANNOnDNC() const;
+	HICANNOnDNC toHICANNOnDNC() const SYMBOL_VISIBLE;
 };
 
 struct GENPYBIND(inline_base("*DNCMixin*")) HighspeedLinkOnWafer
@@ -259,17 +260,18 @@ struct GENPYBIND(inline_base("*")) FPGAOnWafer
 	    rant_t(val)
 	{}
 
-	explicit FPGAOnWafer(WIOOnWafer const& wio, SocketOnWIO const& s);
+	explicit FPGAOnWafer(WIOOnWafer const& wio, SocketOnWIO const& s) SYMBOL_VISIBLE;
 
 	// master FPGA for global sysstart
-	static const FPGAOnWafer Master;
+	static const SYMBOL_VISIBLE FPGAOnWafer Master;
 
-	DNCOnWafer toDNCOnWafer() const;
-	TriggerOnWafer toTriggerOnWafer() const;
-	WIOOnWafer toWIOOnWafer() const;
-	SocketOnWIO toSocketOnWIO() const;
+	DNCOnWafer toDNCOnWafer() const SYMBOL_VISIBLE;
+	TriggerOnWafer toTriggerOnWafer() const SYMBOL_VISIBLE;
+	WIOOnWafer toWIOOnWafer() const SYMBOL_VISIBLE;
+	SocketOnWIO toSocketOnWIO() const SYMBOL_VISIBLE;
 
-	std::array<HICANNOnWafer, halco::hicann::v2::HICANNOnDNC::size> toHICANNOnWafer() const;
+	std::array<HICANNOnWafer, halco::hicann::v2::HICANNOnDNC::size> toHICANNOnWafer() const
+	    SYMBOL_VISIBLE;
 };
 
 struct GENPYBIND(inline_base("*WaferMixin*")) FPGAGlobal
@@ -281,11 +283,11 @@ private:
 public:
 	typedef base::enum_type enum_type GENPYBIND(opaque(false));
 
-	FPGAGlobal();
-	explicit FPGAGlobal(FPGAOnWafer const& h, Wafer const& w = Wafer());
-	explicit FPGAGlobal(enum_type const& e);
+	FPGAGlobal() SYMBOL_VISIBLE;
+	explicit FPGAGlobal(FPGAOnWafer const& h, Wafer const& w = Wafer()) SYMBOL_VISIBLE;
+	explicit FPGAGlobal(enum_type const& e) SYMBOL_VISIBLE;
 
-	std::vector<HICANNGlobal> toHICANNGlobal() const;
+	std::vector<HICANNGlobal> toHICANNGlobal() const SYMBOL_VISIBLE;
 
 	FPGAOnWafer toFPGAOnWafer() const { return This(); }
 };
@@ -322,15 +324,16 @@ private:
 public:
 	typedef base::enum_type enum_type;
 
-	AnanasSliceOnWafer();
+	AnanasSliceOnWafer() SYMBOL_VISIBLE;
 
 	explicit AnanasSliceOnWafer(
-	    AnanasSliceOnAnanas const& slice, AnanasOnWafer const& ananas = AnanasOnWafer());
+	    AnanasSliceOnAnanas const& slice,
+	    AnanasOnWafer const& ananas = AnanasOnWafer()) SYMBOL_VISIBLE;
 
-	explicit AnanasSliceOnWafer(
-	    uintmax_t const& e); // TODO FIXME uint because of AnanasChannelGlobal
+	explicit AnanasSliceOnWafer(uintmax_t const& e)
+	    SYMBOL_VISIBLE; // TODO FIXME uint because of AnanasChannelGlobal
 
-	AnanasSliceOnAnanas toAnanasSliceOnAnanas() const;
+	AnanasSliceOnAnanas toAnanasSliceOnAnanas() const SYMBOL_VISIBLE;
 };
 
 /// AnanasChannel corresponds to an analog input to the board (physical copper trace)
@@ -352,11 +355,11 @@ private:
 public:
 	typedef base::enum_type enum_type GENPYBIND(opaque(false));
 
-	AnanasGlobal();
-	explicit AnanasGlobal(AnanasOnWafer const& h, Wafer const& w = Wafer());
-	explicit AnanasGlobal(enum_type const& e);
+	AnanasGlobal() SYMBOL_VISIBLE;
+	explicit AnanasGlobal(AnanasOnWafer const& h, Wafer const& w = Wafer()) SYMBOL_VISIBLE;
+	explicit AnanasGlobal(enum_type const& e) SYMBOL_VISIBLE;
 
-	AnanasOnWafer toAnanasOnWafer() const;
+	AnanasOnWafer toAnanasOnWafer() const SYMBOL_VISIBLE;
 };
 
 struct GENPYBIND(inline_base("*WaferMixin*")) AnanasSliceGlobal
@@ -368,9 +371,10 @@ private:
 public:
 	using base::enum_type;
 
-	AnanasSliceGlobal();
-	explicit AnanasSliceGlobal(AnanasSliceOnWafer const& h, Wafer const& w = Wafer());
-	explicit AnanasSliceGlobal(enum_type const& e);
+	AnanasSliceGlobal() SYMBOL_VISIBLE;
+	explicit AnanasSliceGlobal(AnanasSliceOnWafer const& h, Wafer const& w = Wafer())
+	    SYMBOL_VISIBLE;
+	explicit AnanasSliceGlobal(enum_type const& e) SYMBOL_VISIBLE;
 
 	AnanasSliceOnWafer toAnanasSliceOnWafer() const
 	{
@@ -403,9 +407,9 @@ private:
 public:
 	using base::enum_type;
 
-	AuxPwrGlobal();
-	explicit AuxPwrGlobal(AuxPwrOnWafer const& h, Wafer const& w = Wafer());
-	explicit AuxPwrGlobal(enum_type const& e);
+	AuxPwrGlobal() SYMBOL_VISIBLE;
+	explicit AuxPwrGlobal(AuxPwrOnWafer const& h, Wafer const& w = Wafer()) SYMBOL_VISIBLE;
+	explicit AuxPwrGlobal(enum_type const& e) SYMBOL_VISIBLE;
 
 	AuxPwrOnWafer toAuxPwrOnWafer() const { return This(); }
 };
@@ -417,7 +421,7 @@ struct GENPYBIND(inline_base("*")) ChannelOnADC
 	    rant_t(val)
 	{}
 
-	static const ChannelOnADC GND;
+	static const SYMBOL_VISIBLE ChannelOnADC GND;
 };
 
 struct GENPYBIND(inline_base("*")) TriggerOnADC
@@ -435,9 +439,9 @@ struct GENPYBIND(inline_base("*")) TriggerOnWafer
 	    rant_t(val)
 	{}
 
-	AnanasOnWafer toAnanasOnWafer() const;
-	AnanasSliceOnAnanas toAnanasSliceOnAnanas() const;
-	AnanasSliceOnWafer toAnanasSliceOnWafer() const;
+	AnanasOnWafer toAnanasOnWafer() const SYMBOL_VISIBLE;
+	AnanasSliceOnAnanas toAnanasSliceOnAnanas() const SYMBOL_VISIBLE;
+	AnanasSliceOnWafer toAnanasSliceOnWafer() const SYMBOL_VISIBLE;
 };
 
 struct GENPYBIND(inline_base("*")) ADCGroupOnWafer
@@ -458,9 +462,9 @@ private:
 public:
 	typedef base::enum_type enum_type GENPYBIND(opaque(false));
 
-	TriggerGlobal();
-	explicit TriggerGlobal(TriggerOnWafer const& h, Wafer const& w = Wafer());
-	explicit TriggerGlobal(enum_type const& e);
+	TriggerGlobal() SYMBOL_VISIBLE;
+	explicit TriggerGlobal(TriggerOnWafer const& h, Wafer const& w = Wafer()) SYMBOL_VISIBLE;
+	explicit TriggerGlobal(enum_type const& e) SYMBOL_VISIBLE;
 
 	TriggerOnWafer toTriggerOnWafer() const { return This(); }
 };

@@ -4,6 +4,7 @@
 #include "halco/common/coordinate.h"
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
+#include "hate/visibility.h"
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
@@ -64,7 +65,7 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) 
 	    rant_t(val)
 	{}
 
-	JTAGPhyRegisterOnDLS toJTAGPhyRegisterOnDLS() const;
+	JTAGPhyRegisterOnDLS toJTAGPhyRegisterOnDLS() const SYMBOL_VISIBLE;
 };
 
 

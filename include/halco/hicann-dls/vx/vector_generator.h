@@ -5,6 +5,7 @@
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
+#include "hate/visibility.h"
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
@@ -25,8 +26,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 
 #include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
-	static const VectorGeneratorOnFPGA top;
-	static const VectorGeneratorOnFPGA bottom;
+	static const SYMBOL_VISIBLE VectorGeneratorOnFPGA top;
+	static const SYMBOL_VISIBLE VectorGeneratorOnFPGA bottom;
 };
 
 /**
@@ -44,8 +45,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 
 #include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
-	static const VectorGeneratorControlOnFPGA top;
-	static const VectorGeneratorControlOnFPGA bottom;
+	static const SYMBOL_VISIBLE VectorGeneratorControlOnFPGA top;
+	static const SYMBOL_VISIBLE VectorGeneratorControlOnFPGA bottom;
 };
 
 
@@ -78,8 +79,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 
 #include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
-	static const VectorGeneratorLUTOnFPGA top;
-	static const VectorGeneratorLUTOnFPGA bottom;
+	static const SYMBOL_VISIBLE VectorGeneratorLUTOnFPGA top;
+	static const SYMBOL_VISIBLE VectorGeneratorLUTOnFPGA bottom;
 };
 
 
@@ -129,8 +130,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 
 #include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
-	static const VectorGeneratorNotificationAddressOnFPGA top;
-	static const VectorGeneratorNotificationAddressOnFPGA bottom;
+	static const SYMBOL_VISIBLE VectorGeneratorNotificationAddressOnFPGA top;
+	static const SYMBOL_VISIBLE VectorGeneratorNotificationAddressOnFPGA bottom;
 };
 
 
@@ -149,8 +150,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 
 #include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
-	static const VectorGeneratorTriggerOnFPGA top;
-	static const VectorGeneratorTriggerOnFPGA bottom;
+	static const SYMBOL_VISIBLE VectorGeneratorTriggerOnFPGA top;
+	static const SYMBOL_VISIBLE VectorGeneratorTriggerOnFPGA bottom;
 };
 
 
@@ -169,8 +170,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 
 #include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
-	static const VectorGeneratorFIFOWordOnFPGA top;
-	static const VectorGeneratorFIFOWordOnFPGA bottom;
+	static const SYMBOL_VISIBLE VectorGeneratorFIFOWordOnFPGA top;
+	static const SYMBOL_VISIBLE VectorGeneratorFIFOWordOnFPGA bottom;
 };
 
 /**

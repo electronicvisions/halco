@@ -5,6 +5,7 @@
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
+#include "hate/visibility.h"
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
@@ -24,8 +25,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) 
 
 #include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
-	static const SynramOnDLS top;
-	static const SynramOnDLS bottom;
+	static const SYMBOL_VISIBLE SynramOnDLS top;
+	static const SYMBOL_VISIBLE SynramOnDLS bottom;
 };
 
 HALCO_COORDINATE_MIXIN(SynramMixin, SynramOnDLS, synram)
@@ -43,8 +44,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 
 #include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
-	static const CommonSynramConfigOnDLS top;
-	static const CommonSynramConfigOnDLS bottom;
+	static const SYMBOL_VISIBLE CommonSynramConfigOnDLS top;
+	static const SYMBOL_VISIBLE CommonSynramConfigOnDLS bottom;
 };
 
 } // namespace halco::hicann_dls::vx

@@ -4,6 +4,7 @@
 #include "halco/common/coordinate.h"
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
+#include "hate/visibility.h"
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
@@ -21,8 +22,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 
 #include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
-	static const CommonCorrelationConfigOnDLS top;
-	static const CommonCorrelationConfigOnDLS bottom;
+	static const SYMBOL_VISIBLE CommonCorrelationConfigOnDLS top;
+	static const SYMBOL_VISIBLE CommonCorrelationConfigOnDLS bottom;
 };
 
 } // namespace halco::hicann_dls::vx

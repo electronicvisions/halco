@@ -5,9 +5,9 @@
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
 #include "halco/common/typed_array.h"
-
 #include "halco/hicann-dls/vx/quad.h"
 #include "halco/hicann-dls/vx/synram.h"
+#include "hate/visibility.h"
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
@@ -39,8 +39,8 @@ struct GENPYBIND(inline_base("*")) SynapseRowOnSynapseDriver
 	    rant_t(val)
 	{}
 
-	static const SynapseRowOnSynapseDriver top;
-	static const SynapseRowOnSynapseDriver bottom;
+	static const SYMBOL_VISIBLE SynapseRowOnSynapseDriver top;
+	static const SYMBOL_VISIBLE SynapseRowOnSynapseDriver bottom;
 };
 
 struct GENPYBIND(inline_base("*")) SynapseRowOnSynram
@@ -55,8 +55,8 @@ struct GENPYBIND(inline_base("*")) SynapseRowOnSynram
 	    rant_t(y)
 	{}
 
-	SynapseDriverOnSynapseDriverBlock toSynapseDriverOnSynapseDriverBlock() const;
-	SynapseRowOnSynapseDriver toSynapseRowOnSynapseDriver() const;
+	SynapseDriverOnSynapseDriverBlock toSynapseDriverOnSynapseDriverBlock() const SYMBOL_VISIBLE;
+	SynapseRowOnSynapseDriver toSynapseRowOnSynapseDriver() const SYMBOL_VISIBLE;
 };
 
 struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*")) SynapseRowOnDLS
@@ -73,9 +73,9 @@ struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*")) 
 	explicit SynapseRowOnDLS(enum_type const& e) : mixin_t(e) {}
 
 	SynapseRowOnSynram toSynapseRowOnSynram() const { return This(); }
-	SynapseWeightRowOnDLS toSynapseWeightRowOnDLS() const;
-	SynapseLabelRowOnDLS toSynapseLabelRowOnDLS() const;
-	SynapseCorrelationCalibRowOnDLS toSynapseCorrelationCalibRowOnDLS() const;
+	SynapseWeightRowOnDLS toSynapseWeightRowOnDLS() const SYMBOL_VISIBLE;
+	SynapseLabelRowOnDLS toSynapseLabelRowOnDLS() const SYMBOL_VISIBLE;
+	SynapseCorrelationCalibRowOnDLS toSynapseCorrelationCalibRowOnDLS() const SYMBOL_VISIBLE;
 };
 
 
@@ -97,9 +97,9 @@ struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*"))
 	{
 		return This();
 	}
-	SynapseRowOnDLS toSynapseRowOnDLS() const;
-	SynapseLabelRowOnDLS toSynapseLabelRowOnDLS() const;
-	SynapseCorrelationCalibRowOnDLS toSynapseCorrelationCalibRowOnDLS() const;
+	SynapseRowOnDLS toSynapseRowOnDLS() const SYMBOL_VISIBLE;
+	SynapseLabelRowOnDLS toSynapseLabelRowOnDLS() const SYMBOL_VISIBLE;
+	SynapseCorrelationCalibRowOnDLS toSynapseCorrelationCalibRowOnDLS() const SYMBOL_VISIBLE;
 };
 
 
@@ -120,9 +120,9 @@ struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*")) 
 	{
 		return This();
 	}
-	SynapseRowOnDLS toSynapseRowOnDLS() const;
-	SynapseWeightRowOnDLS toSynapseWeightRowOnDLS() const;
-	SynapseCorrelationCalibRowOnDLS toSynapseCorrelationCalibRowOnDLS() const;
+	SynapseRowOnDLS toSynapseRowOnDLS() const SYMBOL_VISIBLE;
+	SynapseWeightRowOnDLS toSynapseWeightRowOnDLS() const SYMBOL_VISIBLE;
+	SynapseCorrelationCalibRowOnDLS toSynapseCorrelationCalibRowOnDLS() const SYMBOL_VISIBLE;
 };
 
 
@@ -144,9 +144,9 @@ struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*"))
 	{
 		return This();
 	}
-	SynapseRowOnDLS toSynapseRowOnDLS() const;
-	SynapseLabelRowOnDLS toSynapseLabelRowOnDLS() const;
-	SynapseWeightRowOnDLS toSynapseWeightRowOnDLS() const;
+	SynapseRowOnDLS toSynapseRowOnDLS() const SYMBOL_VISIBLE;
+	SynapseLabelRowOnDLS toSynapseLabelRowOnDLS() const SYMBOL_VISIBLE;
+	SynapseWeightRowOnDLS toSynapseWeightRowOnDLS() const SYMBOL_VISIBLE;
 };
 
 
@@ -177,8 +177,8 @@ struct GENPYBIND(inline_base("*")) SynapticInputOnNeuron
 	    rant_t(val)
 	{}
 
-	static const SynapticInputOnNeuron excitatory;
-	static const SynapticInputOnNeuron inhibitory;
+	static const SYMBOL_VISIBLE SynapticInputOnNeuron excitatory;
+	static const SYMBOL_VISIBLE SynapticInputOnNeuron inhibitory;
 };
 
 struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
@@ -202,8 +202,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 
 #include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
-	static const ColumnCorrelationRowOnDLS top;
-	static const ColumnCorrelationRowOnDLS bottom;
+	static const SYMBOL_VISIBLE ColumnCorrelationRowOnDLS top;
+	static const SYMBOL_VISIBLE ColumnCorrelationRowOnDLS bottom;
 };
 
 
@@ -219,8 +219,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 
 #include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
-	static const ColumnCurrentRowOnDLS top;
-	static const ColumnCurrentRowOnDLS bottom;
+	static const SYMBOL_VISIBLE ColumnCurrentRowOnDLS top;
+	static const SYMBOL_VISIBLE ColumnCurrentRowOnDLS bottom;
 };
 
 
@@ -236,8 +236,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 
 #include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
-	static const SynapseWeightMatrixOnDLS top;
-	static const SynapseWeightMatrixOnDLS bottom;
+	static const SYMBOL_VISIBLE SynapseWeightMatrixOnDLS top;
+	static const SYMBOL_VISIBLE SynapseWeightMatrixOnDLS bottom;
 };
 
 
@@ -253,8 +253,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 
 #include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
-	static const SynapseLabelMatrixOnDLS top;
-	static const SynapseLabelMatrixOnDLS bottom;
+	static const SYMBOL_VISIBLE SynapseLabelMatrixOnDLS top;
+	static const SYMBOL_VISIBLE SynapseLabelMatrixOnDLS bottom;
 };
 
 
@@ -270,8 +270,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 
 #include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
-	static const SynapseCorrelationCalibMatrixOnDLS top;
-	static const SynapseCorrelationCalibMatrixOnDLS bottom;
+	static const SYMBOL_VISIBLE SynapseCorrelationCalibMatrixOnDLS top;
+	static const SYMBOL_VISIBLE SynapseCorrelationCalibMatrixOnDLS bottom;
 };
 
 
@@ -285,8 +285,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) 
 
 #include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
-	static const SynapseBlockOnDLS top;
-	static const SynapseBlockOnDLS bottom;
+	static const SYMBOL_VISIBLE SynapseBlockOnDLS top;
+	static const SYMBOL_VISIBLE SynapseBlockOnDLS bottom;
 };
 
 
@@ -303,11 +303,11 @@ struct GENPYBIND(inline_base("*")) SynapseQuadColumnOnDLS
 	    rant_t(x)
 	{}
 
-	ColumnCorrelationQuadOnSynram toColumnCorrelationQuadOnSynram() const;
-	ColumnCurrentQuadOnSynram toColumnCurrentQuadOnSynram() const;
+	ColumnCorrelationQuadOnSynram toColumnCorrelationQuadOnSynram() const SYMBOL_VISIBLE;
+	ColumnCurrentQuadOnSynram toColumnCurrentQuadOnSynram() const SYMBOL_VISIBLE;
 	typedef common::typed_array<NeuronColumnOnDLS, EntryOnQuad> neuron_column_type
 	    GENPYBIND(opaque(false));
-	neuron_column_type toNeuronColumnOnDLS() const;
+	neuron_column_type toNeuronColumnOnDLS() const SYMBOL_VISIBLE;
 };
 
 struct GENPYBIND(inline_base("*")) SynapseQuadOnSynram
@@ -344,10 +344,10 @@ struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*")) 
 		return This();
 	}
 
-	NeuronConfigBlockOnDLS toNeuronConfigBlockOnDLS() const;
-	SynapseWeightQuadOnDLS toSynapseWeightQuadOnDLS() const;
-	SynapseLabelQuadOnDLS toSynapseLabelQuadOnDLS() const;
-	SynapseCorrelationCalibQuadOnDLS toSynapseCorrelationCalibQuadOnDLS() const;
+	NeuronConfigBlockOnDLS toNeuronConfigBlockOnDLS() const SYMBOL_VISIBLE;
+	SynapseWeightQuadOnDLS toSynapseWeightQuadOnDLS() const SYMBOL_VISIBLE;
+	SynapseLabelQuadOnDLS toSynapseLabelQuadOnDLS() const SYMBOL_VISIBLE;
+	SynapseCorrelationCalibQuadOnDLS toSynapseCorrelationCalibQuadOnDLS() const SYMBOL_VISIBLE;
 };
 
 struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*"))
@@ -389,10 +389,10 @@ struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*"))
 		return This();
 	}
 
-	NeuronConfigBlockOnDLS toNeuronConfigBlockOnDLS() const;
-	SynapseQuadOnDLS toSynapseQuadOnDLS() const;
-	SynapseLabelQuadOnDLS toSynapseLabelQuadOnDLS() const;
-	SynapseCorrelationCalibQuadOnDLS toSynapseCorrelationCalibQuadOnDLS() const;
+	NeuronConfigBlockOnDLS toNeuronConfigBlockOnDLS() const SYMBOL_VISIBLE;
+	SynapseQuadOnDLS toSynapseQuadOnDLS() const SYMBOL_VISIBLE;
+	SynapseLabelQuadOnDLS toSynapseLabelQuadOnDLS() const SYMBOL_VISIBLE;
+	SynapseCorrelationCalibQuadOnDLS toSynapseCorrelationCalibQuadOnDLS() const SYMBOL_VISIBLE;
 };
 
 
@@ -415,10 +415,10 @@ struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*"))
 		return This();
 	}
 
-	NeuronConfigBlockOnDLS toNeuronConfigBlockOnDLS() const;
-	SynapseWeightQuadOnDLS toSynapseWeightQuadOnDLS() const;
-	SynapseQuadOnDLS toSynapseQuadOnDLS() const;
-	SynapseCorrelationCalibQuadOnDLS toSynapseCorrelationCalibQuadOnDLS() const;
+	NeuronConfigBlockOnDLS toNeuronConfigBlockOnDLS() const SYMBOL_VISIBLE;
+	SynapseWeightQuadOnDLS toSynapseWeightQuadOnDLS() const SYMBOL_VISIBLE;
+	SynapseQuadOnDLS toSynapseQuadOnDLS() const SYMBOL_VISIBLE;
+	SynapseCorrelationCalibQuadOnDLS toSynapseCorrelationCalibQuadOnDLS() const SYMBOL_VISIBLE;
 };
 
 
@@ -441,10 +441,10 @@ struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*"))
 		return This();
 	}
 
-	NeuronConfigBlockOnDLS toNeuronConfigBlockOnDLS() const;
-	SynapseWeightQuadOnDLS toSynapseWeightQuadOnDLS() const;
-	SynapseLabelQuadOnDLS toSynapseLabelQuadOnDLS() const;
-	SynapseQuadOnDLS toSynapseQuadOnDLS() const;
+	NeuronConfigBlockOnDLS toNeuronConfigBlockOnDLS() const SYMBOL_VISIBLE;
+	SynapseWeightQuadOnDLS toSynapseWeightQuadOnDLS() const SYMBOL_VISIBLE;
+	SynapseLabelQuadOnDLS toSynapseLabelQuadOnDLS() const SYMBOL_VISIBLE;
+	SynapseQuadOnDLS toSynapseQuadOnDLS() const SYMBOL_VISIBLE;
 };
 
 
@@ -457,13 +457,13 @@ struct GENPYBIND(inline_base("*")) SynapseOnSynapseRow
 	    rant_t(value)
 	{}
 
-	explicit SynapseOnSynapseRow(
-	    EntryOnQuad const& syn_on_quad, SynapseQuadColumnOnDLS const& quad);
+	explicit SynapseOnSynapseRow(EntryOnQuad const& syn_on_quad, SynapseQuadColumnOnDLS const& quad)
+	    SYMBOL_VISIBLE;
 
-	EntryOnQuad toEntryOnQuad() const;
-	SynapseQuadColumnOnDLS toSynapseQuadColumnOnDLS() const;
-	NeuronColumnOnDLS toNeuronColumnOnDLS() const;
-	CADCChannelColumnOnSynram toCADCChannelColumnOnSynram() const;
+	EntryOnQuad toEntryOnQuad() const SYMBOL_VISIBLE;
+	SynapseQuadColumnOnDLS toSynapseQuadColumnOnDLS() const SYMBOL_VISIBLE;
+	NeuronColumnOnDLS toNeuronColumnOnDLS() const SYMBOL_VISIBLE;
+	CADCChannelColumnOnSynram toCADCChannelColumnOnSynram() const SYMBOL_VISIBLE;
 };
 
 struct GENPYBIND(inline_base("*")) SynapseOnSynram

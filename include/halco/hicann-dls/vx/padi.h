@@ -5,6 +5,7 @@
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
+#include "hate/visibility.h"
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
@@ -25,8 +26,8 @@ struct GENPYBIND(inline_base("*")) PADIBusBlockOnDLS
 
 #include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
-	static const PADIBusBlockOnDLS top;
-	static const PADIBusBlockOnDLS bottom;
+	static const SYMBOL_VISIBLE PADIBusBlockOnDLS top;
+	static const SYMBOL_VISIBLE PADIBusBlockOnDLS bottom;
 };
 
 
@@ -56,7 +57,7 @@ struct GENPYBIND(inline_base("*PADIBusMixin*")) PADIBusOnDLS
 	explicit PADIBusOnDLS(enum_type const& e) : mixin_t(e) {}
 
 	PADIBusOnPADIBusBlock toPADIBusOnPADIBusBlock() const { return This(); }
-	CrossbarOutputOnDLS toCrossbarOutputOnDLS() const;
+	CrossbarOutputOnDLS toCrossbarOutputOnDLS() const SYMBOL_VISIBLE;
 };
 
 
@@ -69,8 +70,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 
 #include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
-	static const CommonPADIBusConfigOnDLS top;
-	static const CommonPADIBusConfigOnDLS bottom;
+	static const SYMBOL_VISIBLE CommonPADIBusConfigOnDLS top;
+	static const SYMBOL_VISIBLE CommonPADIBusConfigOnDLS bottom;
 };
 
 
@@ -82,8 +83,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) 
 
 #include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
-	static const CommonSTPConfigOnDLS top;
-	static const CommonSTPConfigOnDLS bottom;
+	static const SYMBOL_VISIBLE CommonSTPConfigOnDLS top;
+	static const SYMBOL_VISIBLE CommonSTPConfigOnDLS bottom;
 };
 
 
@@ -97,8 +98,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) 
 
 #include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
-	static const PADIEventOnDLS top;
-	static const PADIEventOnDLS bottom;
+	static const SYMBOL_VISIBLE PADIEventOnDLS top;
+	static const SYMBOL_VISIBLE PADIEventOnDLS bottom;
 };
 
 struct GENPYBIND(inline_base("*")) PADIRowSelectAddress

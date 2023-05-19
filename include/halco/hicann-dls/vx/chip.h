@@ -5,6 +5,7 @@
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
+#include "hate/visibility.h"
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
@@ -23,8 +24,8 @@ struct GENPYBIND(inline_base("*")) HemisphereOnDLS
 	    rant_t(val)
 	{}
 
-	static const HemisphereOnDLS top;
-	static const HemisphereOnDLS bottom;
+	static const SYMBOL_VISIBLE HemisphereOnDLS top;
+	static const SYMBOL_VISIBLE HemisphereOnDLS bottom;
 
 #include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 };

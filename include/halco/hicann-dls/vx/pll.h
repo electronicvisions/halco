@@ -4,6 +4,7 @@
 #include "halco/common/coordinate.h"
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
+#include "hate/visibility.h"
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
@@ -54,10 +55,10 @@ struct GENPYBIND(inline_base("*")) PLLClockOutputOnDLS
 	    rant_t(val)
 	{}
 
-	static const PLLClockOutputOnDLS serdes_ser_send_clk;
-	static const PLLClockOutputOnDLS phy_ref_clk;
-	static const PLLClockOutputOnDLS ppu_clk;
-	static const PLLClockOutputOnDLS madc_clk;
+	static const SYMBOL_VISIBLE PLLClockOutputOnDLS serdes_ser_send_clk;
+	static const SYMBOL_VISIBLE PLLClockOutputOnDLS phy_ref_clk;
+	static const SYMBOL_VISIBLE PLLClockOutputOnDLS ppu_clk;
+	static const SYMBOL_VISIBLE PLLClockOutputOnDLS madc_clk;
 };
 
 } // namespace halco::hicann_dls::vx

@@ -13,6 +13,7 @@ extern "C" {
 #include "halco/common/geometry.h"
 #include "halco/common/relations.h"
 #include "halco/common/tblr.h"
+#include "hate/visibility.h"
 
 namespace halco {
 namespace hicann {
@@ -36,7 +37,7 @@ struct GENPYBIND(inline_base("*")) FGCellOnFGBlock
 {
 	GRID_COMMON_CONSTRUCTORS(FGCellOnFGBlock)
 
-	FGRowOnFGBlock toFGRowOnFGBlock() const;
+	FGRowOnFGBlock toFGRowOnFGBlock() const SYMBOL_VISIBLE;
 };
 
 struct GENPYBIND(inline_base("*")) FGBlockOnHICANN

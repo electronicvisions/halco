@@ -8,6 +8,8 @@
 #include "halco/hicann-dls/vx/chip.h"
 #include "halco/hicann-dls/vx/neuron.h"
 
+#include "hate/visibility.h"
+
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 struct CapMemBlockOnHemisphere;
@@ -47,8 +49,8 @@ struct GENPYBIND(inline_base("*")) CapMemBlockOnHemisphere
 	    rant_t(val)
 	{}
 
-	static const CapMemBlockOnHemisphere left;
-	static const CapMemBlockOnHemisphere right;
+	static const SYMBOL_VISIBLE CapMemBlockOnHemisphere left;
+	static const SYMBOL_VISIBLE CapMemBlockOnHemisphere right;
 };
 
 
@@ -65,8 +67,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) 
 	    rant_t(x + CapMemBlockOnHemisphere::size * y)
 	{}
 
-	CapMemBlockOnHemisphere toCapMemBlockOnHemisphere() const;
-	HemisphereOnDLS toHemisphereOnDLS() const;
+	CapMemBlockOnHemisphere toCapMemBlockOnHemisphere() const SYMBOL_VISIBLE;
+	HemisphereOnDLS toHemisphereOnDLS() const SYMBOL_VISIBLE;
 };
 
 
@@ -81,8 +83,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 	    rant_t(val)
 	{}
 
-	CapMemBlockOnHemisphere toCapMemBlockOnHemisphere() const;
-	HemisphereOnDLS toHemisphereOnDLS() const;
+	CapMemBlockOnHemisphere toCapMemBlockOnHemisphere() const SYMBOL_VISIBLE;
+	HemisphereOnDLS toHemisphereOnDLS() const SYMBOL_VISIBLE;
 };
 
 

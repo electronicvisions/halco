@@ -5,6 +5,7 @@
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
+#include "hate/visibility.h"
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
@@ -23,8 +24,8 @@ struct GENPYBIND(inline_base("*")) PPUOnDLS
 
 #include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
-	static const PPUOnDLS top;
-	static const PPUOnDLS bottom;
+	static const SYMBOL_VISIBLE PPUOnDLS top;
+	static const SYMBOL_VISIBLE PPUOnDLS bottom;
 };
 
 constexpr static uint_fast16_t enum_vertical_top = 0;
@@ -39,7 +40,7 @@ struct GENPYBIND(inline_base("*")) PPUMemoryWordOnPPU
 	{}
 
 	/** Return code word location (atop first stack frame). */
-	static const PPUMemoryWordOnPPU return_code;
+	static const SYMBOL_VISIBLE PPUMemoryWordOnPPU return_code;
 };
 
 
@@ -61,7 +62,7 @@ struct GENPYBIND(inline_base("*")) PPUMemoryBlockOnPPU
 	PPUMemoryBlockSize toPPUMemoryBlockSize() const { return PPUMemoryBlockSize(length()); }
 
 	/** Location of mailbox memory area (deprecated). */
-	static const PPUMemoryBlockOnPPU mailbox;
+	static const SYMBOL_VISIBLE PPUMemoryBlockOnPPU mailbox;
 };
 
 

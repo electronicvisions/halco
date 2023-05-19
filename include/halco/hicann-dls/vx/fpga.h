@@ -4,6 +4,7 @@
 #include "halco/common/coordinate.h"
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
+#include "hate/visibility.h"
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
@@ -212,7 +213,7 @@ struct GENPYBIND(inline_base("*")) SpikeIOAddress
 	    rant_t(val)
 	{}
 
-	SpikeIOInputRouteOnFPGA toSpikeIOInputRouteOnFPGA() const;
+	SpikeIOInputRouteOnFPGA toSpikeIOInputRouteOnFPGA() const SYMBOL_VISIBLE;
 };
 
 /**
@@ -236,7 +237,7 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 {
 	constexpr explicit SpikeIOInputRouteOnFPGA(uintmax_t value = 0) : rant_t(value) {}
 
-	SpikeIOAddress toSpikeIOAddress() const;
+	SpikeIOAddress toSpikeIOAddress() const SYMBOL_VISIBLE;
 };
 
 /**
@@ -250,7 +251,7 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 {
 	constexpr explicit SpikeIOOutputRouteOnFPGA(uintmax_t value = 0) : rant_t(value) {}
 
-	SpikeLabel toSpikeLabel() const;
+	SpikeLabel toSpikeLabel() const SYMBOL_VISIBLE;
 };
 
 } // namespace halco::hicann_dls::vx

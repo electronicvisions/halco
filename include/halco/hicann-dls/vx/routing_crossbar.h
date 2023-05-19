@@ -5,6 +5,7 @@
 #include "halco/common/coordinate.h"
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
+#include "hate/visibility.h"
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
@@ -54,8 +55,8 @@ struct GENPYBIND(
 	    rant_t(val)
 	{}
 
-	std::optional<PADIBusOnDLS> toPADIBusOnDLS() const;
-	std::optional<CrossbarL2OutputOnDLS> toCrossbarL2OutputOnDLS() const;
+	std::optional<PADIBusOnDLS> toPADIBusOnDLS() const SYMBOL_VISIBLE;
+	std::optional<CrossbarL2OutputOnDLS> toCrossbarL2OutputOnDLS() const SYMBOL_VISIBLE;
 };
 
 
@@ -71,7 +72,7 @@ struct GENPYBIND(inline_base("*")) CrossbarL2OutputOnDLS
 	    rant_t(val)
 	{}
 
-	CrossbarOutputOnDLS toCrossbarOutputOnDLS() const;
+	CrossbarOutputOnDLS toCrossbarOutputOnDLS() const SYMBOL_VISIBLE;
 };
 
 
@@ -90,8 +91,8 @@ struct GENPYBIND(
 	    rant_t(val)
 	{}
 
-	std::optional<SPL1Address> toSPL1Address() const;
-	std::optional<NeuronEventOutputOnDLS> toNeuronEventOutputOnDLS() const;
+	std::optional<SPL1Address> toSPL1Address() const SYMBOL_VISIBLE;
+	std::optional<NeuronEventOutputOnDLS> toNeuronEventOutputOnDLS() const SYMBOL_VISIBLE;
 };
 
 
@@ -144,9 +145,9 @@ struct GENPYBIND(inline_base("*GridCoordinate*"), inline_base("*CoordinateBase*"
 
 	/* implementation detail, not part of public API: */
 
-	static x_type to_x(enum_type const& e);
-	static y_type to_y(enum_type const& e);
-	static enum_type to_enum(x_type const& x, y_type const& y);
+	static x_type to_x(enum_type const& e) SYMBOL_VISIBLE;
+	static y_type to_y(enum_type const& e) SYMBOL_VISIBLE;
+	static enum_type to_enum(x_type const& x, y_type const& y) SYMBOL_VISIBLE;
 };
 
 } // namespace halco::hicann_dls::vx

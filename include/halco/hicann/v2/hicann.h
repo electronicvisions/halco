@@ -9,6 +9,7 @@
 
 #include "halco/hicann/v2/fwd.h"
 #include "halco/hicann/v2/wafer.h"
+#include "hate/visibility.h"
 
 namespace halco {
 namespace hicann {
@@ -25,7 +26,7 @@ struct GENPYBIND(inline_base("*")) HICANNOnWafer
 	HICANNOnWafer west() const { return HICANNOnWafer(x_type(x() - 1), y()); }
 	HICANNOnWafer north() const { return HICANNOnWafer(x(), y_type(y() - 1)); }
 	HICANNOnWafer south() const { return HICANNOnWafer(x(), y_type(y() + 1)); }
-	HICANNOnWafer move(common::Direction const& direction) const;
+	HICANNOnWafer move(common::Direction const& direction) const SYMBOL_VISIBLE;
 
 
 	/**
@@ -36,23 +37,23 @@ struct GENPYBIND(inline_base("*")) HICANNOnWafer
 	 *
 	 * @return true if there is a hicann to {east|west|north|south} false if not.
 	 */
-	bool has_east() const;
-	bool has_west() const;
-	bool has_north() const;
-	bool has_south() const;
-	bool can_move(common::Direction const& direction) const;
+	bool has_east() const SYMBOL_VISIBLE;
+	bool has_west() const SYMBOL_VISIBLE;
+	bool has_north() const SYMBOL_VISIBLE;
+	bool has_south() const SYMBOL_VISIBLE;
+	bool can_move(common::Direction const& direction) const SYMBOL_VISIBLE;
 
-	DNCOnWafer toDNCOnWafer() const;
-	FPGAOnWafer toFPGAOnWafer() const;
-	HICANNOnDNC toHICANNOnDNC() const;
-	HighspeedLinkOnDNC toHighspeedLinkOnDNC() const;
+	DNCOnWafer toDNCOnWafer() const SYMBOL_VISIBLE;
+	FPGAOnWafer toFPGAOnWafer() const SYMBOL_VISIBLE;
+	HICANNOnDNC toHICANNOnDNC() const SYMBOL_VISIBLE;
+	HighspeedLinkOnDNC toHighspeedLinkOnDNC() const SYMBOL_VISIBLE;
 
 
-/* implementation detail, not part of public API: */
+	/* implementation detail, not part of public API: */
 
-	static x_type to_x(enum_type const& e);
-	static y_type to_y(enum_type const& e);
-	static enum_type to_enum(x_type const& x, y_type const& y);
+	static x_type to_x(enum_type const& e) SYMBOL_VISIBLE;
+	static y_type to_y(enum_type const& e) SYMBOL_VISIBLE;
+	static enum_type to_enum(x_type const& x, y_type const& y) SYMBOL_VISIBLE;
 };
 
 // HICANN Coordinate relative to DNC
@@ -62,9 +63,9 @@ struct GENPYBIND(inline_base("*")) HICANNOnDNC
 {
 	GRID_COMMON_CONSTRUCTORS(HICANNOnDNC)
 
-	HICANNOnWafer toHICANNOnWafer(const DNCOnWafer& dnc) const;
-	HICANNOnWafer toHICANNOnWafer(const FPGAOnWafer& fpga) const;
-	HighspeedLinkOnDNC toHighspeedLinkOnDNC() const;
+	HICANNOnWafer toHICANNOnWafer(const DNCOnWafer& dnc) const SYMBOL_VISIBLE;
+	HICANNOnWafer toHICANNOnWafer(const FPGAOnWafer& fpga) const SYMBOL_VISIBLE;
+	HighspeedLinkOnDNC toHighspeedLinkOnDNC() const SYMBOL_VISIBLE;
 };
 
 struct GENPYBIND(inline_base("*WaferMixin*")) HICANNGlobal
@@ -90,16 +91,16 @@ public:
 	    : base(HICANNOnWafer(x, y), w) {}
 
 
-	HICANNGlobal east() const;
-	HICANNGlobal west() const;
-	HICANNGlobal north() const;
-	HICANNGlobal south() const;
-	HICANNGlobal move(common::Direction const& direction) const;
+	HICANNGlobal east() const SYMBOL_VISIBLE;
+	HICANNGlobal west() const SYMBOL_VISIBLE;
+	HICANNGlobal north() const SYMBOL_VISIBLE;
+	HICANNGlobal south() const SYMBOL_VISIBLE;
+	HICANNGlobal move(common::Direction const& direction) const SYMBOL_VISIBLE;
 
-	DNCGlobal toDNCGlobal() const;
-	FPGAGlobal toFPGAGlobal() const;
-	FPGAOnWafer toFPGAOnWafer() const;
-	DNCOnFPGA toDNCOnFPGA() const;
+	DNCGlobal toDNCGlobal() const SYMBOL_VISIBLE;
+	FPGAGlobal toFPGAGlobal() const SYMBOL_VISIBLE;
+	FPGAOnWafer toFPGAOnWafer() const SYMBOL_VISIBLE;
+	DNCOnFPGA toDNCOnFPGA() const SYMBOL_VISIBLE;
 	HICANNOnWafer toHICANNOnWafer() const { return This(); }
 };
 

@@ -5,6 +5,7 @@
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
+#include "hate/visibility.h"
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
@@ -33,8 +34,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) 
 {
 	constexpr explicit TCA9554OnBoard(uintmax_t const val = 0) : rant_t(val) {}
 
-	TCA9554ConfigOnBoard toTCA9554ConfigOnBoard() const;
-	TCA9554InputsOnBoard toTCA9554InputsOnBoard() const;
+	TCA9554ConfigOnBoard toTCA9554ConfigOnBoard() const SYMBOL_VISIBLE;
+	TCA9554InputsOnBoard toTCA9554InputsOnBoard() const SYMBOL_VISIBLE;
 };
 
 
@@ -44,8 +45,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) 
 {
 	constexpr explicit TCA9554InputsOnBoard(uintmax_t const val = 0) : rant_t(val) {}
 
-	TCA9554OnBoard toTCA9554OnBoard() const;
-	TCA9554ConfigOnBoard toTCA9554ConfigOnBoard() const;
+	TCA9554OnBoard toTCA9554OnBoard() const SYMBOL_VISIBLE;
+	TCA9554ConfigOnBoard toTCA9554ConfigOnBoard() const SYMBOL_VISIBLE;
 };
 
 
@@ -55,8 +56,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) 
 {
 	constexpr explicit TCA9554ConfigOnBoard(uintmax_t const val = 0) : rant_t(val) {}
 
-	TCA9554OnBoard toTCA9554OnBoard() const;
-	TCA9554InputsOnBoard toTCA9554InputsOnBoard() const;
+	TCA9554OnBoard toTCA9554OnBoard() const SYMBOL_VISIBLE;
+	TCA9554InputsOnBoard toTCA9554InputsOnBoard() const SYMBOL_VISIBLE;
 };
 
 
@@ -67,17 +68,17 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 {
 	constexpr explicit TCA9554ChannelOnBoard(uintmax_t const val = 0) : rant_t(val) {}
 
-	static const TCA9554ChannelOnBoard vdd25_digital;
-	static const TCA9554ChannelOnBoard vdd12_digital;
-	static const TCA9554ChannelOnBoard vdd12_pll;
-	static const TCA9554ChannelOnBoard vdd12_madc;
-	static const TCA9554ChannelOnBoard vdd25_analog;
-	static const TCA9554ChannelOnBoard vdd12_analog;
+	static const SYMBOL_VISIBLE TCA9554ChannelOnBoard vdd25_digital;
+	static const SYMBOL_VISIBLE TCA9554ChannelOnBoard vdd12_digital;
+	static const SYMBOL_VISIBLE TCA9554ChannelOnBoard vdd12_pll;
+	static const SYMBOL_VISIBLE TCA9554ChannelOnBoard vdd12_madc;
+	static const SYMBOL_VISIBLE TCA9554ChannelOnBoard vdd25_analog;
+	static const SYMBOL_VISIBLE TCA9554ChannelOnBoard vdd12_analog;
 
-	static const TCA9554ChannelOnBoard led1;
-	static const TCA9554ChannelOnBoard led2;
+	static const SYMBOL_VISIBLE TCA9554ChannelOnBoard led1;
+	static const SYMBOL_VISIBLE TCA9554ChannelOnBoard led2;
 
-	TCA9554OnBoard toTCA9554OnBoard() const;
+	TCA9554OnBoard toTCA9554OnBoard() const SYMBOL_VISIBLE;
 };
 
 
@@ -88,9 +89,9 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) 
 	constexpr explicit AD5252OnBoard() : rant_t(0) {}
 	constexpr explicit AD5252OnBoard(uintmax_t const val) : rant_t(val) {}
 
-	static const AD5252OnBoard vdd_12pll_12madc;
-	static const AD5252OnBoard vdd_12analog_25analog;
-	static const AD5252OnBoard vdd_25digital_12digital;
+	static const SYMBOL_VISIBLE AD5252OnBoard vdd_12pll_12madc;
+	static const SYMBOL_VISIBLE AD5252OnBoard vdd_12analog_25analog;
+	static const SYMBOL_VISIBLE AD5252OnBoard vdd_25digital_12digital;
 };
 
 struct GENPYBIND(inline_base("*")) AD5252ChannelOnAD5252
@@ -99,8 +100,8 @@ struct GENPYBIND(inline_base("*")) AD5252ChannelOnAD5252
 	constexpr explicit AD5252ChannelOnAD5252(uintmax_t const val = 0) : rant_t(val) {}
 
 	// The variant we are using only has two channels (at indices 1, 3)
-	static const AD5252ChannelOnAD5252 channel_1;
-	static const AD5252ChannelOnAD5252 channel_3;
+	static const SYMBOL_VISIBLE AD5252ChannelOnAD5252 channel_1;
+	static const SYMBOL_VISIBLE AD5252ChannelOnAD5252 channel_3;
 };
 
 HALCO_COORDINATE_MIXIN(AD5252Mixin, AD5252OnBoard, ad5252)
@@ -118,19 +119,20 @@ struct GENPYBIND(inline_base("*AD5252Mixin*"), inline_base("*CoordinateBase*")) 
 
 	explicit AD5252ChannelOnBoard(enum_type const& e) : mixin_t(e) {}
 
-	static const AD5252ChannelOnBoard vdd_12pll;
-	static const AD5252ChannelOnBoard vdd_12madc;
-	static const AD5252ChannelOnBoard vdd_12analog;
-	static const AD5252ChannelOnBoard vdd_25analog;
-	static const AD5252ChannelOnBoard vdd_25digital;
-	static const AD5252ChannelOnBoard vdd_12digital;
+	static const SYMBOL_VISIBLE AD5252ChannelOnBoard vdd_12pll;
+	static const SYMBOL_VISIBLE AD5252ChannelOnBoard vdd_12madc;
+	static const SYMBOL_VISIBLE AD5252ChannelOnBoard vdd_12analog;
+	static const SYMBOL_VISIBLE AD5252ChannelOnBoard vdd_25analog;
+	static const SYMBOL_VISIBLE AD5252ChannelOnBoard vdd_25digital;
+	static const SYMBOL_VISIBLE AD5252ChannelOnBoard vdd_12digital;
 
 	AD5252ChannelOnAD5252 toAD5252ChannelOnAD5252() const
 	{
 		return This();
 	}
-	AD5252ChannelConfigOnBoard toAD5252ChannelConfigOnBoard() const;
-	AD5252ChannelConfigPersistentOnBoard toAD5252ChannelConfigPersistentOnBoard() const;
+	AD5252ChannelConfigOnBoard toAD5252ChannelConfigOnBoard() const SYMBOL_VISIBLE;
+	AD5252ChannelConfigPersistentOnBoard toAD5252ChannelConfigPersistentOnBoard() const
+	    SYMBOL_VISIBLE;
 };
 
 struct GENPYBIND(inline_base("*AD5252Mixin*"), inline_base("*CoordinateBase*"))
@@ -147,19 +149,20 @@ struct GENPYBIND(inline_base("*AD5252Mixin*"), inline_base("*CoordinateBase*"))
 
 	explicit AD5252ChannelConfigOnBoard(enum_type const& e) : mixin_t(e) {}
 
-	static const AD5252ChannelConfigOnBoard vdd_12pll;
-	static const AD5252ChannelConfigOnBoard vdd_12madc;
-	static const AD5252ChannelConfigOnBoard vdd_12analog;
-	static const AD5252ChannelConfigOnBoard vdd_25analog;
-	static const AD5252ChannelConfigOnBoard vdd_25digital;
-	static const AD5252ChannelConfigOnBoard vdd_12digital;
+	static const SYMBOL_VISIBLE AD5252ChannelConfigOnBoard vdd_12pll;
+	static const SYMBOL_VISIBLE AD5252ChannelConfigOnBoard vdd_12madc;
+	static const SYMBOL_VISIBLE AD5252ChannelConfigOnBoard vdd_12analog;
+	static const SYMBOL_VISIBLE AD5252ChannelConfigOnBoard vdd_25analog;
+	static const SYMBOL_VISIBLE AD5252ChannelConfigOnBoard vdd_25digital;
+	static const SYMBOL_VISIBLE AD5252ChannelConfigOnBoard vdd_12digital;
 
 	AD5252ChannelOnAD5252 toAD5252ChannelOnAD5252() const
 	{
 		return This();
 	}
-	AD5252ChannelOnBoard toAD5252ChannelOnBoard() const;
-	AD5252ChannelConfigPersistentOnBoard toAD5252ChannelConfigPersistentOnBoard() const;
+	AD5252ChannelOnBoard toAD5252ChannelOnBoard() const SYMBOL_VISIBLE;
+	AD5252ChannelConfigPersistentOnBoard toAD5252ChannelConfigPersistentOnBoard() const
+	    SYMBOL_VISIBLE;
 };
 
 struct GENPYBIND(inline_base("*AD5252Mixin*"), inline_base("*CoordinateBase*"))
@@ -176,19 +179,19 @@ struct GENPYBIND(inline_base("*AD5252Mixin*"), inline_base("*CoordinateBase*"))
 
 	explicit AD5252ChannelConfigPersistentOnBoard(enum_type const& e) : mixin_t(e) {}
 
-	static const AD5252ChannelConfigPersistentOnBoard vdd_12pll;
-	static const AD5252ChannelConfigPersistentOnBoard vdd_12madc;
-	static const AD5252ChannelConfigPersistentOnBoard vdd_12analog;
-	static const AD5252ChannelConfigPersistentOnBoard vdd_25analog;
-	static const AD5252ChannelConfigPersistentOnBoard vdd_25digital;
-	static const AD5252ChannelConfigPersistentOnBoard vdd_12digital;
+	static const SYMBOL_VISIBLE AD5252ChannelConfigPersistentOnBoard vdd_12pll;
+	static const SYMBOL_VISIBLE AD5252ChannelConfigPersistentOnBoard vdd_12madc;
+	static const SYMBOL_VISIBLE AD5252ChannelConfigPersistentOnBoard vdd_12analog;
+	static const SYMBOL_VISIBLE AD5252ChannelConfigPersistentOnBoard vdd_25analog;
+	static const SYMBOL_VISIBLE AD5252ChannelConfigPersistentOnBoard vdd_25digital;
+	static const SYMBOL_VISIBLE AD5252ChannelConfigPersistentOnBoard vdd_12digital;
 
 	AD5252ChannelOnAD5252 toAD5252ChannelOnAD5252() const
 	{
 		return This();
 	}
-	AD5252ChannelOnBoard toAD5252ChannelOnBoard() const;
-	AD5252ChannelConfigOnBoard toAD5252ChannelConfigOnBoard() const;
+	AD5252ChannelOnBoard toAD5252ChannelOnBoard() const SYMBOL_VISIBLE;
+	AD5252ChannelConfigOnBoard toAD5252ChannelConfigOnBoard() const SYMBOL_VISIBLE;
 };
 
 
@@ -222,10 +225,10 @@ struct GENPYBIND(inline_base("*DAC6573Mixin*"), inline_base("*CoordinateBase*"))
 	{}
 	explicit DAC6573ChannelOnBoard(enum_type const& e) : mixin_t(e) {}
 
-	static const DAC6573ChannelOnBoard v_reset;
-	static const DAC6573ChannelOnBoard i_ref_board;
-	static const DAC6573ChannelOnBoard v_res_meas;
-	static const DAC6573ChannelOnBoard v_readout;
+	static const SYMBOL_VISIBLE DAC6573ChannelOnBoard v_reset;
+	static const SYMBOL_VISIBLE DAC6573ChannelOnBoard i_ref_board;
+	static const SYMBOL_VISIBLE DAC6573ChannelOnBoard v_res_meas;
+	static const SYMBOL_VISIBLE DAC6573ChannelOnBoard v_readout;
 
 	DAC6573ChannelOnDAC6573 toDAC6573ChannelOnDAC6573() const
 	{

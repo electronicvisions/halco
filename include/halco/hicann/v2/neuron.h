@@ -14,6 +14,8 @@ extern "C" {
 #include "halco/hicann/v2/fwd.h"
 #include "halco/hicann/v2/hicann.h"
 
+#include "hate/visibility.h"
+
 namespace halco {
 namespace hicann {
 namespace v2 GENPYBIND_TAG_HALCO_HICANN_V2 {
@@ -72,7 +74,7 @@ public:
 	explicit NeuronBlockGlobal(enum_type const& e) : base(e) {}
 
 	NeuronBlockOnWafer toNeuronBlockOnWafer() const { return This(); }
-	HICANNGlobal toHICANNGlobal() const;
+	HICANNGlobal toHICANNGlobal() const SYMBOL_VISIBLE;
 }; // NeuronBlockGlobal
 
 struct GENPYBIND(inline_base("*")) NeuronOnNeuronBlock
@@ -82,9 +84,9 @@ struct GENPYBIND(inline_base("*")) NeuronOnNeuronBlock
 {
 	GRID_COMMON_CONSTRUCTORS(NeuronOnNeuronBlock)
 
-	NeuronOnHICANN toNeuronOnHICANN(NeuronBlockOnHICANN const&) const;
-	NeuronGlobal toNeuronGlobal(NeuronBlockGlobal const&) const;
-	NeuronOnWafer toNeuronOnWafer(NeuronBlockOnWafer const&) const;
+	NeuronOnHICANN toNeuronOnHICANN(NeuronBlockOnHICANN const&) const SYMBOL_VISIBLE;
+	NeuronGlobal toNeuronGlobal(NeuronBlockGlobal const&) const SYMBOL_VISIBLE;
+	NeuronOnWafer toNeuronOnWafer(NeuronBlockOnWafer const&) const SYMBOL_VISIBLE;
 };
 
 /** QuadOnHICANN address.
@@ -120,7 +122,7 @@ struct GENPYBIND(inline_base("*")) NeuronOnFGBlock
 	    rant_t(val)
 	{}
 
-	NeuronOnHICANN toNeuronOnHICANN(const FGBlockOnHICANN& block) const;
+	NeuronOnHICANN toNeuronOnHICANN(const FGBlockOnHICANN& block) const SYMBOL_VISIBLE;
 };
 
 // 2D local Neuron coordinate (0..511)
@@ -180,7 +182,7 @@ public:
 	explicit NeuronOnWafer(enum_type const& e) : base(e) {}
 
 	NeuronOnHICANN toNeuronOnHICANN() const { return This(); }
-	NeuronBlockOnWafer toNeuronBlockOnWafer() const;
+	NeuronBlockOnWafer toNeuronBlockOnWafer() const SYMBOL_VISIBLE;
 };
 
 struct GENPYBIND(inline_base("*WaferMixin*")) NeuronGlobal
@@ -200,8 +202,8 @@ public:
 	explicit NeuronGlobal(enum_type const& e) : base(e) {}
 
 	NeuronOnWafer toNeuronOnWafer() const { return This(); }
-	NeuronBlockGlobal toNeuronBlockGlobal() const;
-	HICANNGlobal toHICANNGlobal() const;
+	NeuronBlockGlobal toNeuronBlockGlobal() const SYMBOL_VISIBLE;
+	HICANNGlobal toHICANNGlobal() const SYMBOL_VISIBLE;
 }; // NeuronGlobal
 
 struct GENPYBIND(inline_base("*")) SynapticInputOnNeuron
@@ -217,8 +219,8 @@ public:
 	    rant_t(val)
 	{}
 
-	static SynapticInputOnNeuron const default_inh;
-	static SynapticInputOnNeuron const default_exc;
+	static SYMBOL_VISIBLE SynapticInputOnNeuron const default_inh;
+	static SYMBOL_VISIBLE SynapticInputOnNeuron const default_exc;
 }; // SynapticInputOnNeuron
 
 HALCO_COORDINATE_MIXIN(NeuronMixin, NeuronOnHICANN, neuron)

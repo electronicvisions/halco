@@ -21,6 +21,8 @@ extern "C" {
 #include "boost/optional.hpp"
 #include "boost/tuple/tuple.hpp"
 
+#include "hate/visibility.h"
+
 #if defined(__GENPYBIND__) || defined(__GENPYBIND_GENERATED__)
 #include <pybind11/stl.h>
 namespace pybind11 {
@@ -67,23 +69,25 @@ struct GENPYBIND(inline_base("*")) CrossbarSwitchOnHICANN
 
 	// get CrossbarSwitch from Hline, Side and number of switch in row on side
 	CrossbarSwitchOnHICANN(
-	    HLineOnHICANN const& l, common::SideHorizontal const& s, CrossbarSwitchOnCrossbarSwitchRow const& switch_num);
+	    HLineOnHICANN const& l,
+	    common::SideHorizontal const& s,
+	    CrossbarSwitchOnCrossbarSwitchRow const& switch_num) SYMBOL_VISIBLE;
 
-	static const enum_type::value_type periods = 8;
-	static const enum_type::value_type period = x_type::size / periods;
-	static const enum_type::value_type period_length = 1;
-	static const enum_type::value_type v_period_length = 2;
-	static const enum_type::value_type per_row = 8;
-	static const enum_type::value_type per_column = 2;
-	static const enum_type::value_type per_side = per_row / 2;
-	static const enum_type::value_type per_half = enum_type::size / 2;
+	static const SYMBOL_VISIBLE enum_type::value_type periods = 8;
+	static const SYMBOL_VISIBLE enum_type::value_type period = x_type::size / periods;
+	static const SYMBOL_VISIBLE enum_type::value_type period_length = 1;
+	static const SYMBOL_VISIBLE enum_type::value_type v_period_length = 2;
+	static const SYMBOL_VISIBLE enum_type::value_type per_row = 8;
+	static const SYMBOL_VISIBLE enum_type::value_type per_column = 2;
+	static const SYMBOL_VISIBLE enum_type::value_type per_side = per_row / 2;
+	static const SYMBOL_VISIBLE enum_type::value_type per_half = enum_type::size / 2;
 
 	static std::array<y_type, halco::hicann::v2::CrossbarSwitchOnHICANN::per_column> column(
-	    x_type x);
-	static bool exists(x_type x, y_type y);
-	static x_type to_x(enum_type const& e);
-	static y_type to_y(enum_type const& e);
-	static enum_type to_enum(x_type const& x, y_type const& y);
+	    x_type x) SYMBOL_VISIBLE;
+	static bool exists(x_type x, y_type y) SYMBOL_VISIBLE;
+	static x_type to_x(enum_type const& e) SYMBOL_VISIBLE;
+	static y_type to_y(enum_type const& e) SYMBOL_VISIBLE;
+	static enum_type to_enum(x_type const& x, y_type const& y) SYMBOL_VISIBLE;
 };
 
 struct GENPYBIND(inline_base("*")) SynapseSwitchOnHICANN
@@ -96,24 +100,26 @@ struct GENPYBIND(inline_base("*")) SynapseSwitchOnHICANN
 	GRID_COMMON_CONSTRUCTORS(SynapseSwitchOnHICANN)
 
 	// get SynapseSwitch from SynapseSwitchRow and number of switch in SynapseSwitchRow
-	SynapseSwitchOnHICANN(SynapseSwitchRowOnHICANN const& r, SynapseSwitchOnSynapseSwitchRow const& switch_in_row);
+	SynapseSwitchOnHICANN(
+	    SynapseSwitchRowOnHICANN const& r,
+	    SynapseSwitchOnSynapseSwitchRow const& switch_in_row) SYMBOL_VISIBLE;
 
-	static const enum_type::value_type periods = 8;
-	static const enum_type::value_type period  = x_type::size / periods;
-	static const enum_type::value_type period_length = 4;
-	static const enum_type::value_type v_period = 16;
-	static const enum_type::value_type v_period_length = 2;
-	static const enum_type::value_type per_row = 32;
-	static const enum_type::value_type per_column = 28;
-	static const enum_type::value_type per_side = per_row/2;
-	static const enum_type::value_type per_half = enum_type::size/2;
+	static const SYMBOL_VISIBLE enum_type::value_type periods = 8;
+	static const SYMBOL_VISIBLE enum_type::value_type period = x_type::size / periods;
+	static const SYMBOL_VISIBLE enum_type::value_type period_length = 4;
+	static const SYMBOL_VISIBLE enum_type::value_type v_period = 16;
+	static const SYMBOL_VISIBLE enum_type::value_type v_period_length = 2;
+	static const SYMBOL_VISIBLE enum_type::value_type per_row = 32;
+	static const SYMBOL_VISIBLE enum_type::value_type per_column = 28;
+	static const SYMBOL_VISIBLE enum_type::value_type per_side = per_row / 2;
+	static const SYMBOL_VISIBLE enum_type::value_type per_half = enum_type::size / 2;
 
-	static std::array<y_type, halco::hicann::v2::SynapseSwitchOnHICANN::per_column> column(
-	    x_type y);
-	static bool exists(x_type x, y_type y);
-	static x_type to_x(enum_type const& e);
-	static y_type to_y(enum_type const& e);
-	static enum_type to_enum(x_type const& x, y_type const& y);
+	static std::array<y_type, halco::hicann::v2::SynapseSwitchOnHICANN::per_column> column(x_type y)
+	    SYMBOL_VISIBLE;
+	static bool exists(x_type x, y_type y) SYMBOL_VISIBLE;
+	static x_type to_x(enum_type const& e) SYMBOL_VISIBLE;
+	static y_type to_y(enum_type const& e) SYMBOL_VISIBLE;
+	static enum_type to_enum(x_type const& x, y_type const& y) SYMBOL_VISIBLE;
 };
 
 
@@ -131,12 +137,12 @@ struct GENPYBIND(inline_base("*")) HLineOnHICANN
 	HLineOnHICANN east() const { return HLineOnHICANN((value() + 2) % end); }
 	HLineOnHICANN west() const { return HLineOnHICANN((value() + end - 2) % end); }
 
-	HRepeaterOnHICANN toHRepeaterOnHICANN() const;
-	HRepeaterOnHICANN toRepeaterOnHICANN() const;
+	HRepeaterOnHICANN toHRepeaterOnHICANN() const SYMBOL_VISIBLE;
+	HRepeaterOnHICANN toRepeaterOnHICANN() const SYMBOL_VISIBLE;
 
 	// TODO: Add simple consistency test for this set of functions
-	std::array<VLineOnHICANN, 8> toVLineOnHICANN() const;
-	std::array<VLineOnHICANN, 4> toVLineOnHICANN(common::SideHorizontal s) const;
+	std::array<VLineOnHICANN, 8> toVLineOnHICANN() const SYMBOL_VISIBLE;
+	std::array<VLineOnHICANN, 4> toVLineOnHICANN(common::SideHorizontal s) const SYMBOL_VISIBLE;
 
 	/**
 	 * @brief Return the N-th connected vertical line on the given side of the HICANN.
@@ -144,7 +150,7 @@ struct GENPYBIND(inline_base("*")) HLineOnHICANN
 	 * @param num Index to select one of the four available vertical lines
 	 * @throw std::invalid_argument When the index is out of range
 	 */
-	VLineOnHICANN toVLineOnHICANN(common::SideHorizontal side, size_t num) const;
+	VLineOnHICANN toVLineOnHICANN(common::SideHorizontal side, size_t num) const SYMBOL_VISIBLE;
 };
 
 struct GENPYBIND(inline_base("*")) VLineOnHICANN
@@ -159,10 +165,10 @@ struct GENPYBIND(inline_base("*")) VLineOnHICANN
 	    rant_t(val)
 	{}
 
-	static size_t const switches_per_side = 14;
+	static SYMBOL_VISIBLE size_t const switches_per_side = 14;
 
-	VRepeaterOnHICANN toVRepeaterOnHICANN() const;
-	VRepeaterOnHICANN toRepeaterOnHICANN() const;
+	VRepeaterOnHICANN toVRepeaterOnHICANN() const SYMBOL_VISIBLE;
+	VRepeaterOnHICANN toRepeaterOnHICANN() const SYMBOL_VISIBLE;
 
 	VLineOnHICANN south() const {
 		if (value() < end / 2) {
@@ -187,20 +193,20 @@ struct GENPYBIND(inline_base("*")) VLineOnHICANN
 	 * @throw std::invalid_argument When the index is out of range
 	 */
 	SynapseSwitchRowOnHICANN toSynapseSwitchRowOnHICANN(
-		common::SideVertical side_vert, size_t num) const;
+	    common::SideVertical side_vert, size_t num) const SYMBOL_VISIBLE;
 
 	std::array<SynapseSwitchRowOnHICANN, halco::hicann::v2::VLineOnHICANN::switches_per_side>
-	toSynapseSwitchRowOnHICANN(common::SideVertical side_vert) const;
+	toSynapseSwitchRowOnHICANN(common::SideVertical side_vert) const SYMBOL_VISIBLE;
 
 	std::array<SynapseSwitchRowOnHICANN, 2 * halco::hicann::v2::VLineOnHICANN::switches_per_side>
-	toSynapseSwitchRowOnHICANN() const;
+	toSynapseSwitchRowOnHICANN() const SYMBOL_VISIBLE;
 
 	/// Return synapse drivers reachable from this vline that are on the
 	/// specified side of this or the adjacent hicann.
 	std::array<SynapseDriverOnHICANN, halco::hicann::v2::VLineOnHICANN::switches_per_side>
-	toSynapseDriverOnHICANN(common::SideHorizontal const& side) const;
+	toSynapseDriverOnHICANN(common::SideHorizontal const& side) const SYMBOL_VISIBLE;
 
-	std::array<HLineOnHICANN, 2> toHLineOnHICANN() const;
+	std::array<HLineOnHICANN, 2> toHLineOnHICANN() const SYMBOL_VISIBLE;
 };
 
 struct HRepeaterOnWafer;
@@ -232,7 +238,7 @@ public:
 	 */
 	// clang-format off
 	boost::tuple<HRepeaterOnWafer, boost::optional<HRepeaterOnWafer> > GENPYBIND(hidden)
-	    toHRepeaterOnWafer() const;
+	    toHRepeaterOnWafer() const SYMBOL_VISIBLE;
 	// clang-format on
 	GENPYBIND_MANUAL({
 		parent.def("toHRepeaterOnWafer", [](GENPYBIND_PARENT_TYPE const& self) {
@@ -271,7 +277,7 @@ public:
 	 */
 	// clang-format off
 	boost::tuple<VRepeaterOnWafer, boost::optional<VRepeaterOnWafer> > GENPYBIND(hidden)
-	    toVRepeaterOnWafer() const;
+	    toVRepeaterOnWafer() const SYMBOL_VISIBLE;
 	// clang-format on
 	GENPYBIND_MANUAL({
 		parent.def("toVRepeaterOnWafer", [](GENPYBIND_PARENT_TYPE const& self) {
@@ -289,7 +295,7 @@ struct GENPYBIND(inline_base("*")) BackgroundGeneratorOnHICANN
 	    rant_t(val)
 	{}
 
-	NeuronBlockOnHICANN toNeuronBlockOnHICANN() const;
+	NeuronBlockOnHICANN toNeuronBlockOnHICANN() const SYMBOL_VISIBLE;
 };
 
 struct GENPYBIND(inline_base("*")) DNCMergerOnHICANN
@@ -300,7 +306,7 @@ struct GENPYBIND(inline_base("*")) DNCMergerOnHICANN
 	    rant_t(val)
 	{}
 
-	SendingRepeaterOnHICANN toSendingRepeaterOnHICANN() const;
+	SendingRepeaterOnHICANN toSendingRepeaterOnHICANN() const SYMBOL_VISIBLE;
 };
 
 struct GENPYBIND(inline_base("*HICANNMixin*")) DNCMergerOnWafer
@@ -371,11 +377,11 @@ struct GENPYBIND(inline_base("*")) SendingRepeaterOnHICANN
 	    rant_t(val)
 	{}
 
-	GbitLinkOnHICANN toGbitLinkOnHICANN() const;
-	HLineOnHICANN toHLineOnHICANN() const;
-	HRepeaterOnHICANN toHRepeaterOnHICANN() const;
-	RepeaterBlockOnHICANN toRepeaterBlockOnHICANN() const;
-	DNCMergerOnHICANN toDNCMergerOnHICANN() const;
+	GbitLinkOnHICANN toGbitLinkOnHICANN() const SYMBOL_VISIBLE;
+	HLineOnHICANN toHLineOnHICANN() const SYMBOL_VISIBLE;
+	HRepeaterOnHICANN toHRepeaterOnHICANN() const SYMBOL_VISIBLE;
+	RepeaterBlockOnHICANN toRepeaterBlockOnHICANN() const SYMBOL_VISIBLE;
+	DNCMergerOnHICANN toDNCMergerOnHICANN() const SYMBOL_VISIBLE;
 };
 
 
@@ -424,13 +430,13 @@ struct GENPYBIND(inline_base("*")) HRepeaterOnHICANN
 		return RepeaterBlockOnHICANN(toSideHorizontal(), common::Y(1));
 	}
 
-	TestPortOnRepeaterBlock toTestPortOnRepeaterBlock() const;
+	TestPortOnRepeaterBlock toTestPortOnRepeaterBlock() const SYMBOL_VISIBLE;
 
-	SendingRepeaterOnHICANN toSendingRepeaterOnHICANN() const;
+	SendingRepeaterOnHICANN toSendingRepeaterOnHICANN() const SYMBOL_VISIBLE;
 
-	bool isSending() const;
+	bool isSending() const SYMBOL_VISIBLE;
 
-/* implementation detail, not part of public API: */
+	/* implementation detail, not part of public API: */
 
 	// „even addresses refer to the left border and odd addresses to the right“
 	static x_type to_x(enum_type const& e) { return x_type(e % 2); }
@@ -446,7 +452,7 @@ struct GENPYBIND(inline_base("*")) HRepeaterOnHICANN
 	}
 
 private:
-	static std::array<HLineOnHICANN, 8> const spl1;
+	static SYMBOL_VISIBLE std::array<HLineOnHICANN, 8> const spl1;
 };
 
 
@@ -482,7 +488,7 @@ public:
 	 */
 	// clang-format off
 	boost::tuple<HLineOnWafer, boost::optional<HLineOnWafer> > GENPYBIND(hidden)
-	    toHLineOnWafer() const;
+	    toHLineOnWafer() const SYMBOL_VISIBLE;
 	// clang-format on
 	GENPYBIND_MANUAL({
 		parent.def("toHLineOnWafer", [](GENPYBIND_PARENT_TYPE const& self) {
@@ -491,8 +497,8 @@ public:
 		});
 	})
 
-	boost::optional<HRepeaterOnWafer> east() const;
-	boost::optional<HRepeaterOnWafer> west() const;
+	boost::optional<HRepeaterOnWafer> east() const SYMBOL_VISIBLE;
+	boost::optional<HRepeaterOnWafer> west() const SYMBOL_VISIBLE;
 };
 
 
@@ -591,7 +597,7 @@ public:
 	 */
 	// clang-format off
 	boost::tuple<VLineOnWafer, boost::optional<VLineOnWafer> > GENPYBIND(hidden)
-	    toVLineOnWafer() const;
+	    toVLineOnWafer() const SYMBOL_VISIBLE;
 	// clang-format on
 	GENPYBIND_MANUAL({
 		parent.def("toVLineOnWafer", [](GENPYBIND_PARENT_TYPE const& self) {
@@ -600,8 +606,8 @@ public:
 		});
 	})
 
-	boost::optional<VRepeaterOnWafer> north() const;
-	boost::optional<VRepeaterOnWafer> south() const;
+	boost::optional<VRepeaterOnWafer> north() const SYMBOL_VISIBLE;
+	boost::optional<VRepeaterOnWafer> south() const SYMBOL_VISIBLE;
 };
 
 } // v2

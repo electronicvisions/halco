@@ -8,6 +8,8 @@
 #include "halco/hicann-dls/vx/ultra96.h"
 #include "halco/hicann-dls/vx/xboard.h"
 
+#include "hate/visibility.h"
+
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 /***********\
@@ -33,10 +35,10 @@ struct GENPYBIND(inline_base("*")) I2CINA219RoRegisterOnINA219
 {
 	constexpr explicit I2CINA219RoRegisterOnINA219(uintmax_t const val = 0) : rant_t(val) {}
 
-	static const I2CINA219RoRegisterOnINA219 shunt;
-	static const I2CINA219RoRegisterOnINA219 bus;
-	static const I2CINA219RoRegisterOnINA219 power;
-	static const I2CINA219RoRegisterOnINA219 current;
+	static const SYMBOL_VISIBLE I2CINA219RoRegisterOnINA219 shunt;
+	static const SYMBOL_VISIBLE I2CINA219RoRegisterOnINA219 bus;
+	static const SYMBOL_VISIBLE I2CINA219RoRegisterOnINA219 power;
+	static const SYMBOL_VISIBLE I2CINA219RoRegisterOnINA219 current;
 };
 
 
@@ -45,8 +47,8 @@ struct GENPYBIND(inline_base("*")) I2CINA219RwRegisterOnINA219
 {
 	constexpr explicit I2CINA219RwRegisterOnINA219(uintmax_t const val = 0) : rant_t(val) {}
 
-	static const I2CINA219RwRegisterOnINA219 config;
-	static const I2CINA219RwRegisterOnINA219 calibration;
+	static const SYMBOL_VISIBLE I2CINA219RwRegisterOnINA219 config;
+	static const SYMBOL_VISIBLE I2CINA219RwRegisterOnINA219 calibration;
 };
 
 
@@ -95,9 +97,9 @@ struct GENPYBIND(inline_base("*")) I2CTCA9554RwRegisterOnTCA9554
 {
 	constexpr explicit I2CTCA9554RwRegisterOnTCA9554(uintmax_t const val = 0) : rant_t(val) {}
 
-	static const I2CTCA9554RwRegisterOnTCA9554 outputs;
-	static const I2CTCA9554RwRegisterOnTCA9554 polarity;
-	static const I2CTCA9554RwRegisterOnTCA9554 config;
+	static const SYMBOL_VISIBLE I2CTCA9554RwRegisterOnTCA9554 outputs;
+	static const SYMBOL_VISIBLE I2CTCA9554RwRegisterOnTCA9554 polarity;
+	static const SYMBOL_VISIBLE I2CTCA9554RwRegisterOnTCA9554 config;
 };
 
 
@@ -106,7 +108,7 @@ struct GENPYBIND(inline_base("*")) I2CTCA9554RoRegisterOnTCA9554
 {
 	constexpr explicit I2CTCA9554RoRegisterOnTCA9554(uintmax_t const val = 0) : rant_t(val) {}
 
-	static const I2CTCA9554RoRegisterOnTCA9554 inputs;
+	static const SYMBOL_VISIBLE I2CTCA9554RoRegisterOnTCA9554 inputs;
 };
 
 
@@ -155,8 +157,8 @@ struct GENPYBIND(inline_base("*")) I2CAD5252RwRegisterOnAD5252Channel
 {
 	constexpr explicit I2CAD5252RwRegisterOnAD5252Channel(uintmax_t const val = 0) : rant_t(val) {}
 
-	static const I2CAD5252RwRegisterOnAD5252Channel rdac_volatile;
-	static const I2CAD5252RwRegisterOnAD5252Channel eemem_persistent;
+	static const SYMBOL_VISIBLE I2CAD5252RwRegisterOnAD5252Channel rdac_volatile;
+	static const SYMBOL_VISIBLE I2CAD5252RwRegisterOnAD5252Channel eemem_persistent;
 
 	// Command byte prefixes for the register types
 	static constexpr uint8_t rdac_volatile_prefix = 0x00;

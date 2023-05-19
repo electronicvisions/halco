@@ -2,6 +2,7 @@
 #include "halco/common/coordinate.h"
 #include "halco/common/genpybind.h"
 #include "halco/hicann-dls/vx/capmem.h"
+#include "hate/visibility.h"
 
 namespace halco::hicann_dls::vx::v3 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V3 {
 
@@ -27,85 +28,85 @@ struct GENPYBIND(inline_base("*")) CapMemRowOnCapMemBlock
 	{}
 
 	/** Leak potential. */
-	static const CapMemRowOnCapMemBlock v_leak;
+	static const SYMBOL_VISIBLE CapMemRowOnCapMemBlock v_leak;
 
 	/** Reset potential. */
-	static const CapMemRowOnCapMemBlock v_reset;
+	static const SYMBOL_VISIBLE CapMemRowOnCapMemBlock v_reset;
 
 	/** Threshold potential. */
-	static const CapMemRowOnCapMemBlock v_threshold;
+	static const SYMBOL_VISIBLE CapMemRowOnCapMemBlock v_threshold;
 
 	/** Reversal potential of the excitatory synaptic input. Used only in COBA mode. */
-	static const CapMemRowOnCapMemBlock e_synin_exc_rev;
+	static const SYMBOL_VISIBLE CapMemRowOnCapMemBlock e_synin_exc_rev;
 
 	/** Reversal potential of the inhibitory synaptic input. Used only in COBA mode. */
-	static const CapMemRowOnCapMemBlock e_synin_inh_rev;
+	static const SYMBOL_VISIBLE CapMemRowOnCapMemBlock e_synin_inh_rev;
 
 	/** Leak potential of adaptation term. */
-	static const CapMemRowOnCapMemBlock v_adapt_leak;
+	static const SYMBOL_VISIBLE CapMemRowOnCapMemBlock v_adapt_leak;
 
 	/** Threshold voltage for the exponential term. */
-	static const CapMemRowOnCapMemBlock v_exp;
+	static const SYMBOL_VISIBLE CapMemRowOnCapMemBlock v_exp;
 
 	/** Adaptation reference potential the adaptation state variable is pulled towards. */
-	static const CapMemRowOnCapMemBlock v_adapt_ref;
+	static const SYMBOL_VISIBLE CapMemRowOnCapMemBlock v_adapt_ref;
 
 	/** Bias current of OTA during leak. */
-	static const CapMemRowOnCapMemBlock i_bias_leak;
+	static const SYMBOL_VISIBLE CapMemRowOnCapMemBlock i_bias_leak;
 
 	/** Bias current of OTA during reset. */
-	static const CapMemRowOnCapMemBlock i_bias_reset;
+	static const SYMBOL_VISIBLE CapMemRowOnCapMemBlock i_bias_reset;
 
 	/** Bias current for the RC circuit controlling the excitatory synaptic input time constant. */
-	static const CapMemRowOnCapMemBlock i_bias_synin_exc_tau;
+	static const SYMBOL_VISIBLE CapMemRowOnCapMemBlock i_bias_synin_exc_tau;
 
 	/**
 	 * Bias current for the source follower controlling the reference voltage for the
 	 * excitatory synaptic input's OTA.
 	 */
-	static const CapMemRowOnCapMemBlock i_bias_synin_exc_shift;
+	static const SYMBOL_VISIBLE CapMemRowOnCapMemBlock i_bias_synin_exc_shift;
 
 	/** Bias current of excitatory synaptic input OTA for current-based input. */
-	static const CapMemRowOnCapMemBlock i_bias_synin_exc_gm;
+	static const SYMBOL_VISIBLE CapMemRowOnCapMemBlock i_bias_synin_exc_gm;
 
 	/** Bias current of excitatory synaptic input OTA for conductance-based input. */
-	static const CapMemRowOnCapMemBlock i_bias_synin_exc_coba;
+	static const SYMBOL_VISIBLE CapMemRowOnCapMemBlock i_bias_synin_exc_coba;
 
 	/** Bias current for the RC circuit controlling the inhibitory synaptic input time constant. */
-	static const CapMemRowOnCapMemBlock i_bias_synin_inh_tau;
+	static const SYMBOL_VISIBLE CapMemRowOnCapMemBlock i_bias_synin_inh_tau;
 
 	/**
 	 * Bias current for the source follower controlling the reference voltage for the
 	 * inhibitory synaptic input's OTA.
 	 */
-	static const CapMemRowOnCapMemBlock i_bias_synin_inh_shift;
+	static const SYMBOL_VISIBLE CapMemRowOnCapMemBlock i_bias_synin_inh_shift;
 
 	/** Bias current of inhibitory synaptic input OTA for current-based input. */
-	static const CapMemRowOnCapMemBlock i_bias_synin_inh_gm;
+	static const SYMBOL_VISIBLE CapMemRowOnCapMemBlock i_bias_synin_inh_gm;
 
 	/** Bias current of inhibitory synaptic input OTA for conductance-based input. */
-	static const CapMemRowOnCapMemBlock i_bias_synin_inh_coba;
+	static const SYMBOL_VISIBLE CapMemRowOnCapMemBlock i_bias_synin_inh_coba;
 
 	/** Bias current controlling the adaptation time constant. */
-	static const CapMemRowOnCapMemBlock i_bias_adapt_tau;
+	static const SYMBOL_VISIBLE CapMemRowOnCapMemBlock i_bias_adapt_tau;
 
 	/** Bias current controlling the sub-threshold adaptation strength. */
-	static const CapMemRowOnCapMemBlock i_bias_adapt_a;
+	static const SYMBOL_VISIBLE CapMemRowOnCapMemBlock i_bias_adapt_a;
 
 	/** Bias current controlling the spike-triggered adaptation strength. */
-	static const CapMemRowOnCapMemBlock i_bias_adapt_b;
+	static const SYMBOL_VISIBLE CapMemRowOnCapMemBlock i_bias_adapt_b;
 
 	/** Bias current controlling the strength of the exponential term. */
-	static const CapMemRowOnCapMemBlock i_bias_exp;
+	static const SYMBOL_VISIBLE CapMemRowOnCapMemBlock i_bias_exp;
 
 	/**
 	 * Positive or negative offset current onto the membrane.
 	 * The sign is controlled by a digital setting.
 	 */
-	static const CapMemRowOnCapMemBlock i_mem_offset;
+	static const SYMBOL_VISIBLE CapMemRowOnCapMemBlock i_mem_offset;
 
 	/** Bias current of inter-compartmental conductance. */
-	static const CapMemRowOnCapMemBlock i_bias_nmda;
+	static const SYMBOL_VISIBLE CapMemRowOnCapMemBlock i_bias_nmda;
 };
 
 struct GENPYBIND(inline_base("*")) CapMemCellOnCapMemBlock
@@ -123,81 +124,81 @@ struct GENPYBIND(inline_base("*")) CapMemCellOnCapMemBlock
 		return y();
 	}
 
-	bool isShared() const;
+	bool isShared() const SYMBOL_VISIBLE;
 
 	/** STP vcharge target voltage for selection 0. */
-	static const CapMemCellOnCapMemBlock stp_v_charge_0;
+	static const SYMBOL_VISIBLE CapMemCellOnCapMemBlock stp_v_charge_0;
 
 	/** STP vcharge target voltage for selection 1. */
-	static const CapMemCellOnCapMemBlock stp_v_charge_1;
+	static const SYMBOL_VISIBLE CapMemCellOnCapMemBlock stp_v_charge_1;
 
 	/** STP vrecover target voltage for selection 0. */
-	static const CapMemCellOnCapMemBlock stp_v_recover_0;
+	static const SYMBOL_VISIBLE CapMemCellOnCapMemBlock stp_v_recover_0;
 
 	/** STP vrecover target voltage for selection 1. */
-	static const CapMemCellOnCapMemBlock stp_v_recover_1;
+	static const SYMBOL_VISIBLE CapMemCellOnCapMemBlock stp_v_recover_1;
 
 	/** CADC ramp offset potential. */
-	static const CapMemCellOnCapMemBlock cadc_v_ramp_offset;
+	static const SYMBOL_VISIBLE CapMemCellOnCapMemBlock cadc_v_ramp_offset;
 
 	/** CADC ramp buffer bias potential. */
-	static const CapMemCellOnCapMemBlock cadc_v_bias_ramp_buf;
+	static const SYMBOL_VISIBLE CapMemCellOnCapMemBlock cadc_v_bias_ramp_buf;
 
 	/** Cascode bias potential for various OTAs within the neuron. */
-	static const CapMemCellOnCapMemBlock neuron_v_bias_casc_n;
+	static const SYMBOL_VISIBLE CapMemCellOnCapMemBlock neuron_v_bias_casc_n;
 
 	/** Synapse DAC bias that scales the weight of the synapses on the neuron's input globally. */
-	static const CapMemCellOnCapMemBlock syn_i_bias_dac;
+	static const SYMBOL_VISIBLE CapMemCellOnCapMemBlock syn_i_bias_dac;
 
 	/** Current determining the time constant of the correlation measurement. */
-	static const CapMemCellOnCapMemBlock syn_i_bias_ramp;
+	static const SYMBOL_VISIBLE CapMemCellOnCapMemBlock syn_i_bias_ramp;
 
 	/** Current acting as a multiplicative factor while accumulating correlation measurements. */
-	static const CapMemCellOnCapMemBlock syn_i_bias_store;
+	static const SYMBOL_VISIBLE CapMemCellOnCapMemBlock syn_i_bias_store;
 
 	/**
 	 * Bias current for the output buffer of the synapses' correlation voltage, which accumulates
 	 * and stores the individual measurements.
 	 */
-	static const CapMemCellOnCapMemBlock syn_i_bias_corout;
+	static const SYMBOL_VISIBLE CapMemCellOnCapMemBlock syn_i_bias_corout;
 
 	/** Bias current for the comparator used for weight modulation in STP circuit. */
-	static const CapMemCellOnCapMemBlock stp_i_bias_comparator;
+	static const SYMBOL_VISIBLE CapMemCellOnCapMemBlock stp_i_bias_comparator;
 
 	/** Ramp generating current used for weight modulation in STP circuit. */
-	static const CapMemCellOnCapMemBlock stp_i_ramp;
+	static const SYMBOL_VISIBLE CapMemCellOnCapMemBlock stp_i_ramp;
 
 	/** Calibration current for the ramp in the STP circuit. */
-	static const CapMemCellOnCapMemBlock stp_i_calib;
+	static const SYMBOL_VISIBLE CapMemCellOnCapMemBlock stp_i_calib;
 
 	/** Ramp generating current for the CADC circuit. */
-	static const CapMemCellOnCapMemBlock cadc_i_ramp_slope;
+	static const SYMBOL_VISIBLE CapMemCellOnCapMemBlock cadc_i_ramp_slope;
 
 	/** Comparator bias current in the CADC circuit. */
-	static const CapMemCellOnCapMemBlock cadc_i_bias_comp;
+	static const SYMBOL_VISIBLE CapMemCellOnCapMemBlock cadc_i_bias_comp;
 
 	/** Bias current for the reset buffer of the CADC circuit. */
-	static const CapMemCellOnCapMemBlock cadc_i_bias_vreset_buf;
+	static const SYMBOL_VISIBLE CapMemCellOnCapMemBlock cadc_i_bias_vreset_buf;
 
 	/** Bias current for the neuron's readout amplifier. */
-	static const CapMemCellOnCapMemBlock neuron_i_bias_readout_amp;
+	static const SYMBOL_VISIBLE CapMemCellOnCapMemBlock neuron_i_bias_readout_amp;
 
 	/**
 	 * Bias current for the leak/reset input voltage drop source follower.
 	 * Note that also the potentials v_adapt_ref, v_adapt_leak, v_exp,
 	 * e_synin_exc_rev, e_synin_inh_rev are buffered by a source follower
 	 * and affected by this parameter.*/
-	static const CapMemCellOnCapMemBlock neuron_i_bias_leak_source_follower;
+	static const SYMBOL_VISIBLE CapMemCellOnCapMemBlock neuron_i_bias_leak_source_follower;
 
 	/** Bias current for the threshold comparator. */
-	static const CapMemCellOnCapMemBlock neuron_i_bias_spike_comparator;
+	static const SYMBOL_VISIBLE CapMemCellOnCapMemBlock neuron_i_bias_spike_comparator;
 
 	/**
 	 * Bias current for the source followers controlling the drop of the synaptic
 	 * input voltage before the OTAs' input. Applies to both excitatory and inhibitory
 	 * synaptic inputs.
 	 */
-	static const CapMemCellOnCapMemBlock neuron_i_bias_synin_drop;
+	static const SYMBOL_VISIBLE CapMemCellOnCapMemBlock neuron_i_bias_synin_drop;
 };
 
 HALCO_COORDINATE_MIXIN(CapMemMixin, CapMemBlockOnDLS, capmem)
@@ -220,44 +221,44 @@ struct GENPYBIND(inline_base("*CapMemMixin*"), inline_base("*CoordinateBase*")) 
 		return This();
 	}
 
-	static const CapMemCellOnDLS readout_sc_amp_v_ref;
-	static const CapMemCellOnDLS readout_pseudo_diff_v_ref;
-	static const CapMemCellOnDLS readout_iconv_test_voltage;
-	static const CapMemCellOnDLS readout_iconv_sc_amp_v_ref;
-	static const CapMemCellOnDLS readout_iconv_sc_amp_i_bias;
-	static const CapMemCellOnDLS readout_pseudo_diff_buffer_bias;
-	static const CapMemCellOnDLS readout_out_amp_i_bias_0;
-	static const CapMemCellOnDLS readout_out_amp_i_bias_1;
-	static const CapMemCellOnDLS readout_idac_i_bias;
-	static const CapMemCellOnDLS readout_idac_i_bias_casc;
-	static const CapMemCellOnDLS readout_iconv_i_bias_buffer;
-	static const CapMemCellOnDLS readout_ac_mux_i_bias;
-	static const CapMemCellOnDLS readout_madc_in_500na;
-	static const CapMemCellOnDLS readout_sc_amp_i_bias;
+	static const SYMBOL_VISIBLE CapMemCellOnDLS readout_sc_amp_v_ref;
+	static const SYMBOL_VISIBLE CapMemCellOnDLS readout_pseudo_diff_v_ref;
+	static const SYMBOL_VISIBLE CapMemCellOnDLS readout_iconv_test_voltage;
+	static const SYMBOL_VISIBLE CapMemCellOnDLS readout_iconv_sc_amp_v_ref;
+	static const SYMBOL_VISIBLE CapMemCellOnDLS readout_iconv_sc_amp_i_bias;
+	static const SYMBOL_VISIBLE CapMemCellOnDLS readout_pseudo_diff_buffer_bias;
+	static const SYMBOL_VISIBLE CapMemCellOnDLS readout_out_amp_i_bias_0;
+	static const SYMBOL_VISIBLE CapMemCellOnDLS readout_out_amp_i_bias_1;
+	static const SYMBOL_VISIBLE CapMemCellOnDLS readout_idac_i_bias;
+	static const SYMBOL_VISIBLE CapMemCellOnDLS readout_idac_i_bias_casc;
+	static const SYMBOL_VISIBLE CapMemCellOnDLS readout_iconv_i_bias_buffer;
+	static const SYMBOL_VISIBLE CapMemCellOnDLS readout_ac_mux_i_bias;
+	static const SYMBOL_VISIBLE CapMemCellOnDLS readout_madc_in_500na;
+	static const SYMBOL_VISIBLE CapMemCellOnDLS readout_sc_amp_i_bias;
 
 	/**
 	 * Bias current for the buffer in the top synapse drivers which allows readout of the STP
 	 * voltage.
 	 */
-	static const CapMemCellOnDLS stp_ibias_readout_top;
+	static const SYMBOL_VISIBLE CapMemCellOnDLS stp_ibias_readout_top;
 
 	/**
 	 * Bias current for the buffer in the bottom synapse drivers which allows readout of the STP
 	 * voltage.
 	 */
-	static const CapMemCellOnDLS stp_ibias_readout_bottom;
+	static const SYMBOL_VISIBLE CapMemCellOnDLS stp_ibias_readout_bottom;
 
 	/**
 	 * Bias current for the Hagen mode input DAC used for weight modulation of the top
 	 * synapse drivers.
 	 */
-	static const CapMemCellOnDLS hagen_ibias_dac_top;
+	static const SYMBOL_VISIBLE CapMemCellOnDLS hagen_ibias_dac_top;
 
 	/**
 	 * Bias current for the Hagen mode input DAC used for weight modulation of the bottom
 	 * synapse drivers.
 	 */
-	static const CapMemCellOnDLS hagen_ibias_dac_bottom;
+	static const SYMBOL_VISIBLE CapMemCellOnDLS hagen_ibias_dac_bottom;
 };
 
 
@@ -269,7 +270,7 @@ struct GENPYBIND(inline_base("*")) UnusedCapMemCellOnDLS
 	    rant_t(val)
 	{}
 
-	CapMemCellOnDLS toCapMemCellOnDLS() const;
+	CapMemCellOnDLS toCapMemCellOnDLS() const SYMBOL_VISIBLE;
 };
 
 } // namespace halco::hicann_dls::vx::v3

@@ -29,6 +29,15 @@ def configure(conf):
     if getattr(conf.options, 'with_halco_python_bindings', True):
         conf.recurse('pyhalco')
 
+    conf.env.CXXFLAGS_HALCO = [
+        '-fvisibility=hidden',
+        '-fvisibility-inlines-hidden',
+    ]
+    conf.env.LINKFLAGS_HALCO = [
+        '-fvisibility=hidden',
+        '-fvisibility-inlines-hidden',
+    ]
+
 
 def build(bld):
     bld.install_files(
@@ -49,6 +58,7 @@ def build(bld):
         source=bld.path.ant_glob('src/halco/common/*.cpp'),
         install_path='${PREFIX}/lib',
         linkflags='-Wl,-z,defs',
+        uselib='HALCO',
         use=['rant', 'ZTL', 'pywrap', 'halco_inc',
              'LOG4CXX', 'boost_serialization', 'hate_inc'],
     )
@@ -58,6 +68,7 @@ def build(bld):
         source=bld.path.ant_glob('src/halco/hicann/v2/*.cpp'),
         install_path='${PREFIX}/lib',
         linkflags='-Wl,-z,defs',
+        uselib='HALCO',
         use=['halco_common'],
         defines=['BOOST_MPL_CFG_NO_PREPROCESSED_HEADERS',
                  'BOOST_MPL_LIMIT_LIST_SIZE=30'],
@@ -73,6 +84,7 @@ def build(bld):
             target='halco_common_ppu_vx',
             source=bld.path.ant_glob('src/halco/common/*.cpp'),
             install_path='${PREFIX}/lib/ppu',
+            uselib='HALCO',
             use=['halco_inc', 'ZTL', 'rant', 'pywrap_inc', 'hate_inc'],
             env=env,
             linkflags='-Wl,-z,defs',
@@ -84,6 +96,7 @@ def build(bld):
         install_path='${PREFIX}/lib',
         linkflags='-Wl,-z,defs',
         use=['halco_common'],
+        uselib='HALCO',
     )
 
     bld.shlib(
@@ -102,6 +115,7 @@ def build(bld):
             install_path='${PREFIX}/lib',
             linkflags='-Wl,-z,defs',
             use=['halco_common', 'halco_hicann_dls_vx'],
+            uselib='HALCO',
         )
 
         bld.shlib(
@@ -122,6 +136,7 @@ def build(bld):
             install_path='${PREFIX}/lib/ppu',
             linkflags='-Wl,-z,defs',
             use=['halco_common_ppu_vx'],
+            uselib='HALCO',
             env = env,
         )
 
@@ -136,6 +151,7 @@ def build(bld):
                 install_path='${PREFIX}/lib/ppu',
                 linkflags='-Wl,-z,defs',
                 use=['halco_common_ppu_vx', 'halco_hicann_dls_ppu_vx'],
+                uselib='HALCO',
                 env = env,
             )
 

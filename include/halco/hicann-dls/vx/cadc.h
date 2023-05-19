@@ -9,6 +9,8 @@
 #include "halco/hicann-dls/vx/synapse.h"
 #include "halco/hicann-dls/vx/synram.h"
 
+#include "hate/visibility.h"
+
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 struct SynapseRowOnDLS;
@@ -30,8 +32,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) 
 
 #include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
-	static const CADCOnDLS top;
-	static const CADCOnDLS bottom;
+	static const SYMBOL_VISIBLE CADCOnDLS top;
+	static const SYMBOL_VISIBLE CADCOnDLS bottom;
 };
 
 
@@ -43,8 +45,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) 
 
 #include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
-	static const CADCConfigOnDLS top;
-	static const CADCConfigOnDLS bottom;
+	static const SYMBOL_VISIBLE CADCConfigOnDLS top;
+	static const SYMBOL_VISIBLE CADCConfigOnDLS bottom;
 };
 
 
@@ -53,8 +55,8 @@ struct GENPYBIND(inline_base("*")) CADCChannelType
 {
 	constexpr explicit CADCChannelType(uintmax_t const val = 0) : rant_t(val) {}
 
-	static const CADCChannelType causal;
-	static const CADCChannelType acausal;
+	static const SYMBOL_VISIBLE CADCChannelType causal;
+	static const SYMBOL_VISIBLE CADCChannelType acausal;
 };
 
 
@@ -63,8 +65,8 @@ struct GENPYBIND(inline_base("*")) CADCReadoutType
 {
 	constexpr explicit CADCReadoutType(uintmax_t const val = 0) : rant_t(val) {}
 
-	static const CADCReadoutType trigger_read;
-	static const CADCReadoutType buffered;
+	static const SYMBOL_VISIBLE CADCReadoutType trigger_read;
+	static const SYMBOL_VISIBLE CADCReadoutType buffered;
 };
 
 
@@ -95,10 +97,10 @@ public:
 	SynapseRowOnSynram toSynapseRowOnSynram() const { return This(); }
 	SynramOnDLS toSynramOnDLS() const { return split().first; }
 
-	SynapseRowOnDLS toSynapseRowOnDLS() const;
-	SynapseWeightRowOnDLS toSynapseWeightRowOnDLS() const;
-	SynapseLabelRowOnDLS toSynapseLabelRowOnDLS() const;
-	SynapseCorrelationCalibRowOnDLS toSynapseCorrelationCalibRowOnDLS() const;
+	SynapseRowOnDLS toSynapseRowOnDLS() const SYMBOL_VISIBLE;
+	SynapseWeightRowOnDLS toSynapseWeightRowOnDLS() const SYMBOL_VISIBLE;
+	SynapseLabelRowOnDLS toSynapseLabelRowOnDLS() const SYMBOL_VISIBLE;
+	SynapseCorrelationCalibRowOnDLS toSynapseCorrelationCalibRowOnDLS() const SYMBOL_VISIBLE;
 };
 
 
@@ -189,10 +191,10 @@ struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*")) 
 		return This();
 	}
 
-	SynapseQuadOnDLS toSynapseQuadOnDLS() const;
-	SynapseWeightQuadOnDLS toSynapseWeightQuadOnDLS() const;
-	SynapseLabelQuadOnDLS toSynapseLabelQuadOnDLS() const;
-	SynapseCorrelationCalibQuadOnDLS toSynapseCorrelationCalibQuadOnDLS() const;
+	SynapseQuadOnDLS toSynapseQuadOnDLS() const SYMBOL_VISIBLE;
+	SynapseWeightQuadOnDLS toSynapseWeightQuadOnDLS() const SYMBOL_VISIBLE;
+	SynapseLabelQuadOnDLS toSynapseLabelQuadOnDLS() const SYMBOL_VISIBLE;
+	SynapseCorrelationCalibQuadOnDLS toSynapseCorrelationCalibQuadOnDLS() const SYMBOL_VISIBLE;
 };
 
 struct GENPYBIND(inline_base("*CADCChannelTypeMixin*")) CADCChannelConfigOnSynram
@@ -236,7 +238,7 @@ struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*"))
 	{
 		return This();
 	}
-	NeuronConfigBlockOnDLS toNeuronConfigBlockOnDLS() const;
+	NeuronConfigBlockOnDLS toNeuronConfigBlockOnDLS() const SYMBOL_VISIBLE;
 };
 
 } // namespace halco::hicann_dls::vx

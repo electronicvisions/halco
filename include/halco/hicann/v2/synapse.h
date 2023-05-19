@@ -14,6 +14,8 @@ extern "C" {
 #include "halco/hicann/v2/hicann.h"
 #include "halco/hicann/v2/neuron.h"
 
+#include "hate/visibility.h"
+
 namespace halco {
 namespace hicann {
 namespace v2 GENPYBIND_TAG_HALCO_HICANN_V2 {
@@ -47,16 +49,16 @@ struct GENPYBIND(inline_base("*")) SynapseSwitchRowOnHICANN
 	GRID_COMMON_CONSTRUCTORS(SynapseSwitchRowOnHICANN)
 
 	// TODO: Replace with conversion member function for consistency?
-	explicit SynapseSwitchRowOnHICANN(SynapseDriverOnHICANN const& drv);
+	explicit SynapseSwitchRowOnHICANN(SynapseDriverOnHICANN const& drv) SYMBOL_VISIBLE;
 
 	// TODO: Adapt to new "to..." naming scheme?
 	y_type line() const { return mY; }
 
-	QuadrantOnHICANN toQuadrantOnHICANN() const;
+	QuadrantOnHICANN toQuadrantOnHICANN() const SYMBOL_VISIBLE;
 
-	SynapseArrayOnHICANN toSynapseArrayOnHICANN() const;
+	SynapseArrayOnHICANN toSynapseArrayOnHICANN() const SYMBOL_VISIBLE;
 
-	SynapseDriverOnHICANN toSynapseDriverOnHICANN() const;
+	SynapseDriverOnHICANN toSynapseDriverOnHICANN() const SYMBOL_VISIBLE;
 };
 
 /** SynapseDriverOnHICANN coordinate.
@@ -85,17 +87,17 @@ struct GENPYBIND(inline_base("*")) SynapseDriverOnHICANN
 
 	// returns the FGBlock which holds the shared params of this driver
 	// TODO: check if this is correct
-	FGBlockOnHICANN toFGBlockOnHICANN() const;
+	FGBlockOnHICANN toFGBlockOnHICANN() const SYMBOL_VISIBLE;
 
 	// Return the sending repeater on the same HICANN that can reach this synapse driver.
-	SendingRepeaterOnHICANN toSendingRepeaterOnHICANN() const;
+	SendingRepeaterOnHICANN toSendingRepeaterOnHICANN() const SYMBOL_VISIBLE;
 
-	QuadrantOnHICANN toQuadrantOnHICANN() const;
-	SynapseDriverOnQuadrant toSynapseDriverOnQuadrant() const;
+	QuadrantOnHICANN toQuadrantOnHICANN() const SYMBOL_VISIBLE;
+	SynapseDriverOnQuadrant toSynapseDriverOnQuadrant() const SYMBOL_VISIBLE;
 
-	SynapseArrayOnHICANN toSynapseArrayOnHICANN() const;
+	SynapseArrayOnHICANN toSynapseArrayOnHICANN() const SYMBOL_VISIBLE;
 
-/* implementation detail, not part of public API: */
+	/* implementation detail, not part of public API: */
 
 	static PYPP_CONSTEXPR x_type to_x(enum_type const& e) {
 		return x_type((e + (e < y_type::end / 2 /*is_top*/)) % 2);
@@ -103,7 +105,7 @@ struct GENPYBIND(inline_base("*")) SynapseDriverOnHICANN
 
 	static PYPP_CONSTEXPR y_type to_y(enum_type const& e) { return y_type(e); }
 
-	static enum_type to_enum(x_type const& x, y_type const& y);
+	static enum_type to_enum(x_type const& x, y_type const& y) SYMBOL_VISIBLE;
 };
 
 struct GENPYBIND(inline_base("*HICANNMixin*")) SynapseDriverOnWafer
@@ -147,7 +149,7 @@ public:
 
 	// returns the connected synapse driver which is either on the local or the neighbor
 	// HICANN
-	SynapseDriverOnWafer toSynapseDriverOnWafer() const;
+	SynapseDriverOnWafer toSynapseDriverOnWafer() const SYMBOL_VISIBLE;
 };
 
 struct GENPYBIND(inline_base("*")) SynapseDriverOnQuadrant
@@ -164,7 +166,7 @@ struct GENPYBIND(inline_base("*")) SynapseDriverOnQuadrant
 
 	PYPP_DEFAULT(SynapseDriverOnQuadrant());
 
-	SynapseDriverOnHICANN toSynapseDriverOnHICANN(QuadrantOnHICANN const&) const;
+	SynapseDriverOnHICANN toSynapseDriverOnHICANN(QuadrantOnHICANN const&) const SYMBOL_VISIBLE;
 };
 
 struct GENPYBIND(inline_base("*")) RowOnSynapseDriver
@@ -193,7 +195,8 @@ struct GENPYBIND(inline_base("*")) SynapseRowOnHICANN
 	    rant_t(drv.y() * 2 + row)
 	{}
 
-	explicit SynapseRowOnHICANN(SynapseRowOnArray const& row, SynapseArrayOnHICANN const& synarray);
+	explicit SynapseRowOnHICANN(SynapseRowOnArray const& row, SynapseArrayOnHICANN const& synarray)
+	    SYMBOL_VISIBLE;
 
 	PYPP_CONSTEXPR explicit SynapseRowOnHICANN(common::Y const& y) GENPYBIND(implicit_conversion) :
 	    rant_t(y.value())
@@ -216,7 +219,7 @@ struct GENPYBIND(inline_base("*")) SynapseRowOnHICANN
 		return toSynapseDriverOnHICANN().toSynapseArrayOnHICANN();
 	}
 
-	SynapseRowOnArray toSynapseRowOnArray() const;
+	SynapseRowOnArray toSynapseRowOnArray() const SYMBOL_VISIBLE;
 };
 
 struct GENPYBIND(inline_base("*HICANNMixin*")) SynapseRowOnWafer
@@ -254,7 +257,8 @@ struct GENPYBIND(inline_base("*")) SynapseRowOnArray
     : public common::detail::RantWrapper<SynapseRowOnArray, uint_fast16_t, 224 - 1, 0>
     , public common::detail::YRangedTrait
 {
-	explicit SynapseRowOnArray(SynapseDriverOnHICANN const& drv, RowOnSynapseDriver const& row);
+	explicit SynapseRowOnArray(SynapseDriverOnHICANN const& drv, RowOnSynapseDriver const& row)
+	    SYMBOL_VISIBLE;
 
 	PYPP_CONSTEXPR explicit SynapseRowOnArray(common::Y const& y) GENPYBIND(implicit_conversion) :
 	    rant_t(y.value())

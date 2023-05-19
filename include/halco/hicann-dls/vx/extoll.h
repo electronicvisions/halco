@@ -5,6 +5,7 @@
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
 #include "halco/hicann-dls/vx/omnibus.h"
+#include "hate/visibility.h"
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
@@ -25,8 +26,8 @@ struct GENPYBIND(inline_base("*")) ExtollChipType
 	    rant_t(val)
 	{}
 
-	static const ExtollChipType fpga;
-	static const ExtollChipType tourmalet;
+	static const SYMBOL_VISIBLE ExtollChipType fpga;
+	static const SYMBOL_VISIBLE ExtollChipType tourmalet;
 };
 
 HALCO_COORDINATE_MIXIN(ChipTypeMixin, ExtollChipType, chip_type)
@@ -38,7 +39,7 @@ struct GENPYBIND(inline_base("*")) ExtollNodeId
 	    rant_t(val)
 	{}
 
-	static const ExtollNodeId self;
+	static const SYMBOL_VISIBLE ExtollNodeId self;
 };
 
 struct GENPYBIND(inline_base("*ChipTypeMixin*")) ExtollNodeIdOnExtollNetwork
@@ -95,9 +96,9 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 	    rant_t(val)
 	{}
 
-	static const EventSwitchSourceOnFPGA to_executor;
-	static const EventSwitchSourceOnFPGA to_asic;
-	static const EventSwitchSourceOnFPGA to_external;
+	static const SYMBOL_VISIBLE EventSwitchSourceOnFPGA to_executor;
+	static const SYMBOL_VISIBLE EventSwitchSourceOnFPGA to_asic;
+	static const SYMBOL_VISIBLE EventSwitchSourceOnFPGA to_external;
 };
 
 struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
@@ -110,9 +111,9 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 	    rant_t(val)
 	{}
 
-	static const EventSwitchReadoutOnFPGA systime_offset;
-	static const EventSwitchReadoutOnFPGA global_systime;
-	static const EventSwitchReadoutOnFPGA last_global_systime;
+	static const SYMBOL_VISIBLE EventSwitchReadoutOnFPGA systime_offset;
+	static const SYMBOL_VISIBLE EventSwitchReadoutOnFPGA global_systime;
+	static const SYMBOL_VISIBLE EventSwitchReadoutOnFPGA last_global_systime;
 };
 
 struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))

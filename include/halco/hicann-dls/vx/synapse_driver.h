@@ -7,8 +7,8 @@
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
 #include "halco/common/typed_array.h"
-
 #include "halco/hicann-dls/vx/synapse.h"
+#include "hate/visibility.h"
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
@@ -32,12 +32,12 @@ struct GENPYBIND(inline_base("*")) SynapseDriverOnSynapseDriverBlock
 	    rant_t(val)
 	{}
 
-	PADIBusOnPADIBusBlock toPADIBusOnPADIBusBlock() const;
-	SynapseDriverOnPADIBus toSynapseDriverOnPADIBus() const;
+	PADIBusOnPADIBusBlock toPADIBusOnPADIBusBlock() const SYMBOL_VISIBLE;
+	SynapseDriverOnPADIBus toSynapseDriverOnPADIBus() const SYMBOL_VISIBLE;
 
 	typedef common::typed_array<SynapseRowOnSynram, SynapseRowOnSynapseDriver> synapse_row_type
 	    GENPYBIND(opaque(false));
-	synapse_row_type toSynapseRowOnSynram() const;
+	synapse_row_type toSynapseRowOnSynram() const SYMBOL_VISIBLE;
 };
 
 
@@ -51,7 +51,7 @@ struct GENPYBIND(inline_base("*")) SynapseDriverOnPADIBus
 
 	typedef common::typed_array<SynapseDriverOnSynapseDriverBlock, PADIBusOnPADIBusBlock>
 	    synapse_driver_type GENPYBIND(opaque(false));
-	synapse_driver_type toSynapseDriverOnSynapseDriverBlock() const;
+	synapse_driver_type toSynapseDriverOnSynapseDriverBlock() const SYMBOL_VISIBLE;
 };
 
 
@@ -67,8 +67,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 
 #include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
-	static const SynapseDriverBlockOnDLS top;
-	static const SynapseDriverBlockOnDLS bottom;
+	static const SYMBOL_VISIBLE SynapseDriverBlockOnDLS top;
+	static const SYMBOL_VISIBLE SynapseDriverBlockOnDLS bottom;
 };
 
 
@@ -90,14 +90,14 @@ struct GENPYBIND(inline_base("*SynapseDriverMixin*"), inline_base("*CoordinateBa
 	explicit SynapseDriverOnDLS(enum_type const& e) : mixin_t(e) {}
 
 	SynapseDriverOnSynapseDriverBlock toSynapseDriverOnSynapseDriverBlock() const { return This(); }
-	CapMemBlockOnDLS toCapMemBlockOnDLS() const;
+	CapMemBlockOnDLS toCapMemBlockOnDLS() const SYMBOL_VISIBLE;
 	std::array<
 	    SynapseRowOnDLS,
 	    halco::hicann_dls::vx::SynapseRowOnDLS::size /
 	        halco::hicann_dls::vx::SynapseDriverMixin<
 	            halco::hicann_dls::vx::SynapseDriverOnDLS,
 	            halco::hicann_dls::vx::SynapseDriverOnSynapseDriverBlock>::size>
-	toSynapseRowOnDLS() const;
+	toSynapseRowOnDLS() const SYMBOL_VISIBLE;
 };
 
 
@@ -110,8 +110,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 
 #include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
-	static const CommonSynapseDriverConfigOnDLS top;
-	static const CommonSynapseDriverConfigOnDLS bottom;
+	static const SYMBOL_VISIBLE CommonSynapseDriverConfigOnDLS top;
+	static const SYMBOL_VISIBLE CommonSynapseDriverConfigOnDLS bottom;
 };
 
 
@@ -127,8 +127,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 
 #include "halco/hicann-dls/vx/convert_hemisphere_decl.h"
 
-	static const SynapseDriverSRAMTimingConfigOnDLS top;
-	static const SynapseDriverSRAMTimingConfigOnDLS bottom;
+	static const SYMBOL_VISIBLE SynapseDriverSRAMTimingConfigOnDLS top;
+	static const SYMBOL_VISIBLE SynapseDriverSRAMTimingConfigOnDLS bottom;
 };
 
 } // namespace halco::hicann_dls::vx

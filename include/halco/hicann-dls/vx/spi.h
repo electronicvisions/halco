@@ -4,8 +4,8 @@
 #include "halco/common/coordinate.h"
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
-
 #include "halco/hicann-dls/vx/dac.h"
+#include "hate/visibility.h"
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
@@ -38,10 +38,10 @@ struct GENPYBIND(inline_base("*")) SPIDACControlRegisterOnDAC
 	    rant_t(val)
 	{}
 
-	static const SPIDACControlRegisterOnDAC gain_reference;
-	static const SPIDACControlRegisterOnDAC ldac;
-	static const SPIDACControlRegisterOnDAC power_down;
-	static const SPIDACControlRegisterOnDAC reset;
+	static const SYMBOL_VISIBLE SPIDACControlRegisterOnDAC gain_reference;
+	static const SYMBOL_VISIBLE SPIDACControlRegisterOnDAC ldac;
+	static const SYMBOL_VISIBLE SPIDACControlRegisterOnDAC power_down;
+	static const SYMBOL_VISIBLE SPIDACControlRegisterOnDAC reset;
 };
 
 

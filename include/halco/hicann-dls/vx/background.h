@@ -4,6 +4,7 @@
 #include "halco/common/coordinate.h"
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
+#include "hate/visibility.h"
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
@@ -25,9 +26,9 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 	    rant_t(val)
 	{}
 
-	CrossbarInputOnDLS toCrossbarInputOnDLS() const;
-	CrossbarL2OutputOnDLS toCrossbarL2OutputOnDLS() const;
-	PADIBusOnDLS toPADIBusOnDLS() const;
+	CrossbarInputOnDLS toCrossbarInputOnDLS() const SYMBOL_VISIBLE;
+	CrossbarL2OutputOnDLS toCrossbarL2OutputOnDLS() const SYMBOL_VISIBLE;
+	PADIBusOnDLS toPADIBusOnDLS() const SYMBOL_VISIBLE;
 };
 
 } // namespace halco::hicann_dls::vx
