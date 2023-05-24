@@ -21,6 +21,13 @@ struct GENPYBIND(inline_base("*")) I2CIdRegisterOnBoard
 };
 
 
+struct GENPYBIND(inline_base("*")) I2CTempRegisterOnBoard
+    : public common::detail::RantWrapper<I2CTempRegisterOnBoard, uint_fast16_t, 0, 0>
+{
+	constexpr explicit I2CTempRegisterOnBoard(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+
 struct GENPYBIND(inline_base("*")) I2CINA219RoRegisterOnINA219
     : public common::detail::RantWrapper<I2CINA219RoRegisterOnINA219, uint_fast16_t, 3, 0>
 {

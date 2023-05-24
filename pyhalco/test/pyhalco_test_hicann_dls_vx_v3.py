@@ -48,6 +48,7 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     SpikeIOInputRouteOnFPGA => linear,iterable
     SpikeIOOutputRouteOnFPGA => linear,iterable
     I2CIdRegisterOnBoard => linear,iterable
+    I2CTempRegisterOnBoard => linear,iterable
     I2CINA219RoRegisterOnINA219 => linear,iterable
     I2CINA219RwRegisterOnINA219 => linear,iterable
     I2CTCA9554RoRegisterOnTCA9554 => linear,iterable

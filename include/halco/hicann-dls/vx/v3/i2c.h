@@ -5,6 +5,7 @@
 namespace halco::hicann_dls::vx::v3 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V3 {
 
 using I2CIdRegisterOnBoard GENPYBIND(visible) = halco::hicann_dls::vx::I2CIdRegisterOnBoard;
+using I2CTempRegisterOnBoard GENPYBIND(visible) = halco::hicann_dls::vx::I2CTempRegisterOnBoard;
 using I2CINA219RoRegisterOnINA219 GENPYBIND(visible) =
     halco::hicann_dls::vx::I2CINA219RoRegisterOnINA219;
 using I2CINA219RwRegisterOnINA219 GENPYBIND(visible) =
