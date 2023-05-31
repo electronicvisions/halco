@@ -86,6 +86,14 @@ def build(bld):
         use=['halco_common'],
     )
 
+    bld.shlib(
+        target='halco_hicann_dls_vx_serialization',
+        source=bld.path.ant_glob('src/cereal/types/halco/hicann-dls/vx/*.cpp'),
+        install_path='${PREFIX}/lib',
+        linkflags='-Wl,-z,defs',
+        use=['halco_hicann_dls_vx'],
+    )
+
     for hx_version in [3]:
         bld.shlib(
             target='halco_hicann_dls_vx_v%s' % hx_version,
@@ -101,7 +109,7 @@ def build(bld):
             source=bld.path.ant_glob('src/cereal/types/halco/hicann-dls/vx/v%s/*.cpp' % hx_version),
             install_path='${PREFIX}/lib',
             linkflags='-Wl,-z,defs',
-            use=['halco_hicann_dls_vx_v3'],
+            use=['halco_hicann_dls_vx_v3', 'halco_hicann_dls_vx_serialization'],
         )
 
     if bld.env.have_ppu_toolchain:

@@ -1,4 +1,3 @@
 #pragma once
-#include <cereal/types/polymorphic.hpp>
-
-CEREAL_FORCE_DYNAMIC_INIT(halco_hicann_dls_vx_v3)
+#include "cereal/types/halco/hicann-dls/vx/coordinates.h"
+#include "cereal/types/halco/hicann-dls/vx/v3/capmem.h"
