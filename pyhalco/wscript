@@ -63,20 +63,12 @@ def build(bld):
 
         for hx_version in [3]:
             bld(
-                features='cxx pyext',
-                target='pyhalco_hicann_dls_vx_v%s_obj' % hx_version,
-                source='../src/halco/hicann-dls/vx/v%s/pycoordinates.cpp' % hx_version,
-                use='halco_hicann_dls_vx_v%s' % hx_version
-            )
-
-            bld(
                 target='pyhalco_hicann_dls_vx_v%s' % hx_version,
                 source='../include/halco/hicann-dls/vx/v%s/pycoordinates.h' % hx_version,
                 genpybind_tags=['hicann_dls_vx', 'hicann_dls_vx_v%s' % hx_version],
                 features='genpybind cxx cxxshlib pyext',
                 use=['halco_common', 'halco_hicann_dls_vx_v%s' % hx_version,
-                     'pyhalco_common',
-                     'pyhalco_hicann_dls_vx_v%s_obj' % hx_version],
+                     'pyhalco_common'],
                 install_path='${PREFIX}/lib',
             )
 

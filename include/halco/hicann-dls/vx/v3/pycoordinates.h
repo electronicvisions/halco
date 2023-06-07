@@ -15,15 +15,3 @@ GENPYBIND(postamble, tag(hicann_dls_vx_v3))
 GENPYBIND_MANUAL({
 	parent->py::module::import("pyhalco_hicann_dls_vx_patch").attr("patch")(parent);
 })
-
-namespace halco::hicann_dls::vx::v3 {
-
-pybind11::list get_coordinates_list(pybind11::module& m);
-
-GENPYBIND_MANUAL({
-	parent.attr("coordinates") = [&parent]() {
-		return halco::hicann_dls::vx::v3::get_coordinates_list(parent);
-	}();
-})
-
-} // halco::hicann_dls::vx::v3
