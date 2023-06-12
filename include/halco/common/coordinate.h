@@ -3,6 +3,7 @@
 #if (not defined(__ppu__)) and (not defined(PYPLUSPLUS))
 #include <iosfwd>
 #include <memory>
+#include <typeindex>
 #endif
 
 namespace halco {
@@ -24,6 +25,10 @@ struct GENPYBIND(visible) Coordinate
 
 	virtual bool operator==(Coordinate const& other) const = 0;
 	virtual bool operator!=(Coordinate const& other) const = 0;
+	virtual bool operator<(Coordinate const& other) const = 0;
+	virtual bool operator>(Coordinate const& other) const = 0;
+	virtual bool operator<=(Coordinate const& other) const = 0;
+	virtual bool operator>=(Coordinate const& other) const = 0;
 #endif
 };
 
@@ -53,6 +58,42 @@ struct CoordinateBase : public Coordinate
 	virtual bool operator!=(Coordinate const& other) const
 	{
 		return !(*this == other);
+	}
+
+	/**
+	 * Less comparison operator.
+	 * For coordinates of equal type use their comparison, for different types use comparison
+	 * operator of std::type_index.
+	 */
+	virtual bool operator<(Coordinate const& other) const
+	{
+		if (auto const other_ptr = dynamic_cast<Derived const*>(&other)) {
+			return static_cast<Derived const&>(*this) < *other_ptr;
+		}
+		return std::type_index{typeid(*this)} < std::type_index{typeid(other)};
+	}
+
+	/**
+	 * Greater comparison operator.
+	 * For coordinates of equal type use their comparison, for different types use comparison
+	 * operator of std::type_index.
+	 */
+	virtual bool operator>(Coordinate const& other) const
+	{
+		if (auto const other_ptr = dynamic_cast<Derived const*>(&other)) {
+			return static_cast<Derived const&>(*this) > *other_ptr;
+		}
+		return std::type_index{typeid(*this)} > std::type_index{typeid(other)};
+	}
+
+	virtual bool operator<=(Coordinate const& other) const
+	{
+		return !(*this > other);
+	}
+
+	virtual bool operator>=(Coordinate const& other) const
+	{
+		return !(*this < other);
 	}
 #endif
 };
