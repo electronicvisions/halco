@@ -177,11 +177,36 @@ def build(bld):
     )
 
     for hx_version in [3]:
+        coordinates = list()
+        coordinates_def_path = str(bld.path.get_src()) + "/include/halco/hicann-dls/vx/v3/coordinates.def"
+        with open(coordinates_def_path) as coordinates_def:
+            lines = coordinates_def.readlines()
+            for line in lines:
+                if not line.startswith("COORDINATE") or line.startswith("LAST_COORDINATE"):
+                    continue
+                typename = line.split(", ")[1].replace(")\n", "")
+                coordinates.append(typename)
+
+        common_obj_targets = []
+        num_coordinates_per_obj = 10
+        for i, typenames in enumerate([
+                coordinates[i:i + num_coordinates_per_obj]
+                for i in range(0, len(coordinates), num_coordinates_per_obj)]):
+            bld(
+                target=f'halco_hicann_dls_vx_v{hx_version}_tests_obj_{i}',
+                features='cxx',
+                source=bld.path.ant_glob('test/hicann-dls/vx/v%s/common.cpp' % hx_version),
+                use=['halco_hicann_dls_vx_v%s' % hx_version, 'GTEST', 'halco_test_inc'],
+                defines=[f'BUILD_ENV_COORDINATE_TYPES={", ".join(typenames)}'],
+            )
+
         bld(
             target='halco_hicann_dls_vx_v%s_tests' % hx_version,
             features='gtest cxx cxxprogram',
-            source=bld.path.ant_glob('test/hicann-dls/vx/v%s/*.cpp' % hx_version),
-            use=['halco_hicann_dls_vx_v%s' % hx_version, 'GTEST', 'halco_test_inc'],
+            source=bld.path.ant_glob(
+                'test/hicann-dls/vx/v%s/*.cpp' % hx_version,
+                excl='test/hicann-dls/vx/v%s/common.cpp' % hx_version),
+            use=['halco_hicann_dls_vx_v%s' % hx_version, 'GTEST', 'halco_test_inc'] + common_obj_targets,
             install_path='${PREFIX}/bin'
         )
 

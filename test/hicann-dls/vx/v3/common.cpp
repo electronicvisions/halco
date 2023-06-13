@@ -19,12 +19,11 @@ template <typename T>
 class CommonCoordinateTest : public ::testing::Test
 {};
 
-#define COORDINATE(Name, Type) Name,
-#define LAST_COORDINATE(Name, Type) Name >
+#ifndef BUILD_ENV_COORDINATE_TYPES
+#error "Requires comma separated list of coordinate types via build environment."
+#endif
 
-typedef ::testing::Types <
-#include "halco/hicann-dls/vx/v3/coordinates.def"
-    CoordinateTypes;
+typedef ::testing::Types<BUILD_ENV_COORDINATE_TYPES> CoordinateTypes;
 
 
 TYPED_TEST_CASE(CommonCoordinateTest, CoordinateTypes);
