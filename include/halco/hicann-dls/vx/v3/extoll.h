@@ -45,12 +45,16 @@ using ExtollSpikeCommBucketDestinationConfigOnFPGA GENPYBIND(visible) =
     halco::hicann_dls::vx::ExtollSpikeCommBucketDestinationConfigOnFPGA;
 using ExtollSpikeCommBucketNumPktsSentOnFPGA GENPYBIND(visible) =
     halco::hicann_dls::vx::ExtollSpikeCommBucketNumPktsSentOnFPGA;
+using ExtollSpikeCommBucketNumEvtsRcvdOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommBucketNumEvtsRcvdOnFPGA;
 using ExtollSpikeCommBucketCounterResetOnFPGA GENPYBIND(visible) =
     halco::hicann_dls::vx::ExtollSpikeCommBucketCounterResetOnFPGA;
 using ExtollSpikeCommSplitOnFPGA GENPYBIND(visible) =
     halco::hicann_dls::vx::ExtollSpikeCommSplitOnFPGA;
 using ExtollSpikeCommRouterLookupConfigOnSpikeCommSplit GENPYBIND(visible) =
     halco::hicann_dls::vx::ExtollSpikeCommRouterLookupConfigOnSpikeCommSplit;
+using ExtollSpikeCommBucketNumEvtsRcvdOnSpikeCommSplit GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExtollSpikeCommBucketNumEvtsRcvdOnSpikeCommSplit;
 using ExtollSpikeCommRouterLookupConfigOnFPGA GENPYBIND(visible) =
     halco::hicann_dls::vx::ExtollSpikeCommRouterLookupConfigOnFPGA;
 using ExtollSpikeCommRouterConfigOnSpikeCommSplit GENPYBIND(visible) =

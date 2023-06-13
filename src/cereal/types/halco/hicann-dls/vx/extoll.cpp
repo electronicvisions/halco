@@ -12,6 +12,7 @@ CEREAL_REGISTER_TYPE(halco::hicann_dls::vx::EventSwitchConfigOnFPGA)
 CEREAL_REGISTER_TYPE(halco::hicann_dls::vx::ExtollSpikeCommBucketTriggerConfigOnFPGA)
 CEREAL_REGISTER_TYPE(halco::hicann_dls::vx::ExtollSpikeCommBucketDestinationConfigOnFPGA)
 CEREAL_REGISTER_TYPE(halco::hicann_dls::vx::ExtollSpikeCommBucketNumPktsSentOnFPGA)
+CEREAL_REGISTER_TYPE(halco::hicann_dls::vx::ExtollSpikeCommBucketNumEvtsRcvdOnFPGA)
 CEREAL_REGISTER_TYPE(halco::hicann_dls::vx::ExtollSpikeCommBucketCounterResetOnFPGA)
 CEREAL_REGISTER_TYPE(halco::hicann_dls::vx::ExtollSpikeCommSplitOnFPGA)
 CEREAL_REGISTER_TYPE(halco::hicann_dls::vx::ExtollSpikeCommRouterLookupConfigOnFPGA)
@@ -46,6 +47,8 @@ CEREAL_REGISTER_POLYMORPHIC_RELATION(
     halco::common::Coordinate, halco::hicann_dls::vx::ExtollSpikeCommBucketDestinationConfigOnFPGA)
 CEREAL_REGISTER_POLYMORPHIC_RELATION(
     halco::common::Coordinate, halco::hicann_dls::vx::ExtollSpikeCommBucketNumPktsSentOnFPGA)
+CEREAL_REGISTER_POLYMORPHIC_RELATION(
+    halco::common::Coordinate, halco::hicann_dls::vx::ExtollSpikeCommBucketNumEvtsRcvdOnFPGA)
 CEREAL_REGISTER_POLYMORPHIC_RELATION(
     halco::common::Coordinate, halco::hicann_dls::vx::ExtollSpikeCommBucketCounterResetOnFPGA)
 CEREAL_REGISTER_POLYMORPHIC_RELATION(

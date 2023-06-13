@@ -196,9 +196,11 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     ExtollSpikeCommBucketTriggerConfigOnFPGA => linear,iterable
     ExtollSpikeCommBucketDestinationConfigOnFPGA => linear,iterable
     ExtollSpikeCommBucketNumPktsSentOnFPGA => linear,iterable
+    ExtollSpikeCommBucketNumEvtsRcvdOnFPGA => linear,iterable
     ExtollSpikeCommBucketCounterResetOnFPGA => linear,iterable
     ExtollSpikeCommSplitOnFPGA => linear,iterable
     ExtollSpikeCommRouterLookupConfigOnSpikeCommSplit => linear,iterable
+    ExtollSpikeCommBucketNumEvtsRcvdOnSpikeCommSplit => linear,iterable
     ExtollSpikeCommRouterLookupConfigOnFPGA => linear,iterable
     ExtollSpikeCommRouterConfigOnSpikeCommSplit => linear,iterable
     ExtollSpikeCommRouterConfigOnFPGA => linear,iterable

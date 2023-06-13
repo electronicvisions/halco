@@ -129,6 +129,26 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 
 
 /*
+ * SPLITs:
+ */
+
+
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    ExtollSpikeCommSplitOnFPGA
+    : public common::detail::RantWrapper<ExtollSpikeCommSplitOnFPGA, uint_fast8_t, 1, 0>
+    , common::CoordinateBase<ExtollSpikeCommSplitOnFPGA>
+{
+	constexpr explicit ExtollSpikeCommSplitOnFPGA(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+
+HALCO_COORDINATE_MIXIN(SpikeCommSplitMixin, ExtollSpikeCommSplitOnFPGA, pulse_comm_split)
+
+
+/*
  *  Accumulation-BUCKET:
  */
 
@@ -180,29 +200,44 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 };
 
 
-/*
- * SPLITs:
- */
-
-
-struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
-    ExtollSpikeCommSplitOnFPGA
-    : public common::detail::RantWrapper<ExtollSpikeCommSplitOnFPGA, uint_fast8_t, 1, 0>
-    , common::CoordinateBase<ExtollSpikeCommSplitOnFPGA>
+struct GENPYBIND(inline_base("*")) ExtollSpikeCommBucketNumEvtsRcvdOnSpikeCommSplit
+    : public common::detail::
+          RantWrapper<ExtollSpikeCommBucketNumEvtsRcvdOnSpikeCommSplit, uint_fast8_t, 7, 0>
 {
-	constexpr explicit ExtollSpikeCommSplitOnFPGA(uintmax_t const val = 0)
+	constexpr explicit ExtollSpikeCommBucketNumEvtsRcvdOnSpikeCommSplit(uintmax_t const val = 0)
 	    GENPYBIND(implicit_conversion) :
 	    rant_t(val)
 	{}
+};
+
+struct GENPYBIND(inline_base("*SpikeCommSplitMixin*"), inline_base("*CoordinateBase*"))
+    ExtollSpikeCommBucketNumEvtsRcvdOnFPGA
+    : public SpikeCommSplitMixin<
+          ExtollSpikeCommBucketNumEvtsRcvdOnFPGA,
+          ExtollSpikeCommBucketNumEvtsRcvdOnSpikeCommSplit>
+    , common::CoordinateBase<ExtollSpikeCommBucketNumEvtsRcvdOnFPGA>
+{
+	ExtollSpikeCommBucketNumEvtsRcvdOnFPGA() = default;
+
+	explicit ExtollSpikeCommBucketNumEvtsRcvdOnFPGA(
+	    ExtollSpikeCommBucketNumEvtsRcvdOnSpikeCommSplit const& cnt_evts_rcvd,
+	    ExtollSpikeCommSplitOnFPGA const& split = ExtollSpikeCommSplitOnFPGA()) :
+	    mixin_t(cnt_evts_rcvd, split)
+	{}
+
+	explicit ExtollSpikeCommBucketNumEvtsRcvdOnFPGA(enum_type const& e) : mixin_t(e) {}
+
+	ExtollSpikeCommBucketNumEvtsRcvdOnSpikeCommSplit
+	toExtollSpikeCommBucketNumEvtsRcvdOnSpikeCommSplit() const
+	{
+		return This();
+	}
 };
 
 
 /*
  *  SpikeComm-ROUTER:
  */
-
-
-HALCO_COORDINATE_MIXIN(SpikeCommSplitMixin, ExtollSpikeCommSplitOnFPGA, pulse_comm_split)
 
 
 struct GENPYBIND(inline_base("*")) ExtollSpikeCommRouterLookupConfigOnSpikeCommSplit
@@ -870,6 +905,8 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExtollSpikeCommBucketTriggerCon
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExtollSpikeCommBucketDestinationConfigOnFPGA)
 
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExtollSpikeCommBucketNumPktsSentOnFPGA)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExtollSpikeCommBucketNumEvtsRcvdOnSpikeCommSplit)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExtollSpikeCommBucketNumEvtsRcvdOnFPGA)
 
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExtollSpikeCommBucketCounterResetOnFPGA)
 
