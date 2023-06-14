@@ -9,7 +9,7 @@
 
 #include <cereal/archives/json.hpp>
 
-#include "halco/common/cerealization_geometry.h"
+#include "cereal/types/halco/common/geometry.h"
 
 #include "halco/hicann-dls/vx/v3/coordinates.h"
 

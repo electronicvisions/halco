@@ -1,6 +1,6 @@
 #include "cereal/types/halco/hicann-dls/vx/switch_rows.h"
 
-#include "halco/common/cerealization_geometry.h"
+#include "cereal/types/halco/common/geometry.h"
 #include "halco/hicann-dls/vx/switch_rows.h"
 #include <cereal/archives/json.hpp>
 #include <cereal/archives/portable_binary.hpp>

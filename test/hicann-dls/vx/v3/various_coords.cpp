@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "halco/common/cerealization_geometry.h"
+#include "cereal/types/halco/common/geometry.h"
 #include "halco/common/iter_all.h"
 #include "halco/common/typed_array.h"
 #include "halco/hicann-dls/vx/v3/coordinates.h"

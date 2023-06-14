@@ -1,6 +1,6 @@
 #include "cereal/types/halco/hicann-dls/vx/routing_crossbar.h"
 
-#include "halco/common/cerealization_geometry.h"
+#include "cereal/types/halco/common/geometry.h"
 #include "halco/hicann-dls/vx/routing_crossbar.h"
 #include <cereal/archives/json.hpp>
 #include <cereal/archives/portable_binary.hpp>

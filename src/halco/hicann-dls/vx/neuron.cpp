@@ -10,7 +10,7 @@
 #include "hate/type_index.h"
 
 #ifndef __ppu__
-#include "halco/common/cerealization_geometry.h"
+#include "cereal/types/halco/common/geometry.h"
 #include <cereal/archives/json.hpp>
 #include <cereal/archives/portable_binary.hpp>
 #include <cereal/cereal.hpp>

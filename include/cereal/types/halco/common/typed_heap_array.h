@@ -1,6 +1,6 @@
 #pragma once
-#include <cereal/cereal.hpp>
 #include "halco/common/typed_heap_array.h"
+#include <cereal/cereal.hpp>
 
 namespace cereal {
 
