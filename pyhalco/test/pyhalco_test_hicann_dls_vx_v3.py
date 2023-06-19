@@ -57,6 +57,7 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     TCA9554ChannelOnBoard => linear,iterable
     TCA9554ConfigOnBoard => linear,iterable
     TCA9554InputsOnBoard => linear,iterable
+    TMP112StatusOnBoard => linear,iterable
     INA219OnBoard => linear,iterable
     INA219ConfigOnBoard => linear,iterable
     INA219StatusOnBoard => linear,iterable
