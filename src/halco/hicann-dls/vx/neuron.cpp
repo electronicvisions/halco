@@ -9,6 +9,8 @@
 
 #include "hate/type_index.h"
 
+#include <set>
+
 #ifndef __ppu__
 #include "cereal/types/halco/common/geometry.h"
 #include <cereal/archives/json.hpp>
