@@ -1,6 +1,8 @@
 #pragma once
 #include <stdint.h>
 
+#include <map>
+
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"

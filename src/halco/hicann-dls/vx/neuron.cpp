@@ -7,6 +7,9 @@
 #include "halco/hicann-dls/vx/switch_rows.h"
 #include "halco/hicann-dls/vx/synapse.h"
 
+
+#include <set>
+
 #ifndef __ppu__
 #include "halco/common/cerealization_geometry.h"
 #include <cereal/archives/json.hpp>
