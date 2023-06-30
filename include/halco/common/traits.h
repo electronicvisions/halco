@@ -178,11 +178,19 @@ struct pypp_maybe_ranged_enum<
 
 
 #ifndef PYPLUSPLUS
+template <typename T, typename = void>
+struct has_mixin_t : std::false_type
+{};
+
+template <typename T>
+struct has_mixin_t<T, void_t<typename T::mixin_t>> : std::true_type
+{};
+
 template <typename T>
 struct limits<T, void_t<typename T::enum_type> > : public limits<typename T::enum_type> {};
 
 template <typename T>
-struct limits<T, void_t<typename T::value_type> >
+struct limits<T, void_t<typename T::value_type, std::enable_if_t<!has_mixin_t<T>::value>>>
 {
 	typedef typename T::value_type value_type;
 	static const value_type size = T::size;
