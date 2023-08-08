@@ -61,7 +61,7 @@ def build(bld):
             install_path='${PREFIX}/lib',
         )
 
-        for hx_version in [3]:
+        for hx_version in [3, 4]:
             bld(
                 target='pyhalco_hicann_dls_vx_v%s' % hx_version,
                 source='../include/halco/hicann-dls/vx/v%s/pycoordinates.h' % hx_version,

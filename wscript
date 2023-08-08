@@ -107,7 +107,7 @@ def build(bld):
         use=['halco_hicann_dls_vx'],
     )
 
-    for hx_version in [3]:
+    for hx_version in [3, 4]:
         bld.shlib(
             target='halco_hicann_dls_vx_v%s' % hx_version,
             source=bld.path.ant_glob('src/halco/hicann-dls/vx/v%s/*.cpp' % hx_version,
@@ -123,7 +123,7 @@ def build(bld):
             source=bld.path.ant_glob('src/cereal/types/halco/hicann-dls/vx/v%s/*.cpp' % hx_version),
             install_path='${PREFIX}/lib',
             linkflags='-Wl,-z,defs',
-            use=['halco_hicann_dls_vx_v3', 'halco_hicann_dls_vx_serialization'],
+            use=[f'halco_hicann_dls_vx_v{hx_version}', 'halco_hicann_dls_vx_serialization'],
         )
 
     if bld.env.have_ppu_toolchain:
@@ -140,7 +140,7 @@ def build(bld):
             env = env,
         )
 
-        for hx_version in [3]:
+        for hx_version in [3, 4]:
             env = bld.all_envs['nux_vx_v%s' % hx_version].derive()
             env.detach()
 
@@ -176,9 +176,9 @@ def build(bld):
         install_path='${PREFIX}/bin'
     )
 
-    for hx_version in [3]:
+    for hx_version in [3, 4]:
         coordinates = list()
-        coordinates_def_path = str(bld.path.get_src()) + "/include/halco/hicann-dls/vx/v3/coordinates.def"
+        coordinates_def_path = str(bld.path.get_src()) + f"/include/halco/hicann-dls/vx/v{hx_version}/coordinates.def"
         with open(coordinates_def_path) as coordinates_def:
             lines = coordinates_def.readlines()
             for line in lines:
