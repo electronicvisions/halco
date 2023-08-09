@@ -63,7 +63,7 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) 
 
 struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
     ExternalPPUMemoryByteOnFPGA
-    : public common::detail::RantWrapper<ExternalPPUMemoryByteOnFPGA, uint_fast16_t, 0x20000 - 1, 0>
+    : public common::detail::RantWrapper<ExternalPPUMemoryByteOnFPGA, uint_fast32_t, 0x20000 - 1, 0>
     , common::CoordinateBase<ExternalPPUMemoryByteOnFPGA>
 {
 	constexpr explicit ExternalPPUMemoryByteOnFPGA(uintmax_t const val = 0)
@@ -88,7 +88,7 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 struct GENPYBIND(inline_base("*")) ExternalPPUMemoryBlockSize
     : public common::detail::RantWrapper<
           ExternalPPUMemoryBlockSize,
-          uint_fast16_t,
+          uint_fast32_t,
           ExternalPPUMemoryByteOnFPGA::size,
           1>
 {
