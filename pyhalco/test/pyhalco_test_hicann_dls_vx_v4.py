@@ -7,6 +7,23 @@ from pyhalco_test_utils import parametrize, PyhalcoTest
 @parametrize
 class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     COORDINATES = """
+    GlobalMergerMatrixOnDLS => linear, iterable
+    NeuronLabelToGL1EventLUTOnDLS => linear, iterable
+    NeuronLabelToGL1EventLUTEntryOnLUT => linear, iterable
+    NeuronLabelToGL1EventLUTEntryOnDLS => iterable
+    GlobalMergerMatrixInputOnDLS => linear, iterable
+    GlobalMergerMatrixOutputOnDLS => linear, iterable
+    GlobalMergerMatrixInputChannelOnDLS => linear, iterable
+    GlobalMergerMatrixInputDropCounterOnDLS => linear, iterable
+    GlobalMergerMatrixOutputOnDLS => linear, iterable
+    GlobalMergerMatrixOutputConfigOnDLS => linear, iterable
+    GlobalMergerMatrixOutputChannelOnDLS => linear, iterable
+    GlobalMergerMatrixOutputEventCounterOnDLS => linear, iterable
+    GlobalMergerMatrixIntersectionOnDLS => grid, iterable
+    InputChannelOnGlobalMergerMatrixIntersection => linear, iterable
+    OutputChannelOnGlobalMergerMatrixIntersection => linear, iterable
+    NodeOnGlobalMergerMatrixIntersection => grid, iterable
+    GlobalMergerMatrixNodeOnDLS => linear, iterable
     NeuronBlockOnDLS => linear, iterable
     MemoryTimingOnDLS => linear, iterable
     NeuronColumnOnLogicalNeuron => linear, iterable

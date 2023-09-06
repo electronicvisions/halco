@@ -162,6 +162,17 @@ struct GENPYBIND(inline_base("*")) SpikeLabel
 	GENPYBIND(setter_for(synapse_label))
 	void set_synapse_label(SynapseLabel value) SYMBOL_VISIBLE;
 
+	/** Label type processed by global merger matrix gl1 index lut, bits 5-10. */
+	struct GENPYBIND(inline_base("*")) GlobalMergerMatrixMutable
+	    : public halco::common::detail::
+	          RantWrapper<GlobalMergerMatrixMutable, uint_fast16_t, 0x3f, 0>
+	{
+		constexpr explicit GlobalMergerMatrixMutable(uintmax_t const val = 0)
+		    GENPYBIND(implicit_conversion) :
+		    rant_t(val)
+		{}
+	};
+
 	SpikeIOOutputRouteOnFPGA toSpikeIOOutputRouteOnFPGA() const SYMBOL_VISIBLE;
 };
 

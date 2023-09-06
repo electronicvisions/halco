@@ -12,6 +12,7 @@
 #include "halco/hicann-dls/vx/v4/event.h"
 #include "halco/hicann-dls/vx/v4/extoll.h"
 #include "halco/hicann-dls/vx/v4/fpga.h"
+#include "halco/hicann-dls/vx/v4/global_merger_matrix.h"
 #include "halco/hicann-dls/vx/v4/highspeed_link.h"
 #include "halco/hicann-dls/vx/v4/i2c.h"
 #include "halco/hicann-dls/vx/v4/jtag.h"
