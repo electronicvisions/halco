@@ -58,7 +58,6 @@ def build(bld):
             genpybind_tags='common',
             features='genpybind cxx cxxshlib pyext',
             use=['halco_common', 'pyhalco_common_files'],
-            install_path='${PREFIX}/lib',
         )
 
         for hx_version in [3, 4]:
@@ -69,7 +68,6 @@ def build(bld):
                 features='genpybind cxx cxxshlib pyext',
                 use=['halco_common', 'halco_hicann_dls_vx_v%s' % hx_version,
                      'pyhalco_common'],
-                install_path='${PREFIX}/lib',
             )
 
             bld(
@@ -92,7 +90,6 @@ def build(bld):
             headers='../include/halco/common/common.h',
             use=['halco_common', 'BOOST4HALCO', 'BOOST4PYHALCO', 'PYHALCO', 'pywrap',
                  'pywrapstdvector', 'pycellparameters', 'pyhalco_common_files'],
-            install_path='${PREFIX}/lib',
             includes='.',
         )
 
@@ -106,7 +103,6 @@ def build(bld):
             export_defines='BOOST_VARIANT_DO_NOT_USE_VARIADIC_TEMPLATES',
             headers='../include/halco/hicann/v2/coordinates.h',
             use=['pyhalco_common', 'halco_hicann_v2'],
-            install_path='${PREFIX}/lib',
             includes='.',
         )
 
@@ -134,7 +130,6 @@ def build(bld):
         features='py',
         target='pyhalco_common_files',
         source=bld.path.ant_glob('**/pyhalco_*.py'),
-        install_path='${PREFIX}/lib',
         relative_trick=False,
     )
 
