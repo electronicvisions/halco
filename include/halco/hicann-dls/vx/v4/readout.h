@@ -6,6 +6,7 @@ namespace halco::hicann_dls::vx::v4 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V4 {
 
 using PadMultiplexerConfigOnDLS GENPYBIND(visible) =
     halco::hicann_dls::vx::PadMultiplexerConfigOnDLS;
+using PadOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::PadOnDLS;
 using ReadoutSourceSelectionOnDLS GENPYBIND(visible) =
     halco::hicann_dls::vx::ReadoutSourceSelectionOnDLS;
 using SourceMultiplexerOnReadoutSourceSelection GENPYBIND(visible) =

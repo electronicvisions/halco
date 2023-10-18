@@ -7,6 +7,16 @@
 
 namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) PadOnDLS
+    : public common::detail::RantWrapper<PadOnDLS, uint_fast16_t, 1, 0>
+    , common::CoordinateBase<PadOnDLS>
+{
+	constexpr explicit PadOnDLS(uintmax_t const val = 0) GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+
 struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
     PadMultiplexerConfigOnDLS
     : public common::detail::RantWrapper<PadMultiplexerConfigOnDLS, uint_fast16_t, 1, 0>
@@ -50,6 +60,7 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) 
 namespace std {
 
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ReadoutChainOnDLS)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PadOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::PadMultiplexerConfigOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ReadoutSourceSelectionOnDLS)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SourceMultiplexerOnReadoutSourceSelection)

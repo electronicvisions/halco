@@ -286,6 +286,7 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     CapMemOnDLS => linear,iterable
     ReferenceGeneratorConfigOnDLS => linear,iterable
     PadMultiplexerConfigOnDLS => linear,iterable
+    PadOnDLS => linear,iterable
     ReadoutSourceSelectionOnDLS => linear,iterable
     SourceMultiplexerOnReadoutSourceSelection => linear,iterable
     ReadoutChainOnDLS => linear,iterable

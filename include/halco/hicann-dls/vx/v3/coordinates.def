@@ -220,6 +220,7 @@ COORDINATE(PPUControlRegisterOnDLS, halco::hicann_dls::vx::v3::PPUControlRegiste
 COORDINATE(PPUStatusRegisterOnDLS, halco::hicann_dls::vx::v3::PPUStatusRegisterOnDLS)
 COORDINATE(EntryOnQuad, halco::hicann_dls::vx::v3::EntryOnQuad)
 COORDINATE(PadMultiplexerConfigOnDLS, halco::hicann_dls::vx::v3::PadMultiplexerConfigOnDLS)
+COORDINATE(PadOnDLS, halco::hicann_dls::vx::v3::PadOnDLS)
 COORDINATE(ReadoutSourceSelectionOnDLS, halco::hicann_dls::vx::v3::ReadoutSourceSelectionOnDLS)
 COORDINATE(SourceMultiplexerOnReadoutSourceSelection, halco::hicann_dls::vx::v3::SourceMultiplexerOnReadoutSourceSelection)
 COORDINATE(ReadoutChainOnDLS, halco::hicann_dls::vx::v3::ReadoutChainOnDLS)
