@@ -48,7 +48,7 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     SpikeIOInputRouteOnFPGA => linear,iterable
     SpikeIOOutputRouteOnFPGA => linear,iterable
     I2CIdRegisterOnBoard => linear,iterable
-    I2CMuxRegisterOnBoard => linear,iterable
+    I2CTCA9546RegisterOnBoard => linear,iterable
     I2CTempRegisterOnBoard => linear,iterable
     I2CINA219RoRegisterOnINA219 => linear,iterable
     I2CINA219RwRegisterOnINA219 => linear,iterable
@@ -58,6 +58,8 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     TCA9554ChannelOnBoard => linear,iterable
     TCA9554ConfigOnBoard => linear,iterable
     TCA9554InputsOnBoard => linear,iterable
+    TCA9546OnBoard => linear,iterable
+    TCA9546ChannelOnBoard => linear,iterable
     TMP112StatusOnBoard => linear,iterable
     INA219OnBoard => linear,iterable
     INA219ConfigOnBoard => linear,iterable

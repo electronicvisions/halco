@@ -24,10 +24,11 @@ struct GENPYBIND(inline_base("*")) I2CIdRegisterOnBoard
 };
 
 
-struct GENPYBIND(inline_base("*")) I2CMuxRegisterOnBoard
-    : public common::detail::RantWrapper<I2CMuxRegisterOnBoard, uint_fast16_t, 0, 0>
+// multiplexer
+struct GENPYBIND(inline_base("*")) I2CTCA9546RegisterOnBoard
+    : public common::detail::RantWrapper<I2CTCA9546RegisterOnBoard, uint_fast16_t, 0, 0>
 {
-	constexpr explicit I2CMuxRegisterOnBoard(uintmax_t const val = 0) : rant_t(val) {}
+	constexpr explicit I2CTCA9546RegisterOnBoard(uintmax_t const val = 0) : rant_t(val) {}
 };
 
 
@@ -227,7 +228,7 @@ struct GENPYBIND(inline_base("*DAC6573Mixin*")) I2CDAC6573RwRegisterOnBoard
 namespace std {
 
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::I2CIdRegisterOnBoard)
-HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::I2CMuxRegisterOnBoard)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::I2CTCA9546RegisterOnBoard)
 
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::I2CTempRegisterOnBoard)
 

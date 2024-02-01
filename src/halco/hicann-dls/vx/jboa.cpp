@@ -127,4 +127,11 @@ DAC6573ChannelOnBoard const DAC6573ChannelOnBoard::v_reset{DAC6573ChannelOnDAC65
 DAC6573ChannelOnBoard const DAC6573ChannelOnBoard::i_ref_board{DAC6573ChannelOnDAC6573{1}};
 DAC6573ChannelOnBoard const DAC6573ChannelOnBoard::v_res_meas{DAC6573ChannelOnDAC6573{2}};
 DAC6573ChannelOnBoard const DAC6573ChannelOnBoard::v_readout{DAC6573ChannelOnDAC6573{3}};
+
+
+TCA9546OnBoard TCA9546ChannelOnBoard::toTCA9546OnBoard() const
+{
+	// There are a 4 channels on one TCA9546 (multiplexer)
+	return TCA9546OnBoard(toEnum() / 4);
+}
 } // namespace halco::hicann_dls::vx

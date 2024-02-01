@@ -20,5 +20,7 @@ using DAC6573OnBoard GENPYBIND(visible) = halco::hicann_dls::vx::DAC6573OnBoard;
 using DAC6573ChannelOnDAC6573 GENPYBIND(visible) = halco::hicann_dls::vx::DAC6573ChannelOnDAC6573;
 using DAC6573ChannelOnBoard GENPYBIND(visible) = halco::hicann_dls::vx::DAC6573ChannelOnBoard;
 
+using TCA9546OnBoard GENPYBIND(visible) = halco::hicann_dls::vx::TCA9546OnBoard;
+using TCA9546ChannelOnBoard GENPYBIND(visible) = halco::hicann_dls::vx::TCA9546ChannelOnBoard;
 } // namespace v3
 } // namespace halco::hicann_dls::vx

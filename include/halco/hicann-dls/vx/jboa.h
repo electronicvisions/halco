@@ -28,6 +28,8 @@ struct DAC6573OnBoard;
 struct DAC6573ChannelOnDAC6573;
 struct DAC6573ChannelOnBoard;
 
+struct TCA9546OnBoard;
+struct TCA9546ChannelOnBoard;
 
 struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) TCA9554OnBoard
     : public common::detail::RantWrapper<TCA9554OnBoard, uint_fast16_t, 0, 0>
@@ -241,6 +243,26 @@ struct GENPYBIND(inline_base("*DAC6573Mixin*"), inline_base("*CoordinateBase*"))
 	}
 };
 
+
+// I2C multiplexer
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) TCA9546OnBoard
+    : public common::detail::RantWrapper<TCA9546OnBoard, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<TCA9546OnBoard>
+{
+	constexpr explicit TCA9546OnBoard(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+// The multiplexer can communicate with other slaves using 4 channels
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    TCA9546ChannelOnBoard
+    : public common::detail::RantWrapper<TCA9546ChannelOnBoard, uint_fast16_t, 3, 0>
+    , common::CoordinateBase<TCA9546ChannelOnBoard>
+{
+	constexpr explicit TCA9546ChannelOnBoard(uintmax_t const val = 0) : rant_t(val) {}
+	TCA9546OnBoard toTCA9546OnBoard() const SYMBOL_VISIBLE;
+};
+
+
 } // namespace vx
 } // namespace halco::hicann_dls
 
@@ -258,5 +280,8 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::AD5252ChannelOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::DAC6573OnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::DAC6573ChannelOnDAC6573)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::DAC6573ChannelOnBoard)
+
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::TCA9546OnBoard)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::TCA9546ChannelOnBoard)
 
 } // namespace std

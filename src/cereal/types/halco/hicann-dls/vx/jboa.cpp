@@ -16,6 +16,8 @@ CEREAL_REGISTER_TYPE(halco::hicann_dls::vx::AD5252ChannelConfigOnBoard)
 CEREAL_REGISTER_TYPE(halco::hicann_dls::vx::AD5252ChannelConfigPersistentOnBoard)
 CEREAL_REGISTER_TYPE(halco::hicann_dls::vx::DAC6573OnBoard)
 CEREAL_REGISTER_TYPE(halco::hicann_dls::vx::DAC6573ChannelOnBoard)
+CEREAL_REGISTER_TYPE(halco::hicann_dls::vx::TCA9546OnBoard)
+CEREAL_REGISTER_TYPE(halco::hicann_dls::vx::TCA9546ChannelOnBoard)
 CEREAL_REGISTER_POLYMORPHIC_RELATION(
     halco::common::Coordinate, halco::hicann_dls::vx::TCA9554OnBoard)
 CEREAL_REGISTER_POLYMORPHIC_RELATION(
@@ -36,5 +38,8 @@ CEREAL_REGISTER_POLYMORPHIC_RELATION(
     halco::common::Coordinate, halco::hicann_dls::vx::DAC6573OnBoard)
 CEREAL_REGISTER_POLYMORPHIC_RELATION(
     halco::common::Coordinate, halco::hicann_dls::vx::DAC6573ChannelOnBoard)
-
+CEREAL_REGISTER_POLYMORPHIC_RELATION(
+    halco::common::Coordinate, halco::hicann_dls::vx::TCA9546OnBoard)
+CEREAL_REGISTER_POLYMORPHIC_RELATION(
+    halco::common::Coordinate, halco::hicann_dls::vx::TCA9546ChannelOnBoard)
 CEREAL_REGISTER_DYNAMIC_INIT(halco_hicann_dls_vx_jboa)

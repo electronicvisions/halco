@@ -156,7 +156,7 @@ COORDINATE(PhyStatusOnFPGA, halco::hicann_dls::vx::v3::PhyStatusOnFPGA)
 COORDINATE(CommonPhyConfigFPGAOnDLS, halco::hicann_dls::vx::v3::CommonPhyConfigFPGAOnDLS)
 COORDINATE(CommonPhyConfigChipOnDLS, halco::hicann_dls::vx::v3::CommonPhyConfigChipOnDLS)
 COORDINATE(I2CIdRegisterOnBoard, halco::hicann_dls::vx::v3::I2CIdRegisterOnBoard)
-COORDINATE(I2CMuxRegisterOnBoard, halco::hicann_dls::vx::v3::I2CMuxRegisterOnBoard)
+COORDINATE(I2CTCA9546RegisterOnBoard, halco::hicann_dls::vx::v3::I2CTCA9546RegisterOnBoard)
 COORDINATE(I2CTempRegisterOnBoard, halco::hicann_dls::vx::v3::I2CTempRegisterOnBoard)
 COORDINATE(I2CINA219RoRegisterOnINA219, halco::hicann_dls::vx::v3::I2CINA219RoRegisterOnINA219)
 COORDINATE(I2CINA219RwRegisterOnINA219, halco::hicann_dls::vx::v3::I2CINA219RwRegisterOnINA219)
@@ -303,7 +303,9 @@ COORDINATE(AD5252ChannelConfigOnBoard, halco::hicann_dls::vx::v3::AD5252ChannelC
 COORDINATE(AD5252ChannelConfigPersistentOnBoard, halco::hicann_dls::vx::v3::AD5252ChannelConfigPersistentOnBoard)
 COORDINATE(DAC6573OnBoard, halco::hicann_dls::vx::v3::DAC6573OnBoard)
 COORDINATE(DAC6573ChannelOnDAC6573, halco::hicann_dls::vx::v3::DAC6573ChannelOnDAC6573)
-LAST_COORDINATE(DAC6573ChannelOnBoard, halco::hicann_dls::vx::v3::DAC6573ChannelOnBoard)
+COORDINATE(DAC6573ChannelOnBoard, halco::hicann_dls::vx::v3::DAC6573ChannelOnBoard)
+COORDINATE(TCA9546OnBoard, halco::hicann_dls::vx::v3::TCA9546OnBoard)
+LAST_COORDINATE(TCA9546ChannelOnBoard, halco::hicann_dls::vx::v3::TCA9546ChannelOnBoard)
 // clang-format on
 
 #undef COORDINATE
