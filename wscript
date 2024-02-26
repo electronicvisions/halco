@@ -6,7 +6,8 @@ def depends(ctx):
     ctx('ztl')
     ctx('pywrap') # also needed in non-python mode! (compatibility headers!)
     ctx('lib-boost-patches')
-    ctx('libnux')
+    if getattr(ctx.options, 'with_halco_on_ppu', True):
+        ctx('libnux')
     ctx('hate')
 
 
@@ -18,6 +19,8 @@ def options(opt):
     hopts = opt.add_option_group('halco options')
     hopts.add_withoption('halco-python-bindings', default=True,
                          help='Toggle the generation and build of halco python bindings')
+    hopts.add_withoption('halco-on-ppu', default=True,
+                         help='Toggle the generation and build of halco for the PPU')
 
 
 def configure(conf):
@@ -76,7 +79,7 @@ def build(bld):
                         'BOOST_MPL_LIMIT_LIST_SIZE=30'],
     )
 
-    if bld.env.have_ppu_toolchain:
+    if getattr(bld.options, 'with_halco_on_ppu', True) and bld.env.have_ppu_toolchain:
         env = bld.all_envs['nux_vx'].derive()
         env.detach()
 
@@ -126,7 +129,7 @@ def build(bld):
             use=[f'halco_hicann_dls_vx_v{hx_version}', 'halco_hicann_dls_vx_serialization'],
         )
 
-    if bld.env.have_ppu_toolchain:
+    if getattr(bld.options, 'with_halco_on_ppu', True) and bld.env.have_ppu_toolchain:
         env = bld.all_envs['nux_vx'].derive()
         env.detach()
 
