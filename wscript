@@ -53,7 +53,7 @@ def build(bld):
     bld(
         target='halco_inc',
         export_includes=['include'],
-        depends_on='halco_header',
+        use='halco_header',
     )
 
     bld.shlib(
