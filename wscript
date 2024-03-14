@@ -74,9 +74,11 @@ def build(bld):
         uselib='HALCO',
         use=['halco_common'],
         defines=['BOOST_MPL_CFG_NO_PREPROCESSED_HEADERS',
-                 'BOOST_MPL_LIMIT_LIST_SIZE=30'],
+                 'BOOST_MPL_LIMIT_LIST_SIZE=30',
+                 'BOOST_BIND_GLOBAL_PLACEHOLDERS'],
         export_defines=['BOOST_MPL_CFG_NO_PREPROCESSED_HEADERS',
-                        'BOOST_MPL_LIMIT_LIST_SIZE=30'],
+                        'BOOST_MPL_LIMIT_LIST_SIZE=30',
+                        'BOOST_BIND_GLOBAL_PLACEHOLDERS'],
     )
 
     if getattr(bld.options, 'with_halco_on_ppu', True) and bld.env.have_ppu_toolchain:
