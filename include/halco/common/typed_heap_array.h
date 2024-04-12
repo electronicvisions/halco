@@ -1,9 +1,12 @@
 #pragma once
 
 #ifndef PYPLUSPLUS
+#include "hate/indent.h"
+#include "hate/type_index.h"
 #include <algorithm>
 #include <array>
 #include <iterator>
+#include <ostream>
 #include <stdexcept>
 #include <type_traits>
 #include <utility>
@@ -234,6 +237,31 @@ bool operator>=(
 {
 	return x.elems >= y.elems;
 }
+
+#if !defined(PYPLUSPLUS) && !defined(__ppu__)
+template <typename Value, typename Key, typename Limits>
+std::enable_if_t<
+    std::is_same_v<
+        std::ostream,
+        std::decay_t<decltype(std::declval<std::ostream>() << std::declval<Key>())>> &&
+        std::is_same_v<
+            std::ostream,
+            std::decay_t<decltype(std::declval<std::ostream>() << std::declval<Value>())>>,
+    std::ostream>&
+operator<<(std::ostream& os, typed_heap_array<Value, Key, Limits> const& value)
+{
+	hate::IndentingOstream ios(os);
+	ios << "[\n";
+	ios << hate::Indentation("\t");
+	for (auto i = Enum(Limits::min); i < Limits::max; i = Enum(i + 1)) {
+		Key const key(i);
+		ios << key << ": " << value.at(key) << "\n";
+	}
+	ios << hate::Indentation() << "]";
+	return os;
+}
+#endif
+
 
 } // namespace common
 } // namespace halco
