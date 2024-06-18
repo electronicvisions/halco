@@ -6,6 +6,7 @@
 #define LAST_COORDINATE(Name, Type) COORDINATE(Name, Type)
 #endif
 
+// clang-format off
 COORDINATE(NeuronBlockOnDLS, halco::hicann_dls::vx::v3::NeuronBlockOnDLS)
 COORDINATE(MemoryTimingOnDLS, halco::hicann_dls::vx::v3::MemoryTimingOnDLS)
 COORDINATE(LogicalNeuronOnDLS, halco::hicann_dls::vx::v3::LogicalNeuronOnDLS)
@@ -131,7 +132,12 @@ COORDINATE(ExternalPPUMemoryByteOnFPGA, halco::hicann_dls::vx::v3::ExternalPPUMe
 COORDINATE(ExternalPPUMemoryQuadOnFPGA, halco::hicann_dls::vx::v3::ExternalPPUMemoryQuadOnFPGA)
 COORDINATE(ExternalPPUMemoryBlockSize, halco::hicann_dls::vx::v3::ExternalPPUMemoryBlockSize)
 COORDINATE(ExternalPPUMemoryBlockOnFPGA, halco::hicann_dls::vx::v3::ExternalPPUMemoryBlockOnFPGA)
+COORDINATE(ExternalPPUDRAMMemoryByteOnFPGA, halco::hicann_dls::vx::v3::ExternalPPUDRAMMemoryByteOnFPGA)
+COORDINATE(ExternalPPUDRAMMemoryQuadOnFPGA, halco::hicann_dls::vx::v3::ExternalPPUDRAMMemoryQuadOnFPGA)
+COORDINATE(ExternalPPUDRAMMemoryBlockSize, halco::hicann_dls::vx::v3::ExternalPPUDRAMMemoryBlockSize)
+COORDINATE(ExternalPPUDRAMMemoryBlockOnFPGA, halco::hicann_dls::vx::v3::ExternalPPUDRAMMemoryBlockOnFPGA)
 COORDINATE(ExternalPPUMemoryOnFPGA, halco::hicann_dls::vx::v3::ExternalPPUMemoryOnFPGA)
+COORDINATE(ExternalPPUDRAMMemoryOnFPGA, halco::hicann_dls::vx::v3::ExternalPPUDRAMMemoryOnFPGA)
 COORDINATE(NullPayloadReadableOnFPGA, halco::hicann_dls::vx::v3::NullPayloadReadableOnFPGA)
 COORDINATE(EventRecordingConfigOnFPGA, halco::hicann_dls::vx::v3::EventRecordingConfigOnFPGA)
 COORDINATE(InstructionTimeoutConfigOnFPGA, halco::hicann_dls::vx::v3::InstructionTimeoutConfigOnFPGA)
@@ -295,6 +301,7 @@ COORDINATE(AD5252ChannelConfigPersistentOnBoard, halco::hicann_dls::vx::v3::AD52
 COORDINATE(DAC6573OnBoard, halco::hicann_dls::vx::v3::DAC6573OnBoard)
 COORDINATE(DAC6573ChannelOnDAC6573, halco::hicann_dls::vx::v3::DAC6573ChannelOnDAC6573)
 LAST_COORDINATE(DAC6573ChannelOnBoard, halco::hicann_dls::vx::v3::DAC6573ChannelOnBoard)
+// clang-format on
 
 #undef COORDINATE
 #undef LAST_COORDINATE

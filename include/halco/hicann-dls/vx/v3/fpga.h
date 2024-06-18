@@ -21,7 +21,17 @@ using ExternalPPUMemoryBlockSize GENPYBIND(visible) =
     halco::hicann_dls::vx::ExternalPPUMemoryBlockSize;
 using ExternalPPUMemoryBlockOnFPGA GENPYBIND(visible) =
     halco::hicann_dls::vx::ExternalPPUMemoryBlockOnFPGA;
+using ExternalPPUDRAMMemoryByteOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExternalPPUDRAMMemoryByteOnFPGA;
+using ExternalPPUDRAMMemoryQuadOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExternalPPUDRAMMemoryQuadOnFPGA;
+using ExternalPPUDRAMMemoryBlockSize GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExternalPPUDRAMMemoryBlockSize;
+using ExternalPPUDRAMMemoryBlockOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExternalPPUDRAMMemoryBlockOnFPGA;
 using ExternalPPUMemoryOnFPGA GENPYBIND(visible) = halco::hicann_dls::vx::ExternalPPUMemoryOnFPGA;
+using ExternalPPUDRAMMemoryOnFPGA GENPYBIND(visible) =
+    halco::hicann_dls::vx::ExternalPPUDRAMMemoryOnFPGA;
 using NullPayloadReadableOnFPGA GENPYBIND(visible) =
     halco::hicann_dls::vx::NullPayloadReadableOnFPGA;
 using EventRecordingConfigOnFPGA GENPYBIND(visible) =

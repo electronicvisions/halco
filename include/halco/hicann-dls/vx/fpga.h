@@ -115,11 +115,75 @@ struct GENPYBIND(inline_base("*IntervalCoordinate*"), inline_base("*CoordinateBa
 
 
 struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    ExternalPPUDRAMMemoryByteOnFPGA
+    : public common::detail::
+          RantWrapper<ExternalPPUDRAMMemoryByteOnFPGA, uint_fast32_t, 0x10000000ull - 1, 0>
+    , common::CoordinateBase<ExternalPPUDRAMMemoryByteOnFPGA>
+{
+	constexpr explicit ExternalPPUDRAMMemoryByteOnFPGA(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    ExternalPPUDRAMMemoryQuadOnFPGA
+    : public common::detail::
+          RantWrapper<ExternalPPUDRAMMemoryQuadOnFPGA, uint_fast32_t, 0x04000000ull - 1, 0>
+    , common::CoordinateBase<ExternalPPUDRAMMemoryQuadOnFPGA>
+{
+	constexpr explicit ExternalPPUDRAMMemoryQuadOnFPGA(uintmax_t const val = 0)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+
+struct GENPYBIND(inline_base("*")) ExternalPPUDRAMMemoryBlockSize
+    : public common::detail::RantWrapper<
+          ExternalPPUDRAMMemoryBlockSize,
+          uint_fast32_t,
+          ExternalPPUDRAMMemoryByteOnFPGA::size,
+          1>
+{
+	constexpr explicit ExternalPPUDRAMMemoryBlockSize(uintmax_t const val = 1)
+	    GENPYBIND(implicit_conversion) :
+	    rant_t(val)
+	{}
+};
+
+
+struct GENPYBIND(inline_base("*IntervalCoordinate*"), inline_base("*CoordinateBase*"))
+    ExternalPPUDRAMMemoryBlockOnFPGA
+    : public common::detail::
+          IntervalCoordinate<ExternalPPUDRAMMemoryBlockOnFPGA, ExternalPPUDRAMMemoryByteOnFPGA>
+    , common::CoordinateBase<ExternalPPUDRAMMemoryBlockOnFPGA>
+{
+	INTERVAL_COMMON_CONSTRUCTORS(ExternalPPUDRAMMemoryBlockOnFPGA)
+
+	ExternalPPUDRAMMemoryBlockSize toExternalPPUDRAMMemoryBlockSize() const
+	{
+		return ExternalPPUDRAMMemoryBlockSize(length());
+	}
+};
+
+
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
     ExternalPPUMemoryOnFPGA
     : public common::detail::RantWrapper<ExternalPPUMemoryOnFPGA, uint_fast16_t, 0, 0>
     , common::CoordinateBase<ExternalPPUMemoryOnFPGA>
 {
 	constexpr explicit ExternalPPUMemoryOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
+};
+
+
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    ExternalPPUDRAMMemoryOnFPGA
+    : public common::detail::RantWrapper<ExternalPPUDRAMMemoryOnFPGA, uint_fast16_t, 0, 0>
+    , common::CoordinateBase<ExternalPPUDRAMMemoryOnFPGA>
+{
+	constexpr explicit ExternalPPUDRAMMemoryOnFPGA(uintmax_t const val = 0) : rant_t(val) {}
 };
 
 
@@ -267,7 +331,12 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExternalPPUMemoryByteOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExternalPPUMemoryQuadOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExternalPPUMemoryBlockSize)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExternalPPUMemoryBlockOnFPGA)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExternalPPUDRAMMemoryByteOnFPGA)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExternalPPUDRAMMemoryQuadOnFPGA)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExternalPPUDRAMMemoryBlockSize)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExternalPPUDRAMMemoryBlockOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExternalPPUMemoryOnFPGA)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::ExternalPPUDRAMMemoryOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikeIOAddress)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikeIOConfigOnFPGA)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::SpikeIOInputRouteOnFPGA)
