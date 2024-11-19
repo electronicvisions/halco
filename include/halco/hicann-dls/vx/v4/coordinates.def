@@ -63,6 +63,7 @@ COORDINATE(CapMemBlockConfigOnDLS, halco::hicann_dls::vx::v4::CapMemBlockConfigO
 COORDINATE(CapMemCellOnCapMemBlock, halco::hicann_dls::vx::v4::CapMemCellOnCapMemBlock)
 COORDINATE(CapMemCellOnDLS, halco::hicann_dls::vx::v4::CapMemCellOnDLS)
 COORDINATE(UnusedCapMemCellOnDLS, halco::hicann_dls::vx::v4::UnusedCapMemCellOnDLS)
+COORDINATE(CapMemSRAMTimingConfigOnDLS, halco::hicann_dls::vx::v4::CapMemSRAMTimingConfigOnDLS)
 COORDINATE(CapMemOnDLS, halco::hicann_dls::vx::v4::CapMemOnDLS)
 COORDINATE(CurrentDACOnDLS, halco::hicann_dls::vx::v4::CurrentDACOnDLS)
 COORDINATE(ReferenceGeneratorConfigOnDLS, halco::hicann_dls::vx::v4::ReferenceGeneratorConfigOnDLS)

@@ -14,6 +14,8 @@ using CapMemBlockConfigOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::CapMemB
 using ReferenceGeneratorConfigOnDLS GENPYBIND(visible) =
     halco::hicann_dls::vx::ReferenceGeneratorConfigOnDLS;
 using CapMemOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::CapMemOnDLS;
+using CapMemSRAMTimingConfigOnDLS GENPYBIND(visible) =
+    halco::hicann_dls::vx::CapMemSRAMTimingConfigOnDLS;
 
 struct GENPYBIND(inline_base("*")) CapMemRowOnCapMemBlock
     : public common::detail::RantWrapper<CapMemRowOnCapMemBlock, uint_fast16_t, 23, 0>

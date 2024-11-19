@@ -15,6 +15,11 @@ CapMemBlockOnHemisphere CapMemBlockConfigOnDLS::toCapMemBlockOnHemisphere() cons
 	return CapMemBlockOnHemisphere(toEnum() % CapMemBlockOnHemisphere::size);
 }
 
+CapMemBlockOnHemisphere CapMemSRAMTimingConfigOnDLS::toCapMemBlockOnHemisphere() const
+{
+	return CapMemBlockOnHemisphere(toEnum() % CapMemBlockOnHemisphere::size);
+}
+
 HemisphereOnDLS CapMemBlockOnDLS::toHemisphereOnDLS() const
 {
 	return HemisphereOnDLS(toEnum() / CapMemBlockOnHemisphere::size);
@@ -25,4 +30,8 @@ HemisphereOnDLS CapMemBlockConfigOnDLS::toHemisphereOnDLS() const
 	return HemisphereOnDLS(toEnum() / CapMemBlockOnHemisphere::size);
 }
 
+HemisphereOnDLS CapMemSRAMTimingConfigOnDLS::toHemisphereOnDLS() const
+{
+	return HemisphereOnDLS(toEnum() / CapMemBlockOnHemisphere::size);
+}
 } // namespace halco::hicann_dls::vx:v2
