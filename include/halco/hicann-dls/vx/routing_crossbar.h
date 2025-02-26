@@ -7,7 +7,8 @@
 #include "halco/common/geometry.h"
 #include "hate/visibility.h"
 
-namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
+namespace halco::hicann_dls {
+namespace vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 struct NeuronEventOutputOnDLS;
 struct PADIBusOnDLS;
@@ -150,7 +151,8 @@ struct GENPYBIND(inline_base("*GridCoordinate*"), inline_base("*CoordinateBase*"
 	static enum_type to_enum(x_type const& x, y_type const& y) SYMBOL_VISIBLE;
 };
 
-} // namespace halco::hicann_dls::vx
+} // namespace vx
+} // namespace halco::hicann_dls
 
 namespace std {
 

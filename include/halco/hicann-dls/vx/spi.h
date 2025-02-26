@@ -7,7 +7,8 @@
 #include "halco/hicann-dls/vx/dac.h"
 #include "hate/visibility.h"
 
-namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
+namespace halco::hicann_dls {
+namespace vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 /***********\
     SPI
@@ -76,7 +77,8 @@ struct GENPYBIND(inline_base("*DACMixin*")) SPIDACControlRegisterOnBoard
 	SPIDACControlRegisterOnDAC toSPIDACControlRegisterOnDAC() const { return This(); }
 };
 
-} // namespace halco::hicann_dls::vx
+} // namespace vx
+} // namespace halco::hicann_dls
 
 namespace std {
 

@@ -2,7 +2,8 @@
 #include "halco/common/genpybind.h"
 #include "halco/hicann-dls/vx/vector_generator.h"
 
-namespace halco::hicann_dls::vx::v4 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V4 {
+namespace halco::hicann_dls::vx {
+namespace v4 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V4 {
 
 using VectorGeneratorLUTEntryOnVectorGeneratorLUT GENPYBIND(visible) =
     halco::hicann_dls::vx::VectorGeneratorLUTEntryOnVectorGeneratorLUT;
@@ -20,4 +21,5 @@ using VectorGeneratorControlOnFPGA GENPYBIND(visible) =
 using VectorGeneratorOnFPGA GENPYBIND(visible) = halco::hicann_dls::vx::VectorGeneratorOnFPGA;
 using SourceOnVectorGenerator GENPYBIND(visible) = halco::hicann_dls::vx::SourceOnVectorGenerator;
 
-} // namespace halco::hicann_dls::vx::v4
+} // namespace v4
+} // namespace halco::hicann_dls::vx

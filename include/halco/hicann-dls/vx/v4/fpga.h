@@ -2,7 +2,8 @@
 #include "halco/common/genpybind.h"
 #include "halco/hicann-dls/vx/fpga.h"
 
-namespace halco::hicann_dls::vx::v4 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V4 {
+namespace halco::hicann_dls::vx {
+namespace v4 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V4 {
 
 using FPGASystimeSyncNumRetriesOnFPGA GENPYBIND(visible) =
     halco::hicann_dls::vx::FPGASystimeSyncNumRetriesOnFPGA;
@@ -45,4 +46,5 @@ using SpikeIOConfigOnFPGA GENPYBIND(visible) = halco::hicann_dls::vx::SpikeIOCon
 using SpikeIOInputRouteOnFPGA GENPYBIND(visible) = halco::hicann_dls::vx::SpikeIOInputRouteOnFPGA;
 using SpikeIOOutputRouteOnFPGA GENPYBIND(visible) = halco::hicann_dls::vx::SpikeIOOutputRouteOnFPGA;
 
-} // namespace halco::hicann_dls::vx::v4
+} // namespace v4
+} // namespace halco::hicann_dls::vx

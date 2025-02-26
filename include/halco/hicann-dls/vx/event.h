@@ -8,7 +8,8 @@
 #include "halco/hicann-dls/vx/padi.h"
 #include "hate/visibility.h"
 
-namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
+namespace halco::hicann_dls {
+namespace vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 /***********\
     Spike
@@ -176,7 +177,8 @@ struct GENPYBIND(inline_base("*")) SpikeLabel
 	SpikeIOOutputRouteOnFPGA toSpikeIOOutputRouteOnFPGA() const SYMBOL_VISIBLE;
 };
 
-} // namespace halco::hicann_dls::vx
+} // namespace vx
+} // namespace halco::hicann_dls
 
 namespace std {
 

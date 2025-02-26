@@ -4,7 +4,8 @@
 #include "halco/hicann-dls/vx/capmem.h"
 #include "hate/visibility.h"
 
-namespace halco::hicann_dls::vx::v3 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V3 {
+namespace halco::hicann_dls::vx {
+namespace v3 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V3 {
 
 using CapMemColumnOnCapMemBlock GENPYBIND(visible) =
     halco::hicann_dls::vx::CapMemColumnOnCapMemBlock;
@@ -275,7 +276,8 @@ struct GENPYBIND(inline_base("*")) UnusedCapMemCellOnDLS
 	CapMemCellOnDLS toCapMemCellOnDLS() const SYMBOL_VISIBLE;
 };
 
-} // namespace halco::hicann_dls::vx::v3
+} // namespace v3
+} // namespace halco::hicann_dls::vx
 
 namespace std {
 

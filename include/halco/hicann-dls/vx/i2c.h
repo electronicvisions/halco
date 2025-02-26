@@ -10,7 +10,8 @@
 
 #include "hate/visibility.h"
 
-namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
+namespace halco::hicann_dls {
+namespace vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 /***********\
     I2C
@@ -213,7 +214,8 @@ struct GENPYBIND(inline_base("*DAC6573Mixin*")) I2CDAC6573RwRegisterOnBoard
 	static constexpr uint8_t register_base_addr = 0x10;
 };
 
-} // namespace halco::hicann_dls::vx
+} // namespace vx
+} // namespace halco::hicann_dls
 
 namespace std {
 

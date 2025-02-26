@@ -2,7 +2,8 @@
 #include "halco/common/genpybind.h"
 #include "halco/hicann-dls/vx/padi.h"
 
-namespace halco::hicann_dls::vx::v3 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V3 {
+namespace halco::hicann_dls::vx {
+namespace v3 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V3 {
 
 using PADIBusBlockOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::PADIBusBlockOnDLS;
 using PADIBusOnPADIBusBlock GENPYBIND(visible) = halco::hicann_dls::vx::PADIBusOnPADIBusBlock;
@@ -12,4 +13,5 @@ using CommonSTPConfigOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::CommonSTP
 using PADIEventOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::PADIEventOnDLS;
 using PADIRowSelectAddress GENPYBIND(visible) = halco::hicann_dls::vx::PADIRowSelectAddress;
 
-} // namespace halco::hicann_dls::vx::v3
+} // namespace v3
+} // namespace halco::hicann_dls::vx

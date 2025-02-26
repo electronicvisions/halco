@@ -7,7 +7,8 @@
 #include "halco/hicann-dls/vx/omnibus.h"
 #include "hate/visibility.h"
 
-namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
+namespace halco::hicann_dls {
+namespace vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 // the RantWrapper is needed, as BaseType is not supported for mixins.
 // We limit the range to the size of the Tourmalet-RF which has 23-bit address-space.
@@ -863,7 +864,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 };
 
 
-} // namespace halco::hicann_dls::vx
+} // namespace vx
+} // namespace halco::hicann_dls
 
 namespace std {
 

@@ -5,7 +5,8 @@
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 
-namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
+namespace halco::hicann_dls {
+namespace vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) CurrentDACOnDLS
     : public common::detail::RantWrapper<CurrentDACOnDLS, uint_fast16_t, 0, 0>
@@ -15,7 +16,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) 
 };
 
 
-} // namespace halco::hicann::dls::vx
+} // namespace vx
+} // namespace halco::hicann::dls
 
 namespace std {
 

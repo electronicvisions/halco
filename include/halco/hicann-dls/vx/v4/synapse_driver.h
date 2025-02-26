@@ -2,7 +2,8 @@
 #include "halco/common/genpybind.h"
 #include "halco/hicann-dls/vx/synapse_driver.h"
 
-namespace halco::hicann_dls::vx::v4 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V4 {
+namespace halco::hicann_dls::vx {
+namespace v4 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V4 {
 
 using SynapseDriverOnSynapseDriverBlock GENPYBIND(visible) =
     halco::hicann_dls::vx::SynapseDriverOnSynapseDriverBlock;
@@ -14,4 +15,5 @@ using CommonSynapseDriverConfigOnDLS GENPYBIND(visible) =
 using SynapseDriverSRAMTimingConfigOnDLS GENPYBIND(visible) =
     halco::hicann_dls::vx::SynapseDriverSRAMTimingConfigOnDLS;
 
-} // namespace halco::hicann_dls::vx::v4
+} // namespace v4
+} // namespace halco::hicann_dls::vx
