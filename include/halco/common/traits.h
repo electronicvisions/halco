@@ -22,7 +22,7 @@ namespace detail {
 
 #if defined(PYPLUSPLUS)
 // nothing
-#elif (__cplusplus < 201703L) || (defined(__clang_major__) && (__clang_major__ <= 14))
+#elif (__cplusplus < 201703L) || (defined(__clang_major__) && (__clang_major__ <= 19))
 /* clang seems buggy w.r.t. "Equivalent but not functionally-equivalent redeclarations"
  * cf. https://clang.llvm.org/cxx_dr_status.html
  * easily tested here: https://wandbox.org/permlink/OkzrYjpCOuSHWTZC
