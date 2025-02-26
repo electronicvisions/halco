@@ -11,7 +11,7 @@
 
 #include "hate/visibility.h"
 
-namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
+namespace halco::hicann_dls { namespace vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 struct SynapseRowOnDLS;
 struct SynapseWeightRowOnDLS;
@@ -241,7 +241,8 @@ struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*"))
 	NeuronConfigBlockOnDLS toNeuronConfigBlockOnDLS() const SYMBOL_VISIBLE;
 };
 
-} // namespace halco::hicann_dls::vx
+} // namespace vx
+} // namespace halco::hicann_dls
 
 namespace std {
 

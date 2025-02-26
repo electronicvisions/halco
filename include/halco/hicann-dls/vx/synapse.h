@@ -9,7 +9,7 @@
 #include "halco/hicann-dls/vx/synram.h"
 #include "hate/visibility.h"
 
-namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
+namespace halco::hicann_dls { namespace vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 struct SynapseDriverOnSynapseDriverBlock;
 struct NeuronConfigBlockOnDLS;
@@ -512,7 +512,8 @@ struct GENPYBIND(inline_base("*")) SynapseLabel
 	{}
 };
 
-} // namespace halco::hicann_dls::vx
+} // namespace vx
+} // namespace halco::hicann_dls
 
 namespace std {
 

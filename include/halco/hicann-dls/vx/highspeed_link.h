@@ -6,7 +6,7 @@
 #include "halco/common/geometry.h"
 #include "hate/visibility.h"
 
-namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
+namespace halco::hicann_dls { namespace vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 struct JTAGPhyRegisterOnDLS;
 
@@ -96,7 +96,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 	constexpr explicit CommonPhyConfigChipOnDLS(uintmax_t const val = 0) : rant_t(val) {}
 };
 
-} // namespace halco::hicann_dls::vx
+} // namespace vx
+} // namespace halco::hicann_dls
 
 namespace std {
 

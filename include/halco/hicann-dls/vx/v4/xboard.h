@@ -2,7 +2,7 @@
 #include "halco/common/genpybind.h"
 #include "halco/hicann-dls/vx/xboard.h"
 
-namespace halco::hicann_dls::vx::v4 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V4 {
+namespace halco::hicann_dls::vx { namespace v4 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V4 {
 
 using ShiftRegisterOnBoard GENPYBIND(visible) = halco::hicann_dls::vx::ShiftRegisterOnBoard;
 using ADCSourceOnBoard GENPYBIND(visible) = halco::hicann_dls::vx::ADCSourceOnBoard;
@@ -13,4 +13,5 @@ using INA219OnBoard GENPYBIND(visible) = halco::hicann_dls::vx::INA219OnBoard;
 using INA219ConfigOnBoard GENPYBIND(visible) = halco::hicann_dls::vx::INA219ConfigOnBoard;
 using INA219StatusOnBoard GENPYBIND(visible) = halco::hicann_dls::vx::INA219StatusOnBoard;
 
-} // namespace halco::hicann_dls::vx::v4
+} // namespace v4
+} // namespace halco::hicann_dls::vx

@@ -6,7 +6,7 @@
 #include "halco/common/geometry.h"
 #include "hate/visibility.h"
 
-namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
+namespace halco::hicann_dls { namespace vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 /**********\
     PLL
@@ -61,7 +61,8 @@ struct GENPYBIND(inline_base("*")) PLLClockOutputOnDLS
 	static const SYMBOL_VISIBLE PLLClockOutputOnDLS madc_clk;
 };
 
-} // namespace halco::hicann_dls::vx
+} // namespace vx
+} // namespace halco::hicann_dls
 
 namespace std {
 

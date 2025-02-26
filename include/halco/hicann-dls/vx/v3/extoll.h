@@ -2,7 +2,7 @@
 #include "halco/common/genpybind.h"
 #include "halco/hicann-dls/vx/extoll.h"
 
-namespace halco::hicann_dls::vx::v3 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V3 {
+namespace halco::hicann_dls::vx { namespace v3 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V3 {
 
 using EventSwitchSourceOnFPGA GENPYBIND(visible) = halco::hicann_dls::vx::EventSwitchSourceOnFPGA;
 using EventSwitchReadoutOnFPGA GENPYBIND(visible) = halco::hicann_dls::vx::EventSwitchReadoutOnFPGA;
@@ -104,4 +104,5 @@ using ExtollSpikeCommTimestampDelayCounterResetOnSpikeCommSplit GENPYBIND(visibl
 using ExtollSpikeCommTimestampDelayCounterResetOnFPGA GENPYBIND(visible) =
     halco::hicann_dls::vx::ExtollSpikeCommTimestampDelayCounterResetOnFPGA;
 
-} // namespace halco::hicann_dls::vx::v3
+} // namespace v3
+} // namespace halco::hicann_dls::vx

@@ -10,7 +10,7 @@
 #include "halco/hicann-dls/vx/synapse.h"
 #include "hate/visibility.h"
 
-namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
+namespace halco::hicann_dls { namespace vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 #include "halco/hicann-dls/vx/hemisphere_fwd.h"
 
@@ -131,7 +131,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 	static const SYMBOL_VISIBLE SynapseDriverSRAMTimingConfigOnDLS bottom;
 };
 
-} // namespace halco::hicann_dls::vx
+} // namespace vx
+} // namespace halco::hicann_dls
 
 namespace std {
 

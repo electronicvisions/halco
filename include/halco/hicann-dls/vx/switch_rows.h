@@ -6,7 +6,7 @@
 #include "halco/hicann-dls/vx/synram.h"
 #include <stdint.h>
 
-namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
+namespace halco::hicann_dls { namespace vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 /************************\
   ColumnCorrelationQuad
@@ -107,7 +107,8 @@ struct GENPYBIND(inline_base("*SynramMixin*"), inline_base("*CoordinateBase*"))
 	}
 };
 
-} // namespace halco::hicann_dls::vx::v3
+} // namespace v3
+} // namespace halco::hicann_dls::vx
 
 namespace std {
 

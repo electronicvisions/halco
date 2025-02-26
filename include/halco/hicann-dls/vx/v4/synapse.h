@@ -3,7 +3,7 @@
 #include "halco/hicann-dls/vx/cadc.h"
 #include "halco/hicann-dls/vx/synapse.h"
 
-namespace halco::hicann_dls::vx::v4 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V4 {
+namespace halco::hicann_dls::vx { namespace v4 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V4 {
 
 using SynapseRowOnSynapseDriver GENPYBIND(visible) =
     halco::hicann_dls::vx::SynapseRowOnSynapseDriver;
@@ -38,4 +38,5 @@ using SynapseCorrelationCalibQuadOnDLS GENPYBIND(visible) =
     halco::hicann_dls::vx::SynapseCorrelationCalibQuadOnDLS;
 using CorrelationResetOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::CorrelationResetOnDLS;
 
-} // namespace halco::hicann_dls::vx::v4
+} // namespace v4
+} // namespace halco::hicann_dls::vx

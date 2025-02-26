@@ -4,7 +4,7 @@
 #include "halco/common/genpybind.h"
 #include "halco/common/geometry.h"
 
-namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
+namespace halco::hicann_dls { namespace vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 /**
  * General coordinate used for localisation of an entry inside a coordinate localising a quad block
@@ -20,7 +20,8 @@ struct GENPYBIND(inline_base("*")) EntryOnQuad
 	{}
 };
 
-} // namespace halco::hicann_dls::vx
+} // namespace vx
+} // namespace halco::hicann_dls
 
 namespace std {
 

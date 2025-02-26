@@ -2,7 +2,7 @@
 #include "halco/common/genpybind.h"
 #include "halco/hicann-dls/vx/cadc.h"
 
-namespace halco::hicann_dls::vx::v3 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V3 {
+namespace halco::hicann_dls::vx { namespace v3 GENPYBIND_TAG_HALCO_HICANN_DLS_VX_V3 {
 
 using CADCOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::CADCOnDLS;
 using CADCConfigOnDLS GENPYBIND(visible) = halco::hicann_dls::vx::CADCConfigOnDLS;
@@ -22,4 +22,5 @@ using CADCSampleQuadUnspecifiedReadoutOnSynram GENPYBIND(visible) =
     halco::hicann_dls::vx::CADCSampleQuadUnspecifiedReadoutOnSynram;
 using CADCSampleQuadOnSynram GENPYBIND(visible) = halco::hicann_dls::vx::CADCSampleQuadOnSynram;
 
-} // namespace halco::hicann_dls::vx::v3
+} // namespace v3
+} // namespace halco::hicann_dls::vx

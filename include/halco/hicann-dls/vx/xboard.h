@@ -7,7 +7,7 @@
 #include "halco/common/mixin.h"
 #include "hate/visibility.h"
 
-namespace halco::hicann_dls::vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
+namespace halco::hicann_dls { namespace vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 struct DACChannelOnBoard;
 struct INA219ConfigOnBoard;
@@ -139,7 +139,8 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) 
 	INA219ConfigOnBoard toINA219ConfigOnBoard() const SYMBOL_VISIBLE;
 };
 
-} // namespace halco::hicann_dls::vx
+} // namespace vx
+} // namespace halco::hicann_dls
 
 namespace std {
 
