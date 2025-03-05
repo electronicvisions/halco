@@ -38,8 +38,12 @@ namespace detail {
 #define DETAIL_BINOP(NAME, OP)                                                                     \
 	friend NAME operator OP(NAME const& lhs, NAME const& rhs)                                      \
 	{                                                                                              \
-		/* circumvent -Wint-in-bool-context */                                                     \
-		if PYPP_CONSTEXPR (boost::is_same<value_type, bool>::value) {                              \
+		if PYPP_CONSTEXPR (                                                                        \
+		    boost::is_same<value_type, float>::value ||                                            \
+		    boost::is_same<value_type, double>::value) {                                           \
+			throw std::logic_error("operator% not implementable for floating-point value type.");  \
+		} else if PYPP_CONSTEXPR (boost::is_same<value_type, bool>::value) {                       \
+			/* circumvent -Wint-in-bool-context */                                                 \
 			return NAME(static_cast<int>(lhs.mValue) OP static_cast<int>(rhs.mValue) > 0);         \
 		} else {                                                                                   \
 			return NAME(lhs.mValue OP rhs.mValue);                                                 \
