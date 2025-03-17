@@ -33,12 +33,7 @@ extern SYMBOL_VISIBLE std::array<std::array<int, 9>, 8> const DNCOnWaferEnum;
 extern SYMBOL_VISIBLE std::array<int, 48> const reticle_power_grid;
 
 // Enum for different setup types
-PYPP_CLASS_ENUM(SetupType) {
-	VSetup,
-	FACETSWafer,
-	CubeSetup,
-	BSSWafer
-};
+PYPP_CLASS_ENUM(SetupType){VSetup, FACETSWafer, CubeSetup, BSSWafer, jBOA};
 
 // Return the FPGA position on a Wafer
 SYMBOL_VISIBLE FPGAOnWafer gridLookupFPGAOnWafer(DNCGlobal const dnc);
