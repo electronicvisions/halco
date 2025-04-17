@@ -112,7 +112,7 @@ def build(bld):
         use=['halco_hicann_dls_vx'],
     )
 
-    for hx_version in [3, 4]:
+    for hx_version in [3]:
         bld.shlib(
             target='halco_hicann_dls_vx_v%s' % hx_version,
             source=bld.path.ant_glob('src/halco/hicann-dls/vx/v%s/*.cpp' % hx_version,
@@ -145,7 +145,7 @@ def build(bld):
             env = env,
         )
 
-        for hx_version in [3, 4]:
+        for hx_version in [3]:
             env = bld.all_envs['nux_vx_v%s' % hx_version].derive()
             env.detach()
 
@@ -181,7 +181,7 @@ def build(bld):
         install_path='${PREFIX}/bin'
     )
 
-    for hx_version in [3, 4]:
+    for hx_version in [3]:
         coordinates = list()
         coordinates_def_path = str(bld.path.get_src()) + f"/include/halco/hicann-dls/vx/v{hx_version}/coordinates.def"
         with open(coordinates_def_path) as coordinates_def:

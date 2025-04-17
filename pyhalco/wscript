@@ -60,7 +60,7 @@ def build(bld):
             use=['halco_common', 'pyhalco_common_files'],
         )
 
-        for hx_version in [3, 4]:
+        for hx_version in [3]:
             bld(
                 target='pyhalco_hicann_dls_vx_v%s' % hx_version,
                 source='../include/halco/hicann-dls/vx/v%s/pycoordinates.h' % hx_version,
