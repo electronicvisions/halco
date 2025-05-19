@@ -12,7 +12,7 @@ namespace vx GENPYBIND_TAG_HALCO_HICANN_DLS_VX {
 
 
 /************\
-    ultra96
+    jboa
 \************/
 
 struct TCA9554ChannelOnBoard;
@@ -116,7 +116,8 @@ struct GENPYBIND(inline_base("*AD5252Mixin*"), inline_base("*CoordinateBase*")) 
 	explicit AD5252ChannelOnBoard(
 	    AD5252ChannelOnAD5252 const& reg, AD5252OnBoard const& ad = AD5252OnBoard()) :
 	    mixin_t(reg, ad)
-	{}
+	{
+	}
 
 	explicit AD5252ChannelOnBoard(enum_type const& e) : mixin_t(e) {}
 
@@ -146,7 +147,8 @@ struct GENPYBIND(inline_base("*AD5252Mixin*"), inline_base("*CoordinateBase*"))
 	explicit AD5252ChannelConfigOnBoard(
 	    AD5252ChannelOnAD5252 const& reg, AD5252OnBoard const& ad = AD5252OnBoard()) :
 	    mixin_t(reg, ad)
-	{}
+	{
+	}
 
 	explicit AD5252ChannelConfigOnBoard(enum_type const& e) : mixin_t(e) {}
 
@@ -176,7 +178,8 @@ struct GENPYBIND(inline_base("*AD5252Mixin*"), inline_base("*CoordinateBase*"))
 	explicit AD5252ChannelConfigPersistentOnBoard(
 	    AD5252ChannelOnAD5252 const& reg, AD5252OnBoard const& ad = AD5252OnBoard()) :
 	    mixin_t(reg, ad)
-	{}
+	{
+	}
 
 	explicit AD5252ChannelConfigPersistentOnBoard(enum_type const& e) : mixin_t(e) {}
 
@@ -223,7 +226,8 @@ struct GENPYBIND(inline_base("*DAC6573Mixin*"), inline_base("*CoordinateBase*"))
 	explicit DAC6573ChannelOnBoard(
 	    DAC6573ChannelOnDAC6573 const& reg, DAC6573OnBoard const& dac = DAC6573OnBoard()) :
 	    mixin_t(reg, dac)
-	{}
+	{
+	}
 	explicit DAC6573ChannelOnBoard(enum_type const& e) : mixin_t(e) {}
 
 	static const SYMBOL_VISIBLE DAC6573ChannelOnBoard v_reset;

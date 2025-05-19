@@ -15,6 +15,7 @@
 #include "halco/hicann-dls/vx/v3/fpga.h"
 #include "halco/hicann-dls/vx/v3/highspeed_link.h"
 #include "halco/hicann-dls/vx/v3/i2c.h"
+#include "halco/hicann-dls/vx/v3/jboa.h"
 #include "halco/hicann-dls/vx/v3/jtag.h"
 #include "halco/hicann-dls/vx/v3/madc.h"
 #include "halco/hicann-dls/vx/v3/memory_timing.h"
@@ -33,7 +34,6 @@
 #include "halco/hicann-dls/vx/v3/synapse_driver.h"
 #include "halco/hicann-dls/vx/v3/synram.h"
 #include "halco/hicann-dls/vx/v3/timing.h"
-#include "halco/hicann-dls/vx/v3/ultra96.h"
 #include "halco/hicann-dls/vx/v3/vector_generator.h"
 #include "halco/hicann-dls/vx/v3/xboard.h"
 

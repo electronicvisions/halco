@@ -5,7 +5,7 @@
 #include "halco/common/geometry.h"
 #include "halco/common/mixin.h"
 
-#include "halco/hicann-dls/vx/ultra96.h"
+#include "halco/hicann-dls/vx/jboa.h"
 #include "halco/hicann-dls/vx/xboard.h"
 
 #include "hate/visibility.h"

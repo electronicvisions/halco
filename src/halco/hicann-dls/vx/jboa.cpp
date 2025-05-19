@@ -1,4 +1,4 @@
-#include "halco/hicann-dls/vx/ultra96.h"
+#include "halco/hicann-dls/vx/jboa.h"
 
 namespace halco::hicann_dls::vx {
 
@@ -54,18 +54,18 @@ AD5252OnBoard const AD5252OnBoard::vdd_25digital_12digital{2};
 AD5252ChannelOnAD5252 const AD5252ChannelOnAD5252::channel_1{0};
 AD5252ChannelOnAD5252 const AD5252ChannelOnAD5252::channel_3{1};
 
-AD5252ChannelOnBoard const AD5252ChannelOnBoard::vdd_12pll{AD5252ChannelOnAD5252::channel_1,
-                                                           AD5252OnBoard::vdd_12pll_12madc};
-AD5252ChannelOnBoard const AD5252ChannelOnBoard::vdd_12madc{AD5252ChannelOnAD5252::channel_3,
-                                                            AD5252OnBoard::vdd_12pll_12madc};
-AD5252ChannelOnBoard const AD5252ChannelOnBoard::vdd_12analog{AD5252ChannelOnAD5252::channel_1,
-                                                              AD5252OnBoard::vdd_12pll_12madc};
-AD5252ChannelOnBoard const AD5252ChannelOnBoard::vdd_25analog{AD5252ChannelOnAD5252::channel_3,
-                                                              AD5252OnBoard::vdd_12pll_12madc};
-AD5252ChannelOnBoard const AD5252ChannelOnBoard::vdd_25digital{AD5252ChannelOnAD5252::channel_1,
-                                                               AD5252OnBoard::vdd_12pll_12madc};
-AD5252ChannelOnBoard const AD5252ChannelOnBoard::vdd_12digital{AD5252ChannelOnAD5252::channel_3,
-                                                               AD5252OnBoard::vdd_12pll_12madc};
+AD5252ChannelOnBoard const AD5252ChannelOnBoard::vdd_12pll{
+    AD5252ChannelOnAD5252::channel_1, AD5252OnBoard::vdd_12pll_12madc};
+AD5252ChannelOnBoard const AD5252ChannelOnBoard::vdd_12madc{
+    AD5252ChannelOnAD5252::channel_3, AD5252OnBoard::vdd_12pll_12madc};
+AD5252ChannelOnBoard const AD5252ChannelOnBoard::vdd_12analog{
+    AD5252ChannelOnAD5252::channel_1, AD5252OnBoard::vdd_12pll_12madc};
+AD5252ChannelOnBoard const AD5252ChannelOnBoard::vdd_25analog{
+    AD5252ChannelOnAD5252::channel_3, AD5252OnBoard::vdd_12pll_12madc};
+AD5252ChannelOnBoard const AD5252ChannelOnBoard::vdd_25digital{
+    AD5252ChannelOnAD5252::channel_1, AD5252OnBoard::vdd_12pll_12madc};
+AD5252ChannelOnBoard const AD5252ChannelOnBoard::vdd_12digital{
+    AD5252ChannelOnAD5252::channel_3, AD5252OnBoard::vdd_12pll_12madc};
 AD5252ChannelConfigOnBoard AD5252ChannelOnBoard::toAD5252ChannelConfigOnBoard() const
 {
 	return AD5252ChannelConfigOnBoard(toEnum());

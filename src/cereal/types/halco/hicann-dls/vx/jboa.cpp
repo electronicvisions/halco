@@ -1,7 +1,7 @@
-#include "cereal/types/halco/hicann-dls/vx/ultra96.h"
+#include "cereal/types/halco/hicann-dls/vx/jboa.h"
 
 #include "cereal/types/halco/common/geometry.h"
-#include "halco/hicann-dls/vx/ultra96.h"
+#include "halco/hicann-dls/vx/jboa.h"
 #include <cereal/archives/json.hpp>
 #include <cereal/archives/portable_binary.hpp>
 #include <cereal/types/polymorphic.hpp>
@@ -37,4 +37,4 @@ CEREAL_REGISTER_POLYMORPHIC_RELATION(
 CEREAL_REGISTER_POLYMORPHIC_RELATION(
     halco::common::Coordinate, halco::hicann_dls::vx::DAC6573ChannelOnBoard)
 
-CEREAL_REGISTER_DYNAMIC_INIT(halco_hicann_dls_vx_ultra96)
+CEREAL_REGISTER_DYNAMIC_INIT(halco_hicann_dls_vx_jboa)

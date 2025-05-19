@@ -20,6 +20,7 @@ GENPYBIND_MANUAL({
 #include "halco/hicann-dls/vx/fpga.h"
 #include "halco/hicann-dls/vx/highspeed_link.h"
 #include "halco/hicann-dls/vx/i2c.h"
+#include "halco/hicann-dls/vx/jboa.h"
 #include "halco/hicann-dls/vx/jtag.h"
 #include "halco/hicann-dls/vx/madc.h"
 #include "halco/hicann-dls/vx/memory_timing.h"
@@ -37,7 +38,6 @@ GENPYBIND_MANUAL({
 #include "halco/hicann-dls/vx/synapse_driver.h"
 #include "halco/hicann-dls/vx/synram.h"
 #include "halco/hicann-dls/vx/timing.h"
-#include "halco/hicann-dls/vx/ultra96.h"
 #include "halco/hicann-dls/vx/vector_generator.h"
 #include "halco/hicann-dls/vx/xboard.h"
 
