@@ -47,25 +47,25 @@ TCA9554InputsOnBoard TCA9554ConfigOnBoard::toTCA9554InputsOnBoard() const
 	return TCA9554InputsOnBoard(toEnum());
 }
 
-AD5252OnBoard const AD5252OnBoard::vdd_12pll_12madc{0};
-AD5252OnBoard const AD5252OnBoard::vdd_12analog_25analog{1};
-AD5252OnBoard const AD5252OnBoard::vdd_25digital_12digital{2};
+AD5252OnBoard const AD5252OnBoard::vdd_25digital_12digital{0};
+AD5252OnBoard const AD5252OnBoard::vdd_12pll_12madc{1};
+AD5252OnBoard const AD5252OnBoard::vdd_12analog_25analog{2};
 
 AD5252ChannelOnAD5252 const AD5252ChannelOnAD5252::channel_1{0};
 AD5252ChannelOnAD5252 const AD5252ChannelOnAD5252::channel_3{1};
 
+AD5252ChannelOnBoard const AD5252ChannelOnBoard::vdd_25digital{
+    AD5252ChannelOnAD5252::channel_1, AD5252OnBoard::vdd_25digital_12digital};
+AD5252ChannelOnBoard const AD5252ChannelOnBoard::vdd_12digital{
+    AD5252ChannelOnAD5252::channel_3, AD5252OnBoard::vdd_25digital_12digital};
 AD5252ChannelOnBoard const AD5252ChannelOnBoard::vdd_12pll{
     AD5252ChannelOnAD5252::channel_1, AD5252OnBoard::vdd_12pll_12madc};
 AD5252ChannelOnBoard const AD5252ChannelOnBoard::vdd_12madc{
     AD5252ChannelOnAD5252::channel_3, AD5252OnBoard::vdd_12pll_12madc};
 AD5252ChannelOnBoard const AD5252ChannelOnBoard::vdd_12analog{
-    AD5252ChannelOnAD5252::channel_1, AD5252OnBoard::vdd_12pll_12madc};
+    AD5252ChannelOnAD5252::channel_1, AD5252OnBoard::vdd_12analog_25analog};
 AD5252ChannelOnBoard const AD5252ChannelOnBoard::vdd_25analog{
-    AD5252ChannelOnAD5252::channel_3, AD5252OnBoard::vdd_12pll_12madc};
-AD5252ChannelOnBoard const AD5252ChannelOnBoard::vdd_25digital{
-    AD5252ChannelOnAD5252::channel_1, AD5252OnBoard::vdd_12pll_12madc};
-AD5252ChannelOnBoard const AD5252ChannelOnBoard::vdd_12digital{
-    AD5252ChannelOnAD5252::channel_3, AD5252OnBoard::vdd_12pll_12madc};
+    AD5252ChannelOnAD5252::channel_3, AD5252OnBoard::vdd_12analog_25analog};
 AD5252ChannelConfigOnBoard AD5252ChannelOnBoard::toAD5252ChannelConfigOnBoard() const
 {
 	return AD5252ChannelConfigOnBoard(toEnum());
@@ -75,20 +75,24 @@ AD5252ChannelConfigPersistentOnBoard AD5252ChannelOnBoard::toAD5252ChannelConfig
 {
 	return AD5252ChannelConfigPersistentOnBoard(toEnum());
 }
+AD5252OnBoard AD5252ChannelOnBoard::toAD5252OnBoard() const
+{
+	return AD5252OnBoard(toEnum() / 2);
+}
 
 
+AD5252ChannelConfigOnBoard const AD5252ChannelConfigOnBoard::vdd_25digital{
+    AD5252ChannelOnAD5252::channel_1, AD5252OnBoard::vdd_25digital_12digital};
+AD5252ChannelConfigOnBoard const AD5252ChannelConfigOnBoard::vdd_12digital{
+    AD5252ChannelOnAD5252::channel_3, AD5252OnBoard::vdd_25digital_12digital};
 AD5252ChannelConfigOnBoard const AD5252ChannelConfigOnBoard::vdd_12pll{
     AD5252ChannelOnAD5252::channel_1, AD5252OnBoard::vdd_12pll_12madc};
 AD5252ChannelConfigOnBoard const AD5252ChannelConfigOnBoard::vdd_12madc{
     AD5252ChannelOnAD5252::channel_3, AD5252OnBoard::vdd_12pll_12madc};
 AD5252ChannelConfigOnBoard const AD5252ChannelConfigOnBoard::vdd_12analog{
-    AD5252ChannelOnAD5252::channel_1, AD5252OnBoard::vdd_12pll_12madc};
+    AD5252ChannelOnAD5252::channel_1, AD5252OnBoard::vdd_12analog_25analog};
 AD5252ChannelConfigOnBoard const AD5252ChannelConfigOnBoard::vdd_25analog{
-    AD5252ChannelOnAD5252::channel_3, AD5252OnBoard::vdd_12pll_12madc};
-AD5252ChannelConfigOnBoard const AD5252ChannelConfigOnBoard::vdd_25digital{
-    AD5252ChannelOnAD5252::channel_1, AD5252OnBoard::vdd_12pll_12madc};
-AD5252ChannelConfigOnBoard const AD5252ChannelConfigOnBoard::vdd_12digital{
-    AD5252ChannelOnAD5252::channel_3, AD5252OnBoard::vdd_12pll_12madc};
+    AD5252ChannelOnAD5252::channel_3, AD5252OnBoard::vdd_12analog_25analog};
 AD5252ChannelOnBoard AD5252ChannelConfigOnBoard::toAD5252ChannelOnBoard() const
 {
 	return AD5252ChannelOnBoard(toEnum());
@@ -100,18 +104,18 @@ AD5252ChannelConfigOnBoard::toAD5252ChannelConfigPersistentOnBoard() const
 }
 
 
+AD5252ChannelConfigPersistentOnBoard const AD5252ChannelConfigPersistentOnBoard::vdd_25digital{
+    AD5252ChannelOnAD5252::channel_1, AD5252OnBoard::vdd_25digital_12digital};
+AD5252ChannelConfigPersistentOnBoard const AD5252ChannelConfigPersistentOnBoard::vdd_12digital{
+    AD5252ChannelOnAD5252::channel_3, AD5252OnBoard::vdd_25digital_12digital};
 AD5252ChannelConfigPersistentOnBoard const AD5252ChannelConfigPersistentOnBoard::vdd_12pll{
     AD5252ChannelOnAD5252::channel_1, AD5252OnBoard::vdd_12pll_12madc};
 AD5252ChannelConfigPersistentOnBoard const AD5252ChannelConfigPersistentOnBoard::vdd_12madc{
     AD5252ChannelOnAD5252::channel_3, AD5252OnBoard::vdd_12pll_12madc};
 AD5252ChannelConfigPersistentOnBoard const AD5252ChannelConfigPersistentOnBoard::vdd_12analog{
-    AD5252ChannelOnAD5252::channel_1, AD5252OnBoard::vdd_12pll_12madc};
+    AD5252ChannelOnAD5252::channel_1, AD5252OnBoard::vdd_12analog_25analog};
 AD5252ChannelConfigPersistentOnBoard const AD5252ChannelConfigPersistentOnBoard::vdd_25analog{
-    AD5252ChannelOnAD5252::channel_3, AD5252OnBoard::vdd_12pll_12madc};
-AD5252ChannelConfigPersistentOnBoard const AD5252ChannelConfigPersistentOnBoard::vdd_25digital{
-    AD5252ChannelOnAD5252::channel_1, AD5252OnBoard::vdd_12pll_12madc};
-AD5252ChannelConfigPersistentOnBoard const AD5252ChannelConfigPersistentOnBoard::vdd_12digital{
-    AD5252ChannelOnAD5252::channel_3, AD5252OnBoard::vdd_12pll_12madc};
+    AD5252ChannelOnAD5252::channel_3, AD5252OnBoard::vdd_12analog_25analog};
 AD5252ChannelOnBoard AD5252ChannelConfigPersistentOnBoard::toAD5252ChannelOnBoard() const
 {
 	return AD5252ChannelOnBoard(toEnum());

@@ -10,6 +10,7 @@ using TCA9554ConfigOnBoard GENPYBIND(visible) = halco::hicann_dls::vx::TCA9554Co
 using TCA9554InputsOnBoard GENPYBIND(visible) = halco::hicann_dls::vx::TCA9554InputsOnBoard;
 using TCA9554ChannelOnBoard GENPYBIND(visible) = halco::hicann_dls::vx::TCA9554ChannelOnBoard;
 using AD5252OnBoard GENPYBIND(visible) = halco::hicann_dls::vx::AD5252OnBoard;
+using AD5252ChannelOnAD5252 GENPYBIND(visible) = halco::hicann_dls::vx::AD5252ChannelOnAD5252;
 using AD5252ChannelOnBoard GENPYBIND(visible) = halco::hicann_dls::vx::AD5252ChannelOnBoard;
 using AD5252ChannelConfigOnBoard GENPYBIND(visible) =
     halco::hicann_dls::vx::AD5252ChannelConfigOnBoard;

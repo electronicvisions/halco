@@ -20,6 +20,7 @@ struct TCA9554ConfigOnBoard;
 struct TCA9554InputsOnBoard;
 
 struct AD5252OnBoard;
+struct AD5252ChannelOnAD5252;
 struct AD5252ChannelOnBoard;
 struct AD5252ChannelConfigOnBoard;
 struct AD5252ChannelConfigPersistentOnBoard;
@@ -92,9 +93,9 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*")) 
 	constexpr explicit AD5252OnBoard() : rant_t(0) {}
 	constexpr explicit AD5252OnBoard(uintmax_t const val) : rant_t(val) {}
 
+	static const SYMBOL_VISIBLE AD5252OnBoard vdd_25digital_12digital;
 	static const SYMBOL_VISIBLE AD5252OnBoard vdd_12pll_12madc;
 	static const SYMBOL_VISIBLE AD5252OnBoard vdd_12analog_25analog;
-	static const SYMBOL_VISIBLE AD5252OnBoard vdd_25digital_12digital;
 };
 
 struct GENPYBIND(inline_base("*")) AD5252ChannelOnAD5252
@@ -123,12 +124,12 @@ struct GENPYBIND(inline_base("*AD5252Mixin*"), inline_base("*CoordinateBase*")) 
 
 	explicit AD5252ChannelOnBoard(enum_type const& e) : mixin_t(e) {}
 
+	static const SYMBOL_VISIBLE AD5252ChannelOnBoard vdd_25digital;
+	static const SYMBOL_VISIBLE AD5252ChannelOnBoard vdd_12digital;
 	static const SYMBOL_VISIBLE AD5252ChannelOnBoard vdd_12pll;
 	static const SYMBOL_VISIBLE AD5252ChannelOnBoard vdd_12madc;
 	static const SYMBOL_VISIBLE AD5252ChannelOnBoard vdd_12analog;
 	static const SYMBOL_VISIBLE AD5252ChannelOnBoard vdd_25analog;
-	static const SYMBOL_VISIBLE AD5252ChannelOnBoard vdd_25digital;
-	static const SYMBOL_VISIBLE AD5252ChannelOnBoard vdd_12digital;
 
 	AD5252ChannelOnAD5252 toAD5252ChannelOnAD5252() const
 	{
@@ -137,6 +138,7 @@ struct GENPYBIND(inline_base("*AD5252Mixin*"), inline_base("*CoordinateBase*")) 
 	AD5252ChannelConfigOnBoard toAD5252ChannelConfigOnBoard() const SYMBOL_VISIBLE;
 	AD5252ChannelConfigPersistentOnBoard toAD5252ChannelConfigPersistentOnBoard() const
 	    SYMBOL_VISIBLE;
+	AD5252OnBoard toAD5252OnBoard() const SYMBOL_VISIBLE;
 };
 
 struct GENPYBIND(inline_base("*AD5252Mixin*"), inline_base("*CoordinateBase*"))
@@ -154,12 +156,12 @@ struct GENPYBIND(inline_base("*AD5252Mixin*"), inline_base("*CoordinateBase*"))
 
 	explicit AD5252ChannelConfigOnBoard(enum_type const& e) : mixin_t(e) {}
 
+	static const SYMBOL_VISIBLE AD5252ChannelConfigOnBoard vdd_25digital;
+	static const SYMBOL_VISIBLE AD5252ChannelConfigOnBoard vdd_12digital;
 	static const SYMBOL_VISIBLE AD5252ChannelConfigOnBoard vdd_12pll;
 	static const SYMBOL_VISIBLE AD5252ChannelConfigOnBoard vdd_12madc;
 	static const SYMBOL_VISIBLE AD5252ChannelConfigOnBoard vdd_12analog;
 	static const SYMBOL_VISIBLE AD5252ChannelConfigOnBoard vdd_25analog;
-	static const SYMBOL_VISIBLE AD5252ChannelConfigOnBoard vdd_25digital;
-	static const SYMBOL_VISIBLE AD5252ChannelConfigOnBoard vdd_12digital;
 
 	AD5252ChannelOnAD5252 toAD5252ChannelOnAD5252() const
 	{
@@ -185,12 +187,12 @@ struct GENPYBIND(inline_base("*AD5252Mixin*"), inline_base("*CoordinateBase*"))
 
 	explicit AD5252ChannelConfigPersistentOnBoard(enum_type const& e) : mixin_t(e) {}
 
+	static const SYMBOL_VISIBLE AD5252ChannelConfigPersistentOnBoard vdd_25digital;
+	static const SYMBOL_VISIBLE AD5252ChannelConfigPersistentOnBoard vdd_12digital;
 	static const SYMBOL_VISIBLE AD5252ChannelConfigPersistentOnBoard vdd_12pll;
 	static const SYMBOL_VISIBLE AD5252ChannelConfigPersistentOnBoard vdd_12madc;
 	static const SYMBOL_VISIBLE AD5252ChannelConfigPersistentOnBoard vdd_12analog;
 	static const SYMBOL_VISIBLE AD5252ChannelConfigPersistentOnBoard vdd_25analog;
-	static const SYMBOL_VISIBLE AD5252ChannelConfigPersistentOnBoard vdd_25digital;
-	static const SYMBOL_VISIBLE AD5252ChannelConfigPersistentOnBoard vdd_12digital;
 
 	AD5252ChannelOnAD5252 toAD5252ChannelOnAD5252() const
 	{
@@ -276,6 +278,8 @@ HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::TCA9554ChannelOnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::AD5252OnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::AD5252ChannelOnAD5252)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::AD5252ChannelOnBoard)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::AD5252ChannelConfigOnBoard)
+HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::AD5252ChannelConfigPersistentOnBoard)
 
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::DAC6573OnBoard)
 HALCO_GEOMETRY_HASH_CLASS(halco::hicann_dls::vx::DAC6573ChannelOnDAC6573)
