@@ -10,5 +10,6 @@ withCcache() {
 	wafDefaultPipeline(projects: ["halco"],
 	                   container: [app: "wafer"],
 	                   notificationChannel: "#softies",
+	                   enableClangFormat: false,  // older llvm in wafer app
 	                   configureInstallOptions: "--build-profile=ci")
 }
