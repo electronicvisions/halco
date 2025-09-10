@@ -253,8 +253,8 @@ operator<<(std::ostream& os, typed_heap_array<Value, Key, Limits> const& value)
 	hate::IndentingOstream ios(os);
 	ios << "[\n";
 	ios << hate::Indentation("\t");
-	for (auto i = Enum(Limits::min); i < Limits::max; i = Enum(i + 1)) {
-		Key const key(i);
+	for (auto i = Limits::min; i <= Limits::max; ++i) {
+		Key const key{Enum{i}};
 		ios << key << ": " << value.at(key) << "\n";
 	}
 	ios << hate::Indentation() << "]";
