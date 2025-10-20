@@ -2,14 +2,14 @@
 
 namespace halco::hicann_dls::vx {
 
-TCA9554ChannelOnBoard const TCA9554ChannelOnBoard::vdd25_digital{0};
-TCA9554ChannelOnBoard const TCA9554ChannelOnBoard::vdd12_digital{1};
-TCA9554ChannelOnBoard const TCA9554ChannelOnBoard::vdd12_pll{2};
-TCA9554ChannelOnBoard const TCA9554ChannelOnBoard::vdd12_madc{3};
-TCA9554ChannelOnBoard const TCA9554ChannelOnBoard::vdd25_analog{4};
-TCA9554ChannelOnBoard const TCA9554ChannelOnBoard::vdd12_analog{5};
-TCA9554ChannelOnBoard const TCA9554ChannelOnBoard::led1{6};
-TCA9554ChannelOnBoard const TCA9554ChannelOnBoard::led2{7};
+TCA9554ChannelOnBoard const TCA9554ChannelOnBoard::disable_vdd25_digital{0};
+TCA9554ChannelOnBoard const TCA9554ChannelOnBoard::disable_vdd12_digital{1};
+TCA9554ChannelOnBoard const TCA9554ChannelOnBoard::disable_vdd12_pll{2};
+TCA9554ChannelOnBoard const TCA9554ChannelOnBoard::disable_vdd12_madc{3};
+TCA9554ChannelOnBoard const TCA9554ChannelOnBoard::disable_vdd25_analog{4};
+TCA9554ChannelOnBoard const TCA9554ChannelOnBoard::disable_vdd12_analog{5};
+TCA9554ChannelOnBoard const TCA9554ChannelOnBoard::disable_led{6};
+TCA9554ChannelOnBoard const TCA9554ChannelOnBoard::disable_power{7};
 
 TCA9554OnBoard TCA9554ChannelOnBoard::toTCA9554OnBoard() const
 {

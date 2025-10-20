@@ -72,15 +72,15 @@ struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
 {
 	constexpr explicit TCA9554ChannelOnBoard(uintmax_t const val = 0) : rant_t(val) {}
 
-	static const SYMBOL_VISIBLE TCA9554ChannelOnBoard vdd25_digital;
-	static const SYMBOL_VISIBLE TCA9554ChannelOnBoard vdd12_digital;
-	static const SYMBOL_VISIBLE TCA9554ChannelOnBoard vdd12_pll;
-	static const SYMBOL_VISIBLE TCA9554ChannelOnBoard vdd12_madc;
-	static const SYMBOL_VISIBLE TCA9554ChannelOnBoard vdd25_analog;
-	static const SYMBOL_VISIBLE TCA9554ChannelOnBoard vdd12_analog;
+	static const SYMBOL_VISIBLE TCA9554ChannelOnBoard disable_vdd25_digital;
+	static const SYMBOL_VISIBLE TCA9554ChannelOnBoard disable_vdd12_digital;
+	static const SYMBOL_VISIBLE TCA9554ChannelOnBoard disable_vdd12_pll;
+	static const SYMBOL_VISIBLE TCA9554ChannelOnBoard disable_vdd12_madc;
+	static const SYMBOL_VISIBLE TCA9554ChannelOnBoard disable_vdd25_analog;
+	static const SYMBOL_VISIBLE TCA9554ChannelOnBoard disable_vdd12_analog;
 
-	static const SYMBOL_VISIBLE TCA9554ChannelOnBoard led1;
-	static const SYMBOL_VISIBLE TCA9554ChannelOnBoard led2;
+	static const SYMBOL_VISIBLE TCA9554ChannelOnBoard disable_led;
+	static const SYMBOL_VISIBLE TCA9554ChannelOnBoard disable_power;
 
 	TCA9554OnBoard toTCA9554OnBoard() const SYMBOL_VISIBLE;
 };
