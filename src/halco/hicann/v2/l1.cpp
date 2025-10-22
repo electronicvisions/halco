@@ -5,6 +5,8 @@
 
 #include "halco/common/iter_all.h"
 
+#include <algorithm>
+
 using namespace halco::common;
 
 namespace halco {
