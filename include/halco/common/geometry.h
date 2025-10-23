@@ -141,6 +141,7 @@ public:
 
 	PYPP_CONSTEXPR_STATIC T max PYPP_HIDE_BODY(= std::numeric_limits<T>::max());
 	PYPP_CONSTEXPR_STATIC T min PYPP_HIDE_BODY(= std::numeric_limits<T>::min());
+	PYPP_CONSTEXPR_STATIC T lowest PYPP_HIDE_BODY(= std::numeric_limits<T>::lowest());
 
 	static const bool is_interval = false;
 
@@ -306,6 +307,8 @@ public:
 	PYPP_CONSTEXPR_STATIC T size = Max - Min + 1;
 	PYPP_CONSTEXPR_STATIC T min = Min;
 	PYPP_CONSTEXPR_STATIC T begin = Min;
+	PYPP_CONSTEXPR_STATIC T lowest
+	    PYPP_HIDE_BODY(= std::max(Min, std::numeric_limits<T>::lowest()));
 
 	DETAIL_COMPARE(Derived, ==)
 	DETAIL_COMPARE(Derived, !=)
