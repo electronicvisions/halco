@@ -307,8 +307,13 @@ COORDINATE(DAC6573OnBoard, halco::hicann_dls::vx::v3::DAC6573OnBoard)
 COORDINATE(DAC6573ChannelOnDAC6573, halco::hicann_dls::vx::v3::DAC6573ChannelOnDAC6573)
 COORDINATE(DAC6573ChannelOnBoard, halco::hicann_dls::vx::v3::DAC6573ChannelOnBoard)
 COORDINATE(TCA9546OnBoard, halco::hicann_dls::vx::v3::TCA9546OnBoard)
-LAST_COORDINATE(TCA9546ChannelOnBoard, halco::hicann_dls::vx::v3::TCA9546ChannelOnBoard)
-// clang-format on
+COORDINATE(TCA9546ChannelOnBoard, halco::hicann_dls::vx::v3::TCA9546ChannelOnBoard)
+COORDINATE(OutputRoutingTableEntryOnFPGA, halco::hicann_dls::vx::v3::OutputRoutingTableEntryOnFPGA)
+COORDINATE(InputRoutingTableEntryOnFPGA, halco::hicann_dls::vx::v3::OutputRoutingTableEntryOnFPGA)
+COORDINATE(OutputRoutingTableOnFPGA, halco::hicann_dls::vx::v3::OutputRoutingTableOnFPGA)
+LAST_COORDINATE(InputRoutingTableOnFPGA, halco::hicann_dls::vx::v3::OutputRoutingTableOnFPGA)
+// clang-format on#
+
 
 #undef COORDINATE
 #undef LAST_COORDINATE

@@ -28,6 +28,8 @@
 #include "halco/hicann-dls/vx/v3/readout.h"
 #include "halco/hicann-dls/vx/v3/reset.h"
 #include "halco/hicann-dls/vx/v3/routing_crossbar.h"
+#include "halco/hicann-dls/vx/v3/routing_table.h"
+#include "halco/hicann-dls/vx/v3/routing_table_entry.h"
 #include "halco/hicann-dls/vx/v3/spi.h"
 #include "halco/hicann-dls/vx/v3/switch_rows.h"
 #include "halco/hicann-dls/vx/v3/synapse.h"

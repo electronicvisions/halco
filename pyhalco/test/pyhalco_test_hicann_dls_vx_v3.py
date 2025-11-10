@@ -308,6 +308,10 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     CommonCorrelationConfigOnDLS => linear,iterable
     BlockPostPulseOnDLS => linear,iterable
     CorrelationResetRowOnDLS => iterable
+    OutputRoutingTableEntryOnFPGA => linear,iterable
+    InputRoutingTableEntryOnFPGA => linear,iterable
+    OutputRoutingTableOnFPGA => linear,iterable
+    InputRoutingTableOnFPGA => linear,iterable
     Coordinate => ignore
     """
 
