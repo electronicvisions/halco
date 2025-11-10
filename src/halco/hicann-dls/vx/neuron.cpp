@@ -489,9 +489,9 @@ std::ostream& operator<<(std::ostream& os, LogicalNeuronCompartments const& conf
 {
 	os << "LogicalNeuronCompartments(\n";
 	for (auto const& [index, compartment] : config.m_compartments) {
-		os << index << "\n";
+		os << "\t" << index << "\n";
 		for (auto const& neuron : compartment) {
-			os << "\t" << neuron << "\n";
+			os << "\t\t" << neuron << "\n";
 		}
 	}
 	os << ")";
