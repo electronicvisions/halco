@@ -311,7 +311,11 @@ COORDINATE(TCA9546ChannelOnBoard, halco::hicann_dls::vx::v3::TCA9546ChannelOnBoa
 COORDINATE(OutputRoutingTableEntryOnFPGA, halco::hicann_dls::vx::v3::OutputRoutingTableEntryOnFPGA)
 COORDINATE(InputRoutingTableEntryOnFPGA, halco::hicann_dls::vx::v3::OutputRoutingTableEntryOnFPGA)
 COORDINATE(OutputRoutingTableOnFPGA, halco::hicann_dls::vx::v3::OutputRoutingTableOnFPGA)
-LAST_COORDINATE(InputRoutingTableOnFPGA, halco::hicann_dls::vx::v3::OutputRoutingTableOnFPGA)
+COORDINATE(InputRoutingTableOnFPGA, halco::hicann_dls::vx::v3::OutputRoutingTableOnFPGA)
+COORDINATE(FPGAOnChipAndMultichipJboaLeafFPGA, halco::hicann_dls::vx::v3::FPGAOnChipAndMultichipJboaLeafFPGA)
+COORDINATE(ChipAndMultichipJboaLeafFPGAOnSystem, halco::hicann_dls::vx::v3::ChipAndMultichipJboaLeafFPGAOnSystem)
+COORDINATE(FPGAOnChipAndSinglechipFPGA, halco::hicann_dls::vx::v3::FPGAOnChipAndSinglechipFPGA)
+LAST_COORDINATE(ChipAndSinglechipFPGAOnSystem, halco::hicann_dls::vx::v3::ChipAndSinglechipFPGAOnSystem)
 // clang-format on#
 
 

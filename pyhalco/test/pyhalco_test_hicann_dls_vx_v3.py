@@ -312,6 +312,10 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     InputRoutingTableEntryOnFPGA => linear,iterable
     OutputRoutingTableOnFPGA => linear,iterable
     InputRoutingTableOnFPGA => linear,iterable
+    FPGAOnChipAndMultichipJboaLeafFPGA => linear,iterable
+    FPGAOnChipAndSinglechipFPGA => linear,iterable
+    ChipAndMultichipJboaLeafFPGAOnSystem => linear,iterable
+    ChipAndSinglechipFPGAOnSystem => linear,iterable
     Coordinate => ignore
     """
 
