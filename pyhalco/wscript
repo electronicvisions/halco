@@ -129,7 +129,7 @@ def build(bld):
     bld(
         features='py',
         target='pyhalco_common_files',
-        source=bld.path.ant_glob('**/pyhalco_*.py'),
+        source=bld.path.ant_glob('(common|hicann|hicann-dls)/**/pyhalco_*.py'),
         relative_trick=False,
     )
 
