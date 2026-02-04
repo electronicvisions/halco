@@ -31,7 +31,8 @@ struct GENPYBIND(inline_base("*")) OmnibusAddress
 };
 
 
-struct GENPYBIND(inline_base("*")) PollingOmnibusBlockOnFPGA
+struct GENPYBIND(inline_base("*RantWrapper*"), inline_base("*CoordinateBase*"))
+    PollingOmnibusBlockOnFPGA
     : public common::detail::RantWrapper<PollingOmnibusBlockOnFPGA, uint_fast8_t, 0, 0>
     , common::CoordinateBase<PollingOmnibusBlockOnFPGA>
 {
