@@ -85,9 +85,22 @@ CEREAL_SERIALIZE_FUNCTION_NAME(Archive& ar, Derived& grid)
 	}
 }
 
-template <typename Archive, typename Derived, typename T, size_t EnumSize>
+template <typename Archive, typename Derived, typename T>
 void CEREAL_SERIALIZE_FUNCTION_NAME(
-    Archive& ar, halco::common::detail::IntervalCoordinate<Derived, T, EnumSize>& interval)
+    Archive& ar, halco::common::detail::Interval<Derived, T>& interval)
+{
+	auto min = interval.toMin();
+	auto max = interval.toMax();
+	ar(CEREAL_NVP(min));
+	ar(CEREAL_NVP(max));
+	interval = halco::common::detail::Interval<Derived, T>(min, max);
+}
+
+template <typename Archive, typename Derived, typename T, size_t EnumSize>
+std::enable_if_t<std::is_base_of_v<
+    halco::common::detail::IntervalCoordinate<Derived, typename Derived::bound_type, Derived::size>,
+    Derived>>
+CEREAL_SERIALIZE_FUNCTION_NAME(Archive& ar, Derived& interval)
 {
 	auto min = interval.toMin();
 	auto max = interval.toMax();
@@ -99,7 +112,7 @@ void CEREAL_SERIALIZE_FUNCTION_NAME(
 	// serialized as well for Bjoern's visualization.
 	auto e = interval.toEnum();
 	ar(CEREAL_NVP(e));
-	if (halco::common::detail::IntervalCoordinate<Derived, T, EnumSize>(e) != interval) {
+	if (Derived(e) != interval) {
 		throw std::runtime_error(
 		    "Deserialized enum and min, max of IntervalCoordinate don't match.");
 	}

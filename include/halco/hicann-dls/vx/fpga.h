@@ -100,7 +100,7 @@ struct GENPYBIND(inline_base("*")) ExternalPPUMemoryBlockSize
 };
 
 
-struct GENPYBIND(inline_base("*IntervalCoordinate*"), inline_base("*CoordinateBase*"))
+struct GENPYBIND(inline_base("*Interval*"), inline_base("*CoordinateBase*"))
     ExternalPPUMemoryBlockOnFPGA
     : public common::detail::
           IntervalCoordinate<ExternalPPUMemoryBlockOnFPGA, ExternalPPUMemoryByteOnFPGA>
@@ -155,7 +155,7 @@ struct GENPYBIND(inline_base("*")) ExternalPPUDRAMMemoryBlockSize
 };
 
 
-struct GENPYBIND(inline_base("*IntervalCoordinate*"), inline_base("*CoordinateBase*"))
+struct GENPYBIND(inline_base("*Interval*"), inline_base("*CoordinateBase*"))
     ExternalPPUDRAMMemoryBlockOnFPGA
     : public common::detail::
           IntervalCoordinate<ExternalPPUDRAMMemoryBlockOnFPGA, ExternalPPUDRAMMemoryByteOnFPGA>

@@ -602,84 +602,47 @@ private:
 template<typename Derived, typename XT, typename YT, size_t EnumSize>
 const bool GridCoordinate<Derived, XT, YT, EnumSize>::is_interval;
 
-template<typename Derived, typename T, size_t EnumSize = T::size * T::size>
-struct IntervalCoordinate {
+/**
+ * Interval type implementing a closed interval.
+ */
+template <typename Derived, typename T>
+struct Interval
+{
 	typedef T bound_type GENPYBIND(opaque(false));
 
 	static const bool is_interval = true;
 
-	PYPP_CONSTEXPR_STATIC size_t size = EnumSize;
+	typedef Interval<Derived, bound_type> interval_type;
 
-	typedef detail::EnumRanged<EnumSize> enum_type GENPYBIND(opaque(false));
-	typedef IntervalCoordinate<Derived, bound_type, EnumSize> interval_type;
-
-	PYPP_CONSTEXPR explicit IntervalCoordinate(enum_type const& e) :
-	    mMin(static_cast<Derived const*>(this)->to_min(e)),
-	    mMax(static_cast<Derived const*>(this)->to_max(e))
-	{}
-
-	IntervalCoordinate(bound_type const& min, bound_type const& max) :
-	    mMin(min), mMax(max)
+	Interval(bound_type const& min, bound_type const& max) : mMin(min), mMax(max)
 	{
 		static_cast<Derived const*>(this)->check(mMin,mMax); /* throws for invalid min/max combination */
 	}
 
-	PYPP_CONSTEXPR IntervalCoordinate() :
-	    mMin(static_cast<Derived const*>(this)->to_min(enum_type(0))),
-	    mMax(static_cast<Derived const*>(this)->to_max(enum_type(0)))
-	{}
+	PYPP_CONSTEXPR Interval() : mMin(), mMax() {}
 
-	PYPP_DEFAULT(PYPP_CONSTEXPR IntervalCoordinate(IntervalCoordinate const&));
-	PYPP_DEFAULT(IntervalCoordinate& operator= (IntervalCoordinate const&));
+	PYPP_DEFAULT(PYPP_CONSTEXPR Interval(Interval const&));
+	PYPP_DEFAULT(Interval& operator=(Interval const&));
 
-	enum_type toEnum() const { return static_cast<Derived const*>(this)->to_enum(mMin, mMax); }
 	bound_type toMin() const { return mMin; }
-	bound_type toMax() const { return mMax; }
-	size_t length() const { return mMax - mMin + 1; }
-
-	GENPYBIND(expose_as(__getitem__))
-	bound_type get(size_t i) const
+	bound_type toMax() const
 	{
-		if (!(i < length())) {
-			std::stringstream ss;
-			ss << "coordinate index (" << i << ") is out of interval range";
-			throw std::out_of_range(ss.str());
-		}
-		return bound_type(mMin.toEnum() + i);
+		return mMax;
 	}
 
-
-	bound_type const operator[](size_t i) const
+	bool contains(bound_type const& value) const
 	{
-		if (!(i < length())) {
-			std::stringstream ss;
-			ss << "coordinate index ("
-			   << i << ") is out of interval range";
-			throw std::out_of_range(ss.str());
-		}
-		return bound_type(mMin.toEnum() + i);
+		return (value >= mMin) && (value <= mMax);
 	}
-
-#ifndef PYPLUSPLUS
-	typename detail::CoordinateIterator<bound_type> begin()
-	{
-		return typename detail::CoordinateIterator<bound_type>(toMin().toEnum());
-	}
-
-	typename detail::CoordinateIterator<bound_type> end()
-	{
-		return typename detail::CoordinateIterator<bound_type>(toMax().toEnum() + 1);
-	}
-#endif
 
 	friend bool operator<(Derived const& a, Derived const&b)
 	{
-		return a.toEnum() < b.toEnum();
+		return a.mMin < b.mMin || (a.mMin == b.mMin && a.mMax < b.mMax);
 	}
 
 	friend bool operator>(Derived const& a, Derived const&b)
 	{
-		return a.toEnum() > b.toEnum();
+		return a.mMin > b.mMin || (a.mMin == b.mMin && a.mMax > b.mMax);
 	}
 
 	friend bool operator==(Derived const& a, Derived const&b)
@@ -692,30 +655,22 @@ struct IntervalCoordinate {
 		return !(a == b);
 	}
 
-	friend bool operator==(interval_type const& a, interval_type const& b)
-	{
-		return a.toMin() == b.toMin() && a.toMax() == b.toMax();
-	}
-
-	friend bool operator!=(interval_type const& a, interval_type const& b) { return !(a == b); }
-
 	GENPYBIND(stringstream)
-	friend std::ostream& operator<<(std::ostream& os, const IntervalCoordinate& c)
+	friend std::ostream& operator<<(std::ostream& os, const Interval& c)
 	{
 #ifndef __ppu__
 		static std::string const name =
 			ZTL::typestring<Derived>().substr(ZTL::typestring<Derived>().rfind(':') + 1);
-		os << name << "([" << c.toMin().toEnum().value() << "," << c.toMax().toEnum().value()
-		   << "])";
+		os << name << "([" << c.toMin() << ", " << c.toMax() << "])";
 #else
-		os << "[" << c.toMin().toEnum().value() << "," << c.toMax().toEnum().value() << "]";
+		os << "[" << c.toMin() << "," << c.toMax() << "]";
 #endif
 		return os;
 	}
 
 	friend std::ostream& operator<<(std::ostream& os, const Derived& c)
 	{
-		return os << static_cast<IntervalCoordinate const&>(c);
+		return os << static_cast<Interval const&>(c);
 	}
 
 	GENPYBIND(expose_as(__hash__))
@@ -729,13 +684,125 @@ struct IntervalCoordinate {
 #else
 		size_t hash = 0;
 #endif
-		boost::hash_combine(hash, mMin.value());
-		boost::hash_combine(hash, mMax.value());
+		boost::hash_combine(hash, mMin);
+		boost::hash_combine(hash, mMax);
 		return hash;
 	}
 
 	friend size_t hash_value(Derived const& t) {
 		return t.hash();
+	}
+
+	GENPYBIND_MANUAL({
+		typedef typename decltype(parent)::type self_type;
+		parent.def(parent->py::pickle(
+		    [](GENPYBIND_PARENT_TYPE const& self) {
+			    return std::pair{self.toMin(), self.toMax()};
+		    },
+		    [](std::pair<typename self_type::bound_type, typename self_type::bound_type> const&
+		           value) { return self_type(value.first, value.second); }));
+	})
+
+protected:
+	bound_type mMin;
+	bound_type mMax;
+
+	static PYPP_CONSTEXPR void check(bound_type const& min, bound_type const& max) GENPYBIND(hidden)
+	{
+		if (min > max) {
+#ifndef __ppu__
+			throw std::runtime_error("Interval orientation wrong, min > max.");
+#else
+			exit(1);
+#endif
+		}
+	}
+};
+
+template <typename Derived, typename T>
+const bool Interval<Derived, T>::is_interval;
+
+
+template <typename Derived, typename T, size_t EnumSize = T::size* T::size>
+struct IntervalCoordinate : public Interval<Derived, T>
+{
+	typedef T bound_type GENPYBIND(opaque(false));
+
+	PYPP_CONSTEXPR_STATIC size_t size = EnumSize;
+
+	typedef detail::EnumRanged<EnumSize> enum_type GENPYBIND(opaque(false));
+	typedef IntervalCoordinate<Derived, bound_type, EnumSize> interval_type;
+
+	PYPP_CONSTEXPR IntervalCoordinate() :
+	    Interval<Derived, T>(
+	        static_cast<Derived const*>(this)->to_min(enum_type(0)),
+	        static_cast<Derived const*>(this)->to_max(enum_type(0)))
+	{
+	}
+
+	PYPP_CONSTEXPR explicit IntervalCoordinate(enum_type const& e) :
+	    Interval<Derived, T>(
+	        static_cast<Derived const*>(this)->to_min(e),
+	        static_cast<Derived const*>(this)->to_max(e))
+	{
+	}
+
+	IntervalCoordinate(bound_type const& min, bound_type const& max) :
+	    Interval<Derived, T>(min, max)
+	{
+	}
+
+	PYPP_DEFAULT(PYPP_CONSTEXPR IntervalCoordinate(IntervalCoordinate const&));
+	PYPP_DEFAULT(IntervalCoordinate& operator=(IntervalCoordinate const&));
+
+	size_t length() const
+	{
+		return this->mMax - this->mMin + 1;
+	}
+
+	enum_type toEnum() const
+	{
+		return static_cast<Derived const*>(this)->to_enum(this->mMin, this->mMax);
+	}
+
+	GENPYBIND(expose_as(__getitem__))
+	bound_type get(size_t i) const
+	{
+		if (!(i < this->length())) {
+			std::stringstream ss;
+			ss << "coordinate index (" << i << ") is out of interval range";
+			throw std::out_of_range(ss.str());
+		}
+		return bound_type(this->mMin.toEnum() + i);
+	}
+
+
+	bound_type const operator[](size_t i) const
+	{
+		if (!(i < this->length())) {
+			std::stringstream ss;
+			ss << "coordinate index (" << i << ") is out of interval range";
+			throw std::out_of_range(ss.str());
+		}
+		return bound_type(this->mMin.toEnum() + i);
+	}
+
+#ifndef PYPLUSPLUS
+	typename detail::CoordinateIterator<bound_type> begin()
+	{
+		return typename detail::CoordinateIterator<bound_type>(this->toMin().toEnum());
+	}
+
+	typename detail::CoordinateIterator<bound_type> end()
+	{
+		return typename detail::CoordinateIterator<bound_type>(this->toMax().toEnum() + 1);
+	}
+#endif
+
+	GENPYBIND(stringstream)
+	friend std::ostream& operator<<(std::ostream& os, const IntervalCoordinate& c)
+	{
+		return os << static_cast<Interval<Derived, T> const&>(c);
 	}
 
 	GENPYBIND_MANUAL({
@@ -748,9 +815,6 @@ struct IntervalCoordinate {
 	})
 
 protected:
-	bound_type mMin;
-	bound_type mMax;
-
 	static PYPP_CONSTEXPR bound_type to_min(enum_type const& e) GENPYBIND(hidden)
 	{
 		return bound_type(e / bound_type::size);
@@ -759,17 +823,6 @@ protected:
 	static PYPP_CONSTEXPR bound_type to_max(enum_type const& e) GENPYBIND(hidden)
 	{
 		return bound_type(e % bound_type::size + to_min(e));
-	}
-
-	static PYPP_CONSTEXPR void check(bound_type const& min, bound_type const& max) GENPYBIND(hidden)
-	{
-		if (min > max) {
-#ifndef __ppu__
-			throw std::runtime_error("Interval orientation wrong, min > max.");
-#else
-			exit(1);
-#endif
-		}
 	}
 
 	static PYPP_CONSTEXPR enum_type to_enum(bound_type const& min, bound_type const& max) GENPYBIND(hidden)
@@ -786,8 +839,7 @@ private:
 	void serialize(Archiver & ar, unsigned int const)
 	{
 		using boost::serialization::make_nvp;
-		ar & make_nvp("min", mMin)
-		   & make_nvp("max", mMax);
+		ar& make_nvp("min", this->mMin) & make_nvp("max", this->mMax);
 
 		// despite not part of the class's layout the enum coordinate is
 		// serialized as well for Bjoern's visualization.
@@ -795,9 +847,6 @@ private:
 		ar & make_nvp("e", e);
 	}
 };
-
-template<typename Derived, typename T, size_t EnumSize>
-const bool IntervalCoordinate<Derived, T, EnumSize>::is_interval;
 
 } // namespace detail
 
