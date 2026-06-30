@@ -8,7 +8,6 @@
 #include "cereal/types/halco/hicann-dls/vx/current_dac.h"
 #include "cereal/types/halco/hicann-dls/vx/dac.h"
 #include "cereal/types/halco/hicann-dls/vx/event.h"
-#include "cereal/types/halco/hicann-dls/vx/extoll.h"
 #include "cereal/types/halco/hicann-dls/vx/fpga.h"
 #include "cereal/types/halco/hicann-dls/vx/highspeed_link.h"
 #include "cereal/types/halco/hicann-dls/vx/jboa.h"

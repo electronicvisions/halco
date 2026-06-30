@@ -16,7 +16,6 @@ GENPYBIND_MANUAL({
 #include "halco/hicann-dls/vx/correlation.h"
 #include "halco/hicann-dls/vx/dac.h"
 #include "halco/hicann-dls/vx/event.h"
-#include "halco/hicann-dls/vx/extoll.h"
 #include "halco/hicann-dls/vx/fpga.h"
 #include "halco/hicann-dls/vx/highspeed_link.h"
 #include "halco/hicann-dls/vx/i2c.h"
