@@ -27,5 +27,4 @@
 #include "cereal/types/halco/hicann-dls/vx/synapse_driver.h"
 #include "cereal/types/halco/hicann-dls/vx/synram.h"
 #include "cereal/types/halco/hicann-dls/vx/timing.h"
-#include "cereal/types/halco/hicann-dls/vx/vector_generator.h"
 #include "cereal/types/halco/hicann-dls/vx/xboard.h"

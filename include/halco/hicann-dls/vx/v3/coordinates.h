@@ -37,7 +37,6 @@
 #include "halco/hicann-dls/vx/v3/synram.h"
 #include "halco/hicann-dls/vx/v3/system.h"
 #include "halco/hicann-dls/vx/v3/timing.h"
-#include "halco/hicann-dls/vx/v3/vector_generator.h"
 #include "halco/hicann-dls/vx/v3/xboard.h"
 
 namespace halco::hicann_dls::vx::v3 {

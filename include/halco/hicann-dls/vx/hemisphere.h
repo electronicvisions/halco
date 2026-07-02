@@ -8,4 +8,3 @@
 #include "halco/hicann-dls/vx/synapse.h"
 #include "halco/hicann-dls/vx/synapse_driver.h"
 #include "halco/hicann-dls/vx/synram.h"
-#include "halco/hicann-dls/vx/vector_generator.h"

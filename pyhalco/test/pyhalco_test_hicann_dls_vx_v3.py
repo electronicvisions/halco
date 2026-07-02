@@ -15,15 +15,6 @@ class Test_PyhalcoHICANNDLSvx(unittest.TestCase, PyhalcoTest):
     AtomicNeuronOnLogicalNeuron => grid, iterable
     LogicalNeuronCompartments => ignore
     LogicalNeuronOnDLS => ignore
-    SourceOnVectorGenerator => linear,iterable
-    VectorGeneratorOnFPGA => linear,iterable
-    VectorGeneratorControlOnFPGA => linear,iterable
-    VectorGeneratorLUTOnFPGA => linear,iterable
-    VectorGeneratorLUTEntryOnVectorGeneratorLUT => linear,iterable
-    VectorGeneratorLUTEntryOnFPGA => iterable
-    VectorGeneratorNotificationAddressOnFPGA => iterable
-    VectorGeneratorFIFOWordOnFPGA => iterable
-    VectorGeneratorTriggerOnFPGA => iterable
     CADCOffsetSRAMTimingConfigOnDLS => linear,iterable
     NeuronSRAMTimingConfigOnDLS => linear,iterable
     NeuronBackendSRAMTimingConfigOnDLS => linear,iterable
